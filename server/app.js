@@ -1,0 +1,72 @@
+process.loadEnvFile(".env.dev");
+
+const express = require("express");
+const morgan = require("morgan");
+const cookieParser = require("cookie-parser");
+const cors = require("cors");
+const cluster = require("cluster");
+const numCPUs = require("os").cpus().length;
+const compression = require("compression");
+const { rateLimit } = require("express-rate-limit");
+const mongoose = require("mongoose");
+const { default: helmet } = require("helmet");
+
+// IMPORT middleware
+const escape = require('./middleware/escape');
+
+const app = express();
+
+const MONGOODB = process.env.MONGOODB;
+
+mongoose.connect(MONGOODB).then(() => {
+    console.log("MONGOODB CONNECTED");
+}).catch((err) => {
+    console.error(err);
+})
+
+const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000, 
+    max: 500, 
+    message: "Too many requests from this IP, please try again later.",
+    statusCode: 429, 
+    headers: true 
+});
+
+app
+    .use(express.json())
+    .use(helmet())
+    .disable("x-powered-by")
+    .use(cors({
+        origin: process.env.URL,
+        credentials: true
+    }))
+    .use(limiter)
+    .use(compression())
+    .use(cookieParser())
+    .use(morgan(process.env.MODE))
+    .use(escape);
+
+app.get("/", (req,res) => {
+    return res.status(200).send("HELLO WORLD");
+})
+
+const startServer = () => {
+    const PORT = process.env.PORT || 5000;
+    const server = app.listen(PORT, (req, res) => {
+        console.log(`server is start running in ${PORT}`);
+    });
+}
+
+if (cluster.isMaster) {
+    console.log(`Master ${process.pid} is running`);
+    for (let i = 0; i < numCPUs; i++) {
+        cluster.fork();
+    }
+    cluster.on("exit", (worker, code, signal) => {
+        console.log(`Worker ${worker.process.pid} died`);
+        console.log("Forking a new worker...");
+        cluster.fork();
+    });
+} else {
+    startServer();
+}
