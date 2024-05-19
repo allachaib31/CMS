@@ -46,6 +46,16 @@ app
     .use(morgan(process.env.MODE))
     .use(escape);
 
+//IMPORT ROUTES
+const adminRoute = require("./routes/manageAdmin/admins");
+const userRoute = require("./routes/manageAdmin/users");
+const authAdmin = require("./routes/manageAdmin/auth");
+app
+    .use(authAdmin)
+    .use(adminRoute)
+    .use(userRoute);
+
+
 app.get("/", (req,res) => {
     return res.status(200).send("HELLO WORLD");
 })

@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.fontCairo {
+  font-family: "Cairo", sans-serif;
+}
+
+/* Style for label when input is invalid */
+.formInput:invalid , textarea:invalid , .status:invalid{
+  border-color: hsla(0, 90%, 70%, 1);
+}
+
+/* Style for label when input is valid */
+.formInput:valid , textarea:valid , .status:valid{
+  border-color: hsla(100, 90%, 70%, 1);
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
