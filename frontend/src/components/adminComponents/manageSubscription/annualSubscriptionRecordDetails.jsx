@@ -1,0 +1,171 @@
+import { faRightLong } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import React, { useEffect, useState } from 'react'
+import { Link, useLocation } from 'react-router-dom'
+import { hijriDateObject } from '../../../utils/getHijriDate';
+import { getAnnualSubscriptionsDetailsFetch } from '../../../utils/apiFetch';
+import AddNoteRecordAnnualSubscriptions from '../../modals/addNoteRecordAnnualSubscriptions';
+
+function AnnualSubscriptionRecordDetails() {
+    const query = new URLSearchParams(useLocation().search);
+    const [subscriptions, setSubscriptions] = useState(false);
+    const [loading, setLoading] = useState(true);
+    const [inputs, setInputs] = useState({
+        idUser: query.get('id'),
+        typeSearch: "oneYear",
+        startYear: hijriDateObject()[2],
+        endYear: ""
+    });
+    const [comment, setComment] = useState({
+        _id: "",
+        year: "",
+        comment: ""
+    })
+    const handleSearch = (typeSearch) => {
+        setInputs((prevInput) => {
+            return { ...prevInput, typeSearch: typeSearch }
+        })
+        getAnnualSubscriptionsDetails();
+    }
+    const getAnnualSubscriptionsDetails = () => {
+        setLoading((e) => !e);
+        getAnnualSubscriptionsDetailsFetch(inputs).then((res) => {
+            setLoading((e) => !e);
+            setSubscriptions(res.data.subscription);
+            console.log(res)
+        }).catch((err) => {
+            console.log(err)
+        })
+    }
+    useEffect(() => {
+        getAnnualSubscriptionsDetails();
+    }, [])
+    return (
+        <div className="sm:p-0 px-[1rem]">
+            <div>
+                <Link to="/subscription/annualSubscriptionRecord" className="btn btn-primary text-[2rem] px-[2rem]">
+                    <FontAwesomeIcon icon={faRightLong} />
+                </Link>
+            </div>
+            <h1 className="text-center text-[1rem] sm:text-[1.5rem] font-bold py-[1rem]">
+                سجل الاشتراكات السنوية الخاصة بي {inputs.idUser}
+            </h1>
+            <div className='flex flex-wrap md:gap-0 gap-[1rem]'>
+                <select onChange={(event) => {
+                    setInputs((prevInput) => {
+                        return { ...prevInput, typeSearch: event.target.value }
+                    })
+                }} className="select select-bordered w-full max-w-xs">
+                    <option value="oneYear">لسنة</option>
+                    <option value="years">لسنوات</option>
+                </select>
+                {
+                    inputs.typeSearch == "oneYear" ? <div className='flex'><input onChange={(event) => {
+                        setInputs((prevInput) => {
+                            return { ...prevInput, startYear: event.target.value.trim() }
+                        })
+                    }} type="text" className="formInput input input-bordered w-full max-w-xs" placeholder='ادخل السنة ' required pattern='\b(1[0-9]{3}|2[0-9]{3}|3[0-9]{3}|4[0-9]{3}|5[0-9]{3}|6[0-9]{3}|7[0-9]{3}|8[0-9]{3}|9[0-9]{3})\b' />
+                        <button onClick={() => handleSearch("oneYear")} className='btn xs:w-auto bg-primary text-[20px] text-white'>ابحث</button>
+                    </div> : <div className='flex'>
+                        <input onChange={(event) => {
+                            setInputs((prevInput) => {
+                                return { ...prevInput, startYear: event.target.value.trim() }
+                            })
+                        }} type="text" className="formInput input input-bordered w-full max-w-xs" placeholder='من ' required pattern='\b(1[0-9]{3}|2[0-9]{3}|3[0-9]{3}|4[0-9]{3}|5[0-9]{3}|6[0-9]{3}|7[0-9]{3}|8[0-9]{3}|9[0-9]{3})\b' />
+                        <input onChange={(event) => {
+                            setInputs((prevInput) => {
+                                return { ...prevInput, endYear: event.target.value.trim() }
+                            })
+                        }} type="text" className="formInput input input-bordered w-full max-w-xs" placeholder='الى' required pattern='\b(1[0-9]{3}|2[0-9]{3}|3[0-9]{3}|4[0-9]{3}|5[0-9]{3}|6[0-9]{3}|7[0-9]{3}|8[0-9]{3}|9[0-9]{3})\b' />
+                        <button onClick={() => handleSearch("customYear")} className='btn xs:w-auto bg-primary text-[20px] text-white'>ابحث</button>
+                    </div>
+                }
+            </div>
+            <div className='flex justify-center'>
+                {
+                    inputs.typeSearch == "oneYear" ? <div className="overflow-x-auto mt-[2rem]">
+                        {!loading ? <div className='flex justify-center'> <span className=" loading loading-ring loading-lg"></span></div> :
+                            <table className="table border-separate border-spacing-2 w-[1000px] border text-[1rem]">
+                                <thead className='text-[1rem]'>
+                                    <tr>
+                                        <th className='border border-slate-600'>الاشهر</th>
+                                        <th className='border border-slate-600'>المبلغ</th>
+                                        <th className='border border-slate-600'>تاريخ الدفع</th>
+                                        <th className='border border-slate-600'>ملاحظات</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {
+                                        subscriptions && subscriptions.map((subscription) => {
+                                            return Object.entries(subscription.months).map(([month, details], index) => (
+                                                <tr>
+                                                    <td className='border border-slate-600'>{details.name}</td>
+                                                    <td className='border border-slate-600'>{details.amount}</td>
+                                                    <td className='border border-slate-600'>{details.hijriDate.day ? details.hijriDate.day + "/" + details.hijriDate.month.number + "/" + details.hijriDate.year : "لم يتم دفع"}</td>
+                                                    <td className='border border-slate-600'>{
+                                                        details.amount == 0 ? "" : details.comments
+                                                    }</td>
+                                                </tr>
+                                            ))
+                                        })
+                                    }
+                                </tbody>
+                            </table>
+                        }
+                    </div> : <div className="overflow-x-auto mt-[2rem]">
+                        <table className="table border-separate border-spacing-2 border text-[1rem] w-[2000px]">
+                            <thead className='text-[1rem]'>
+                                <tr>
+                                    <th className='border border-slate-600'>الاسم</th>
+                                    <th className='border border-slate-600'>السنة</th>
+                                    <th className='border border-slate-600'>محرم</th>
+                                    <th className='border border-slate-600'>صفر</th>
+                                    <th className='border border-slate-600'>ربيع الاول</th>
+                                    <th className='border border-slate-600'>ربيع الثاني</th>
+                                    <th className='border border-slate-600'>جمادى الاول</th>
+                                    <th className='border border-slate-600'>جمادى الثاني</th>
+                                    <th className='border border-slate-600'>رجب</th>
+                                    <th className='border border-slate-600'>شعبان</th>
+                                    <th className='border border-slate-600'>رمضان</th>
+                                    <th className='border border-slate-600'>شوال</th>
+                                    <th className='border border-slate-600'>ذو القعدة</th>
+                                    <th className='border border-slate-600'>ذو الحجة</th>
+                                    <th className='border border-slate-600'>اضافة ملاحظات</th>
+                                    <th className='border border-slate-600'>ملاحظات</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    subscriptions && subscriptions.map(((subscription, subIndex) => (
+                                        <tr>
+                                            <th className='border border-slate-600'>{subscription.idUser.name}</th>
+                                            <th className='border border-slate-600'>{subscription.year}</th>
+                                            {
+                                                Object.entries(subscription.months).map(([month, details], index) => (
+                                                    <td className='border border-slate-600' key={index}>{details.amount}</td>
+                                                ))
+                                            }
+                                            <td className='border border-slate-600'><button onClick={() => {
+                                                setComment({
+                                                    _id: subscription._id,
+                                                    year: subscription.year,
+                                                    comment: ""
+                                                })
+                                                document.getElementById('addNote').showModal()
+                                            }
+                                            } className='btn btn-secondary'>اضافة ملاحظة</button></td>
+                                            <th id={subscription._id} className='border border-slate-600'>{subscription.comments}</th>
+                                        </tr>
+                                    )))
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+            </div>
+            <AddNoteRecordAnnualSubscriptions inputs={comment} setInputs={setComment}/>
+        </div>
+    )
+}
+
+export default AnnualSubscriptionRecordDetails

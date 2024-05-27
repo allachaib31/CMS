@@ -15,51 +15,51 @@ function RegisterMemberFinancialData() {
                 سجل البيانات المالية للعضو
             </h1>
             <div className="overflow-x-auto mt-[1rem]">
-                <table className="text-[1rem] table w-[1700px] border mx-auto">
+                <table className="text-[1rem] table border-separate border-spacing-2 border w-[2000px] mx-auto">
                     {/* head */}
-                    <thead >
+                    <thead className='text-[1rem]'>
                         <tr>
-                            <th rowSpan={2}>اسم العضو</th>
-                            <th className='text-center' colSpan={2}>تاريخ الاشتراك</th>
-                            <th className='text-center' colSpan={2}>رصيد العضو</th>
-                            <th rowSpan={2}>المصروف من رصيده</th>
-                            <th className='text-center' colSpan={2}>القروض</th>
-                            <th className='text-center' colSpan={2}>الاعانات</th>
-                            <th rowSpan={2}>ارباح السلع و المساهمات</th>
-                            <th colSpan={2}>تاريخ انتهاء اشتراكه</th>
-                            <th>الحالة</th>
-                            <th>ملاحظات</th>
+                            <th rowSpan={2} className='border border-slate-600'>اسم العضو</th>
+                            <th className='text-center border border-slate-600' colSpan={2}>تاريخ الاشتراك</th>
+                            <th className='text-center border border-slate-600' colSpan={2}>رصيد العضو</th>
+                            <th rowSpan={2} className='border border-slate-600'>المصروف من رصيده</th>
+                            <th className='text-center border border-slate-600' colSpan={2}>القروض</th>
+                            <th className='text-center border border-slate-600' colSpan={2}>الاعانات</th>
+                            <th rowSpan={2} className='border border-slate-600'>ارباح السلع و المساهمات</th>
+                            <th colSpan={2} className='border border-slate-600'>تاريخ انتهاء اشتراكه</th>
+                            <th rowSpan={2} className='border border-slate-600'>الحالة</th>
+                            <th rowSpan={2} className='border border-slate-600'>ملاحظات</th>
                         </tr>
                         <tr>
-                            <th className='text-center'>الميلادي</th>
-                            <th className='text-center'>الهجري</th>
-                            <th className='text-center'>مند بداية اشتراكه</th>
-                            <th className='text-center'>الحالي</th>
-                            <th>عددها</th>
-                            <th>مبلغها</th>
-                            <th>عددها</th>
-                            <th>مبلغها</th>
-                            <th>الميلادي</th>
-                            <th>الهجري</th>
+                            <th className='text-center border border-slate-600'>الميلادي</th>
+                            <th className='text-center border border-slate-600'>الهجري</th>
+                            <th className='text-center border border-slate-600'>مند بداية اشتراكه</th>
+                            <th className='text-center border border-slate-600'>الحالي</th>
+                            <th className='border border-slate-600'>عددها</th>
+                            <th className='border border-slate-600'>مبلغها</th>
+                            <th className='border border-slate-600'>عددها</th>
+                            <th className='border border-slate-600'>مبلغها</th>
+                            <th className='border border-slate-600'>الميلادي</th>
+                            <th className='border border-slate-600'>الهجري</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <th>chaib ala eddine</th>
-                            <td>04/12/2001</td>
-                            <td>13/11/1443</td>
-                            <td>1500</td>
-                            <td>500</td>
-                            <td>1000</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>2000</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>عند النقر على التفاصيل، تظهر جميع اشتراكات العضو
+                            <th className='border border-slate-600'>chaib ala eddine</th>
+                            <td className='border border-slate-600'>04/12/2001</td>
+                            <td className='border border-slate-600'>13/11/1443</td>
+                            <td className='border border-slate-600'>1500</td>
+                            <td className='border border-slate-600'>500</td>
+                            <td className='border border-slate-600'>1000</td>
+                            <td className='border border-slate-600'>0</td>
+                            <td className='border border-slate-600'>0</td>
+                            <td className='border border-slate-600'>0</td>
+                            <td className='border border-slate-600'>0</td>
+                            <td className='border border-slate-600'>2000</td>
+                            <td className='border border-slate-600'></td>
+                            <td className='border border-slate-600'></td>
+                            <td className='border border-slate-600'></td>
+                            <td className='border border-slate-600'>عند النقر على التفاصيل، تظهر جميع اشتراكات العضو
                                 من بداية اشتراكه سواء لسنوات أو لسنة محددة</td>
                         </tr>
                     </tbody>

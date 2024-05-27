@@ -16,3 +16,18 @@ export const GETADMIN_ROUTE = `${HOST}api/v1.0/admins/`;
 export const SEARCHADMIN_ROUTE = `${HOST}api/v1.0/admins/search`;
 export const UPDATEADMIN_ROUTE = `${HOST}api/v1.0/admins/`
 export const DELETEADMIN_ROUTE = `${HOST}api/v1.0/admins/`;
+// Manage subscription type
+export const GETTYPESUBSCRIPTION_ROUTE = `${HOST}api/v1.0/typeSubscription`;
+export const UPDATETYPESUBSCRIPTION_ROUTE = `${HOST}api/v1.0/typeSubscription`;
+// Manage subscription
+export const ADDFOUNDATIONSUBSCRIPTIONS_ROUTE = `${HOST}api/v1.0/subscriptions/foundation`;
+export const ADDMONTHLYSUBSCRIPTIONS_ROUTE = `${HOST}api/v1.0/subscriptions/monthly`
+export const GETANNUALSUBSCRIPTIONS_ROUTE = `${HOST}api/v1.0/subscriptions/annual`;
+export const GETANNUALSUBSCRIPTIONSDETAILS_ROUTE = `${HOST}api/v1.0/subscriptions/annualDetails`;
+export const GETSUBSCRIPTIONHISTORY_ROUTE = `${HOST}api/v1.0/subscriptions/history`;
+export const SEARCHSUBSCRIPTIONHISTORY_ROUTE = `${HOST}api/v1.0/subscriptions/search`;
+export const UPDATECOMMENTSUBSCRIBEHISTORY_ROUTE = `${HOST}api/v1.0/subscriptions/updateCommentSubscribeHistory`;
+export const UPDATECOMMENTRECORDANNUAL_ROUTE = `${HOST}api/v1.0/subscriptions/updateCommentRecordAnnual`;
+export const GETSUBSCRIPTIONSFORM_ROUTE = `${HOST}api/v1.0/subscriptions/getSubscriptionsForm`;
+export const GETOVERDUESUBSCRIPTIONS_ROUTE = `${HOST}api/v1.0/subscriptions/getOverdueSubscriptions`;
+export const UPDATEINVOICEOVERDUE_ROUTE = `${HOST}api/v1.0/subscriptions/isInvoiceOverdue`;

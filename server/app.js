@@ -26,7 +26,7 @@ mongoose.connect(MONGOODB).then(() => {
 
 const limiter = rateLimit({
     windowMs: 15 * 60 * 1000, 
-    max: 500, 
+    max: 5000, 
     message: "Too many requests from this IP, please try again later.",
     statusCode: 429, 
     headers: true 
@@ -50,10 +50,16 @@ app
 const adminRoute = require("./routes/manageAdmin/admins");
 const userRoute = require("./routes/manageAdmin/users");
 const authAdmin = require("./routes/manageAdmin/auth");
+const typeSubscription = require("./routes/manageSubscription/typeSubscription");
+const subscriptions = require("./routes/manageSubscription/subscriptions");
+//const moneyBox = require("./routes/manageMoneyBox/moneyBox");
 app
     .use(authAdmin)
     .use(adminRoute)
-    .use(userRoute);
+    .use(userRoute)
+    .use(typeSubscription)
+    .use(subscriptions)
+    //.use(moneyBox);
 
 
 app.get("/", (req,res) => {

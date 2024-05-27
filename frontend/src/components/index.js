@@ -14,11 +14,19 @@ export { default as UpdateAdmin } from "./adminComponents/manageAdmin/updateAdmi
 /*MANAGE SUBSCRIPTION */
 export { default as ManageSubscription } from "./adminComponents/manageSubscription/manageSubscription";
 export { default as DisplaySubscription } from "./adminComponents/manageSubscription/displaySubscription";
+export { default as AnnualSubscriptionRecord } from "./adminComponents/manageSubscription/annualSubscriptionRecord";
 export { default as ModifySubscriptionAmount } from "./adminComponents/manageSubscription/modifySubscriptionAmount";
 export { default as RegisterMemberFinancialData } from "./adminComponents/manageSubscription/registerMemberFinancialData";
 export { default as SubscriptionHistory } from "./adminComponents/manageSubscription/subscriptionHistory";
+export { default as PaymentOfSubscriptions } from "./adminComponents/manageSubscription/paymentOfSubscriptions";
+export { default as MonthlySubscription } from "./adminComponents/manageSubscription/monthlySubscription";
+export { default as FoundationSubscription } from "./adminComponents/manageSubscription/foundationSubscription";
+export { default as AnnualSubscriptionRecordDetails } from "./adminComponents/manageSubscription/annualSubscriptionRecordDetails";
+export { default as ManagingLatePayments } from "./adminComponents/manageSubscription/managingLatePayments";
 /*MANAGE MODALS */
 export { default as DeleteUserModals } from "./modals/deleteModalsUser";
+export { default as AddNoteModals } from "./modals/addNoteSubscriptionHistoryModals";
+export { default as AddNoteRecordAnnualModals } from "./modals/addNoteRecordAnnualSubscriptions";
 /*MANAGE LOADING */
 export { default as Loading } from "./loading/loading";
 /*MANAGE ALERT */

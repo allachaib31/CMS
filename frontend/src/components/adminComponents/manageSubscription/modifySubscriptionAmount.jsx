@@ -1,9 +1,62 @@
 import { faRightLong } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { getTypeSubscriptionFetch, updateTypeSubscriptionFetch } from '../../../utils/apiFetch';
+import Alert from '../../alert/alert';
 
 function ModifySubscriptionAmount() {
+    const navigate = useNavigate();
+    const [monthlySubmit, setMonthlySubmit] = useState(false);
+    const [foundationSubmit, setFoundationSubmit] = useState(false);
+    const [monthlyInput, setMonthlyInput] = useState(false);
+    const [foundationInput, setFoundationInput] = useState(false);
+    const [showAlert, setShowAlert] = useState({
+        display: false,
+    });
+    useEffect(() => {
+        getTypeSubscriptionFetch().then((res) => {
+            setMonthlyInput({
+                id: res.data.typeSubscription[0]._id,
+                name: res.data.typeSubscription[0].name,
+                amount: res.data.typeSubscription[0].amount
+            })
+            setFoundationInput({
+                id: res.data.typeSubscription[1]._id,
+                name: res.data.typeSubscription[1].name,
+                amount: res.data.typeSubscription[1].amount
+            })
+        }).catch((err) => {
+            if (err.response.status == 401) {
+                navigate("/auth");
+            }
+        })
+    }, []);
+    const handleUpdate = (input, setSubmit) => {
+        setSubmit((e) => !e);
+        setShowAlert({
+            display: false,
+        });
+        updateTypeSubscriptionFetch(input).then((res) => {
+            console.log(res);
+            setSubmit((e) => !e)
+            setShowAlert({
+                display: true,
+                status: true,
+                text: res.data.msg
+            });
+        }).catch((err) => {
+            if (err.response.status == 401) {
+                navigate("/auth");
+            }
+            setSubmit((e) => !e)
+            setShowAlert({
+                display: true,
+                status: false,
+                text: err.response.data.msg
+            });
+        })
+    }
     return (
         <div className="sm:p-0 px-[1rem]">
             <div>
@@ -14,32 +67,47 @@ function ModifySubscriptionAmount() {
             <h1 className="text-center text-[1.5rem] font-bold py-[1rem]">
                 تحديث مبلغ الاشتراكات
             </h1>
-            <div className="overflow-x-auto mt-[1rem]">
-                <table className="table w-[600px] mx-auto">
-                    {/* head */}
-                    <thead>
-                        <tr>
-                            <th>النوع</th>
-                            <th>المبلغ</th>
-                            <th>تعديل</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {/* row 1 */}
-                        <tr>
-                            <th>اشتراك شهري</th>
-                            <td><input type="text" placeholder="اكتب المبلغ" className="input input-bordered w-full max-w-xs" /></td>
-                            <td><button className="btn btn-warning">تعديل</button></td>
-                        </tr>
-                        {/* row 2 */}
-                        <tr>
-                            <th>اشتراك تاسيسي</th>
-                            <td><input type="text" placeholder="اكتب المبلغ" className="input input-bordered w-full max-w-xs" /></td>
-                            <td><button className="btn btn-warning">تعديل</button></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+            {showAlert.display ? <Alert msg={showAlert} /> : ""}
+            {
+                (monthlyInput && foundationInput) && <div className="overflow-x-auto mt-[1rem]">
+                    <table className="table w-[600px] mx-auto">
+                        {/* head */}
+                        <thead>
+                            <tr>
+                                <th>النوع</th>
+                                <th>المبلغ</th>
+                                <th>تعديل</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {/* row 1 */}
+                            <tr>
+                                <th>اشتراك شهري</th>
+                                <td><input type="number" placeholder="اكتب المبلغ" onChange={(event) => {
+                                    setMonthlyInput((prevInput) => {
+                                        return { ...prevInput, amount: event.target.value };
+                                    })
+                                }} value={monthlyInput.amount} required className="formInput input input-bordered w-full max-w-xs" /></td>
+                                <td><button onClick={() => {
+                                    handleUpdate(monthlyInput, setMonthlySubmit);
+                                }} className="btn btn-warning">{monthlySubmit ? <span className="loading loading-ring loading-lg"></span> : "تعديل"}</button></td>
+                            </tr>
+                            {/* row 2 */}
+                            <tr>
+                                <th>اشتراك تاسيسي</th>
+                                <td><input type="number" placeholder="اكتب المبلغ" onChange={(event) => {
+                                    setFoundationInput((prevInput) => {
+                                        return { ...prevInput, amount: event.target.value };
+                                    })
+                                }} value={foundationInput.amount} required className="formInput input input-bordered w-full max-w-xs" /></td>
+                                <td><button onClick={() => {
+                                    handleUpdate(foundationInput, setFoundationSubmit);
+                                }} className="btn btn-warning">{foundationSubmit ? <span className="loading loading-ring loading-lg"></span> : "تعديل"}</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            }
         </div>
     )
 }

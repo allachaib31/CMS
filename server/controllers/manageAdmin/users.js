@@ -14,7 +14,7 @@ exports.addUser = async (req, res) => {
         msg: "ليس لديك إذن إضافة او تعديل او حذف عضو",
       });
     }
-    const hijriDate = await getHijriDate();
+    const hijriDate = getHijriDate();
     const genSalt = Number(await bcrypt.genSalt(SALTROUNDS));
     const hashPassword = await bcrypt.hash(password, genSalt);
     const user = userModel({
@@ -24,9 +24,9 @@ exports.addUser = async (req, res) => {
       NationalIdentificationNumber,
       phoneNumber,
       hijriDate: {
-        day: hijriDate.data.hijri.day,
-        month: hijriDate.data.hijri.month,
-        year: hijriDate.data.hijri.year,
+        day: hijriDate[0],
+        month: hijriDate[1],
+        year: hijriDate[2],
       },
     });
     let err = await user.joiValidate(user.toObject());
@@ -92,7 +92,6 @@ exports.searchUser = async (req, res) => {
     if (err.error) throw err;
     let query = {};
     if (searchMethod && searchValue) {
-      ;
       switch (searchMethod) {
         case "_id":
           query._id = searchValue;

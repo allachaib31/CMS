@@ -5,6 +5,7 @@ import { deleteAdminFetch, getAdminFetch, searchAdminFetch } from "../../../util
 
 function DisplayAdmin() {
   const navigate = useNavigate();
+  const [loadingSearch, setLoadingSearch] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [admins, setAdmins] = useState(false);
@@ -17,11 +18,20 @@ function DisplayAdmin() {
     searchValue: "",
   });
   const handleSearch = () => {
+    setLoadingSearch((e) => !e);
+    setShowAlert({
+      display: false,
+    });
     searchAdminFetch(search).then((res) => {
       setAdmins(res.data.admin);
+      setLoadingSearch((e) => !e)
       setCurrentPage(1);
       setTotalPages(1);
     }).catch((err) => {
+      if (err.response.status == 401) {
+        navigate("/auth");
+      }
+      setLoadingSearch((e) => !e)
       setShowAlert({
         display: true,
         status: false,
@@ -77,7 +87,7 @@ function DisplayAdmin() {
           </select>
           <div className="indicator xs:mt-0 mt-[1rem] ">
             <button onClick={handleSearch} className="btn xs:w-auto bg-primary text-[20px] text-white join-item">
-              ابحث
+            {loadingSearch ? <span className="loading loading-ring loading-lg"></span> : "ابحث"}
             </button>
           </div>
         </div>

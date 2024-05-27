@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Auth from "./screens/adminsScreen/auth";
 import Home from "./screens/adminsScreen/home";
-import { AddAdmin, AddUser, DisplayAdmin, DisplaySubscription, DisplayUser, ManageAdmin, ManageSubscription, ManageUser, ModifySubscriptionAmount, RegisterMemberFinancialData, SubscriptionHistory, UpdateAdmin, UpdateUser } from "./components";
+import { AddAdmin, AddUser, AnnualSubscriptionRecord, AnnualSubscriptionRecordDetails, DisplayAdmin, DisplaySubscription, DisplayUser, FoundationSubscription, ManageAdmin, ManageSubscription, ManageUser, ManagingLatePayments, ModifySubscriptionAmount, MonthlySubscription, PaymentOfSubscriptions, RegisterMemberFinancialData, SubscriptionHistory, UpdateAdmin, UpdateUser } from "./components";
 import Welcome from "./components/adminComponents/welcome/welcome";
 
 function App() {
@@ -25,8 +25,15 @@ function App() {
             <Route exact path="/subscription" element={<ManageSubscription />}>
               <Route exact path="/subscription" element={<DisplaySubscription />} />
               <Route path="/subscription/modifySubscriptionAmount" element={<ModifySubscriptionAmount />}/>
+              <Route path="/subscription/annualSubscriptionRecord" element={<AnnualSubscriptionRecord />}/>
+              <Route path="/subscription/annualSubscriptionRecordDetails" element={<AnnualSubscriptionRecordDetails />}/>
               <Route path="/subscription/registerMemberFinancialData" element={<RegisterMemberFinancialData />}/>
               <Route path="/subscription/subscriptionHistory" element={<SubscriptionHistory />}/>
+              <Route path="/subscription/paymentOfSubscriptions" element={<PaymentOfSubscriptions />}>
+                <Route path="/subscription/paymentOfSubscriptions/monthlySubscription" element={<MonthlySubscription />}/>
+                <Route path="/subscription/paymentOfSubscriptions/foundationSubscription" element={<FoundationSubscription />}/>
+              </Route>
+              <Route path="/subscription/managingLatePayments" element={<ManagingLatePayments />}/>
             </Route>
           </Route>
           <Route exact path="/auth" element={<Auth />} />

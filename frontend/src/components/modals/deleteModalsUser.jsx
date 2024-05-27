@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { deleteUserFetch } from "../../utils/apiFetch";
 import { useNavigate } from "react-router-dom";
 
 function DeleteUserModals({user, setShowAlert, users, setUsers, deleteFetch}) {
@@ -19,7 +18,6 @@ function DeleteUserModals({user, setShowAlert, users, setUsers, deleteFetch}) {
             })
             document.getElementById('deleteModel').close();
         }).catch((err) => {
-            console.log(err)
             setSubmit((e) => !e)
             document.getElementById('deleteModel').close();
             if (err.response.status == 403 || err.response.status == 404) {

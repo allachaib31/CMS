@@ -20,14 +20,7 @@ exports.login = async (req, res) => {
             });
         }
         const token = jwt.sign({
-            name: admin.name,
-            email: admin.email,
-            NationalIdentificationNumber: admin.NationalIdentificationNumber,
-            phoneNumber: admin.phoneNumber,
-            status: admin.status,
-            admin: {
-                userPermission: admin.admin.userPermissions,
-            }
+            _id: admin._id,
         }, JWTKEY);
         return res.status(200).send({
             msg: "تم تسجيل الدخول بنجاح",

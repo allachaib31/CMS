@@ -47,6 +47,18 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: ""
   },
+  memberBalance: {
+    type: Number,
+    default: 0,
+  },
+  commentSubscribeHistory: {
+    type: String,
+    default: ""
+  },
+  cumulativeBalance: {
+    type: Number,
+    default: 0
+  },
   hijriDate: {
     type: Object,
     required: true,
@@ -73,6 +85,9 @@ userSchema.methods.joiValidate = async function (obj) {
     admin: Joi.object().required(),
     enableAccount: Joi.boolean().required(),
     comments: Joi.string().min(0).max(5000),
+    memberBalance: Joi.number(),
+    commentSubscribeHistory: Joi.string().min(0).max(5000),
+    cumulativeBalance: Joi.number(),
     hijriDate: Joi.object(),
     createdAt: Joi.date().required(),
   });
