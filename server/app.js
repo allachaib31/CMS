@@ -42,7 +42,6 @@ app
         origin: process.env.URL,
         credentials: true
     }))
-    .use(limiter)
     .use(compression())
     .use(cookieParser())
     .use(morgan(process.env.MODE))
