@@ -8,7 +8,21 @@ const moneyBoxId = process.env.moneyBoxId;
 exports.addCommodityRevenue = async (req, res) => {
     const { customerData, sponsorData, commodityData, comments } = req.body;
     try {
-        //commodityData.numberOfInstallments = (commodityData.saleAmount - commodityData.amountPaid) / commodityData.premiumAmount;
+        if (
+            req.user.admin.userPermission.indexOf(
+                "إضافة إيرادات (المساهمات وشراء السلع)"
+            ) == -1
+        ) {
+            return res.status(403).send({
+                msg: "ليس لديك إذن إضافة إيرادات (المساهمات وشراء السلع)",
+            });
+        }
+        const amountMoneyBox = await moneyBoxModel.findById(moneyBoxId);
+        if(commodityData.purchaseAmount > amountMoneyBox.amount){
+            return res.status(403).send({
+                msg: "لايوجد رصيد كافي في الصندوق",
+            });
+        }
         let days = 30 * commodityData.numberOfInstallments;
         const date = new Date();
         date.setDate(new Date(commodityData.dateOfPayment).getDate() + days)
