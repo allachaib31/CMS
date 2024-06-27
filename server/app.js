@@ -1,5 +1,5 @@
+//process.loadEnvFile(".env.dev");
 process.loadEnvFile(".env.dev");
-
 const express = require("express");
 const morgan = require("morgan");
 const cookieParser = require("cookie-parser");
