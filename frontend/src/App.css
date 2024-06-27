@@ -36,3 +36,7 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+@media print {
+
+  
+}

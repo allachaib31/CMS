@@ -6,6 +6,7 @@ const {
     updateUser,
     changeStatus,
     deleteUser,
+    updatePassword,
 } = require("../../controllers/manageAdmin/users");
 const authMiddleware = require("../../middleware/admin/auth");
 const Router = express.Router();
@@ -21,6 +22,7 @@ Router.get("/api/v1.0/users/search", searchUser)
 
 //UPDATE METHODS
 Router.put("/api/v1.0/users", updateUser);
+Router.patch("/api/v1.0/users/updatePassword", updatePassword);
 Router.patch("/api/v1.0/users/changeStatus", changeStatus);
 
 //DELETE METHODS

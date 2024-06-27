@@ -1,12 +1,13 @@
-import { faRightLong } from '@fortawesome/free-solid-svg-icons'
+import { faPrint, faRightLong } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useEffect, useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { hijriDateObject } from '../../../utils/getHijriDate';
 import { getAnnualSubscriptionsDetailsFetch } from '../../../utils/apiFetch';
 import AddNoteRecordAnnualSubscriptions from '../../modals/addNoteRecordAnnualSubscriptions';
 
 function AnnualSubscriptionRecordDetails() {
+    const navigate = useNavigate();
     const query = new URLSearchParams(useLocation().search);
     const [subscriptions, setSubscriptions] = useState(false);
     const [loading, setLoading] = useState(true);
@@ -34,7 +35,10 @@ function AnnualSubscriptionRecordDetails() {
             setSubscriptions(res.data.subscription);
             console.log(res)
         }).catch((err) => {
-            console.log(err)
+            if (err.response && err.response.status === 401) {
+                navigate("/auth");
+            }
+            setLoading((e) => !e);
         })
     }
     useEffect(() => {
@@ -48,7 +52,7 @@ function AnnualSubscriptionRecordDetails() {
                 </Link>
             </div>
             <h1 className="text-center text-[1rem] sm:text-[1.5rem] font-bold py-[1rem]">
-                سجل الاشتراكات السنوية الخاصة بي {inputs.idUser}
+                سجل الاشتراكات السنوية الخاصة بي {inputs.idUser} : للعضو {query.get("name")}
             </h1>
             <div className='flex flex-wrap md:gap-0 gap-[1rem]'>
                 <select onChange={(event) => {
@@ -81,12 +85,15 @@ function AnnualSubscriptionRecordDetails() {
                     </div>
                 }
             </div>
+            <div>
+                <Link to={`/print/recordAnnualDetails?idUser=${inputs.idUser}&tyeSearch=${inputs.typeSearch}&startYear=${inputs.startYear}&endYear=${inputs.endYear}`} target='_blank' className='mt-[1rem] btn btn-info font-bold'><FontAwesomeIcon icon={faPrint} /> طباعة</Link>
+            </div>
             <div className='flex justify-center'>
                 {
                     inputs.typeSearch == "oneYear" ? <div className="overflow-x-auto mt-[2rem]">
                         {!loading ? <div className='flex justify-center'> <span className=" loading loading-ring loading-lg"></span></div> :
                             <table className="table border-separate border-spacing-2 w-[1000px] border text-[1rem]">
-                                <thead className='text-[1rem]'>
+                                <thead className='text-[1rem] text-center'>
                                     <tr>
                                         <th className='border border-slate-600'>الاشهر</th>
                                         <th className='border border-slate-600'>المبلغ</th>
@@ -98,10 +105,10 @@ function AnnualSubscriptionRecordDetails() {
                                     {
                                         subscriptions && subscriptions.map((subscription) => {
                                             return Object.entries(subscription.months).map(([month, details], index) => (
-                                                <tr>
+                                                <tr className='text-center'>
                                                     <td className='border border-slate-600'>{details.name}</td>
                                                     <td className='border border-slate-600'>{details.amount}</td>
-                                                    <td className='border border-slate-600'>{details.hijriDate.day ? details.hijriDate.day + "/" + details.hijriDate.month.number + "/" + details.hijriDate.year : "لم يتم دفع"}</td>
+                                                    <td className='border border-slate-600'>{details.hijriDate && details.hijriDate.day ? details.hijriDate.day + "/" + details.hijriDate.month.number + "/" + details.hijriDate.year : "لم يتم دفع"}</td>
                                                     <td className='border border-slate-600'>{
                                                         details.amount == 0 ? "" : details.comments
                                                     }</td>
@@ -114,7 +121,7 @@ function AnnualSubscriptionRecordDetails() {
                         }
                     </div> : <div className="overflow-x-auto mt-[2rem]">
                         <table className="table border-separate border-spacing-2 border text-[1rem] w-[2000px]">
-                            <thead className='text-[1rem]'>
+                            <thead className='text-center text-[1rem]'>
                                 <tr>
                                     <th className='border border-slate-600'>الاسم</th>
                                     <th className='border border-slate-600'>السنة</th>
@@ -130,14 +137,13 @@ function AnnualSubscriptionRecordDetails() {
                                     <th className='border border-slate-600'>شوال</th>
                                     <th className='border border-slate-600'>ذو القعدة</th>
                                     <th className='border border-slate-600'>ذو الحجة</th>
-                                    <th className='border border-slate-600'>اضافة ملاحظات</th>
                                     <th className='border border-slate-600'>ملاحظات</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {
                                     subscriptions && subscriptions.map(((subscription, subIndex) => (
-                                        <tr>
+                                        <tr className='text-center'>
                                             <th className='border border-slate-600'>{subscription.idUser.name}</th>
                                             <th className='border border-slate-600'>{subscription.year}</th>
                                             {
@@ -145,7 +151,8 @@ function AnnualSubscriptionRecordDetails() {
                                                     <td className='border border-slate-600' key={index}>{details.amount}</td>
                                                 ))
                                             }
-                                            <td className='border border-slate-600'><button onClick={() => {
+
+                                            <th onClick={() => {
                                                 setComment({
                                                     _id: subscription._id,
                                                     year: subscription.year,
@@ -153,8 +160,7 @@ function AnnualSubscriptionRecordDetails() {
                                                 })
                                                 document.getElementById('addNote').showModal()
                                             }
-                                            } className='btn btn-secondary'>اضافة ملاحظة</button></td>
-                                            <th id={subscription._id} className='border border-slate-600'>{subscription.comments}</th>
+                                            } id={subscription._id} className='border border-slate-600'>{subscription.comments}</th>
                                         </tr>
                                     )))
                                 }
@@ -163,7 +169,7 @@ function AnnualSubscriptionRecordDetails() {
                     </div>
                 }
             </div>
-            <AddNoteRecordAnnualSubscriptions inputs={comment} setInputs={setComment}/>
+            <AddNoteRecordAnnualSubscriptions inputs={comment} setInputs={setComment} />
         </div>
     )
 }

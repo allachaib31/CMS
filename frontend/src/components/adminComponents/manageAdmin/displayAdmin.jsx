@@ -82,7 +82,6 @@ function DisplayAdmin() {
             <option value="name">اسم</option>
             <option value="NationalIdentificationNumber">رقم الهوية</option>
             <option value="phoneNumber">رقم الجوال</option>
-            <option value="email">بريد إلكتروني</option>
             <option value="status">الحالة</option>
           </select>
           <div className="indicator xs:mt-0 mt-[1rem] ">
@@ -97,11 +96,10 @@ function DisplayAdmin() {
         <table className="table w-[1600px]">
           {/* head */}
           <thead>
-            <tr className="text-[1rem]">
+            <tr className="text-center text-[1rem]">
               <th>العدد</th>
               <th>اسم العضو</th>
               <th>رقم الهوية</th>
-              <th>بريد إلكتروني</th>
               <th>رقم الجوال</th>
               <th colSpan="2" rowSpan="2" className="">
                 <span className="flex w-full justify-center"> تاريخ الاشتراك  </span>
@@ -119,16 +117,15 @@ function DisplayAdmin() {
             {admins && admins.map((admin, index) => {
               const date = new Date(admin.createdAt);
               return (
-                <tr>
+                <tr className="text-center">
                   <td>{admin._id}</td>
                   <td>{admin.name}</td>
                   <td>{admin.NationalIdentificationNumber}</td>
-                  <td>{admin.email}</td>
                   <td>{admin.phoneNumber}</td>
                   <td className="text-center">{date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()}</td>
                   <td className="text-center">{admin.hijriDate.year + "-" + admin.hijriDate.month.number + "-" + admin.hijriDate.day}</td>
                   <td className={(admin.status == "not active" ? "text-error" : "text-success") + " font-bold text-[1.3rem]"}>{admin.status == "not active" ? "غير مفعل" : "مفعل"}</td>
-                  <td><Link to={`/admin/updateAdmin?id=${admin._id}`} className="btn btn-warning">تعديل</Link></td>
+                  <td><Link to={`/admin/updateAdmin?id=${admin._id}&name=${admin.name}`} className="btn btn-warning">تعديل</Link></td>
                   <td><button onClick={() => {
                     setUserDelete({
                       id: admin._id,

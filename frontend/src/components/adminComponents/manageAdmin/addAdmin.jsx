@@ -11,7 +11,7 @@ function AddAdmin() {
   const [submit, setSubmit] = useState(false);
   const [inputs, setInputs] = useState({
     idUser: "",
-    UserPermission: "",
+    UserPermission: ["إضافة إيرادات (اشتراكات الأعضاء)"],
   });
   const [disbledSubmit, setDisbledSubmit] = useState({
     idUser: false,

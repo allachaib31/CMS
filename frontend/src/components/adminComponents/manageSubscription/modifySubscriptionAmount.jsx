@@ -73,7 +73,7 @@ function ModifySubscriptionAmount() {
                     <table className="table w-[600px] mx-auto">
                         {/* head */}
                         <thead>
-                            <tr>
+                            <tr className='text-center'>
                                 <th>النوع</th>
                                 <th>المبلغ</th>
                                 <th>تعديل</th>
@@ -81,8 +81,8 @@ function ModifySubscriptionAmount() {
                         </thead>
                         <tbody>
                             {/* row 1 */}
-                            <tr>
-                                <th>اشتراك شهري</th>
+                            <tr className='text-center'>
+                                <th>إشتراك شهري</th>
                                 <td><input type="number" placeholder="اكتب المبلغ" onChange={(event) => {
                                     setMonthlyInput((prevInput) => {
                                         return { ...prevInput, amount: event.target.value };
@@ -93,8 +93,8 @@ function ModifySubscriptionAmount() {
                                 }} className="btn btn-warning">{monthlySubmit ? <span className="loading loading-ring loading-lg"></span> : "تعديل"}</button></td>
                             </tr>
                             {/* row 2 */}
-                            <tr>
-                                <th>اشتراك تاسيسي</th>
+                            <tr className='text-center'>
+                                <th>إشتراك التأسيس</th>
                                 <td><input type="number" placeholder="اكتب المبلغ" onChange={(event) => {
                                     setFoundationInput((prevInput) => {
                                         return { ...prevInput, amount: event.target.value };

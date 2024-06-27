@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {   useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function DeleteUserModals({user, setShowAlert, users, setUsers, deleteFetch}) {
@@ -7,9 +7,9 @@ function DeleteUserModals({user, setShowAlert, users, setUsers, deleteFetch}) {
     const handleDelete = (id, index) => {
         setSubmit((e) => !e);
         deleteFetch(id).then((res) => {
-            const newListUser = [...users];
-            newListUser.splice(index, 1);
-            setUsers(newListUser);
+            //const newListUser = [...users];
+            //newListUser.splice(index, 1);
+            //setUsers(newListUser);
             setSubmit((e) => !e);
             setShowAlert({
                 display: true,
@@ -17,6 +17,8 @@ function DeleteUserModals({user, setShowAlert, users, setUsers, deleteFetch}) {
                 text: res.data.msg
             })
             document.getElementById('deleteModel').close();
+            document.getElementById(user.id).innerText = user.disable ?"تعطيل":"تنشيط" ;
+            document.getElementById(user.id).setAttribute("data-disable",user.disable ? false : true);
         }).catch((err) => {
             setSubmit((e) => !e)
             document.getElementById('deleteModel').close();
@@ -41,7 +43,7 @@ function DeleteUserModals({user, setShowAlert, users, setUsers, deleteFetch}) {
     return (
         <dialog id="deleteModel" className="modal">
             <div className="modal-box">
-                <h3 className="font-bold text-[1rem]">هل تريد حقًا إزالة هذا المستخدم {user.id}؟</h3>
+                <h3 className="font-bold text-[1rem]">هل تريد حقًا {user.disable ? "تنشيط": "تعطيل" } هذا المستخدم {user.id}؟</h3>
                 <div className="flex justify-center my-[1rem]">
                     {!submit ? "" : <span className="loading loading-ring loading-lg"></span>}
                 </div>
@@ -53,7 +55,7 @@ function DeleteUserModals({user, setShowAlert, users, setUsers, deleteFetch}) {
                         <button onClick={(event) => {
                             event.preventDefault();
                             handleDelete(user.id,user.index);
-                        }} className="btn btn-error">حدف</button>
+                        }} className="btn btn-error">{user.disable ?"تنشيط": "تعطيل" }</button>
                     </form>
                 </div>
             </div>

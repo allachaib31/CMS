@@ -4,6 +4,7 @@ import {
     ADDFOUNDATIONSUBSCRIPTIONS_ROUTE,
     ADDMONTHLYSUBSCRIPTIONS_ROUTE,
     ADDUSER_ROUTE,
+    UPDATEPASSWORD_ROUTE,
     DELETEADMIN_ROUTE,
     DELETEUSER_ROUTE,
     GETADMIN_ROUTE,
@@ -24,8 +25,22 @@ import {
     UPDATECOMMENTRECORDANNUAL_ROUTE,
     GETSUBSCRIPTIONSFORM_ROUTE,
     GETOVERDUESUBSCRIPTIONS_ROUTE,
-    UPDATEINVOICEOVERDUE_ROUTE
+    UPDATEINVOICEOVERDUE_ROUTE,
+    GETMONEYBOX_ROUTE,
+    ADDCOMMODITYREVENUE_ROUTE,
+    GETIDCOMMODITYREVENUE_ROUTE,
+    GETCOMMODITYREVENUE_ROUTE,
+    GETINSTALLMENTSCHEDULE_ROUTE,
+    GETFORMCONTRIBUTIONPURCHASECOMMODITY_ROUTE,
+    GETALLCOMMODITYREVENUEALL_ROUTE,
+    ADDCOMMENTCOMMODITYREVENUE_ROUTE,
+    GETACTIVECOMMODITYREVENUE_ROUTE,
+    GETCOMMODITYANDINSTALLMENT_ROUTE,
+    PAYINSTALLMENTSCHEDULE_ROUTE,
+    ADDCOMMENTINSTALLMENTSCHEDULE_ROUTE,
+    ADDCOMMENTMONTHLY_ROUTE
 } from "./apiRoutes";
+
 
 axios.defaults.withCredentials = true;
 
@@ -59,6 +74,10 @@ export const updateUserFetch = async (user) => {
 }
 export const deleteUserFetch = async (id) => {
     const data = await axios.delete(`${DELETEUSER_ROUTE}?id=${id}`);
+    return data;
+}
+export const updatePasswordFetch = async (input) => {
+    const data = await axios.patch(`${UPDATEPASSWORD_ROUTE}`, input);
     return data;
 }
 // Manage admin fetch
@@ -125,14 +144,70 @@ export const updateCommentRecordAnnualFetch = async (input) => {
     return data;
 }
 export const getSubscriptionsFormFetch = async (input) => {
-    const data = await axios.get(`${GETSUBSCRIPTIONSFORM_ROUTE}?year=${input.year}&month=${input.month}`);
+    const data = await axios.post(`${GETSUBSCRIPTIONSFORM_ROUTE}`,input);
     return data;
 }
-export const getOverdueSubscriptionsFetch = async (input) => {
-    const data = await axios.get(`${GETOVERDUESUBSCRIPTIONS_ROUTE}?year=${input.year}&month=${input.month}`);
+export const getOverdueSubscriptionsFetch = async () => {
+    const data = await axios.get(`${GETOVERDUESUBSCRIPTIONS_ROUTE}`);
     return data;
 }
 export const updateInvoiceOverdueFetch = async (input) => {
     const data = await axios.patch(UPDATEINVOICEOVERDUE_ROUTE,input);
+    return data;
+}
+export const addCommentMonthlyFetch = async (comment) => {
+    const data = await axios.patch(ADDCOMMENTMONTHLY_ROUTE,comment);
+    return data;
+}
+// Manage moneyBox
+export const getMoneyBoxFetch = async () => {
+    const data = await axios.get(GETMONEYBOX_ROUTE);
+    return data;
+}
+// Manage commodity revenu
+export const addCommodityRevenueFetch = async (inputs) => {
+    const data = await axios.post(ADDCOMMODITYREVENUE_ROUTE,inputs);
+    return data;
+}
+export const payInstallmentScheduleFetch = async (idInstallmentSchedule) => {
+    const data = await axios.post(PAYINSTALLMENTSCHEDULE_ROUTE,{
+        idInstallmentSchedule
+    });
+    return data;
+}
+export const getIdCommodityRevenueFetch = async (inputs) => {
+    const data = await axios.get(`${GETIDCOMMODITYREVENUE_ROUTE}?month=${inputs.month}&year=${inputs.year}`);
+    return data;
+}
+export const getCommodityRevenueFetch = async (id) => {
+    const data = await axios.get(`${GETCOMMODITYREVENUE_ROUTE}?id=${id}`);
+    return data;
+}
+export const getInstallmentScheduleFetch = async (id) => {
+    const data = await axios.get(`${GETINSTALLMENTSCHEDULE_ROUTE}?id=${id}`);
+    return data;
+}
+export const getFormContributionPurchaseCommodityFetch = async (id) => {
+    const data = await axios.get(`${GETFORMCONTRIBUTIONPURCHASECOMMODITY_ROUTE}?id=${id}`);
+    return data;
+}
+export const getAllCommodityRevenueFetch = async () => {
+    const data = await axios.get(GETALLCOMMODITYREVENUEALL_ROUTE);
+    return data;
+}
+export const getActiveCommodityRevenueFetch = async (date) => {
+    const data = await axios.get(`${GETACTIVECOMMODITYREVENUE_ROUTE}?date=${date}`);
+    return data;
+}
+export const getCommidtyAndInstallmentFetch = async (id) => {
+    const data = await axios.get(`${GETCOMMODITYANDINSTALLMENT_ROUTE}?id=` + id);
+    return data;
+}
+export const addCommentCommodityRevenueFetch = async (inputs) => {
+    const data = await axios.patch(ADDCOMMENTCOMMODITYREVENUE_ROUTE,inputs);
+    return data;
+}
+export const addCommentInstallmentScheduleFetch = async (inputs) => {
+    const data = await axios.patch(ADDCOMMENTINSTALLMENTSCHEDULE_ROUTE,inputs);
     return data;
 }

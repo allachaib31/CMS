@@ -20,6 +20,8 @@ function SubscriptionHistory() {
   const [totalPages, setTotalPages] = useState(1);
   const [users, setUsers] = useState(false);
   const [moneyBox, setMoneyBox] = useState(false);
+  const [activeMember, setActiveMember] = useState(0);
+  const [newUser, setNewUser] = useState(0);
   const [showAlert, setShowAlert] = useState({
     display: false,
   });
@@ -52,9 +54,12 @@ function SubscriptionHistory() {
   const getUser = (currentPage) => {
     setLoading(false)
     getSubscriptionHistoryFetch(currentPage).then((res) => {
+      console.log(res)
       setTotalPages(res.data.totalPages);
-      setUsers(res.data.users)
-      setMoneyBox(res.data.moneyBox)
+      setUsers(res.data.users);
+      setMoneyBox(res.data.moneyBox);
+      setActiveMember(res.data.activeMembers)
+      setNewUser(res.data.newUser)
       setLoading((e) => !e)
     }).catch((err) => {
       if (err.response.status == 401) {
@@ -104,7 +109,6 @@ function SubscriptionHistory() {
           <option value="name">اسم</option>
           <option value="NationalIdentificationNumber">رقم الهوية</option>
           <option value="phoneNumber">رقم الجوال</option>
-          <option value="email">بريد إلكتروني</option>
         </select>
         <div className="indicator xs:mt-0 mt-[1rem] ">
           <button onClick={handleSearch} className="btn xs:w-auto bg-primary text-[20px] text-white join-item">
@@ -112,32 +116,49 @@ function SubscriptionHistory() {
           </button>
         </div>
       </div>
+      <div className="mt-[1rem] flex justify-center gap-[1rem] flex-wrap">
+        <div className='flex flex-col items-center gap-[1rem]'>
+          <h1 className="text-[1.1rem] font-bold bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]">رصيد الصندوق منذ إنشائه </h1>
+          <h1 className="text-[1.1rem] font-bold bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]"> {moneyBox && moneyBox.cumulativeAmount}</h1>
+        </div>
+        <div className='flex flex-col items-center gap-[1rem]'>
+          <h1 className="text-[1.1rem] font-bold bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]">المصروفات </h1>
+          <h1 className="text-[1.1rem] font-bold bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]">{moneyBox && (moneyBox.cumulativeAmount - moneyBox.amount)}</h1>
+        </div>
+        <div className='flex flex-col items-center gap-[1rem]'>
+          <h1 className="text-[1.1rem] font-bold bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]">الأعضاء المفعلون </h1>
+          <h1 className="text-[1.1rem] font-bold bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]">{activeMember}</h1>
+        </div>
+        <div className='flex flex-col items-center gap-[1rem]'>
+          <h1 className="text-[1.1rem] font-bold bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]">الأعضاء الجدد </h1>
+          <h1 className="text-[1.1rem] font-bold bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]">{newUser}</h1>
+        </div>
+      </div>
       {showAlert.display ? <Alert msg={showAlert} /> : ""}
       <div className="overflow-x-auto mt-[1rem]">
         {!loading ? <div className='flex justify-center'> <span className=" loading loading-ring loading-lg"></span></div> : <table className="text-[1rem] table border-separate border-spacing-2 border w-[1700px] mx-auto">
-          <thead className='text-[1rem]'>
+          <thead className='text-[1rem] text-center'>
             <tr>
               <th className='border border-slate-600'>اسم العضو</th>
               <th className='border border-slate-600'>رصيد العضو منذ بداية اشتراكه</th>
               <th className='border border-slate-600'> المصروف من رصيده العضو</th>
               <th className='border border-slate-600'>الرصيد الحالي للعضو</th>
               <th className='border border-slate-600'>نسبة العضو من رصيد الصندوق</th>
-              <th className='border border-slate-600'>اضافة ملاحظات</th>
               <th className='border border-slate-600'>ملاحظات</th>
-              <th className='border border-slate-600'>تفاصيل اكثر</th>
+              <th className='border border-slate-600'>تفاصيل أكثر</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className='text-center'>
             {
               users && users.map((user) => {
                 return (
                   <tr>
                     <td className='border border-slate-600'>{user.name}</td>
-                    <td className='border border-slate-600'>{user.cumulativeBalance}</td>
-                    <td className='border border-slate-600'>{user.cumulativeBalance - user.memberBalance}</td>
-                    <td className='border border-slate-600'>{user.memberBalance}</td>
+                    <td className='border border-slate-600'>{user.cumulativeBalance.toFixed(2)}</td>
+                    <td className='border border-slate-600'>{(user.cumulativeBalance - user.memberBalance).toFixed(2)}</td>
+                    <td className='border border-slate-600'>{user.memberBalance.toFixed(2)}</td>
                     <td className='border border-slate-600'>%{((user.memberBalance * 100) / moneyBox.amount).toFixed(2)}</td>
-                    <td className='border border-slate-600'><button onClick={() => {
+                    <td onClick={() => {
                       setInputs({
                         _id: user._id,
                         name: user.name,
@@ -145,9 +166,8 @@ function SubscriptionHistory() {
                       })
                       document.getElementById('addNote').showModal()
                     }
-                    } className='btn btn-secondary'>اضافة ملاحظة</button></td>
-                    <td id={user._id} className='border border-slate-600'>{user.commentSubscribeHistory}</td>
-                    <td className='border border-slate-600'><Link to={`/subscription/annualSubscriptionRecordDetails?id=${user._id}`} className='btn btn-info'>التفاصيل</Link></td>
+                    } id={user._id} className='border cursor-pointer border-slate-600'>{user.commentSubscribeHistory}</td>
+                    <td className='border border-slate-600'><Link to={`/subscription/annualSubscriptionRecordDetails?id=${user._id}&name=${user.name}`} className='btn btn-info'>التفاصيل</Link></td>
                   </tr>
                 )
               })
@@ -155,7 +175,7 @@ function SubscriptionHistory() {
           </tbody>
         </table>}
       </div>
-      <AddNoteModals inputs={inputs} setInputs={setInputs}/>
+      <AddNoteModals inputs={inputs} setInputs={setInputs} />
       <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} totalPages={totalPages} setTotalPages={setTotalPages} />
     </div>
   )

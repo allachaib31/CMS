@@ -16,7 +16,6 @@ function AddUser() {
     const navigate = useNavigate();
     const [submit, setSubmit] = useState(false);
     const [disbledSubmit, setDisbledSubmit] = useState({
-        email: false,
         password: false,
         name: false,
         NationalIdentificationNumber: false,
@@ -24,7 +23,6 @@ function AddUser() {
     });
     const [inputs, setInputs] = useState({
         name: "",
-        email: "",
         password: "",
         NationalIdentificationNumber: "",
         phoneNumber: ""
@@ -90,24 +88,26 @@ function AddUser() {
                     <div className="relative sm:w-1/2">
                         <FontAwesomeIcon icon={faIdCard} className="absolute top-[1rem] right-[1rem]" />
                         <input type="text" onChange={(e) => {
-                            if (e.target.validity.valid) setDisbledSubmit(value => { return { ...value, NationalIdentificationNumber: true } });
+                            if (e.target.validity.valid) {
+                                setDisbledSubmit(value => { return { ...value, NationalIdentificationNumber: true,password: true } });
+                            }
                             else setDisbledSubmit(value => { return { ...value, NationalIdentificationNumber: false } });
                             setInputs((input) => {
-                                return { ...input, NationalIdentificationNumber: e.target.value.trim() }
+                                return { ...input, NationalIdentificationNumber: e.target.value.trim(), password: e.target.value.substring(e.target.value.length - 4).trim() }
                             })
                         }} required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder="رقم الهوية الوطنية" pattern="[1-9]\d{9}" />
                     </div>
                 </div>
                 <div className="flex sm:flex-row flex-col gap-[1rem]">
                     <div className="relative sm:w-1/2">
-                        <FontAwesomeIcon icon={faEnvelope} className="absolute top-[1rem] right-[1rem]" />
-                        <input type="email" onChange={(e) => {
-                            if (e.target.validity.valid) setDisbledSubmit(value => { return { ...value, email: true } });
-                            else setDisbledSubmit(value => { return { ...value, email: false } });
+                        <FontAwesomeIcon icon={faPhone} className="absolute top-[1rem] right-[1rem]" />
+                        <input type="text" onChange={(e) => {
+                            if (e.target.validity.valid) setDisbledSubmit(value => { return { ...value, phoneNumber: true } });
+                            else setDisbledSubmit(value => { return { ...value, phoneNumber: false } });
                             setInputs((input) => {
-                                return { ...input, email: e.target.value.trim() }
+                                return { ...input, phoneNumber: e.target.value.trim() }
                             })
-                        }} required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder={` بريد إلكتروني`} pattern="^[^\s@]+@[^\s@]+\.[^\s@]{2,}$" />
+                        }} required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder="رقم الجوال" pattern="05\d{8}" />
                     </div>
                     <div className="relative sm:w-1/2">
                         <FontAwesomeIcon icon={faKey} className="absolute top-[1rem] right-[1rem]" />
@@ -117,25 +117,15 @@ function AddUser() {
                             setInputs((input) => {
                                 return { ...input, password: e.target.value.trim() }
                             })
-                        }} required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder="كلمة المرور" pattern="^.{8,1024}$" />
+                        }} required value={inputs.password} className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder="كلمة المرور" pattern="^.{4,1024}$" />
                     </div>
                 </div>
-                <div className="relative">
-                    <FontAwesomeIcon icon={faPhone} className="absolute top-[1rem] right-[1rem]" />
-                    <input type="text" onChange={(e) => {
-                        if (e.target.validity.valid) setDisbledSubmit(value => { return { ...value, phoneNumber: true } });
-                        else setDisbledSubmit(value => { return { ...value, phoneNumber: false } });
-                        setInputs((input) => {
-                            return { ...input, phoneNumber: e.target.value.trim() }
-                        })
-                    }} required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder="رقم الجوال" pattern="05\d{8}" />
-                </div>
                 <button
-                    disabled={!disbledSubmit.email || !disbledSubmit.password || !disbledSubmit.name || !disbledSubmit.phoneNumber || !disbledSubmit.NationalIdentificationNumber}
+                    disabled={!disbledSubmit.password || !disbledSubmit.name || !disbledSubmit.phoneNumber || !disbledSubmit.NationalIdentificationNumber}
                     onClick={(event) => {
                         event.preventDefault();
                         handleSubmit();
-                    }} className="btn text-white font-bold text-[20px] bg-primary">{submit ? <span className="loading loading-ring loading-lg"></span> : "تاكيد"}</button>
+                    }} className="btn text-white font-bold text-[20px] btn-primary">{submit ? <span className="loading loading-ring loading-lg"></span> : "تاكيد"}</button>
             </form>
         </div>
     );

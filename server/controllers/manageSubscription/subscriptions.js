@@ -1,11 +1,14 @@
-const foundationSubscriptionModel = require("../../models/foundationSubscription");
+const foundationSubscriptionModel = require("../../models/subscription/foundationSubscription");
 const userModel = require("../../models/user");
 const getHijriDate = require("../../utils/getHijriDate");
 const moneyBoxModel = require("../../models/moneybox");
-const monthlySubscriptionModel = require("../../models/monthlySubscription");
+const monthlySubscriptionModel = require("../../models/subscription/monthlySubscription");
 const { schemaSearchValidation } = require("../../utils/validation/schemaValidation");
 const moneyBoxId = process.env.moneyBoxId;
-
+const querystring = require("querystring");
+const typeSubscriptionModel = require("../../models/subscription/typeSubscription");
+const moment = require('moment');
+const momentHijri = require("moment-hijri");
 //POST METHODS
 exports.addFoundationSubscriptions = async (req, res) => {
     const { idUser, amount, comments } = req.body;
@@ -50,8 +53,12 @@ exports.addFoundationSubscriptions = async (req, res) => {
         await foundationSubscription.save();
 
         user.enableAccount = true;
+        user.memberBalance += amount;
+        user.cumulativeBalance += amount;
 
         user.markModified("enableAccount");
+        user.markModified("memberBalance");
+        user.markModified("cumulativeBalance");
         await user.save();
 
         const moneyBox = await moneyBoxModel.findByIdAndUpdate(
@@ -78,9 +85,31 @@ exports.addFoundationSubscriptions = async (req, res) => {
                 year: hijriDate[2],
             },
         });
+        function addDaysToHijriDate(hijriDate) {
+            const newDate = [...hijriDate];
+            if (newDate[1].number < 12) {
+                newDate[1].number += 1;
+            }
+            newDate[1].ar = Subscription.months[newDate[1].number].name;
+            return newDate;
+        }
         for (let i = 0; i < 12; i++) {
             const monthIndex = (i + 1).toString();
-            Subscription.months[monthIndex].isInvoiceOverdue = false;
+            if (Number(monthIndex) <= hijriDate[1].number) {//tfkar
+                Subscription.months[monthIndex].pendingPayment = false;
+            } else {
+                const dueDate = addDaysToHijriDate([hijriDate[0], { number: Number(monthIndex), ar: Subscription.months[Number(monthIndex)].name }, hijriDate[2]]);
+                Subscription.months[monthIndex].dueDate = momentHijri(dueDate[2] + "-" + dueDate[1].number + "-" + dueDate[0] ,'iYYYY-iMM-iDD').locale("en").format('YYYY-MM-DD');
+                const toHijriDate = getHijriDate(Subscription.months[monthIndex].dueDate);
+                Subscription.months[monthIndex].dueDateHijri = {
+                    day: toHijriDate[0],
+                    month: {
+                        number: dueDate[1].number,
+                        ar: dueDate[1].ar
+                    },
+                    year: dueDate[2]
+                };
+            }
         }
         await Subscription.save();
         return res.status(200).send({
@@ -109,7 +138,7 @@ exports.addFoundationSubscriptions = async (req, res) => {
 };
 
 exports.addMonthlySubscriptions = async (req, res) => {
-    const { idUser, amount, month, year, comments } = req.body;
+    const { idUser, amount, month, dueDateHijri, dueDate, year } = req.body;
     try {
         // Check for permissions
         if (req.user.admin.userPermission.indexOf("إضافة إيرادات (اشتراكات الأعضاء)") === -1) {
@@ -133,35 +162,22 @@ exports.addMonthlySubscriptions = async (req, res) => {
 
         let existingSubscription = await monthlySubscriptionModel.findOne({ idUser, year });
 
-        if (!existingSubscription) {
-            existingSubscription = new monthlySubscriptionModel({
-                idUser,
-                year,
-                hijriDate: {
-                    day: hijriDate[0],
-                    month: hijriDate[1],
-                    year: hijriDate[2],
-                },
-            });
-            for (let i = 0; i < 12; i++) {
-                const monthIndex = (i + 1).toString();
-                existingSubscription.months[monthIndex].isInvoiceOverdue = false;
-            }
-        }
         if (existingSubscription.months[month].amount != 0) {
             return res.status(400).send({
                 msg: "لقد تم دفع الاشتراك الخاص بهذا الشهر من قبل"
             })
         }
         existingSubscription.total += Number(amount);
-        if(existingSubscription.months[month].isInvoiceOverdue) {
+        if (existingSubscription.months[month].isInvoiceOverdue) {
             existingSubscription.numberofArrears -= 1;
         }
         existingSubscription.months[month] = {
             name: existingSubscription.months[month].name,
             amount: amount,
-            comments: comments,
             isInvoiceOverdue: false,
+            pendingPayment: true,
+            dueDate: dueDate,
+            dueDateHijri: dueDateHijri,
             hijriDate: {
                 day: hijriDate[0],
                 month: hijriDate[1],
@@ -216,56 +232,105 @@ exports.addMonthlySubscriptions = async (req, res) => {
     }
 };
 
+exports.addCommentMonthly = async (req,res) => {
+    const { _id, comment, month } = req.body;
+    try {
+        const existingSubscription = await monthlySubscriptionModel.findById(_id);
+        if (!existingSubscription) {
+            return res.status(404).send({
+                msg: "الاشتراك غير موجود",
+            });
+        }
+        existingSubscription.months[month].comments = comment;
+        existingSubscription.markModified("months");
+        await existingSubscription.save();
+        return res.status(200).send({
+            msg: "لقد تم اضافة الملاحظة بنجاح",
+        });
+    } catch (error) {
+        if (error.error) {
+            return res.status(422).send({
+                msg: "احد المدخلات فيه خطاء",
+            });
+        }
+        return res.status(500).send({
+            msg: "حدث خطأ أثناء معالجة طلبك"
+        });
+    }
+}
 //GET METHODS
 exports.getSubscriptionsForm = async (req, res) => {
-    const { month, year } = req.query;
+    const { date, dateHijri } = req.body;
 
-    if (!month || !year) {
+    if (!date || !dateHijri) {
         return res.status(400).send({ msg: "مطلوب الشهر والسنة" });
     }
 
     try {
-        const subscriptions = await monthlySubscriptionModel.find({ year: year }).populate("idUser");
+        const subscriptions = await monthlySubscriptionModel.find({ year: dateHijri.year }).populate("idUser", "name");
 
         if (subscriptions.length === 0) {
             return res.status(404).send({ msg: "لم يتم العثور على اشتراكات للسنة المحددة" });
         }
         const results = []
-        for(let i = 0; i < subscriptions.length;i++){
-            const monthData = subscriptions[i].months[month];
-            if(monthData &&  monthData.amount !== 0){
-                results.push(subscriptions[i])
+        var total = 0;
+        for (let i = 0; i < subscriptions.length; i++) {
+            const monthData = subscriptions[i].months[dateHijri.month.number];
+            //&& monthData.dueDateHijri.day == dateHijri.day
+            if (monthData) {
+                if (monthData.dueDateHijri && monthData.dueDateHijri.month.number == dateHijri.month.number && monthData.dueDateHijri.year == dateHijri.year) {
+                    results.push(subscriptions[i]);
+                }
+                if (monthData.dueDateHijri && monthData.dueDateHijri.month.number == dateHijri.month.number) {
+                    total += monthData.amount;
+                }
             }
         }
+        const typeSubscription = await typeSubscriptionModel.find();
         return res.status(200).send({
-            subscriptions: results
+            subscriptions: results,
+            typeSubscription,
+            total,
         });
 
     } catch (error) {
+        console.log(error)
         return res.status(500).send({
-            msg:  "حدث خطأ أثناء معالجة طلبك",
+            msg: "حدث خطأ أثناء معالجة طلبك",
             error: error.message,
         });
     }
 };
 exports.getOverdueSubscriptions = async (req, res) => {
-    const { month, year } = req.query;
-
-    if (!month || !year) {
-        return res.status(400).send({ msg: "مطلوب الشهر والسنة" });
-    }
 
     try {
-        const subscriptions = await monthlySubscriptionModel.find({ year: year }).populate("idUser");
+        const subscriptions = await monthlySubscriptionModel.find().populate("idUser", "name");
 
         if (subscriptions.length === 0) {
             return res.status(404).send({ msg: "لم يتم العثور على اشتراكات للسنة المحددة" });
         }
         const results = []
-        for(let i = 0; i < subscriptions.length;i++){
-            const monthData = subscriptions[i].months[month];
-            if(monthData &&  monthData.amount == 0){
-                results.push(subscriptions[i])
+        const typeSubscription = await typeSubscriptionModel.find();
+        for (let i = 0; i < subscriptions.length; i++) {
+            for (let j = 1; j <= 12; j++) {
+                const monthData = subscriptions[i].months[j.toString()];
+                if (monthData && monthData.pendingPayment && monthData.isInvoiceOverdue) {
+                    results.push({
+                        idUser: subscriptions[i].idUser,
+                        name: subscriptions[i].idUser.name,
+                        dueDate: monthData.dueDate,
+                        dueDateHijri: {
+                            year: monthData.dueDateHijri.year,
+                            month: {
+                                number: monthData.dueDateHijri.month.number
+                            },
+                            day: monthData.dueDateHijri.day
+                        },
+                        amount: typeSubscription[0].amount,
+                        month: j.toString(),
+                        comments: subscriptions[i].months[j.toString()].comments
+                    })
+                }
             }
         }
         return res.status(200).send({
@@ -273,8 +338,9 @@ exports.getOverdueSubscriptions = async (req, res) => {
         });
 
     } catch (error) {
+        console.log(error)
         return res.status(500).send({
-            msg:  "حدث خطأ أثناء معالجة طلبك",
+            msg: "حدث خطأ أثناء معالجة طلبك",
             error: error.message,
         });
     }
@@ -286,7 +352,8 @@ exports.getAnnualSubscriptions = async (req, res) => {
             year
         }).populate("idUser", "name");
         return res.status(200).send({
-            subscription
+            subscription,
+            print: req.user.admin.userPermission.indexOf("طباعة سجل الاشتراكات (سنوي ، شهري ، أو مدة محددة)") > -1 ? true : false,
         })
     } catch (error) {
         return res.status(500).send({
@@ -304,7 +371,8 @@ exports.getAnnualSubscriptionsDetails = async (req, res) => {
                 year: startYear
             }).populate("idUser", "name");
             return res.status(200).send({
-                subscription
+                subscription,
+                print: req.user.admin.userPermission.indexOf("طباعة سجل الاشتراكات (سنوي ، شهري ، أو مدة محددة)") > -1 ? true : false,
             });
         }
         const subscription = await monthlySubscriptionModel.find({
@@ -315,7 +383,8 @@ exports.getAnnualSubscriptionsDetails = async (req, res) => {
             }
         }).populate("idUser", "name");
         return res.status(200).send({
-            subscription
+            subscription,
+            print: req.user.admin.userPermission.indexOf("طباعة سجل الاشتراكات (سنوي ، شهري ، أو مدة محددة)") > -1 ? true : false,
         });
     } catch (error) {
         console.log(error)
@@ -331,13 +400,30 @@ exports.getSubscriptionHistory = async (req, res) => {
         const page = parseInt(req.query.page) || 1;
         const pageSize = 10;
         const skip = (page - 1) * pageSize;
-        const users = await userModel.find().select("_id name memberBalance cumulativeBalance commentSubscribeHistory").skip(skip).limit(pageSize).exec();
+        const users = await userModel.find().select("_id name memberBalance cumulativeBalance commentSubscribeHistory status createdAt").skip(skip).limit(pageSize).exec();
         const totalUsers = await userModel.countDocuments();
         const totalPages = Math.ceil(totalUsers / pageSize);
         const moneyBox = await moneyBoxModel.findById(moneyBoxId)
+        var activeMembers = 0;
+        var newUser = 0;
+        for (let i = 0; i < users.length; i++) {
+            if (users[i].status == "active") activeMembers++;
+            var creationDate = moment(users[i].createdAt).locale("en");
+
+            // Get the current date
+            var currentDate = moment();
+
+            // Calculate the difference in days
+            var daysDifference = currentDate.diff(creationDate, 'years');
+            if (daysDifference < 1) {
+                newUser++;
+            }
+        }
         return res.status(200).json({
             moneyBox,
             users,
+            activeMembers,
+            newUser,
             totalPages,
             totalUsers,
         });
@@ -453,8 +539,8 @@ exports.updateCommentRecordAnnual = async (req, res) => {
     }
 }
 exports.updateInvoiceOverdue = async (req, res) => {
-    const { id,month } = req.body;
-    try{
+    const { id, month } = req.body;
+    try {
         if (req.user.admin.userPermission.indexOf("إضافة إيرادات (اشتراكات الأعضاء)") === -1) {
             return res.status(403).send({
                 msg: "ليس لديك إذن التعامل مع إيرادات (اشتراكات الأعضاء)",
@@ -467,12 +553,12 @@ exports.updateInvoiceOverdue = async (req, res) => {
                 msg: "لم يتم ايجاد هذا الاشتراك"
             });
         }
-        if(existingSubscription.months[month].amount != 0){
+        if (existingSubscription.months[month].amount != 0) {
             return res.status(400).send({
                 msg: "لقد تم دفع هدا الاشتراك من قبل"
             });
         }
-        if(existingSubscription.months[month].isInvoiceOverdue){
+        if (existingSubscription.months[month].isInvoiceOverdue) {
             return res.status(400).send({
                 msg: "لقد تم اضافتها من قبل"
             });

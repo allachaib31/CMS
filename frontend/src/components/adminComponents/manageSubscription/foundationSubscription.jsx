@@ -110,7 +110,6 @@ function FoundationSubscription() {
           <option value="_id">العدد</option>
           <option value="NationalIdentificationNumber">رقم الهوية</option>
           <option value="phoneNumber">رقم الجوال</option>
-          <option value="email">بريد إلكتروني</option>
         </select>
         <div className="indicator xs:mt-0 mt-[1rem] ">
           <button onClick={handleSearch} className="btn xs:w-auto bg-primary text-[20px] text-white join-item">
@@ -126,7 +125,6 @@ function FoundationSubscription() {
               <th>العدد</th>
               <th>اسم العضو</th>
               <th>رقم الهوية</th>
-              <th>بريد إلكتروني</th>
               <th>رقم الجوال</th>
               <th>نوع المبلغ</th>
               <th>سعر الاشتراك</th>
@@ -141,9 +139,8 @@ function FoundationSubscription() {
                   <td>{user._id}</td>
                   <td>{user.name}</td>
                   <td>{user.NationalIdentificationNumber}</td>
-                  <td>{user.email}</td>
                   <td>{user.phoneNumber}</td>
-                  <td>تاسيسي</td>
+                  <td>التأسيس</td>
                   <td>{foundationPrice}</td>
                   <td><input type="text" onChange={(event) => {
                     setInputs((prevInputs) => {

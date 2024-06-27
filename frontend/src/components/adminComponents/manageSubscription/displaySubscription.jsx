@@ -1,34 +1,59 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { hijriDateObject } from "../../../utils/getHijriDate";
-import { getSubscriptionsFormFetch } from "../../../utils/apiFetch";
+import { addMonthlySubscriptionsFetch, getSubscriptionsFormFetch } from "../../../utils/apiFetch";
+import Alert from "../../alert/alert";
+import moment from "moment-hijri";
+import AddNoteMonthly from "../../modals/addNoteMonthly";
+
 
 function DisplaySubscription() {
     const navigate = useNavigate();
-    const [date, setDate] = useState(hijriDateObject());
     const [loading, setLoading] = useState(true);
     const [subscriptions, setSubscriptions] = useState([]);
+    const [amount, setAmount] = useState(0);
     const [inputs, setInputs] = useState({
-        month: date[1].number,
-        year: date[2],
+        date: "",
+        dateHijri: "",
+    });
+    const [comment, setComment] = useState(false);
+    const [showAlert, setShowAlert] = useState({
+        display: false,
     });
     const [month, setMonth] = useState(inputs.month);
-    const [yearOptions, setYearOptions] = useState([]);
-    const generateYear = () => {
-        const years = [];
-        for (let i = 1415; i <= inputs.year; i++) {
-            years.push(i);
-        }
-        setYearOptions(years);
-    };
-    const getSubscriptionsForm = () => {
+    const [total, setTotal] = useState(0);
+    const handleSubmit = (data) => {
+        setShowAlert({
+            display: false,
+        });
+        addMonthlySubscriptionsFetch(data).then((res) => {
+            setShowAlert({
+                display: true,
+                status: true,
+                text: res.data.msg
+            });
+            document.getElementById(data.idUser).innerHTML = "تم الدفع بنجاح" ;
+        }).catch((err) => {
+            if (err.response.status == 401) {
+                navigate("/auth");
+            }
+            setShowAlert({
+                display: true,
+                status: false,
+                text: err.response.data.msg
+            });
+        })
+    }
+    const getSubscriptionsForm = (input) => {
         setLoading((e) => !e);
-        //  alert(inputs.month)
-        getSubscriptionsFormFetch(inputs)
+        getSubscriptionsFormFetch(input)
             .then((res) => {
+                console.log(res);
                 setLoading((e) => !e);
                 setSubscriptions(res.data.subscriptions);
-                setMonth(inputs.month)
+                setMonth(input.dateHijri.month.number);
+                setTotal(res.data.total);
+                setAmount(res.data.typeSubscription[0].amount);
             })
             .catch((err) => {
                 if (err.response && err.response.status === 401) {
@@ -37,86 +62,85 @@ function DisplaySubscription() {
                 setLoading((e) => !e);
                 setSubscriptions([]);
             });
-    }
+    };
     useEffect(() => {
-        generateYear();
-        getSubscriptionsForm();
+        const today = new Date().toISOString().split("T")[0];
+        //document.getElementById("dateInput").max = today;
+        document.getElementById("dateInput").value = today;
+        const hijriDate = hijriDateObject(today);
+        setInputs((prevInput) => {
+            return {
+                ...prevInput,
+                date: today,
+                dateHijri: {
+                    day: hijriDate[0],
+                    month: hijriDate[1],
+                    year: hijriDate[2],
+                },
+            };
+        });
+        getSubscriptionsForm({
+            date: today,
+            dateHijri: {
+                day: hijriDate[0],
+                month: hijriDate[1],
+                year: hijriDate[2],
+            },
+        });
     }, []);
     return (
         <div className="px-[1rem] sm:px-0">
-            <div className="mb-[1rem] flex lg:flex-row sm:gap-1 gap-[1rem] flex-col justify-center">
-                <Link
-                    to="/subscription/modifySubscriptionAmount"
-                    className="text-[1rem] btn btn-primary"
-                >
-                    تعديل مبلغ الاشتراكات
-                </Link>
-                <Link
-                    to="/subscription/annualSubscriptionRecord"
-                    className="text-[1rem] btn btn-primary"
-                >
-                    سجل الاشتراكات السنوي
-                </Link>
-                <Link
-                    to="/subscription/registerMemberFinancialData"
-                    className="text-[1rem] btn btn-primary"
-                >
-                    سجل بيانات العضو المالية
-                </Link>
-                <Link
-                    to="/subscription/subscriptionHistory"
-                    className="text-[1rem] btn btn-primary"
-                >
-                    سجل الاشتراكات
-                </Link>
-                <Link
-                    to="/subscription/paymentOfSubscriptions"
-                    className="text-[1rem] btn btn-primary"
-                >
-                    دفع الاشتراكات
-                </Link>
-                <Link to="/subscription/managingLatePayments"
-                    className="text-[1rem] btn btn-primary">
-                    ادارة المدفوعات المتاخرة
-                </Link>
-            </div>
             <h1 className="text-center text-[1.5rem] font-bold py-[1rem]">
                 نموذج الاشتراكات
             </h1>
-            <div className="join">
-                <select onChange={(event) => {
-                    setInputs((input) => {
-                        return { ...input, year: event.target.value.trim() }
-                    })
-                }} className="select xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
-                    {yearOptions.map((value) => (
-                        <option key={value} value={value} selected={inputs.year === value}>
-                            {value}
-                        </option>
-                    ))}
-                </select>
-                <select onChange={(event) => {
-                    setInputs((input) => {
-                        return { ...input, month: event.target.value.trim() }
-                    })
-                }} className="select xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
-                    <option value="1" selected={"1" == inputs.month}>محرم</option>
-                    <option value="2" selected={"1" == inputs.month}>صفر</option>
-                    <option value="3" selected={"3" == inputs.month}>ربيع الاول</option>
-                    <option value="4" selected={"4" == inputs.month}>ربيع الثاني</option>
-                    <option value="5" selected={"5" == inputs.month}>جمادى الاول</option>
-                    <option value="6" selected={"6" == inputs.month}>جمادى الثاني</option>
-                    <option value="7" selected={"7" == inputs.month}>رجب</option>
-                    <option value="8" selected={"8" == inputs.month}>شعبان</option>
-                    <option value="9" selected={"9" == inputs.month}>رمضان</option>
-                    <option value="10" selected={"10" == inputs.month}>شوال</option>
-                    <option value="11" selected={"11" == inputs.month}>ذو القعدة</option>
-                    <option value="12" selected={"12" == inputs.month}>ذو الحجة</option>
-                </select>
-                <div className="indicator">
-                    <button onClick={getSubscriptionsForm} className="btn btn-primary join-item">ابحث</button>
+            <div className="join items-center justify-center w-full gap-[1rem]">
+                <input
+                    className="input input-bordered"
+                    onChange={(event) => {
+                        const hijriDate = hijriDateObject(event.target.value);
+                        setInputs((prevInput) => {
+                            return {
+                                ...prevInput,
+                                date: event.target.value,
+                                dateHijri: {
+                                    day: hijriDate[0],
+                                    month: hijriDate[1],
+                                    year: hijriDate[2],
+                                },
+                            };
+                        });
+                        getSubscriptionsForm({
+                            date: event.target.value,
+                            dateHijri: {
+                                day: hijriDate[0],
+                                month: hijriDate[1],
+                                year: hijriDate[2],
+                            },
+                        });
+                    }}
+                    type="date"
+                    id="dateInput"
+                    name="dateInput"
+                />
+                <label htmlFor="">
+                    الموافق لي{" "}
+                    {inputs.dateHijri ? (
+                        <span>
+                            {inputs.dateHijri.year}/{inputs.dateHijri.month.number}/
+                            {inputs.dateHijri.day}
+                        </span>
+                    ) : (
+                        ""
+                    )}
+                </label>
+            </div>
+            <div className="mt-[1rem] flex justify-center">
+                <div className="flex gap-[1rem]">
+                    <h1 className="text-[1.1rem] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">إجمالي الاشتراكات لهذا الشهر</h1>
+                    <h1 className="text-[1.1rem] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">{total}</h1>
                 </div>
             </div>
+            {showAlert.display ? <Alert msg={showAlert} /> : ""}
             <div className="overflow-x-auto mt-[1rem]">
                 {!loading ? (
                     <div className="flex justify-center">
@@ -124,8 +148,8 @@ function DisplaySubscription() {
                         <span className=" loading loading-ring loading-lg"></span>
                     </div>
                 ) : (
-                    <table className="text-[1rem] table border-separate border-spacing-2 border w-[1200px] mx-auto">
-                        <thead className="text-[1rem]">
+                    <table className="text-[1rem] table border-separate border-spacing-2 border w-[1500px] mx-auto">
+                        <thead className="text-[1rem] text-center">
                             <tr>
                                 <th className="border border-slate-600" rowSpan={2}>
                                     اسم العضو
@@ -137,10 +161,16 @@ function DisplaySubscription() {
                                     المبلغ
                                 </th>
                                 <th className="text-center border border-slate-600" colSpan={2}>
+                                    تاريخ الاستحقاق
+                                </th>
+                                <th className="text-center border border-slate-600" colSpan={2}>
                                     تاريخ الايداع
                                 </th>
                                 <th className="border border-slate-600" rowSpan={2}>
                                     ملاحظات
+                                </th>
+                                <th className="border border-slate-600" rowSpan={2}>
+                                    دفع
                                 </th>
                             </tr>
                             <tr>
@@ -148,37 +178,58 @@ function DisplaySubscription() {
                                     الميلادي
                                 </th>
                                 <th className="text-center border border-slate-600">الهجري</th>
+                                <th className="text-center border border-slate-600">
+                                    الميلادي
+                                </th>
+                                <th className="text-center border border-slate-600">الهجري</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody className="text-center">
                             {subscriptions &&
                                 subscriptions.map((subscription) => {
-                                    const createAt = new Date(
-                                        subscription.months[month].createdAt
-                                    );
+                                    const date = subscription.months[month].createdAt == null ? new Date() : new Date(subscription.months[month].createdAt);
+                                    const hijriDate = hijriDateObject(date);
                                     return (
                                         <tr>
                                             <th className="border border-slate-600">
                                                 {subscription.idUser.name}
                                             </th>
                                             <td className="border border-slate-600">اشتراك شهري</td>
+                                            <td className="border border-slate-600">{amount}</td>
+                                            <td className="border border-slate-600">{subscription.months[month].dueDate}</td>
                                             <td className="border border-slate-600">
-                                                {subscription.months[month].amount}
+                                                {subscription.months[month].dueDateHijri.year}-
+                                                {subscription.months[month].dueDateHijri.month.number}-
+                                                {subscription.months[month].dueDateHijri.day}
                                             </td>
                                             <td className="border border-slate-600">
-                                                {createAt.getDate()}/{createAt.getMonth() + 1}/
-                                                {createAt.getFullYear()}
+                                                {date.getFullYear()}-{date.getMonth() + 1}-
+                                                {date.getDate()}
                                             </td>
                                             <td className="border border-slate-600">
-                                                {subscription.months[month].hijriDate.day}/
-                                                {
-                                                    subscription.months[month].hijriDate.month
-                                                        .number
-                                                }
-                                                /{subscription.months[month].hijriDate.year}
+                                                {hijriDate[2]}-{hijriDate[1].number}-{hijriDate[0]}
                                             </td>
-                                            <td className="border border-slate-600">
+                                            <td id={subscription._id} onClick={() => {
+                                                setComment({
+                                                    _id: subscription._id,
+                                                    month: month,
+                                                    comment: "",
+                                                })
+                                                document.getElementById('addNote').showModal()
+                                            }} className="border border-slate-600 cursor-pointer">
                                                 {subscription.months[month].comments}
+                                            </td>
+                                            <td id={subscription.idUser._id} className="border border-slate-600">
+                                                {subscription.months[month].amount != 0 ? "تم الدفع بنجاح" : <button onClick={() => {
+                                                    handleSubmit({
+                                                        idUser: subscription.idUser._id,
+                                                        amount,
+                                                        month,
+                                                        dueDateHijri: subscription.months[month].dueDateHijri,
+                                                        dueDate: inputs.date,
+                                                        year: subscription.months[month].dueDateHijri.year,
+                                                    })
+                                                }} className="btn btn-success">دفع</button>}
                                             </td>
                                         </tr>
                                     );
@@ -187,6 +238,7 @@ function DisplaySubscription() {
                     </table>
                 )}
             </div>
+            <AddNoteMonthly comment={comment} setComment={setComment}/>
         </div>
     );
 }

@@ -20,6 +20,7 @@ function UpdateAdmin() {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const id = queryParams.get('id');
+  const name = queryParams.get('name');
   const handleUpdate = () => {
     setSubmit((e) => !e);
     setShowAlert({
@@ -89,17 +90,17 @@ function UpdateAdmin() {
         </Link>
       </div>
       <h1 className="text-center text-[1.5rem] font-bold py-[1rem]">
-        تحديث معلومات المستخدم {id}
+        تحديث معلومات المستخدم {id} للعضو  : {name}
       </h1>
       {loading ? <div className="flex justify-center"><span className="loading loading-ring w-[4rem]"></span></div> :
         <form action="" className="py-[2rem] flex flex-col gap-[1rem]">
           {showAlert.display ? <Alert msg={showAlert} /> : ""}
           <Checkbox inputs={inputs} setInputs={setInputs} />
           <button
-          onClick={(event) => {
-            event.preventDefault();
-            handleUpdate();
-          }} className="btn text-white font-bold text-[20px] bg-primary">{submit ? <span className="loading loading-ring loading-lg"></span> : "تحديث"}</button>
+            onClick={(event) => {
+              event.preventDefault();
+              handleUpdate();
+            }} className="btn text-white font-bold text-[20px] bg-primary">{submit ? <span className="loading loading-ring loading-lg"></span> : "تحديث"}</button>
         </form>}
     </div>
   )

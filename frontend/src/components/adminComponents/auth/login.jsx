@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import authPng from "../../../images/auth.png";
 import logoPng from "../../../images/logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEnvelope, faKey } from "@fortawesome/free-solid-svg-icons";
+import { faIdCard, faKey } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import Cookies from "cookies-js";
 import { loginFetch } from "../../../utils/apiFetch";
@@ -11,11 +11,11 @@ function Login() {
   const navigate = useNavigate();
   const [submit, setSubmit] = useState(false);
   const [disbledSubmit, setDisbledSubmit] = useState({
-    email: false,
+    NationalIdentificationNumber: false,
     password: false
   });
   const [inputs, setInputs] = useState({
-    email: "",
+    NationalIdentificationNumber: "",
     password: "",
   });
   const [showAlert, setShowAlert] = useState({
@@ -58,14 +58,14 @@ function Login() {
           <form action="" className="flex flex-col gap-[2rem]">
             {showAlert.display ? <Alert msg={showAlert} /> : ""}
             <div className="relative">
-              <FontAwesomeIcon icon={faEnvelope} className="absolute top-[1rem] right-[1rem]" />
-              <input type="email" onChange={(e) => {
-                if(e.target.validity.valid) setDisbledSubmit(value => {return {...value,email: true}});
-                else setDisbledSubmit(value => {return {...value,email: false}});
+              <FontAwesomeIcon icon={faIdCard} className="absolute top-[1rem] right-[1rem]" />
+              <input type="text" onChange={(e) => {
+                if(e.target.validity.valid) setDisbledSubmit(value => {return {...value,NationalIdentificationNumber: true}});
+                else setDisbledSubmit(value => {return {...value,NationalIdentificationNumber: false}});
                 setInputs((input) => {
-                  return { ...input, email: e.target.value.trim() }
+                  return { ...input, NationalIdentificationNumber: e.target.value.trim() }
                 })
-              }} required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder={` بريد إلكتروني`} pattern="^[^\s@]+@[^\s@]+\.[^\s@]{2,}$" />
+              }} required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder={"رقم الهوية الوطنية"} pattern="[1-9]\d{9}" />
             </div>
             <div className="relative">
               <FontAwesomeIcon icon={faKey} className="absolute top-[1rem] right-[1rem]" />
@@ -75,10 +75,10 @@ function Login() {
                 setInputs((input) => {
                   return { ...input, password: e.target.value.trim() }
                 })
-              }} required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder="كلمة المرور" pattern="^.{8,1024}$" />
+              }} required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder="كلمة المرور" pattern="^.{4,1024}$" />
             </div>
             <button
-            disabled={!disbledSubmit.email || !disbledSubmit.password}
+            disabled={!disbledSubmit.NationalIdentificationNumber || !disbledSubmit.password}
             onClick={(event) => {
               event.preventDefault();
               handleSubmit();

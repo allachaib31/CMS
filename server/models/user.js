@@ -5,11 +5,6 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-  },
   password: {
     type: String,
     required: true,
@@ -59,6 +54,10 @@ const userSchema = new mongoose.Schema({
     type: Number,
     default: 0
   },
+  disable: {
+    type: Boolean,
+    default: false,
+  },
   hijriDate: {
     type: Object,
     required: true,
@@ -73,8 +72,7 @@ userSchema.methods.joiValidate = async function (obj) {
   const schema = Joi.object({
     _id: Joi.object(),
     name: Joi.string().min(3).max(1024).required(),
-    email: Joi.string().email().max(1024).required(),
-    password: Joi.string().min(8).max(1024).required(),
+    password: Joi.string().min(4).max(1024).required(),
     NationalIdentificationNumber: Joi.string()
       .pattern(/^[1-9]\d{9}$/)
       .required(),
@@ -88,6 +86,7 @@ userSchema.methods.joiValidate = async function (obj) {
     memberBalance: Joi.number(),
     commentSubscribeHistory: Joi.string().min(0).max(5000),
     cumulativeBalance: Joi.number(),
+    disable: Joi.boolean().required(),
     hijriDate: Joi.object(),
     createdAt: Joi.date().required(),
   });

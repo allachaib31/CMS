@@ -84,7 +84,6 @@ function DisplayUser() {
             <option value="name">اسم</option>
             <option value="NationalIdentificationNumber">رقم الهوية</option>
             <option value="phoneNumber">رقم الجوال</option>
-            <option value="email">بريد إلكتروني</option>
             <option value="status">الحالة</option>
           </select>
           <div className="indicator xs:mt-0 mt-[1rem] ">
@@ -99,11 +98,10 @@ function DisplayUser() {
         <table className="table w-[1800px]">
           {/* head */}
           <thead>
-            <tr className="text-[1rem]">
+            <tr className="text-center text-[1rem]">
               <th>العدد</th>
               <th>اسم العضو</th>
               <th>رقم الهوية</th>
-              <th>بريد إلكتروني</th>
               <th>رقم الجوال</th>
               <th colSpan="2" rowSpan="2" className="">
                 <span className="flex w-full justify-center"> تاريخ الاشتراك  </span>
@@ -115,31 +113,31 @@ function DisplayUser() {
               <th>الحالة</th>
               <th>ملاحظات</th>
               <th>تعديل</th>
-              <th>حدف</th>
+              <th>تعطيل</th>
             </tr>
           </thead>
           <tbody className="text-[1rem]">
             {users && users.map((user, index) => {
               const date = new Date(user.createdAt);
               return (
-                <tr>
+                <tr className="text-center">
                   <td>{user._id}</td>
                   <td>{user.name}</td>
                   <td>{user.NationalIdentificationNumber}</td>
-                  <td>{user.email}</td>
                   <td>{user.phoneNumber}</td>
                   <td className="text-center">{date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()}</td>
                   <td className="text-center">{user.hijriDate.year + "-" + user.hijriDate.month.number + "-" + user.hijriDate.day}</td>
                   <td className={(user.status == "not active" ? "text-error" : "text-success") + " font-bold text-[1.3rem]"}>{user.status == "not active" ? "غير مفعل" : "مفعل"}</td>
                   <td>{user.comments}</td>
                   <td><Link to={`/user/updateUser?id=${user._id}`} className="btn btn-warning">تعديل</Link></td>
-                  <td><button onClick={() => {
+                  <td><button data-disable={user.disable} id={user._id} onClick={(event) => {
                     setUserDelete({
                       id: user._id,
-                      index
+                      index,
+                      disable: event.target.getAttribute("data-disable") == "true" ? true: false
                     });
                     document.getElementById('deleteModel').showModal()
-                  }} className="btn btn-error">حدف</button></td>
+                  }} className="btn btn-error">{user.disable ? "تنشيط" : "تعطيل"}</button></td>
                 </tr>)
             })}
           </tbody>

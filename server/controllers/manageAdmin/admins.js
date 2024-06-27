@@ -9,7 +9,8 @@ exports.addAdmin = async (req, res) => {
         msg: "ليس لديك إذن إضافة او تعديل او حذف مسؤل",
       });
     }
-    UserPermission = UserPermission.split(",");
+    //console.log(UserPermission)
+    //UserPermission = UserPermission.split(",");
     let err = schemaAdminValidation.validate({
       isAdmin: true,
       userPermissions: UserPermission,
@@ -30,6 +31,7 @@ exports.addAdmin = async (req, res) => {
       msg: "لقد تمت إضافة الادمن بنجاح",
     });
   } catch (error) {
+    console.log(error)
     if (error.error) {
       return res.status(422).send({
         msg: "احد المدخلات فيه خطاء",
@@ -126,7 +128,7 @@ exports.updateAdmin = async (req, res) => {
         msg: "ليس لديك إذن إضافة او تعديل او حذف مسؤل",
       });
     }
-    UserPermission = UserPermission.split(",");
+    //UserPermission = UserPermission.split(",");
     let err = schemaAdminValidation.validate({
       isAdmin: true,
       userPermissions: UserPermission,

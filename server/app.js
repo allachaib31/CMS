@@ -9,6 +9,7 @@ const numCPUs = require("os").cpus().length;
 const compression = require("compression");
 const { rateLimit } = require("express-rate-limit");
 const mongoose = require("mongoose");
+const path = require('path');
 const { default: helmet } = require("helmet");
 
 // IMPORT middleware
@@ -25,14 +26,15 @@ mongoose.connect(MONGOODB).then(() => {
 })
 
 const limiter = rateLimit({
-    windowMs: 15 * 60 * 1000, 
-    max: 5000, 
+    windowMs: 15 * 60 * 1000,
+    max: 5000,
     message: "Too many requests from this IP, please try again later.",
-    statusCode: 429, 
-    headers: true 
+    statusCode: 429,
+    headers: true
 });
 
 app
+    .use(express.static(path.join(__dirname, 'build')))
     .use(express.json())
     .use(helmet())
     .disable("x-powered-by")
@@ -52,23 +54,27 @@ const userRoute = require("./routes/manageAdmin/users");
 const authAdmin = require("./routes/manageAdmin/auth");
 const typeSubscription = require("./routes/manageSubscription/typeSubscription");
 const subscriptions = require("./routes/manageSubscription/subscriptions");
-//const moneyBox = require("./routes/manageMoneyBox/moneyBox");
+const commodityRevenu = require("./routes/manageCommodityRevenue/commodityRevenue");
+const moneyBox = require("./routes/manageMoneyBox/moneyBox");
+const { scheduleUpdate } = require("./schedule/schedule");
 app
     .use(authAdmin)
     .use(adminRoute)
     .use(userRoute)
     .use(typeSubscription)
     .use(subscriptions)
-    //.use(moneyBox);
+    .use(commodityRevenu)
+    .use(moneyBox);
 
 
-app.get("/", (req,res) => {
-    return res.status(200).send("HELLO WORLD");
-})
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
 
 const startServer = () => {
     const PORT = process.env.PORT || 5000;
     const server = app.listen(PORT, (req, res) => {
+        if (cluster.worker.id === 1) scheduleUpdate();
         console.log(`server is start running in ${PORT}`);
     });
 }

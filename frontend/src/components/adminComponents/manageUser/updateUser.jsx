@@ -10,7 +10,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { searchUserFetch, updateUserFetch } from "../../../utils/apiFetch";
+import { searchUserFetch, updatePasswordFetch, updateUserFetch } from "../../../utils/apiFetch";
 import Alert from "../../alert/alert";
 
 function UpdateUser() {
@@ -18,7 +18,6 @@ function UpdateUser() {
     const [submit, setSubmit] = useState(false);
     const [loading, setLoading] = useState(true);
     const [disbledSubmit, setDisbledSubmit] = useState({
-        email: true,
         status: true,
         name: true,
         NationalIdentificationNumber: true,
@@ -27,19 +26,51 @@ function UpdateUser() {
     const [inputs, setInputs] = useState({
         _id: "",
         name: "",
-        email: "",
         NationalIdentificationNumber: "",
         phoneNumber: "",
         status: "",
         comments: ""
     });
+    const [password, setPassword] = useState("");
+    const [disbledPassword, setDisbledPassword] = useState(false);
     const [showAlert, setShowAlert] = useState({
         display: false,
     });
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
     const id = queryParams.get('id');
-
+    const handleUpdatePassword = () => {
+        setShowAlert({
+            display: false,
+        });
+        updatePasswordFetch({
+            idUser: id,
+            password
+        }).then((res) => {
+            setShowAlert({
+                display: true,
+                status: true,
+                text: res.data.msg
+            });
+        }).catch((err) => {
+            if (err.response.status == 404 || err.response.status == 422 || err.response.status == 403) {
+                setShowAlert({
+                    display: true,
+                    status: false,
+                    text: err.response.data.msg
+                });
+                return
+            } else if (err.response.status == 401) {
+                navigate("/auth");
+            }
+            setShowAlert({
+                display: true,
+                status: false,
+                text: err.response.data.msg
+            });
+            return
+        })
+    }
     const handleUpdate = () => {
         setSubmit((e) => !e);
         setShowAlert({
@@ -87,7 +118,6 @@ function UpdateUser() {
                 _id: res.data.user[0]._id,
                 name: res.data.user[0].name,
                 NationalIdentificationNumber: res.data.user[0].NationalIdentificationNumber,
-                email: res.data.user[0].email,
                 phoneNumber: res.data.user[0].phoneNumber,
                 status: res.data.user[0].status,
                 comments: res.data.user[0].comments,
@@ -120,7 +150,7 @@ function UpdateUser() {
                                 if (e.target.validity.valid) setDisbledSubmit(value => { return { ...value, name: true } });
                                 else setDisbledSubmit(value => { return { ...value, name: false } });
                                 setInputs((input) => {
-                                    return { ...input, name: e.target.value.trim() }
+                                    return { ...input, name: e.target.value }
                                 })
                             }}
                             required
@@ -141,7 +171,7 @@ function UpdateUser() {
                                 if (e.target.validity.valid) setDisbledSubmit(value => { return { ...value, NationalIdentificationNumber: true } });
                                 else setDisbledSubmit(value => { return { ...value, NationalIdentificationNumber: false } });
                                 setInputs((input) => {
-                                    return { ...input, NationalIdentificationNumber: e.target.value.trim() }
+                                    return { ...input, NationalIdentificationNumber: e.target.value }
                                 })
                             }}
                             required
@@ -153,27 +183,16 @@ function UpdateUser() {
                     </div>
                 </div>
                 <div className="flex sm:flex-row flex-col gap-[1rem]">
-                    <div className="relative sm:w-1/2">
-                        <FontAwesomeIcon
-                            icon={faEnvelope}
-                            className="absolute top-[1rem] right-[1rem]"
-                        />
-                        <input
-                            type="email"
-                            onChange={(e) => {
-                                if (e.target.validity.valid) setDisbledSubmit(value => { return { ...value, email: true } });
-                                else setDisbledSubmit(value => { return { ...value, email: false } });
-                                setInputs((input) => {
-                                    return { ...input, email: e.target.value.trim() }
-                                })
-                            }}
-                            required
-                            className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2"
-                            placeholder={` بريد إلكتروني`}
-                            value={inputs.email}
-                            pattern="^[^\s@]+@[^\s@]+\.[^\s@]{2,}$"
-                        />
-                    </div>
+                <div className="relative sm:w-1/2">
+                    <select onChange={(e) => {
+                        setInputs((input) => {
+                            return { ...input, status: e.target.value }
+                        })
+                    }} className="select w-full status" required>
+                        <option value="not active" selected={inputs.status == "not active" ? true : false}>غير مفعل</option>
+                        <option value="active" selected={inputs.status == "active" ? true : false}>مفعل</option>
+                    </select>
+                </div>
                     <div className="relative sm:w-1/2">
                         <FontAwesomeIcon
                             icon={faPhone}
@@ -185,7 +204,7 @@ function UpdateUser() {
                                 if (e.target.validity.valid) setDisbledSubmit(value => { return { ...value, phoneNumber: true } });
                                 else setDisbledSubmit(value => { return { ...value, phoneNumber: false } });
                                 setInputs((input) => {
-                                    return { ...input, phoneNumber: e.target.value.trim() }
+                                    return { ...input, phoneNumber: e.target.value }
                                 })
                             }}
                             required
@@ -196,22 +215,12 @@ function UpdateUser() {
                         />
                     </div>
                 </div>
-                <div className="relative ">
-                    <select onChange={(e) => {
-                        setInputs((input) => {
-                            return { ...input, status: e.target.value.trim() }
-                        })
-                    }} className="select w-full status" required>
-                        <option value="not active" selected={inputs.status == "not active" ? true : false}>غير مفعل</option>
-                        <option value="active" selected={inputs.status == "active" ? true : false}>مفعل</option>
-                    </select>
-                </div>
                 <div className="relative">
                     <FontAwesomeIcon icon={faNoteSticky} className="absolute top-[1rem] right-[1rem]" />
                     <textarea
                         onChange={(e) => {
                             setInputs((input) => {
-                                return { ...input, comments: e.target.value.trim() }
+                                return { ...input, comments: e.target.value }
                             })
                         }}
                         className="textarea textarea-primary pr-[2.3rem] resize-none w-full"
@@ -219,7 +228,19 @@ function UpdateUser() {
                         value={inputs.comments}
                     ></textarea>
                 </div>
-                <button disabled={!disbledSubmit.email || !disbledSubmit.status || !disbledSubmit.name || !disbledSubmit.phoneNumber || !disbledSubmit.NationalIdentificationNumber}
+                <div className="relative flex">
+                        <FontAwesomeIcon icon={faKey} className="absolute top-[1rem] right-[1rem]" />
+                        <input type="password" onChange={(e) => {
+                            if (e.target.validity.valid) setDisbledPassword(true);
+                            else setDisbledPassword(false);
+                            setPassword(e.target.value)
+                        }} required value={inputs.password} className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder="كلمة المرور" pattern="^.{4,1024}$" />
+                        <button onClick={(event) => {
+                            event.preventDefault();
+                            handleUpdatePassword();
+                        }} disabled={!disbledPassword} className="btn btn-warning font-bold">تحديث</button>
+                    </div>
+                <button disabled={!disbledSubmit.status || !disbledSubmit.name || !disbledSubmit.phoneNumber || !disbledSubmit.NationalIdentificationNumber}
                     onClick={(event) => {
                         event.preventDefault();
                         handleUpdate();

@@ -3,8 +3,7 @@ import { Link, Outlet, useNavigate } from "react-router-dom";
 import profileImage from "../../images/profileImage.png";
 import logo from "../../images/logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser } from "@fortawesome/free-regular-svg-icons";
-import { faFileInvoiceDollar, faUserTie } from "@fortawesome/free-solid-svg-icons";
+import { faChartPie, faBuilding, faUser, faChartSimple, faFileInvoiceDollar, faSackDollar, faUserTie, faHandHoldingDollar, faGift, faRecycle, faArrowTrendUp } from "@fortawesome/free-solid-svg-icons";
 import { validationFetch } from "../../utils/apiFetch";
 import { Loading } from "../../components";
 import Cookies from "cookies-js";
@@ -92,9 +91,170 @@ function Home() {
                     <Link to="/user">
                       <FontAwesomeIcon icon={faUser} /> إدارة الاعضاء
                     </Link>
-                    <Link to="/subscription">
-                      <FontAwesomeIcon icon={faFileInvoiceDollar} /> ادارة الاشتراكات
-                    </Link>
+                    <details>
+                      <summary>
+                        <Link to="/subscription">
+                          <FontAwesomeIcon icon={faFileInvoiceDollar} /> ادارة الاشتراكات
+                        </Link>
+                      </summary>
+                      <ul>
+                        <li>
+                          <Link
+                            to="/subscription/modifySubscriptionAmount"
+                            className="text-[1rem]"
+                          >
+                            تعديل مبلغ الاشتراكات
+                          </Link></li>
+                        <li>
+                          <Link
+                            to="/subscription/annualSubscriptionRecord"
+                            className="text-[1rem]"
+                          >
+                            سجل الاشتراكات السنوي
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            to="/subscription/registerMemberFinancialData"
+                            className="text-[1rem]"
+                          >
+                            سجل بيانات العضو المالية
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            to="/subscription/subscriptionHistory"
+                            className="text-[1rem]"
+                          >
+                            سجل الاشتراكات
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            to="/subscription/paymentOfSubscriptions"
+                            className="text-[1rem]"
+                          >
+                            دفع اشتراك التاسيس
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            to="/subscription/managingLatePayments"
+                            className="text-[1rem]"
+                          >
+                            ادارة المدفوعات المتاخرة
+                          </Link>
+                        </li>
+                      </ul>
+                    </details>
+                    <details>
+                      <summary>
+                        <Link to="/commodityRevenue">
+                          <FontAwesomeIcon icon={faChartPie} /> ايرادات السلع
+                        </Link>
+                      </summary>
+                      <ul>
+                        <li><Link to="/commodityRevenue/goodsRevenueRecord" className="text-[1rem]">سجل ايرادات السلع</Link></li>
+                        <li><Link to="/commodityRevenue/formContributionPurchaseCommodity" className="text-[1rem]">نموذج المساهمة في شراء سلعة</Link></li>
+                        <li><Link to="/commodityRevenue/recordContributionPurchaseCommodity" className="text-[1rem]">سجل المساهمين في شراء سلعة</Link></li>
+                        <li><Link to="/commodityRevenue/orderToPurchaseGoods" className="text-[1rem]">طلب شراء السلع</Link></li>
+                        <li><Link to="/commodityRevenue/commodityPurchaseOrderForm" className="text-[1rem]">نموذج طلب شراء سلعة</Link></li>
+                      </ul>
+                    </details>
+                    <details>
+                      <summary>
+                        <Link to="/contributionRevenue">
+                          <FontAwesomeIcon icon={faChartSimple} /> ايرادات المساهمة
+                        </Link>
+                      </summary>
+                      <ul>
+                        <li><Link to="/contributionRevenue/recordContributions" className="text-[1rem]">سجل المساهمات</Link></li>
+                        <li>                <Link to="/contributionRevenue/consolidatedRecordRevenues" className="text-[1rem]">سجل الموحد للإيرادات</Link></li>
+                      </ul>
+                    </details>
+                    <details>
+                      <summary>
+                        <Link to="/stocks">
+                          <FontAwesomeIcon icon={faArrowTrendUp} /> الأسهم
+                        </Link>
+                      </summary>
+                      <ul>
+                        <li><Link to="/stocks/contributionForm" className="text-[1rem]">طلب المساهمة</Link></li>
+                        <li><Link to="/stocks/displayContributionForm" className="text-[1rem]">نموذج المساهمة</Link></li>
+                      </ul>
+                    </details>
+                    <details>
+                      <summary>
+                        <Link to="/investmentBox">
+                          <FontAwesomeIcon icon={faSackDollar} /> صندوق الاستثماري
+                        </Link>
+                      </summary>
+                      <ul>
+                        <li><Link to="/investmentBox/contributionForm" className="text-[1rem]">طلب المساهمة</Link></li>
+                        <li><Link to="/investmentBox/displayContributionForm" className="text-[1rem]">نموذج المساهمة</Link></li>
+                      </ul>
+                    </details>
+                    <details>
+                      <summary>
+                        <Link to="/financialCompany">
+                          <FontAwesomeIcon icon={faBuilding} /> شركة مالية
+                        </Link>
+                      </summary>
+                      <ul>
+                        <li><Link to="/financialCompany/contributionForm" className="text-[1rem]">طلب المساهمة</Link></li>
+                        <li><Link to="/financialCompany/displayContributionForm" className="text-[1rem]">نموذج المساهمة</Link></li>
+                      </ul>
+                    </details>
+                    <details>
+                      <summary>
+                        <Link to="/loans">
+                          <FontAwesomeIcon icon={faHandHoldingDollar} /> القروض
+                        </Link>
+                      </summary>
+                      <ul>
+                        <li><Link to="/loans/history">سجل القروض</Link></li>
+                        <li><Link to="/loans/order">طلب قرض</Link></li>
+                      </ul>
+                    </details>
+                    <details>
+                      <summary>
+                        <Link to="/unreimbursedExpenses">
+                          <FontAwesomeIcon icon={faGift} /> المصروفات الغير مستردة
+                        </Link>
+                      </summary>
+                      <ul>
+                        <li>
+                          <Link to="/unreimbursedExpenses/displayRecord">سجل المصروفات</Link>
+                        </li>
+                        <li>
+                          <Link to="/unreimbursedExpenses/expenseRequest">طلب مصروف</Link>
+                        </li>
+                        <li>
+                          <Link to="/unreimbursedExpenses/paymentExpenses">دفع المصروفات</Link>
+                        </li>
+                        <li>
+                          <Link to="/unreimbursedExpenses/addExpenseType">اضافة نوع مصروف</Link>
+                        </li>
+                      </ul>
+                    </details>
+                    <details>
+                      <summary>
+                        <Link to="/reimbusedExpenses">
+                          <FontAwesomeIcon icon={faRecycle} /> المصروفات مستردة
+                        </Link>
+                      </summary>
+                      <ul>
+                        <li>
+                          <Link to="/reimbusedExpenses/displayRecord">سجل المصروفات</Link>
+                        </li>
+                        <li>
+                          <Link to="/reimbusedExpenses/expenseRequest">طلب مصروف</Link>
+                        </li>
+                        <li>
+                          <Link to="/reimbusedExpenses/addExpenseType">اضافة نوع مصروف</Link>
+                        </li>
+                      </ul>
+                    </details>
                   </li>
                 </ul>
               </div>

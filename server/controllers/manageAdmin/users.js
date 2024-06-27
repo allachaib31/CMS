@@ -6,7 +6,7 @@ const SALTROUNDS = Number(process.env.SALTROUNDS);
 
 //POST METHODS
 exports.addUser = async (req, res) => {
-  const { name, email, password, NationalIdentificationNumber, phoneNumber } =
+  const { name, password, NationalIdentificationNumber, phoneNumber } =
     req.body;
   try {
     if (req.user.admin.userPermission.indexOf("اضافة او حذف او تعديل عضو جديد") == -1) {
@@ -19,7 +19,6 @@ exports.addUser = async (req, res) => {
     const hashPassword = await bcrypt.hash(password, genSalt);
     const user = userModel({
       name,
-      email,
       password: hashPassword,
       NationalIdentificationNumber,
       phoneNumber,
@@ -37,10 +36,9 @@ exports.addUser = async (req, res) => {
     });
   } catch (error) {
     let message = '';
+    console.log(error)
     if (error.code === 11000) {
-      if (error.keyPattern.email) {
-        message = 'البريد الإلكتروني موجود بالفعل';
-      } else if (error.keyPattern.NationalIdentificationNumber) {
+      if (error.keyPattern.NationalIdentificationNumber) {
         message = 'رقم التعريف الوطني موجود بالفعل';
       } else if (error.keyPattern.phoneNumber) {
         message = 'رقم الهاتف موجود بالفعل';
@@ -59,6 +57,31 @@ exports.addUser = async (req, res) => {
     });
   }
 };
+exports.updatePassword = async (req, res) => {
+  const { idUser, password } = req.body;
+  console.log(password);
+  console.log(idUser)
+  try {
+    if (req.user.admin.userPermission.indexOf("اضافة او حذف او تعديل عضو جديد") == -1) {
+      return res.status(403).send({
+        msg: "ليس لديك إذن إضافة او تعديل او حذف عضو",
+      });
+    }
+    const genSalt = Number(await bcrypt.genSalt(SALTROUNDS));
+    const hashPassword = await bcrypt.hash(password, genSalt);
+    const user = await userModel.findByIdAndUpdate(idUser, {
+      password: hashPassword
+    });
+    console.log(user)
+    return res.status(200).send({
+      msg: "لقد تم تحديث كلمة سر بنجاح",
+    });
+  } catch (error) {
+    return res.status(500).send({
+      msg: "حدث خطأ أثناء معالجة طلبك",
+  });
+  }
+}
 //GET METHODS
 exports.getUser = async (req, res) => {
   try {
@@ -66,7 +89,7 @@ exports.getUser = async (req, res) => {
     const pageSize = 10;
     const skip = (page - 1) * pageSize;
 
-    const users = await userModel.find().select("_id name email NationalIdentificationNumber phoneNumber status comments hijriDate createdAt").skip(skip).limit(pageSize).exec();
+    const users = await userModel.find().select("_id name NationalIdentificationNumber phoneNumber status comments disable hijriDate createdAt").skip(skip).limit(pageSize).exec();
 
     const totalUsers = await userModel.countDocuments();
     const totalPages = Math.ceil(totalUsers / pageSize);
@@ -99,9 +122,6 @@ exports.searchUser = async (req, res) => {
         case "name":
           query.name = { $regex: searchValue, $options: "i" };
           break;
-        case "email":
-          query.email = searchValue;
-          break;
         case "NationalIdentificationNumber":
           query.NationalIdentificationNumber = searchValue;
           break;
@@ -119,7 +139,7 @@ exports.searchUser = async (req, res) => {
     } else {
       return res.status(400).send({ msg: "مطلوب طريقة البحث والقيمة" });
     }
-    const user = await userModel.find(query).select("_id name email NationalIdentificationNumber phoneNumber status comments hijriDate createdAt");
+    const user = await userModel.find(query).select("_id name NationalIdentificationNumber phoneNumber status comments disable hijriDate createdAt");
     const totalUsers = await userModel.countDocuments();
     const totalPages = Math.ceil(totalUsers / 1);
     return res.status(200).json({
@@ -140,7 +160,7 @@ exports.searchUser = async (req, res) => {
 };
 //UPDATE METHODS
 exports.updateUser = async (req, res) => {
-  const { _id, name, email, NationalIdentificationNumber, phoneNumber, status, comments } = req.body;
+  const { _id, name, NationalIdentificationNumber, phoneNumber, status, comments } = req.body;
   try {
     if (req.user.admin.userPermission.indexOf("اضافة او حذف او تعديل عضو جديد") == -1) {
       return res.status(403).send({
@@ -148,22 +168,35 @@ exports.updateUser = async (req, res) => {
       });
     }
     let err = schemaUpdateUserValidation.validate({
-      _id, name, email, NationalIdentificationNumber, phoneNumber, status, comments
+      _id, name, NationalIdentificationNumber, phoneNumber, status, comments
     })
     if (err.error) throw err;
-    const user = await userModel.findByIdAndUpdate(_id, {
+    const user = await userModel.findById(_id);
+   /* const user = await userModel.findByIdAndUpdate(_id, {
       name,
-      email,
       NationalIdentificationNumber,
       phoneNumber,
       status,
       comments,
-    })
-    if(!user){
+    })*/
+    if (!user) {
       return res.status(404).send({
         msg: "المستخدم غير موجود"
       });
     }
+    if(user.status != status){
+      if(req.user.admin.userPermission.indexOf("تفعيل اشتراك و ايقاف اشتراك عضو") == -1){
+        return res.status(403).send({
+          msg: "ليس لديك إذن تفعيل اشتراك و ايقاف اشتراك عضو",
+        });
+      }
+    }
+    user.name = name;
+    user.NationalIdentificationNumber = NationalIdentificationNumber;
+    user.phoneNumber = phoneNumber;
+    user.status = status;
+    user.comments = comments
+    await user.save();
     return res.status(200).send({
       msg: `تتم تحديث المستخدم ${_id}`
     });
@@ -189,14 +222,19 @@ exports.deleteUser = async (req, res) => {
         msg: "ليس لديك إذن إضافة او تعديل او حذف عضو",
       });
     }
-    const user = await userModel.findByIdAndDelete(id);
+    const user = await userModel.findById(id);
+    user.disable = !user.disable;
+    await user.save();
+    /*const user = await userModel.findByIdAndUpdate(id,{
+      disable: true
+    });*/
     if (!user) {
       return res.status(404).send({
         msg: "المستخدم غير موجود"
       });
     }
     return res.status(200).send({
-      msg: `تتم إزالة المستخدم ${id}`
+      msg: `تتم ${user.disable ? "تعطيل" : "تنشيط"} المستخدم ${id}`
     });
   } catch (error) {
     return res.status(500).send({

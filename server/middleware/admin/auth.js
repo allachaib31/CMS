@@ -20,7 +20,6 @@ module.exports = async (req, res, next) => {
         }
         req.user = {
             name: admin.name,
-            email: admin.email,
             NationalIdentificationNumber: admin.NationalIdentificationNumber,
             phoneNumber: admin.phoneNumber,
             status: admin.status,

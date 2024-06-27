@@ -1,4 +1,4 @@
-import { faRightLong } from '@fortawesome/free-solid-svg-icons';
+import { faPrint, faRightLong } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -67,13 +67,13 @@ function AnnualSubscriptionRecord() {
 
     const renderSubscriptions = () => {
         return subscriptions.map((subscription, subIndex) => (
-            <tr key={subIndex}>
+            <tr className='text-center' key={subIndex}>
                 <th className='border border-slate-600'>{subscription.idUser.name}</th>
                 {renderSubscriptionAmounts(subscription.months)}
                 <td className='border border-slate-600'>{subscription.total}</td>
                 <td className='border border-slate-600'>{subscription.numberofArrears}</td>
                 <td className='border border-slate-600'>
-                    <Link to={`/subscription/annualSubscriptionRecordDetails?id=${subscription.idUser._id}`} className="btn btn-info">التفاصيل</Link>
+                    <Link to={`/subscription/annualSubscriptionRecordDetails?id=${subscription.idUser._id}&name=${subscription.idUser.name}`} className="btn btn-info">التفاصيل</Link>
                 </td>
             </tr>
         ));
@@ -87,7 +87,9 @@ function AnnualSubscriptionRecord() {
                 </Link>
             </div>
             <h1 className="text-center text-[1.5rem] font-bold py-[1rem]">
-                سجل الاشتراكات السنوي لسنة {year}
+                سجل الاشتراكات السنوية لعام {year} الرصيد : {total.reduce((total, value) => {
+                    return total + Number(value);
+                })}
             </h1>
             <div className="join flex-wrap mb-[1rem]">
                 <select
@@ -109,10 +111,13 @@ function AnnualSubscriptionRecord() {
                     </button>
                 </div>
             </div>
+            <div>
+                <Link to={`/print/recordAnnual?year=${year}`} target='_blank' className='btn btn-info font-bold'><FontAwesomeIcon icon={faPrint} /> طباعة</Link>
+            </div>
             <div className="overflow-x-auto mt-[2rem]">
                 {!loading ? <div className='flex justify-center'> <span className=" loading loading-ring loading-lg"></span></div> : <table className="table border-separate border-spacing-2 border text-[1rem] w-[1800px]">
                     <thead className='text-[1rem]'>
-                        <tr>
+                        <tr className='text-center'>
                             <th className='border border-slate-600'>الاسم</th>
                             <th className='border border-slate-600'>محرم</th>
                             <th className='border border-slate-600'>صفر</th>
@@ -127,20 +132,20 @@ function AnnualSubscriptionRecord() {
                             <th className='border border-slate-600'>ذو القعدة</th>
                             <th className='border border-slate-600'>ذو الحجة</th>
                             <th className='border border-slate-600'>رصيد العضو</th>
-                            <th className='border border-slate-600'>المتاخرات</th>
-                            <th className='border border-slate-600'>تفاصيل اكثر</th>
+                            <th className='border border-slate-600'>المتأخرات</th>
+                            <th className='border border-slate-600'>تفاصيل أكثر</th>
                         </tr>
                     </thead>
                     <tbody>
                         {renderSubscriptions()}
-                        <tr>
+                        <tr className='text-center'>
                             <th className='border border-slate-600'>المجموع</th>
                             {total.map((value, index) => {
                                 return (<td className='border border-slate-600' key={index}>{value}</td>)
                             })}
                             <td className='border border-slate-600'>{
                                 total.reduce((total, value) => {
-                                    return total + value;
+                                    return total + Number(value);
                                 })
                             }</td>
                             <td className='border border-slate-600'>0</td>

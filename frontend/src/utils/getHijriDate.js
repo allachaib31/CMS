@@ -2,7 +2,7 @@ const moment = require('moment');
 require('moment-hijri');
 const momentTimezone = require('moment-timezone');
 
-export const hijriDateObject = () => {
+export const hijriDateObject = (date) => {
     const months = {
         "1": "محرم", "2": "صفر", "3": "ربيع الاول", "4": "ربيع الثاني",
         "5": "جماد الأول", "6": "جماد الثاني", "7": "رجب", "8": "شعبان",
@@ -10,10 +10,11 @@ export const hijriDateObject = () => {
     };
 
     // Set the current date in the Asia/Riyadh timezone
-    const now = momentTimezone.tz(new Date(), 'Asia/Riyadh');
+    //alert(date)
+    //const now = momentTimezone.tz(new Date(date), 'Asia/Riyadh');
 
     // Format the current date as Hijri in the ar-sa locale using Intl.DateTimeFormat
-    const formattedHijriDate = new Intl.DateTimeFormat('ar-sa', { calendar: 'islamic' }).format(new Date());
+    const formattedHijriDate = new Intl.DateTimeFormat('ar-sa', { calendar: 'islamic' }).format(date ? new Date(date) : new Date());
 
     // Function to convert Arabic-Indic numerals to Arabic numerals
     const convertToArabicNumerals = (dateStr) => {

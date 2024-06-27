@@ -1,4 +1,4 @@
-const typeSubscriptionModel = require("../../models/typeSubscription")
+const typeSubscriptionModel = require("../../models/subscription/typeSubscription")
 
 //POST METHODS
 exports.addTypeSubscription = async (req, res) => {

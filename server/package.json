@@ -26,6 +26,8 @@
     "moment-hijri": "^2.1.2",
     "moment-timezone": "^0.5.45",
     "mongoose": "^8.3.4",
+    "node-cron": "^3.0.3",
+    "querystring": "^0.2.1",
     "uuid": "^9.0.1"
   },
   "devDependencies": {
