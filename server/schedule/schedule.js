@@ -4,7 +4,7 @@ const monthlySubscriptionModel = require("../models/subscription/monthlySubscrip
 const getHijriDate = require("../utils/getHijriDate");
 const momentHijri = require("moment-hijri");
 function scheduleUpdate() {
-    cron.schedule('0 0 * * *', async () => {
+    cron.schedule('* * * * *', async () => {
         const hijriDate = getHijriDate();
         const foundationSubscription = await foundationSubscriptionModel.find();
         for (let i = 0; i < foundationSubscription.length; i++) {
@@ -37,7 +37,7 @@ function scheduleUpdate() {
         }
         console.log('running a task every minute');
     });
-    cron.schedule("0 0 * * *", async () => {
+    cron.schedule("* * * * *", async () => {
         const hijriDate = getHijriDate();
         const existingSubscriptions = await monthlySubscriptionModel.find({ year: hijriDate[2] });
         existingSubscriptions.forEach(async (subscription) => {

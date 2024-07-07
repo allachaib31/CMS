@@ -42,6 +42,7 @@ app
         origin: process.env.URL,
         credentials: true
     }))
+    .use(limiter)
     .use(compression())
     .use(cookieParser())
     .use(morgan(process.env.MODE))
@@ -55,6 +56,9 @@ const typeSubscription = require("./routes/manageSubscription/typeSubscription")
 const subscriptions = require("./routes/manageSubscription/subscriptions");
 const commodityRevenu = require("./routes/manageCommodityRevenue/commodityRevenue");
 const moneyBox = require("./routes/manageMoneyBox/moneyBox");
+const loans = require("./routes/loans/loans");
+const reimbursedExpenses = require("./routes/reimbursedExpenses/reimbursedExpenses");
+const unReimbursedExpenses = require("./routes/unreimbursedExpenses/unreimbursedExpenses");
 const { scheduleUpdate } = require("./schedule/schedule");
 app
     .use(authAdmin)
@@ -63,6 +67,9 @@ app
     .use(typeSubscription)
     .use(subscriptions)
     .use(commodityRevenu)
+    .use(loans)
+    .use(reimbursedExpenses)
+    .use(unReimbursedExpenses)
     .use(moneyBox);
 
 
