@@ -56,7 +56,7 @@ function DisplayUser() {
 
   return (
     <div className="px-[1rem] sm:px-0">
-      <div className="flex sm:flex-row sm:gap-0 gap-[1rem] flex-col justify-between mb-[1rem]">
+      <div className="container mx-auto flex sm:flex-row sm:gap-0 gap-[1rem] flex-col justify-between mb-[1rem]">
         <Link to="/user/addUser" className="text-[1rem] btn btn-primary">
           اضافة عضو
         </Link>
@@ -94,7 +94,7 @@ function DisplayUser() {
         </div>
       </div>
       {showAlert.display ? <Alert msg={showAlert} /> : ""}
-      <div className="overflow-x-auto  mt-[2rem]">
+      <div className="overflow-x-auto xl:flex xl:justify-center  mt-[2rem]">
         <table className="table w-[1800px]">
           {/* head */}
           <thead>
@@ -121,7 +121,7 @@ function DisplayUser() {
               const date = new Date(user.createdAt);
               return (
                 <tr className="text-center">
-                  <td>{user._id}</td>
+                  <td>{user.id}</td>
                   <td>{user.name}</td>
                   <td>{user.NationalIdentificationNumber}</td>
                   <td>{user.phoneNumber}</td>
@@ -129,10 +129,10 @@ function DisplayUser() {
                   <td className="text-center">{user.hijriDate.year + "-" + user.hijriDate.month.number + "-" + user.hijriDate.day}</td>
                   <td className={(user.status == "not active" ? "text-error" : "text-success") + " font-bold text-[1.3rem]"}>{user.status == "not active" ? "غير مفعل" : "مفعل"}</td>
                   <td>{user.comments}</td>
-                  <td><Link to={`/user/updateUser?id=${user._id}`} className="btn btn-warning">تعديل</Link></td>
-                  <td><button data-disable={user.disable} id={user._id} onClick={(event) => {
+                  <td><Link to={`/user/updateUser?id=${user.id}`} className="btn btn-warning">تعديل</Link></td>
+                  <td><button data-disable={user.disable} id={user.id} onClick={(event) => {
                     setUserDelete({
-                      id: user._id,
+                      id: user.id,
                       index,
                       disable: event.target.getAttribute("data-disable") == "true" ? true: false
                     });

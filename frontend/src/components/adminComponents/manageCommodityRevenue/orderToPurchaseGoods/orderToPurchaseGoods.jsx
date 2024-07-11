@@ -68,6 +68,9 @@ function OrderToPurchaseGoods() {
                 text: res.data.msg
             });
         }).catch((err) => {
+            if (err.response && err.response.status === 401) {
+                navigate("/auth");
+            }
             setSubmit((e) => !e);
             setShowAlert({
                 display: true,
@@ -96,13 +99,13 @@ function OrderToPurchaseGoods() {
         })
     }, [])
     return (
-        <div className="sm:p-0 px-[1rem]">
+        <div className="container mx-auto sm:p-0 px-[1rem]">
             <div>
                 <Link to="/commodityRevenue" className="btn btn-primary text-[2rem] px-[2rem]">
                     <FontAwesomeIcon icon={faRightLong} />
                 </Link>
             </div>
-            <h1 className="text-center text-[1.5rem] font-bold py-[1rem]">
+            <h1 className="text-center text-[1.3rem] sm:text-[1.5rem] font-bold py-[1rem]">
                 نموذج طلب شراء سلعة
             </h1>
             {
@@ -350,15 +353,15 @@ function OrderToPurchaseGoods() {
                             <div className="relative sm:w-1/2">
                                 <FontAwesomeIcon icon={faMoneyBill} className="absolute top-[1rem] right-[1rem]" />
                                 <input type="number" required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" onChange={(event) => {
-                                    return setInputs((prevInput) => {
+                                    /*return setInputs((prevInput) => {
                                         return {
                                             ...prevInput, commodityData: {
                                                 ...prevInput.commodityData,
                                                 amountPaid: Number(event.target.value.trim())
                                             }
                                         }
-                                    })
-                                }} placeholder={`المبلغ المسدد`} />
+                                    })*/
+                                }} placeholder={`المبلغ المسدد`} disabled/>
                             </div>
                             <div className="relative sm:w-1/2">
                                 <FontAwesomeIcon icon={faMoneyBill} className="absolute top-[1rem] right-[1rem]" />

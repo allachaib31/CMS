@@ -18,6 +18,7 @@ export { default as AnnualSubscriptionRecord } from "./adminComponents/manageSub
 export { default as ModifySubscriptionAmount } from "./adminComponents/manageSubscription/modifySubscriptionAmount";
 export { default as RegisterMemberFinancialData } from "./adminComponents/manageSubscription/registerMemberFinancialData";
 export { default as SubscriptionHistory } from "./adminComponents/manageSubscription/subscriptionHistory";
+export { default as PayMonthlySubscriptions } from "./adminComponents/manageSubscription/payMonthlySubscriptions";
 export { default as PaymentOfSubscriptions } from "./adminComponents/manageSubscription/paymentOfSubscriptions";
 export { default as FoundationSubscription } from "./adminComponents/manageSubscription/foundationSubscription";
 export { default as AnnualSubscriptionRecordDetails } from "./adminComponents/manageSubscription/annualSubscriptionRecordDetails";
@@ -58,7 +59,7 @@ export { default as LoansData } from "./adminComponents/loans/loansData";
 export { default as RecordInstallments } from "./adminComponents/loans/recordInstallments";
 export { default as LoansHistory } from "./adminComponents/loans/loansHistory";
 export { default as LoansOrder } from "./adminComponents/loans/loansOrder";
-/*MANAGE UNREIMBUSED EXPRESES */
+/*MANAGE UNREIMBUSED EXPENSES */
 export { default as UnreimbursedExpenses } from "./adminComponents/unreimbursedExpenses/unreimbursedExpenses";
 export { default as RecordUnrecoveredExpenses } from "./adminComponents/unreimbursedExpenses/recordUnrecoveredExpenses";
 export { default as ExpenseRequest } from "./adminComponents/unreimbursedExpenses/expenseRequest";
@@ -66,11 +67,11 @@ export { default as DisplayRecordUnrecoveredExpenses } from "./adminComponents/u
 export { default as AddExpenseType } from "./adminComponents/unreimbursedExpenses/addExpenseType";
 export { default as PaymentExpenses } from "./adminComponents/unreimbursedExpenses/paymentExpenses";
 /*MANAGE REIMBUSED EXPENSES */
-export { default as ReimbusedExpenses } from "./adminComponents/reimbursedExprenses/reimbusedExpenses";
-export { default as RecordRecoveredExpenses } from "./adminComponents/reimbursedExprenses/recordRecoveredExpenses";
-export { default as DisplayRecordRecoveredExpenses } from "./adminComponents/reimbursedExprenses/displayRecordRecoveredExpenses";
-export { default as ReimbursedExpenseRequest } from "./adminComponents/reimbursedExprenses/reimbursedExpenseRequest";
-export { default as AddReimbursedExprensesType } from "./adminComponents/reimbursedExprenses/addReimbursedExprensesType";
+export { default as ReimbusedExpenses } from "./adminComponents/reimbursedExpenses/reimbusedExpenses";
+export { default as RecordRecoveredExpenses } from "./adminComponents/reimbursedExpenses/recordRecoveredExpenses";
+export { default as DisplayRecordRecoveredExpenses } from "./adminComponents/reimbursedExpenses/displayRecordRecoveredExpenses";
+export { default as ReimbursedExpenseRequest } from "./adminComponents/reimbursedExpenses/reimbursedExpenseRequest";
+export { default as AddReimbursedExprensesType } from "./adminComponents/reimbursedExpenses/addReimbursedExprensesType";
 /*MANAGE MODALS */
 export { default as DeleteUserModals } from "./modals/deleteModalsUser";
 export { default as AddNoteModals } from "./modals/addNoteSubscriptionHistoryModals";

@@ -7,7 +7,7 @@ import moment from "moment-hijri";
 import AddNoteMonthly from "../../modals/addNoteMonthly";
 
 
-function DisplaySubscription() {
+function PayMonthlySubscriptions() {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
     const [subscriptions, setSubscriptions] = useState([]);
@@ -169,6 +169,9 @@ function DisplaySubscription() {
                                 <th className="border border-slate-600" rowSpan={2}>
                                     ملاحظات
                                 </th>
+                                <th className="border border-slate-600" rowSpan={2}>
+                                    دفع
+                                </th>
                             </tr>
                             <tr>
                                 <th className="text-center border border-slate-600">
@@ -184,7 +187,7 @@ function DisplaySubscription() {
                         <tbody className="text-center">
                             {subscriptions &&
                                 subscriptions.map((subscription) => {
-                                    const date = new Date(subscription.months[month].createdAt);
+                                    const date = subscription.months[month].createdAt == null ? new Date() : new Date(subscription.months[month].createdAt);
                                     const hijriDate = hijriDateObject(date);
                                     return (
                                         <tr>
@@ -204,7 +207,7 @@ function DisplaySubscription() {
                                                 {date.getDate()}
                                             </td>
                                             <td className="border border-slate-600">
-                                                {subscription.months[month].createdAt && hijriDate[2] + "-" + hijriDate[1].number + "-" + hijriDate[0]}
+                                                {hijriDate[2]}-{hijriDate[1].number}-{hijriDate[0]}
                                             </td>
                                             <td id={subscription._id} onClick={() => {
                                                 setComment({
@@ -215,6 +218,18 @@ function DisplaySubscription() {
                                                 document.getElementById('addNote').showModal()
                                             }} className="border border-slate-600 cursor-pointer">
                                                 {subscription.months[month].comments}
+                                            </td>
+                                            <td id={subscription.idUser._id} className="border border-slate-600">
+                                                {subscription.months[month].amount != 0 ? "تم الدفع بنجاح" : <button onClick={() => {
+                                                    handleSubmit({
+                                                        idUser: subscription.idUser._id,
+                                                        amount,
+                                                        month,
+                                                        dueDateHijri: subscription.months[month].dueDateHijri,
+                                                        dueDate: inputs.date,
+                                                        year: subscription.months[month].dueDateHijri.year,
+                                                    })
+                                                }} className="btn btn-success">دفع</button>}
                                             </td>
                                         </tr>
                                     );
@@ -228,4 +243,4 @@ function DisplaySubscription() {
     );
 }
 
-export default DisplaySubscription;
+export default PayMonthlySubscriptions;

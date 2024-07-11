@@ -22,9 +22,11 @@ export const GETTYPESUBSCRIPTION_ROUTE = `${HOST}api/v1.0/typeSubscription`;
 export const UPDATETYPESUBSCRIPTION_ROUTE = `${HOST}api/v1.0/typeSubscription`;
 // Manage subscription
 export const ADDFOUNDATIONSUBSCRIPTIONS_ROUTE = `${HOST}api/v1.0/subscriptions/foundation`;
-export const ADDMONTHLYSUBSCRIPTIONS_ROUTE = `${HOST}api/v1.0/subscriptions/monthly`
+export const ADDMONTHLYSUBSCRIPTIONS_ROUTE = `${HOST}api/v1.0/subscriptions/monthly`;
+export const GETREGISTERFINANCIALDATA_ROUTE = `${HOST}api/v1.0/subscriptions/getRegisterFinancialData`
 export const GETANNUALSUBSCRIPTIONS_ROUTE = `${HOST}api/v1.0/subscriptions/annual`;
 export const GETANNUALSUBSCRIPTIONSDETAILS_ROUTE = `${HOST}api/v1.0/subscriptions/annualDetails`;
+export const GETUSERFORFOUNDATIONSUBSCRIPE_ROUTE = `${HOST}api/v1.0/subscriptions/getUserForFoundationSubscripe`;
 export const GETSUBSCRIPTIONHISTORY_ROUTE = `${HOST}api/v1.0/subscriptions/history`;
 export const SEARCHSUBSCRIPTIONHISTORY_ROUTE = `${HOST}api/v1.0/subscriptions/search`;
 export const UPDATECOMMENTSUBSCRIBEHISTORY_ROUTE = `${HOST}api/v1.0/subscriptions/updateCommentSubscribeHistory`;
@@ -47,3 +49,30 @@ export const GETACTIVECOMMODITYREVENUE_ROUTE = `${HOST}api/v1.0/commodityRevenu/
 export const GETCOMMODITYANDINSTALLMENT_ROUTE = `${HOST}api/v1.0/commodityRevenu/getCommidtyAndInstallment`;
 export const ADDCOMMENTCOMMODITYREVENUE_ROUTE = `${HOST}api/v1.0/commodityRevenu/addCommentCommodityRevenue`;
 export const ADDCOMMENTINSTALLMENTSCHEDULE_ROUTE = `${HOST}api/v1.0/commodityRevenu/addCommentInstallmentSchedule`;
+// Manage Loans
+export const ADDLOANS_ROUTE = `${HOST}api/v1.0/loans`;
+export const PAYINSTALLMENTS_ROUTE = `${HOST}api/v1.0/loans/payInstallments`;
+export const GETLOANSHISTORY_ROUTE = `${HOST}api/v1.0/loans/history`;
+export const GETLOANSID_ROUTE = `${HOST}api/v1.0/loans/getIdLoans`;
+export const SEARCHLOANS_ROUTE = `${HOST}api/v1.0/loans/search`;
+export const GETRECORDINSTALLMENTS_ROUTE = `${HOST}api/v1.0/loans/getRecordInstallments`;
+// Manage reimbursed expenses
+export const ADDTYPEEXPENSES_ROUTE = `${HOST}api/v1.0/reimbursedExpenses/addTypeExpenses`;
+export const ADDEXPENSES_ROUTE = `${HOST}api/v1.0/reimbursedExpenses/addExpenses`;
+export const GETTYPEEXPENSES_ROUTE = `${HOST}api/v1.0/reimbursedExpenses/getTypeExpenses`;
+export const GETRECORDREIMBURSEDEXPENSES_ROUTE = `${HOST}api/v1.0/reimbursedExpenses/getRecordReimbursedExpenses`;
+export const GETREIMBURSEDEXPENSES_ROUTE = `${HOST}api/v1.0/reimbursedExpenses/getReimbursedExpenses`;
+export const DELETETYPEEXPENSES_ROUTE = `${HOST}api/v1.0/reimbursedExpenses/deleteTypeExpenses`;
+// Manage unReimbursed expenses
+export const ADDTYPEUNREIMBURSEDEXPENSES_ROUTE = `${HOST}api/v1.0/unReimbursedExpenses/addTypeExpenses`;
+export const GETTYPEUNREIMBURSEDEXPENSES_ROUTE = `${HOST}api/v1.0/unReimbursedExpenses/getTypeExpenses`;
+export const ADDUNREIMBURSEDEXPENSES_ROUTE = `${HOST}api/v1.0/unReimbursedExpenses/addExpenses`;
+export const GETRECORDUNRECOVEREEXPENSES_ROUTE = `${HOST}api/v1.0/unReimbursedExpenses/getRecordUnrecovereExpenses`;
+export const GETIDUNREIMBURSEDEXPENSES_ROUTE = `${HOST}api/v1.0/unReimbursedExpenses/getIdUnReimbursedExpenses`;
+export const SEARCHUNREIMBURSEDEXPENSES_ROUTE = `${HOST}api/v1.0/unReimbursedExpenses/searchUnReimbursedExpenses`;
+export const PAYCASHUNREIMBURSEDEXPENSES_ROUTE = `${HOST}api/v1.0/unReimbursedExpenses/payCash`;
+export const GETUNREIMBURSEDEXPENSES_ROUTE = `${HOST}api/v1.0/unReimbursedExpenses/getUnReimbursedExpenses`;
+export const DELETETYPEUNREIMBURSEDEXPENSES_ROUTE = `${HOST}api/v1.0/unReimbursedExpenses/deleteTypeExpenses`;
+
+//Manage contribution revenue
+export const GETCONSOLIDATEDRECORDREVENUES_ROUTE = `${HOST}api/v1.0/contributionRevenue/consolidatedRecordRevenues`;

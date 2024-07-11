@@ -58,7 +58,7 @@ function ManagingLatePayments() {
   }, []);
   return (
     <div className="sm:p-0 px-[1rem]">
-      <div>
+      <div className="container mx-auto">
         <Link
           to="/subscription"
           className="btn btn-primary text-[2rem] px-[2rem]"

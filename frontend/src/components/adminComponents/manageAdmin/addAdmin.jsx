@@ -52,9 +52,9 @@ function AddAdmin() {
     })
   }
   return (
-    <div className="sm:p-0 px-[1rem]">
+    <div className="container mx-auto sm:p-0 px-[1rem]">
       <div>
-        <Link to="/admin" className="btn btn-primary text-[2rem] px-[2rem]">
+        <Link to="/admin" className=" btn btn-primary text-[2rem] px-[2rem]">
           <FontAwesomeIcon icon={faRightLong} />
         </Link>
       </div>
@@ -80,8 +80,6 @@ function AddAdmin() {
             required
             className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2"
             placeholder={`رقم المسؤول`}
-            minLength={24}
-            maxLength={24}
           />
         </div>
         <Checkbox inputs={inputs} setInputs={setInputs} />

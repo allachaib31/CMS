@@ -40,10 +40,14 @@ exports.getTypeExpenses = async (req, res) => {
 }
 
 exports.deleteTypeExpenses = async (req, res) => {
-    const { id } = req.body;
+    const { id } = req.query;
     try {
         const removeType = await typeExpensesModel.findByIdAndDelete(id);
-        console.log(removeType);
+        if (!removeType) {
+            return res.status(404).send({
+                msg: "لم يتم ايجاد هذا النوع"
+            })
+        }
         return res.status(200).send({
             msg: "تم حذف العنصر بنجاح"
         })

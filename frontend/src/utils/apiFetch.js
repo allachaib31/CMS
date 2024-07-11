@@ -38,7 +38,31 @@ import {
     GETCOMMODITYANDINSTALLMENT_ROUTE,
     PAYINSTALLMENTSCHEDULE_ROUTE,
     ADDCOMMENTINSTALLMENTSCHEDULE_ROUTE,
-    ADDCOMMENTMONTHLY_ROUTE
+    ADDCOMMENTMONTHLY_ROUTE,
+    ADDLOANS_ROUTE,
+    GETLOANSHISTORY_ROUTE,
+    GETLOANSID_ROUTE,
+    SEARCHLOANS_ROUTE,
+    GETRECORDINSTALLMENTS_ROUTE,
+    ADDTYPEEXPENSES_ROUTE,
+    ADDEXPENSES_ROUTE,
+    GETTYPEEXPENSES_ROUTE,
+    GETRECORDREIMBURSEDEXPENSES_ROUTE,
+    GETREIMBURSEDEXPENSES_ROUTE,
+    DELETETYPEEXPENSES_ROUTE,
+    ADDTYPEUNREIMBURSEDEXPENSES_ROUTE,
+    GETTYPEUNREIMBURSEDEXPENSES_ROUTE,
+    ADDUNREIMBURSEDEXPENSES_ROUTE,
+    GETRECORDUNRECOVEREEXPENSES_ROUTE,
+    GETIDUNREIMBURSEDEXPENSES_ROUTE,
+    SEARCHUNREIMBURSEDEXPENSES_ROUTE,
+    PAYCASHUNREIMBURSEDEXPENSES_ROUTE,
+    GETUNREIMBURSEDEXPENSES_ROUTE,
+    GETUSERFORFOUNDATIONSUBSCRIPE_ROUTE,
+    GETREGISTERFINANCIALDATA_ROUTE,
+    PAYINSTALLMENTS_ROUTE,
+    DELETETYPEUNREIMBURSEDEXPENSES_ROUTE,
+    GETCONSOLIDATEDRECORDREVENUES_ROUTE
 } from "./apiRoutes";
 
 
@@ -121,6 +145,14 @@ export const addMonthlySubscriptionsFetch = async (monthlySubscription) => {
 }
 export const getAnnualSubscriptionsFetch = async (year) => {
     const data = await axios.get(`${GETANNUALSUBSCRIPTIONS_ROUTE}?year=${year}`);
+    return data;
+}
+export const getRegisterFinancialDataFetch = async () => {
+    const data = await axios.get(GETREGISTERFINANCIALDATA_ROUTE);
+    return data;
+}
+export const getUserForFoundationSubscripeFetch = async () => {
+    const data = await axios.get(GETUSERFORFOUNDATIONSUBSCRIPE_ROUTE);
     return data;
 }
 export const getAnnualSubscriptionsDetailsFetch = async (input) => {
@@ -209,5 +241,100 @@ export const addCommentCommodityRevenueFetch = async (inputs) => {
 }
 export const addCommentInstallmentScheduleFetch = async (inputs) => {
     const data = await axios.patch(ADDCOMMENTINSTALLMENTSCHEDULE_ROUTE,inputs);
+    return data;
+}
+
+// Manage Loans
+export const addLoansFetch = async (inputs) => {
+    const data = await axios.post(ADDLOANS_ROUTE,inputs);
+    return data;
+}
+export const payInstallmentsFetch = async (inputs) => {
+    const data = await axios.post(PAYINSTALLMENTS_ROUTE,inputs);
+    return data;
+}
+export const getLoansHistoryFetch = async () => {
+    const data = await axios.get(GETLOANSHISTORY_ROUTE);
+    return data;
+}
+export const getIdLoansFetch = async () => {
+    const data = await axios.get(GETLOANSID_ROUTE);
+    return data;
+}
+export const searchLoansFetch = async (id) => {
+    const data = await axios.get(`${SEARCHLOANS_ROUTE}?id=${id}`);
+    return data;
+}
+export const getRecordInstallmentsFetch = async (id) => {
+    const data = await axios.get(`${GETRECORDINSTALLMENTS_ROUTE}?id=${id}`);
+    return data;
+}
+
+//Manage reimbursed expenses
+export const addTypeExpensesFetch = async (inputs) => {
+    const data = await axios.post(ADDTYPEEXPENSES_ROUTE, inputs);
+    return data;
+}
+export const addExpensesFetch = async (inputs) => {
+    const data = await axios.post(ADDEXPENSES_ROUTE, inputs);
+    return data;
+}
+export const getTypeExpensesFetch = async () => {
+    const data = await axios.get(GETTYPEEXPENSES_ROUTE);
+    return data;
+}
+export const getRecordReimbursedExpensesFetch = async () => {
+    const data = await axios.get(GETRECORDREIMBURSEDEXPENSES_ROUTE);
+    return data;
+}
+export const getReimbursedExpensesFetch = async (inputs) => {
+    const data = await axios.get(`${GETREIMBURSEDEXPENSES_ROUTE}?month=${inputs.month}&year=${inputs.year}`);
+    return data;
+}
+export const deleteTypeExpensesFetch = async (inputs) => {
+    const data = await axios.delete(`${DELETETYPEEXPENSES_ROUTE}?id=${inputs.id}`);
+    return data;
+}
+//Manage unReimbursed expenses
+export const addTypeUnReimbursedExpensesFetch = async (inputs) => {
+    const data = await axios.post(ADDTYPEUNREIMBURSEDEXPENSES_ROUTE, inputs);
+    return data;
+}
+export const deleteTypeUnReimbursedExpensesFetch = async (inputs) => {
+    const data = await axios.delete(`${DELETETYPEUNREIMBURSEDEXPENSES_ROUTE}?id=${inputs.id}`);
+    return data;
+}
+export const getTypeUnReimbursedExpensesFetch = async () => {
+    const data = await axios.get(GETTYPEUNREIMBURSEDEXPENSES_ROUTE);
+    return data;
+}
+export const addUnReimbursedExpensesFetch = async (inputs) => {
+    const data = await axios.post(ADDUNREIMBURSEDEXPENSES_ROUTE, inputs);
+    return data;
+}
+export const getRecordUnrecovereExpensesFetch = async () => {
+    const data = await axios.get(GETRECORDUNRECOVEREEXPENSES_ROUTE);
+    return data;
+}
+export const getIdUnReimbursedExpensesFetch = async () => {
+    const data = await axios.get(GETIDUNREIMBURSEDEXPENSES_ROUTE);
+    return data;
+}
+export const searchUnReimbursedExpensesFetch = async (id) => {
+    const data = await axios.get(`${SEARCHUNREIMBURSEDEXPENSES_ROUTE}?id=${id}`);
+    return data;
+}
+export const payCashUnReimbursedExpensesFetch = async (id) => {
+    const data = await axios.post (PAYCASHUNREIMBURSEDEXPENSES_ROUTE, id);
+    return data;
+}
+export const getUnReimbursedExpensesFetch = async (inputs) => {
+    const data = await axios.get(`${GETUNREIMBURSEDEXPENSES_ROUTE}?month=${inputs.month}&year=${inputs.year}`);
+    return data;
+}
+
+//Manage contribution revenue
+export const getConsolidatedRecordRevenuesFetch = async () => {
+    const data = await axios.get(GETCONSOLIDATEDRECORDREVENUES_ROUTE);
     return data;
 }

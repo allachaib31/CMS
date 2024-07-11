@@ -6,7 +6,7 @@ const userModel = require("../../models/user");
 const getHijriDate = require("../../utils/getHijriDate");
 const moneyBoxId = process.env.moneyBoxId;
 
-exports.addLoans = async (req,res) => {
+exports.addLoans = async (req, res) => {
     const { nationalIdentificationNumber, amount, premiumAmount, numberOfInstallments, dateOfReceipt, dateOfReceiptHijri } = req.body;
     try {
         if (
@@ -19,7 +19,7 @@ exports.addLoans = async (req,res) => {
             });
         }
         const amountMoneyBox = await moneyBoxModel.findById(moneyBoxId);
-        if(amount > amountMoneyBox.amount){
+        if (amount > amountMoneyBox.amount) {
             return res.status(403).send({
                 msg: "لايوجد رصيد كافي في الصندوق",
             });
@@ -35,12 +35,17 @@ exports.addLoans = async (req,res) => {
         const user = await userModel.findOne({
             NationalIdentificationNumber: nationalIdentificationNumber
         })
+        if (!user) {
+            return res.status(422).send({
+                msg: "لا وجود هذا المستخدم",
+            });
+        }
         const { error } = validateLoans({
-            name: user.name, amount, premiumAmount, numberOfInstallments, dateOfReceipt, dateOfReceiptHijri,paymentStartDate,paymentStartDateHijri: {
+            name: user.name, amount, premiumAmount, numberOfInstallments, dateOfReceipt, dateOfReceiptHijri, paymentStartDate, paymentStartDateHijri: {
                 day: paymentStartDateHijri[0],
                 month: paymentStartDateHijri[1],
                 year: paymentStartDateHijri[2],
-            },paymentEndDate,paymentEndDateHijri: {
+            }, paymentEndDate, paymentEndDateHijri: {
                 day: paymentEndDateHijri[0],
                 month: paymentEndDateHijri[1],
                 year: paymentEndDateHijri[2],
@@ -54,11 +59,11 @@ exports.addLoans = async (req,res) => {
         }
         const hijriDate = getHijriDate();
         const loans = new loansModel({
-            name: user.name, amount, premiumAmount, numberOfInstallments, dateOfReceipt, dateOfReceiptHijri,paymentStartDate,paymentStartDateHijri: {
+            name: user.name, amount, premiumAmount, numberOfInstallments, dateOfReceipt, dateOfReceiptHijri, paymentStartDate, paymentStartDateHijri: {
                 day: paymentStartDateHijri[0],
                 month: paymentStartDateHijri[1],
                 year: paymentStartDateHijri[2],
-            },paymentEndDate,paymentEndDateHijri: {
+            }, paymentEndDate, paymentEndDateHijri: {
                 day: paymentEndDateHijri[0],
                 month: paymentEndDateHijri[1],
                 year: paymentEndDateHijri[2],
@@ -98,8 +103,11 @@ exports.addLoans = async (req,res) => {
             })
             await newInstallmentGoods.save();
         });
+        const numberOfUser = await userModel.countDocuments({ "status": "active", "disable": false });
         const activeUsers = await userModel.find({
-            status: "active"
+            status: "active",
+            disable: false,
+            memberBalance: { $gte: loans.amount / Number(numberOfUser) }
         });
         const amountUser = loans.amount / activeUsers.length;
         activeUsers.forEach(async (user) => {
@@ -120,6 +128,15 @@ exports.addLoans = async (req,res) => {
                 }
             },
             { new: true })
+        const updatedUser = await userModel.findByIdAndUpdate(user._id,
+            {
+                $inc: {
+                    'loans.number': 1,
+                    'loans.amount': loans.amount
+                }
+            },
+            { new: true, useFindAndModify: false }
+        );
         if (!moneyBox) {
             return res.status(400).send({
                 msg: "حدث خطأ أثناء معالجة طلبك",
@@ -129,6 +146,70 @@ exports.addLoans = async (req,res) => {
             msg: "لقد تمت اضافته بنجاح",
         });
     } catch (error) {
+        console.log(error)
+        return res.status(500).send({
+            msg: "حدث خطأ أثناء معالجة طلبك"
+        });
+    }
+}
+
+exports.payInstallments = async (req, res) => {
+    const { id } = req.body;
+    try {
+        const hijriDate = getHijriDate();
+        const installmentsLoans = await installmentsLoansModel.findById(id);
+
+        if (installmentsLoans.itPaid) {
+            return res.status(400).send({
+                msg: "لقد تم دفعه من قبل"
+            });
+        }
+        
+        const updatedInstallmentsLoans = await installmentsLoansModel.findByIdAndUpdate(
+            id,
+            {
+                itPaid: true,
+                actualPaymentDate: new Date(),
+                actualPaymentDateHijri: {
+                    day: hijriDate[0],
+                    month: hijriDate[1],
+                    year: hijriDate[2],
+                },
+            },
+            { new: true } // This option ensures the updated document is returned
+        );
+        const loan = await loansModel.findByIdAndUpdate(installmentsLoans.idLoans, {
+            $inc: {
+                balance: installmentsLoans.premiumAmount,
+            }
+        },
+            { new: true });
+        const moneyBox = await moneyBoxModel.findByIdAndUpdate(moneyBoxId,
+            {
+                $inc: {
+                    amount: installmentsLoans.premiumAmount,
+                    "source.loanIncome": installmentsLoans.premiumAmount
+                }
+            },
+            { new: true });
+        const userContribution = await userContributionLoansModel.find({
+            idLoans: installmentsLoans.idLoans
+        });
+        const amount = installmentsLoans.premiumAmount / userContribution.length;
+        userContribution.forEach(async (userId) => {
+            const user = await userModel.findByIdAndUpdate(userId.idUser, {
+                $inc: {
+                    memberBalance: amount,
+                    cumulativeBalance: amount
+                }
+            },
+                { new: true })
+        })
+        return res.status(200).send({
+            msg: "لقد تم دفع بنجاح",
+        });
+    } catch (error) {
+        console.log(error)
         return res.status(500).send({
             msg: "حدث خطأ أثناء معالجة طلبك"
         });
@@ -211,7 +292,7 @@ exports.searchLoans = async (req, res) => {
         const loan = await loansModel.findOne({
             id: id
         });
-        if(!loan){
+        if (!loan) {
             return res.status(404).send({
                 msg: "القرض غير موجود"
             })
@@ -242,7 +323,7 @@ exports.getRecordInstallments = async (req, res) => {
         const loan = await loansModel.findOne({
             id: id
         });
-        if(!loan){
+        if (!loan) {
             return res.status(404).send({
                 msg: "القرض غير موجود"
             })

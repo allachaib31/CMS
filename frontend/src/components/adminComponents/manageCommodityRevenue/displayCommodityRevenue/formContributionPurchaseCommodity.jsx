@@ -52,15 +52,15 @@ function FormContributionPurchaseCommodity() {
     }
     return (
         <div className="sm:p-0 px-[1rem]">
-            <div>
+            <div className='container mx-auto'>
                 <Link to="/commodityRevenue/" className="btn btn-primary text-[2rem] px-[2rem]">
                     <FontAwesomeIcon icon={faRightLong} />
                 </Link>
             </div>
-            <h1 className="text-center text-[1.5rem] font-bold py-[1rem]">
+            <h1 className="text-center text-[1.3rem] sm:text-[1.5rem] font-bold py-[1rem]">
                 نموذج المساهمة في شراء سلعة
             </h1>
-            <div className="md:join ">
+            <div className=" container mx-auto ">
                 <select className="select xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
                     {yearOptions.map((value) => (
                         <option key={value} value={value} selected={inputs.year === value}>
@@ -87,15 +87,15 @@ function FormContributionPurchaseCommodity() {
                 }} className="select xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
                     <option selected disabled>قم باختيار العدد الخاص بنموذج شراء السلع</option>
                     {idList && idList.map((list) => (
-                        <option value={list._id}>{list._id}</option>
+                        <option value={list._id}>{list.id}</option>
                     ))}
                 </select>
                 <div className="indicator">
-                    <button onClick={handleSearch} className="btn btn-primary join-item">ابحث</button>
+                    <button onClick={handleSearch} className="btn btn-primary join-item md:mt-[0rem] mt-[1rem]">ابحث</button>
                 </div>
             </div>
             {
-                commodityRevenu && <div>
+                commodityRevenu && <div className='container mx-auto'>
                     <Link to={`/print/formContribution?id=` + commodityRevenu._id} target='_blank' className='btn mt-[1rem] btn-info font-bold'><FontAwesomeIcon icon={faPrint} /> طباعة</Link></div>
             }
             {
@@ -104,7 +104,7 @@ function FormContributionPurchaseCommodity() {
                     <span className=" loading loading-ring loading-lg"></span>
                 </div> : <div className="overflow-x-auto mt-[1rem]">
                     {
-                        commodityRevenu && <table className="text-[1.1rem] table border-separate border-spacing-2 border w-[2000px]  mx-auto">
+                        commodityRevenu && <table className="text-[1.1rem] table border-separate border-spacing-2 border w-[1900px]  mx-auto">
                             <tr className='text-center'>
                                 <th className="border text-center border-slate-600" colSpan={7}>البيانات: العميل \ سلعة \ الكفيل</th>
                             </tr>
@@ -134,7 +134,7 @@ function FormContributionPurchaseCommodity() {
                             </tr>
                             <tbody>
                                 <tr>
-                                    <td className="border text-center border-slate-600">{commodityRevenu._id}</td>
+                                    <td className="border text-center border-slate-600">{commodityRevenu.id}</td>
                                     <td className="border text-center border-slate-600">{commodityRevenu.customerData.name}</td>
                                     <td className="border text-center border-slate-600">{commodityRevenu.commodityData.itemType}</td>
                                     <td className="border text-center border-slate-600">{commodityRevenu.commodityData.purchaseAmount}</td>

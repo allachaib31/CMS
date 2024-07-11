@@ -34,27 +34,27 @@ function GoodsRevenueRecord() {
     }, [])
     return (
         <div className="sm:p-0 px-[1rem]">
-            <div>
+            <div className='container mx-auto'>
                 <Link to="/commodityRevenue/" className="btn btn-primary text-[2rem] px-[2rem]">
                     <FontAwesomeIcon icon={faRightLong} />
                 </Link>
             </div>
-            <h1 className="text-center text-[1.5rem] font-bold py-[1rem]">
+            <h1 className="text-center text-[1.3rem] sm:text-[1.5rem] font-bold py-[1rem]">
                 سجل إيرادات السلع
             </h1>
             {
-                !loading ? "" : <div className="mt-[1rem] flex gap-[1rem] justify-center">
-                    <div className="flex flex-col items-center gap-[1rem]">
-                        <h1 className="text-[1.1rem] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">اجمالي مبلغ إيرادات السلع</h1>
-                        <h1 className="text-[1.1rem] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">{saleAmount}</h1>
+                !loading ? "" : <div className="mt-[1rem] flex sm:flex-row flex-col gap-[1rem] justify-center">
+                    <div className="flex sm:flex-col items-center justify-center gap-[1rem]">
+                        <h1 className="md:text-[1.1rem] sm:w-auto w-[90%] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">اجمالي مبلغ إيرادات السلع</h1>
+                        <h1 className="md:text-[1.1rem] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">{saleAmount}</h1>
                     </div>
-                    <div className="flex flex-col items-center gap-[1rem]">
-                        <h1 className="text-[1.1rem] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">اجمالي الارباح</h1>
-                        <h1 className="text-[1.1rem] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">{profitAmount}</h1>
+                    <div className="flex sm:flex-col items-center justify-center gap-[1rem]">
+                        <h1 className="md:text-[1.1rem] sm:w-auto w-[90%] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">اجمالي الارباح</h1>
+                        <h1 className="md:text-[1.1rem] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">{profitAmount}</h1>
                     </div>
-                    <div className="flex flex-col items-center gap-[1rem]">
-                        <h1 className="text-[1.1rem] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">عدد المستفيدين</h1>
-                        <h1 className="text-[1.1rem] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">{numberOfBeneficiaries}</h1>
+                    <div className="flex sm:flex-col items-center justify-center gap-[1rem]">
+                        <h1 className="md:text-[1.1rem] sm:w-auto w-[90%] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">عدد المستفيدين</h1>
+                        <h1 className="md:text-[1.1rem] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">{numberOfBeneficiaries}</h1>
                     </div>
                 </div>
             }
@@ -107,7 +107,7 @@ function GoodsRevenueRecord() {
                                     </tr>
                                     <tbody>
                                         <tr>
-                                            <td className="border text-center border-slate-600">{commodity._id}</td>
+                                            <td className="border text-center border-slate-600">{commodity.id}</td>
                                             <td className="border text-center border-slate-600">{commodity.customerData.name}</td>
                                             <td className="border text-center border-slate-600">{commodity.commodityData.purchaseAmount}</td>
                                             <td className="border text-center border-slate-600">{commodity.commodityData.saleAmount}</td>

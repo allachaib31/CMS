@@ -91,13 +91,13 @@ function DisplayCommodityRevenue() {
           )}
         </label>
       </div>
-      <div className='mt-[1rem] flex justify-center gap-[1rem]'>
-        <h1 className='text-[1.1rem] font-bold bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]'>اجمالي إيرادات السلع لهذا الشهر</h1>
-        <span className='text-[1.1rem] font-bold bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]'>{total}</span>
+      <div className='mt-[1rem] flex justify-center gap-[0.2rem] sm:gap-[1rem]'>
+        <h1 className='sm:text-[1.1rem] font-bold bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]'>اجمالي إيرادات السلع لهذا الشهر</h1>
+        <span className='sm:text-[1.1rem] font-bold bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]'>{total}</span>
       </div>
       {showAlert.display ? <Alert msg={showAlert} /> : ""}
       <div className="overflow-x-auto mt-[1rem]">
-        <table className="text-[1rem] table border-separate border-spacing-2 border w-[2500px] mx-auto">
+        <table className="text-[1rem] table border-separate border-spacing-2 border w-[1900px] mx-auto">
           <thead className="text-[1rem] text-center">
             <tr>
               <th className="border border-slate-600" rowSpan={2}>
@@ -154,7 +154,7 @@ function DisplayCommodityRevenue() {
                 }} className='select xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered'>
                   <option selected disabled>قم باختيار رقم الطلب</option>
                   {idList && idList.map((list) => (
-                    <option value={list._id}>{list._id}</option>
+                    <option value={list._id}>{list.id}</option>
                   ))}
                 </select>
               </th>

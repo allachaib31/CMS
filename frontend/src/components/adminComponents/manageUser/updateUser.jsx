@@ -115,7 +115,7 @@ function UpdateUser() {
                 navigate("/user");
             }
             setInputs({
-                _id: res.data.user[0]._id,
+                _id: res.data.user[0].id,
                 name: res.data.user[0].name,
                 NationalIdentificationNumber: res.data.user[0].NationalIdentificationNumber,
                 phoneNumber: res.data.user[0].phoneNumber,
@@ -127,7 +127,7 @@ function UpdateUser() {
         })
     }, []);
     return (
-        <div className="sm:p-0 px-[1rem]">
+        <div className="container mx-auto  sm:p-0 px-[1rem]">
             <div>
                 <Link to="/user" className="btn btn-primary text-[2rem] px-[2rem]">
                     <FontAwesomeIcon icon={faRightLong} />

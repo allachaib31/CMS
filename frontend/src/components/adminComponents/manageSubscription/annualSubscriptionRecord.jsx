@@ -73,7 +73,7 @@ function AnnualSubscriptionRecord() {
                 <td className='border border-slate-600'>{subscription.total}</td>
                 <td className='border border-slate-600'>{subscription.numberofArrears}</td>
                 <td className='border border-slate-600'>
-                    <Link to={`/subscription/annualSubscriptionRecordDetails?id=${subscription.idUser._id}&name=${subscription.idUser.name}`} className="btn btn-info">التفاصيل</Link>
+                    <Link to={`/subscription/annualSubscriptionRecordDetails?id=${subscription.idUser._id}&smallId=${subscription.idUser.id}&name=${subscription.idUser.name}`} className="btn btn-info">التفاصيل</Link>
                 </td>
             </tr>
         ));
@@ -81,17 +81,17 @@ function AnnualSubscriptionRecord() {
 
     return (
         <div className="sm:p-0 px-[1rem]">
-            <div>
+            <div className='container mx-auto'>
                 <Link to="/subscription" className="btn btn-primary text-[2rem] px-[2rem]">
                     <FontAwesomeIcon icon={faRightLong} />
                 </Link>
             </div>
-            <h1 className="text-center text-[1.5rem] font-bold py-[1rem]">
+            <h1 className="text-center text-[1.1rem] sm:text-[1.5rem] font-bold py-[1rem]">
                 سجل الاشتراكات السنوية لعام {year} الرصيد : {total.reduce((total, value) => {
                     return total + Number(value);
                 })}
             </h1>
-            <div className="join flex-wrap mb-[1rem]">
+            <div className="container mx-auto flex-wrap mb-[1rem]">
                 <select
                     onChange={(event) => setYear(event.target.value)}
                     className="select xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item"
@@ -111,7 +111,7 @@ function AnnualSubscriptionRecord() {
                     </button>
                 </div>
             </div>
-            <div>
+            <div className='container mx-auto'>
                 <Link to={`/print/recordAnnual?year=${year}`} target='_blank' className='btn btn-info font-bold'><FontAwesomeIcon icon={faPrint} /> طباعة</Link>
             </div>
             <div className="overflow-x-auto mt-[2rem]">

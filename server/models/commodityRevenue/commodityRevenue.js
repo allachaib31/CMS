@@ -1,7 +1,13 @@
 const mongoose = require("mongoose");
 const Joi = require('joi');
+const shortid = require("shortid");
 
 const commodityRevenueSchema = new mongoose.Schema({
+    id: {
+        type: String,
+        default: shortid.generate,
+        unique: true,
+    },
     customerData: {
         name: {
             type: String,
@@ -16,7 +22,7 @@ const commodityRevenueSchema = new mongoose.Schema({
             required: true,
         },
         phoneNumber: {
-            type: String, 
+            type: String,
             required: true,
         },
         region: {
@@ -46,7 +52,7 @@ const commodityRevenueSchema = new mongoose.Schema({
             required: true
         },
         phoneNumber: {
-            type: String, 
+            type: String,
             required: true,
         },
         region: {
@@ -57,6 +63,11 @@ const commodityRevenueSchema = new mongoose.Schema({
             type: String,
             required: true,
         },
+        itPaid: {
+            type: Boolean,
+            default: false,
+            required: true
+        }
     },
     commodityData: {
         itemType: {
@@ -157,6 +168,7 @@ const commodityRevenueSchema = new mongoose.Schema({
 })
 
 const joiSchema = Joi.object({
+    id: Joi.string(),
     customerData: Joi.object({
         name: Joi.string().min(3).max(30).required(),
         job: Joi.string().min(3).max(30).pattern(/^[a-zA-Z\s]+$/).required(),
@@ -173,6 +185,7 @@ const joiSchema = Joi.object({
         phoneNumber: Joi.string().min(10).max(10).pattern(/^05\d{8}$/).required(),
         region: Joi.string().min(3).max(1024).required(),
         address: Joi.string().min(3).max(1024).required(),
+        itPaid: Joi.boolean()
     }).required(),
     commodityData: Joi.object({
         itemType: Joi.string().min(3).max(1024).required(),

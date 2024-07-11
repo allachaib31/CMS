@@ -58,7 +58,7 @@ function ModifySubscriptionAmount() {
         })
     }
     return (
-        <div className="sm:p-0 px-[1rem]">
+        <div className="container mx-auto sm:p-0 px-[1rem]">
             <div>
                 <Link to="/subscription" className="btn btn-primary text-[2rem] px-[2rem]">
                     <FontAwesomeIcon icon={faRightLong} />

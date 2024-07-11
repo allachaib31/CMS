@@ -131,6 +131,14 @@ function Home() {
                         </li>
                         <li>
                           <Link
+                            to="/subscription/payMonthlySubscriptions"
+                            className="text-[1rem]"
+                          >
+                            دفع اشتراك الشهري
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
                             to="/subscription/paymentOfSubscriptions"
                             className="text-[1rem]"
                           >
@@ -183,7 +191,9 @@ function Home() {
                         <li><Link to="/stocks/displayContributionForm" className="text-[1rem]">نموذج المساهمة</Link></li>
                       </ul>
                     </details>
-                    <details>
+                    {
+                      /**
+                       *                     <details>
                       <summary>
                         <Link to="/investmentBox">
                           <FontAwesomeIcon icon={faSackDollar} /> صندوق الاستثماري
@@ -205,6 +215,8 @@ function Home() {
                         <li><Link to="/financialCompany/displayContributionForm" className="text-[1rem]">نموذج المساهمة</Link></li>
                       </ul>
                     </details>
+                       */
+                    }
                     <details>
                       <summary>
                         <Link to="/loans">
@@ -248,7 +260,7 @@ function Home() {
                           <Link to="/reimbusedExpenses/displayRecord">سجل المصروفات</Link>
                         </li>
                         <li>
-                          <Link to="/reimbusedExpenses/expenseRequest">طلب مصروف</Link>
+                          <Link to="/reimbusedExpenses/expenseRequest">تسجيل المصروفات</Link>
                         </li>
                         <li>
                           <Link to="/reimbusedExpenses/addExpenseType">اضافة نوع مصروف</Link>

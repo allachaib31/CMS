@@ -66,7 +66,8 @@ exports.addFoundationSubscriptions = async (req, res) => {
             {
                 $inc: {
                     amount: amount,
-                    cumulativeAmount: amount
+                    cumulativeAmount: amount,
+                    "source.subscriptions": amount
                 }
             },
             { new: true }
@@ -87,9 +88,9 @@ exports.addFoundationSubscriptions = async (req, res) => {
         });
         function addDaysToHijriDate(hijriDate) {
             const newDate = [...hijriDate];
-            if (newDate[1].number < 12) {
+            /*if (newDate[1].number < 12) {
                 newDate[1].number += 1;
-            }
+            }*/
             newDate[1].ar = Subscription.months[newDate[1].number].name;
             return newDate;
         }
@@ -203,7 +204,8 @@ exports.addMonthlySubscriptions = async (req, res) => {
             {
                 $inc: {
                     amount: amount,
-                    cumulativeAmount: amount
+                    cumulativeAmount: amount,
+                    "source.subscriptions": amount
                 }
             },
             { new: true }
@@ -259,16 +261,44 @@ exports.addCommentMonthly = async (req,res) => {
     }
 }
 //GET METHODS
+exports.getRegisterFinancialData = async (req, res) => {
+    try {
+        const users = await foundationSubscriptionModel.find().populate("idUser",{
+            password: false
+        });
+        return res.status(200).send({
+            users
+        })
+    } catch (error) {
+        return res.status(500).send({
+            msg: "حدث خطأ أثناء معالجة طلبك",
+            error: error.message,
+        });
+    }
+}
+exports.getUserForFoundationSubscripe = async (req, res) => {
+    try {
+        const users = await userModel.find({
+            disable: false
+        }).select("id name NationalIdentificationNumber phoneNumber enableAccount");
+        return res.status(200).send({
+            users
+        })
+    } catch (error) {
+        return res.status(500).send({
+            msg: "حدث خطأ أثناء معالجة طلبك",
+            error: error.message,
+        });
+    }
+}
 exports.getSubscriptionsForm = async (req, res) => {
     const { date, dateHijri } = req.body;
-
     if (!date || !dateHijri) {
         return res.status(400).send({ msg: "مطلوب الشهر والسنة" });
     }
 
     try {
         const subscriptions = await monthlySubscriptionModel.find({ year: dateHijri.year }).populate("idUser", "name");
-
         if (subscriptions.length === 0) {
             return res.status(404).send({ msg: "لم يتم العثور على اشتراكات للسنة المحددة" });
         }
@@ -277,6 +307,8 @@ exports.getSubscriptionsForm = async (req, res) => {
         for (let i = 0; i < subscriptions.length; i++) {
             const monthData = subscriptions[i].months[dateHijri.month.number];
             //&& monthData.dueDateHijri.day == dateHijri.day
+            console.log(monthData);
+            console.log(dateHijri)
             if (monthData) {
                 if (monthData.dueDateHijri && monthData.dueDateHijri.month.number == dateHijri.month.number && monthData.dueDateHijri.year == dateHijri.year) {
                     results.push(subscriptions[i]);
@@ -350,7 +382,7 @@ exports.getAnnualSubscriptions = async (req, res) => {
     try {
         const subscription = await monthlySubscriptionModel.find({
             year
-        }).populate("idUser", "name");
+        }).populate("idUser", "name id");
         return res.status(200).send({
             subscription,
             print: req.user.admin.userPermission.indexOf("طباعة سجل الاشتراكات (سنوي ، شهري ، أو مدة محددة)") > -1 ? true : false,
@@ -446,7 +478,7 @@ exports.searchSubscriptionHistory = async (req, res) => {
         if (searchMethod && searchValue) {
             switch (searchMethod) {
                 case "_id":
-                    query._id = searchValue;
+                    query.id = searchValue;
                     break;
                 case "name":
                     query.name = { $regex: searchValue, $options: "i" };

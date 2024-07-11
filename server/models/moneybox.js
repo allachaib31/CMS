@@ -12,6 +12,15 @@ const moneyBoxSchema = new mongoose.Schema({
         required: true,
         default: 0
     },
+    source : {
+        type: Object,
+        default: {
+            subscriptions: 0,
+            commodityRevenue: 0,
+            contributionRevenues: 0,
+            loanIncome: 0,
+        }
+    },
     createdAt: {
         type: Date,
         default: Date.now(),

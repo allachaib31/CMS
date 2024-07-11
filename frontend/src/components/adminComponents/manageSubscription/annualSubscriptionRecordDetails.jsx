@@ -45,19 +45,19 @@ function AnnualSubscriptionRecordDetails() {
         getAnnualSubscriptionsDetails();
     }, [])
     return (
-        <div className="sm:p-0 px-[1rem]">
+        <div className="md:container md:mx-auto px-[1rem]">
             <div>
                 <Link to="/subscription/annualSubscriptionRecord" className="btn btn-primary text-[2rem] px-[2rem]">
                     <FontAwesomeIcon icon={faRightLong} />
                 </Link>
             </div>
-            <h1 className="text-center text-[1rem] sm:text-[1.5rem] font-bold py-[1rem]">
-                سجل الاشتراكات السنوية الخاصة بي {inputs.idUser} : للعضو {query.get("name")}
+            <h1 className="text-center text-[1rem] sm:text-[1.2rem] lg:text-[1.5rem] font-bold py-[1rem]">
+                سجل الاشتراكات السنوية الخاصة بي {query.get('smallId')} : للعضو {query.get("name")}
             </h1>
             <div className='flex flex-wrap md:gap-0 gap-[1rem]'>
                 <select onChange={(event) => {
                     setInputs((prevInput) => {
-                        return { ...prevInput, typeSearch: event.target.value }
+                        return { ...prevInput, typeSearch: event.target.value, endYear: (event.target.value == "years") ? hijriDateObject()[2] : "" }
                     })
                 }} className="select select-bordered w-full max-w-xs">
                     <option value="oneYear">لسنة</option>

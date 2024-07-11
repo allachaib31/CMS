@@ -1,6 +1,13 @@
 const mongoose = require("mongoose");
 const Joi = require("joi");
+const shortid = require("shortid");
+
 const userSchema = new mongoose.Schema({
+  id: {
+    type: String,
+    default: shortid.generate,
+    unique: true,
+  },
   name: {
     type: String,
     required: true,
@@ -27,6 +34,27 @@ const userSchema = new mongoose.Schema({
   enableAccount: {
     type: Boolean,
     default: false,
+  },
+  loans: {
+    type: Object,
+    default: {
+      number: 0,
+      amount: 0
+    },
+    required: true,
+  },
+  subsidies: {
+    type: Object,
+    default: {
+      number: 0,
+      amount: 0
+    },
+    required: true,
+  },
+  commodityProfitsContributions: {
+    type: Number,
+    default: 0,
+    required: true
   },
   admin: {
     type: {
@@ -58,6 +86,14 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  subscriptionExpiryDate:{
+    type: Date,
+    required: false,
+  },
+  subscriptionExpiryDateHijri:{
+    type: Object,
+    required: false,
+  },
   hijriDate: {
     type: Object,
     required: true,
@@ -70,6 +106,7 @@ const userSchema = new mongoose.Schema({
 
 userSchema.methods.joiValidate = async function (obj) {
   const schema = Joi.object({
+    id: Joi.string(),
     _id: Joi.object(),
     name: Joi.string().min(3).max(1024).required(),
     password: Joi.string().min(4).max(1024).required(),
@@ -81,6 +118,9 @@ userSchema.methods.joiValidate = async function (obj) {
       .required(),
     status: Joi.string().valid("active", "not active").required(),
     admin: Joi.object().required(),
+    loans:Joi.object().required(),
+    subsidies:Joi.object().required(),
+    commodityProfitsContributions: Joi.number(),
     enableAccount: Joi.boolean().required(),
     comments: Joi.string().min(0).max(5000),
     memberBalance: Joi.number(),

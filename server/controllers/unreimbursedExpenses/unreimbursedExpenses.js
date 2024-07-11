@@ -22,7 +22,8 @@ exports.addTypeExpenses = async (req, res) => {
         })
         await typeExpenses.save();
         return res.status(200).send({
-            msg: "لقد تمت اضافته بنجاح"
+            msg: "لقد تمت اضافته بنجاح",
+            typeExpenses
         });
     } catch (error) {
         return res.status(500).send({
@@ -30,7 +31,24 @@ exports.addTypeExpenses = async (req, res) => {
         });
     }
 }
-
+exports.deleteTypeExpenses = async (req, res) => {
+    const { id } = req.query;
+    try {
+        const type = await typeExpensesModel.findByIdAndDelete(id);
+        if (!type) {
+            return res.status(404).send({
+                msg: "لم يتم ايجاد هذا النوع"
+            })
+        }
+        return res.status(200).send({
+            msg: "لقد تم حذفه بنجاح"
+        })
+    } catch (error) {
+        return res.status(500).send({
+            msg: "حدث خطأ أثناء معالجة طلبك"
+        });
+    }
+}
 exports.getTypeExpenses = async (req, res) => {
     try {
         const typesExpenses = await typeExpensesModel.find();
@@ -45,7 +63,7 @@ exports.getTypeExpenses = async (req, res) => {
 }
 
 exports.addExpenses = async (req, res) => {
-    const { name, amount, typeExpenses, comments } = req.body;
+    const { NationalIdentificationNumber, amount, typeExpenses, comments } = req.body;
     try {
         if (
             req.user.admin.userPermission.indexOf(
@@ -62,6 +80,14 @@ exports.addExpenses = async (req, res) => {
                 msg: "لايوجد رصيد كافي في الصندوق",
             });
         }
+        const user = await userModel.findOne({
+            NationalIdentificationNumber: NationalIdentificationNumber
+        })
+        if (!user) {
+            return res.status(404).send({
+                msg: "لا وجود لهذا المستخدم"
+            })
+        }
         const typeExpensesName = await typeExpensesModel.findOne({
             id: typeExpenses
         });
@@ -71,7 +97,7 @@ exports.addExpenses = async (req, res) => {
             })
         }
         const { error } = validateUnReimbursedExpenses({
-            name, amount, typeExpenses: typeExpensesName.name, comments
+            name: user.name, amount, typeExpenses: typeExpensesName.name, comments
         })
         if (error) {
             return res.status(422).send({
@@ -84,7 +110,7 @@ exports.addExpenses = async (req, res) => {
         });
         const paymentAmount = amount / users.length;
         const unReimbursedExpenses = new unReimbursedExpensesModel({
-            name,
+            name: user.name,
             amount,
             typeExpenses: typeExpensesName.name,
             comments,
@@ -129,10 +155,20 @@ exports.addExpenses = async (req, res) => {
                 msg: "حدث خطأ أثناء معالجة طلبك",
             });
         }
+        const userUpdate = await userModel.findOneAndUpdate({
+            NationalIdentificationNumber: NationalIdentificationNumber
+        }, {
+            $inc: {
+                "subsidies.number": 1,
+                "subsidies.amount": Number(amount)
+            }
+        },
+            { new: true })
         return res.status(200).send({
             msg: "لقد تمت اضافته بنجاح",
         });
     } catch (error) {
+        console.log(error)
         return res.status(500).send({
             msg: "حدث خطأ أثناء معالجة طلبك"
         });
@@ -240,11 +276,11 @@ exports.getUnReimbursedExpenses = async (req, res) => {
         let totalAmountMonth = 0;
         const result = [];
         unReimbursedExpenses.forEach((expenses) => {
-            totalAmount += expenses.amount
-            if(expenses.hijriDate.month.number == month && expenses.hijriDate.year == year){
+            if (expenses.hijriDate.month.number == month && expenses.hijriDate.year == year) {
                 result.push(expenses)
                 totalAmountMonth += expenses.amount
             }
+            if(expenses.expensesPaidCash.length > 0) totalAmount += expenses.expensesPaidCash[0].amount * expenses.expensesPaidCash.length
         })
         return res.status(200).send({
             result,

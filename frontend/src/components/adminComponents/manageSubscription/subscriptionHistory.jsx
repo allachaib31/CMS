@@ -74,7 +74,7 @@ function SubscriptionHistory() {
 
   return (
     <div className="sm:p-0 px-[1rem]">
-      <div>
+      <div className='container mx-auto'>
         <Link to="/subscription" className="btn btn-primary text-[2rem] px-[2rem]">
           <FontAwesomeIcon icon={faRightLong} />
         </Link>
@@ -82,29 +82,27 @@ function SubscriptionHistory() {
       <h1 className="text-center text-[1.5rem] font-bold py-[1rem]">
         سجل الاشتراكات
       </h1>
-      <div className="join flex-wrap mb-[1rem]">
+      <div className="container mx-auto sm:flex  mb-[1rem]">
         <div>
-          <div>
-            <input
-              onChange={(input) => {
-                if (input.target.value.trim() == "") {
-                  setLoading((e) => !e)
-                  getUser()
-                };
-                setSearch((search) => {
-                  return { ...search, searchValue: input.target.value.trim() }
-                })
-              }}
-              className="input input-bordered join-item"
-              placeholder="أكتب هنا"
-            />
-          </div>
+          <input
+            onChange={(input) => {
+              if (input.target.value.trim() == "") {
+                setLoading((e) => !e)
+                getUser()
+              };
+              setSearch((search) => {
+                return { ...search, searchValue: input.target.value.trim() }
+              })
+            }}
+            className="input input-bordered join-item"
+            placeholder="أكتب هنا"
+          />
         </div>
         <select onChange={(input) => {
           setSearch((search) => {
             return { ...search, searchMethod: input.target.value.trim() }
           })
-        }} className="select xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
+        }} className="select sm:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
           <option value="_id">العدد</option>
           <option value="name">اسم</option>
           <option value="NationalIdentificationNumber">رقم الهوية</option>
@@ -116,21 +114,21 @@ function SubscriptionHistory() {
           </button>
         </div>
       </div>
-      <div className="mt-[1rem] flex justify-center gap-[1rem] flex-wrap">
-        <div className='flex flex-col items-center gap-[1rem]'>
-          <h1 className="text-[1.1rem] font-bold bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]">رصيد الصندوق منذ إنشائه </h1>
+      <div className="mt-[1rem] flex md:flex-row flex-col items-center container mx-auto justify-center gap-[0.2rem] md:gap-[1rem]">
+        <div className='flex md:flex-col w-full  md:w-auto items-center justify-center gap-[1rem]'>
+          <h1 className="md:text-[1.1rem] w-full sm:w-1/2 md:w-auto font-bold bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]">رصيد الصندوق منذ إنشائه </h1>
           <h1 className="text-[1.1rem] font-bold bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]"> {moneyBox && moneyBox.cumulativeAmount}</h1>
         </div>
-        <div className='flex flex-col items-center gap-[1rem]'>
-          <h1 className="text-[1.1rem] font-bold bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]">المصروفات </h1>
+        <div className='flex md:flex-col w-full  md:w-auto items-center justify-center gap-[1rem]'>
+          <h1 className="md:text-[1.1rem] w-full sm:w-1/2 md:w-auto font-bold bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]">المصروفات </h1>
           <h1 className="text-[1.1rem] font-bold bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]">{moneyBox && (moneyBox.cumulativeAmount - moneyBox.amount)}</h1>
         </div>
-        <div className='flex flex-col items-center gap-[1rem]'>
-          <h1 className="text-[1.1rem] font-bold bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]">الأعضاء المفعلون </h1>
+        <div className='flex md:flex-col w-full md:w-auto items-center justify-center gap-[1rem]'>
+          <h1 className="md:text-[1.1rem] w-full sm:w-1/2 md:w-auto font-bold bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]">الأعضاء المفعلون </h1>
           <h1 className="text-[1.1rem] font-bold bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]">{activeMember}</h1>
         </div>
-        <div className='flex flex-col items-center gap-[1rem]'>
-          <h1 className="text-[1.1rem] font-bold bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]">الأعضاء الجدد </h1>
+        <div className='flex md:flex-col w-full md:w-auto items-center justify-center gap-[1rem]'>
+          <h1 className="md:text-[1.1rem] w-full sm:w-1/2 md:w-auto font-bold bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]">الأعضاء الجدد </h1>
           <h1 className="text-[1.1rem] font-bold bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]">{newUser}</h1>
         </div>
       </div>

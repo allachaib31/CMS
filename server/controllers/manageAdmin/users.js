@@ -69,7 +69,9 @@ exports.updatePassword = async (req, res) => {
     }
     const genSalt = Number(await bcrypt.genSalt(SALTROUNDS));
     const hashPassword = await bcrypt.hash(password, genSalt);
-    const user = await userModel.findByIdAndUpdate(idUser, {
+    const user = await userModel.findOneAndUpdate({
+      id: idUser
+    }, {
       password: hashPassword
     });
     console.log(user)
@@ -89,7 +91,7 @@ exports.getUser = async (req, res) => {
     const pageSize = 10;
     const skip = (page - 1) * pageSize;
 
-    const users = await userModel.find().select("_id name NationalIdentificationNumber phoneNumber status comments disable hijriDate createdAt").skip(skip).limit(pageSize).exec();
+    const users = await userModel.find().select("_id id name NationalIdentificationNumber phoneNumber status comments disable hijriDate createdAt").skip(skip).limit(pageSize).exec();
 
     const totalUsers = await userModel.countDocuments();
     const totalPages = Math.ceil(totalUsers / pageSize);
@@ -117,7 +119,7 @@ exports.searchUser = async (req, res) => {
     if (searchMethod && searchValue) {
       switch (searchMethod) {
         case "_id":
-          query._id = searchValue;
+          query.id = searchValue;
           break;
         case "name":
           query.name = { $regex: searchValue, $options: "i" };
@@ -139,7 +141,7 @@ exports.searchUser = async (req, res) => {
     } else {
       return res.status(400).send({ msg: "مطلوب طريقة البحث والقيمة" });
     }
-    const user = await userModel.find(query).select("_id name NationalIdentificationNumber phoneNumber status comments disable hijriDate createdAt");
+    const user = await userModel.find(query).select("_id id name NationalIdentificationNumber phoneNumber status comments disable hijriDate createdAt");
     const totalUsers = await userModel.countDocuments();
     const totalPages = Math.ceil(totalUsers / 1);
     return res.status(200).json({
@@ -161,6 +163,7 @@ exports.searchUser = async (req, res) => {
 //UPDATE METHODS
 exports.updateUser = async (req, res) => {
   const { _id, name, NationalIdentificationNumber, phoneNumber, status, comments } = req.body;
+  console.log(req.body)
   try {
     if (req.user.admin.userPermission.indexOf("اضافة او حذف او تعديل عضو جديد") == -1) {
       return res.status(403).send({
@@ -171,7 +174,9 @@ exports.updateUser = async (req, res) => {
       _id, name, NationalIdentificationNumber, phoneNumber, status, comments
     })
     if (err.error) throw err;
-    const user = await userModel.findById(_id);
+    const user = await userModel.findOne({
+      id: _id
+    });
    /* const user = await userModel.findByIdAndUpdate(_id, {
       name,
       NationalIdentificationNumber,
@@ -222,7 +227,9 @@ exports.deleteUser = async (req, res) => {
         msg: "ليس لديك إذن إضافة او تعديل او حذف عضو",
       });
     }
-    const user = await userModel.findById(id);
+    const user = await userModel.findOne({
+      id: id
+    });
     user.disable = !user.disable;
     await user.save();
     /*const user = await userModel.findByIdAndUpdate(id,{

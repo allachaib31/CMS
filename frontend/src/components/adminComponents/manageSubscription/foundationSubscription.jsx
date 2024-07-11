@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { addFoundationSubscriptionsFetch, getTypeSubscriptionFetch, searchUserFetch } from '../../../utils/apiFetch';
+import { addFoundationSubscriptionsFetch, getTypeSubscriptionFetch, getUserForFoundationSubscripeFetch, searchUserFetch } from '../../../utils/apiFetch';
 import { useNavigate } from 'react-router-dom';
 import Alert from '../../alert/alert';
 
@@ -44,18 +44,19 @@ function FoundationSubscription() {
       });
     })
   }
-  const handleSubmit = () => {
+  const handleSubmit = (input) => {
     setSubmit((e) => !e);
     setShowAlert({
       display: false,
     });
-    addFoundationSubscriptionsFetch(inputs).then((res) => {
+    addFoundationSubscriptionsFetch(input).then((res) => {
       setSubmit((e) => !e)
       setShowAlert({
         display: true,
         status: true,
         text: res.data.msg
       });
+      document.getElementById(input.idUser).innerHTML = "لقد تم دفع";
     }).catch((err) => {
       if (err.response.status == 401) {
         navigate("/auth");
@@ -74,6 +75,9 @@ function FoundationSubscription() {
       setInputs((prevInputs) => {
         return { ...prevInputs, amount: res.data.typeSubscription[1].amount };
       })
+      getUserForFoundationSubscripeFetch().then((res) => {
+        setUser(res.data.users);
+      })
     }).catch((err) => {
       if (err.response.status == 401) {
         navigate("/auth");
@@ -87,7 +91,9 @@ function FoundationSubscription() {
   }, []);
   return (
     <div className="mt-[1rem]">
-      <div className="join flex-wrap mb-[1rem]">
+      {
+        /**
+         *       <div className="container mx-auto flex flex-wrap mb-[1rem]">
         <div>
           <div>
             <input
@@ -106,17 +112,20 @@ function FoundationSubscription() {
           setSearch((search) => {
             return { ...search, searchMethod: input.target.value.trim() }
           })
-        }} className="select xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
+        }} className="select pl-[2rem] pr-[1.5rem] select-bordered join-item">
           <option value="_id">العدد</option>
           <option value="NationalIdentificationNumber">رقم الهوية</option>
           <option value="phoneNumber">رقم الجوال</option>
         </select>
-        <div className="indicator xs:mt-0 mt-[1rem] ">
+        <div className="indicator  ">
           <button onClick={handleSearch} className="btn xs:w-auto bg-primary text-[20px] text-white join-item">
-          {loadingSearch ? <span className="loading loading-ring loading-lg"></span> : "ابحث"}
+            {loadingSearch ? <span className="loading loading-ring loading-lg"></span> : "ابحث"}
           </button>
         </div>
       </div>
+         */
+      }
+
       {showAlert.display ? <Alert msg={showAlert} /> : ""}
       <div className="overflow-x-auto  mt-[2rem]">
         <table className="table text-[1rem] mx-auto w-[1800px]">
@@ -134,20 +143,28 @@ function FoundationSubscription() {
           </thead>
           <tbody>
             {user && user.map((user, index) => {
+              let comment = "";
               return (
                 <tr>
-                  <td>{user._id}</td>
+                  <td>{user.id}</td>
                   <td>{user.name}</td>
                   <td>{user.NationalIdentificationNumber}</td>
                   <td>{user.phoneNumber}</td>
                   <td>التأسيس</td>
                   <td>{foundationPrice}</td>
                   <td><input type="text" onChange={(event) => {
-                    setInputs((prevInputs) => {
+                    comment = event.target.value.trim()
+                    /*setInputs((prevInputs) => {
                       return { ...prevInputs, comments: event.target.value.trim() }
-                    })
+                    })*/
                   }} placeholder="أكتب هنا" className="input input-bordered w-full max-w-xs" /></td>
-                  <td><button onClick={handleSubmit} className='btn btn-success'>{submit ? <span className="loading loading-ring loading-lg"></span> : "دفع"}</button></td>
+                  <td id={user._id}>{user.enableAccount ? "لقد تم دفع" : <button onClick={() => {
+                    handleSubmit({
+                      idUser: user._id,
+                      amount: foundationPrice,
+                      comments: comment
+                    })
+                  }} className='btn btn-success'>دفع</button>}</td>
                 </tr>
               )
             })}

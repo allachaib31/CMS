@@ -1,12 +1,13 @@
 const express = require("express");
 const authMiddleware = require("../../middleware/admin/auth");
-const { addLoans, getLoansHistory, getIdLoans, searchLoans, getRecordInstallments } = require("../../controllers/loans/loans");
+const { addLoans, getLoansHistory, getIdLoans, searchLoans, getRecordInstallments, payInstallments } = require("../../controllers/loans/loans");
 const Router = express.Router();
 
 Router.use(authMiddleware);
 
 //POST METHODS
 Router.post("/api/v1.0/loans/", addLoans);
+Router.post("/api/v1.0/loans/payInstallments", payInstallments)
 
 //GET METHODS
 Router.get("/api/v1.0/loans/history", getLoansHistory);

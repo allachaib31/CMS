@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import { hijriDateObject } from '../../../utils/getHijriDate';
+import { getReimbursedExpensesFetch } from '../../../utils/apiFetch';
 import { useNavigate } from 'react-router-dom';
-import { getUnReimbursedExpensesFetch } from '../../../utils/apiFetch';
-function RecordUnrecoveredExpenses() {
+
+function RecordRecoveredExpenses() {
     const navigate = useNavigate();
-    const [unReimbursedExpenses, setUnReimbursedExpenses] = useState(false);
+    const [reimbursedExpenses, setReimbursedExpensesExpenses] = useState(false);
     const [inputs, setInputs] = useState({
         date: "",
         dateHijri: "",
     });
     const [totalAmount, setTotalAmount] = useState(0);
     const [totalAmountMonth, setTotalAmountMonth] = useState(0);
-    const getUnReimbursedExpenses = (input) => {
-        getUnReimbursedExpensesFetch(input).then((res) => {
-            setUnReimbursedExpenses(res.data.result);
+    const getReimbursedExpenses = (input) => {
+        getReimbursedExpensesFetch(input).then((res) => {
+            setReimbursedExpensesExpenses(res.data.result);
             setTotalAmount(res.data.totalAmount);
             setTotalAmountMonth(res.data.totalAmountMonth);
         })
@@ -34,7 +35,7 @@ function RecordUnrecoveredExpenses() {
                 },
             };
         });
-        getUnReimbursedExpenses({
+        getReimbursedExpenses({
             year: hijriDate[2],
             month: hijriDate[1].number
         });
@@ -42,7 +43,7 @@ function RecordUnrecoveredExpenses() {
     return (
         <div className="px-[1rem] sm:px-0">
             <h1 className="text-center text-[1.5rem] font-bold py-[1rem]">
-                المصروفات الغير مستردة
+                المصروفات المستردة
             </h1>
             <div className='text-[1.1rem] flex sm:flex-row flex-col gap-[1rem] items-center justify-center'>
                 <label>إيرادات اقساط السلع لشهر</label>
@@ -59,7 +60,7 @@ function RecordUnrecoveredExpenses() {
                             },
                         };
                     });
-                    getUnReimbursedExpenses({
+                    getReimbursedExpenses({
                         year: hijriDate[2],
                         month: hijriDate[1].number
                     });
@@ -76,36 +77,26 @@ function RecordUnrecoveredExpenses() {
                         ""
                     )}
 
-
                 </label>
             </div>
             <div className="mt-[1rem] flex md:flex-row flex-col gap-[1rem] justify-center">
                 <div className="flex md:flex-col items-center justify-center gap-[1rem]">
-                    <h1 className="text-[1.1rem] font-bold bg-primary w-[90%] md:w-auto text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">إجمالي المصروفات الغير مستردة لهذا الشهر</h1>
-                    <h1 className="text-[1.1rem] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">{totalAmountMonth.toFixed(2)}</h1>
+                    <h1 className="text-[1.1rem] md:w-auto w-[90%] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">إجمالي المصروفات المستردة لهذا الشهر</h1>
+                    <h1 className="text-[1.1rem] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">{totalAmountMonth}</h1>
                 </div>
                 <div className="flex md:flex-col items-center justify-center gap-[1rem]">
-                    <h1 className="text-[1.1rem] font-bold bg-primary w-[90%] md:w-auto text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">المصروفات المسددة نقداً</h1>
-                    <h1 className="text-[1.1rem] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">{totalAmount.toFixed(2)}</h1>
+                    <h1 className="text-[1.1rem] md:w-auto w-[90%] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">جمالي المصروفات المستردة</h1>
+                    <h1 className="text-[1.1rem] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">{totalAmount}</h1>
                 </div>
             </div>
             <div className="overflow-x-auto mt-[1rem]">
                 <table className="text-[1rem] table border-separate border-spacing-2 border w-[1900px] mx-auto">
                     <tr>
                         <th className="border text-center border-slate-600" rowSpan={2}>
-                            رقم الطلب
+                            اسم الجهة
                         </th>
                         <th className="border text-center border-slate-600" rowSpan={2}>
-                            اسم المستفيد
-                        </th>
-                        <th className="border text-center border-slate-600" rowSpan={2}>
-                            المصروف من رصيد الصندوق
-                        </th>
-                        <th colSpan={2} className="border text-center border-slate-600">
-                            المصروفات المسددة نقداً
-                        </th>
-                        <th className="border text-center border-slate-600" rowSpan={2}>
-                            الإجمالي
+                            المبلغ المصروف
                         </th>
                         <th className="border text-center border-slate-600" rowSpan={2}>
                             نوع المصروف
@@ -119,12 +110,6 @@ function RecordUnrecoveredExpenses() {
                     </tr>
                     <tr>
                         <th className="border text-center border-slate-600">
-                            المبلغ
-                        </th>
-                        <th className="border text-center border-slate-600">
-                            المصدر
-                        </th>
-                        <th className="border text-center border-slate-600">
                             الميلادي
                         </th>
                         <th className="border text-center border-slate-600">
@@ -133,35 +118,11 @@ function RecordUnrecoveredExpenses() {
                     </tr>
                     <tbody>
                         {
-                            unReimbursedExpenses && unReimbursedExpenses.map((expenses) => {
+                            reimbursedExpenses && reimbursedExpenses.map((expenses) => {
                                 return (
-                                    <tr >
-                                        <td className="border text-center border-slate-600">{expenses.id}</td>
+                                    <tr>
                                         <td className="border text-center border-slate-600">{expenses.name}</td>
-                                        <td className="border text-center border-slate-600">{expenses.balanceDistribution.toFixed(2)}</td>
-                                        <td className="border text-center border-slate-600">
-                                            {
-                                                expenses.expensesPaidCash.map((expensesPaidCash) => {
-                                                    return (
-                                                        <tr className='flex mb-1'>
-                                                            <td className="w-full border text-center border-slate-600">{expensesPaidCash.amount.toFixed(2)}</td>
-                                                        </tr>
-                                                    )
-                                                })
-                                            }
-                                        </td>
-                                        <td className="border text-center border-slate-600">
-                                            {
-                                                expenses.expensesPaidCash.map((expensesPaidCash) => {
-                                                    return (
-                                                        <tr className='flex mb-1'>
-                                                            <td className="w-full border text-center border-slate-600">{expensesPaidCash.name}</td>
-                                                        </tr>
-                                                    )
-                                                })
-                                            }
-                                        </td>
-                                        <td className="border text-center border-slate-600">{expenses.total.toFixed(2)}</td>
+                                        <td className="border text-center border-slate-600">{expenses.amount}</td>
                                         <td className="border text-center border-slate-600">{expenses.typeExpenses}</td>
                                         <td className="border text-center border-slate-600">{expenses.createdAt}</td>
                                         <td className="border text-center border-slate-600">{expenses.hijriDate.year}/{expenses.hijriDate.month.number}/{expenses.hijriDate.day}</td>
@@ -177,4 +138,4 @@ function RecordUnrecoveredExpenses() {
     )
 }
 
-export default RecordUnrecoveredExpenses
+export default RecordRecoveredExpenses

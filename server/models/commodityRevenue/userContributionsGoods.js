@@ -1,7 +1,13 @@
 const mongoose = require("mongoose");
 const Joi = require('joi');
+const shortid = require("shortid");
 
 const userContributionGoodSchema = new mongoose.Schema({
+    id: {
+        type: String,
+        default: shortid.generate,
+        unique: true,
+    },
     idUser: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "users"
@@ -43,6 +49,7 @@ const userContributionGoodSchema = new mongoose.Schema({
 
 const validateUserContributionGood = (data) => {
     const schema = Joi.object({
+        id: Joi.string(),
         idUser: Joi.string().hex().length(24).required(),
         idCommodityRevenue: Joi.string().hex().length(24).required(),
         previousBalance: Joi.number().required(),
@@ -52,7 +59,7 @@ const validateUserContributionGood = (data) => {
         balance: Joi.number().required(),
         comments: Joi.string().optional().allow(''),
     });
-    
+
     return schema.validate(data);
 };
 

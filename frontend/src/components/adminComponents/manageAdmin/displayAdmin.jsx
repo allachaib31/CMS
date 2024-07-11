@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Alert, DeleteUserModals, Pagination } from "../../index";
+import { Alert, Pagination } from "../../index";
 import { deleteAdminFetch, getAdminFetch, searchAdminFetch } from "../../../utils/apiFetch";
+import DeleteAdminModals from "../../modals/deleteModalsAdmin";
 
 function DisplayAdmin() {
   const navigate = useNavigate();
@@ -54,7 +55,7 @@ function DisplayAdmin() {
   }, [currentPage]);
   return (
     <div className="px-[1rem] sm:px-0">
-      <div className="mb-[1rem] flex sm:flex-row sm:gap-0 gap-[1rem] flex-col justify-between">
+      <div className="container mx-auto mb-[1rem] flex sm:flex-row sm:gap-0 gap-[1rem] flex-col justify-between">
         <Link to="/admin/addAdmin" className="text-[1rem] btn btn-primary">
           اضافة مسؤل
         </Link>
@@ -92,7 +93,7 @@ function DisplayAdmin() {
         </div>
       </div>
       {showAlert.display ? <Alert msg={showAlert} /> : ""}
-      <div className="overflow-x-auto  mt-[2rem]">
+      <div className=" overflow-x-auto xl:flex xl:justify-center  mt-[2rem]">
         <table className="table w-[1600px]">
           {/* head */}
           <thead>
@@ -118,17 +119,17 @@ function DisplayAdmin() {
               const date = new Date(admin.createdAt);
               return (
                 <tr className="text-center">
-                  <td>{admin._id}</td>
+                  <td>{admin.id}</td>
                   <td>{admin.name}</td>
                   <td>{admin.NationalIdentificationNumber}</td>
                   <td>{admin.phoneNumber}</td>
                   <td className="text-center">{date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()}</td>
                   <td className="text-center">{admin.hijriDate.year + "-" + admin.hijriDate.month.number + "-" + admin.hijriDate.day}</td>
                   <td className={(admin.status == "not active" ? "text-error" : "text-success") + " font-bold text-[1.3rem]"}>{admin.status == "not active" ? "غير مفعل" : "مفعل"}</td>
-                  <td><Link to={`/admin/updateAdmin?id=${admin._id}&name=${admin.name}`} className="btn btn-warning">تعديل</Link></td>
+                  <td><Link to={`/admin/updateAdmin?id=${admin.id}&name=${admin.name}`} className="btn btn-warning">تعديل</Link></td>
                   <td><button onClick={() => {
                     setUserDelete({
-                      id: admin._id,
+                      id: admin.id,
                       index
                     });
                     document.getElementById('deleteModel').showModal()
@@ -139,7 +140,7 @@ function DisplayAdmin() {
         </table>
       </div>
       <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} totalPages={totalPages} setTotalPages={setTotalPages}/>
-      <DeleteUserModals user={userDelete} setShowAlert={setShowAlert} users={admins} setUsers={setAdmins} deleteFetch={deleteAdminFetch} />
+      <DeleteAdminModals user={userDelete} setShowAlert={setShowAlert} users={admins} setUsers={setAdmins} deleteFetch={deleteAdminFetch} />
     </div>
   )
 }

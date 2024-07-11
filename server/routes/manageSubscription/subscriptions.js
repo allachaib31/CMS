@@ -1,6 +1,6 @@
 const express = require("express");
 const authMiddleware = require("../../middleware/admin/auth");
-const { addFoundationSubscriptions, addMonthlySubscriptions, getAnnualSubscriptions, getSubscriptionHistory,searchSubscriptionHistory, updateCommentSubscribeHistory, getAnnualSubscriptionsDetails, updateCommentRecordAnnual, getSubscriptionsForm, getOverdueSubscriptions, updateInvoiceOverdue, addCommentMonthly } = require("../../controllers/manageSubscription/subscriptions");
+const { addFoundationSubscriptions, addMonthlySubscriptions, getAnnualSubscriptions,getUserForFoundationSubscripe, getSubscriptionHistory,searchSubscriptionHistory, updateCommentSubscribeHistory, getAnnualSubscriptionsDetails, updateCommentRecordAnnual, getSubscriptionsForm, getOverdueSubscriptions, updateInvoiceOverdue, addCommentMonthly, getRegisterFinancialData } = require("../../controllers/manageSubscription/subscriptions");
 const Router = express.Router();
 
 Router.use(authMiddleware);
@@ -10,7 +10,9 @@ Router.post("/api/v1.0/subscriptions/foundation", addFoundationSubscriptions);
 Router.post("/api/v1.0/subscriptions/monthly", addMonthlySubscriptions);
 Router.post("/api/v1.0/subscriptions/getSubscriptionsForm", getSubscriptionsForm);
 //GET METHODS
-Router.get("/api/v1.0/subscriptions/getOverdueSubscriptions", getOverdueSubscriptions)
+Router.get("/api/v1.0/subscriptions/getRegisterFinancialData", getRegisterFinancialData)
+Router.get("/api/v1.0/subscriptions/getOverdueSubscriptions", getOverdueSubscriptions);
+Router.get("/api/v1.0/subscriptions/getUserForFoundationSubscripe", getUserForFoundationSubscripe);
 Router.get("/api/v1.0/subscriptions/annual", getAnnualSubscriptions);
 Router.get("/api/v1.0/subscriptions/annualDetails", getAnnualSubscriptionsDetails);
 Router.get("/api/v1.0/subscriptions/history",getSubscriptionHistory);

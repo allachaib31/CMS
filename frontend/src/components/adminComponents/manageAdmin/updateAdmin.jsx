@@ -64,8 +64,9 @@ function UpdateAdmin() {
       if (res.data.admin.length == 0) {
         navigate("/admin");
       }
+      console.log(res.data)
       setInputs({
-        idUser: res.data.admin[0]._id,
+        idUser: res.data.admin[0].id,
         UserPermission: res.data.admin[0].admin.userPermissions,
       })
       setLoading((e) => !e);
@@ -83,7 +84,7 @@ function UpdateAdmin() {
     })
   }, [loading])
   return (
-    <div className="sm:p-0 px-[1rem]">
+    <div className="container mx-auto  sm:p-0 px-[1rem]">
       <div>
         <Link to="/admin" className="btn btn-primary text-[2rem] px-[2rem]">
           <FontAwesomeIcon icon={faRightLong} />

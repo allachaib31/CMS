@@ -1,7 +1,13 @@
 const mongoose = require("mongoose");
 const Joi = require('joi');
+const shortid = require("shortid");
 
 const installmentsGoodsSchema = new mongoose.Schema({
+    id: {
+        type: String,
+        default: shortid.generate,
+        unique: true,
+    },
     idCommodityRevenue: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'CommodityRevenue',
@@ -41,6 +47,7 @@ const installmentsGoodsSchema = new mongoose.Schema({
 })
 
 const joiSchema = Joi.object({
+    id: Joi.string(),
     idCommodityRevenue: Joi.string().required(),
     premiumAmount: Joi.number().min(0).required(),
     requiredPaymentDate: Joi.date().required(),

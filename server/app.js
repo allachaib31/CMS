@@ -59,6 +59,7 @@ const moneyBox = require("./routes/manageMoneyBox/moneyBox");
 const loans = require("./routes/loans/loans");
 const reimbursedExpenses = require("./routes/reimbursedExpenses/reimbursedExpenses");
 const unReimbursedExpenses = require("./routes/unreimbursedExpenses/unreimbursedExpenses");
+const contributionRevenue = require("./routes/manageContributionRevenue/contributionRevenue");
 const { scheduleUpdate } = require("./schedule/schedule");
 app
     .use(authAdmin)
@@ -70,7 +71,8 @@ app
     .use(loans)
     .use(reimbursedExpenses)
     .use(unReimbursedExpenses)
-    .use(moneyBox);
+    .use(moneyBox)
+    .use(contributionRevenue);
 
 
 app.get('*', (req, res) => {

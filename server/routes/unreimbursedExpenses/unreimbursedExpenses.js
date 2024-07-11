@@ -1,6 +1,6 @@
 const express = require("express");
 const authMiddleware = require("../../middleware/admin/auth");
-const { addTypeExpenses, getTypeExpenses ,addExpenses, getRecordUnrecovereExpenses, searchUnReimbursedExpenses, getIdUnReimbursedExpenses,payCash, getUnReimbursedExpenses} = require("../../controllers/unreimbursedExpenses/unreimbursedExpenses");
+const { addTypeExpenses, getTypeExpenses ,addExpenses, getRecordUnrecovereExpenses, searchUnReimbursedExpenses, getIdUnReimbursedExpenses,payCash, getUnReimbursedExpenses, deleteTypeExpenses} = require("../../controllers/unreimbursedExpenses/unreimbursedExpenses");
 
 const Router = express.Router();
 
@@ -17,5 +17,8 @@ Router.get("/api/v1.0/unReimbursedExpenses/getRecordUnrecovereExpenses", getReco
 Router.get("/api/v1.0/unReimbursedExpenses/searchUnReimbursedExpenses", searchUnReimbursedExpenses)
 Router.get("/api/v1.0/unReimbursedExpenses/getIdUnReimbursedExpenses", getIdUnReimbursedExpenses)
 Router.get("/api/v1.0/unReimbursedExpenses/getUnReimbursedExpenses", getUnReimbursedExpenses);
+
+//DELETE METHODS
+Router.delete("/api/v1.0/unReimbursedExpenses/deleteTypeExpenses", deleteTypeExpenses);
 
 module.exports = Router;

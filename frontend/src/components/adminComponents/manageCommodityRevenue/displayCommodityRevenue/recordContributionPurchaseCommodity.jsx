@@ -50,15 +50,15 @@ function RecordContributionPurchaseCommodity() {
   }
   return (
     <div className="sm:p-0 px-[1rem]">
-      <div>
+      <div className='container mx-auto'>
         <Link to="/commodityRevenue/" className="btn btn-primary text-[2rem] px-[2rem]">
           <FontAwesomeIcon icon={faRightLong} />
         </Link>
       </div>
-      <h1 className="text-center text-[1.5rem] font-bold py-[1rem]">
+      <h1 className="text-center text-[1.3rem] sm:text-[1.5rem] font-bold py-[1rem]">
         سجل المساهمين في شراء السلع
       </h1>
-      <div className="md:join ">
+      <div className="container mx-auto ">
         <select className="select xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
           {yearOptions.map((value) => (
             <option key={value} value={value} selected={inputs.year === value}>
@@ -85,11 +85,11 @@ function RecordContributionPurchaseCommodity() {
         }} className="select xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
           <option selected disabled>قم باختيار العدد الخاص بنموذج شراء السلع</option>
           {idList && idList.map((list) => (
-            <option value={list._id}>{list._id}</option>
+            <option value={list._id}>{list.id}</option>
           ))}
         </select>
         <div className="indicator">
-          <button onClick={handleSearch} className="btn btn-primary join-item">ابحث</button>
+          <button onClick={handleSearch} className="btn btn-primary join-item  md:mt-[0rem] mt-[1rem]">ابحث</button>
         </div>
       </div>
       {
@@ -120,7 +120,7 @@ function RecordContributionPurchaseCommodity() {
                 userContribution && userContribution.map((user) => {
                   return (
                     <tr>
-                      <td className="border text-center border-slate-600">{user.idCommodityRevenue}</td>
+                      <td className="border text-center border-slate-600">{user.idCommodityRevenue.id}</td>
                       <td className="border text-center border-slate-600">{user.idUser.name}</td>
                       <td className="border text-center border-slate-600">{user.contributionPercentage.toFixed(2)}%</td>
                       <td className="border text-center border-slate-600">{user.contributionAmount.toFixed(2)}</td>

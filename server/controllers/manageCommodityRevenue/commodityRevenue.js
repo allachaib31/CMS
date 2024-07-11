@@ -33,6 +33,7 @@ exports.addCommodityRevenue = async (req, res) => {
             month: paymentExpiryDateHijri[1],
             year: paymentExpiryDateHijri[2],
         };
+        sponsorData.amount = commodityData.profitAmount * (sponsorData.sponsorRatio / 100);
         const hijriDate = getHijriDate();
         const { error } = validateCommodityRevenue({
             customerData, sponsorData, commodityData, comments, hijriDate: {
@@ -50,7 +51,7 @@ exports.addCommodityRevenue = async (req, res) => {
         const commodityRevenu = new commodityRevenueModel({
             customerData, sponsorData, commodityData: {
                 ...commodityData,
-                saleAmount: commodityData.saleAmount - commodityData.amountPaid
+                saleAmount: commodityData.saleAmount //- commodityData.amountPaid
             }, comments, hijriDate: {
                 day: hijriDate[0],
                 month: hijriDate[1],
@@ -88,11 +89,13 @@ exports.addCommodityRevenue = async (req, res) => {
             })
             await newInstallmentGoods.save();
         });
+        const numberOfUser = await userModel.countDocuments({ "status": "active","disable": false });
         const activeUsers = await userModel.find({
-            status: "active"
+            status: "active",
+            disable: false,
+            memberBalance: { $gte: commodityData.purchaseAmount / Number(numberOfUser)}
         });
         const amount = commodityData.purchaseAmount / activeUsers.length;
-
         activeUsers.forEach(async (user) => {
             const userContribution = new userContributionGoodModel({
                 idUser: user._id,
@@ -100,7 +103,7 @@ exports.addCommodityRevenue = async (req, res) => {
                 previousBalance: user.memberBalance,
                 contributionPercentage: (amount * 100) / user.memberBalance,
                 contributionAmount: amount,
-                profitAmount: amount
+                profitAmount: commodityData.profitAmount / activeUsers.length
             })
             user.memberBalance -= amount;
             await user.save();
@@ -142,7 +145,8 @@ exports.payInstallmentSchedule = async (req, res) => {
             {
                 $inc: {
                     amount: installmentSchedule.premiumAmount,
-                    cumulativeAmount: installmentSchedule.premiumAmount
+                    cumulativeAmount: installmentSchedule.premiumAmount,
+                    "source.commodityRevenue": installmentSchedule.premiumAmount
                 }
             },
             { new: true })
@@ -175,7 +179,8 @@ exports.payInstallmentSchedule = async (req, res) => {
             await userModel.findByIdAndUpdate(contribution.idUser, {
                 $inc: {
                     memberBalance: amount,
-                    cumulativeBalance: amount
+                    cumulativeBalance: amount,
+                    commodityProfitsContributions: amount
                 }
             },
             { new: true })
@@ -219,7 +224,7 @@ exports.getActiveCommodityRevenue = async (req, res) => {
                 $gte: startDate,
                 $lt: endDate
             }
-        }).select("_id").sort({ _id: -1 });
+        }).select("_id id").sort({ _id: -1 });
         const installmentSchedule = await installmentsGoodsModel.find({
             createdAt: {
                 $gte: startDate,
@@ -272,7 +277,7 @@ exports.getIdCommodityRevenue = async (req, res) => {
         const commodityRevenue = await commodityRevenueModel.find({
             "hijriDate.year": parseInt(year),
             "hijriDate.month.number": parseInt(month)
-        }).select("_id");
+        }).select("_id id");
         return res.status(200).send({
             commodityRevenue
         })
@@ -342,7 +347,7 @@ exports.getFormContributionPurchaseCommodity = async (req, res) => {
         }
         const userContribution = await userContributionGoodModel.find({
             idCommodityRevenue: commodityRevenue._id
-        }).populate("idUser", "name");
+        }).populate("idUser", "name").populate("idCommodityRevenue");
         return res.status(200).send({
             commodityRevenue,
             userContribution,

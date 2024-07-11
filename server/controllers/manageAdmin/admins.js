@@ -1,5 +1,5 @@
 const userModel = require("../../models/user");
-const {schemaAdminValidation} = require("../../utils/validation/schemaValidation");
+const { schemaAdminValidation } = require("../../utils/validation/schemaValidation");
 //POST METHODS
 exports.addAdmin = async (req, res) => {
   let { UserPermission, idUser } = req.body;
@@ -16,7 +16,9 @@ exports.addAdmin = async (req, res) => {
       userPermissions: UserPermission,
     });
     if (err.error) throw err;
-    const admin = await userModel.findByIdAndUpdate(idUser, {
+    const admin = await userModel.findOneAndUpdate({
+      id: idUser
+    }, {
       admin: {
         isAdmin: true,
         userPermissions: UserPermission,
@@ -52,9 +54,9 @@ exports.getAdmin = async (req, res) => {
     const admins = await userModel
       .find({ "admin.isAdmin": true })
       .select(
-        "_id name email NationalIdentificationNumber phoneNumber status comments hijriDate createdAt"
+        "_id id name email NationalIdentificationNumber phoneNumber status comments hijriDate createdAt"
       );
-    const totalUsers = await userModel.countDocuments();
+    const totalUsers = await userModel.countDocuments({ "admin.isAdmin": true });
     const totalPages = Math.ceil(totalUsers / pageSize);
     return res.status(200).send({
       admins,
@@ -77,7 +79,7 @@ exports.searchAdmin = async (req, res) => {
     if (searchMethod && searchValue) {
       switch (searchMethod) {
         case "_id":
-          query._id = searchValue;
+          query.id = searchValue;
           break;
         case "name":
           query.name = { $regex: searchValue, $options: "i" };
@@ -103,11 +105,10 @@ exports.searchAdmin = async (req, res) => {
       return res
         .status(400)
         .send({ msg: "مطلوب طريقة البحث والقيمة" })
-        .select(
-          "_id name NationalIdentificationNumber phoneNumber status comments hijriDate createdAt"
-        );
     }
-    const admin = await userModel.find(query);
+    const admin = await userModel.find(query).select(
+      "_id id name NationalIdentificationNumber phoneNumber admin status comments hijriDate createdAt"
+    );;
     console.log(admin)
     return res.status(200).json({
       admin,
@@ -121,7 +122,7 @@ exports.searchAdmin = async (req, res) => {
 
 //UPDATE METHODS
 exports.updateAdmin = async (req, res) => {
-  let { idUser, UserPermission} = req.body;
+  let { idUser, UserPermission } = req.body;
   try {
     if (req.user.admin.userPermission.indexOf("اضافة او حذف او تعديل مسؤل جديد") == -1) {
       return res.status(403).send({
@@ -134,7 +135,9 @@ exports.updateAdmin = async (req, res) => {
       userPermissions: UserPermission,
     });
     if (err.error) throw err;
-    const admin = await userModel.findByIdAndUpdate(idUser, {
+    const admin = await userModel.findOneAndUpdate({
+      id: idUser
+    }, {
       admin: {
         isAdmin: true,
         userPermissions: UserPermission,
@@ -158,13 +161,15 @@ exports.updateAdmin = async (req, res) => {
 //DELETE METHODS
 exports.deleteAdmin = async (req, res) => {
   const { id } = req.query;
-  try{
+  try {
     if (req.user.admin.userPermission.indexOf("اضافة او حذف او تعديل مسؤل جديد") == -1) {
       return res.status(403).send({
         msg: "ليس لديك إذن إضافة او تعديل او حذف عضو",
       });
     }
-    const user = await userModel.findByIdAndUpdate(id, {
+    const user = await userModel.findOneAndUpdate({
+      id: id
+    }, {
       admin: {
         isAdmin: false,
         userPermissions: [],
@@ -178,7 +183,7 @@ exports.deleteAdmin = async (req, res) => {
     return res.status(200).send({
       msg: `تتم إزالة المسؤل ${id}`
     });
-  }catch(error){
+  } catch (error) {
     return res.status(500).send({
       msg: "حدث خطأ أثناء معالجة طلبك"
     })
