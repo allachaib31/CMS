@@ -72,6 +72,13 @@ export { default as RecordRecoveredExpenses } from "./adminComponents/reimbursed
 export { default as DisplayRecordRecoveredExpenses } from "./adminComponents/reimbursedExpenses/displayRecordRecoveredExpenses";
 export { default as ReimbursedExpenseRequest } from "./adminComponents/reimbursedExpenses/reimbursedExpenseRequest";
 export { default as AddReimbursedExprensesType } from "./adminComponents/reimbursedExpenses/addReimbursedExprensesType";
+/*MANAGE CONTEST */
+export { default as ManageContest } from "./adminComponents/manageContest/manageContest";
+export { default as DisplayContest } from "./adminComponents/manageContest/displayContest";
+export { default as AddContest } from "./adminComponents/manageContest/addContest";
+export { default as ControllerContest } from "./adminComponents/manageContest/controllerContest";
+export { default as CompetitionBranches } from "./adminComponents/manageContest/competitionBranches";
+export { default as AddQuestion } from "./adminComponents/manageContest/addQuestion";
 /*MANAGE MODALS */
 export { default as DeleteUserModals } from "./modals/deleteModalsUser";
 export { default as AddNoteModals } from "./modals/addNoteSubscriptionHistoryModals";

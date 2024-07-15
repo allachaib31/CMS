@@ -135,6 +135,15 @@ exports.addCommodityRevenue = async (req, res) => {
 exports.payInstallmentSchedule = async (req, res) => {
     const { idInstallmentSchedule } = req.body;
     try {
+        if (
+            req.user.admin.userPermission.indexOf(
+                "إضافة بيانات شراء السلع وأقساطها"
+            ) == -1
+        ) {
+            return res.status(403).send({
+                msg: "ليس لديك إذن إضافة بيانات شراء السلع وأقساطها",
+            });
+        }
         const installmentSchedule = await installmentsGoodsModel.findById(idInstallmentSchedule);
         if(installmentSchedule.itPaid){
             return res.status(400).send({

@@ -62,7 +62,11 @@ import {
     GETREGISTERFINANCIALDATA_ROUTE,
     PAYINSTALLMENTS_ROUTE,
     DELETETYPEUNREIMBURSEDEXPENSES_ROUTE,
-    GETCONSOLIDATEDRECORDREVENUES_ROUTE
+    GETCONSOLIDATEDRECORDREVENUES_ROUTE,
+    ADDCONTEST_ROUTE,
+    GETCONTEST_ROUTE,
+    ADDBRANCHE_ROUTE,
+    GETBRANCHE_ROUTE
 } from "./apiRoutes";
 
 
@@ -336,5 +340,23 @@ export const getUnReimbursedExpensesFetch = async (inputs) => {
 //Manage contribution revenue
 export const getConsolidatedRecordRevenuesFetch = async () => {
     const data = await axios.get(GETCONSOLIDATEDRECORDREVENUES_ROUTE);
+    return data;
+}
+
+//Manage contest
+export const addContestFetch = async (input) => {
+    const data = await axios.post(ADDCONTEST_ROUTE,input);
+    return data;
+}
+export const getContestFetch = async () => {
+    const data = await axios.get(GETCONTEST_ROUTE);
+    return data;
+};
+export const addBrancheFetch = async (input) => {
+    const data = await axios.post(ADDBRANCHE_ROUTE, input);
+    return data;
+}
+export const getBrancheFetch = async () => {
+    const data = await axios.get(GETBRANCHE_ROUTE);
     return data;
 }

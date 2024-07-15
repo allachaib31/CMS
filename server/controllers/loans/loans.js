@@ -156,6 +156,15 @@ exports.addLoans = async (req, res) => {
 exports.payInstallments = async (req, res) => {
     const { id } = req.body;
     try {
+        if (
+            req.user.admin.userPermission.indexOf(
+                "إضافة أقساط قروض الأعضاء"
+            ) == -1
+        ) {
+            return res.status(403).send({
+                msg: "ليس لديك إذن إضافة أقساط قروض الأعضاء",
+            });
+        }
         const hijriDate = getHijriDate();
         const installmentsLoans = await installmentsLoansModel.findById(id);
 
@@ -188,6 +197,7 @@ exports.payInstallments = async (req, res) => {
             {
                 $inc: {
                     amount: installmentsLoans.premiumAmount,
+                    cumulativeAmount: installmentsLoans.premiumAmount,
                     "source.loanIncome": installmentsLoans.premiumAmount
                 }
             },

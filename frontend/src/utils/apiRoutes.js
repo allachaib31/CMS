@@ -1,5 +1,5 @@
-//export const HOST = `http://localhost:4000/`;
-export const HOST = `/`;
+export const HOST = `http://localhost:4000/`;
+//export const HOST = `/`;
 // Auth admin Route
 export const LOGIN_ROUTE = `${HOST}api/v1.0/auth/login`;
 export const VALIDATION_ROUTE = `${HOST}api/v1.0/auth/validation`;
@@ -76,3 +76,9 @@ export const DELETETYPEUNREIMBURSEDEXPENSES_ROUTE = `${HOST}api/v1.0/unReimburse
 
 //Manage contribution revenue
 export const GETCONSOLIDATEDRECORDREVENUES_ROUTE = `${HOST}api/v1.0/contributionRevenue/consolidatedRecordRevenues`;
+
+//Manage contest
+export const ADDCONTEST_ROUTE = `${HOST}api/v1.0/addContest`;
+export const GETCONTEST_ROUTE = `${HOST}api/v1.0/getContest`;
+export const ADDBRANCHE_ROUTE = `${HOST}api/v1.0/addBranche`;
+export const GETBRANCHE_ROUTE = `${HOST}api/v1.0/getBranche`;

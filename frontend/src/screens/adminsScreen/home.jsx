@@ -3,7 +3,7 @@ import { Link, Outlet, useNavigate } from "react-router-dom";
 import profileImage from "../../images/profileImage.png";
 import logo from "../../images/logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChartPie, faBuilding, faUser, faChartSimple, faFileInvoiceDollar, faSackDollar, faUserTie, faHandHoldingDollar, faGift, faRecycle, faArrowTrendUp } from "@fortawesome/free-solid-svg-icons";
+import { faChartPie, faBuilding, faUser, faChartSimple, faFileInvoiceDollar, faSackDollar, faUserTie, faHandHoldingDollar, faGift, faRecycle, faArrowTrendUp, faShapes } from "@fortawesome/free-solid-svg-icons";
 import { validationFetch } from "../../utils/apiFetch";
 import { Loading } from "../../components";
 import Cookies from "cookies-js";
@@ -264,6 +264,16 @@ function Home() {
                         </li>
                         <li>
                           <Link to="/reimbusedExpenses/addExpenseType">اضافة نوع مصروف</Link>
+                        </li>
+                      </ul>
+                    </details>
+                    <details>
+                      <summary>
+                        <Link to="/manageContest/"><FontAwesomeIcon icon={faShapes} /> إدارة المسابقة</Link>
+                      </summary>
+                      <ul>
+                        <li>
+                          <Link to="/manageContest/addContest">إضافة مسابقة</Link>
                         </li>
                       </ul>
                     </details>

@@ -232,6 +232,15 @@ exports.searchUnReimbursedExpenses = async (req, res) => {
 exports.payCash = async (req, res) => {
     const { id } = req.body;
     try {
+        if (
+            req.user.admin.userPermission.indexOf(
+                "إضافة المصروفات الغير مسترجعة بأنواعها"
+            ) == -1
+        ) {
+            return res.status(403).send({
+                msg: "ليس لديك إذن إضافة المصروفات الغير المسترجعة بأنواعها",
+            });
+        }
         const cashPayUser = await cashPayUserModel.findById(id).populate("idUser");
         if (cashPayUser.itPaid) {
             return res.status(400).send({

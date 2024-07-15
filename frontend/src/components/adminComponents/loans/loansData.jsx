@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getIdLoansFetch, searchLoansFetch } from "../../../utils/apiFetch";
 
 function LoansData() {
+    const navigate = useNavigate();
     const [loanInfo, setLoanInfo] = useState(false);
     const [installmentsPaid, setInstallmentsPaid] = useState(false);
     const [loansId, setLoansId] = useState(false);
@@ -11,12 +12,20 @@ function LoansData() {
         searchLoansFetch(id).then((res) => {
             setLoanInfo(res.data.loan);
             setInstallmentsPaid(res.data.installmentsPaid);
+        }).catch((err) => {
+            if (err.response && err.response.status === 401) {
+                navigate("/auth");
+            }
         })
     }
     useEffect(() => {
         getIdLoansFetch().then((res) => {
             console.log(res)
             setLoansId(res.data.loansId);
+        }).catch((err) => {
+            if (err.response && err.response.status === 401) {
+                navigate("/auth");
+            }
         })
     }, []);
     return (
