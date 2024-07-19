@@ -74,7 +74,7 @@ function ControllerContest() {
                 {
                     contestBranches && contestBranches.map((contest) => {
                         return (
-                            <Link to={"/manageContest/competitionBranches?id=" + contest._id} className='mb-[1rem] w-full md:w-1/2 flex justify-center items-center'>
+                            <Link to={"/manageContest/competitionBranches?idContest=" + queryParams.get('id') + "&idBranche=" + contest._id} className='mb-[1rem] w-full md:w-1/2 flex justify-center items-center'>
                                 <div className='bg-primary rounded-[14px] text-center w-full lg:w-[70%] text-white text-[1.5rem] p-[4rem]'>
                                     {contest.name}
                                 </div>

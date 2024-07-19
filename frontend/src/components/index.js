@@ -79,6 +79,19 @@ export { default as AddContest } from "./adminComponents/manageContest/addContes
 export { default as ControllerContest } from "./adminComponents/manageContest/controllerContest";
 export { default as CompetitionBranches } from "./adminComponents/manageContest/competitionBranches";
 export { default as AddQuestion } from "./adminComponents/manageContest/addQuestion";
+/*MANAGE VOTE */
+export { default as ManageVote } from "./adminComponents/manageVote/manageVote";
+export { default as DisplayVote } from "./adminComponents/manageVote/displayVote";
+export { default as AddVote } from "./adminComponents/manageVote/addVote";
+export { default as VoteDetails } from "./adminComponents/manageVote/voteDetails";
+/*MANAGE ADVERTISING */
+export { default as ManageAdvertising } from "./adminComponents/manageAdvertising/manageAdvertising";
+export { default as DisplayAdvertising } from "./adminComponents/manageAdvertising/displayAdvertising";
+export { default as AddAd } from "./adminComponents/manageAdvertising/addAd";
+/*MANAGE AGREEMENTS */
+export { default as Agreements } from "./adminComponents/agreements/agreements";
+export { default as DisplayAgreements } from "./adminComponents/agreements/displayAgreements";
+export { default as AddAgreements } from "./adminComponents/agreements/addAgreements";
 /*MANAGE MODALS */
 export { default as DeleteUserModals } from "./modals/deleteModalsUser";
 export { default as AddNoteModals } from "./modals/addNoteSubscriptionHistoryModals";

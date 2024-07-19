@@ -66,7 +66,15 @@ import {
     ADDCONTEST_ROUTE,
     GETCONTEST_ROUTE,
     ADDBRANCHE_ROUTE,
-    GETBRANCHE_ROUTE
+    GETBRANCHE_ROUTE,
+    ADDQUESTION_ROUTE,
+    GETQUESTIONS_ROUTE,
+    REMOVEQUESTION_ROUTE,
+    ADDVOTE_ROUTE,
+    GETVOTE_ROUTE,
+    VOTEDETAILS_ROUTE,
+    ADDAGREEMENTS_ROUTE,
+    GETAGREEMENTS_ROUTE
 } from "./apiRoutes";
 
 
@@ -358,5 +366,38 @@ export const addBrancheFetch = async (input) => {
 }
 export const getBrancheFetch = async () => {
     const data = await axios.get(GETBRANCHE_ROUTE);
+    return data;
+}
+export const addQuestionFetch = async (inputs) => {
+    const data = await axios.post(ADDQUESTION_ROUTE, inputs);
+    return data;
+}
+export const getQuestionsFetch = async (idBranche) => {
+    const data = await axios.get(`${GETQUESTIONS_ROUTE}?idBranche=${idBranche}`);
+    return data;
+}
+export const removeQuestionFetch = async (idQuestion) => {
+    const data = await axios.delete(`${REMOVEQUESTION_ROUTE}?idQuestion=${idQuestion}`);
+    return data;
+}
+export const addVoteFetch = async (inputs) => {
+    const data = await axios.post(ADDVOTE_ROUTE, inputs);
+    return data;
+}
+export const getVoteFetch = async () => {
+    const data = await axios.get(GETVOTE_ROUTE);
+    return data;
+}
+export const voteDetailsFetch = async (id) => {
+    const data = await axios.get(`${VOTEDETAILS_ROUTE}?id=${id}`);
+    return data;
+}
+export const addAgreementsFetch = async (inputs) => {
+    const data = await axios.post (ADDAGREEMENTS_ROUTE,inputs);
+    return data;
+}
+
+export const getAgreementsFetch = async () => {
+    const data = await axios.get (GETAGREEMENTS_ROUTE);
     return data;
 }

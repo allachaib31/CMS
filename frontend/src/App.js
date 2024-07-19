@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Auth from "./screens/adminsScreen/auth";
 import Home from "./screens/adminsScreen/home";
-import { Welcome, AddAdmin, AddUser, AnnualSubscriptionRecord, AnnualSubscriptionRecordDetails, DisplayAdmin, DisplayCommodityRevenue, DisplaySubscription, DisplayUser, FoundationSubscription, ManageAdmin, ManageCommodityRevenue, ManageSubscription, ManageUser, ManagingLatePayments, ModifySubscriptionAmount, MonthlySubscription, OrderToPurchaseGoods, PaymentOfSubscriptions, RegisterMemberFinancialData, SubscriptionHistory, UpdateAdmin, UpdateUser, CommodityPurchaseOrderForm, PaymentOfInstallments, InstallmentSchedule, GoodsRevenueRecord, FormContributionPurchaseCommodity, RecordContributionPurchaseCommodity, RecordAnnual, RecordAnnualDetails, ManageContributionRevenue, DisplayContributionRevenue, RecordContributions, ConsolidatedRecordRevenues, ManageStock, ContributionRormForPurchasingShares, CommodityPurchase, FormContribution, InvestmentBox, DisplayContributionRecord, ContributionForm, DisplayContributionForm, FinancialCompany, DisplayContributionfinancialCompanyRecord, FinancialCompanyForm, DisplayfinancialCompanyForm, Loans, LoansData, RecordInstallments, LoansHistory, UnreimbursedExpenses, RecordUnrecoveredExpenses, DisplayRecordUnrecoveredExpenses, AddExpenseType, PaymentExpenses, ExpenseRequest, ReimbusedExpenses, RecordRecoveredExpenses, DisplayRecordRecoveredExpenses, ReimbursedExpenseRequest, AddReimbursedExprensesType, Stocks, RegisterOfStockContributions, StocksContributionForm, DisplayStocksContributionForm, LoansOrder, PayMonthlySubscriptions, ManageContest, DisplayContest, AddContest, ControllerContest, CompetitionBranches, AddQuestion } from "./components";
+import { Welcome, AddAdmin, AddUser, AnnualSubscriptionRecord, AnnualSubscriptionRecordDetails, DisplayAdmin, DisplayCommodityRevenue, DisplaySubscription, DisplayUser, FoundationSubscription, ManageAdmin, ManageCommodityRevenue, ManageSubscription, ManageUser, ManagingLatePayments, ModifySubscriptionAmount, MonthlySubscription, OrderToPurchaseGoods, PaymentOfSubscriptions, RegisterMemberFinancialData, SubscriptionHistory, UpdateAdmin, UpdateUser, CommodityPurchaseOrderForm, PaymentOfInstallments, InstallmentSchedule, GoodsRevenueRecord, FormContributionPurchaseCommodity, RecordContributionPurchaseCommodity, RecordAnnual, RecordAnnualDetails, ManageContributionRevenue, DisplayContributionRevenue, RecordContributions, ConsolidatedRecordRevenues, ManageStock, ContributionRormForPurchasingShares, CommodityPurchase, FormContribution, InvestmentBox, DisplayContributionRecord, ContributionForm, DisplayContributionForm, FinancialCompany, DisplayContributionfinancialCompanyRecord, FinancialCompanyForm, DisplayfinancialCompanyForm, Loans, LoansData, RecordInstallments, LoansHistory, UnreimbursedExpenses, RecordUnrecoveredExpenses, DisplayRecordUnrecoveredExpenses, AddExpenseType, PaymentExpenses, ExpenseRequest, ReimbusedExpenses, RecordRecoveredExpenses, DisplayRecordRecoveredExpenses, ReimbursedExpenseRequest, AddReimbursedExprensesType, Stocks, RegisterOfStockContributions, StocksContributionForm, DisplayStocksContributionForm, LoansOrder, PayMonthlySubscriptions, ManageContest, DisplayContest, AddContest, ControllerContest, CompetitionBranches, AddQuestion, ManageVote, DisplayVote, AddVote, VoteDetails, ManageAdvertising, DisplayAdvertising, AddAd, Agreements, DisplayAgreements, AddAgreements } from "./components";
 import Print from "./screens/adminsScreen/print";
 
 
@@ -89,6 +89,19 @@ function App() {
               <Route path="/manageContest/controllerContest" element={<ControllerContest />}/>
               <Route path="/manageContest/competitionBranches" element={<CompetitionBranches />}/>
               <Route path="/manageContest/competitionBranches/addQuestion" element={<AddQuestion />}/>
+            </Route>
+            <Route exact path="/manageVote" element={<ManageVote />}>
+              <Route path="/manageVote" element={<DisplayVote />}/>
+              <Route path="/manageVote/addVote" element={<AddVote />}/>
+              <Route path="/manageVote/voteDetails" element={<VoteDetails />}/>
+            </Route>
+            <Route exact path="/manageAdvertising/" element={<ManageAdvertising />}>
+              <Route path="/manageAdvertising/" element={<DisplayAdvertising />}/>
+              <Route path="/manageAdvertising/addAd" element={<AddAd />}/>
+            </Route>
+            <Route exact path="/agreements/" element={<Agreements />}>
+              <Route path="/agreements/" element={<DisplayAgreements />}/>
+              <Route path="/agreements/add" element={<AddAgreements />}/>
             </Route>
           </Route>
           <Route exact path="/auth" element={<Auth />} />

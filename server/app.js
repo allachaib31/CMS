@@ -61,6 +61,8 @@ const reimbursedExpenses = require("./routes/reimbursedExpenses/reimbursedExpens
 const unReimbursedExpenses = require("./routes/unreimbursedExpenses/unreimbursedExpenses");
 const contributionRevenue = require("./routes/manageContributionRevenue/contributionRevenue");
 const contest = require("./routes/contest/contest");
+const vote = require("./routes/vote/vote");
+const agreements = require("./routes/agreement/agreement");
 const { scheduleUpdate } = require("./schedule/schedule");
 app
     .use(authAdmin)
@@ -74,7 +76,9 @@ app
     .use(unReimbursedExpenses)
     .use(moneyBox)
     .use(contributionRevenue)
-    .use(contest);
+    .use(contest)
+    .use(vote)
+    .use(agreements);
 
 
 app.get('*', (req, res) => {

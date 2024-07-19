@@ -82,3 +82,14 @@ export const ADDCONTEST_ROUTE = `${HOST}api/v1.0/addContest`;
 export const GETCONTEST_ROUTE = `${HOST}api/v1.0/getContest`;
 export const ADDBRANCHE_ROUTE = `${HOST}api/v1.0/addBranche`;
 export const GETBRANCHE_ROUTE = `${HOST}api/v1.0/getBranche`;
+export const ADDQUESTION_ROUTE = `${HOST}api/v1.0/addQuestion`;
+export const GETQUESTIONS_ROUTE = `${HOST}api/v1.0/getQuestions`;
+export const REMOVEQUESTION_ROUTE = `${HOST}api/v1.0/removeQuestion`;
+
+//Manage Vote
+export const ADDVOTE_ROUTE = `${HOST}api/v1.0/vote/addVote`;
+export const GETVOTE_ROUTE = `${HOST}api/v1.0/vote/getVote`;
+export const VOTEDETAILS_ROUTE = `${HOST}api/v1.0/vote/voteDetails`;
+//Manage agreements
+export const ADDAGREEMENTS_ROUTE = `${HOST}api/v1.0/agreements/add`
+export const GETAGREEMENTS_ROUTE = `${HOST}api/v1.0/agreements/`;

@@ -3,7 +3,7 @@ import { Link, Outlet, useNavigate } from "react-router-dom";
 import profileImage from "../../images/profileImage.png";
 import logo from "../../images/logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChartPie, faBuilding, faUser, faChartSimple, faFileInvoiceDollar, faSackDollar, faUserTie, faHandHoldingDollar, faGift, faRecycle, faArrowTrendUp, faShapes } from "@fortawesome/free-solid-svg-icons";
+import { faChartPie, faBuilding, faUser, faChartSimple, faFileInvoiceDollar, faSackDollar, faUserTie, faHandHoldingDollar, faGift, faRecycle, faArrowTrendUp, faShapes, faCheckToSlot, faGamepad, faMicrophone, faListCheck } from "@fortawesome/free-solid-svg-icons";
 import { validationFetch } from "../../utils/apiFetch";
 import { Loading } from "../../components";
 import Cookies from "cookies-js";
@@ -269,11 +269,41 @@ function Home() {
                     </details>
                     <details>
                       <summary>
-                        <Link to="/manageContest/"><FontAwesomeIcon icon={faShapes} /> إدارة المسابقة</Link>
+                        <Link to="/manageContest/"><FontAwesomeIcon icon={faGamepad} /> إدارة المسابقة</Link>
                       </summary>
                       <ul>
                         <li>
                           <Link to="/manageContest/addContest">إضافة مسابقة</Link>
+                        </li>
+                      </ul>
+                    </details>
+                    <details>
+                      <summary>
+                        <Link to="/manageVote/"><FontAwesomeIcon icon={faCheckToSlot} /> إدارة تصويت الأعضاء</Link>
+                      </summary>
+                      <ul>
+                        <li>
+                          <Link to="/manageVote/addVote">إضافة تصويت</Link>
+                        </li>
+                      </ul>
+                    </details>
+                    <details>
+                      <summary>
+                        <Link to="/manageAdvertising/"><FontAwesomeIcon icon={faMicrophone} /> ادارة الاعلانات</Link>
+                      </summary>
+                      <ul>
+                        <li>
+                          <Link to="/manageAdvertising/addAd">إضافة اعلان</Link>
+                        </li>
+                      </ul>
+                    </details>
+                    <details>
+                      <summary>
+                        <Link to="/agreements/"><FontAwesomeIcon icon={faListCheck} /> إدارة البنود اتفاقيات الصندوق</Link>
+                      </summary>
+                      <ul>
+                        <li>
+                          <Link to="/agreements/add">اضافة اتفاقيات</Link>
                         </li>
                       </ul>
                     </details>

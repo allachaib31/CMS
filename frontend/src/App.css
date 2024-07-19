@@ -40,3 +40,8 @@
 
   
 }
+
+/* customEditorStyles.css */
+.ck-content {
+  padding: 20px; /* Adjust the padding value as needed */
+}
