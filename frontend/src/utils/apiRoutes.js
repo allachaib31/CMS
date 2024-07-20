@@ -93,3 +93,11 @@ export const VOTEDETAILS_ROUTE = `${HOST}api/v1.0/vote/voteDetails`;
 //Manage agreements
 export const ADDAGREEMENTS_ROUTE = `${HOST}api/v1.0/agreements/add`
 export const GETAGREEMENTS_ROUTE = `${HOST}api/v1.0/agreements/`;
+export const UPDATEAGREEMENTSACTIVE_ROUTE = `${HOST}api/v1.0/agreements/`
+//Manage familyTree
+export const CREATEFAMILYTREE_ROUTE = `${HOST}api/v1.0/familyTree/createNewFamilyTree`;
+export const ADDTOFAMILYTREE_ROUTE = `${HOST}api/v1.0/familyTree`;
+export const GETFAMILYTREE_ROUTE = `${HOST}api/v1.0/familyTree`;
+export const UPDATEFAMILYTREE_ROUTE = `${HOST}api/v1.0/familyTree`;
+export const GETFAMILYTREEUSEID = `${HOST}api/v1.0/familyTree/withId`;
+export const GETIDFAMILYTREE_ROUTE = `${HOST}api/v1.0/familyTree/getListId`

@@ -92,6 +92,10 @@ export { default as AddAd } from "./adminComponents/manageAdvertising/addAd";
 export { default as Agreements } from "./adminComponents/agreements/agreements";
 export { default as DisplayAgreements } from "./adminComponents/agreements/displayAgreements";
 export { default as AddAgreements } from "./adminComponents/agreements/addAgreements";
+/*FAMILY TREE */
+export { default as FamilyTree } from "./adminComponents/familyTree/familyTree";
+export { default as DisplayFamilyTree } from "./adminComponents/familyTree/displayFamilyTree";
+export { default as AddFamilyTree } from "./adminComponents/familyTree/addFamilyTree";
 /*MANAGE MODALS */
 export { default as DeleteUserModals } from "./modals/deleteModalsUser";
 export { default as AddNoteModals } from "./modals/addNoteSubscriptionHistoryModals";

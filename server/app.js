@@ -63,6 +63,7 @@ const contributionRevenue = require("./routes/manageContributionRevenue/contribu
 const contest = require("./routes/contest/contest");
 const vote = require("./routes/vote/vote");
 const agreements = require("./routes/agreement/agreement");
+const familyTree = require("./routes/familyTree/familyTree");
 const { scheduleUpdate } = require("./schedule/schedule");
 app
     .use(authAdmin)
@@ -78,7 +79,8 @@ app
     .use(contributionRevenue)
     .use(contest)
     .use(vote)
-    .use(agreements);
+    .use(agreements)
+    .use(familyTree);
 
 
 app.get('*', (req, res) => {

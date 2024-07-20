@@ -3,7 +3,7 @@ import { Link, Outlet, useNavigate } from "react-router-dom";
 import profileImage from "../../images/profileImage.png";
 import logo from "../../images/logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChartPie, faBuilding, faUser, faChartSimple, faFileInvoiceDollar, faSackDollar, faUserTie, faHandHoldingDollar, faGift, faRecycle, faArrowTrendUp, faShapes, faCheckToSlot, faGamepad, faMicrophone, faListCheck } from "@fortawesome/free-solid-svg-icons";
+import { faChartPie, faBuilding, faUser, faChartSimple, faFileInvoiceDollar, faSackDollar, faUserTie, faHandHoldingDollar, faGift, faRecycle, faArrowTrendUp, faShapes, faCheckToSlot, faGamepad, faMicrophone, faListCheck, faTree } from "@fortawesome/free-solid-svg-icons";
 import { validationFetch } from "../../utils/apiFetch";
 import { Loading } from "../../components";
 import Cookies from "cookies-js";
@@ -304,6 +304,16 @@ function Home() {
                       <ul>
                         <li>
                           <Link to="/agreements/add">اضافة اتفاقيات</Link>
+                        </li>
+                      </ul>
+                    </details>
+                    <details>
+                      <summary>
+                        <Link to="/familyTree"><FontAwesomeIcon icon={faTree} /> شجرة العائلة</Link>
+                      </summary>
+                      <ul>
+                        <li>
+                          <Link to="/familyTree/manage">تحكم فيها</Link>
                         </li>
                       </ul>
                     </details>

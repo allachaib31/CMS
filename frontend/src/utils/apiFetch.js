@@ -74,7 +74,14 @@ import {
     GETVOTE_ROUTE,
     VOTEDETAILS_ROUTE,
     ADDAGREEMENTS_ROUTE,
-    GETAGREEMENTS_ROUTE
+    GETAGREEMENTS_ROUTE,
+    UPDATEAGREEMENTSACTIVE_ROUTE,
+    CREATEFAMILYTREE_ROUTE,
+    ADDTOFAMILYTREE_ROUTE,
+    GETFAMILYTREE_ROUTE,
+    UPDATEFAMILYTREE_ROUTE,
+    GETFAMILYTREEUSEID,
+    GETIDFAMILYTREE_ROUTE
 } from "./apiRoutes";
 
 
@@ -399,5 +406,35 @@ export const addAgreementsFetch = async (inputs) => {
 
 export const getAgreementsFetch = async () => {
     const data = await axios.get (GETAGREEMENTS_ROUTE);
+    return data;
+}
+
+export const updateAgreementsActiveFetch = async (inputs) => {
+    const data = await axios.patch(UPDATEAGREEMENTSACTIVE_ROUTE, inputs);
+    return data;
+}
+//Manage family tree
+export const createFamilyTreeFetch = async (inputs) => {
+    const data = await axios.post(CREATEFAMILYTREE_ROUTE, inputs);
+    return data;
+}
+export const addToFamilyTreeFetch = async (inputs) => {
+    const data = await axios.post(ADDTOFAMILYTREE_ROUTE, inputs);
+    return data;
+}
+export const getFamilyTreeFetch = async () => {
+    const data = await axios.get(GETFAMILYTREE_ROUTE);
+    return data;
+}
+export const updateFamilyTreeFetch = async (inputs) => {
+    const data = await axios.patch(UPDATEFAMILYTREE_ROUTE,inputs);
+    return data;
+}
+export const getFamilyTreeUseIdFetch = async (id) => {
+    const data = await axios.get(`${GETFAMILYTREEUSEID}?id=${id}`);
+    return data;
+}
+export const getIdFamilyTreeFetch = async () => {
+    const data = await axios.get(GETIDFAMILYTREE_ROUTE);
     return data;
 }
