@@ -3,24 +3,23 @@ const authMiddleware = require("../../middleware/admin/auth");
 const { addFoundationSubscriptions, addMonthlySubscriptions, getAnnualSubscriptions,getUserForFoundationSubscripe, getSubscriptionHistory,searchSubscriptionHistory, updateCommentSubscribeHistory, getAnnualSubscriptionsDetails, updateCommentRecordAnnual, getSubscriptionsForm, getOverdueSubscriptions, updateInvoiceOverdue, addCommentMonthly, getRegisterFinancialData } = require("../../controllers/manageSubscription/subscriptions");
 const Router = express.Router();
 
-Router.use(authMiddleware);
 
 //POST METHODS
-Router.post("/api/v1.0/subscriptions/foundation", addFoundationSubscriptions);
-Router.post("/api/v1.0/subscriptions/monthly", addMonthlySubscriptions);
-Router.post("/api/v1.0/subscriptions/getSubscriptionsForm", getSubscriptionsForm);
+Router.post("/api/v1.0/subscriptions/foundation",authMiddleware, addFoundationSubscriptions);
+Router.post("/api/v1.0/subscriptions/monthly",authMiddleware, addMonthlySubscriptions);
+Router.post("/api/v1.0/subscriptions/getSubscriptionsForm",authMiddleware, getSubscriptionsForm);
 //GET METHODS
-Router.get("/api/v1.0/subscriptions/getRegisterFinancialData", getRegisterFinancialData)
-Router.get("/api/v1.0/subscriptions/getOverdueSubscriptions", getOverdueSubscriptions);
-Router.get("/api/v1.0/subscriptions/getUserForFoundationSubscripe", getUserForFoundationSubscripe);
-Router.get("/api/v1.0/subscriptions/annual", getAnnualSubscriptions);
-Router.get("/api/v1.0/subscriptions/annualDetails", getAnnualSubscriptionsDetails);
-Router.get("/api/v1.0/subscriptions/history",getSubscriptionHistory);
-Router.get("/api/v1.0/subscriptions/search", searchSubscriptionHistory)
+Router.get("/api/v1.0/subscriptions/getRegisterFinancialData",authMiddleware, getRegisterFinancialData)
+Router.get("/api/v1.0/subscriptions/getOverdueSubscriptions",authMiddleware, getOverdueSubscriptions);
+Router.get("/api/v1.0/subscriptions/getUserForFoundationSubscripe",authMiddleware, getUserForFoundationSubscripe);
+Router.get("/api/v1.0/subscriptions/annual",authMiddleware, getAnnualSubscriptions);
+Router.get("/api/v1.0/subscriptions/annualDetails",authMiddleware, getAnnualSubscriptionsDetails);
+Router.get("/api/v1.0/subscriptions/history",authMiddleware,getSubscriptionHistory);
+Router.get("/api/v1.0/subscriptions/search",authMiddleware, searchSubscriptionHistory)
 
 //PATCH METHODS
-Router.patch("/api/v1.0/subscriptions/addCommentMonthly",addCommentMonthly)
-Router.patch("/api/v1.0/subscriptions/updateCommentSubscribeHistory", updateCommentSubscribeHistory);
-Router.patch("/api/v1.0/subscriptions/updateCommentRecordAnnual",updateCommentRecordAnnual)
-Router.patch("/api/v1.0/subscriptions/isInvoiceOverdue", updateInvoiceOverdue);
+Router.patch("/api/v1.0/subscriptions/addCommentMonthly",authMiddleware,addCommentMonthly)
+Router.patch("/api/v1.0/subscriptions/updateCommentSubscribeHistory",authMiddleware, updateCommentSubscribeHistory);
+Router.patch("/api/v1.0/subscriptions/updateCommentRecordAnnual",authMiddleware,updateCommentRecordAnnual)
+Router.patch("/api/v1.0/subscriptions/isInvoiceOverdue",authMiddleware, updateInvoiceOverdue);
 module.exports = Router;

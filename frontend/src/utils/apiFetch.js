@@ -81,7 +81,11 @@ import {
     GETFAMILYTREE_ROUTE,
     UPDATEFAMILYTREE_ROUTE,
     GETFAMILYTREEUSEID,
-    GETIDFAMILYTREE_ROUTE
+    GETIDFAMILYTREE_ROUTE,
+    LOGINCLIENT_ROUTE,
+    VALIDATIONCLIENT_ROUTE,
+    CLIENTINFORMATION_ROUTE,
+    CLIENTINFORMATIONAGREEMENTS_ROUTE
 } from "./apiRoutes";
 
 
@@ -436,5 +440,26 @@ export const getFamilyTreeUseIdFetch = async (id) => {
 }
 export const getIdFamilyTreeFetch = async () => {
     const data = await axios.get(GETIDFAMILYTREE_ROUTE);
+    return data;
+}
+
+// Auth client fetch
+export const loginClientFetch = async (user) => {
+    const { data } = await axios.post(LOGINCLIENT_ROUTE, user);
+    return data;
+}
+
+export const validationClientFetch = async () => {
+    const { data } = await axios.get(VALIDATIONCLIENT_ROUTE);
+    return data;
+}
+
+export const clientInformationFetch = async () => {
+    const  data = await axios.get(CLIENTINFORMATION_ROUTE);
+    return data;
+}
+
+export const clientInformationAgreementsFetch = async () => {
+    const data = await axios.get(CLIENTINFORMATIONAGREEMENTS_ROUTE);
     return data;
 }

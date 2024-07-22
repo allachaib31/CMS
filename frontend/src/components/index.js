@@ -114,3 +114,9 @@ export { default as RecordAnnual } from "./adminComponents/print/recordAnnual";
 export { default as RecordAnnualDetails } from "./adminComponents/print/recordAnnualDetails";
 export { default as CommodityPurchase } from "./adminComponents/print/commodityPurchase";
 export { default as FormContribution } from "./adminComponents/print/formContribution";
+
+//CLIENT COMPONENETS
+export { default as LoginClient } from "./clientComponents/authClient/loginClient";
+export { default as Dashboard } from "./clientComponents/dashboard/dashboard";
+export { default as Contest } from "./clientComponents/contest/contest"
+export { default as AgreementsClient } from "./clientComponents/agreements/agreements";

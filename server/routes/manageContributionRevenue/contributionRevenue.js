@@ -3,10 +3,9 @@ const authMiddleware = require("../../middleware/admin/auth");
 const { getConsolidatedRecordRevenues } = require("../../controllers/manageContributionRevenue/contributionRevenue");
 const Router = express.Router();
 
-Router.use(authMiddleware);
 
 //GET METHODS
-Router.get("/api/v1.0/contributionRevenue/consolidatedRecordRevenues", getConsolidatedRecordRevenues);
+Router.get("/api/v1.0/contributionRevenue/consolidatedRecordRevenues",authMiddleware, getConsolidatedRecordRevenues);
 
 
 module.exports = Router;

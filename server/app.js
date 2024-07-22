@@ -64,8 +64,12 @@ const contest = require("./routes/contest/contest");
 const vote = require("./routes/vote/vote");
 const agreements = require("./routes/agreement/agreement");
 const familyTree = require("./routes/familyTree/familyTree");
+const clientAuth = require("./routes/client/login/login");
+const userInformation = require("./routes/client/userInformation/information");
 const { scheduleUpdate } = require("./schedule/schedule");
 app
+    .use(clientAuth)
+    .use(userInformation)
     .use(authAdmin)
     .use(adminRoute)
     .use(userRoute)

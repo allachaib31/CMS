@@ -6,9 +6,8 @@ const Router = express.Router();
 //POST METHODS
 Router.post("/api/v1.0/auth/login",login);
 
-Router.use(authMiddleware);
 
 //GET METHODS
-Router.get("/api/v1.0/auth/validation",validation);
+Router.get("/api/v1.0/auth/validation",authMiddleware,validation);
 
 module.exports = Router;

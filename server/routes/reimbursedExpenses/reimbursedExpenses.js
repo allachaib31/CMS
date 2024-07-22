@@ -3,18 +3,17 @@ const authMiddleware = require("../../middleware/admin/auth");
 const { addTypeExpenses, getTypeExpenses, deleteTypeExpenses, addExpenses, getRecordReimbursedExpenses, getReimbursedExpenses } = require("../../controllers/reimbursedExpenses/reimbursedExpenses");
 const Router = express.Router();
 
-Router.use(authMiddleware);
 
 //POST METHODS
-Router.post("/api/v1.0/reimbursedExpenses/addTypeExpenses", addTypeExpenses);
-Router.post("/api/v1.0/reimbursedExpenses/addExpenses", addExpenses);
+Router.post("/api/v1.0/reimbursedExpenses/addTypeExpenses",authMiddleware, addTypeExpenses);
+Router.post("/api/v1.0/reimbursedExpenses/addExpenses",authMiddleware, addExpenses);
 
 //GET METHODS
-Router.get("/api/v1.0/reimbursedExpenses/getTypeExpenses", getTypeExpenses);
-Router.get("/api/v1.0/reimbursedExpenses/getRecordReimbursedExpenses", getRecordReimbursedExpenses);
-Router.get("/api/v1.0/reimbursedExpenses/getReimbursedExpenses", getReimbursedExpenses);
+Router.get("/api/v1.0/reimbursedExpenses/getTypeExpenses",authMiddleware, getTypeExpenses);
+Router.get("/api/v1.0/reimbursedExpenses/getRecordReimbursedExpenses",authMiddleware, getRecordReimbursedExpenses);
+Router.get("/api/v1.0/reimbursedExpenses/getReimbursedExpenses",authMiddleware, getReimbursedExpenses);
 
 //DELETE METHODS
-Router.delete("/api/v1.0/reimbursedExpenses/deleteTypeExpenses", deleteTypeExpenses)
+Router.delete("/api/v1.0/reimbursedExpenses/deleteTypeExpenses",authMiddleware, deleteTypeExpenses)
 
 module.exports = Router;

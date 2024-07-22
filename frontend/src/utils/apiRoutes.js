@@ -101,3 +101,10 @@ export const GETFAMILYTREE_ROUTE = `${HOST}api/v1.0/familyTree`;
 export const UPDATEFAMILYTREE_ROUTE = `${HOST}api/v1.0/familyTree`;
 export const GETFAMILYTREEUSEID = `${HOST}api/v1.0/familyTree/withId`;
 export const GETIDFAMILYTREE_ROUTE = `${HOST}api/v1.0/familyTree/getListId`
+
+//Manage client Route
+//Manage auth
+export const LOGINCLIENT_ROUTE = `${HOST}api/v1.0/authClient/login`;
+export const VALIDATIONCLIENT_ROUTE = `${HOST}api/v1.0/authClient/validation`;
+export const CLIENTINFORMATION_ROUTE = `${HOST}api/v1.0/clientInformation`;
+export const CLIENTINFORMATIONAGREEMENTS_ROUTE = `${HOST}api/v1.0/clientInformation/agreements`;
