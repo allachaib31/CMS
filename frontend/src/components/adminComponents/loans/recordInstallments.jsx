@@ -1,4 +1,4 @@
-import { faRightLong } from '@fortawesome/free-solid-svg-icons'
+import { faPrint, faRightLong } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useEffect, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
@@ -62,6 +62,7 @@ function RecordInstallments() {
                 </Link>
             </div>
             {showAlert.display ? <Alert msg={showAlert} /> : ""}
+            <Link to={`/print/loans/recordInstallments?id=${queryParams.get('id')}`} target='_blank' className='mt-[1rem] btn btn-info font-bold'><FontAwesomeIcon icon={faPrint} /> طباعة</Link>
             <div className="overflow-x-auto mt-[1rem]">
                 {
                     loanInfo && <table className="text-[1rem] table border-separate border-spacing-2 border w-[1900px] mx-auto">

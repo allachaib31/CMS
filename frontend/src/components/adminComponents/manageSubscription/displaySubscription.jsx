@@ -200,8 +200,8 @@ function DisplaySubscription() {
                                                 {subscription.months[month].dueDateHijri.day}
                                             </td>
                                             <td className="border border-slate-600">
-                                                {date.getFullYear()}-{date.getMonth() + 1}-
-                                                {date.getDate()}
+                                                {subscription.months[month].createdAt && date.getFullYear()+ "-" + (date.getMonth() + 1) + "-" +
+                                                date.getDate()}
                                             </td>
                                             <td className="border border-slate-600">
                                                 {subscription.months[month].createdAt && hijriDate[2] + "-" + hijriDate[1].number + "-" + hijriDate[0]}

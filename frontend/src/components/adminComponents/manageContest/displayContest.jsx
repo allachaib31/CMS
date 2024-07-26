@@ -24,7 +24,7 @@ function DisplayContest() {
                     contests && contests.map((contest) => {
                         return (
                             <Link to={"/manageContest/controllerContest?id=" + contest._id} className='mb-[1rem] w-full md:w-1/2 flex justify-center items-center'>
-                                <div className='bg-primary rounded-[14px] text-center w-full lg:w-[70%] text-white text-[1.5rem] p-[4rem]'>
+                                <div className='bg-primary rounded-[14px] text-center w-full lg:w-[70%] text-white text-[1.1rem] sm:text-[1.5rem] p-[4rem]'>
                                     {contest.name}
                                 </div>
                             </Link>

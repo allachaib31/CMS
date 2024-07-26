@@ -350,7 +350,8 @@ exports.getRecordInstallments = async (req, res) => {
         return res.status(200).send({
             loan,
             installments,
-            installmentsPaid
+            installmentsPaid,
+            print: req.user.admin.userPermission.indexOf("طباعة القروض و أقساطها (كل الأعضاء أو عضو محدد)") > -1 ? true : false,
         })
     } catch (error) {
         return res.status(500).send({

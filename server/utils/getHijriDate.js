@@ -14,7 +14,7 @@ const hijriDateObject = (date) => {
     //const now = momentTimezone.tz(new Date(date), 'Asia/Riyadh');
 
     // Format the current date as Hijri in the ar-sa locale using Intl.DateTimeFormat
-    const formattedHijriDate = new Intl.DateTimeFormat('ar-sa', { calendar: 'islamic' }).format(date ? new Date(date) : new Date());
+    const formattedHijriDate = new Intl.DateTimeFormat('ar-sa', { calendar: 'islamic-umalqura' }).format(date ? new Date(date) : new Date());
 
     // Function to convert Arabic-Indic numerals to Arabic numerals
     const convertToArabicNumerals = (dateStr) => {

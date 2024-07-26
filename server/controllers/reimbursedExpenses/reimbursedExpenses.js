@@ -57,7 +57,33 @@ exports.deleteTypeExpenses = async (req, res) => {
         });
     }
 }
+exports.printReimbursedExpenses = async (req, res) => {
+    const { from, to } = req.query;
+    try {
+        if(req.user.admin.userPermission.indexOf("طباعة المصروفات المسترجعة (كلي أو جزئي حسب المدة)") <= -1){
+            return res.status(400).send({
+                msg: "ليس لديك الاذن للطباعة"
+            })
+        }
+        const query = {};
+        
+        if (from) {
+            query.createdAt = { $gte: new Date(from) };
+        }
+        
+        if (to) {
+            query.createdAt = query.createdAt || {};
+            query.createdAt.$lte = new Date(to);
+        }
 
+        console.log(query)
+        const reimbursedExpenses = await reimbursedExpensesModel.find(query);
+        
+        return res.status(200).json({reimbursedExpenses});
+    } catch (error) {
+        return res.status(500).json({ msg: "حدث خطأ أثناء معالجة طلبك" });
+    }
+};
 exports.addExpenses = async (req, res) => {
     const { name, amount, typeExpenses, comments } = req.body;
     try {

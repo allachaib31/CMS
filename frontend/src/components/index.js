@@ -114,9 +114,18 @@ export { default as RecordAnnual } from "./adminComponents/print/recordAnnual";
 export { default as RecordAnnualDetails } from "./adminComponents/print/recordAnnualDetails";
 export { default as CommodityPurchase } from "./adminComponents/print/commodityPurchase";
 export { default as FormContribution } from "./adminComponents/print/formContribution";
-
+export { default as UnrecoverExpenses } from "./adminComponents/print/unrecoverExpenses";
+export { default as RecoverExpenses } from "./adminComponents/print/recoverExpenses";
+export { default as PrintRecordInstallments } from "./adminComponents/print/printRecordInstallments";
 //CLIENT COMPONENETS
 export { default as LoginClient } from "./clientComponents/authClient/loginClient";
 export { default as Dashboard } from "./clientComponents/dashboard/dashboard";
-export { default as Contest } from "./clientComponents/contest/contest"
+export { default as Contest } from "./clientComponents/contest/contest";
+export { default as Election } from "./clientComponents/election/election";
+export { default as ElectionDetails } from "./clientComponents/election/electionDetails";
 export { default as AgreementsClient } from "./clientComponents/agreements/agreements";
+export { default as AdvertisingClient } from "./clientComponents/advertising/advertising";
+export { default as ContestStart } from "./clientComponents/contest/contestStart";
+export { default as EnterToContest } from "./clientComponents/contest/enterToContest";
+export { default as EnterToBranches } from "./clientComponents/contest/enterToBranches"
+export { default as StartResponse } from "./clientComponents/contest/startResponse";

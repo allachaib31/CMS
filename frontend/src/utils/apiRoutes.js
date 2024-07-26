@@ -90,6 +90,10 @@ export const REMOVEQUESTION_ROUTE = `${HOST}api/v1.0/removeQuestion`;
 export const ADDVOTE_ROUTE = `${HOST}api/v1.0/vote/addVote`;
 export const GETVOTE_ROUTE = `${HOST}api/v1.0/vote/getVote`;
 export const VOTEDETAILS_ROUTE = `${HOST}api/v1.0/vote/voteDetails`;
+//Manage advertising
+export const ADDADVERTISING_ROUTE = `${HOST}api/v1.0/advertising`;
+export const GETALLADVERTISING_ROUTE = `${HOST}api/v1.0/advertising/getAll`;
+export const DELETEADVERTISING_ROUTE = `${HOST}api/v1.0/advertising/delete`;
 //Manage agreements
 export const ADDAGREEMENTS_ROUTE = `${HOST}api/v1.0/agreements/add`
 export const GETAGREEMENTS_ROUTE = `${HOST}api/v1.0/agreements/`;
@@ -108,3 +112,15 @@ export const LOGINCLIENT_ROUTE = `${HOST}api/v1.0/authClient/login`;
 export const VALIDATIONCLIENT_ROUTE = `${HOST}api/v1.0/authClient/validation`;
 export const CLIENTINFORMATION_ROUTE = `${HOST}api/v1.0/clientInformation`;
 export const CLIENTINFORMATIONAGREEMENTS_ROUTE = `${HOST}api/v1.0/clientInformation/agreements`;
+export const GETELECTION_ROUTE = `${HOST}api/v1.0/clientInformation/getElection`;
+export const SETVOTE_ROUTE = `${HOST}api/v1.0/clientInformation/vote`;
+export const ELECTIONDETAILS_ROUTE = `${HOST}api/v1.0/clientInformation/electionDetails`
+export const GETADVERTISING_ROUTE = `${HOST}api/v1.0/clientInformation/getAdvertising`;
+export const GETTIMING_ROUTE = `${HOST}api/v1.0/competition/getTiming`;
+export const GETUSERCOMPTETIONINFORMATION_ROUTE = `${HOST}api/v1.0/competition/getInformation`;
+export const ENTERTOCONTEST_ROUTE = `${HOST}api/v1.0/competition/enterToContest`;
+export const GETBRANCHEFORUSER_ROUTE = `${HOST}api/v1.0/competition/getBranches`;
+export const GETQUESTIONSCOMPETITION_ROUTE = `${HOST}api/v1.0/competition/getQuestion`;
+//PRINT
+export const PRINTUNREIMBURSEDEXPENSES_ROUTE = `${HOST}api/v1.0/unReimbursedExpenses/printUnReimbursedExpenses`;
+export const PRINTREIMBURSEDEXPENSES_ROUTE = `${HOST}api/v1.0/reimbursedExpenses/printReimbursedExpenses`;

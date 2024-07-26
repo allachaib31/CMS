@@ -6,41 +6,66 @@ const getHijriDate = require("../../utils/getHijriDate");
 const { validateFillVoid, fillVoidModel } = require("../../models/contest/fillVoid");
 const { validateDragDrop, dragDropModel } = require("../../models/contest/dargDrop");
 exports.addContest = async (req, res) => {
-    const { name, competitionStartDate, competitionEndDate, numberOfAwards, awards } = req.body;
+    const { name, competitionStartDate, competitionEndDate } = req.body;
     try {
+        // Validate input
         const { error } = validateContest({
-            name, competitionStartDate, competitionEndDate, numberOfAwards, awards
+            name, competitionStartDate, competitionEndDate
         });
         if (error) {
-            console.log(error)
+            console.log(error);
             return res.status(422).send({
                 msg: "يرجى ادخال جميع المدخلات والتأكد من صحتها",
             });
         }
-        if (numberOfAwards != awards.length) {
-            return res.status(400).send({
-                msg: "عدد الجوائز لا يساوي الجوائز"
-            })
+
+        // Check if there are any contests with an end date in the future
+        const ongoingContest = await contestModel.findOne({ competitionEndDate: { $gt: new Date() } });
+        if (ongoingContest) {
+            return res.status(422).send({
+                msg: "هناك مسابقة جارية حالياً، لا يمكنك إضافة مسابقة جديدة قبل انتهاء المسابقة الحالية.",
+            });
         }
+
+        // Get Hijri date
         const hijriDate = getHijriDate();
+
+        // Create contest
         const contest = new contestModel({
-            name, competitionStartDate, competitionEndDate, numberOfAwards, awards, hijriDate: {
+            name,
+            competitionStartDate,
+            competitionEndDate,
+            hijriDate: {
                 day: hijriDate[0],
                 month: hijriDate[1],
                 year: hijriDate[2],
             }
         });
         await contest.save();
+
+        // Create contest branch
+        const contestBranche = new contestBrancheModel({
+            idContest: contest._id,
+            name: "فرع تجريبي",
+            hijriDate: {
+                day: hijriDate[0],
+                month: hijriDate[1],
+                year: hijriDate[2],
+            }
+        });
+        await contestBranche.save();
+
         return res.status(200).send({
-            msg: "لقد تم انشاء المسابقة بجاح",
+            msg: "لقد تم انشاء المسابقة بنجاح",
         });
     } catch (error) {
-        console.log(error)
+        console.log(error);
         return res.status(500).send({
-            msg: "حدث خطأ أثناء معالجة طلبك"
+            msg: "حدث خطأ أثناء معالجة طلبك",
         });
     }
-}
+};
+
 exports.getContest = async (req, res) => {
     try {
         const contest = await contestModel.find().sort({ createdAt: -1 })
@@ -66,6 +91,15 @@ exports.addBranche = async (req, res) => {
                 msg: "يرجى ادخال جميع المدخلات والتأكد من صحتها",
             });
         }
+        const findContest = await contestBrancheModel.findOne({
+            name: name,
+            idContest
+        });
+        if(findContest){
+            return res.status(400).send({
+                msg: "هذا الفرع موجود بالفعل"
+            })
+        }
         const hijriDate = getHijriDate();
         const contestBranche = new contestBrancheModel({
             idContest, name, hijriDate: {
@@ -87,8 +121,11 @@ exports.addBranche = async (req, res) => {
 }
 
 exports.getBranche = async (req, res) => {
+    const {idContest} = req.query
     try {
-        const contestBranche = await contestBrancheModel.find().sort({ createdAt: -1 })
+        const contestBranche = await contestBrancheModel.find({
+            idContest
+        }).sort({ createdAt: -1 })
         return res.status(200).send({
             contestBranche
         })

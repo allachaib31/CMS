@@ -3,15 +3,25 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useEffect, useRef, useState } from 'react'
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { addAdvertisingFetch } from '../../../utils/apiFetch';
+import Alert from '../../alert/alert';
 
 function AddAd() {
+    const navigate = useNavigate();
     const [submit, setSubmit] = useState(false);
     const fileInputRef = useRef(null);
-    const [editorData, setEditorData] = useState('');
+    const [inputs, setInputs] = useState({
+        text: "",
+        endDate: "",
+        image: ""
+    });
     const handleFileClick = () => {
-      fileInputRef.current.click();
+        fileInputRef.current.click();
     };
+    const [showAlert, setShowAlert] = useState({
+        display: false,
+    });
     const editorConfiguration = {
         language: 'ar',  // Set language to Arabic
         toolbar: [
@@ -22,15 +32,45 @@ function AddAd() {
         contentsLangDirection: 'rtl', // Set text direction to RTL
     };
     const handleFileChange = (event) => {
-     /* const file = event.target.files[0];
-      if (file) {
-        onFileSelect(file);
-      }*/
+        const file = event.target.files[0];
+        if (file) {
+            setInputs((prevInput) => {
+                return {
+                    ...prevInput,
+                    image: file
+                }
+            })
+        }
     };
-    const handleSubmit = () => {}
-    useEffect(() => {
-        console.log(editorData)
-    },[editorData])
+    const handleSubmit = () => {
+        console.log(inputs)
+        setShowAlert({
+            display: false,
+        });
+        setSubmit((e) => !e);
+        const form = new FormData();
+        form.append("text", inputs.text);
+        form.append("endDate", inputs.endDate);
+        form.append("image", inputs.image);
+        addAdvertisingFetch(form).then((res) => {
+            setSubmit((e) => !e);
+            setShowAlert({
+                display: true,
+                status: true,
+                text: res.data.msg
+            });
+        }).catch((err) => {
+            if (err.response && err.response.status === 401) {
+                navigate("/auth");
+            }
+            setSubmit((e) => !e);
+            setShowAlert({
+                display: true,
+                status: false,
+                text: err.response.data.msg
+            });
+        })
+    }
     return (
         <div className="sm:p-0 px-[1rem] container mx-auto">
             <div>
@@ -42,26 +82,31 @@ function AddAd() {
                 نموذج الاعلانات
             </h1>
             <form action="" className="py-[2rem] flex flex-col gap-[1rem]">
-            <CKEditor
-                editor={ClassicEditor}
-                config={editorConfiguration}
-                data={editorData}
-                onChange={(event, editor) => {
-                    const data = editor.getData();
-                    setEditorData(data);
-                }}
-            />
-                <div className="relative sm:w-full">
-                    <FontAwesomeIcon icon={faMicrophone} className="absolute top-[1rem] right-[1rem]" />
-                    <input type="text" required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder={`موضوع الاعلان`} />
-                </div>
-                <div className='flex gap-[1rem] items-center'>
-                    <h1>تاريخ بداية الاعلان</h1>
-                    <input type="date" required className="formInput input pr-[2.3rem] input-bordered flex items-center gap-2" />
-                </div>
+            {showAlert.display ? <Alert msg={showAlert} /> : ""}
+                <CKEditor
+                    editor={ClassicEditor}
+                    config={editorConfiguration}
+                    data={inputs.text}
+                    onChange={(event, editor) => {
+                        const data = editor.getData();
+                        setInputs((prevInput) => {
+                            return {
+                                ...prevInput,
+                                text: data
+                            }
+                        });
+                    }}
+                />
                 <div className='flex gap-[1rem] items-center'>
                     <h1>تاريخ نهاية الاعلان</h1>
-                    <input type="date" required className="formInput input pr-[2.3rem] input-bordered flex items-center gap-2" />
+                    <input type="date" onChange={(event) => {
+                        setInputs((prevInput) => {
+                            return {
+                                ...prevInput,
+                                endDate: event.target.value
+                            }
+                        })
+                    }} required className="formInput input pr-[2.3rem] input-bordered flex items-center gap-2" />
                 </div>
                 <button className='btn btn-info max-w-sm' type="button" onClick={handleFileClick}>
                     <FontAwesomeIcon icon={faUpload} /> تحميل صورة
@@ -71,6 +116,7 @@ function AddAd() {
                     ref={fileInputRef}
                     style={{ display: 'none' }}
                     onChange={handleFileChange}
+                    accept="image/png, image/gif, image/jpeg"
                 />
                 <button onClick={(event) => {
                     event.preventDefault();

@@ -5,7 +5,7 @@ import profileImage from "../../images/profileImage.png";
 import Cookies from "cookies-js";
 import { validationClientFetch } from '../../utils/apiFetch';
 import { Loading } from '../../components';
-import { faGamepad, faGauge, faListCheck } from '@fortawesome/free-solid-svg-icons';
+import { faCheckToSlot, faGamepad, faGauge, faListCheck, faMicrophone } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 export const UserContext = React.createContext();
 
@@ -88,7 +88,13 @@ function HomeClient() {
                                         <Link to="/client"><FontAwesomeIcon icon={faGauge} /> لوحة القيادة</Link>
                                     </li>
                                     <li className="text-[1.3rem] space-y-1">
+                                        <Link to="/client/advetising"><FontAwesomeIcon icon={faMicrophone} /> اعلانات</Link>
+                                    </li>
+                                    <li className="text-[1.3rem] space-y-1">
                                         <Link to="/client/contest"><FontAwesomeIcon icon={faGamepad} /> المسابقات</Link>
+                                    </li>
+                                    <li className="text-[1.3rem] space-y-1">
+                                        <Link to="/client/election"><FontAwesomeIcon icon={faCheckToSlot} /> انتخابات</Link>
                                     </li>
                                     <li className="text-[1.3rem] space-y-1">
                                         <Link to="/client/agreements"><FontAwesomeIcon icon={faListCheck} /> بنود واتفاقيات الصندوق</Link>

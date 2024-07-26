@@ -22,8 +22,8 @@ function AgreementsClient() {
     }, [])
     return (
         <div className="px-[1rem] sm:px-0 py-[2rem]">
-            <div className="container mx-auto"  dangerouslySetInnerHTML={{ __html: agreements }}>
-               
+            <div className="container mx-auto" dangerouslySetInnerHTML={{ __html: agreements }}>
+
             </div>
         </div>
     )

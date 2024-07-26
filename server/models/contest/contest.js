@@ -20,18 +20,18 @@ const contestSchema = new mongoose.Schema({
         type: Date,
         required: true,
     },
-    numberOfAwards: {
+    /*numberOfAwards: {
         type: Number,
         required: true,
     },
     awards: {
         type: Array,
         required: true,
-    },
-    open: {
+    },*/
+    /*open: {
         type: Boolean,
         default: true
-    },
+    },*/
     hijriDate: {
         type: Object,
         required: true,
@@ -46,8 +46,8 @@ const joiSchema = Joi.object({
     name: Joi.string().required(),
     competitionStartDate: Joi.date().required(),
     competitionEndDate: Joi.date().required(),
-    numberOfAwards: Joi.number().required(),
-    awards: Joi.array()
+    //numberOfAwards: Joi.number().required(),
+    //awards: Joi.array()
 })
 
 const validateContest = (data) => {

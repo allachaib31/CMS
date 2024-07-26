@@ -49,6 +49,7 @@ exports.deleteTypeExpenses = async (req, res) => {
         });
     }
 }
+
 exports.getTypeExpenses = async (req, res) => {
     try {
         const typesExpenses = await typeExpensesModel.find();
@@ -174,6 +175,33 @@ exports.addExpenses = async (req, res) => {
         });
     }
 }
+exports.printUnReimbursedExpenses = async (req, res) => {
+    const { from, to } = req.query;
+    try {
+        if(req.user.admin.userPermission.indexOf("طباعة المصروفات الغير مسترجعة (كلي أو جزئي حسب المدة)") <= -1){
+            return res.status(400).send({
+                msg: "ليس لديك الاذن للطباعة"
+            })
+        }
+        const query = {};
+        
+        if (from) {
+            query.createdAt = { $gte: new Date(from) };
+        }
+        
+        if (to) {
+            query.createdAt = query.createdAt || {};
+            query.createdAt.$lte = new Date(to);
+        }
+
+        console.log(query)
+        const unReimbursedExpenses = await unReimbursedExpensesModel.find(query);
+        
+        return res.status(200).json({unReimbursedExpenses});
+    } catch (error) {
+        return res.status(500).json({ msg: "حدث خطأ أثناء معالجة طلبك" });
+    }
+};
 exports.getRecordUnrecovereExpenses = async (req, res) => {
     try {
         const unReimbursedExpenses = await unReimbursedExpensesModel.find();

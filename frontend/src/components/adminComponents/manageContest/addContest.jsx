@@ -12,8 +12,8 @@ function AddContest() {
         name: "",
         competitionStartDate: "",
         competitionEndDate: "",
-        numberOfAwards: 0,
-        awards: []
+       // numberOfAwards: 0,
+       // awards: []
     });
     const [showAlert, setShowAlert] = useState({
         display: false,
@@ -30,9 +30,10 @@ function AddContest() {
                 status: true,
                 text: res.data.msg
             });
+            navigate("/manageContest")
         }).catch((err) => {
             if (err.response && err.response.status === 401) {
-                navigate("/auth");
+                navigate("/authClient");
             }
             setSubmit((e) => !e);
             setShowAlert({
@@ -81,7 +82,7 @@ function AddContest() {
                         })
                     }}  required className="formInput input pr-[2.3rem] input-bordered flex items-center gap-2" />
                 </div>
-                <input type="number" onChange={(event) => {
+               { /*<input type="number" onChange={(event) => {
                         return setInputs((prevInput) => {
                             return {
                                 ...prevInput,
@@ -96,7 +97,7 @@ function AddContest() {
                                 awards: event.target.value.split(",")
                             }
                         })
-                    }} required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder={`قم باضافة جوائز بترتيب مع الفصل بينهم بفاصلة`} />
+                    }} required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder={`قم باضافة جوائز بترتيب مع الفصل بينهم بفاصلة`} />*/}
                 <button onClick={(event) => {
                     event.preventDefault();
                     handleSubmit();

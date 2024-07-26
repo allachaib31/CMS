@@ -85,7 +85,21 @@ import {
     LOGINCLIENT_ROUTE,
     VALIDATIONCLIENT_ROUTE,
     CLIENTINFORMATION_ROUTE,
-    CLIENTINFORMATIONAGREEMENTS_ROUTE
+    CLIENTINFORMATIONAGREEMENTS_ROUTE,
+    GETELECTION_ROUTE,
+    SETVOTE_ROUTE,
+    ELECTIONDETAILS_ROUTE,
+    ADDADVERTISING_ROUTE,
+    GETALLADVERTISING_ROUTE,
+    DELETEADVERTISING_ROUTE,
+    GETADVERTISING_ROUTE,
+    PRINTUNREIMBURSEDEXPENSES_ROUTE,
+    PRINTREIMBURSEDEXPENSES_ROUTE,
+    GETTIMING_ROUTE,
+    GETUSERCOMPTETIONINFORMATION_ROUTE,
+    ENTERTOCONTEST_ROUTE,
+    GETBRANCHEFORUSER_ROUTE,
+    GETQUESTIONSCOMPETITION_ROUTE
 } from "./apiRoutes";
 
 
@@ -375,8 +389,8 @@ export const addBrancheFetch = async (input) => {
     const data = await axios.post(ADDBRANCHE_ROUTE, input);
     return data;
 }
-export const getBrancheFetch = async () => {
-    const data = await axios.get(GETBRANCHE_ROUTE);
+export const getBrancheFetch = async (id) => {
+    const data = await axios.get(`${GETBRANCHE_ROUTE}?idContest=${id}`);
     return data;
 }
 export const addQuestionFetch = async (inputs) => {
@@ -417,6 +431,19 @@ export const updateAgreementsActiveFetch = async (inputs) => {
     const data = await axios.patch(UPDATEAGREEMENTSACTIVE_ROUTE, inputs);
     return data;
 }
+//Manage advertising
+export const addAdvertisingFetch = async (inputs) => {
+    const data = await axios.post(ADDADVERTISING_ROUTE,inputs);
+    return data;
+}
+export const getAdvertisingFetch = async () => {
+    const data = await axios.get(GETALLADVERTISING_ROUTE);
+    return data;
+}
+export const deleteAdvertisingFetch = async (id) => {
+    const data = await axios.delete(`${DELETEADVERTISING_ROUTE}?id=${id}`);
+    return data;
+}  
 //Manage family tree
 export const createFamilyTreeFetch = async (inputs) => {
     const data = await axios.post(CREATEFAMILYTREE_ROUTE, inputs);
@@ -461,5 +488,52 @@ export const clientInformationFetch = async () => {
 
 export const clientInformationAgreementsFetch = async () => {
     const data = await axios.get(CLIENTINFORMATIONAGREEMENTS_ROUTE);
+    return data;
+}
+
+export const getElectionFetch = async () => {
+    const data = await axios.get(GETELECTION_ROUTE);
+    return data;
+}
+
+export const setVoteFetch = async (input) => {
+    const data = await axios.post(SETVOTE_ROUTE, input);
+    return data;
+}
+export const electionDetailsFetch = async (id) => {
+    const data = await axios.get(`${ELECTIONDETAILS_ROUTE}?id=${id}`);
+    return data;
+}
+export const getClientAdvertisingFetch = async () => {
+    const data = await axios.get(GETADVERTISING_ROUTE);
+    return data;
+}
+export const getTimingFetch = async () => {
+    const data = await axios.get(GETTIMING_ROUTE);
+    return data;
+}
+export const getUserComptetionInformationFetch = async (id) => {
+    const data = await axios.get(`${GETUSERCOMPTETIONINFORMATION_ROUTE}?idCompetition=${id}`);
+    return data;
+}
+export const enterToContestFetch = async (inputs) => {
+    const data = await axios.post(ENTERTOCONTEST_ROUTE, inputs);
+    return data;
+}
+export const getBrancheForUserFetch = async (id) => {
+    const data = await axios.get(`${GETBRANCHEFORUSER_ROUTE}?idContest=${id}`)
+    return data;
+}
+export const getQuestionsCompetitionFetch = async (id) => {
+    const data = await axios.get(`${GETQUESTIONSCOMPETITION_ROUTE}?idBranche=${id}`)
+    return data;
+}
+//PRINT
+export const printUnReimbursedExpensesFetch = async (input) => {
+    const data = await axios.get(`${PRINTUNREIMBURSEDEXPENSES_ROUTE}?from=${input.from}&to=${input.to}`)
+    return data;
+}
+export const printReimbursedExpensesFetch = async (input) => {
+    const data = await axios.get(`${PRINTREIMBURSEDEXPENSES_ROUTE}?from=${input.from}&to=${input.to}`)
     return data;
 }
