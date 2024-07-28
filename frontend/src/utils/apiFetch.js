@@ -99,7 +99,9 @@ import {
     GETUSERCOMPTETIONINFORMATION_ROUTE,
     ENTERTOCONTEST_ROUTE,
     GETBRANCHEFORUSER_ROUTE,
-    GETQUESTIONSCOMPETITION_ROUTE
+    GETQUESTIONSCOMPETITION_ROUTE,
+    SAVERESPONSE_ROUTE,
+    GETUSERRESULT_ROUTE
 } from "./apiRoutes";
 
 
@@ -524,10 +526,18 @@ export const getBrancheForUserFetch = async (id) => {
     const data = await axios.get(`${GETBRANCHEFORUSER_ROUTE}?idContest=${id}`)
     return data;
 }
-export const getQuestionsCompetitionFetch = async (id) => {
-    const data = await axios.get(`${GETQUESTIONSCOMPETITION_ROUTE}?idBranche=${id}`)
+export const getQuestionsCompetitionFetch = async (id,idBranche) => {
+    const data = await axios.get(`${GETQUESTIONSCOMPETITION_ROUTE}?id=${id}&idBranche=${idBranche}`)
     return data;
 }
+export const saveResponseFetch = async (inputs) => {
+    const data = await axios.post(SAVERESPONSE_ROUTE, inputs);
+    return data;
+}
+export const getUserResultFetch = async (id) => {
+    const data = await axios.get(`${GETUSERRESULT_ROUTE}?id=${id}`)
+    return data;
+}  
 //PRINT
 export const printUnReimbursedExpensesFetch = async (input) => {
     const data = await axios.get(`${PRINTUNREIMBURSEDEXPENSES_ROUTE}?from=${input.from}&to=${input.to}`)

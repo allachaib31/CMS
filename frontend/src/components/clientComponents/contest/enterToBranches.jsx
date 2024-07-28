@@ -14,7 +14,6 @@ function EnterToBranches() {
             if (err.response && err.response.status === 401) {
                 navigate("/authClient");
             }
-            console.log(err)
         })
     }, []);
     return (

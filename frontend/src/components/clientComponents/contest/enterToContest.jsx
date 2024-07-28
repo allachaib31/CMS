@@ -55,7 +55,7 @@ function EnterToContest() {
                 <button onClick={(event) => {
                     event.preventDefault();
                     handleSubmit();
-                }} className='btn btn-primary'>بسم الله أبدأ</button>
+                }} className='btn btn-primary'>{submit ? <span className="loading loading-ring loading-lg"></span> : "بسم الله أبدأ"}</button>
             </form>
         </div>
     )

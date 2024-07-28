@@ -1,5 +1,5 @@
-export const HOST = `http://localhost:4000/`;
-//export const HOST = `/`;
+//export const HOST = `http://localhost:4000/`;
+export const HOST = `/`;
 // Auth admin Route
 export const LOGIN_ROUTE = `${HOST}api/v1.0/auth/login`;
 export const VALIDATION_ROUTE = `${HOST}api/v1.0/auth/validation`;
@@ -121,6 +121,8 @@ export const GETUSERCOMPTETIONINFORMATION_ROUTE = `${HOST}api/v1.0/competition/g
 export const ENTERTOCONTEST_ROUTE = `${HOST}api/v1.0/competition/enterToContest`;
 export const GETBRANCHEFORUSER_ROUTE = `${HOST}api/v1.0/competition/getBranches`;
 export const GETQUESTIONSCOMPETITION_ROUTE = `${HOST}api/v1.0/competition/getQuestion`;
+export const SAVERESPONSE_ROUTE = `${HOST}api/v1.0/competition/saveResponse`;
+export const GETUSERRESULT_ROUTE = `${HOST}api/v1.0/competition/userResult`;
 //PRINT
 export const PRINTUNREIMBURSEDEXPENSES_ROUTE = `${HOST}api/v1.0/unReimbursedExpenses/printUnReimbursedExpenses`;
 export const PRINTREIMBURSEDEXPENSES_ROUTE = `${HOST}api/v1.0/reimbursedExpenses/printReimbursedExpenses`;

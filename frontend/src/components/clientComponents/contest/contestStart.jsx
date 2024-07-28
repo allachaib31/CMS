@@ -8,7 +8,6 @@ function ContestStart() {
     const queryParams = new URLSearchParams(location.search);
     useEffect(() => {
         getUserComptetionInformationFetch(queryParams.get("id")).then((res) => {
-            console.log(res)
             navigate("/client/contestStart/enterToBranches?id="+queryParams.get("id"))
         }).catch((err) => {
             if (err.response && err.response.status === 401) {
@@ -23,7 +22,6 @@ function ContestStart() {
     }, [])
     return (
         <div>
-            <Outlet />
         </div>
     )
 }

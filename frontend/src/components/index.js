@@ -129,3 +129,4 @@ export { default as ContestStart } from "./clientComponents/contest/contestStart
 export { default as EnterToContest } from "./clientComponents/contest/enterToContest";
 export { default as EnterToBranches } from "./clientComponents/contest/enterToBranches"
 export { default as StartResponse } from "./clientComponents/contest/startResponse";
+export { default as UserResultContest } from "./clientComponents/contest/userResultContest";

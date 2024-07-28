@@ -6,6 +6,7 @@ const { questionModel } = require("../../../models/contest/question");
 const { mcqModel } = require("../../../models/contest/mcq");
 const { fillVoidModel } = require("../../../models/contest/fillVoid");
 const { dragDropModel } = require("../../../models/contest/dargDrop");
+const { userContestBrancheModel } = require("../../../models/contest/userContestBranche");
 exports.getTiming = async (req, res) => {
     try {
         // Query for contests that have not started yet
@@ -75,13 +76,13 @@ exports.getInformation = async (req, res) => {
 exports.enterToContest = async (req, res) => {
     const { email, idContest } = req.body;
     const { id } = req.user;
-    try{
+    try {
         const checkUser = await userContestModel.findOne({
             email,
             idUser: id,
             idContest,
         })
-        if(checkUser){
+        if (checkUser) {
             return res.status(400).send({
                 msg: "لا تستطيع الاشتراك مرتين"
             })
@@ -95,7 +96,7 @@ exports.enterToContest = async (req, res) => {
         return res.status(200).send({
             msg: "تم تسجيلك بنجاح"
         })
-    }catch (error) {
+    } catch (error) {
         console.log(error);
         return res.status(500).send({
             msg: "حدث خطأ أثناء معالجة طلبك",
@@ -120,26 +121,165 @@ exports.getBrancheForUser = async (req, res) => {
 }
 
 exports.getQuestion = async (req, res) => {
-    const { idBranche } = req.query;
+    const { id,idBranche } = req.query;
+    const idUser = req.user.id;
     try {
         const questions = await questionModel.find({ idBranche });
+        const checkUser = await userContestModel.findOne({
+            idUser: idUser,
+            idContest: id,
+        });
+        console.log(idUser)
+        console.log(id)
+        console.log(checkUser)
+        if (!checkUser) {
+            return res.status(400).send({
+                msg: "انت لست مشترك في المسابقة"
+            })
+        }
+        const checkUserContestBranche = await userContestBrancheModel.findOne({
+            idUserContest: checkUser._id,
+            idBranche,
+        })
+        if(checkUserContestBranche){
+            return res.status(403).send({
+                msg: "لا تستطيع الاشتراك اكثر من مرة",
+                id: checkUserContestBranche._id
+            })
+        }
         const results = await Promise.all(questions.map(async (question) => {
             console.log(question.idQuestion);
             if (question.typeQuestion == "عادي") {
                 let obj = await mcqModel.findById(question.idQuestion).select("question id responses");
                 console.log(obj);
-                return {...obj, typeQuestion: "عادي"};
+                return { ...obj, typeQuestion: "عادي" };
             } else if (question.typeQuestion == "املأ الفراغ") {
                 let obj = await fillVoidModel.findById(question.idQuestion).select("question id");
                 console.log(obj);
-                return {...obj,typeQuestion: "املأ الفراغ"};
+                return { ...obj, typeQuestion: "املأ الفراغ" };
             } else if (question.typeQuestion == "سحب") {
                 let obj = await dragDropModel.findById(question.idQuestion).select("question id responses falseResponse");
                 console.log(obj);
-                return {...obj,typeQuestion: "سحب"};
+                return { ...obj, typeQuestion: "سحب" };
             }
         }));
         return res.status(200).send({ results });
+    } catch (error) {
+        console.log(error)
+        return res.status(500).send({
+            msg: "حدث خطأ أثناء معالجة طلبك"
+        });
+    }
+}
+
+exports.saveResponse = async (req, res) => {
+    const { id } = req.user;
+    var { response, idContest, idBranche } = req.body;
+    try {
+        const checkUser = await userContestModel.findOne({
+            idUser: id,
+            idContest,
+        });
+        if (!checkUser) {
+            return res.status(400).send({
+                msg: "انت لست مشترك في المسابقة"
+            })
+        }
+        const checkUserContestBranche = await userContestBrancheModel.findOne({
+            idUserContest: checkUser._id,
+            idBranche,
+        })
+        if (checkUserContestBranche) {
+            return res.status(400).send({
+                msg: "لا تستطيع الاشتراك اكثر من مرة"
+            })
+        }
+        var points = 0;
+        for (let i = 0; i < response.length; i++) {
+            if (response[i].typeQuestion == "عادي") {
+                const mcq = await mcqModel.findById(response[i].idQuestion);
+                if (mcq.correctResponse == response[i].responses) {
+                    response[i].responseStatus = true;
+                    response[i].correctResponse = mcq.correctResponse
+                    response[i].point = mcq.point;
+                } else {
+                    response[i].responseStatus = false;
+                    response[i].correctResponse = mcq.correctResponse
+                    response[i].point = 0;
+                }
+                points += response[i].point;
+            } else if (response[i].typeQuestion == "املأ الفراغ") {
+                const fillVoid = await fillVoidModel.findById(response[i].idQuestion);
+                response[i].correctResponse = [];
+                response[i].point = 0
+                for (let j = 0; j < response[i].responses.length; j++) {
+                    if (fillVoid.responses[j].indexOf(response[i].responses[j]) > -1) {
+                        response[i].correctResponse[j] = fillVoid.responses[j]
+                        response[i].point += fillVoid.point / response[i].responses.length;
+                    } else {
+                        response[i].correctResponse[j] = fillVoid.responses[j]
+                        response[i].point += 0;
+                    }
+                }
+                if (response[i].point == fillVoid.point) response[i].responseStatus = true;
+                else if (response[i].point > 0 && response[i].point < fillVoid.point) response[i].responseStatus = "neutral";
+                else if (response[i].point == 0) response[i].responseStatus = false;
+                points += response[i].point;
+            } else if (response[i].typeQuestion == "سحب") {
+                const dragDrop = await dragDropModel.findById(response[i].idQuestion);
+                response[i].correctResponse = [];
+                response[i].point = 0
+                for (let j = 0; j < response[i].responses.length; j++) {
+                    if (dragDrop.responses[j] == response[i].responses[j]) {
+                        response[i].correctResponse[j] = dragDrop.responses[j]
+                        response[i].point += dragDrop.point / response[i].responses.length;
+                    } else {
+                        response[i].correctResponse[j] = dragDrop.responses[j]
+                        response[i].point += 0;
+                    }
+                }
+                if (response[i].point == dragDrop.point) response[i].responseStatus = true;
+                else if (response[i].point > 0 && response[i].point < dragDrop.point) response[i].responseStatus = "neutral";
+                else if (response[i].point == 0) response[i].responseStatus = false;
+                points += response[i].point;
+            }
+
+        }
+        console.log(response)
+        const userContestBranche = new userContestBrancheModel({
+            idUserContest: checkUser._id,
+            idBranche,
+            point: points,
+            response
+        });
+        await userContestBranche.save();
+        return res.status(200).send({
+            msg: "تم تسجيل اجوبتك بنجاح",
+            id: userContestBranche._id
+        })
+    } catch (error) {
+        return res.status(500).send({
+            msg: "حدث خطأ أثناء معالجة طلبك"
+        });
+    }
+}
+
+exports.getUserResult = async (req, res) => {
+    const { id } = req.query;
+    const idUser = req.user.id;
+    try {
+        const userContestBranche = await userContestBrancheModel.findById(id).populate("idUserContest");
+        console.log(userContestBranche.idUserContest.idUser)
+        console.log(idUser)
+        console.log(userContestBranche.idUserContest.idUser.toString() == idUser.toString())
+        if (userContestBranche.idUserContest.idUser.toString() == idUser.toString()){
+            return res.status(200).send({
+                userContestBranche
+            })
+        }
+        return res.status(400).send({
+            msg: "لا تستطيع الحصول على النتائج"
+        })
     } catch (error) {
         return res.status(500).send({
             msg: "حدث خطأ أثناء معالجة طلبك"

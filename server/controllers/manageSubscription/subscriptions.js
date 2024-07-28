@@ -296,7 +296,7 @@ exports.getSubscriptionsForm = async (req, res) => {
     if (!date || !dateHijri) {
         return res.status(400).send({ msg: "مطلوب الشهر والسنة" });
     }
-
+    console.log("hi")
     try {
         const subscriptions = await monthlySubscriptionModel.find({ year: dateHijri.year }).populate("idUser", "name");
         if (subscriptions.length === 0) {
@@ -310,7 +310,8 @@ exports.getSubscriptionsForm = async (req, res) => {
             console.log(monthData);
             console.log(dateHijri)
             if (monthData) {
-                if (monthData.dueDateHijri && monthData.dueDateHijri.month.number == dateHijri.month.number && monthData.dueDateHijri.year == dateHijri.year) {
+                //results.push(subscriptions[i])
+                if (monthData.dueDateHijri /*&& monthData.dueDateHijri.month.number == dateHijri.month.number && monthData.dueDateHijri.year == dateHijri.year*/) {
                     results.push(subscriptions[i]);
                 }
                 if (monthData.dueDateHijri && monthData.dueDateHijri.month.number == dateHijri.month.number) {
@@ -319,6 +320,7 @@ exports.getSubscriptionsForm = async (req, res) => {
             }
         }
         const typeSubscription = await typeSubscriptionModel.find();
+        console.log(results)
         return res.status(200).send({
             subscriptions: results,
             typeSubscription,

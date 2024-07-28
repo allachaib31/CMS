@@ -1,21 +1,55 @@
 import React, { useEffect, useState } from 'react';
-import { getQuestionsCompetitionFetch } from '../../../utils/apiFetch';
+import { getQuestionsCompetitionFetch, saveResponseFetch } from '../../../utils/apiFetch';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import DragItem from './dragItem';
 import DropZone from './dropZone';
+import Alert from '../../alert/alert';
 
 function StartResponse() {
     const navigate = useNavigate();
     const location = useLocation();
+    const [submit, setSubmit] = useState(false);
+    const [showAlert, setShowAlert] = useState({
+        display: false,
+    });
     const queryParams = new URLSearchParams(location.search);
     const [data, setData] = useState([]);
     const [index, setIndex] = useState(0);
     const [inputs, setInputs] = useState([]);
 
+    const handleSubmit = () => {
+        setShowAlert({
+            display: false,
+        });
+        setSubmit((e) => !e);
+        saveResponseFetch({
+            response: [...inputs],
+            idContest: queryParams.get("id"),
+            idBranche: queryParams.get("idBranche")
+        }).then((res) => {
+            setSubmit((e) => !e);
+            setShowAlert({
+                display: true,
+                status: true,
+                text: res.data.msg
+            });
+            navigate("/client/contestStart/userResult?id=" + res.data.id)
+        }).catch((err) => {
+            if (err.response && err.response.status === 401) {
+                navigate("/authClient");
+            }
+            setSubmit((e) => !e);
+            setShowAlert({
+                display: true,
+                status: false,
+                text: err.response.data.msg
+            });
+        })
+    }
     useEffect(() => {
-        getQuestionsCompetitionFetch(queryParams.get("idBranche")).then((res) => {
+        getQuestionsCompetitionFetch(queryParams.get("id"),queryParams.get("idBranche")).then((res) => {
             const shuffledData = res.data.results.map((result) => {
                 if (result.typeQuestion === "عادي") {
                     return {
@@ -44,6 +78,13 @@ function StartResponse() {
                 responses: result.typeQuestion === "عادي" ? "" : []
             }));
             setInputs(initialInputs);
+        }).catch((err) => {
+            if (err.response && err.response.status === 401) {
+                navigate("/authClient");
+            }
+            if (err.response && err.response.status === 403) {
+                navigate("/client/contestStart/userResult?id=" + err.response.data.id);
+            }
         });
     }, []);
 
@@ -117,6 +158,7 @@ function StartResponse() {
 
     return (
         <div className='py-[2rem] container mx-auto'>
+            {showAlert.display ? <Alert msg={showAlert} /> : ""}
             {data.length > 0 && (
                 <div className='flex flex-col gap-[1rem] justify-center items-center'>
                     {data[index].typeQuestion === "عادي" && (
@@ -165,8 +207,8 @@ function StartResponse() {
                             عودة
                         </button>
                         <button onClick={() => {
-                            console.log(inputs)
-                        }} className='btn btn-outline btn-warning sm:text-[1.3rem] font-bold'>ارسال الاجوبة</button>
+                            handleSubmit();
+                        }} disabled={!(index === data.length - 1)} className='btn btn-outline btn-warning sm:text-[1.3rem] font-bold'>{submit ? <span className="loading loading-ring loading-lg"></span> : "ارسال الاجوبة"}</button>
                         <button
                             onClick={() => setIndex((prevIndex) => prevIndex + 1)}
                             disabled={index === data.length - 1}
