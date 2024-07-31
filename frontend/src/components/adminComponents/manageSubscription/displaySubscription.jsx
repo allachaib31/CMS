@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { hijriDateObject } from "../../../utils/getHijriDate";
 import { addMonthlySubscriptionsFetch, getSubscriptionsFormFetch } from "../../../utils/apiFetch";
 import Alert from "../../alert/alert";
-import moment from "moment-hijri";
 import AddNoteMonthly from "../../modals/addNoteMonthly";
 
 

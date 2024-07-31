@@ -3,6 +3,12 @@ require('moment-hijri');
 const momentTimezone = require('moment-timezone');
 
 export const hijriDateObject = (date) => {
+    return [
+        25,{
+            number: 1,
+        },
+        1446
+    ]
     const months = {
         "1": "محرم", "2": "صفر", "3": "ربيع الاول", "4": "ربيع الثاني",
         "5": "جماد الأول", "6": "جماد الثاني", "7": "رجب", "8": "شعبان",
