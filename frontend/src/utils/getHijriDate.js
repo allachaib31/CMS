@@ -9,7 +9,18 @@ export const hijriDateObject = (date) => {
         "9": "رمضان", "10": "شوال", "11": "ذو القعدة", "12": "ذو الحجة"
     };
 
-    const formattedHijriDate = new Intl.DateTimeFormat('ar-sa', { calendar: 'islamic-umalqura' }).format(date ? new Date(date) : new Date());
+    let formattedHijriDate;
+
+    try {
+        // Attempt to use Intl.DateTimeFormat
+        formattedHijriDate = new Intl.DateTimeFormat('ar-sa', { calendar: 'islamic-umalqura' }).format(date ? new Date(date) : new Date());
+    } catch (e) {
+        console.error("Intl.DateTimeFormat failed:", e);
+
+        // Fallback to moment-hijri
+        const hijriMoment = momentTimezone.tz(date ? new Date(date) : new Date(), 'Asia/Riyadh').format('iYYYY/iM/iD');
+        formattedHijriDate = hijriMoment.replace(/\/\d+$/, ' هـ');
+    }
 
     const convertToArabicNumerals = (dateStr) => {
         const arabicIndicToArabic = {
@@ -46,4 +57,4 @@ export const hijriDateObject = (date) => {
     }
 
     return [day, convertedHijriDate[1], year];
-}
+};
