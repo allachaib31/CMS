@@ -121,7 +121,7 @@ function SubscriptionHistory() {
         </div>
         <div className='flex md:flex-col w-full  md:w-auto items-center justify-center gap-[1rem]'>
           <h1 className="md:text-[1.1rem] w-full sm:w-1/2 md:w-auto font-bold bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]">المصروفات </h1>
-          <h1 className="text-[1.1rem] font-bold bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]">{(moneyBox && moneyBox.cumulativeAmount - moneyBox.amount).toFixed(2)}</h1>
+          <h1 className="text-[1.1rem] font-bold bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]">{moneyBox &&  (moneyBox.cumulativeAmount - moneyBox.amount).toFixed(2)}</h1>
         </div>
         <div className='flex md:flex-col w-full md:w-auto items-center justify-center gap-[1rem]'>
           <h1 className="md:text-[1.1rem] w-full sm:w-1/2 md:w-auto font-bold bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]">الأعضاء المفعلون </h1>
