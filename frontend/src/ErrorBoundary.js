@@ -1,14 +1,13 @@
-// ErrorBoundary.js
 import React, { Component } from 'react';
 
 class ErrorBoundary extends Component {
     constructor(props) {
         super(props);
-        this.state = { hasError: false };
+        this.state = { hasError: false, errorMessage: '' };
     }
 
     static getDerivedStateFromError(error) {
-        return { hasError: true };
+        return { hasError: true, errorMessage: error.message };
     }
 
     componentDidCatch(error, errorInfo) {
@@ -17,10 +16,11 @@ class ErrorBoundary extends Component {
 
     render() {
         if (this.state.hasError) {
-            return <h1>Something went wrong.</h1>;
+            return <h1>{this.state.errorMessage}</h1>;
         }
         return this.props.children;
     }
 }
 
 export default ErrorBoundary;
+
