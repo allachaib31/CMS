@@ -28,24 +28,24 @@ function ConsolidatedRecordRevenues() {
             <h1 className="text-center text-[1.5rem] font-bold py-[1rem]">سجل الموحد للإيرادات</h1>
             <div className="mt-[1rem] flex md:flex-row flex-col gap-[1rem] justify-center">
                 <div className="flex md:flex-col items-center gap-[1rem]">
-                    <h1 className="w-[90%] md:w-auto md:text-center sm:text-[1.1rem] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">اجمالي الايرادات</h1>
-                    <h1 className="text-[1.1rem] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">{moneyBox &&(moneyBox.source.subscriptions + moneyBox.source.commodityRevenue + moneyBox.source.contributionRevenues + moneyBox.source.loanIncome).toFixed(2)}</h1>
+                    <h1 className="w-[70%] md:w-auto md:text-center sm:text-[1.1rem] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">اجمالي الايرادات</h1>
+                    <h1 className="w-[30%] md:w-auto text-[1.1rem] text-center font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">{moneyBox &&(moneyBox.source.subscriptions + moneyBox.source.commodityRevenue + moneyBox.source.contributionRevenues + moneyBox.source.loanIncome).toFixed(2)}</h1>
                 </div>
                 <div className="flex md:flex-col items-center gap-[1rem]">
-                    <h1 className="w-[90%] md:w-auto md:text-center sm:text-[1.1rem] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">اجمالي الاشتراكات</h1>
-                    <h1 className="text-[1.1rem] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">{moneyBox && moneyBox.source.subscriptions.toFixed(2)}</h1>
+                    <h1 className="w-[70%] md:w-auto md:text-center sm:text-[1.1rem] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">اجمالي الاشتراكات</h1>
+                    <h1 className="w-[30%] md:w-auto text-[1.1rem] text-center font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">{moneyBox && moneyBox.source.subscriptions.toFixed(2)}</h1>
                 </div>
                 <div className="flex md:flex-col items-center gap-[1rem]">
-                    <h1 className="w-[90%] md:w-auto md:text-center sm:text-[1.1rem] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">اجمالي ايراد السلع</h1>
-                    <h1 className="text-[1.1rem] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">{moneyBox && moneyBox.source.commodityRevenue.toFixed(2)}</h1>
+                    <h1 className="w-[70%] md:w-auto md:text-center sm:text-[1.1rem] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">اجمالي ايراد السلع</h1>
+                    <h1 className="w-[30%] md:w-auto text-[1.1rem] text-center font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">{moneyBox && moneyBox.source.commodityRevenue.toFixed(2)}</h1>
                 </div>
                 <div className="flex md:flex-col items-center gap-[1rem]">
-                    <h1 className="w-[90%] md:w-auto md:text-center sm:text-[1.1rem] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">اجمالي ايرادات المساهمات</h1>
-                    <h1 className="text-[1.1rem] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">{moneyBox && moneyBox.source.contributionRevenues.toFixed(2)}</h1>
+                    <h1 className="w-[70%] md:w-auto md:text-center sm:text-[1.1rem] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">اجمالي ايرادات المساهمات</h1>
+                    <h1 className="w-[30%] md:w-auto text-[1.1rem] text-center font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">{moneyBox && moneyBox.source.contributionRevenues.toFixed(2)}</h1>
                 </div>
                 <div className="flex md:flex-col items-center gap-[1rem]">
-                    <h1 className="w-[90%] md:w-auto md:text-center sm:text-[1.1rem] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">اجمالي ايرادات القروض</h1>
-                    <h1 className="text-[1.1rem] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">{moneyBox && moneyBox.source.loanIncome.toFixed(2)}</h1>
+                    <h1 className="w-[70%] md:w-auto md:text-center sm:text-[1.1rem] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">اجمالي ايرادات القروض</h1>
+                    <h1 className="w-[30%] md:w-auto text-[1.1rem] text-center font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">{moneyBox && moneyBox.source.loanIncome.toFixed(2)}</h1>
                 </div>
             </div>
             <div className="overflow-x-auto mt-[1rem]">

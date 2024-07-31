@@ -314,8 +314,8 @@ function OrderToPurchaseGoods() {
                                                 purchaseAmount: Number(event.target.value.trim()),
                                                 contributionAmount: Number(event.target.value.trim()),
                                                 contributionPercentage: (Number(event.target.value.trim()) * 100) / inputs.commodityData.currentBalanceFund,
-                                                profitRatio: ((inputs.commodityData.saleAmount - Number(event.target.value.trim())) / Number(event.target.value.trim())) * 100,
-                                                profitAmount: prevInput.commodityData.saleAmount - Number(event.target.value.trim())
+                                                //profitRatio: ((inputs.commodityData.saleAmount - Number(event.target.value.trim())) / Number(event.target.value.trim())) * 100,
+                                                //profitAmount: prevInput.commodityData.saleAmount - Number(event.target.value.trim())
                                             }
                                         }
                                     })
@@ -367,12 +367,13 @@ function OrderToPurchaseGoods() {
                                 <FontAwesomeIcon icon={faMoneyBill} className="absolute top-[1rem] right-[1rem]" />
                                 <input type="number" required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" onChange={(event) => {
                                     return setInputs((prevInput) => {
+                                        //let amount = (Number(event.target.value.trim()) - prevInput.commodityData.purchaseAmount) - ((Number(event.target.value.trim()) - prevInput.commodityData.purchaseAmount) * (prevInput.sponsorData.sponsorRatio / 100));
                                         return {
                                             ...prevInput, commodityData: {
                                                 ...prevInput.commodityData,
                                                 saleAmount: Number(event.target.value.trim()),
-                                                profitAmount: Number(event.target.value.trim()) - prevInput.commodityData.purchaseAmount,
-                                                profitRatio: ((Number(event.target.value.trim()) - prevInput.commodityData.purchaseAmount) / prevInput.commodityData.purchaseAmount) * 100,
+                                                //profitAmount: amount,
+                                                //profitRatio: (amount / prevInput.commodityData.purchaseAmount) * 100,
                                             }
                                         }
                                     })
@@ -433,40 +434,9 @@ function OrderToPurchaseGoods() {
                                 }
                             </div>
                         </div>
-                        {
-                            /** 
-                             *                         <div className="flex sm:flex-row flex-col gap-[1rem]">
-                            <div className="flex gap-[1rem] items-center relative sm:w-1/2">
-                                <label>تاريخ انتهاء السداد (الميلادي)</label>
-                                <input disabled value={inputs.commodityData.paymentExpiryDate} type="date" onChange={(event) => {
-                                    return setInputs((prevInput) => {
-                                        const hijriDate = hijriDateObject(event.target.value);
-                                        return {
-                                            ...prevInput, commodityData: {
-                                                ...prevInput.commodityData,
-                                                paymentExpiryDate: event.target.value,
-                                                paymentExpiryDateHijri: {
-                                                    day: hijriDate[0],
-                                                    month: hijriDate[1],
-                                                    year: hijriDate[2],
-                                                }
-                                            }
-                                        }
-                                    })
-                                }} required className="formInput input pr-[2.3rem] input-bordered flex items-center gap-2" />
-                            </div>
-                            <div className="flex gap-[1rem] items-center relative sm:w-1/2">
-                                <label>تاريخ انتهاء السداد (الهجري)</label>
-                                {
-                                    inputs.commodityData.paymentExpiryDateHijri ? <span>{inputs.commodityData.paymentExpiryDateHijri.day}/{inputs.commodityData.paymentExpiryDateHijri.month.number}/{inputs.commodityData.paymentExpiryDateHijri.year}</span> : ""
-                                }
-                            </div>
-                        </div>
-                            */
-                        }
 
                         <div className="flex sm:flex-row flex-col gap-[1rem]">
-                            <div className="relative sm:w-1/2">
+                            <div className="relative w-full">
                                 <FontAwesomeIcon icon={faMoneyBill} className="absolute top-[1rem] right-[1rem]" />
                                 <input type="number" min={0} onChange={(event) => {
                                     return setInputs((prevInput) => {
@@ -474,18 +444,22 @@ function OrderToPurchaseGoods() {
                                             ...prevInput, commodityData: {
                                                 ...prevInput.commodityData,
                                                 numberOfInstallments: event.target.value,
-                                                premiumAmount: prevInput.commodityData.saleAmount / event.target.value
+                                                //premiumAmount: prevInput.commodityData.saleAmount / event.target.value
                                             }
                                         }
                                     })
-                                }}  required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder="عدد القسط" />
+                                }}  required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder="عدد الاقساط" />
                             </div>
-                            <div className="relative sm:w-1/2">
+                          {
+                            /*
+                             <div className="relative sm:w-1/2">
                                 <FontAwesomeIcon icon={faMoneyBill} className="absolute top-[1rem] right-[1rem]" />
                                 <input type="number" disabled value={inputs.commodityData.premiumAmount} required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder={`مبلغ القسط`} />
-                            </div>
+                            </div>*/}
                         </div>
-                        <div className="flex sm:flex-row flex-col gap-[1rem]">
+                        {
+                            /**
+                             *                         <div className="flex sm:flex-row flex-col gap-[1rem]">
                             <div className="relative sm:w-1/2">
                                 <FontAwesomeIcon icon={faLandmark} className="absolute top-[1rem] right-[1rem]" />
                                 <input type="number" value={inputs.commodityData.currentBalanceFund} disabled className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder={`الرصيد الحالي صندوق`} title={`الرصيد الحالي صندوق`} />
@@ -535,9 +509,12 @@ function OrderToPurchaseGoods() {
                                 <input type="number" value={inputs.commodityData.balance} disabled required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder="الرصيد" title="الرصيد" />
                             </div>
                         </div>
+                             */
+                        }
                     </div>
                     <button onClick={(event) => {
                         event.preventDefault();
+                        console.log(inputs)
                         handleSubmit();
                     }} disabled={submit} className='btn text-white font-bold text-[20px] btn-primary'>{submit ? <span className="loading loading-ring loading-lg"></span> : "تاكيد"}</button>
                 </form>

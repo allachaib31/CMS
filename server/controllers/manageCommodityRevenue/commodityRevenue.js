@@ -7,6 +7,9 @@ const getHijriDate = require("../../utils/getHijriDate");
 const moneyBoxId = process.env.moneyBoxId;
 exports.addCommodityRevenue = async (req, res) => {
     const { customerData, sponsorData, commodityData, comments } = req.body;
+    commodityData.profitAmount = (commodityData.saleAmount - commodityData.purchaseAmount) - ((commodityData.saleAmount - commodityData.purchaseAmount) * (sponsorData.sponsorRatio / 100))
+    commodityData.profitRatio =  (commodityData.profitAmount /  commodityData.purchaseAmount) * 100
+    commodityData.premiumAmount = (commodityData.purchaseAmount + commodityData.profitAmount) / commodityData.numberOfInstallments;
     try {
         if (
             req.user.admin.userPermission.indexOf(

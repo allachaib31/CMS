@@ -91,7 +91,7 @@ function PaymentExpenses() {
                             users && users.map((user,index) => {
                                 return (
                                     <tr>
-                                        <td className="border text-center border-slate-600">{user.idUser._id}</td>
+                                        <td className="border text-center border-slate-600">{user.idUser.id}</td>
                                         <td className="border text-center border-slate-600">{user.idUser.name}</td>
                                         <td className="border text-center border-slate-600">{user.amount.toFixed(2)}</td>
                                         <td id={user.idUser._id} className="border text-center border-slate-600">

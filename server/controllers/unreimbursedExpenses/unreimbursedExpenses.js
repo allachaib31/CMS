@@ -246,7 +246,8 @@ exports.searchUnReimbursedExpenses = async (req, res) => {
     try {
         const cashPayUsers = await cashPayUserModel.find({
             unReimbursedExpensesId: id,
-        }).populate("idUser", "name");
+        }).populate("idUser", "name id");
+        console.log(cashPayUsers)
         return res.status(200).send({
             cashPayUsers
         })
