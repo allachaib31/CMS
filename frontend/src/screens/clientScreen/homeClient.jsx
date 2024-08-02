@@ -5,7 +5,7 @@ import profileImage from "../../images/profileImage.png";
 import Cookies from "cookies-js";
 import { validationClientFetch } from '../../utils/apiFetch';
 import { Loading } from '../../components';
-import { faCheckToSlot, faGamepad, faGauge, faListCheck, faMicrophone } from '@fortawesome/free-solid-svg-icons';
+import { faCheckToSlot, faFileInvoiceDollar, faGamepad, faGauge, faListCheck, faMicrophone } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 export const UserContext = React.createContext();
 
@@ -86,6 +86,9 @@ function HomeClient() {
                                     <h1 className='font-bold mb-[2rem] text-center text-[1.2rem]'>{user.name}</h1>
                                     <li className="text-[1.3rem] space-y-1">
                                         <Link to="/client"><FontAwesomeIcon icon={faGauge} /> لوحة القيادة</Link>
+                                    </li>
+                                    <li className="text-[1.3rem] space-y-1">
+                                        <Link to="/client/subscribe"><FontAwesomeIcon icon={faFileInvoiceDollar} /> الاشتراكات</Link>
                                     </li>
                                     <li className="text-[1.3rem] space-y-1">
                                         <Link to="/client/advetising"><FontAwesomeIcon icon={faMicrophone} /> اعلانات</Link>

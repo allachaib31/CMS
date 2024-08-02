@@ -2,12 +2,13 @@ import { faRightLong } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { addToFamilyTreeFetch, createFamilyTreeFetch, getFamilyTreeFetch } from '../../../utils/apiFetch';
+import { addToFamilyTreeFetch, createFamilyTreeFetch, deleteFamilyTreeFetch, getFamilyTreeFetch } from '../../../utils/apiFetch';
 import Alert from '../../alert/alert';
 
 function AddFamilyTree() {
     const navigate = useNavigate();
     const [submit, setSubmit] = useState(false);
+    const [deleteSubmit, setDeleteSubmit] = useState(false);
     const [inputs, setInputs] = useState({
         nameTree: "",
         name: ""
@@ -23,6 +24,31 @@ function AddFamilyTree() {
     const [showAlert, setShowAlert] = useState({
         display: false,
     });
+    const handleDelete = (id) => {
+        setShowAlert({
+            display: false,
+        });
+        setDeleteSubmit((e) => !e);
+        deleteFamilyTreeFetch(id).then((res) => {
+            setDeleteSubmit((e) => !e);
+            setShowAlert({
+                display: true,
+                status: true,
+                text: res.data.msg
+            });
+            getFamilyTree();
+        }).catch((err) => {
+            if (err.response && err.response.status === 401) {
+                navigate("/auth");
+            }
+            setDeleteSubmit((e) => !e);
+            setShowAlert({
+                display: true,
+                status: false,
+                text: err.response.data.msg
+            });
+        })
+    }
     const createNewTree = () => {
         setShowAlert({
             display: false,
@@ -75,7 +101,7 @@ function AddFamilyTree() {
             });
         })
     }
-    useEffect(() => {
+    const getFamilyTree = () => {
         getFamilyTreeFetch().then((res) => {
             console.log(res)
             setFamilyTree(res.data.familyTree);
@@ -84,6 +110,9 @@ function AddFamilyTree() {
                 navigate("/auth");
             }
         })
+    }
+    useEffect(() => {
+        getFamilyTree();
     }, [])
     function getAllNames(node, names = []) {
         if (node.name) {
@@ -97,7 +126,6 @@ function AddFamilyTree() {
     }
     useEffect(() => {
         if (updateFamilyTree != false) {
-            console.log(updateFamilyTree)
             setNames(getAllNames(updateFamilyTree.familyTree));
         }
     }, [updateFamilyTree])
@@ -170,6 +198,9 @@ function AddFamilyTree() {
                     {showAlert.display ? <Alert msg={showAlert} /> : ""}
                     {
                         updateFamilyTree && <>
+                            <button disabled={deleteSubmit} onClick={() => {
+                                handleDelete(updateFamilyTree._id)
+                            }} className='btn btn-error mb-1'>{deleteSubmit ? <span className="loading loading-ring loading-lg"></span> : "حذف شجرة العائلة"}</button>
                             <input type="text" disabled value={updateFamilyTree.name} placeholder="اسم شجرة العائلة" required className="formInput input input-bordered w-full mb-[1rem]" />
                             <select onChange={(event) => {
                                 setAddToFamily((prev) => {

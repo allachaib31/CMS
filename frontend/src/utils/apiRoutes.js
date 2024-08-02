@@ -1,5 +1,5 @@
-//export const HOST = `http://localhost:4000/`;
-export const HOST = `/`;
+export const HOST = `http://localhost:4000/`;
+//export const HOST = `/`;
 // Auth admin Route
 export const LOGIN_ROUTE = `${HOST}api/v1.0/auth/login`;
 export const VALIDATION_ROUTE = `${HOST}api/v1.0/auth/validation`;
@@ -104,7 +104,8 @@ export const ADDTOFAMILYTREE_ROUTE = `${HOST}api/v1.0/familyTree`;
 export const GETFAMILYTREE_ROUTE = `${HOST}api/v1.0/familyTree`;
 export const UPDATEFAMILYTREE_ROUTE = `${HOST}api/v1.0/familyTree`;
 export const GETFAMILYTREEUSEID = `${HOST}api/v1.0/familyTree/withId`;
-export const GETIDFAMILYTREE_ROUTE = `${HOST}api/v1.0/familyTree/getListId`
+export const GETIDFAMILYTREE_ROUTE = `${HOST}api/v1.0/familyTree/getListId`;
+export const DELETEFAMILYTREE_ROUTE = `${HOST}api/v1.0/familyTree/delete`
 
 //Manage client Route
 //Manage auth
@@ -123,6 +124,7 @@ export const GETBRANCHEFORUSER_ROUTE = `${HOST}api/v1.0/competition/getBranches`
 export const GETQUESTIONSCOMPETITION_ROUTE = `${HOST}api/v1.0/competition/getQuestion`;
 export const SAVERESPONSE_ROUTE = `${HOST}api/v1.0/competition/saveResponse`;
 export const GETUSERRESULT_ROUTE = `${HOST}api/v1.0/competition/userResult`;
+export const GETSUBSCRIPTIONCLIENT_ROUTE = `${HOST}api/v1.0/clientInformation/subscribe`;
 //PRINT
 export const PRINTUNREIMBURSEDEXPENSES_ROUTE = `${HOST}api/v1.0/unReimbursedExpenses/printUnReimbursedExpenses`;
 export const PRINTREIMBURSEDEXPENSES_ROUTE = `${HOST}api/v1.0/reimbursedExpenses/printReimbursedExpenses`;

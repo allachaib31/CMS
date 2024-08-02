@@ -50,6 +50,7 @@ function StartResponse() {
     }
     useEffect(() => {
         getQuestionsCompetitionFetch(queryParams.get("id"),queryParams.get("idBranche")).then((res) => {
+            console.log(res)
             const shuffledData = res.data.results.map((result) => {
                 if (result.typeQuestion === "عادي") {
                     return {

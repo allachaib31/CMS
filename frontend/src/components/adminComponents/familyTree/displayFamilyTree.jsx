@@ -5,8 +5,8 @@ import * as d3 from "d3";
 const DisplayFamilyTree = () => {
   const [listId, setListId] = useState(false);
   const [id, setId] = useState(false);
-  const chartRef = useRef();
-
+  const svgRef = useRef();
+  const [svgWidth, setSvgWidth] = useState(0);  // Add state for dynamic width
   useEffect(() => {
     if (id !== false) {
       getFamilyTreeUseIdFetch(id).then((res) => {
@@ -21,260 +21,72 @@ const DisplayFamilyTree = () => {
     });
   }, []);
 
-  const parentFunction = (jsondata) => {
-    // Clear existing SVG element
-    d3.select(chartRef.current).selectAll("*").remove();
+  const parentFunction = (data) => {
+    const svg = d3.select(svgRef.current);
+    const margin = { top: 50, right: 50, bottom: 50, left: 50 };
 
-    let mouseX = 0;
-    let buttonTracker = [];
-    let rootNode = d3.hierarchy(jsondata, (d) => d.children);
-    let pathLinks = rootNode.links();
-    let updatePathLinks;
+    const root = d3.hierarchy(data);
+    const nodes = root.descendants();
+    const links = root.links();
 
-    let circleLinks = rootNode.descendants();
-    let updateCircleLinks;
+    const treeLayout = d3.tree()
+      .nodeSize([200, 200])  // Adjust node size to control spacing
+      .separation((a, b) => a.parent === b.parent ? 1.5 : 2);
 
-    let textLinks = rootNode.descendants();
-    let updateTextLinks;
+    treeLayout(root);
 
-    let dim = {
-      width: 2000,
-      height: window.innerHeight * 2,
-      margin: 0,
-    };
+    // Calculate required width and height based on node positions
+    const maxX = d3.max(nodes, d => d.x) || 0;
+    const maxY = d3.max(nodes, d => d.y) || 0;
+    const minX = d3.min(nodes, d => d.x) || 0;
+    const minY = d3.min(nodes, d => d.y) || 0;
 
-    let svg = d3
-      .select(chartRef.current)
-      .append("svg")
-      .style("background", "white")
-      .attr("width", dim.width)
-      .attr("height", dim.height);
+    const width = maxX - minX + margin.left + margin.right;
+    const height = maxY - minY + margin.top + margin.bottom;
 
-    document.querySelector("#chart").classList.add("center");
+    svg.attr('width', width).attr('height', height);
+    setSvgWidth(width);  // Update state with the calculated width
 
-    let g = svg.append("g").attr("transform", "translate(140,50)");
+    svg.selectAll('*').remove();  // Clear any existing content in the SVG
 
-    let layout = d3.tree().size([dim.height - 50, dim.width - 320]);
+    const g = svg.append('g').attr('transform', `translate(${margin.left - minX},${margin.top - minY})`);
 
-    layout(rootNode);
-    console.log(rootNode.links());
-    console.log("----------------------");
-    console.log(rootNode.descendants());
+    // Links
+    g.append("g")
+      .selectAll('line')
+      .data(links)
+      .enter()
+      .append('line')
+      .attr('class', 'link')
+      .attr('x1', d => d.source.x)
+      .attr('y1', d => d.source.y)
+      .attr('x2', d => d.target.x)
+      .attr('y2', d => d.target.y)
+      .attr('stroke', 'black');
 
-    function update(data) {
-      g.selectAll("path")
-        .data(data, (d, i) => d.target.data.name)
-        .join(
-          (enter) =>
-            enter
-              .append("path")
-              .attr(
-                "d",
-                d3
-                  .linkHorizontal()
-                  .x((d) => mouseX)
-                  .y((d) => d.x)
-              )
-              .attr("fill", "none")
-              .attr("stroke", "black"),
-          (update) => update,
-          (exit) =>
-            exit.call((path) =>
-              path
-                .transition()
-                .duration(300)
-                .remove()
-                .attr(
-                  "d",
-                  d3
-                    .linkHorizontal()
-                    .x((d) => mouseX)
-                    .y((d) => d.x)
-                )
-            )
-        )
-        .call((path) =>
-          path
-            .transition()
-            .duration(1000)
-            .attr(
-              "d",
-              d3
-                .linkHorizontal()
-                .x((d) => d.y)
-                .y((d) => d.x)
-            )
-            .attr("id", (d, i) => "path" + i)
-        );
-    }
-    update(pathLinks);
+    // Nodes
+    g.append("g")
+      .selectAll('circle')
+      .data(nodes)
+      .enter()
+      .append('circle')
+      .attr('class', 'node')
+      .attr('cx', d => d.x)
+      .attr('cy', d => d.y)
+      .attr('r', 15);
 
-    function updateCircles(data) {
-      g.selectAll("circle")
-        .data(data, (d) => d.data.name)
-        .join(
-          (enter) =>
-            enter
-              .append("circle")
-              .attr("cx", (d) => mouseX)
-              .attr("cy", (d) => d.x)
-              .attr("r", 12)
-              .attr("fill", (d) =>
-                d.children == undefined ? "red" : "#2563eb"
-              )
-              .attr("id", (d, i) => d.data.name)
-              .attr("class", "sel"),
-          (update) => update,
-          (exit) =>
-            exit.call((path) =>
-              path
-                .transition()
-                .duration(300)
-                .remove()
-                .attr("cx", (d) => mouseX)
-                .attr("r", 0)
-            )
-        )
-        .call((circle) =>
-          circle
-            .transition()
-            .duration(1000)
-            .attr("cx", (d) => d.y)
-        )
-        .on("mouseover", function (d) {
-          d3.select(this)
-            .attr("fill", "orange")
-            .transition()
-            .duration(100)
-            .attr("r", 16);
-        })
-        .on("mouseout", function (d) {
-          d3.select(this)
-            .attr("fill", (d) => (d.children == undefined ? "red" : "#2563eb"))
-            .transition()
-            .duration(100)
-            .attr("r", 12);
-        })
-        .on("click", async function (d) {
-          let buttonId = d3.select(this).attr("id");
-          mouseX = d3.select(this).attr("cx");
-
-          let checkButtonExists = buttonTracker.filter(
-            (button) => button.buttonId == buttonId
-          );
-
-          if (checkButtonExists[0] != undefined) {
-            buttonTracker = buttonTracker.filter(
-              (button) => button.buttonId != buttonId
-            );
-
-            pathLinks = checkButtonExists[0].buttonPathData.concat(pathLinks);
-            update(pathLinks);
-
-            circleLinks =
-              checkButtonExists[0].buttonCircleData.concat(circleLinks);
-            updateCircles(circleLinks);
-
-            textLinks = checkButtonExists[0].buttonTextData.concat(textLinks);
-            updateText(textLinks);
-
-            return;
-          }
-
-          const clickedNode = d;
-          const clickedNodeLinks = getNodeLinks(clickedNode);
-          const valueArray = clickedNodeLinks.map(
-            (link) => link.target.data.name
-          );
-
-          updatePathLinks = pathLinks.filter(
-            (item) => !valueArray.includes(item.target.data.name)
-          );
-          const clickedPathData = pathLinks.filter((item) =>
-            valueArray.includes(item.target.data.name)
-          );
-
-          updateCircleLinks = circleLinks.filter(
-            (item) => !valueArray.includes(item.data.name)
-          );
-          const clickedCircleData = circleLinks.filter((item) =>
-            valueArray.includes(item.data.name)
-          );
-
-          updateTextLinks = textLinks.filter(
-            (item) => !valueArray.includes(item.data.name)
-          );
-          const clickedTextData = textLinks.filter((item) =>
-            valueArray.includes(item.data.name)
-          );
-
-          buttonTracker.push({
-            buttonId: buttonId,
-            buttonPathData: clickedPathData,
-            buttonCircleData: clickedCircleData,
-            buttonTextData: clickedTextData,
-          });
-
-          update(updatePathLinks);
-          updateCircles(updateCircleLinks);
-          updateText(updateTextLinks);
-
-          pathLinks = updatePathLinks;
-          circleLinks = updateCircleLinks;
-          textLinks = updateTextLinks;
-        });
-    }
-
-    function getNodeLinks(node) {
-      const links = [];
-      function traverse(n) {
-        if (n.children) {
-          n.children.forEach((child) => {
-            links.push({ source: n, target: child });
-            traverse(child);
-          });
-        }
-      }
-      traverse(node);
-      return links;
-    }
-
-    updateCircles(rootNode.descendants());
-
-    function updateText(data) {
-      g.selectAll("text")
-        .data(data, (d) => d.data.name)
-        .join(
-          (enter) =>
-            enter
-              .append("text")
-              .attr("x", (d) => mouseX)
-              .attr("y", (d) => d.x + 30)
-              .attr("font-size", 0)
-              .text((d) => d.data.name),
-          (update) => update,
-          (exit) =>
-            exit.call((text) =>
-              text
-                .transition()
-                .duration(300)
-                .remove()
-                .attr("x", (d) => mouseX)
-                .attr("font-size", 0)
-            )
-        )
-        .call((text) =>
-          text
-            .transition()
-            .duration(1000)
-            .attr("x", (d) => d.y + 20)
-            .attr("font-size", 20)
-            .attr("font-bold", 700)
-            .attr("fill", "black")
-        );
-    }
-
-    updateText(textLinks);
+    // Labels
+    g.append("g")
+      .selectAll('text')
+      .data(nodes)
+      .enter()
+      .append('text')
+      .attr('class', 'label')
+      .attr('x', d => d.x)
+      .attr('y', d => d.y - 20)
+      .attr("font-size", 20)
+      .attr('text-anchor', 'middle')
+      .text(d => d.data.name);
   };
 
   return (
@@ -297,8 +109,8 @@ const DisplayFamilyTree = () => {
         </select>
       </div>
       <div className="overflow-x-auto">
-        <div className="w-[2000px]">
-          <div id="chart" ref={chartRef}></div>
+        <div className='flex justify-center items-center' style={{ width: svgWidth }}>
+          <svg ref={svgRef}></svg>
         </div>
       </div>
     </div>

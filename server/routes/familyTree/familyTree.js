@@ -1,6 +1,6 @@
 const express = require("express");
 const authMiddleware = require("../../middleware/admin/auth");
-const { addToFamilyTree, getFamilyTree, updateFamilyTree, createNewFamilyTree, getFamilyTreeUseId, getIdFamilyTree } = require("../../controllers/familyTree/familyTree");
+const { addToFamilyTree, getFamilyTree, updateFamilyTree, createNewFamilyTree, getFamilyTreeUseId, getIdFamilyTree, deleteFamilyTree } = require("../../controllers/familyTree/familyTree");
 const Router = express.Router();
 
 
@@ -15,5 +15,8 @@ Router.get("/api/v1.0/familyTree/getListId",authMiddleware, getIdFamilyTree)
 
 //PATCH METHODS
 Router.patch("/api/v1.0/familyTree",authMiddleware, updateFamilyTree)
+
+//DELETE METHODS
+Router.delete("/api/v1.0/familyTree/delete",authMiddleware, deleteFamilyTree);
 
 module.exports = Router

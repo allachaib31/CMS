@@ -130,3 +130,4 @@ export { default as EnterToContest } from "./clientComponents/contest/enterToCon
 export { default as EnterToBranches } from "./clientComponents/contest/enterToBranches"
 export { default as StartResponse } from "./clientComponents/contest/startResponse";
 export { default as UserResultContest } from "./clientComponents/contest/userResultContest";
+export { default as SubscribeClient } from"./clientComponents/subscribe/subscribe";

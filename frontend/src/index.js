@@ -7,11 +7,11 @@ import ErrorBoundary from './ErrorBoundary';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode id='fullScreen' data-theme={window.localStorage.getItem("theme")} className='min-h-screen'>
+  <div id='fullScreen' data-theme={window.localStorage.getItem("theme")} className='min-h-screen'>
     <ErrorBoundary>
       <App />
     </ErrorBoundary>
-  </React.StrictMode>
+  </div>
 );
 
 // If you want to start measuring performance in your app, pass a function

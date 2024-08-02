@@ -1,4 +1,5 @@
 const { familyTreeModel } = require("../../models/familyTree/familyTree");
+const { isValidObjectId } = require('mongoose');
 const getHijriDate = require("../../utils/getHijriDate");
 const shortid = require("shortid");
 exports.createNewFamilyTree = async (req, res) => {
@@ -138,3 +139,35 @@ exports.getIdFamilyTree = async (req, res) => {
 exports.updateFamilyTree = async (req, res) => {
 
 }
+exports.deleteFamilyTree = async (req, res) => {
+    const { id } = req.query;
+
+    // Validate ID
+    if (!id || !isValidObjectId(id)) {
+        return res.status(400).send({
+            msg: "معرف غير صالح"
+        });
+    }
+
+    try {
+        // Attempt to find and delete the document
+        const familyTree = await familyTreeModel.findByIdAndDelete(id);
+
+        // Handle case where no document is found
+        if (!familyTree) {
+            return res.status(404).send({
+                msg: "لم يتم العثور على شجرة العائلة"
+            });
+        }
+
+        // Success response
+        return res.status(200).send({
+            msg: "تم حذف شجرة العائلة"
+        });
+    } catch (error) {
+        console.error("Error deleting family tree:", error); // Log the error
+        return res.status(500).send({
+            msg: "حدث خطأ أثناء معالجة طلبك"
+        });
+    }
+};

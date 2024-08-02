@@ -3,6 +3,7 @@ const moneyBoxModel = require("../../../models/moneybox");
 const { advertisingModel, File } = require("../../../models/advertising/advertising")
 const userModel = require("../../../models/user");
 const { voteModel } = require("../../../models/voting/vote");
+const monthlySubscriptionModel = require("../../../models/subscription/monthlySubscription");
 const moneyBoxId = process.env.moneyBoxId;
 exports.getClientInformation = async (req, res) => {
     const { id } = req.user;
@@ -126,6 +127,24 @@ exports.getAdvertising = async (req, res) => {
     } catch (error) {
         return res.status(500).send({
             msg: "حدث خطأ أثناء معالجة طلبك"
+        });
+    }
+}
+exports.getSubscribeClient = async (req, res) => {
+    const { year } = req.query;
+    const id = req.user.id;
+    try {
+        const subscription = await monthlySubscriptionModel.findOne({
+            year,
+            idUser: id
+        });
+        return res.status(200).send({
+            subscription,
+        })
+    } catch (error) {
+        return res.status(500).send({
+            msg: "حدث خطأ أثناء معالجة طلبك",
+            error: error.message
         });
     }
 }

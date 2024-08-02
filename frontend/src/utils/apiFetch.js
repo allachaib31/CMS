@@ -101,7 +101,9 @@ import {
     GETBRANCHEFORUSER_ROUTE,
     GETQUESTIONSCOMPETITION_ROUTE,
     SAVERESPONSE_ROUTE,
-    GETUSERRESULT_ROUTE
+    GETUSERRESULT_ROUTE,
+    DELETEFAMILYTREE_ROUTE,
+    GETSUBSCRIPTIONCLIENT_ROUTE
 } from "./apiRoutes";
 
 
@@ -471,6 +473,10 @@ export const getIdFamilyTreeFetch = async () => {
     const data = await axios.get(GETIDFAMILYTREE_ROUTE);
     return data;
 }
+export const deleteFamilyTreeFetch = async (id) => {
+    const data = await axios.delete(`${DELETEFAMILYTREE_ROUTE}?id=${id}`);
+    return data;
+}
 
 // Auth client fetch
 export const loginClientFetch = async (user) => {
@@ -537,7 +543,11 @@ export const saveResponseFetch = async (inputs) => {
 export const getUserResultFetch = async (id) => {
     const data = await axios.get(`${GETUSERRESULT_ROUTE}?id=${id}`)
     return data;
-}  
+}
+export const getSubscribeClientFetch = async (year) => {
+    const data = await axios.get(`${GETSUBSCRIPTIONCLIENT_ROUTE}?year=${year}`);
+    return data;
+}
 //PRINT
 export const printUnReimbursedExpensesFetch = async (input) => {
     const data = await axios.get(`${PRINTUNREIMBURSEDEXPENSES_ROUTE}?from=${input.from}&to=${input.to}`)
