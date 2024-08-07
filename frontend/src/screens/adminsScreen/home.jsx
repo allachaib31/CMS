@@ -80,7 +80,7 @@ function Home() {
                   aria-label="close sidebar"
                   className="drawer-overlay"
                 ></label>
-                <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
+                <ul className="menu p-4 w-[17rem] sm:w-80 min-h-full bg-base-200 text-base-content">
                   <div className="flex justify-center mb-[2rem]">
                     <img src={logo} alt="" />
                   </div>
@@ -267,7 +267,7 @@ function Home() {
                         </li>
                       </ul>
                     </details>
-                    <details>
+                    {/*<details>
                       <summary>
                         <Link to="/manageContest/"><FontAwesomeIcon icon={faGamepad} /> إدارة المسابقة</Link>
                       </summary>
@@ -276,7 +276,7 @@ function Home() {
                           <Link to="/manageContest/addContest">إضافة مسابقة</Link>
                         </li>
                       </ul>
-                    </details>
+                    </details>*/}
                     <details>
                       <summary>
                         <Link to="/manageVote/"><FontAwesomeIcon icon={faCheckToSlot} /> إدارة تصويت الأعضاء</Link>

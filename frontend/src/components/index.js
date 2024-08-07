@@ -125,9 +125,6 @@ export { default as Election } from "./clientComponents/election/election";
 export { default as ElectionDetails } from "./clientComponents/election/electionDetails";
 export { default as AgreementsClient } from "./clientComponents/agreements/agreements";
 export { default as AdvertisingClient } from "./clientComponents/advertising/advertising";
-export { default as ContestStart } from "./clientComponents/contest/contestStart";
-export { default as EnterToContest } from "./clientComponents/contest/enterToContest";
-export { default as EnterToBranches } from "./clientComponents/contest/enterToBranches"
-export { default as StartResponse } from "./clientComponents/contest/startResponse";
 export { default as UserResultContest } from "./clientComponents/contest/userResultContest";
+export { default as ContestResult } from "./clientComponents/contest/contestResult"
 export { default as SubscribeClient } from"./clientComponents/subscribe/subscribe";

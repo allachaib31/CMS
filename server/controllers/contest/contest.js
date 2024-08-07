@@ -68,9 +68,9 @@ exports.addContest = async (req, res) => {
 
 exports.getContest = async (req, res) => {
     try {
-        const contest = await contestModel.find().sort({ createdAt: -1 })
+        const contest = await contestModel.find();
         return res.status(200).send({
-            contest
+            contest: contest.reverse()
         })
     } catch (error) {
         return res.status(500).send({

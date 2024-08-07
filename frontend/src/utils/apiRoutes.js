@@ -49,6 +49,11 @@ export const GETACTIVECOMMODITYREVENUE_ROUTE = `${HOST}api/v1.0/commodityRevenu/
 export const GETCOMMODITYANDINSTALLMENT_ROUTE = `${HOST}api/v1.0/commodityRevenu/getCommidtyAndInstallment`;
 export const ADDCOMMENTCOMMODITYREVENUE_ROUTE = `${HOST}api/v1.0/commodityRevenu/addCommentCommodityRevenue`;
 export const ADDCOMMENTINSTALLMENTSCHEDULE_ROUTE = `${HOST}api/v1.0/commodityRevenu/addCommentInstallmentSchedule`;
+//Manage Stock
+export const ADDSTOCK_ROUTE = `${HOST}api/v1.0/stock/add`;
+export const GETACTIVEUSER_ROUTE = `${HOST}api/v1.0/stock/getIdUsers`;
+export const GETIDSTOCK_ROUTE = `${HOST}api/v1.0/stock/getIdStock`;
+export const GETSTOCK_ROUTE = `${HOST}api/v1.0/stock/getStock`;
 // Manage Loans
 export const ADDLOANS_ROUTE = `${HOST}api/v1.0/loans`;
 export const PAYINSTALLMENTS_ROUTE = `${HOST}api/v1.0/loans/payInstallments`;
@@ -125,6 +130,7 @@ export const GETQUESTIONSCOMPETITION_ROUTE = `${HOST}api/v1.0/competition/getQue
 export const SAVERESPONSE_ROUTE = `${HOST}api/v1.0/competition/saveResponse`;
 export const GETUSERRESULT_ROUTE = `${HOST}api/v1.0/competition/userResult`;
 export const GETSUBSCRIPTIONCLIENT_ROUTE = `${HOST}api/v1.0/clientInformation/subscribe`;
+export const GETCONTESTRESULT_ROUTE = `${HOST}api/v1.0/competition/getContestResult`
 //PRINT
 export const PRINTUNREIMBURSEDEXPENSES_ROUTE = `${HOST}api/v1.0/unReimbursedExpenses/printUnReimbursedExpenses`;
 export const PRINTREIMBURSEDEXPENSES_ROUTE = `${HOST}api/v1.0/reimbursedExpenses/printReimbursedExpenses`;

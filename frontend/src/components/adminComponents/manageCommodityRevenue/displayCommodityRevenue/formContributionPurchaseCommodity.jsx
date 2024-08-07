@@ -61,16 +61,24 @@ function FormContributionPurchaseCommodity() {
                 نموذج المساهمة في شراء سلعة
             </h1>
             <div className=" container mx-auto ">
-                <select className="select xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
+                <select onChange={(event) => {
+                    setInputs((prevInput) => {
+                        return { ...prevInput, year: event.target.value }
+                    });
+                }} className="select xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
                     {yearOptions.map((value) => (
                         <option key={value} value={value} selected={inputs.year === value}>
                             {value}
                         </option>
                     ))}
                 </select>
-                <select className="select xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
+                <select onChange={(event) => {
+                    setInputs((prevInput) => {
+                        return { ...prevInput, month: event.target.value }
+                    });
+                }} className="select xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
                     <option value="1" selected={"1" == inputs.month}>محرم</option>
-                    <option value="2" selected={"1" == inputs.month}>صفر</option>
+                    <option value="2" selected={"2" == inputs.month}>صفر</option>
                     <option value="3" selected={"3" == inputs.month}>ربيع الاول</option>
                     <option value="4" selected={"4" == inputs.month}>ربيع الثاني</option>
                     <option value="5" selected={"5" == inputs.month}>جمادى الاول</option>

@@ -1,19 +1,74 @@
-import React from 'react'
-import backgroundImage from "../images/background.png"
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import Cookies from "cookies-js";
+import backgroundImage from "../images/background.png";
+import { Alert, Loading } from "../components";
+import { useState } from "react";
+import { loginFetch, validationFetch } from "../utils/apiFetch";
 
 function Auth() {
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
+  const [submit, setSubmit] = useState(false);
+  const [disbledSubmit, setDisbledSubmit] = useState({
+    NationalIdentificationNumber: false,
+    password: false,
+  });
+  const [inputs, setInputs] = useState({
+    NationalIdentificationNumber: "",
+    password: "",
+  });
+  const [showAlert, setShowAlert] = useState({
+    display: false,
+  });
+  const handleSubmit = () => {
+    setSubmit((e) => !e);
+    setShowAlert({
+      display: false,
+    });
+    loginFetch(inputs)
+      .then((res) => {
+        Cookies.set("token", res.token, { secure: true });
+        setSubmit((e) => !e);
+        setShowAlert({
+          display: true,
+          status: true,
+          text: res.msg,
+        });
+        navigate("/");
+      })
+      .catch((err) => {
+        setSubmit((e) => !e);
+        setShowAlert({
+          display: true,
+          status: false,
+          text: err.response.data.msg,
+        });
+      });
+  };
+  useEffect(() => {
+    validationFetch().then((res) => {
+        navigate("/");
+    }).catch((err) => {
+        setLoading((e) => !e)
+    })
+}, []);
   return (
-    <div className="hero min-h-screen delay-[3000] duration-1000 ease-out"
+    <div
+      className="hero min-h-screen delay-[3000] duration-1000 ease-out"
       style={{
         backgroundImage: `url(${backgroundImage})`,
-      }}>
-      <div className='w-full transition delay-[3000] duration-1000 ease-out text-center text-neutral-content'>
+      }}
+    >
+      {
+        loading ? <Loading /> :       <div className="w-full transition delay-[3000] duration-1000 ease-out text-center text-neutral-content">
         <div className="md:w-[60%] lg:w-[50%] h-screen backdrop-blur-xl bg-black/40">
           <div className="h-screen">
             <form
               action=""
               className="w-full h-full gap-5 flex flex-col justify-center items-center"
             >
+              {showAlert.display ? <Alert msg={showAlert} /> : ""}
               <label className="sm:w-1/2 bg-transparent input input-bordered  text-white flex items-center gap-2">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -26,8 +81,29 @@ function Auth() {
                 </svg>
                 <input
                   type="text"
-                  className="grow"
+                  className="grow formInput"
+                  onChange={(e) => {
+                    if (e.target.validity.valid)
+                      setDisbledSubmit((value) => {
+                        return { ...value, NationalIdentificationNumber: true };
+                      });
+                    else
+                      setDisbledSubmit((value) => {
+                        return {
+                          ...value,
+                          NationalIdentificationNumber: false,
+                        };
+                      });
+                    setInputs((input) => {
+                      return {
+                        ...input,
+                        NationalIdentificationNumber: e.target.value.trim(),
+                      };
+                    });
+                  }}
+                  required
                   placeholder="رقم الهوية الوطنية"
+                  pattern="[1-9]\d{9}"
                 />
               </label>
               <label className="sm:w-1/2 bg-transparent input input-bordered text-white flex items-center gap-2">
@@ -45,17 +121,48 @@ function Auth() {
                 </svg>
                 <input
                   type="password"
-                  className="grow"
+                  className="grow formInput"
+                  onChange={(e) => {
+                    if (e.target.validity.valid)
+                      setDisbledSubmit((value) => {
+                        return { ...value, password: true };
+                      });
+                    else
+                      setDisbledSubmit((value) => {
+                        return { ...value, password: false };
+                      });
+                    setInputs((input) => {
+                      return { ...input, password: e.target.value.trim() };
+                    });
+                  }}
+                  required
                   placeholder="كلمة المرور"
                 />
               </label>
-              <button className="btn hover:btn-secondary bg-secondary text-white text-[18px] font-bold">تسجيل الدخول</button>
+              <button
+                disabled={
+                  !disbledSubmit.NationalIdentificationNumber ||
+                  !disbledSubmit.password
+                }
+                onClick={(event) => {
+                  event.preventDefault();
+                  handleSubmit();
+                }}
+                className="btn btn-secondary text-white text-[18px] font-bold"
+              >
+                {submit ? (
+                  <span className="loading loading-ring loading-lg"></span>
+                ) : (
+                  "تسجيل الدخول"
+                )}{" "}
+              </button>
             </form>
           </div>
         </div>
       </div>
+      }
     </div>
-  )
+  );
 }
 
-export default Auth
+export default Auth;

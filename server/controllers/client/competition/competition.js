@@ -15,9 +15,7 @@ exports.getTiming = async (req, res) => {
         });
 
         // If no upcoming contests are found
-        const contest = await contestModel.find().sort({
-            createdAt: -1
-        })
+        const contest = await contestModel.find()
         if (!upcomingContests) {
             return res.status(200).send({
                 contest,
@@ -26,7 +24,7 @@ exports.getTiming = async (req, res) => {
         // Return the upcoming contests
         return res.status(200).send({
             upcomingContests,
-            contest
+            contest: contest.reverse()
         });
     } catch (error) {
         console.log(error);
@@ -280,6 +278,51 @@ exports.getUserResult = async (req, res) => {
         return res.status(400).send({
             msg: "لا تستطيع الحصول على النتائج"
         })
+    } catch (error) {
+        return res.status(500).send({
+            msg: "حدث خطأ أثناء معالجة طلبك"
+        });
+    }
+}
+
+exports.getContestResult = async (req, res) => {
+    const { id } = req.query;
+    try{
+        const contest = await contestModel.findById(id);
+        if (!contest) {
+            return res.status(404).send({
+                msg: "هذه المسابقة غير موجودة"
+            });
+        }
+        
+        const contestBranche = await contestBrancheModel.find({
+            idContest: id
+        });
+        
+        const results = await Promise.all(contestBranche.map(async (branche) => {
+            const userContestBranche = await userContestBrancheModel.find({
+                idBranche: branche._id
+            }).sort({
+                point: -1
+            }).populate({
+                path: 'idUserContest',
+                populate: {
+                    path: 'idUser',
+                    select: '_id id name'
+                }
+            });
+        
+            return {
+                branche,
+                userContestBranche
+            };
+        }));
+        
+        return res.status(200).send({
+            contest,
+            results
+        });
+        
     } catch (error) {
         return res.status(500).send({
             msg: "حدث خطأ أثناء معالجة طلبك"

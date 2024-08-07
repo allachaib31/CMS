@@ -77,7 +77,7 @@ function CommodityPurchaseOrderForm() {
                     });
                 }} className="select xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
                     <option value="1" selected={"1" == inputs.month}>محرم</option>
-                    <option value="2" selected={"1" == inputs.month}>صفر</option>
+                    <option value="2" selected={"2" == inputs.month}>صفر</option>
                     <option value="3" selected={"3" == inputs.month}>ربيع الاول</option>
                     <option value="4" selected={"4" == inputs.month}>ربيع الثاني</option>
                     <option value="5" selected={"5" == inputs.month}>جمادى الاول</option>

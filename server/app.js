@@ -72,6 +72,7 @@ conn.once('open', () => {
     const unReimbursedExpenses = require("./routes/unreimbursedExpenses/unreimbursedExpenses");
     const contributionRevenue = require("./routes/manageContributionRevenue/contributionRevenue");
     const contest = require("./routes/contest/contest");
+    const stocks = require("./routes/manageStock/stock");
     const vote = require("./routes/vote/vote");
     const agreements = require("./routes/agreement/agreement");
     const familyTree = require("./routes/familyTree/familyTree");
@@ -91,6 +92,7 @@ conn.once('open', () => {
         .use(subscriptions)
         .use(commodityRevenu)
         .use(loans)
+        .use(stocks)
         .use(reimbursedExpenses)
         .use(unReimbursedExpenses)
         .use(moneyBox)

@@ -103,7 +103,12 @@ import {
     SAVERESPONSE_ROUTE,
     GETUSERRESULT_ROUTE,
     DELETEFAMILYTREE_ROUTE,
-    GETSUBSCRIPTIONCLIENT_ROUTE
+    GETSUBSCRIPTIONCLIENT_ROUTE,
+    GETCONTESTRESULT_ROUTE,
+    ADDSTOCK_ROUTE,
+    GETACTIVEUSER_ROUTE,
+    GETIDSTOCK_ROUTE,
+    GETSTOCK_ROUTE
 } from "./apiRoutes";
 
 
@@ -284,7 +289,23 @@ export const addCommentInstallmentScheduleFetch = async (inputs) => {
     const data = await axios.patch(ADDCOMMENTINSTALLMENTSCHEDULE_ROUTE,inputs);
     return data;
 }
-
+//Manage Stock
+export const addStockFetch = async (inputs) => {
+    const data = await axios.post(ADDSTOCK_ROUTE, inputs);
+    return data;
+}
+export const getActiveUserFetch = async () => {
+    const data = await axios.get(GETACTIVEUSER_ROUTE);
+    return data;
+}
+export const getIdStockFetch = async (inputs) => {
+    const data = await axios.get(`${GETIDSTOCK_ROUTE}?month=${inputs.month}&year=${inputs.year}`);
+    return data;
+}
+export const getStockFetch = async (id) => {
+    const data = await axios.get(`${GETSTOCK_ROUTE}?id=${id}`);
+    return data;
+}
 // Manage Loans
 export const addLoansFetch = async (inputs) => {
     const data = await axios.post(ADDLOANS_ROUTE,inputs);
@@ -546,6 +567,10 @@ export const getUserResultFetch = async (id) => {
 }
 export const getSubscribeClientFetch = async (year) => {
     const data = await axios.get(`${GETSUBSCRIPTIONCLIENT_ROUTE}?year=${year}`);
+    return data;
+}
+export const getContestResultFetch = async (id) => {
+    const data = await axios.get(`${GETCONTESTRESULT_ROUTE}?id=${id}`);
     return data;
 }
 //PRINT

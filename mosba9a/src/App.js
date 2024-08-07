@@ -2,7 +2,9 @@ import './App.css';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from './screens/home';
 import Auth from './screens/auth';
-import { Result, StartResponse, Welcome } from './components';
+import { Admin, Result, StartResponse, Welcome } from './components';
+import HomeAdmin from './screens/homeAdmin';
+import AuthAdmin from './screens/authAdmin';
 
 function App() {
   return (
@@ -14,6 +16,10 @@ function App() {
             <Route path='/start' element={<StartResponse />}/>
             <Route path='/result' element={<Result />}/>
           </Route>
+          <Route exact path='/admin' element={<HomeAdmin />}>
+            <Route path='/admin' element={<Admin />}/>
+          </Route>
+          <Route exact path='/authAdmin' element={<AuthAdmin />}/>
           <Route exact path='/auth' element={<Auth />}/>
         </Routes>
       </Router>
