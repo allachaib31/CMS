@@ -7,6 +7,16 @@ export const hijriDateObject = (date) => {
         "5": "جماد الأول", "6": "جماد الثاني", "7": "رجب", "8": "شعبان",
         "9": "رمضان", "10": "شوال", "11": "ذو القعدة", "12": "ذو الحجة"
     };
+    let d = moment(date ? new Date(date) : new Date()).format('iYYYY/iM/iD').split("/");
+    return [d[2], {
+        number: d[1],
+        ar: months[d[1]]
+    }, d[0]];
+    /*const months = {
+        "1": "محرم", "2": "صفر", "3": "ربيع الاول", "4": "ربيع الثاني",
+        "5": "جماد الأول", "6": "جماد الثاني", "7": "رجب", "8": "شعبان",
+        "9": "رمضان", "10": "شوال", "11": "ذو القعدة", "12": "ذو الحجة"
+    };
 
     let formattedHijriDate;
 
@@ -70,5 +80,5 @@ export const hijriDateObject = (date) => {
         return [0, { number: monthNumber, ar: months[monthNumber] }, 0]; // Return a default value
     }
 
-    return [day, convertedHijriDate[1], year];
+    return [day, convertedHijriDate[1], year];*/
 };
