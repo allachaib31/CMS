@@ -15,7 +15,10 @@ export const hijriDateObject = (date) => {
         formattedHijriDate = new Intl.DateTimeFormat('ar-sa', { calendar: 'islamic-umalqura' }).format(date ? new Date(date) : new Date());
     } catch (e) {
         console.error("Intl.DateTimeFormat failed:", e);
-        alert(moment().format('iYYYY/iM/iD'));
+        let date = moment(date ? new Date(date) : new Date()).format('iYYYY/iM/iD').split("/");
+        return [date[2], {
+            number: date[1]
+        }, date[0]];
         // Fallback to moment-hijri
         const hijriMoment = momentTimezone.tz(date ? new Date(date) : new Date(), 'Asia/Riyadh').format('iYYYY/iM/iD');
         formattedHijriDate = hijriMoment.replace(/\/\d+$/, ' هـ');
@@ -32,14 +35,20 @@ export const hijriDateObject = (date) => {
     const convertedHijriDate = convertedHijriDateStr.split("/").map(part => part.trim());
 
     if (convertedHijriDate.length < 3) {
-        alert(moment().format('iYYYY/iM/iD'));
+        let date = moment(date ? new Date(date) : new Date()).format('iYYYY/iM/iD').split("/");
+        return [date[2], {
+            number: date[1]
+        }, date[0]];
         console.error("Invalid Hijri date format:", convertedHijriDateStr);
         return [0, { number: 0, ar: "Unknown" }, 0]; // Return a default value
     }
 
     let monthNumber = Number(convertedHijriDate[1].slice(0, convertedHijriDate[1].length - 1));
     if (isNaN(monthNumber) || !months[monthNumber]) {
-        alert(moment().format('iYYYY/iM/iD'));
+        let date = moment(date ? new Date(date) : new Date()).format('iYYYY/iM/iD').split("/");
+        return [date[2], {
+            number: date[1]
+        }, date[0]];
         console.error("Invalid month number:", monthNumber);
         monthNumber = 1; // Fallback to a default valid month
     }
@@ -53,6 +62,10 @@ export const hijriDateObject = (date) => {
     const year = Number(convertedHijriDate[2].slice(0, convertedHijriDate[2].length));
 
     if (isNaN(day) || isNaN(year)) {
+        let date = moment(date ? new Date(date) : new Date()).format('iYYYY/iM/iD').split("/");
+        return [date[2], {
+            number: date[1]
+        }, date[0]];
         console.error("Invalid day or year:", day, year);
         return [0, { number: monthNumber, ar: months[monthNumber] }, 0]; // Return a default value
     }
