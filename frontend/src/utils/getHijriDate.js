@@ -1,5 +1,4 @@
-const moment = require('moment');
-require('moment-hijri');
+const moment = require('moment-hijri');
 const momentTimezone = require('moment-timezone');
 
 export const hijriDateObject = (date) => {
@@ -16,7 +15,7 @@ export const hijriDateObject = (date) => {
         formattedHijriDate = new Intl.DateTimeFormat('ar-sa', { calendar: 'islamic-umalqura' }).format(date ? new Date(date) : new Date());
     } catch (e) {
         console.error("Intl.DateTimeFormat failed:", e);
-
+        alert(moment().format('iYYYY/iM/iD'));
         // Fallback to moment-hijri
         const hijriMoment = momentTimezone.tz(date ? new Date(date) : new Date(), 'Asia/Riyadh').format('iYYYY/iM/iD');
         formattedHijriDate = hijriMoment.replace(/\/\d+$/, ' هـ');
@@ -33,12 +32,14 @@ export const hijriDateObject = (date) => {
     const convertedHijriDate = convertedHijriDateStr.split("/").map(part => part.trim());
 
     if (convertedHijriDate.length < 3) {
+        alert(moment().format('iYYYY/iM/iD'));
         console.error("Invalid Hijri date format:", convertedHijriDateStr);
         return [0, { number: 0, ar: "Unknown" }, 0]; // Return a default value
     }
 
     let monthNumber = Number(convertedHijriDate[1].slice(0, convertedHijriDate[1].length - 1));
     if (isNaN(monthNumber) || !months[monthNumber]) {
+        alert(moment().format('iYYYY/iM/iD'));
         console.error("Invalid month number:", monthNumber);
         monthNumber = 1; // Fallback to a default valid month
     }
