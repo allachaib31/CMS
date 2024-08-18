@@ -1,21 +1,16 @@
 const mongoose = require("mongoose");
 const Joi = require("joi");
-const shortid = require("shortid");
+const { generateNextId } = require("../../utils/generateNextId");
 
 const familyTreeSchema = new mongoose.Schema({
     id: {
         type: String,
-        default: shortid.generate,
         unique: true,
     },
     name: {
         type: String,
         required: true,
         unique: true
-    },
-    familyTree: {
-        type: Object,
-        required: true
     },
     hijriDate: {
         type: Object,
@@ -26,7 +21,12 @@ const familyTreeSchema = new mongoose.Schema({
         default: Date.now(),
     },
 });
-
+familyTreeSchema.pre('save', async function(next) {
+    if (this.isNew) { // Check if the document is new
+        this.id = await generateNextId("familyTree", "FT");
+    }
+    next();
+});
 module.exports = {
     familyTreeModel: mongoose.model("familyTree", familyTreeSchema)
 }

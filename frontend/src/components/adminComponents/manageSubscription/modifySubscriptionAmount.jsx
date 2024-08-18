@@ -65,12 +65,12 @@ function ModifySubscriptionAmount() {
                 </Link>
             </div>
             <h1 className="text-center text-[1.5rem] font-bold py-[1rem]">
-                تحديث مبلغ الاشتراكات
+            إضافة مبلغ الاشتراكات
             </h1>
             {showAlert.display ? <Alert msg={showAlert} /> : ""}
             {
                 (monthlyInput && foundationInput) && <div className="overflow-x-auto mt-[1rem]">
-                    <table className="table w-[600px] mx-auto">
+                    <table className="table w-[400px] mx-auto">
                         {/* head */}
                         <thead>
                             <tr className='text-center'>
@@ -87,7 +87,7 @@ function ModifySubscriptionAmount() {
                                     setMonthlyInput((prevInput) => {
                                         return { ...prevInput, amount: event.target.value };
                                     })
-                                }} value={monthlyInput.amount} required className="formInput input input-bordered w-full max-w-xs" /></td>
+                                }} value={monthlyInput.amount} required className="formInput input input-bordered w-full max-w-[5rem]" /></td>
                                 <td><button onClick={() => {
                                     handleUpdate(monthlyInput, setMonthlySubmit);
                                 }} className="btn btn-warning">{monthlySubmit ? <span className="loading loading-ring loading-lg"></span> : "تعديل"}</button></td>
@@ -99,7 +99,7 @@ function ModifySubscriptionAmount() {
                                     setFoundationInput((prevInput) => {
                                         return { ...prevInput, amount: event.target.value };
                                     })
-                                }} value={foundationInput.amount} required className="formInput input input-bordered w-full max-w-xs" /></td>
+                                }} value={foundationInput.amount} required className="formInput input input-bordered w-full max-w-[5rem]" /></td>
                                 <td><button onClick={() => {
                                     handleUpdate(foundationInput, setFoundationSubmit);
                                 }} className="btn btn-warning">{foundationSubmit ? <span className="loading loading-ring loading-lg"></span> : "تعديل"}</button></td>

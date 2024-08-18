@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Auth from "./screens/adminsScreen/auth";
 import Home from "./screens/adminsScreen/home";
-import { Welcome, AddAdmin, AddUser, AnnualSubscriptionRecord, AnnualSubscriptionRecordDetails, DisplayAdmin, DisplayCommodityRevenue, DisplaySubscription, DisplayUser, FoundationSubscription, ManageAdmin, ManageCommodityRevenue, ManageSubscription, ManageUser, ManagingLatePayments, ModifySubscriptionAmount, MonthlySubscription, OrderToPurchaseGoods, PaymentOfSubscriptions, RegisterMemberFinancialData, SubscriptionHistory, UpdateAdmin, UpdateUser, CommodityPurchaseOrderForm, PaymentOfInstallments, InstallmentSchedule, GoodsRevenueRecord, FormContributionPurchaseCommodity, RecordContributionPurchaseCommodity, RecordAnnual, RecordAnnualDetails, ManageContributionRevenue, DisplayContributionRevenue, RecordContributions, ConsolidatedRecordRevenues, ManageStock, ContributionRormForPurchasingShares, CommodityPurchase, FormContribution, InvestmentBox, DisplayContributionRecord, ContributionForm, DisplayContributionForm, FinancialCompany, DisplayContributionfinancialCompanyRecord, FinancialCompanyForm, DisplayfinancialCompanyForm, Loans, LoansData, RecordInstallments, LoansHistory, UnreimbursedExpenses, RecordUnrecoveredExpenses, DisplayRecordUnrecoveredExpenses, AddExpenseType, PaymentExpenses, ExpenseRequest, ReimbusedExpenses, RecordRecoveredExpenses, DisplayRecordRecoveredExpenses, ReimbursedExpenseRequest, AddReimbursedExprensesType, Stocks, RegisterOfStockContributions, StocksContributionForm, DisplayStocksContributionForm, LoansOrder, PayMonthlySubscriptions, ManageContest, DisplayContest, AddContest, ControllerContest, CompetitionBranches, AddQuestion, ManageVote, DisplayVote, AddVote, VoteDetails, ManageAdvertising, DisplayAdvertising, AddAd, Agreements, DisplayAgreements, AddAgreements, FamilyTree, DisplayFamilyTree, AddFamilyTree, Dashboard, Contest, AgreementsClient, Election, ElectionDetails, AdvertisingClient, UnrecoverExpenses, RecoverExpenses, PrintRecordInstallments, UserResultContest, SubscribeClient, ContestResult } from "./components";
+import { Welcome, AddAdmin, AddUser, AnnualSubscriptionRecord, AnnualSubscriptionRecordDetails, DisplayAdmin, DisplayCommodityRevenue, DisplaySubscription, DisplayUser, FoundationSubscription, ManageAdmin, ManageCommodityRevenue, ManageSubscription, ManageUser, ManagingLatePayments, ModifySubscriptionAmount, MonthlySubscription, OrderToPurchaseGoods, PaymentOfSubscriptions, RegisterMemberFinancialData, SubscriptionHistory, UpdateAdmin, UpdateUser, CommodityPurchaseOrderForm, PaymentOfInstallments, InstallmentSchedule, GoodsRevenueRecord, FormContributionPurchaseCommodity, RecordContributionPurchaseCommodity, RecordAnnual, RecordAnnualDetails, ManageContributionRevenue, DisplayContributionRevenue, RecordContributions, ConsolidatedRecordRevenues, ManageStock, ContributionRormForPurchasingShares, CommodityPurchase, FormContribution, InvestmentBox, DisplayContributionRecord, ContributionForm, DisplayContributionForm, FinancialCompany, DisplayContributionfinancialCompanyRecord, FinancialCompanyForm, DisplayfinancialCompanyForm, Loans, LoansData, RecordInstallments, LoansHistory, UnreimbursedExpenses, RecordUnrecoveredExpenses, DisplayRecordUnrecoveredExpenses, AddExpenseType, PaymentExpenses, ExpenseRequest, ReimbusedExpenses, RecordRecoveredExpenses, DisplayRecordRecoveredExpenses, ReimbursedExpenseRequest, AddReimbursedExprensesType, Stocks, RegisterOfStockContributions, StocksContributionForm, DisplayStocksContributionForm, LoansOrder, PayMonthlySubscriptions, ManageContest, DisplayContest, AddContest, ControllerContest, CompetitionBranches, AddQuestion, ManageVote, DisplayVote, AddVote, VoteDetails, ManageAdvertising, DisplayAdvertising, AddAd, Agreements, DisplayAgreements, AddAgreements, FamilyTree, DisplayFamilyTree, AddFamilyTree, Dashboard, Contest, AgreementsClient, Election, ElectionDetails, AdvertisingClient, UnrecoverExpenses, RecoverExpenses, PrintRecordInstallments, UserResultContest, SubscribeClient, ContestResult, GoodsPurchaseContract, BloodMoney, RequestBloodMoney, PaymentBloodMoney, RecordBloodMoney, SlideShow } from "./components";
 import Print from "./screens/adminsScreen/print";
 import AuthClient from "./screens/clientScreen/authClient";
 import HomeClient from "./screens/clientScreen/homeClient";
@@ -85,6 +85,11 @@ function App() {
               <Route path="/reimbusedExpenses/expenseRequest" element={<ReimbursedExpenseRequest />} />
               <Route path="/reimbusedExpenses/addExpenseType" element={<AddReimbursedExprensesType />} />
             </Route>
+            <Route exact path="/bloodMoney" element={<BloodMoney />}>
+              <Route path="/bloodMoney/" element={<RequestBloodMoney />}/>
+              <Route path="/bloodMoney/payment" element={<PaymentBloodMoney />}/>
+              <Route path="/bloodMoney/record" element={<RecordBloodMoney />}/>
+            </Route>
             {/*<Route exact path="/manageContest" element={<ManageContest />}>
               <Route path="/manageContest/" element={<DisplayContest />} />
               <Route path="/manageContest/addContest" element={<AddContest />} />
@@ -100,6 +105,7 @@ function App() {
             <Route exact path="/manageAdvertising/" element={<ManageAdvertising />}>
               <Route path="/manageAdvertising/" element={<DisplayAdvertising />} />
               <Route path="/manageAdvertising/addAd" element={<AddAd />} />
+              <Route path="/manageAdvertising/slideShow" element={<SlideShow />}/>
             </Route>
             <Route exact path="/agreements/" element={<Agreements />}>
               <Route path="/agreements/" element={<DisplayAgreements />} />
@@ -118,8 +124,8 @@ function App() {
             <Route path="/client/election" element={<Election />} />
             <Route path="/client/electionDetails" element={<ElectionDetails />} />
             <Route path="/client/advetising" element={<AdvertisingClient />} />
-            <Route path="/client/contest/userResult" element={<UserResultContest />} />
-            <Route path="/client/contest/result" element={<ContestResult />}/>
+            {/*<Route path="/client/contest/userResult" element={<UserResultContest />} />
+            <Route path="/client/contest/result" element={<ContestResult />}/>*/}
             {/*<Route path="/client/contestStart" element={<ContestStart />}>
               <Route path="/client/contestStart/enterToCompetiton" element={<EnterToContest />}/>
               <Route path="/client/contestStart/enterToBranches" element={<EnterToBranches />}/>
@@ -137,6 +143,7 @@ function App() {
             <Route path="/print/unrecoverdExpenses" element={<UnrecoverExpenses />} />
             <Route path="/print/recoverdExpenses" element={<RecoverExpenses />} />
             <Route path="/print/loans/recordInstallments" element={<PrintRecordInstallments />} />
+            <Route path="/print/goodsPurchaseContract" element={<GoodsPurchaseContract />}/>
           </Route>
         </Routes>
       </Router>

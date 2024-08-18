@@ -1,11 +1,10 @@
 const mongoose = require("mongoose");
 const Joi = require("joi");
-const shortid = require("shortid");
+const { generateNextId } = require("../../utils/generateNextId");
 
 const installmentsLoansSchema = new mongoose.Schema({
     id: {
         type: String,
-        default: shortid.generate,
         unique: true
     },
     idLoans: {
@@ -41,6 +40,30 @@ const installmentsLoansSchema = new mongoose.Schema({
         default: Date.now(),
     },
 })
+installmentsLoansSchema.pre('save', async function(next) {
+    if (this.isNew) {
+        let isUnique = false;
+        while (!isUnique) {
+            try {
+                this.id = await generateNextId("installmentsLoans", "IL");
+                await this.constructor.findOne({ id: this.id });
+                isUnique = true;
+            } catch (error) {
+                if (error.code === 11000) { // Duplicate key error
+                    await new Promise(res => setTimeout(res, Math.random() * 100)); // Délai aléatoire jusqu'à 100ms
+                    isUnique = false;
+                } else {
+                    next(error);
+                }
+            }
+        }
+        next();
+    } else {
+        next();
+    }
+});
+
+
 const joiSchema = Joi.object({
     idLoans: Joi.string().required(),
     premiumAmount: Joi.number().min(0).required(),

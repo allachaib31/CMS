@@ -19,7 +19,6 @@ function GoodsRevenueRecord() {
     useEffect(() => {
         setLoading((e) => !e)
         getAllCommodityRevenueFetch().then((res) => {
-            console.log(res)
             setLoading((e) => !e)
             setCommodityRevenue(res.data.commodityRevenue);
             setSaleAmount(res.data.saleAmount);
@@ -45,16 +44,16 @@ function GoodsRevenueRecord() {
             {
                 !loading ? "" : <div className="mt-[1rem] flex sm:flex-row flex-col gap-[1rem] justify-center">
                     <div className="flex sm:flex-col items-center justify-center gap-[1rem]">
-                        <h1 className="md:text-[1.1rem] sm:w-auto w-[90%] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">اجمالي مبلغ إيرادات السلع</h1>
-                        <h1 className="md:text-[1.1rem] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">{saleAmount}</h1>
+                        <h1 className="text-[0.8rem] md:text-[1.1rem] w-[70%] sm:w-auto  font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">إجمالي مبالغ إيرادات السلع</h1>
+                        <h1 className="text-[0.8rem] md:text-[1.1rem] text-center w-[30%] sm:w-auto font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">{saleAmount && saleAmount.toFixed(2)}</h1>
                     </div>
                     <div className="flex sm:flex-col items-center justify-center gap-[1rem]">
-                        <h1 className="md:text-[1.1rem] sm:w-auto w-[90%] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">اجمالي الارباح</h1>
-                        <h1 className="md:text-[1.1rem] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">{profitAmount}</h1>
+                        <h1 className="text-[0.8rem] md:text-[1.1rem] w-[70%] sm:w-auto font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">إجمالي الارباح</h1>
+                        <h1 className="text-[0.8rem] md:text-[1.1rem] text-center w-[30%] sm:w-auto font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">{profitAmount && profitAmount.toFixed(2)}</h1>
                     </div>
                     <div className="flex sm:flex-col items-center justify-center gap-[1rem]">
-                        <h1 className="md:text-[1.1rem] sm:w-auto w-[90%] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">عدد المستفيدين</h1>
-                        <h1 className="md:text-[1.1rem] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">{numberOfBeneficiaries}</h1>
+                        <h1 className="text-[0.8rem] md:text-[1.1rem] w-[70%] sm:w-auto font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">عدد المستفيدين</h1>
+                        <h1 className="text-[0.8rem] md:text-[1.1rem] text-center w-[30%] sm:w-auto font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">{numberOfBeneficiaries && numberOfBeneficiaries.toFixed(2)}</h1>
                     </div>
                 </div>
             }
@@ -63,48 +62,50 @@ function GoodsRevenueRecord() {
                     {" "}
                     <span className=" loading loading-ring loading-lg"></span>
                 </div> : <div className="overflow-x-auto mt-[1rem]">
-                    {
-                        commodityRevenue && commodityRevenue.map((commodity) => {
-                            return (
-                                <table className="text-[1rem] table border-separate border-spacing-2 border w-[2500px] mx-auto">
-                                    <tr>
-                                        <th className="border text-center border-slate-600" rowSpan={2}>
-                                            رقم الطلب
-                                        </th>
-                                        <th className="border text-center border-slate-600" rowSpan={2}>
-                                            اسم العميل
-                                        </th>
-                                        <th className="border text-center border-slate-600" rowSpan={2}>
-                                            مبلغ الشراء
-                                        </th>
-                                        <th className="border text-center border-slate-600" rowSpan={2}>
-                                            مبلغ البيع
-                                        </th>
-                                        <th className="border text-center border-slate-600" rowSpan={2}>
-                                            مبلغ الربح
-                                        </th>
-                                        <th className="border text-center border-slate-600" rowSpan={2}>
-                                            عدد الاقساط
-                                        </th>
-                                        <th colSpan={2} className="border text-center border-slate-600">
-                                            تاريخ بدء السداد
-                                        </th>
-                                        <th colSpan={2} className="border text-center border-slate-600">
-                                            تاريخ انتهاء السداد
-                                        </th>
-                                        <th className="border text-center border-slate-600" rowSpan={2}>
-                                            ملاحظات
-                                        </th>
-                                        <th className="border text-center border-slate-600" rowSpan={2}>
-                                            تفاصيل اكثر
-                                        </th>
-                                    </tr>
-                                    <tr>
-                                        <th className="border text-center border-slate-600">الميلادي</th>
-                                        <th className="border text-center border-slate-600">الهجري</th>
-                                        <th className="border text-center border-slate-600">الميلادي</th>
-                                        <th className="border text-center border-slate-600">الهجري</th>
-                                    </tr>
+                    <table className="text-[1rem] table border-separate border-spacing-2 border w-[1500px] mx-auto">
+                        <tr>
+                            <th className="border text-center border-slate-600" rowSpan={2}>
+                                رقم <br/>الطلب
+                            </th>
+                            <th className="border text-center border-slate-600" rowSpan={2}>
+                                اسم <br/>العميل
+                            </th>
+                            <th className="border text-center border-slate-600" rowSpan={2}>
+                                مبلغ <br/>الشراء
+                            </th>
+                            <th className="border text-center border-slate-600" rowSpan={2}>
+                                مبلغ <br/>البيع
+                            </th>
+                            <th className="border text-center border-slate-600" rowSpan={2}>
+                                مبلغ <br/>
+                            </th>
+                            <th className="border text-center border-slate-600" rowSpan={2}>
+                                عدد <br/>الاقساط
+                            </th>
+                            <th colSpan={2} className="border text-center border-slate-600">
+                                تاريخ بدء السداد
+                            </th>
+                            <th colSpan={2} className="border text-center border-slate-600">
+                                تاريخ انتهاء السداد
+                            </th>
+                            <th className="border text-center border-slate-600" rowSpan={2}>
+                                ملاحظات
+                            </th>
+                            <th className="border text-center border-slate-600" rowSpan={2}>
+                                تفاصيل اكثر
+                            </th>
+                        </tr>
+                        <tr>
+                            <th className="border text-center border-slate-600">الميلادي</th>
+                            <th className="border text-center border-slate-600">الهجري</th>
+                            <th className="border text-center border-slate-600">الميلادي</th>
+                            <th className="border text-center border-slate-600">الهجري</th>
+                        </tr>
+                        {
+                            commodityRevenue && commodityRevenue.map((commodity) => {
+                                const d = new Date(commodity.commodityData.dateOfPayment);
+                                const d2 = new Date(commodity.commodityData.paymentExpiryDate);
+                                return (
                                     <tbody>
                                         <tr>
                                             <td className="border text-center border-slate-600">{commodity.id}</td>
@@ -113,9 +114,9 @@ function GoodsRevenueRecord() {
                                             <td className="border text-center border-slate-600">{commodity.commodityData.saleAmount}</td>
                                             <td className="border text-center border-slate-600">{commodity.commodityData.profitAmount}</td>
                                             <td className="border text-center border-slate-600">{commodity.commodityData.numberOfInstallments}</td>
-                                            <td className="border text-center border-slate-600">{commodity.commodityData.dateOfPayment}</td>
+                                            <td className="border text-center border-slate-600">{d.getUTCFullYear() + "-" + (d.getUTCMonth() + 1) + "-" + d.getDate()}</td>
                                             <td className="border text-center border-slate-600">{commodity.commodityData.dateOfPaymentHijri.year}-{commodity.commodityData.dateOfPaymentHijri.month.number}-{commodity.commodityData.dateOfPaymentHijri.day}</td>
-                                            <td className="border text-center border-slate-600">{commodity.commodityData.paymentExpiryDate}</td>
+                                            <td className="border text-center border-slate-600">{d2.getUTCFullYear() + "-" + (d2.getUTCMonth() + 1) + "-" + d2.getDate()}</td>
                                             <td className="border text-center border-slate-600">{commodity.commodityData.paymentExpiryDateHijri.year}-{commodity.commodityData.paymentExpiryDateHijri.month.number}-{commodity.commodityData.paymentExpiryDateHijri.day}</td>
                                             <td onClick={() => {
                                                 setInputs({
@@ -131,10 +132,10 @@ function GoodsRevenueRecord() {
                                             </td>
                                         </tr>
                                     </tbody>
-                                </table>
-                            )
-                        })
-                    }
+                                )
+                            })
+                        }
+                    </table>
                 </div>
             }
             <AddNoteGoodsRevenueRecord inputs={inputs} setInputs={setInputs} />

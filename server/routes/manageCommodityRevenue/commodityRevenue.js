@@ -1,6 +1,6 @@
 const express = require("express");
 const authMiddleware = require("../../middleware/admin/auth");
-const { addCommodityRevenue, getIdCommodityRevenue, getCommodityRevenue, getInstallmentSchedule, getFormContributionPurchaseCommodity, getAllCommodityRevenue,addCommentCommodityRevenue,getActiveCommodityRevenue, getCommidtyAndInstallment, payInstallmentSchedule, addCommentInstallmentSchedule } = require("../../controllers/manageCommodityRevenue/commodityRevenue");
+const { addCommodityRevenue, getIdCommodityRevenue, getCommodityRevenue, getInstallmentSchedule, getFormContributionPurchaseCommodity, getAllCommodityRevenue,addCommentCommodityRevenue,getActiveCommodityRevenue, getCommidtyAndInstallment, payInstallmentSchedule, addCommentInstallmentSchedule, payAmount } = require("../../controllers/manageCommodityRevenue/commodityRevenue");
 const Router = express.Router();
 
 
@@ -14,7 +14,8 @@ Router.get("/api/v1.0/commodityRevenu/getActiveCommodityRevenue",authMiddleware,
 Router.get("/api/v1.0/commodityRevenu/getCommidtyAndInstallment",authMiddleware, getCommidtyAndInstallment);
 //POST METHODS
 Router.post("/api/v1.0/commodityRevenu/",authMiddleware, addCommodityRevenue);
-Router.post("/api/v1.0/commodityRevenu/payInstallmentSchedule",authMiddleware,payInstallmentSchedule)
+Router.post("/api/v1.0/commodityRevenu/payAmount", authMiddleware, payAmount)
+Router.post("/api/v1.0/commodityRevenu/payInstallmentSchedule",authMiddleware,payInstallmentSchedule);
 
 //PATCH METHODS
 Router.patch("/api/v1.0/commodityRevenu/addCommentCommodityRevenue",authMiddleware, addCommentCommodityRevenue);

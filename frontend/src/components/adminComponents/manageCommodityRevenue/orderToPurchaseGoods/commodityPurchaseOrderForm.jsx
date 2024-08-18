@@ -3,20 +3,28 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { hijriDateObject } from '../../../../utils/getHijriDate';
-import { getCommodityRevenueFetch, getIdCommodityRevenueFetch } from '../../../../utils/apiFetch';
+import { getCommodityRevenueFetch, getIdCommodityRevenueFetch, payAmountFetch } from '../../../../utils/apiFetch';
+import Alert from '../../../alert/alert';
 
 function CommodityPurchaseOrderForm() {
     const navigate = useNavigate();
     const [date, setDate] = useState(hijriDateObject());
     const [yearOptions, setYearOptions] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [load, setLoad] = useState(false);
     const [inputs, setInputs] = useState({
         month: date[1].number,
         year: date[2],
     });
+    const [payAmount, setPayAmount] = useState({
+        id: ""
+    });
     const [id, setId] = useState("");
     const [idList, setIdList] = useState([]);
     const [commodityRevenu, setCommodityRevenu] = useState(false);
+    const [showAlert, setShowAlert] = useState({
+        display: false,
+    });
     const generateYear = () => {
         const years = [];
         for (let i = 1415; i <= inputs.year; i++) {
@@ -27,7 +35,27 @@ function CommodityPurchaseOrderForm() {
     useEffect(() => {
         generateYear();
     }, []);
-
+    const handleSubmit = () => {
+        setLoad((e) => !e)
+        payAmountFetch(payAmount).then((res) => {
+            setLoad((e) => !e)
+            setShowAlert({
+                display: true,
+                status: true,
+                text: res.data.msg
+            });
+        }).catch((err) => {
+            if (err.response && err.response.status === 401) {
+                navigate("/auth");
+            }
+            setLoad((e) => !e)
+            setShowAlert({
+                display: true,
+                status: false,
+                text: err.response.data.msg
+            });
+        })
+    }
     useEffect(() => {
         getIdCommodityRevenueFetch(inputs).then((res) => {
             setIdList(res.data.commodityRevenue);
@@ -66,7 +94,7 @@ function CommodityPurchaseOrderForm() {
                     });
                 }} className="select xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
                     {yearOptions.map((value) => (
-                        <option key={value} value={value} selected={inputs.year === value}>
+                        <option key={value} value={value} selected={inputs.year == value}>
                             {value}
                         </option>
                     ))}
@@ -91,7 +119,10 @@ function CommodityPurchaseOrderForm() {
                 </select>
                 <select onChange={(event) => {
                     setId(event.target.value);
-                }} className="select xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
+                    setPayAmount({
+                        id: event.target.value
+                    })
+                }} className="select w-[8rem] xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
                     <option selected disabled>قم باختيار العدد الخاص بنموذج شراء السلع</option>
                     {idList && idList.map((list) => (
                         <option value={list._id}>{list.id}</option>
@@ -107,12 +138,20 @@ function CommodityPurchaseOrderForm() {
                 </div>
             }
             {
+                commodityRevenu && <div className=' mt-[1rem] container mx-auto'>
+                    {showAlert.display ? <Alert msg={showAlert} /> : ""}
+                    <button disabled={load} onClick={() => {
+                        handleSubmit();
+                    }} className='btn btn-success'>{load ?  <span className=" loading loading-ring loading-lg"></span> : "دفع الدفعة الاولى ان وجدت"}</button>
+                </div>
+            }
+            {
                 !loading ? <div className="flex justify-center">
                     {" "}
                     <span className=" loading loading-ring loading-lg"></span>
                 </div> : <div className="overflow-x-auto mt-[1rem]">
                     {
-                        commodityRevenu && <table className="text-[1rem] table border-separate border-spacing-2 border w-[1900px] mx-auto">
+                        commodityRevenu && <table className="text-[1rem] table border-separate border-spacing-2 border w-[1400px] mx-auto">
                             <tr className='text-center'>
                                 <th className="border text-center border-slate-600" colSpan={8}>بيانات العميل</th>
                             </tr>
@@ -151,7 +190,7 @@ function CommodityPurchaseOrderForm() {
                                 </tr>
                             </tbody>
                             <tr className='text-center'>
-                                <th className="border border-slate-600" colSpan={8}>بيانات العميل (العضو المشرف على شراء السلعة)</th>
+                                <th className="border border-slate-600" colSpan={8}>بيانات الكفيل (العضو المشرف على شراء السلعة)</th>
                             </tr>
                             <tr>
                                 <th colSpan={2} className="border text-center border-slate-600" rowSpan={2}>
@@ -206,11 +245,11 @@ function CommodityPurchaseOrderForm() {
                             <tbody>
                                 <tr>
                                     <td colSpan={2} className="border text-center border-slate-600">{commodityRevenu.commodityData.itemType}</td>
-                                    <td className="border text-center border-slate-600">{commodityRevenu.commodityData.purchaseAmount}</td>
-                                    <td className="border text-center border-slate-600">{commodityRevenu.commodityData.dateOfPurchase}</td>
+                                    <td className="border text-center border-slate-600">{commodityRevenu.commodityData.purchaseAmount.toFixed(2)}</td>
+                                    <td className="border text-center border-slate-600">{new Date(commodityRevenu.commodityData.dateOfPurchase).getUTCFullYear() + "-" + (new Date(commodityRevenu.commodityData.dateOfPurchase).getUTCMonth() + 1) + "-" + new Date(commodityRevenu.commodityData.dateOfPurchase).getUTCDate()}</td>
                                     <td className="border text-center border-slate-600">{commodityRevenu.commodityData.dateOfPurchaseHijri.year}-{commodityRevenu.commodityData.dateOfPurchaseHijri.month.number}-{commodityRevenu.commodityData.dateOfPurchaseHijri.day}</td>
                                     <td className="border text-center border-slate-600">{commodityRevenu.commodityData.amountPaid}</td>
-                                    <td className="border text-center border-slate-600" colSpan={2}>{commodityRevenu.commodityData.saleAmount}</td>
+                                    <td className="border text-center border-slate-600" colSpan={2}>{commodityRevenu.commodityData.saleAmount.toFixed(2)}</td>
                                 </tr>
                                 <tr>
                                     <th colSpan={2} className="border text-center border-slate-600">
@@ -238,13 +277,13 @@ function CommodityPurchaseOrderForm() {
                                     <th className="border text-center border-slate-600">الهجري</th>
                                 </tr>
                                 <tr>
-                                    <td className="border text-center border-slate-600">{commodityRevenu.commodityData.saleDate}</td>
+                                    <td className="border text-center border-slate-600">{new Date(commodityRevenu.commodityData.saleDate).getUTCFullYear() + "-" + (new Date(commodityRevenu.commodityData.saleDate).getUTCMonth() + 1) + "-" + new Date(commodityRevenu.commodityData.saleDate).getUTCDate()}</td>
                                     <td className="border text-center border-slate-600">{commodityRevenu.commodityData.saleDateHijri.year}-{commodityRevenu.commodityData.saleDateHijri.month.number}-{commodityRevenu.commodityData.saleDateHijri.day}</td>
-                                    <td className="border text-center border-slate-600">{commodityRevenu.commodityData.dateOfPayment}</td>
+                                    <td className="border text-center border-slate-600">{new Date(commodityRevenu.commodityData.dateOfPayment).getUTCFullYear() + "-" + (new Date(commodityRevenu.commodityData.dateOfPayment).getUTCMonth() + 1) + "-" + new Date(commodityRevenu.commodityData.dateOfPayment).getUTCDate()}</td>
                                     <td className="border text-center border-slate-600">{commodityRevenu.commodityData.dateOfPaymentHijri.year}-{commodityRevenu.commodityData.dateOfPaymentHijri.month.number}-{commodityRevenu.commodityData.dateOfPaymentHijri.day}</td>
-                                    <td className="border text-center border-slate-600">{commodityRevenu.commodityData.paymentExpiryDate}</td>
+                                    <td className="border text-center border-slate-600">{new Date(commodityRevenu.commodityData.paymentExpiryDate).getUTCFullYear() + "-" + (new Date(commodityRevenu.commodityData.paymentExpiryDate).getUTCMonth() + 1) + "-" + new Date(commodityRevenu.commodityData.paymentExpiryDate).getUTCDate()}</td>
                                     <td className="border text-center border-slate-600">{commodityRevenu.commodityData.paymentExpiryDateHijri.year}-{commodityRevenu.commodityData.paymentExpiryDateHijri.month.number}-{commodityRevenu.commodityData.paymentExpiryDateHijri.day}</td>
-                                    <td className="border text-center border-slate-600">{commodityRevenu.commodityData.premiumAmount}</td>
+                                    <td className="border text-center border-slate-600">{commodityRevenu.commodityData.premiumAmount.toFixed(2)}</td>
                                     <td className="border text-center border-slate-600">{commodityRevenu.commodityData.numberOfInstallments}</td>
                                 </tr>
                             </tbody>
@@ -261,12 +300,12 @@ function CommodityPurchaseOrderForm() {
                             </tr>
                             <tbody>
                                 <tr>
-                                    <td className="border text-center border-slate-600">{commodityRevenu.commodityData.currentBalanceFund}</td>
-                                    <td className="border text-center border-slate-600">{commodityRevenu.commodityData.contributionAmount}</td>
+                                    <td className="border text-center border-slate-600">{commodityRevenu.commodityData.currentBalanceFund.toFixed(2)}</td>
+                                    <td className="border text-center border-slate-600">{commodityRevenu.commodityData.contributionAmount.toFixed(2)}</td>
                                     <td className="border text-center border-slate-600">{commodityRevenu.commodityData.contributionPercentage.toFixed(2)}%</td>
-                                    <td className="border text-center border-slate-600">{commodityRevenu.commodityData.profitRatio}%</td>
-                                    <td className="border text-center border-slate-600">{commodityRevenu.commodityData.profitAmount}</td>
-                                    <td className="border text-center border-slate-600" colSpan={3}>{commodityRevenu.commodityData.balance}</td>
+                                    <td className="border text-center border-slate-600">{commodityRevenu.commodityData.profitRatio.toFixed(2)}%</td>
+                                    <td className="border text-center border-slate-600">{commodityRevenu.commodityData.profitAmount.toFixed(2)}</td>
+                                    <td className="border text-center border-slate-600" colSpan={3}>{commodityRevenu.commodityData.balance.toFixed(2)}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -274,10 +313,12 @@ function CommodityPurchaseOrderForm() {
 
                 </div>
             }
+            <div className='container mx-auto'>
             {
                 commodityRevenu && <h1 className='mt-[1rem] text-[1.1rem] font-bold'>للذهاب إلى جدول الأقساط <Link to={"/commodityRevenue/installmentSchedule?id=" + commodityRevenu._id} className='text-error'>اضغط هنا</Link></h1>
 
             }
+            </div>
         </div>
     )
 }

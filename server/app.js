@@ -80,6 +80,7 @@ conn.once('open', () => {
     const userInformation = require("./routes/client/userInformation/information");
     const advertising = require("./routes/manageAdvertising/advertising");
     const competition = require("./routes/client/competition/competition");
+    const bloodMoney = require("./routes/bloodMoney/bloodMoney");
     const { scheduleUpdate } = require("./schedule/schedule");
 
     app
@@ -102,7 +103,8 @@ conn.once('open', () => {
         .use(agreements)
         .use(familyTree)
         .use(advertising)
-        .use(competition);
+        .use(competition)
+        .use(bloodMoney);
 
     app.get('*', (req, res) => {
         res.sendFile(path.join(__dirname, 'build', 'index.html'));

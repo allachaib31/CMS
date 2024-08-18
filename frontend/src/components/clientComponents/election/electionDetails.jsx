@@ -61,7 +61,17 @@ function ElectionDetails() {
                         backgroundColor: "#1eb854", // Adjust color as needed
                     },
                 ],
-            }} />
+            }}
+                options={{
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                stepSize: 1, // Ensures ticks are whole numbers
+                            },
+                        },
+                    },
+                }} />
         </div>
     )
 }

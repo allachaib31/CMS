@@ -17,7 +17,8 @@ exports.addTypeExpenses = async (req, res) => {
         })
         await typeExpenses.save();
         return res.status(200).send({
-            msg: "لقد تمت اضافته بنجاح"
+            msg: "لقد تمت اضافته بنجاح",
+            typeExpenses
         });
     } catch (error) {
         return res.status(500).send({

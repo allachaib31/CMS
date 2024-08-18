@@ -37,11 +37,39 @@
   background: #555;
 }
 @media print {
-
-  
+  .contract-container {
+      width: 100%;
+      height: 100%;
+      padding: 20mm;
+      box-sizing: border-box;
+  }
+  .contract-content {
+      width: 100%;
+      height: auto;
+      box-shadow: none;
+  }
+  .contract-content * {
+      font-size: 12pt; /* Adjust font size for print */
+      line-height: 1.4;
+  }
 }
 
 /* customEditorStyles.css */
 .ck-content {
   padding: 20px; /* Adjust the padding value as needed */
+}
+@layer utilities {
+  @keyframes scroll {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+
+  .animate-scroll {
+    animation: scroll 30s linear infinite;
+    display: flex;
+  }
 }

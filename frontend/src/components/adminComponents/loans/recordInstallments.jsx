@@ -61,11 +61,13 @@ function RecordInstallments() {
                     <FontAwesomeIcon icon={faRightLong} />
                 </Link>
             </div>
+            <div className='container mx-auto'>
             {showAlert.display ? <Alert msg={showAlert} /> : ""}
             <Link to={`/print/loans/recordInstallments?id=${queryParams.get('id')}`} target='_blank' className='mt-[1rem] btn btn-info font-bold'><FontAwesomeIcon icon={faPrint} /> طباعة</Link>
+            </div>
             <div className="overflow-x-auto mt-[1rem]">
                 {
-                    loanInfo && <table className="text-[1rem] table border-separate border-spacing-2 border w-[1900px] mx-auto">
+                    loanInfo && <table className="text-[1rem] table border-separate border-spacing-2 border w-[1300px] mx-auto">
                         <thead className="text-[1rem] text-center">
                             <tr>
                                 <td className='border border-slate-600' colSpan={9}>سجل الاقساط</td>
@@ -112,31 +114,23 @@ function RecordInstallments() {
                             <th className="border border-slate-600" rowSpan={2}>
                                 مبلغ القسط
                             </th>
-                            <th className="border border-slate-600" colSpan={2}>
-                                تاريخ التسديد الفعلي
+                            <th className="border border-slate-600" >
+                                تاريخ التسديد الفعلي بالميلادي
                             </th>
-                            <th className="border border-slate-600" colSpan={2}>
-                                تاريخ التسديد المطلوب
+                            <th className="border border-slate-600" >
+                                تاريخ التسديد الفعلي بالهجري
+                            </th>
+                            <th className="border border-slate-600" >
+                                تاريخ التسديد المطلوب بالميلادي
+                            </th>
+                            <th className="border border-slate-600" >
+                                تاريخ التسديد المطلوب بالهجري
                             </th>
                             <th className="border border-slate-600" rowSpan={2}>
                                 مبلغ القسط المتأخر
                             </th>
                             <th className="border border-slate-600" rowSpan={2}>
                                 دفع
-                            </th>
-                        </tr>
-                        <tr className='text-center'>
-                            <th className="border border-slate-600">
-                                الميلادي
-                            </th>
-                            <th className="border border-slate-600">
-                                الهجري
-                            </th>
-                            <th className="border border-slate-600">
-                                الميلادي
-                            </th>
-                            <th className="border border-slate-600">
-                                الهجري
                             </th>
                         </tr>
                         <tbody>
@@ -148,18 +142,18 @@ function RecordInstallments() {
                                     const currentDate = new Date();
                                     targetDate.setHours(0, 0, 0, 0);
                                     currentDate.setHours(0, 0, 0, 0);
-                                    console.log(targetDate);
-                                    console.log(currentDate)
                                     if (currentDate.getTime() >= targetDate.getTime() && !installment.itPaid) {
                                         amount = installment.premiumAmount;
                                     }
+                                    const d = new Date(installment.actualPaymentDate);
+                                    const d2 = new Date(installment.requiredPaymentDate)
                                     return (
                                         <tr className='text-center'>
                                             <td className="border border-slate-600">{installment.id}</td>
                                             <td className="border border-slate-600">{installment.premiumAmount}</td>
-                                            <td className="border border-slate-600">{installment.actualPaymentDate}</td>
+                                            <td className="border border-slate-600">{installment.actualPaymentDate && d.getUTCFullYear() + "-" + (d.getUTCMonth() + 1) + "-" + d.getUTCDate()}</td>
                                             <td className="border border-slate-600">{installment.actualPaymentDateHijri && installment.actualPaymentDateHijri.year + "-" + installment.actualPaymentDateHijri.month.number + "-" + installment.actualPaymentDateHijri.day}</td>
-                                            <td className="border border-slate-600">{installment.requiredPaymentDate}</td>
+                                            <td className="border border-slate-600">{d2.getUTCFullYear() + "-" + (d2.getUTCMonth() + 1) + "-" + d2.getUTCDate()}</td>
                                             <td className="border border-slate-600">{installment.requiredPaymentDateHijri.year}-{installment.requiredPaymentDateHijri.month.number}-{installment.requiredPaymentDateHijri.day}</td>
                                             <td className="border border-slate-600">{amount}</td>
                                             <td className="border border-slate-600">

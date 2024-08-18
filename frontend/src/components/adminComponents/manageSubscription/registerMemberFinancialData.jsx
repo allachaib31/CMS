@@ -23,17 +23,17 @@ function RegisterMemberFinancialData() {
                 سجل البيانات المالية للعضو
             </h1>
             <div className="overflow-x-auto mt-[1rem]">
-                <table className="text-[1rem] table border-separate border-spacing-2 border w-[2700px] mx-auto">
+                <table className="text-[1rem] table border-separate border-spacing-2 border w-[1700px] mx-auto">
                     {/* head */}
-                    <thead className='text-center text-[1rem]'>
+                    <thead className='text-center text-[0.9rem]'>
                         <tr>
                             <th rowSpan={2} className='border border-slate-600'>اسم العضو</th>
                             <th className='text-center border border-slate-600' colSpan={2}>تاريخ الاشتراك</th>
                             <th className='text-center border border-slate-600' colSpan={2}>رصيد العضو</th>
-                            <th rowSpan={2} className='border border-slate-600'>المصروف من رصيده</th>
+                            <th rowSpan={2} className='border border-slate-600'>المصروف من <br />رصيده</th>
                             <th className='text-center border border-slate-600' colSpan={2}>القروض</th>
                             <th className='text-center border border-slate-600' colSpan={2}>الاعانات</th>
-                            <th rowSpan={2} className='border border-slate-600'>ارباح السلع و المساهمات</th>
+                            <th rowSpan={2} className='border border-slate-600'>ارباح السلع<br/> و المساهمات</th>
                             <th colSpan={2} className='border border-slate-600'>تاريخ انتهاء اشتراكه</th>
                             <th rowSpan={2} className='border border-slate-600'>الحالة</th>
                             <th rowSpan={2} className='border border-slate-600'>ملاحظات</th>
@@ -41,7 +41,7 @@ function RegisterMemberFinancialData() {
                         <tr>
                             <th className='text-center border border-slate-600'>الميلادي</th>
                             <th className='text-center border border-slate-600'>الهجري</th>
-                            <th className='text-center border border-slate-600'>مند بداية اشتراكه</th>
+                            <th className='text-center border border-slate-600'>مند بداية <br />اشتراكه</th>
                             <th className='text-center border border-slate-600'>الحالي</th>
                             <th className='border border-slate-600'>عددها</th>
                             <th className='border border-slate-600'>مبلغها</th>
@@ -54,10 +54,11 @@ function RegisterMemberFinancialData() {
                     <tbody>
                         {
                             users && users.map((user) => {
+                                const createdAt = new Date(user.createdAt);
                                 return (
-                                    <tr className='text-center'>
+                                    <tr className='text-center text-[0.8rem]'>
                                         <th className='border border-slate-600'>{user.idUser.name}</th>
-                                        <td className='border border-slate-600'>{user.createdAt}</td>
+                                        <td className='border border-slate-600'>{createdAt.getUTCFullYear() + "-" + (createdAt.getUTCMonth() + 1) + "-" + createdAt.getUTCDate()}</td>
                                         <td className='border border-slate-600'>{user.hijriDate.year}-{user.hijriDate.month.number}-{user.hijriDate.day}</td>
                                         <td className='border border-slate-600'>{user.idUser.cumulativeBalance.toFixed(2)}</td>
                                         <td className='border border-slate-600'>{user.idUser.memberBalance.toFixed(2)}</td>

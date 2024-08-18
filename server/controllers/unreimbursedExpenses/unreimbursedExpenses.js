@@ -113,6 +113,7 @@ exports.addExpenses = async (req, res) => {
         const unReimbursedExpenses = new unReimbursedExpensesModel({
             name: user.name,
             amount,
+            expensememberbalance: paymentAmount,
             typeExpenses: typeExpensesName.name,
             comments,
             hijriDate: {
@@ -122,25 +123,37 @@ exports.addExpenses = async (req, res) => {
             }
         })
         let activeAmount = 0;
-        users.forEach(async (user) => {
-            if (user.status == "active") {
-                activeAmount += paymentAmount;
-                user.memberBalance -= paymentAmount;
-                await user.save();
-            } else {
-                const cashPayUser = new cashPayUserModel({
-                    idUser: user._id,
-                    amount: paymentAmount,
-                    unReimbursedExpensesId: unReimbursedExpenses._id,
-                    hijriDate: {
-                        day: hijriDate[0],
-                        month: hijriDate[1],
-                        year: hijriDate[2],
+        for(const user of users) {
+            let isSaved = false;
+            while(!isSaved){
+                try {
+                    if (user.status == "active") {
+                        activeAmount += paymentAmount;
+                        user.memberBalance -= paymentAmount;
+                        await user.save();
+                    } else {
+                        const cashPayUser = new cashPayUserModel({
+                            idUser: user._id,
+                            amount: paymentAmount,
+                            unReimbursedExpensesId: unReimbursedExpenses._id,
+                            hijriDate: {
+                                day: hijriDate[0],
+                                month: hijriDate[1],
+                                year: hijriDate[2],
+                            }
+                        })
+                        await cashPayUser.save();
                     }
-                })
-                await cashPayUser.save();
+                    isSaved = true;
+                }catch (error) {
+                    if (error.code === 11000) {
+                        await new Promise(res => setTimeout(res, Math.random() * 100));
+                    } else {
+                        throw error;
+                    }
+                }
             }
-        });
+        }
         unReimbursedExpenses.balanceDistribution = activeAmount;
         unReimbursedExpenses.total = activeAmount;
         await unReimbursedExpenses.save();

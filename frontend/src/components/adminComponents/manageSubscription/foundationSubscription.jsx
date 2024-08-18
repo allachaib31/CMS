@@ -128,8 +128,8 @@ function FoundationSubscription() {
 
       {showAlert.display ? <Alert msg={showAlert} /> : ""}
       <div className="overflow-x-auto  mt-[2rem]">
-        <table className="table text-[1rem] mx-auto w-[1800px]">
-          <thead className="text-[1rem]">
+        <table className="table text-[1rem] mx-auto w-[1400px]">
+          <thead className="text-center text-[1rem]">
             <tr>
               <th>العدد</th>
               <th>اسم العضو</th>
@@ -145,19 +145,19 @@ function FoundationSubscription() {
             {user && user.map((user, index) => {
               let comment = "";
               return (
-                <tr>
+                <tr className='text-center'>
                   <td>{user.id}</td>
                   <td>{user.name}</td>
                   <td>{user.NationalIdentificationNumber}</td>
                   <td>{user.phoneNumber}</td>
                   <td>التأسيس</td>
                   <td>{foundationPrice}</td>
-                  <td><input type="text" onChange={(event) => {
+                  <td>{user.enableAccount ? "" : <input type="text" onChange={(event) => {
                     comment = event.target.value.trim()
                     /*setInputs((prevInputs) => {
                       return { ...prevInputs, comments: event.target.value.trim() }
                     })*/
-                  }} placeholder="أكتب هنا" className="input input-bordered w-full max-w-xs" /></td>
+                  }} placeholder="أكتب هنا" className="input input-bordered w-full max-w-xs" /> }</td>
                   <td id={user._id}>{user.enableAccount ? "لقد تم دفع" : <button onClick={() => {
                     handleSubmit({
                       idUser: user._id,

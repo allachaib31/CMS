@@ -252,7 +252,6 @@ function StocksContributionForm() {
                 </div>
                 <button onClick={(event) => {
                     event.preventDefault();
-                    console.log(inputs)
                     handleSubmit();
                 }} disabled={submit} className='btn text-white font-bold text-[20px] btn-primary'>
                     {submit ? <span className="loading loading-ring loading-lg"></span> : "تاكيد"}

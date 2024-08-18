@@ -95,7 +95,7 @@ function DisplayUser() {
       </div>
       {showAlert.display ? <Alert msg={showAlert} /> : ""}
       <div className="overflow-x-auto xl:flex xl:justify-center  mt-[2rem]">
-        <table className="table w-[1800px]">
+        <table className="table w-[1400px]">
           {/* head */}
           <thead>
             <tr className="text-center text-[1rem]">
@@ -103,13 +103,8 @@ function DisplayUser() {
               <th>اسم العضو</th>
               <th>رقم الهوية</th>
               <th>رقم الجوال</th>
-              <th colSpan="2" rowSpan="2" className="">
-                <span className="flex w-full justify-center"> تاريخ الاشتراك  </span>
-                <div className="flex mt-[0.5rem]">
-                  <span className="w-1/2 text-center">الميلادي</span>
-                  <span className="w-1/2 text-center">الهجري</span>
-                </div>
-              </th>
+              <th>تاريخ الاشتراك الميلادي </th>
+              <th>تاريخ الاشتراك الهجري </th>
               <th>الحالة</th>
               <th>ملاحظات</th>
               <th>تعديل</th>

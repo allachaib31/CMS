@@ -86,12 +86,13 @@ function AnnualSubscriptionRecord() {
                     <FontAwesomeIcon icon={faRightLong} />
                 </Link>
             </div>
-            <h1 className="text-center text-[1.1rem] sm:text-[1.5rem] font-bold py-[1rem]">
+            <h1 className="text-center text-[1.1rem] sm:text-[1.5rem] font-bold py-[0.5rem]">
                 سجل الاشتراكات السنوية لعام {year} الرصيد : {total.reduce((total, value) => {
                     return total + Number(value);
                 })}
             </h1>
-            <div className="container mx-auto flex-wrap mb-[1rem]">
+            <div className="container mx-auto flex-wrap">
+                <Link to={`/print/recordAnnual?year=${year}`} target='_blank' className='ml-[1rem] btn btn-info font-bold'><FontAwesomeIcon icon={faPrint} /> طباعة</Link>
                 <select
                     onChange={(event) => setYear(event.target.value)}
                     className="select xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item"
@@ -111,47 +112,46 @@ function AnnualSubscriptionRecord() {
                     </button>
                 </div>
             </div>
-            <div className='container mx-auto'>
-                <Link to={`/print/recordAnnual?year=${year}`} target='_blank' className='btn btn-info font-bold'><FontAwesomeIcon icon={faPrint} /> طباعة</Link>
-            </div>
-            <div className="overflow-x-auto mt-[2rem]">
-                {!loading ? <div className='flex justify-center'> <span className=" loading loading-ring loading-lg"></span></div> : <table className="table border-separate border-spacing-2 border text-[1rem] w-[1800px]">
-                    <thead className='text-[1rem]'>
-                        <tr className='text-center'>
-                            <th className='border border-slate-600'>الاسم</th>
-                            <th className='border border-slate-600'>محرم</th>
-                            <th className='border border-slate-600'>صفر</th>
-                            <th className='border border-slate-600'>ربيع الاول</th>
-                            <th className='border border-slate-600'>ربيع الثاني</th>
-                            <th className='border border-slate-600'>جمادى الاول</th>
-                            <th className='border border-slate-600'>جمادى الثاني</th>
-                            <th className='border border-slate-600'>رجب</th>
-                            <th className='border border-slate-600'>شعبان</th>
-                            <th className='border border-slate-600'>رمضان</th>
-                            <th className='border border-slate-600'>شوال</th>
-                            <th className='border border-slate-600'>ذو القعدة</th>
-                            <th className='border border-slate-600'>ذو الحجة</th>
-                            <th className='border border-slate-600'>رصيد العضو</th>
-                            <th className='border border-slate-600'>المتأخرات</th>
-                            <th className='border border-slate-600'>تفاصيل أكثر</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {renderSubscriptions()}
-                        <tr className='text-center'>
-                            <th className='border border-slate-600'>المجموع</th>
-                            {total.map((value, index) => {
-                                return (<td className='border border-slate-600' key={index}>{value}</td>)
-                            })}
-                            <td className='border border-slate-600'>{
-                                total.reduce((total, value) => {
-                                    return total + Number(value);
-                                })
-                            }</td>
-                            <td className='border border-slate-600'>0</td>
-                        </tr>
-                    </tbody>
-                </table>}
+            <div className='flex justify-center'>
+                <div className="overflow-x-auto mt-[0.5rem]">
+                    {!loading ? <div className='flex justify-center'> <span className=" loading loading-ring loading-lg"></span></div> : <table className="table border-separate border-spacing-2 border text-[1rem] w-[1450px]">
+                        <thead className='text-[1rem]'>
+                            <tr className='text-center'>
+                                <th className='border border-slate-600'>الاسم</th>
+                                <th className='border border-slate-600'>محرم</th>
+                                <th className='border border-slate-600'>صفر</th>
+                                <th className='border border-slate-600'>ربيع <br />الاول</th>
+                                <th className='border border-slate-600'>ربيع <br />الثاني</th>
+                                <th className='border border-slate-600'>جمادى <br />الاول</th>
+                                <th className='border border-slate-600'>جمادى <br />الثاني</th>
+                                <th className='border border-slate-600'>رجب</th>
+                                <th className='border border-slate-600'>شعبان</th>
+                                <th className='border border-slate-600'>رمضان</th>
+                                <th className='border border-slate-600'>شوال</th>
+                                <th className='border border-slate-600'>ذو القعدة</th>
+                                <th className='border border-slate-600'>ذو الحجة</th>
+                                <th className='border border-slate-600'>رصيد <br />العضو</th>
+                                <th className='border border-slate-600'>المتأخرات</th>
+                                <th className='border border-slate-600'>تفاصيل <br />أكثر</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {renderSubscriptions()}
+                            <tr className='text-center'>
+                                <th className='border border-slate-600'>المجموع</th>
+                                {total.map((value, index) => {
+                                    return (<td className='border border-slate-600' key={index}>{value}</td>)
+                                })}
+                                <td className='border border-slate-600'>{
+                                    total.reduce((total, value) => {
+                                        return total + Number(value);
+                                    })
+                                }</td>
+                                <td className='border border-slate-600'>0</td>
+                            </tr>
+                        </tbody>
+                    </table>}
+                </div>
             </div>
         </div>
     );

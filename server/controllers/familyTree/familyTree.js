@@ -1,9 +1,14 @@
 const { familyTreeModel } = require("../../models/familyTree/familyTree");
+const { Readable } = require('stream');
 const { isValidObjectId } = require('mongoose');
 const getHijriDate = require("../../utils/getHijriDate");
 const shortid = require("shortid");
+const { familyMemberModel } = require("../../models/familyTree/familyMembers");
+const { File } = require("../../models/advertising/advertising");
+const { familyRelationModel } = require("../../models/familyTree/familyRelation");
+const { bucket } = require('../../app');
 exports.createNewFamilyTree = async (req, res) => {
-    const { nameTree, name } = req.body;
+    const { nameTree } = req.body;
     try {
         if (
             req.user.admin.userPermission.indexOf(
@@ -17,11 +22,6 @@ exports.createNewFamilyTree = async (req, res) => {
         const hijriDate = getHijriDate();
         const familyTree = new familyTreeModel({
             name: nameTree,
-            familyTree: {
-                name,
-                value: shortid.generate(),
-                children: []
-            },
             hijriDate: {
                 day: hijriDate[0],
                 month: hijriDate[1],
@@ -41,51 +41,62 @@ exports.createNewFamilyTree = async (req, res) => {
 }
 
 exports.addToFamilyTree = async (req, res) => {
-    const { idTree, valueName, nameSun } = req.body;
-    console.log(req.body);
+    const { file } = req;
+    const { idTree, nameTree, title, titleBgColor, titleTextColor, subtitles, sex, badges } = req.body;
     try {
-        const familyTree = await familyTreeModel.findById(idTree);
-        if (!familyTree) {
-            return res.status(404).send({
-                msg: "شجرة العائلة غير موجودة"
+        // Create a writable stream to GridFS
+        if(file){
+            const { originalname, mimetype, buffer } = file;
+            let uploadStream = bucket.openUploadStream(originalname, {
+                contentType: mimetype
             });
-        }
-
-        function addChild(parentName, newChild, node) {
-            if (node.value === parentName) {
-                if (!node.children) {
-                    node.children = [];
-                }
-                node.children.push(newChild);
-                return true;
-            }
-            if (node.children) {
-                for (let child of node.children) {
-                    if (addChild(parentName, newChild, child)) {
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
-
-        const newChild = { "name": nameSun, "value": shortid.generate() };
-        const parentName = valueName;
-
-        if (!addChild(parentName, newChild, familyTree.familyTree)) {
-            return res.status(404).send({
-                msg: "العنصر الأب غير موجود"
+    
+            // Create a readable stream from the buffer
+            let readBuffer = new Readable();
+            readBuffer.push(buffer);
+            readBuffer.push(null);
+    
+            // Pipe the buffer to GridFS
+            await new Promise((resolve, reject) => {
+                readBuffer.pipe(uploadStream)
+                    .on('finish', resolve)
+                    .on('error', reject);
             });
+    
+            // Save file metadata in MongoDB
+            let newFile = new File({
+                filename: originalname,
+                contentType: mimetype,
+                length: buffer.length,
+                id: uploadStream.id
+            });
+    
+            let savedFile = await newFile.save();
+            if (!savedFile) {
+                return res.status(404).send("حدث خطأ أثناء حفظ البيانات التعريفية للملف");
+            }
+            const familyTree = await familyTreeModel.findById(idTree);
+            if (!familyTree) {
+                return res.status(404).send({
+                    msg: "شجرة العائلة غير موجودة"
+                });
+            }
+            const familyMember = new familyMemberModel({
+                idFamilyTree: idTree,data: {
+                    nameTree, title, titleBgColor, titleTextColor, subtitles: subtitles.split(","), sex, badges: badges.split(","),  imageUrl: newFile._id
+                }
+            })
+            await familyMember.save();
+        }else{
+            const familyMember = new familyMemberModel({
+                idFamilyTree: idTree,data: {
+                    nameTree, title, titleBgColor, titleTextColor, subtitles: subtitles.split(","), sex, badges: badges.split(",")
+                }
+            })
+            await familyMember.save();
         }
-
-        // Mark the familyTree field as modified
-        familyTree.markModified('familyTree');
-
-        await familyTree.save();
-
         return res.status(200).send({
             msg: "تمت إضافة العنصر بنجاح",
-            familyTree
         });
     } catch (error) {
         console.log(error);
@@ -95,6 +106,59 @@ exports.addToFamilyTree = async (req, res) => {
         });
     }
 };
+exports.addNewRelation = async (req, res) => {
+    const { idTree, relationType, prettyType, toId, fromId, isInnerFamily } = req.body;
+    try {
+        const familyTree = await familyTreeModel.findById(idTree);
+        if (!familyTree) {
+            return res.status(404).send({
+                msg: "شجرة العائلة غير موجودة"
+            });
+        }
+        if(toId.toString() == fromId.toString()) {
+            return res.status(400).send({
+                msg: "حدث خطأ"
+            })
+        }
+        const familyRelationExist = await familyRelationModel.findOne({
+            fromId: toId,
+            toId: fromId
+        });
+        if(familyRelationExist) {
+            return res.status(400).send({
+                msg: "هذه العلاقة موجودة بالفعل"
+            })
+        }
+        const familyRelation = new familyRelationModel({
+            idFamilyTree: idTree,relationType, prettyType, toId: fromId, fromId: toId , isInnerFamily
+        })
+        await familyRelation.save();
+        return res.status(200).send({
+            msg: "تمت إضافة العنصر بنجاح",
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).send({
+            msg: "حدث خطأ أثناء معالجة طلبك",
+            error: error.message
+        });
+    }
+}
+exports.getMemberFamilyTree = async (req, res) => {
+    const { idFamilyTree } = req.query;
+    try{
+        const familyMember = await familyMemberModel.find({
+            idFamilyTree
+        });
+        return res.status(200).send({
+            familyMember
+        })
+    }catch (error) {
+        return res.status(500).send({
+            msg: "حدث خطأ أثناء معالجة طلبك"
+        });
+    }
+}
 exports.getFamilyTree = async (req, res) => {
     try {
         const familyTree = await familyTreeModel.find().sort({
@@ -113,8 +177,16 @@ exports.getFamilyTreeUseId = async (req, res) => {
     const { id } = req.query;
     try {
         const familyTree = await familyTreeModel.findById(id);
+        const familyMember = await familyMemberModel.find({
+            idFamilyTree: id
+        });
+        const familyRelation = await familyRelationModel.find({
+            idFamilyTree: id
+        });
         return res.status(200).send({
-            familyTree
+            familyTree,
+            familyMembers: familyMember,
+            familyRelations: familyRelation
         })
     } catch (error) {
         return res.status(500).send({

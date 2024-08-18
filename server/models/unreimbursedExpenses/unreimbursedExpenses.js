@@ -1,16 +1,19 @@
 const mongoose = require("mongoose");
 const Joi = require("joi");
-const shortid = require("shortid");
+const { generateNextId } = require("../../utils/generateNextId");
 
 const unReimbursedExpensesSchema = new mongoose.Schema({
     id: {
         type: String,
-        default: shortid.generate,
         unique: true,
     },
     name: {
         type: String,
         required: true,
+    },
+    expensememberbalance: {
+        type: Number,
+        required: true
     },
     amount: {
         type: Number,
@@ -46,7 +49,12 @@ const unReimbursedExpensesSchema = new mongoose.Schema({
         default: Date.now(),
     },
 })
-
+unReimbursedExpensesSchema.pre('save', async function(next) {
+    if (this.isNew) { // Check if the document is new
+        this.id = await generateNextId("unReimbursedExpenses", "UR");
+    }
+    next();
+});
 const joiSchema = Joi.object({
     name: Joi.string().required(),
     amount: Joi.number().min(0).required(),

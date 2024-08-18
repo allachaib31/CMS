@@ -55,8 +55,8 @@ function RecordAnnual() {
     },[loading])
     return (
         <div id="printableArea">
-            {!loading ? <div className='flex justify-center'> <span className=" loading loading-ring loading-lg"></span></div> : <div className='flex justify-center'> <table className="table border-separate border-spacing-2 border text-[1rem] w-[1800px]">
-                    <thead className='text-[1rem]'>
+            {!loading ? <div className='flex justify-center'> <span className=" loading loading-ring loading-lg"></span></div> : <div className='flex justify-center'> <table className="table border-separate border-spacing-2 border text-[1rem] w-[1300px]">
+                    <thead className='text-[0.8rem]'>
                         <tr className='text-center'>
                             <th className='border border-slate-600'>الاسم</th>
                             <th className='border border-slate-600'>محرم</th>
@@ -75,7 +75,7 @@ function RecordAnnual() {
                             <th className='border border-slate-600'>المتأخرات</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody className='text-[0.8rem]'>
                         {renderSubscriptions()}
                         <tr className='text-center'>
                             <th className='border border-slate-600'>المجموع</th>

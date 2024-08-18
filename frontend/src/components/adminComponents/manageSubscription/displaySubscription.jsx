@@ -122,7 +122,7 @@ function DisplaySubscription() {
                     name="dateInput"
                 />
                 <label htmlFor="">
-                    الموافق لي{" "}
+                    الموافق{" "}
                     {inputs.dateHijri ? (
                         <span>
                             {inputs.dateHijri.year}/{inputs.dateHijri.month.number}/
@@ -135,8 +135,8 @@ function DisplaySubscription() {
             </div>
             <div className="mt-[1rem] flex justify-center">
                 <div className="flex gap-[0.2rem] sm:gap-[1rem]">
-                    <h1 className="text-[1.1rem] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">إجمالي الاشتراكات لهذا الشهر</h1>
-                    <h1 className="text-[1.1rem] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">{total}</h1>
+                    <h1 className="text-[0.8rem] sm:text-[1rem] text-center font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">إجمالي الاشتراكات لهذا الشهر</h1>
+                    <h1 className="text-[0.8rem] sm:text-[1rem]  font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">{total}</h1>
                 </div>
             </div>
             {showAlert.display ? <Alert msg={showAlert} /> : ""}
@@ -147,37 +147,33 @@ function DisplaySubscription() {
                         <span className=" loading loading-ring loading-lg"></span>
                     </div>
                 ) : (
-                    <table className="text-[1rem] table border-separate border-spacing-2 border w-[1500px] mx-auto">
+                    <table className="text-[1rem] table border-separate border-spacing-2 border w-[1550px] mx-auto">
                         <thead className="text-[1rem] text-center">
                             <tr>
-                                <th className="border border-slate-600" rowSpan={2}>
+                                <th className="border border-slate-600">
                                     اسم العضو
                                 </th>
-                                <th className="border border-slate-600" rowSpan={2}>
+                                <th className="border border-slate-600">
                                     نوع المبلغ
                                 </th>
-                                <th className="border border-slate-600" rowSpan={2}>
+                                <th className="border border-slate-600">
                                     المبلغ
                                 </th>
-                                <th className="text-center border border-slate-600" colSpan={2}>
-                                    تاريخ الاستحقاق
+                                <th className="text-center border border-slate-600" >
+                                    تاريخ الاستحقاق <br/> الميلادي
                                 </th>
-                                <th className="text-center border border-slate-600" colSpan={2}>
-                                    تاريخ الايداع
+                                <th className="text-center border border-slate-600" >
+                                    تاريخ الاستحقاق <br/> الهجري
                                 </th>
-                                <th className="border border-slate-600" rowSpan={2}>
+                                <th className="text-center border border-slate-600" >
+                                    تاريخ الايداع <br />الميلادي
+                                </th>
+                                <th className="text-center border border-slate-600" >
+                                    تاريخ الايداع <br /> الهجري
+                                </th>
+                                <th className="border border-slate-600">
                                     ملاحظات
                                 </th>
-                            </tr>
-                            <tr>
-                                <th className="text-center border border-slate-600">
-                                    الميلادي
-                                </th>
-                                <th className="text-center border border-slate-600">الهجري</th>
-                                <th className="text-center border border-slate-600">
-                                    الميلادي
-                                </th>
-                                <th className="text-center border border-slate-600">الهجري</th>
                             </tr>
                         </thead>
                         <tbody className="text-center">

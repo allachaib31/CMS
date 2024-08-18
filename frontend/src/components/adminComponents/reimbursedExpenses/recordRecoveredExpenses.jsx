@@ -52,7 +52,6 @@ function RecordRecoveredExpenses() {
                 المصروفات المستردة
             </h1>
             <div className='text-[1.1rem] flex sm:flex-row flex-col gap-[1rem] items-center justify-center'>
-                <label>إيرادات اقساط السلع لشهر</label>
                 <input type="date" id="dateInput" className='input input-bordered' onChange={(event) => {
                     const hijriDate = hijriDateObject(event.target.value);
                     setInputs((prevInput) => {
@@ -72,7 +71,7 @@ function RecordRecoveredExpenses() {
                     });
                 }} />
                 <label>
-                    الموافق لي{" "}
+                    الموافق {" "}
 
                     {inputs.dateHijri ? (
                         <span>
@@ -87,51 +86,49 @@ function RecordRecoveredExpenses() {
             </div>
             <div className="mt-[1rem] flex md:flex-row flex-col gap-[1rem] justify-center">
                 <div className="flex md:flex-col items-center justify-center gap-[1rem]">
-                    <h1 className="text-[1.1rem] md:w-auto w-[90%] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">إجمالي المصروفات المستردة لهذا الشهر</h1>
-                    <h1 className="text-[1.1rem] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">{totalAmountMonth}</h1>
+                    <h1 className="text-[0.8rem] sm:text-[1.1rem] md:w-auto w-[70%] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">إجمالي المصروفات المستردة لهذا الشهر</h1>
+                    <h1 className="text-[0.8rem] sm:text-[1.1rem] font-bold md:w-auto w-[30%] bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem] text-center">{totalAmountMonth.toFixed(2)}</h1>
                 </div>
                 <div className="flex md:flex-col items-center justify-center gap-[1rem]">
-                    <h1 className="text-[1.1rem] md:w-auto w-[90%] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">جمالي المصروفات المستردة</h1>
-                    <h1 className="text-[1.1rem] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">{totalAmount}</h1>
+                    <h1 className="text-[0.8rem] sm:text-[1.1rem] md:w-auto w-[70%] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">جمالي المصروفات المستردة</h1>
+                    <h1 className="text-[0.8rem] sm:text-[1.1rem] font-bold md:w-auto w-[30%] bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem] text-center">{totalAmount.toFixed(2)}</h1>
                 </div>
             </div>
+            <div className='container mx-auto'>
             <button onClick={()=>document.getElementById('my_modal_1').showModal()} className='mt-[1rem] btn btn-info font-bold'><FontAwesomeIcon icon={faPrint} /> طباعة</button>
+            </div>
             <div className="overflow-x-auto mt-[1rem]">
-                <table className="text-[1rem] table border-separate border-spacing-2 border w-[1900px] mx-auto">
+                <table className="text-[0.8rem] table border-separate border-spacing-2 border w-[1200px] mx-auto">
                     <tr>
                         <th className="border text-center border-slate-600" rowSpan={2}>
                             اسم الجهة
                         </th>
                         <th className="border text-center border-slate-600" rowSpan={2}>
-                            المبلغ المصروف
+                            المبلغ <br />المصروف
                         </th>
                         <th className="border text-center border-slate-600" rowSpan={2}>
-                            نوع المصروف
+                            نوع <br />المصروف
                         </th>
-                        <th colSpan={2} className="border text-center border-slate-600">
-                            تاريخ الصرف
+                        <th className="border text-center border-slate-600">
+                            تاريخ الصرف الميلادي
+                        </th>
+                        <th className="border text-center border-slate-600">
+                            تاريخ الصرف الهجري
                         </th>
                         <th className="border text-center border-slate-600" rowSpan={2}>
                             البيان
                         </th>
                     </tr>
-                    <tr>
-                        <th className="border text-center border-slate-600">
-                            الميلادي
-                        </th>
-                        <th className="border text-center border-slate-600">
-                            الهجري
-                        </th>
-                    </tr>
                     <tbody>
                         {
                             reimbursedExpenses && reimbursedExpenses.map((expenses) => {
+                                const d = new Date(expenses.createdAt);
                                 return (
                                     <tr>
                                         <td className="border text-center border-slate-600">{expenses.name}</td>
                                         <td className="border text-center border-slate-600">{expenses.amount}</td>
                                         <td className="border text-center border-slate-600">{expenses.typeExpenses}</td>
-                                        <td className="border text-center border-slate-600">{expenses.createdAt}</td>
+                                        <td className="border text-center border-slate-600">{d.getUTCFullYear() + "-" + d.getUTCMonth() + "-" + d.getUTCDate()}</td>
                                         <td className="border text-center border-slate-600">{expenses.hijriDate.year}/{expenses.hijriDate.month.number}/{expenses.hijriDate.day}</td>
                                         <td className="border text-center border-slate-600">{expenses.comments}</td>
                                     </tr>

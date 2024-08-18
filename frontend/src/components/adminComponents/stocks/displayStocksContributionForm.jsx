@@ -3,7 +3,8 @@ import { hijriDateObject } from '../../../utils/getHijriDate';
 import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMoneyBill, faRightLong } from '@fortawesome/free-solid-svg-icons';
-import { getIdStockFetch, getStockFetch } from '../../../utils/apiFetch';
+import { addAdditionalStockFetch, getIdStockFetch, getStockFetch } from '../../../utils/apiFetch';
+import Alert from '../../alert/alert';
 
 function DisplayStocksContributionForm() {
     const navigate = useNavigate();
@@ -14,6 +15,11 @@ function DisplayStocksContributionForm() {
         month: date[1].number,
         year: date[2],
     });
+    const [additionalStock, setAdditionalStock] = useState({
+        buyAdditionalStock: 0,
+        additionalStockCost: 0,
+        idStock: ""
+    })
     const [id, setId] = useState("");
     const [idList, setIdList] = useState([]);
     const [stock, setStock] = useState(false);
@@ -25,6 +31,10 @@ function DisplayStocksContributionForm() {
         }
         setYearOptions(years);
     };
+    const [showAlert, setShowAlert] = useState({
+        display: false,
+    });
+    const [submit, setSubmit] = useState(false);
     useEffect(() => {
         getIdStockFetch(inputs).then((res) => {
             setIdList(res.data.stock);
@@ -34,11 +44,36 @@ function DisplayStocksContributionForm() {
             }
         })
     }, [inputs])
+    const handleSubmit = () => {
+        setShowAlert({
+            display: false,
+        });
+        setSubmit((e) => !e);
+        addAdditionalStockFetch(additionalStock).then((res) => {
+            setSubmit((e) => !e);
+            setShowAlert({
+                display: true,
+                status: true,
+                text: res.data.msg
+            });
+            setStock(res.data.stocks);
+            setUserStock(res.data.userStock)
+        }).catch((err) => {
+            if (err.response && err.response.status === 401) {
+                navigate("/auth");
+            }
+            setSubmit((e) => !e);
+            setShowAlert({
+                display: true,
+                status: false,
+                text: err.response.data.msg
+            });
+        })
+    }
     const handleSearch = () => {
         setLoading((e) => !e)
         getStockFetch(id).then((res) => {
             setLoading((e) => !e)
-            console.log(res)
             setStock(res.data.stock);
             setUserStock(res.data.userStock)
         }).catch((err) => {
@@ -69,7 +104,7 @@ function DisplayStocksContributionForm() {
                         });
                     }} className="select xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
                         {yearOptions.map((value) => (
-                            <option key={value} value={value} selected={inputs.year === value}>
+                            <option key={value} value={value} selected={inputs.year == value}>
                                 {value}
                             </option>
                         ))}
@@ -94,6 +129,11 @@ function DisplayStocksContributionForm() {
                     </select>
                     <select onChange={(event) => {
                         setId(event.target.value);
+                        setAdditionalStock({
+                            buyAdditionalStock: 0,
+                            additionalStockCost: 0,
+                            idStock: event.target.value
+                        })
                     }} className="select xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
                         <option selected disabled>قم باختيار العدد الخاص بالاسهم</option>
                         {idList && idList.map((list) => (
@@ -168,7 +208,7 @@ function DisplayStocksContributionForm() {
                                 </tr>
                                 <tbody>
                                     <tr>
-                                        <td className="border text-center border-slate-600">{stock.contributionDateMiladi}</td>
+                                        <td className="border text-center border-slate-600">{new Date(stock.contributionDateMiladi).getUTCFullYear() + "-" + (new Date(stock.contributionDateMiladi).getUTCMonth() + 1) + "-" + new Date(stock.contributionDateMiladi).getUTCDate()}</td>
                                         <td className="border text-center border-slate-600">{stock.contributionDateHijri && stock.contributionDateHijri.year + "-" + stock.contributionDateHijri.month.number + "-" + stock.contributionDateHijri.day}</td>
                                         <td className="border text-center border-slate-600">{stock.freeStocks}</td>
                                         <td className="border text-center border-slate-600">{stock.numberOfPreviousStockWithFreeStock}</td>
@@ -328,19 +368,37 @@ function DisplayStocksContributionForm() {
             <dialog id="my_modal_1" className="modal">
                 <div className="modal-box">
                     <form action="">
+                    {showAlert.display ? <Alert msg={showAlert} /> : ""}
                         <div className="relative w-full mb-[1rem]">
                             <FontAwesomeIcon icon={faMoneyBill} className="absolute top-[1rem] right-[1rem]" />
-                            <input type="number" required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder={`عدد الاسهم الاضافية`} />
+                            <input type="number" onChange={(event) => {
+                                setAdditionalStock((prev) => {
+                                    return {
+                                        ...prev,
+                                        buyAdditionalStock: Number(event.target.value)
+                                    }
+                                })
+                            }} required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder={`عدد الاسهم الاضافية`} />
                         </div>
                         <div className="relative w-full">
                             <FontAwesomeIcon icon={faMoneyBill} className="absolute top-[1rem] right-[1rem]" />
-                            <input type="number" required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder={`تكلفة الاسهم الاضافية`} />
+                            <input type="number" onChange={(event) => {
+                                setAdditionalStock((prev) => {
+                                    return {
+                                        ...prev,
+                                        additionalStockCost: Number(event.target.value)
+                                    }
+                                })
+                            }} required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder={`تكلفة الاسهم الاضافية`} />
                         </div>
                     </form>
                     <div className="modal-action">
                         <form method="dialog">
                             {/* if there is a button in form, it will close the modal */}
-                            <button className='btn btn-primary'>تاكيد</button>
+                            <button onClick={(event) => {
+                                event.preventDefault();
+                                handleSubmit();
+                            }} disabled={submit} className='btn btn-primary'> {submit ? <span className="loading loading-ring loading-lg"></span> : "تاكيد"}</button>
                             <button className="btn">اغلاق</button>
                         </form>
                     </div>

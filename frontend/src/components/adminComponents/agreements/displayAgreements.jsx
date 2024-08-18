@@ -61,7 +61,7 @@ function DisplayAgreements() {
       </h1>
       {showAlert.display ? <Alert msg={showAlert} /> : ""}
       <div className="overflow-x-auto mt-[1rem]">
-        <table className="text-[1rem] table border-separate border-spacing-2 border w-[1000px] mx-auto">
+        <table className="text-[1rem] table border-separate border-spacing-2 border w-[600px] mx-auto">
           <thead className="text-[1rem] text-center">
             <tr>
               <th className="border border-slate-600">رقم</th>

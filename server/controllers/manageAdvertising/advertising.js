@@ -1,6 +1,7 @@
 const { Readable } = require('stream');
 const { bucket } = require('../../app'); // Import the bucket from app.js
-const { advertisingModel, File } = require("../../models/advertising/advertising")
+const { advertisingModel, File } = require("../../models/advertising/advertising");
+const { adsModel } = require("../../models/advertising/ads")
 
 exports.addAdvertising = async (req, res) => {
     const { file } = req;
@@ -48,7 +49,7 @@ exports.addAdvertising = async (req, res) => {
             })
             await advertising.save();
         }
-        return res.send({ msg: "لقد تم اضافته بجاح" });
+        return res.status(200).send({ msg: "لقد تم اضافته بجاح" });
     } catch (error) {
         console.log(error);
         return res.status(500).send({
@@ -117,3 +118,51 @@ exports.getAdvertisingImage = async (req, res) => {
         return res.status(500).send("Error occurred while retrieving the file.");
     }
 };
+
+
+exports.addAds = async (req, res) => {
+    const { text, endDate } = req.body;
+    try {
+        const ads = new adsModel({
+            text,endDate
+        })
+        await ads.save();
+        return res.status(200).send({ msg: "لقد تم اضافته بجاح" , ads});
+    }catch (error) {
+        console.log(error);
+        return res.status(500).send({
+            msg: "حدث خطأ أثناء معالجة طلبك"
+        });
+    }
+}
+
+exports.getAds = async (req, res) => {
+    console.log("h")
+    try{
+        const ads = await adsModel.find().sort({
+            createdAt: -1
+        });
+        return res.status(200).send({
+            ads
+        })
+    }catch (error) {
+        return res.status(500).send({
+            msg: "حدث خطأ أثناء معالجة طلبك"
+        });
+    }
+}
+
+exports.deleteAds = async (req, res) => {
+    const { id }  = req.query;
+    try{
+        const ads = await adsModel.findByIdAndDelete(id);
+        return res.status(200).send({
+            msg: "تم حذف العنصر بنجاح"
+        })
+    }catch (error) {
+        console.log(error);
+        return res.status(500).send({
+            msg: "حدث خطأ أثناء معالجة طلبك"
+        });
+    }
+}

@@ -57,7 +57,7 @@ function DisplayAdmin() {
     <div className="px-[1rem] sm:px-0">
       <div className="container mx-auto mb-[1rem] flex sm:flex-row sm:gap-0 gap-[1rem] flex-col justify-between">
         <Link to="/admin/addAdmin" className="text-[1rem] btn btn-primary">
-          اضافة مسؤل
+        إضافة مسئول 
         </Link>
         <div className="join flex-wrap ">
           <div>
@@ -94,7 +94,7 @@ function DisplayAdmin() {
       </div>
       {showAlert.display ? <Alert msg={showAlert} /> : ""}
       <div className=" overflow-x-auto xl:flex xl:justify-center  mt-[2rem]">
-        <table className="table w-[1600px]">
+        <table className="table w-[1400px]">
           {/* head */}
           <thead>
             <tr className="text-center text-[1rem]">

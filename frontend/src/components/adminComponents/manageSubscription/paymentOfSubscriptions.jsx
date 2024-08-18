@@ -14,7 +14,7 @@ function PaymentOfSubscriptions() {
                 </Link>
             </div>
             <h1 className="text-center text-[1.5rem] font-bold py-[1rem]">
-            دفع اشتراك التاسيس
+            تسديد اشتراك التأسيس
             </h1>
             <FoundationSubscription />
         </div>

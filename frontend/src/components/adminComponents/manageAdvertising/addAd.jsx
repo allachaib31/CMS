@@ -43,7 +43,6 @@ function AddAd() {
         }
     };
     const handleSubmit = () => {
-        console.log(inputs)
         setShowAlert({
             display: false,
         });

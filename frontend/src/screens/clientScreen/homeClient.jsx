@@ -1,16 +1,27 @@
-import React, { useEffect, useState } from 'react'
-import { Link, Outlet, useNavigate } from 'react-router-dom';
+import React, { useEffect, useRef, useState } from "react";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import logo from "../../images/logo.png";
 import profileImage from "../../images/profileImage.png";
 import Cookies from "cookies-js";
-import { validationClientFetch } from '../../utils/apiFetch';
-import { Loading } from '../../components';
-import { faCheckToSlot, faFileInvoiceDollar, faGamepad, faGauge, faListCheck, faMicrophone } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { getClientAdsFetch, uploadClientImageFetch, validationClientFetch } from "../../utils/apiFetch";
+import { Alert, Loading } from "../../components";
+import {
+    faCheckToSlot,
+    faFileInvoiceDollar,
+    faGamepad,
+    faGauge,
+    faListCheck,
+    faMicrophone,
+    faUpload,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 export const UserContext = React.createContext();
 
 function HomeClient() {
     const navigate = useNavigate();
+    const [submit, setSubmit] = useState(false);
+    const fileInputRef = useRef(null);
+    const [ads, setAds] = useState(false);
     const [loading, setLoading] = useState(true);
     const [user, setUser] = useState(false);
     const [theme, setTheme] = useState(
@@ -18,9 +29,61 @@ function HomeClient() {
             ? "lofi"
             : window.localStorage.getItem("theme")
     );
+    const [inputs, setInputs] = useState({
+        image: ""
+    });
+    const [showAlert, setShowAlert] = useState({
+        display: false,
+    });
     const handleLogout = () => {
         Cookies.expire("tokenClient");
         navigate("/authClient");
+    };
+    const handleFileClick = () => {
+        fileInputRef.current.click();
+    };
+    const handleFileChange = (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            setInputs((prevInput) => {
+                return {
+                    ...prevInput,
+                    image: file
+                }
+            })
+        }
+    };
+    const handleSubmit = () => {
+        setShowAlert({
+            display: false,
+        });
+        setSubmit((e) => !e);
+        const form = new FormData();
+        form.append("image", inputs.image);
+        uploadClientImageFetch(form).then((res) => {
+            setSubmit((e) => !e);
+            setShowAlert({
+                display: true,
+                status: true,
+                text: res.data.msg
+            });
+            setUser((prev) => {
+                return {
+                    ...prev,
+                    profileImage: res.data.profileImage
+                }
+            });
+        }).catch((err) => {
+            if (err.response && err.response.status === 401) {
+                navigate("/auth");
+            }
+            setSubmit((e) => !e);
+            setShowAlert({
+                display: true,
+                status: false,
+                text: err.response.data.msg
+            });
+        })
     }
     useEffect(() => {
         try {
@@ -29,17 +92,28 @@ function HomeClient() {
         } catch (error) { }
     }, [theme]);
     useEffect(() => {
-        validationClientFetch().then((res) => {
-            setUser(res.user);
-            setLoading((e) => !e);
+        validationClientFetch()
+            .then((res) => {
+                setUser(res.user);
+                setLoading((e) => !e);
+            })
+            .catch((err) => {
+                navigate("/authClient");
+            });
+    }, []);
+    useEffect(() => {
+        getClientAdsFetch().then((res) => {
+            setAds(res.data.ads)
         }).catch((err) => {
             navigate("/authClient");
-        })
-    }, []);
+        });
+    }, [])
     return (
         <div>
-            {
-                loading ? <Loading /> : <UserContext.Provider value={user}>
+            {loading ? (
+                <Loading />
+            ) : (
+                <UserContext.Provider value={user}>
                     <header className="flex items-center bg-base-300 p-[1rem]">
                         <div className="drawer">
                             <input id="my-drawer" type="checkbox" className="drawer-toggle" />
@@ -83,24 +157,39 @@ function HomeClient() {
                                     <div className="flex justify-center mb-[2rem]">
                                         <img src={logo} alt="" />
                                     </div>
-                                    <h1 className='font-bold mb-[2rem] text-center text-[1.2rem]'>{user.name}</h1>
+                                    <h1 className="font-bold mb-[2rem] text-center text-[1.2rem]">
+                                        {user.name}
+                                    </h1>
                                     <li className="text-[1.3rem] space-y-1">
-                                        <Link to="/client"><FontAwesomeIcon icon={faGauge} /> لوحة القيادة</Link>
+                                        <Link to="/client">
+                                            <FontAwesomeIcon icon={faGauge} /> لوحة القيادة
+                                        </Link>
                                     </li>
                                     <li className="text-[1.3rem] space-y-1">
-                                        <Link to="/client/subscribe"><FontAwesomeIcon icon={faFileInvoiceDollar} /> الاشتراكات</Link>
+                                        <Link to="/client/subscribe">
+                                            <FontAwesomeIcon icon={faFileInvoiceDollar} /> الاشتراكات
+                                        </Link>
                                     </li>
                                     <li className="text-[1.3rem] space-y-1">
-                                        <Link to="/client/advetising"><FontAwesomeIcon icon={faMicrophone} /> اعلانات</Link>
+                                        <Link to="/client/advetising">
+                                            <FontAwesomeIcon icon={faMicrophone} /> اعلانات
+                                        </Link>
                                     </li>
-                                    <li className="text-[1.3rem] space-y-1">
+                                    {/**
+                                         *                                     <li className="text-[1.3rem] space-y-1">
                                         <Link to="/client/contest"><FontAwesomeIcon icon={faGamepad} /> المسابقات</Link>
                                     </li>
+                                         */}
                                     <li className="text-[1.3rem] space-y-1">
-                                        <Link to="/client/election"><FontAwesomeIcon icon={faCheckToSlot} /> انتخابات</Link>
+                                        <Link to="/client/election">
+                                            <FontAwesomeIcon icon={faCheckToSlot} /> انتخابات
+                                        </Link>
                                     </li>
                                     <li className="text-[1.3rem] space-y-1">
-                                        <Link to="/client/agreements"><FontAwesomeIcon icon={faListCheck} /> بنود واتفاقيات الصندوق</Link>
+                                        <Link to="/client/agreements">
+                                            <FontAwesomeIcon icon={faListCheck} /> بنود واتفاقيات
+                                            الصندوق
+                                        </Link>
                                     </li>
                                 </ul>
                             </div>
@@ -143,8 +232,8 @@ function HomeClient() {
                                     const listMenu = document.getElementById("listMenu");
                                     listMenu.classList.toggle("hidden");
                                 }}
-                                src={profileImage}
-                                className="cursor-pointer"
+                                src={user && user.profileImage ? "/api/v1.0/users/getProfileImage/" + user.profileImage : profileImage}
+                                className="cursor-pointer w-[64.58px] h-[64.58px] rounded-full"
                                 alt=""
                             />
                             <div
@@ -153,7 +242,15 @@ function HomeClient() {
                             >
                                 <ul>
                                     <li>
-                                        <button onClick={handleLogout} className="btn w-full rounded-none">
+                                        <button onClick={() => document.getElementById('my_modal_ImageProfile').showModal()} className="btn w-full rounded-none">
+                                            رفع صورة جديدة
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button
+                                            onClick={handleLogout}
+                                            className="btn w-full rounded-none"
+                                        >
                                             تسجيل الخروج
                                         </button>
                                     </li>
@@ -161,11 +258,52 @@ function HomeClient() {
                             </div>
                         </div>
                     </header>
+                    <div className="scrolling-text flex w-full overflow-hidden">
+                        <div className="flex justify-center gap-[8rem] min-w-full animate-scroll">
+                            {
+                                ads && ads.map((ad) => {
+                                    return (
+                                        <h1 className="text-[2rem] inline-block min-w-max text-center whitespace-nowrap">
+                                            {ad.text}
+                                        </h1>
+                                    )
+                                })
+                            }
+                        </div>
+                    </div>
+                    <dialog id="my_modal_ImageProfile" className="modal">
+                        <div className="modal-box">
+                            {showAlert.display ? <Alert msg={showAlert} /> : ""}
+                            <h3 className="font-bold text-lg">رفع صورة جديدة</h3>
+                            <button className='btn btn-info max-w-sm' type="button" onClick={handleFileClick}>
+                                <FontAwesomeIcon icon={faUpload} /> تحميل صورة
+                            </button>
+                            <input
+                                type="file"
+                                ref={fileInputRef}
+                                style={{ display: 'none' }}
+                                onChange={handleFileChange}
+                                accept="image/png, image/gif, image/jpeg"
+                            />
+                            <div className="modal-action">
+                                <form method="dialog">
+                                    {/* if there is a button in form, it will close the modal */}
+                                    <button className="btn">اغلاق</button>
+                                    <button onClick={(event) => {
+                                        event.preventDefault();
+                                        handleSubmit();
+                                    }} disabled={submit} className='btn btn-success font-bold'>{submit ? <span className="loading loading-ring loading-lg"></span> : "إضافة"}</button>
+                                </form>
+                            </div>
+                        </div>
+                    </dialog>
+
+
                     <Outlet />
                 </UserContext.Provider>
-            }
+            )}
         </div>
-    )
+    );
 }
 
-export default HomeClient
+export default HomeClient;

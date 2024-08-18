@@ -53,6 +53,9 @@ function AddReimbursedExprensesType() {
         status: true,
         text: res.data.msg
       });
+      setExpensesType((prevExpenses) => {
+        return [...prevExpenses, res.data.typeExpenses]
+    })
     }).catch((err) => {
       if (err.response && err.response.status === 401) {
         navigate("/auth");
@@ -87,7 +90,7 @@ function AddReimbursedExprensesType() {
       </h1>
       <form action="" className='container mx-auto'>
         {showAlert.display ? <Alert msg={showAlert} /> : ""}
-        <input type="text" placeholder="اكتب نوع مصروف" className="input input-bordered w-full max-w-xs" onChange={(event) => {
+        <input type="text" placeholder="اكتب نوع مصروف" className="input input-bordered w-full max-w-[10rem]" onChange={(event) => {
           setInputs((prevInput) => {
             return {
               ...prevInput,
@@ -98,7 +101,7 @@ function AddReimbursedExprensesType() {
         <button onClick={handleSubmit} disabled={submit} className='btn btn-primary text-[1.1rem] font-bold'>{submit ? <span className="loading loading-ring loading-lg"></span> : "اضافة"}</button>
       </form>
       <div className="overflow-x-auto mt-[1rem]">
-        <table className="text-[1rem] table border-separate border-spacing-2 border w-[1000px] mx-auto">
+        <table className="text-[1rem] table border-separate border-spacing-2 border w-[600px] mx-auto">
           <tr>
             <th className="border text-center border-slate-600">
               رقم النوع

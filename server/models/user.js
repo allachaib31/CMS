@@ -1,11 +1,11 @@
 const mongoose = require("mongoose");
 const Joi = require("joi");
-const shortid = require("shortid");
+const { generateNextId } = require("../utils/generateNextId");
+
 
 const userSchema = new mongoose.Schema({
   id: {
     type: String,
-    default: shortid.generate,
     unique: true,
   },
   name: {
@@ -25,6 +25,11 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     unique: true,
+  },
+  oneYear: {
+    type: Boolean,
+    default: false,
+    required: true,
   },
   status: {
     type: String,
@@ -94,6 +99,9 @@ const userSchema = new mongoose.Schema({
     type: Object,
     required: false,
   },
+  profileImage: {
+    type: mongoose.Schema.Types.ObjectId,
+  },
   hijriDate: {
     type: Object,
     required: true,
@@ -103,7 +111,12 @@ const userSchema = new mongoose.Schema({
     default: Date.now(),
   },
 });
-
+userSchema.pre('save', async function(next) {
+  if (this.isNew) { // Check if the document is new
+      this.id = await generateNextId("users", "U");
+  }
+  next();
+});
 userSchema.methods.joiValidate = async function (obj) {
   const schema = Joi.object({
     id: Joi.string(),
@@ -116,6 +129,7 @@ userSchema.methods.joiValidate = async function (obj) {
     phoneNumber: Joi.string()
       .pattern(/^05\d{8}$/)
       .required(),
+    oneYear: Joi.boolean().required(),
     status: Joi.string().valid("active", "not active").required(),
     admin: Joi.object().required(),
     loans:Joi.object().required(),

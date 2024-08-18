@@ -20,7 +20,6 @@ function LoansData() {
     }
     useEffect(() => {
         getIdLoansFetch().then((res) => {
-            console.log(res)
             setLoansId(res.data.loansId);
         }).catch((err) => {
             if (err.response && err.response.status === 401) {
@@ -49,20 +48,20 @@ function LoansData() {
                 <button onClick={handleSearch} disabled={!id} className="btn btn-primary text-[1.1rem] font-bold join-item ">ابحث</button>
             </div>
             <div className="overflow-x-auto mt-[1rem]">
-                <table className="text-[1rem] table border-separate border-spacing-2 border w-[2500px] mx-auto">
-                    <thead className="text-[1rem] text-center">
+                <table className="text-[1rem] table border-separate border-spacing-2 border w-[1900px] mx-auto">
+                    <thead className="text-[0.8rem] text-center">
                         <tr>
                             <th className="border border-slate-600" rowSpan={2}>
-                                اسم العضو
+                                اسم <br/>العضو
                             </th>
                             <th className="border border-slate-600" rowSpan={2}>
-                                رقم الطلب
+                                رقم <br/>الطلب
                             </th>
                             <th className="border border-slate-600" colSpan={2}>
                                 تاريخ الطلب
                             </th>
                             <th className="border border-slate-600" rowSpan={2}>
-                                مبلغ القرض
+                                مبلغ <br/>القرض
                             </th>
                             <th className="text-center border border-slate-600" colSpan={2}>
                                 تاريخ استلام القرض
@@ -74,25 +73,25 @@ function LoansData() {
                                 تاريخ انتهاء التسديد
                             </th>
                             <th className="border border-slate-600" rowSpan={2}>
-                                عدد الأقساط
+                                عدد <br/>الأقساط
                             </th>
                             <th className="border border-slate-600" rowSpan={2}>
-                                مبلغ القسط الأول
+                                مبلغ القسط <br/>الأول
                             </th>
                             <th className="border border-slate-600" rowSpan={2}>
-                                مبلغ القسط الأخير
+                                مبلغ القسط <br/>الأخير
                             </th>
                             <th className="border border-slate-600" rowSpan={2}>
-                                الأقساط المسددة
+                                الأقساط <br/>المسددة
                             </th>
                             <th className="border border-slate-600" rowSpan={2}>
-                                الأقساط المتبقية
+                                الأقساط <br/>المتبقية
                             </th>
                             <th className="border border-slate-600" rowSpan={2}>
-                                مبلغ المسدد
+                                مبلغ <br/>المسدد
                             </th>
                             <th className="border border-slate-600" rowSpan={2}>
-                                مبلغ المتبقي
+                                مبلغ <br/>المتبقي
                             </th>
                         </tr>
                         <tr>
@@ -124,7 +123,7 @@ function LoansData() {
                     </thead>
                     <tbody>
                         {
-                            loanInfo && <tr className="text-center">
+                            loanInfo && <tr className="text-center text-[0.8rem]">
                                 <td className="border border-slate-600">{loanInfo.name}</td>
                                 <td className="border border-slate-600">{loanInfo.id}</td>
                                 <td className="border border-slate-600">{new Date(loanInfo.createdAt).toLocaleDateString('en-CA')}</td>

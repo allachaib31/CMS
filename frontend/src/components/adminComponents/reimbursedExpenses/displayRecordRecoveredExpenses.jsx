@@ -31,12 +31,12 @@ function DisplayRecordRecoveredExpenses() {
             </h1>
             <div className="mt-[1rem] flex md:flex-row flex-col gap-[1rem] justify-center">
                 <div className="flex md:flex-col items-center gap-[1rem]">
-                    <h1 className="sm:text-[1.1rem] w-[90%] md:w-auto font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[0.5rem] sm:px-[1.3rem]">إجمالي المصروفات المستردة</h1>
-                    <h1 className="sm:text-[1.1rem] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">{total}</h1>
+                    <h1 className="text-[0.8rem] sm:text-[1.1rem] w-[70%] md:w-auto font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[0.5rem] sm:px-[1.3rem]">إجمالي المصروفات المستردة</h1>
+                    <h1 className="text-[0.8rem] sm:text-[1.1rem] w-[30%] md:w-auto font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem] text-center">{total.toFixed(2)}</h1>
                 </div>
             </div>
             <div className="overflow-x-auto mt-[1rem]">
-                <table className="text-[1rem] table border-separate border-spacing-2 border w-[1900px] mx-auto">
+                <table className="text-[0.8rem] table border-separate border-spacing-2 border w-[1400px] mx-auto">
                     <tr>
                         <th className="border text-center border-slate-600" rowSpan={2}>
                             اسم الجهة
@@ -47,8 +47,11 @@ function DisplayRecordRecoveredExpenses() {
                         <th className="border text-center border-slate-600" rowSpan={2}>
                             نوع المصروف
                         </th>
-                        <th colSpan={2} className="border text-center border-slate-600">
-                            تاريخ الصرف
+                        <th className="border text-center border-slate-600">
+                            تاريخ الصرف الميلادي
+                        </th>
+                        <th className="border text-center border-slate-600">
+                            تاريخ الصرف الهجري
                         </th>
                         <th className="border text-center border-slate-600" rowSpan={2}>
                             البيان
@@ -57,23 +60,16 @@ function DisplayRecordRecoveredExpenses() {
                             تفاصيل أكثر
                         </th>
                     </tr>
-                    <tr>
-                        <th className="border text-center border-slate-600">
-                            الميلادي
-                        </th>
-                        <th className="border text-center border-slate-600">
-                            الهجري
-                        </th>
-                    </tr>
                     <tbody>
                         {
                             reimbursedExpenses && reimbursedExpenses.map((expenses) => {
+                                const d = new Date(expenses.createdAt);
                                 return (
                                     <tr>
                                         <td className="border text-center border-slate-600">{expenses.name}</td>
                                         <td className="border text-center border-slate-600">{expenses.amount}</td>
                                         <td className="border text-center border-slate-600">{expenses.typeExpenses}</td>
-                                        <td className="border text-center border-slate-600">{expenses.createdAt}</td>
+                                        <td className="border text-center border-slate-600">{d.getUTCFullYear() + "-" + (d.getUTCMonth() + 1) + "-" + d.getDate() }</td>
                                         <td className="border text-center border-slate-600">{expenses.hijriDate.year}/{expenses.hijriDate.month.number}/{expenses.hijriDate.day}</td>
                                         <td className="border text-center border-slate-600">{expenses.comments}</td>
                                         <td className="border text-center border-slate-600"></td>

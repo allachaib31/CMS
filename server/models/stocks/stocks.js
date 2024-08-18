@@ -1,11 +1,10 @@
 const mongoose = require("mongoose");
 const Joi = require("joi");
-const shortid = require("shortid");
+const { generateNextId } = require("../../utils/generateNextId");
 
 const stockSchema = new mongoose.Schema({
     id: {
         type: String,
-        default: shortid.generate,
         unique: true,
     },
     nameContributingParty: {
@@ -156,7 +155,12 @@ const joiSchema = Joi.object({
     memberId: Joi.string().required(),
     memberPercentage: Joi.number().required(),
 })
-
+stockSchema.pre('save', async function(next) {
+    if (this.isNew) { // Check if the document is new
+        this.id = await generateNextId("stocks", "ST");
+    }
+    next();
+});
 const validateStock = (data) => {
     return joiSchema.validate(data);
 };

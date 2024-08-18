@@ -35,13 +35,12 @@ function DisplayCommodityRevenue() {
   useEffect(() => {
     if (id == "") return;
     getCommidtyAndInstallmentFetch(id).then((res) => {
-      console.log(res)
       setCommodityRevenue(res.data.commodityRevenue);
       setInstallmentSchedule(res.data.installmentSchedule);
     })
 
   }, [id]);
-  const handleSubmit = (id,index) => {
+  const handleSubmit = (id,index,amount) => {
     setShowAlert({
       display: false,
     });
@@ -52,7 +51,8 @@ function DisplayCommodityRevenue() {
         text: res.data.msg
       });
       const newInstallment = installmentSchedule;
-      newInstallment[index].itPaid = true
+      newInstallment[index].itPaid = true;
+      setTotal((prev) => prev + amount)
       setInstallmentSchedule(newInstallment)
       //document.getElementById(id + "pay").innerHTML = "تم الدفع بنجاح";
     }).catch((err) => {
@@ -80,7 +80,7 @@ function DisplayCommodityRevenue() {
           setInstallmentSchedule(false);
         }} value={date} className='input input-bordered' />
         <label>
-          الموافق لي{" "}
+          الموافق {" "}
           {hijriDate ? (
             <span>
               {hijriDate[2]}/{hijriDate[1].number}/
@@ -92,34 +92,40 @@ function DisplayCommodityRevenue() {
         </label>
       </div>
       <div className='mt-[1rem] flex justify-center gap-[0.2rem] sm:gap-[1rem]'>
-        <h1 className='sm:text-[1.1rem] font-bold bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]'>اجمالي إيرادات السلع لهذا الشهر</h1>
-        <span className='sm:text-[1.1rem] font-bold bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]'>{total}</span>
+        <h1 className='text-[0.8rem] sm:text-[1rem] w-[70%] sm:w-auto font-bold bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]'>إجمالي إيرادات السلع لهذا الشهر</h1>
+        <span className='text-[0.8rem] sm:text-[1rem] w-[30%] text-center sm:w-auto font-bold bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]'>{total.toFixed(2)}</span>
       </div>
       {showAlert.display ? <Alert msg={showAlert} /> : ""}
       <div className="overflow-x-auto mt-[1rem]">
-        <table className="text-[1rem] table border-separate border-spacing-2 border w-[1900px] mx-auto">
-          <thead className="text-[1rem] text-center">
+        <table className="text-[1rem] table border-separate border-spacing-2 border w-[1600px] mx-auto">
+          <thead className="text-[0.8rem] text-center">
             <tr>
               <th className="border border-slate-600" rowSpan={2}>
-                رقم الطلب
+                رقم <br/>الطلب
               </th>
               <th className="border border-slate-600" rowSpan={2}>
-                اسم العميل
+                اسم <br/>العميل
               </th>
               <th className="border border-slate-600" rowSpan={2}>
-                نوع السلعة
+                نوع <br/>السلعة
               </th>
               <th className="border border-slate-600" rowSpan={2}>
-                رقم القسط
+                رقم <br/>القسط
               </th>
               <th className="border border-slate-600" rowSpan={2}>
-                مبلغ القسط
+                مبلغ <br/>القسط
               </th>
-              <th className="text-center border border-slate-600" colSpan={2}>
-                تاريخ الاستحقاق
+              <th className="text-center border border-slate-600" >
+                تاريخ الاستحقاق <br/>بالميلادي
               </th>
-              <th className="text-center border border-slate-600" colSpan={2}>
-                تاريخ السداد
+              <th className="text-center border border-slate-600" >
+                تاريخ الاستحقاق <br/>بالهجري
+              </th>
+              <th className="text-center border border-slate-600">
+                تاريخ السداد <br/>بالميلادي
+              </th>
+              <th className="text-center border border-slate-600">
+                تاريخ السداد <br/>بالهجري
               </th>
               <th className="border border-slate-600" rowSpan={2}>
                 ملاحظات
@@ -131,27 +137,13 @@ function DisplayCommodityRevenue() {
                 دفع
               </th>
             </tr>
-            <tr>
-              <th className="text-center border border-slate-600">
-                الميلادي
-              </th>
-              <th className="text-center border border-slate-600">
-                الهجري
-              </th>
-              <th className="text-center border border-slate-600">
-                الميلادي
-              </th>
-              <th className="text-center border border-slate-600">
-                الهجري
-              </th>
-            </tr>
           </thead>
           <tbody className='text-center'>
-            <tr>
+            <tr className='text-[0.8rem]'>
               <th className="border border-slate-600">
                 <select onChange={(event) => {
                   setId(event.target.value);
-                }} className='select xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered'>
+                }} className='select w-[8rem] xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered'>
                   <option selected disabled>قم باختيار رقم الطلب</option>
                   {idList && idList.map((list) => (
                     <option value={list._id}>{list.id}</option>
@@ -181,13 +173,13 @@ function DisplayCommodityRevenue() {
                     {installmentSchedule[index].premiumAmount}
                   </td>
                   <td className="border border-slate-600">
-                    {installmentSchedule[index].requiredPaymentDate}
+                    {new Date(installmentSchedule[index].requiredPaymentDate).getUTCFullYear() + "-" + (new Date(installmentSchedule[index].requiredPaymentDate).getUTCMonth() + 1) + "-" + new Date(installmentSchedule[index].requiredPaymentDate).getUTCDate()}
                   </td>
                   <td className="border border-slate-600">
                     {installmentSchedule[index].requiredPaymentDateHijri.year}-{installmentSchedule[index].requiredPaymentDateHijri.month.number}-{installmentSchedule[index].requiredPaymentDateHijri.day}
                   </td>
                   <td className="border border-slate-600">
-                    {installmentSchedule[index].actualPaymentDate}
+                    {installmentSchedule[index].actualPaymentDate && new Date(installmentSchedule[index].actualPaymentDate).getUTCFullYear() + "-" + (new Date(installmentSchedule[index].actualPaymentDate).getUTCMonth() + 1) + "-" + new Date(installmentSchedule[index].actualPaymentDate).getUTCDate()}
                   </td>
                   <td className="border border-slate-600">
                     {installmentSchedule[index].actualPaymentDateHijri && installmentSchedule[index].actualPaymentDateHijri.year + "-" + installmentSchedule[index].actualPaymentDateHijri.month.number + "-" + installmentSchedule[index].actualPaymentDateHijri.day}
@@ -207,7 +199,7 @@ function DisplayCommodityRevenue() {
                   </td>
                   <td id={installmentSchedule[index]._id + "pay"} className="border border-slate-600">
                     {installmentSchedule[index].itPaid ? "تم الدفع بنجاح" : <button onClick={() => {
-                      handleSubmit(installmentSchedule[index]._id,index)
+                      handleSubmit(installmentSchedule[index]._id,index,installmentSchedule[index].premiumAmount)
                     }} className='btn btn-success'>دفع</button>
                     }
                   </td>

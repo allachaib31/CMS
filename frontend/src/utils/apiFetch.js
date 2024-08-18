@@ -108,7 +108,22 @@ import {
     ADDSTOCK_ROUTE,
     GETACTIVEUSER_ROUTE,
     GETIDSTOCK_ROUTE,
-    GETSTOCK_ROUTE
+    GETSTOCK_ROUTE,
+    GETMEMBERFAMILYTREE_ROUTE,
+    ADDNEWRELATION_ROUTE,
+    ADDADDITIONALSTOCK,
+    ADDBLOODMONEY_ROUTE,
+    PAYBLOODMONEY_ROUTE,
+    GETPAYMENTBLOODMONEY_ROUTE,
+    GETRECORDBLOODMONEY_ROUTE,
+    PAYAMOUNT_ROUTE,
+    PAYCLIENTMONTHLY_ROUTE,
+    ADDADS_ROUTE,
+    DELETEADS_ROUTE,
+    GETADS_ROUTE,
+    GETADSCLIENT_ROUTE,
+    UPLOADIMAGE_ROUTE,
+    UPLOADCLIENTIMAGE_ROUTE
 } from "./apiRoutes";
 
 
@@ -128,6 +143,15 @@ export const validationFetch = async () => {
 // Manage user fetch
 export const addUserFetch = async (user) => {
     const data = await axios.post(ADDUSER_ROUTE, user);
+    return data;
+}
+
+export const uploadClientImageFetch = async (input) => {
+    const data = await axios.post(UPLOADCLIENTIMAGE_ROUTE, input);
+    return data;
+}
+export const uploadImageFetch = async (input) => {
+    const data = await axios.post(UPLOADIMAGE_ROUTE, input);
     return data;
 }
 export const getUserFetch = async (currentPage) => {
@@ -247,6 +271,10 @@ export const addCommodityRevenueFetch = async (inputs) => {
     const data = await axios.post(ADDCOMMODITYREVENUE_ROUTE,inputs);
     return data;
 }
+export const payAmountFetch = async (inputs) => {
+    const data = await axios.post(PAYAMOUNT_ROUTE, inputs);
+    return data;
+}
 export const payInstallmentScheduleFetch = async (idInstallmentSchedule) => {
     const data = await axios.post(PAYINSTALLMENTSCHEDULE_ROUTE,{
         idInstallmentSchedule
@@ -292,6 +320,10 @@ export const addCommentInstallmentScheduleFetch = async (inputs) => {
 //Manage Stock
 export const addStockFetch = async (inputs) => {
     const data = await axios.post(ADDSTOCK_ROUTE, inputs);
+    return data;
+}
+export const addAdditionalStockFetch = async (inputs) => {
+    const data = await axios.post(ADDADDITIONALSTOCK, inputs);
     return data;
 }
 export const getActiveUserFetch = async () => {
@@ -394,7 +426,23 @@ export const getUnReimbursedExpensesFetch = async (inputs) => {
     const data = await axios.get(`${GETUNREIMBURSEDEXPENSES_ROUTE}?month=${inputs.month}&year=${inputs.year}`);
     return data;
 }
-
+//Manage bloodMoney
+export const addBloodMoneyFetch = async (inputs) => {
+    const data = await axios.post(ADDBLOODMONEY_ROUTE,inputs);
+    return data;
+}
+export const payBloodMoneyFetch = async (inputs) => {
+    const data = await axios.post(PAYBLOODMONEY_ROUTE,inputs);
+    return data;
+}
+export const getPaymentBloodMoneyFetch = async () => {
+    const data = await axios.get(GETPAYMENTBLOODMONEY_ROUTE);
+    return data;
+}
+export const getRecordBloodMoneyFetch = async () => {
+    const data = await axios.get(GETRECORDBLOODMONEY_ROUTE);
+    return data;
+}
 //Manage contribution revenue
 export const getConsolidatedRecordRevenuesFetch = async () => {
     const data = await axios.get(GETCONSOLIDATEDRECORDREVENUES_ROUTE);
@@ -469,6 +517,18 @@ export const deleteAdvertisingFetch = async (id) => {
     const data = await axios.delete(`${DELETEADVERTISING_ROUTE}?id=${id}`);
     return data;
 }  
+export const addAdsFetch = async (inputs) => {
+    const data = await axios.post(ADDADS_ROUTE, inputs);
+    return data;
+}
+export const getAdsFetch = async () => {
+    const data = await axios.get(GETADS_ROUTE);
+    return data;
+}
+export const deleteAdsFetch = async (id) => {
+    const data = await axios.delete(`${DELETEADS_ROUTE}?id=${id}`);
+    return data;
+}
 //Manage family tree
 export const createFamilyTreeFetch = async (inputs) => {
     const data = await axios.post(CREATEFAMILYTREE_ROUTE, inputs);
@@ -476,6 +536,14 @@ export const createFamilyTreeFetch = async (inputs) => {
 }
 export const addToFamilyTreeFetch = async (inputs) => {
     const data = await axios.post(ADDTOFAMILYTREE_ROUTE, inputs);
+    return data;
+}
+export const addNewRelationFetch = async (inputs) => {
+    const data = await axios.post(ADDNEWRELATION_ROUTE, inputs);
+    return data;
+}
+export const getMemberFamilyTreeFetch = async (id) => {
+    const data = await axios.get(`${GETMEMBERFAMILYTREE_ROUTE}?idFamilyTree=${id}`);
     return data;
 }
 export const getFamilyTreeFetch = async () => {
@@ -537,6 +605,10 @@ export const getClientAdvertisingFetch = async () => {
     const data = await axios.get(GETADVERTISING_ROUTE);
     return data;
 }
+export const getClientAdsFetch = async () => {
+    const data = await axios.get(GETADSCLIENT_ROUTE);
+    return data;
+}
 export const getTimingFetch = async () => {
     const data = await axios.get(GETTIMING_ROUTE);
     return data;
@@ -565,8 +637,12 @@ export const getUserResultFetch = async (id) => {
     const data = await axios.get(`${GETUSERRESULT_ROUTE}?id=${id}`)
     return data;
 }
-export const getSubscribeClientFetch = async (year) => {
-    const data = await axios.get(`${GETSUBSCRIPTIONCLIENT_ROUTE}?year=${year}`);
+export const getSubscribeClientFetch = async (input) => {
+    const data = await axios.post(`${GETSUBSCRIPTIONCLIENT_ROUTE}`, input);
+    return data;
+}
+export const payClientMonthlyFetch = async (inputs) => {
+    const data = await axios.post(`${PAYCLIENTMONTHLY_ROUTE}`, inputs);
     return data;
 }
 export const getContestResultFetch = async (id) => {

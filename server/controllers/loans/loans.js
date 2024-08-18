@@ -5,7 +5,6 @@ const moneyBoxModel = require("../../models/moneybox");
 const userModel = require("../../models/user");
 const getHijriDate = require("../../utils/getHijriDate");
 const moneyBoxId = process.env.moneyBoxId;
-
 exports.addLoans = async (req, res) => {
     const { nationalIdentificationNumber, amount, premiumAmount, numberOfInstallments, dateOfReceipt, dateOfReceiptHijri } = req.body;
     try {
@@ -29,12 +28,12 @@ exports.addLoans = async (req, res) => {
         const paymentStartDate = date.toLocaleDateString();
         const paymentStartDateHijri = getHijriDate(date);
         date = new Date();
-        date.setDate(new Date(dateOfReceipt).getDate() + (numberOfInstallments * 30))
+        date.setDate(new Date(dateOfReceipt).getDate() + (numberOfInstallments * 30));
         const paymentEndDate = date.toLocaleDateString();
         const paymentEndDateHijri = getHijriDate(date);
         const user = await userModel.findOne({
             NationalIdentificationNumber: nationalIdentificationNumber
-        })
+        });
         if (!user) {
             return res.status(422).send({
                 msg: "لا وجود هذا المستخدم",
@@ -52,7 +51,6 @@ exports.addLoans = async (req, res) => {
             }
         });
         if (error) {
-            console.log(error)
             return res.status(422).send({
                 msg: "يرجى ادخال جميع المدخلات والتأكد من صحتها",
             });
@@ -75,60 +73,98 @@ exports.addLoans = async (req, res) => {
             }
         });
         await loans.save();
+        
         function calculateInstallmentDates(startDate, endDate, numberOfInstallments) {
             const start = new Date(startDate);
             const end = new Date(endDate);
-            console.log(start)
             const installmentDates = [];
             for (let i = 0; i < numberOfInstallments; i++) {
                 const installmentDate = new Date(start);
-                installmentDate.setDate(installmentDate.getDate() + (30 * i))
+                installmentDate.setDate(installmentDate.getDate() + (30 * i));
                 installmentDates.push(installmentDate.toISOString().split('T')[0]);
             }
-            //installmentDates.push(new Date(endDate).toISOString().split('T')[0]);
             return installmentDates;
         }
+
         const installmentDates = calculateInstallmentDates(paymentStartDate, paymentEndDate, numberOfInstallments);
-        installmentDates.forEach(async (date, index) => {
+
+        for (const date of installmentDates) {
             const hijriDate = getHijriDate(date);
-            const newInstallmentGoods = new installmentsLoansModel({
-                idLoans: loans._id,
-                premiumAmount: loans.premiumAmount,
-                requiredPaymentDate: date,
-                requiredPaymentDateHijri: {
-                    day: hijriDate[0],
-                    month: hijriDate[1],
-                    year: hijriDate[2],
+            let isSaved = false;
+            while (!isSaved) {
+                try {
+                    const newInstallmentGoods = new installmentsLoansModel({
+                        idLoans: loans._id,
+                        premiumAmount: loans.premiumAmount,
+                        requiredPaymentDate: date,
+                        requiredPaymentDateHijri: {
+                            day: hijriDate[0],
+                            month: hijriDate[1],
+                            year: hijriDate[2],
+                        }
+                    });
+                    await newInstallmentGoods.save();
+                    isSaved = true;
+                } catch (error) {
+                    if (error.code === 11000) {
+                        await new Promise(res => setTimeout(res, Math.random() * 100));
+                    } else {
+                        throw error;
+                    }
                 }
-            })
-            await newInstallmentGoods.save();
-        });
+            }
+        }
+
         const numberOfUser = await userModel.countDocuments({ "status": "active", "disable": false });
         const activeUsers = await userModel.find({
             status: "active",
             disable: false,
-            memberBalance: { $gte: loans.amount / Number(numberOfUser) }
         });
         const amountUser = loans.amount / activeUsers.length;
-        activeUsers.forEach(async (user) => {
+        for(const user of activeUsers) {
+            let isSaved = false;
+            while (!isSaved) {
+                try{
+                    const userContribution = new userContributionLoansModel({
+                        idUser: user._id,
+                        idLoans: loans._id,
+                        previousBalance: user.memberBalance,
+                        amount: amountUser,
+                    });
+                    user.memberBalance -= amountUser;
+                    await user.save();
+                    await userContribution.save();
+                    isSaved = true;
+                }catch(error) {
+                    if (error.code === 11000) {
+                        await new Promise(res => setTimeout(res, Math.random() * 100));
+                    } else {
+                        throw error;
+                    }
+                }
+            }
+        }
+        /*for (const user of activeUsers) {
             const userContribution = new userContributionLoansModel({
                 idUser: user._id,
                 idLoans: loans._id,
                 previousBalance: user.memberBalance,
                 amount: amountUser,
-            })
+            });
             user.memberBalance -= amountUser;
             await user.save();
             await userContribution.save();
-        });
+        }*/
+
         const moneyBox = await moneyBoxModel.findByIdAndUpdate(moneyBoxId,
             {
                 $inc: {
                     amount: (loans.amount * (-1)),
                 }
             },
-            { new: true })
-        const updatedUser = await userModel.findByIdAndUpdate(user._id,
+            { new: true });
+
+        await userModel.findByIdAndUpdate(user._id,
             {
                 $inc: {
                     'loans.number': 1,
@@ -137,6 +173,7 @@ exports.addLoans = async (req, res) => {
             },
             { new: true, useFindAndModify: false }
         );
+
         if (!moneyBox) {
             return res.status(400).send({
                 msg: "حدث خطأ أثناء معالجة طلبك",
@@ -146,12 +183,13 @@ exports.addLoans = async (req, res) => {
             msg: "لقد تمت اضافته بنجاح",
         });
     } catch (error) {
-        console.log(error)
+        console.log(error);
         return res.status(500).send({
             msg: "حدث خطأ أثناء معالجة طلبك"
         });
     }
 }
+
 
 exports.payInstallments = async (req, res) => {
     const { id } = req.body;
@@ -340,6 +378,8 @@ exports.getRecordInstallments = async (req, res) => {
         }
         const installments = await installmentsLoansModel.find({
             idLoans: loan._id
+        }).sort({
+            requiredPaymentDate: 1
         });
         var installmentsPaid = 0;
         installments.forEach((installment) => {

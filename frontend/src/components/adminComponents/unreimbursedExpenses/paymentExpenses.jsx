@@ -1,11 +1,12 @@
 import { faRightLong } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { getIdUnReimbursedExpensesFetch, payCashUnReimbursedExpensesFetch, searchUnReimbursedExpensesFetch } from '../../../utils/apiFetch';
 import Alert from '../../alert/alert';
 
 function PaymentExpenses() {
+    const navigate = useNavigate();
     const [listId, setListId] = useState(false);
     const [selectId, setSelectId] = useState(false);
     const [users, setUsers] = useState(false);
@@ -14,7 +15,6 @@ function PaymentExpenses() {
     });
     useEffect(() => {
         getIdUnReimbursedExpensesFetch().then((res) => {
-            console.log(res)
             setListId(res.data.unReimbursedExpenses);
         })
     }, []);
@@ -38,7 +38,14 @@ function PaymentExpenses() {
             setUsers(users)
             //document.getElementById(idUser).innerHTML = "تم الدفع"
         }).catch((err) => {
-            console.log(err)
+            if (err.response.status == 401) {
+                navigate("/auth");
+            }
+            setShowAlert({
+                display: true,
+                status: false,
+                text: err.response.data.msg
+            });
         })
     }
     return (
@@ -49,12 +56,12 @@ function PaymentExpenses() {
                 </Link>
             </div>
             <h1 className="text-center text-[1.5rem] font-bold py-[1rem]">
-                دفع المصروفات
+            تسديد المصروفات
             </h1>
             <form action="" className='container mx-auto'>
                 <select onChange={(event) => {
                     setSelectId(event.target.value)
-                }} className="select select-bordered w-full max-w-xs">
+                }} className="select select-bordered w-full max-w-[9rem]">
                     <option disabled selected>اختر رقم الطلب </option>
                     {
                         listId && listId.map((value) => {
@@ -71,7 +78,7 @@ function PaymentExpenses() {
             </form>
             {showAlert.display ? <Alert msg={showAlert} /> : ""}
             <div className="overflow-x-auto mt-[1rem]">
-                <table className="text-[1rem] table border-separate border-spacing-2 border w-[1000px] mx-auto">
+                <table className="text-[1rem] table border-separate border-spacing-2 border w-[600px] mx-auto">
                     <tr>
                         <th className="border text-center border-slate-600">
                             رقم المستخدم

@@ -11,7 +11,7 @@ const moment = require('moment');
 const momentHijri = require("moment-hijri");
 //POST METHODS
 exports.addFoundationSubscriptions = async (req, res) => {
-    const { idUser, amount, comments } = req.body;
+    const { idUser, comments } = req.body;
     try {
         if (
             req.user.admin.userPermission.indexOf(
@@ -35,7 +35,8 @@ exports.addFoundationSubscriptions = async (req, res) => {
                 msg: "لقد تم دفع الاشتراك التاسيسي من قبل"
             })
         }
-
+        let type = await typeSubscriptionModel.find()
+        let amount = type[1].amount;
         const foundationSubscription = foundationSubscriptionModel({
             idUser,
             amount,
@@ -139,7 +140,7 @@ exports.addFoundationSubscriptions = async (req, res) => {
 };
 
 exports.addMonthlySubscriptions = async (req, res) => {
-    const { idUser, amount, month, dueDateHijri, dueDate, year } = req.body;
+    const { idUser, month, dueDateHijri, dueDate, year } = req.body;
     try {
         // Check for permissions
         if (req.user.admin.userPermission.indexOf("إضافة إيرادات (اشتراكات الأعضاء)") === -1) {
@@ -168,6 +169,8 @@ exports.addMonthlySubscriptions = async (req, res) => {
                 msg: "لقد تم دفع الاشتراك الخاص بهذا الشهر من قبل"
             })
         }
+        let type = await typeSubscriptionModel.find()
+        let amount = type[0].amount;
         existingSubscription.total += Number(amount);
         if (existingSubscription.months[month].isInvoiceOverdue) {
             existingSubscription.numberofArrears -= 1;

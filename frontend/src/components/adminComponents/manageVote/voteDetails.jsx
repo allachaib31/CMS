@@ -30,6 +30,7 @@ function VoteDetails() {
     const [labels, setLabels] = useState(["A", "B", "C"]);
     const [data, setData] = useState([0, 0, 0]);
     const [vote, setVote] = useState(false);
+
     useEffect(() => {
         voteDetailsFetch(queryParams.get("id")).then((res) => {
             console.log(res)
@@ -49,23 +50,35 @@ function VoteDetails() {
                 navigate("/auth");
             }
         })
-    }, [])
+    }, []);
 
     return (
         <div className='container mx-auto'>
             <h1>{vote && vote.subject}</h1>
-            <Bar data={{
-                labels: labels,
-                datasets: [
-                    {
-                        label: "عدد المصوتين",
-                        data: data,
-                        backgroundColor: "#1eb854", // Adjust color as needed
+            <Bar
+                data={{
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: "عدد المصوتين",
+                            data: data,
+                            backgroundColor: "#1eb854", // Adjust color as needed
+                        },
+                    ],
+                }}
+                options={{
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                stepSize: 1, // Ensures ticks are whole numbers
+                            },
+                        },
                     },
-                ],
-            }} />
+                }}
+            />
         </div>
-    )
+    );
 }
 
 export default VoteDetails;

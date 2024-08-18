@@ -65,7 +65,7 @@ function RecordContributionPurchaseCommodity() {
           });
         }} className="select xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
           {yearOptions.map((value) => (
-            <option key={value} value={value} selected={inputs.year === value}>
+            <option key={value} value={value} selected={inputs.year == value}>
               {value}
             </option>
           ))}
@@ -90,7 +90,7 @@ function RecordContributionPurchaseCommodity() {
         </select>
         <select onChange={(event) => {
           setId(event.target.value);
-        }} className="select xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
+        }} className="select w-[8rem] xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
           <option selected disabled>قم باختيار العدد الخاص بنموذج شراء السلع</option>
           {idList && idList.map((list) => (
             <option value={list._id}>{list.id}</option>
@@ -105,7 +105,7 @@ function RecordContributionPurchaseCommodity() {
           {" "}
           <span className=" loading loading-ring loading-lg"></span>
         </div> : <div className="overflow-x-auto mt-[1rem]">
-          {userContribution && <table className="text-[1.1rem] table border-separate border-spacing-2 border w-[1000px]  mx-auto">
+          {userContribution && <table className="text-[1.1rem] table border-separate border-spacing-2 border w-[900px]  mx-auto">
             <tr>
               <th className="border text-center border-slate-600" >
                 رقم الطلب

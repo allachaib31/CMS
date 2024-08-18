@@ -22,6 +22,7 @@ module.exports = async (req, res, next) => {
             name: user.name,
             NationalIdentificationNumber: user.NationalIdentificationNumber,
             phoneNumber: user.phoneNumber,
+            profileImage: user.profileImage,
             status: user.status,
         };
         next();

@@ -6,6 +6,8 @@ export const VALIDATION_ROUTE = `${HOST}api/v1.0/auth/validation`;
 
 // Manage user Route
 export const ADDUSER_ROUTE = `${HOST}api/v1.0/users/addUser`;
+export const UPLOADIMAGE_ROUTE = `${HOST}api/v1.0/users/uploadImage`;
+export const UPLOADCLIENTIMAGE_ROUTE = `${HOST}api/v1.0/users/uploadClientImage`;
 export const GETUSER_ROUTE = `${HOST}api/v1.0/users/`;
 export const SEARCHUSER_ROUTE = `${HOST}api/v1.0/users/search`;
 export const UPDATEUSER_ROUTE = `${HOST}api/v1.0/users`
@@ -39,6 +41,7 @@ export const ADDCOMMENTMONTHLY_ROUTE = `${HOST}api/v1.0/subscriptions/addComment
 export const GETMONEYBOX_ROUTE = `${HOST}api/v1.0/moneyBox`;
 // Manage commodity revenu
 export const ADDCOMMODITYREVENUE_ROUTE = `${HOST}api/v1.0/commodityRevenu`;
+export const PAYAMOUNT_ROUTE = `${HOST}api/v1.0/commodityRevenu/payAmount`
 export const PAYINSTALLMENTSCHEDULE_ROUTE = `${HOST}api/v1.0/commodityRevenu/payInstallmentSchedule`; 
 export const GETIDCOMMODITYREVENUE_ROUTE = `${HOST}api/v1.0/commodityRevenu/getIdCommodityRevenue`; 
 export const GETCOMMODITYREVENUE_ROUTE = `${HOST}api/v1.0/commodityRevenu/getCommodityRevenue`;
@@ -54,6 +57,7 @@ export const ADDSTOCK_ROUTE = `${HOST}api/v1.0/stock/add`;
 export const GETACTIVEUSER_ROUTE = `${HOST}api/v1.0/stock/getIdUsers`;
 export const GETIDSTOCK_ROUTE = `${HOST}api/v1.0/stock/getIdStock`;
 export const GETSTOCK_ROUTE = `${HOST}api/v1.0/stock/getStock`;
+export const ADDADDITIONALSTOCK = `${HOST}api/v1.0/stock/addAdditionalStock`;
 // Manage Loans
 export const ADDLOANS_ROUTE = `${HOST}api/v1.0/loans`;
 export const PAYINSTALLMENTS_ROUTE = `${HOST}api/v1.0/loans/payInstallments`;
@@ -99,6 +103,9 @@ export const VOTEDETAILS_ROUTE = `${HOST}api/v1.0/vote/voteDetails`;
 export const ADDADVERTISING_ROUTE = `${HOST}api/v1.0/advertising`;
 export const GETALLADVERTISING_ROUTE = `${HOST}api/v1.0/advertising/getAll`;
 export const DELETEADVERTISING_ROUTE = `${HOST}api/v1.0/advertising/delete`;
+export const ADDADS_ROUTE = `${HOST}api/v1.0/ads/add`;
+export const GETADS_ROUTE = `${HOST}api/v1.0/ads/`;
+export const DELETEADS_ROUTE = `${HOST}api/v1.0/ads`;
 //Manage agreements
 export const ADDAGREEMENTS_ROUTE = `${HOST}api/v1.0/agreements/add`
 export const GETAGREEMENTS_ROUTE = `${HOST}api/v1.0/agreements/`;
@@ -106,12 +113,18 @@ export const UPDATEAGREEMENTSACTIVE_ROUTE = `${HOST}api/v1.0/agreements/`
 //Manage familyTree
 export const CREATEFAMILYTREE_ROUTE = `${HOST}api/v1.0/familyTree/createNewFamilyTree`;
 export const ADDTOFAMILYTREE_ROUTE = `${HOST}api/v1.0/familyTree`;
+export const ADDNEWRELATION_ROUTE = `${HOST}api/v1.0/familyTree/addNewRelation`
+export const GETMEMBERFAMILYTREE_ROUTE = `${HOST}api/v1.0/familyTree/getMemberFamilyTree`;
 export const GETFAMILYTREE_ROUTE = `${HOST}api/v1.0/familyTree`;
 export const UPDATEFAMILYTREE_ROUTE = `${HOST}api/v1.0/familyTree`;
 export const GETFAMILYTREEUSEID = `${HOST}api/v1.0/familyTree/withId`;
 export const GETIDFAMILYTREE_ROUTE = `${HOST}api/v1.0/familyTree/getListId`;
 export const DELETEFAMILYTREE_ROUTE = `${HOST}api/v1.0/familyTree/delete`
-
+//Manage bloodMoney
+export const ADDBLOODMONEY_ROUTE = `${HOST}api/v1.0/bloodMoney/add`;
+export const PAYBLOODMONEY_ROUTE = `${HOST}api/v1.0/bloodMoney/pay`;
+export const GETPAYMENTBLOODMONEY_ROUTE = `${HOST}api/v1.0/bloodMoney/payment`;
+export const GETRECORDBLOODMONEY_ROUTE = `${HOST}api/v1.0/bloodMoney/record`;
 //Manage client Route
 //Manage auth
 export const LOGINCLIENT_ROUTE = `${HOST}api/v1.0/authClient/login`;
@@ -122,6 +135,8 @@ export const GETELECTION_ROUTE = `${HOST}api/v1.0/clientInformation/getElection`
 export const SETVOTE_ROUTE = `${HOST}api/v1.0/clientInformation/vote`;
 export const ELECTIONDETAILS_ROUTE = `${HOST}api/v1.0/clientInformation/electionDetails`
 export const GETADVERTISING_ROUTE = `${HOST}api/v1.0/clientInformation/getAdvertising`;
+export const GETADSCLIENT_ROUTE = `${HOST}api/v1.0/clientInformation/getAds`;
+export const PAYCLIENTMONTHLY_ROUTE = `${HOST}api/v1.0/clientInformation/payMonthly`;
 export const GETTIMING_ROUTE = `${HOST}api/v1.0/competition/getTiming`;
 export const GETUSERCOMPTETIONINFORMATION_ROUTE = `${HOST}api/v1.0/competition/getInformation`;
 export const ENTERTOCONTEST_ROUTE = `${HOST}api/v1.0/competition/enterToContest`;
@@ -130,7 +145,8 @@ export const GETQUESTIONSCOMPETITION_ROUTE = `${HOST}api/v1.0/competition/getQue
 export const SAVERESPONSE_ROUTE = `${HOST}api/v1.0/competition/saveResponse`;
 export const GETUSERRESULT_ROUTE = `${HOST}api/v1.0/competition/userResult`;
 export const GETSUBSCRIPTIONCLIENT_ROUTE = `${HOST}api/v1.0/clientInformation/subscribe`;
-export const GETCONTESTRESULT_ROUTE = `${HOST}api/v1.0/competition/getContestResult`
+export const GETCONTESTRESULT_ROUTE = `${HOST}api/v1.0/competition/getContestResult`;
+
 //PRINT
 export const PRINTUNREIMBURSEDEXPENSES_ROUTE = `${HOST}api/v1.0/unReimbursedExpenses/printUnReimbursedExpenses`;
 export const PRINTREIMBURSEDEXPENSES_ROUTE = `${HOST}api/v1.0/reimbursedExpenses/printReimbursedExpenses`;

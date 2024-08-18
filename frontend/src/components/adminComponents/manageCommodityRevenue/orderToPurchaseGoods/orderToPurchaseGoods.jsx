@@ -353,15 +353,15 @@ function OrderToPurchaseGoods() {
                             <div className="relative sm:w-1/2">
                                 <FontAwesomeIcon icon={faMoneyBill} className="absolute top-[1rem] right-[1rem]" />
                                 <input type="number" required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" onChange={(event) => {
-                                    /*return setInputs((prevInput) => {
+                                    return setInputs((prevInput) => {
                                         return {
                                             ...prevInput, commodityData: {
                                                 ...prevInput.commodityData,
                                                 amountPaid: Number(event.target.value.trim())
                                             }
                                         }
-                                    })*/
-                                }} placeholder={`المبلغ المسدد`} disabled/>
+                                    })
+                                }} placeholder={`المبلغ المسدد`}/>
                             </div>
                             <div className="relative sm:w-1/2">
                                 <FontAwesomeIcon icon={faMoneyBill} className="absolute top-[1rem] right-[1rem]" />

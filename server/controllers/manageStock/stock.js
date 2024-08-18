@@ -25,7 +25,6 @@ exports.addStock = async (req, res) => {
             });
         }
         const userExsist = await userModel.findById(memberId);
-        console.log(memberId)
         if(!userExsist){
             return res.status(404).send({
                 msg: "العدد الخاص بهذا العضو غير موجود",
@@ -62,7 +61,7 @@ exports.addStock = async (req, res) => {
         const activeUsers = await userModel.find({
             status: "active",
             disable: false,
-            memberBalance: { $gte: (totalCostStocks - amountPercentage) / Number(numberOfUser)}
+            //memberBalance: { $gte: (totalCostStocks - amountPercentage) / Number(numberOfUser)}
         });
         const amount = (totalCostStocks - amountPercentage) / activeUsers.length;
         activeUsers.forEach(async (user) => {
@@ -100,7 +99,86 @@ exports.addStock = async (req, res) => {
         });
     }
 }
-
+exports.addAdditionalStock = async (req, res) => {
+    const {buyAdditionalStock, additionalStockCost,idStock} = req.body;
+    try {
+        if (
+            req.user.admin.userPermission.indexOf(
+                "إضافة بيانات المساهمات (أسهم، صندوق استثماري، شركة مالية، أخرى)"
+            ) == -1
+        ) {
+            return res.status(403).send({
+                msg: "ليس لديك إذن إضافة بيانات المساهمات (أسهم، صندوق استثماري، شركة مالية، أخرى)",
+            });
+        }
+        const amountMoneyBox = await moneyBoxModel.findById(moneyBoxId);
+        const totalCost = additionalStockCost * buyAdditionalStock;
+        if(totalCost > amountMoneyBox.amount){
+            return res.status(403).send({
+                msg: "لايوجد رصيد كافي في الصندوق",
+            });
+        } 
+        const stocks = await stocksModel.findById(idStock);
+        if(!stocks) {
+            return res.status(404).send({
+                msg: "لا توجد هدى المساهمة"
+            })
+        }
+        stocks.buyAdditionalStock += buyAdditionalStock;
+        stocks.additionalStockCost = additionalStockCost;
+        stocks.additionalStocksCost = totalCost;
+        stocks.previousStockCostWithAdditionalStock = (stocks.previousStockCostWithAdditionalStock + additionalStockCost) / (stocks.totalNumberOfStock + buyAdditionalStock);
+        stocks.totalNumberOfStock += buyAdditionalStock;
+        await stocks.save();
+        const numberOfUser = await userModel.countDocuments({ "status": "active","disable": false });
+        const activeUsers = await userModel.find({
+            status: "active",
+            disable: false,
+            memberBalance: { $gte: (totalCost) / Number(numberOfUser)}
+        });
+        const amount = totalCost / activeUsers.length;
+        activeUsers.forEach(async (user) => {
+            const userStock = new userStockModel({
+                idStock: stocks._id,
+                idUser: user._id,
+                prevBalance: user.memberBalance,
+                contributionAmount: amount,
+                contributionRate: (amount * 100) / user.memberBalance,
+                amountProfitPercentage: 0
+            })
+            user.memberBalance -= amount;
+            await user.save();
+            await userStock.save();
+        });
+        const moneyBox = await moneyBoxModel.findByIdAndUpdate(moneyBoxId,
+            {
+                $inc: {
+                    amount: (totalCost * (-1)),
+                }
+            },
+            { new: true })
+        if (!moneyBox) {
+            return res.status(400).send({
+                msg: "حدث خطأ أثناء معالجة طلبك",
+            });
+        }
+        const userStock = await userStockModel.find({
+            idStock: idStock
+        }).populate("idUser",{
+            password: false
+        })
+        return res.status(200).send({
+            msg: "لقد تمت اضافته بنجاح",
+            stocks,
+            userStock
+        });
+    } catch (error) {
+        console.log(error)
+        return res.status(500).send({
+            msg: "حدث خطأ أثناء معالجة طلبك"
+        });
+    }
+}
 exports.getActiveUser = async (req, res) => {
     try {
         const users = await userModel.find({

@@ -11,13 +11,11 @@ function DisplayRecordUnrecoveredExpenses() {
   const [numberOfBeneficiaries, setNumberOfBeneficiaries] = useState(0);
   useEffect(() => {
     getRecordUnrecovereExpensesFetch().then((res) => {
-      console.log(res)
       setUnReimbursedExpenses(res.data.unReimbursedExpenses)
       setTotal(res.data.total);
       setExpensesPaidCash(res.data.expensesPaidCash);
       setNumberOfBeneficiaries(res.data.numberOfBeneficiaries);
     }).catch((err) => {
-      console.log(err)
     })
   }, [])
   return (
@@ -32,41 +30,47 @@ function DisplayRecordUnrecoveredExpenses() {
       </h1>
       <div className="mt-[1rem] flex flex-col md:flex-row gap-[1rem] justify-center">
         <div className="flex md:flex-col items-center gap-[1rem]">
-          <h1 className="text-[1.1rem] md:w-auto w-[90%] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">إجمالي المصروفات الغير مستردة </h1>
-          <h1 className="text-[1.1rem] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">{total.toFixed(2)}</h1>
+          <h1 className="text-[0.8rem] sm:text-[1.1rem] md:w-auto w-[70%] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">إجمالي المصروفات الغير مستردة </h1>
+          <h1 className="text-[0.8rem] sm:text-[1.1rem] md:w-auto w-[30%] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem] text-center">{total.toFixed(2)}</h1>
         </div>
         <div className="flex md:flex-col items-center gap-[1rem]">
-          <h1 className="text-[1.1rem] md:w-auto w-[90%] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">المصروفات المسددة نقداً</h1>
-          <h1 className="text-[1.1rem] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">{expensesPaidCash.toFixed(2)}</h1>
+          <h1 className="text-[0.8rem] sm:text-[1.1rem] md:w-auto w-[70%] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">المصروفات المسددة نقداً</h1>
+          <h1 className="text-[0.8rem] sm:text-[1.1rem] md:w-auto w-[30%] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem] text-center">{expensesPaidCash.toFixed(2)}</h1>
         </div>
         <div className="flex md:flex-col items-center gap-[1rem]">
-          <h1 className="text-[1.1rem] md:w-auto w-[90%] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">عدد المستفيدين</h1>
-          <h1 className="text-[1.1rem] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">{numberOfBeneficiaries}</h1>
+          <h1 className="text-[0.8rem] sm:text-[1.1rem] md:w-auto w-[70%] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">عدد المستفيدين</h1>
+          <h1 className="text-[0.8rem] sm:text-[1.1rem] md:w-auto w-[30%] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem] text-center">{numberOfBeneficiaries}</h1>
         </div>
       </div>
       <div className="overflow-x-auto mt-[1rem]">
-        <table className="text-[1rem] table border-separate border-spacing-2 border w-[1900px] mx-auto">
+        <table className="text-[0.8rem] table border-separate border-spacing-2 border w-[1500px] mx-auto">
           <tr>
             <th className="border text-center border-slate-600" rowSpan={2}>
-              رقم الطلب
+              رقم <br />الطلب
             </th>
             <th className="border text-center border-slate-600" rowSpan={2}>
-              اسم المستفيد
+              المستفيد
             </th>
             <th className="border text-center border-slate-600" rowSpan={2}>
-              المصروف من رصيد الصندوق
+              نوع <br />المصروف
+            </th>
+            <th className="border text-center border-slate-600" rowSpan={2}>
+            المبلغ المطلوب <br />صرفه
+            </th>
+            <th className="border text-center border-slate-600" rowSpan={2}>
+              المصروف من <br />رصيد العضو
+            </th>
+            <th className="border text-center border-slate-600" rowSpan={2}>
+              المصروف من <br />رصيد الصندوق
             </th>
             <th colSpan={2} className="border text-center border-slate-600">
-              المصروفات المسددة نقداً
+              المصروفات المسددة <br />نقداً
             </th>
-            <th className="border text-center border-slate-600" rowSpan={2}>
-              الإجمالي
+            <th rowSpan={2} className="border text-center border-slate-600">
+              تاريخ <br/> الميلادي
             </th>
-            <th className="border text-center border-slate-600" rowSpan={2}>
-              نوع المصروف
-            </th>
-            <th colSpan={2} className="border text-center border-slate-600">
-              تاريخ الصرف
+            <th rowSpan={2} className="border text-center border-slate-600">
+              تاريخ <br/> الهجري
             </th>
             <th className="border text-center border-slate-600" rowSpan={2}>
               البيان
@@ -82,20 +86,18 @@ function DisplayRecordUnrecoveredExpenses() {
             <th className="border text-center border-slate-600">
               المصدر
             </th>
-            <th className="border text-center border-slate-600">
-              الميلادي
-            </th>
-            <th className="border text-center border-slate-600">
-              الهجري
-            </th>
           </tr>
           <tbody>
             {
               unReimbursedExpenses && unReimbursedExpenses.map((expenses) => {
+                const d = new Date(expenses.createdAt);
                 return (
                   <tr >
                     <td className="border text-center border-slate-600">{expenses.id}</td>
                     <td className="border text-center border-slate-600">{expenses.name}</td>
+                    <td className="border text-center border-slate-600">{expenses.typeExpenses}</td>
+                    <td className="border text-center border-slate-600">{expenses.amount.toFixed(2)}</td>
+                    <td className="border text-center border-slate-600">{expenses.expensememberbalance.toFixed(2)}</td>
                     <td className="border text-center border-slate-600">{expenses.balanceDistribution.toFixed(2)}</td>
                     <td className="border text-center border-slate-600">
                       {
@@ -119,9 +121,7 @@ function DisplayRecordUnrecoveredExpenses() {
                         })
                       }
                     </td>
-                    <td className="border text-center border-slate-600">{expenses.total.toFixed(2)}</td>
-                    <td className="border text-center border-slate-600">{expenses.typeExpenses}</td>
-                    <td className="border text-center border-slate-600">{expenses.createdAt}</td>
+                    <td className="border text-center border-slate-600">{d.getUTCFullYear() + "-" + (d.getUTCMonth() + 1) + "-" + d.getDate()}</td>
                     <td className="border text-center border-slate-600">{expenses.hijriDate.year}/{expenses.hijriDate.month.number}/{expenses.hijriDate.day}</td>
                     <td className="border text-center border-slate-600">{expenses.comments}</td>
                     <td className="border text-center border-slate-600"></td>

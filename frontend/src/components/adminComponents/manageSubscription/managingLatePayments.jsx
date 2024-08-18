@@ -77,7 +77,7 @@ function ManagingLatePayments() {
             <span className=" loading loading-ring loading-lg"></span>
           </div>
         ) : (
-          <table className="text-[1rem] table border-separate border-spacing-2 border w-[1200px] mx-auto">
+          <table className="text-[1rem] table border-separate border-spacing-2 border w-[800px] mx-auto">
             <thead className="text-[1rem] text-center">
               <tr>
                 <th className="border border-slate-600" rowSpan={2}>
@@ -89,7 +89,6 @@ function ManagingLatePayments() {
                 <th className="text-center border border-slate-600" colSpan={2}>
                   تاريخ الاستحقاق
                 </th>
-                <th className="text-center border border-slate-600" rowSpan={2}>تنبيه</th>
                 <th className="text-center border border-slate-600" rowSpan={2}>دفع</th>
               </tr>
               <tr>
@@ -110,9 +109,6 @@ function ManagingLatePayments() {
                       <td className="border border-slate-600">{subscription.dueDate}</td>
                       <td className="border border-slate-600">
                         {dateHijri}
-                      </td>
-                      <td className="border border-slate-600">
-                        <button className="btn w-full btn-warning">تنبيه</button>
                       </td>
                       <td id={subscription.idUser._id} className="border border-slate-600">
                         <button onClick={() => {

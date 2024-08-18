@@ -1,11 +1,10 @@
 const mongoose = require("mongoose");
 const Joi = require('joi');
-const shortid = require("shortid");
+const { generateNextId } = require("../../utils/generateNextId");
 
 const commodityRevenueSchema = new mongoose.Schema({
     id: {
         type: String,
-        default: shortid.generate,
         unique: true,
     },
     customerData: {
@@ -51,6 +50,10 @@ const commodityRevenueSchema = new mongoose.Schema({
             type: Number,
             required: true
         },
+        balance: {
+            type: Number,
+            default: 0
+        },
         phoneNumber: {
             type: String,
             required: true,
@@ -66,7 +69,6 @@ const commodityRevenueSchema = new mongoose.Schema({
         itPaid: {
             type: Boolean,
             default: false,
-            required: true
         }
     },
     commodityData: {
@@ -89,6 +91,10 @@ const commodityRevenueSchema = new mongoose.Schema({
         amountPaid: {
             type: Number,
             required: true,
+        },
+        amountItPaid: {
+            type: Boolean,
+            default: false
         },
         saleAmount: {
             type: Number,
@@ -166,7 +172,12 @@ const commodityRevenueSchema = new mongoose.Schema({
     },
 
 })
-
+commodityRevenueSchema.pre('save', async function(next) {
+    if (this.isNew) { // Check if the document is new
+        this.id = await generateNextId("CommodityRevenue", "CR");
+    }
+    next();
+});
 const joiSchema = Joi.object({
     id: Joi.string(),
     customerData: Joi.object({
@@ -182,6 +193,7 @@ const joiSchema = Joi.object({
         nationalIdentificationNumber: Joi.string().pattern(/^[1-9]\d{9}$/).required(),
         sponsorRatio: Joi.number().min(0).required(),
         amount: Joi.number().min(0).required(),
+        balance: Joi.number().min(0),
         phoneNumber: Joi.string().min(10).max(10).pattern(/^05\d{8}$/).required(),
         region: Joi.string().min(3).max(1024).required(),
         address: Joi.string().min(3).max(1024).required(),
@@ -193,6 +205,7 @@ const joiSchema = Joi.object({
         dateOfPurchase: Joi.date().required(),
         dateOfPurchaseHijri: Joi.object().required(),
         amountPaid: Joi.number().min(0).required(),
+        amountItPaid: Joi.boolean(),
         saleAmount: Joi.number().min(0).required(),
         saleDate: Joi.date().required(),
         saleDateHijri: Joi.object().required(),

@@ -39,7 +39,7 @@ function RecordAnnualDetails() {
                 {
                     inputs.typeSearch == "oneYear" ? <div className="overflow-x-auto">
                         {!loading ? <div className='flex justify-center'> <span className=" loading loading-ring loading-lg"></span></div> :
-                            <table className="table border-separate border-spacing-2 w-[1000px] border text-[1rem]">
+                            <table className="table border-separate border-spacing-2 w-[600px] border text-[1rem]">
                                 <thead className='text-[1rem] text-center'>
                                     <tr>
                                         <th className='border border-slate-600'>الاشهر</th>
@@ -67,8 +67,8 @@ function RecordAnnualDetails() {
                             </table>
                         }
                     </div> :
-                        <table className="table border-separate border-spacing-2 border text-[1rem] w-[2000px]">
-                            <thead className='text-center text-[1rem]'>
+                        <table className="table border-separate border-spacing-2 border text-[1rem] w-[1400px]">
+                            <thead className='text-center text-[0.8rem]'>
                                 <tr>
                                     <th className='border border-slate-600'>الاسم</th>
                                     <th className='border border-slate-600'>السنة</th>
@@ -87,7 +87,7 @@ function RecordAnnualDetails() {
                                     <th className='border border-slate-600'>ملاحظات</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody className='text-[0.8rem]'>
                                 {
                                     subscriptions && subscriptions.map(((subscription, subIndex) => (
                                         <tr className='text-center'>

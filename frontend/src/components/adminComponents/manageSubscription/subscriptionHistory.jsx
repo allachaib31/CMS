@@ -82,7 +82,7 @@ function SubscriptionHistory() {
       <h1 className="text-center text-[1.5rem] font-bold py-[1rem]">
         سجل الاشتراكات
       </h1>
-      <div className="container mx-auto sm:flex  mb-[1rem]">
+      {/*<div className="container mx-auto sm:flex  mb-[1rem]">
         <div>
           <input
             onChange={(input) => {
@@ -113,35 +113,35 @@ function SubscriptionHistory() {
             {loadingSearch ? <span className="loading loading-ring loading-lg"></span> : "ابحث"}
           </button>
         </div>
-      </div>
+      </div>*/}
       <div className="mt-[1rem] flex md:flex-row flex-col items-center container mx-auto justify-center gap-[0.2rem] md:gap-[1rem]">
         <div className='flex md:flex-col w-full  md:w-auto items-center justify-center gap-[1rem]'>
-          <h1 className="md:text-[1.1rem] w-full sm:w-1/2 md:w-auto font-bold bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]">رصيد الصندوق منذ إنشائه </h1>
-          <h1 className="text-[1.1rem] font-bold bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]"> {moneyBox && moneyBox.cumulativeAmount}</h1>
+          <h1 className="text-[0.9rem] w-[70%] sm:w-[80%] md:w-auto font-bold bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]">رصيد الصندوق منذ إنشائه </h1>
+          <h1 className="text-[0.9rem] w-[30%] sm:w-[20%] md:w-auto text-center font-bold bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]"> {moneyBox && moneyBox.cumulativeAmount}</h1>
         </div>
         <div className='flex md:flex-col w-full  md:w-auto items-center justify-center gap-[1rem]'>
-          <h1 className="md:text-[1.1rem] w-full sm:w-1/2 md:w-auto font-bold bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]">المصروفات </h1>
-          <h1 className="text-[1.1rem] font-bold bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]">{moneyBox &&  (moneyBox.cumulativeAmount - moneyBox.amount).toFixed(2)}</h1>
+          <h1 className="text-[0.9rem] w-[70%] sm:w-[80%] md:w-auto font-bold bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]">المصروفات </h1>
+          <h1 className="text-[0.9rem] w-[30%] sm:w-[20%] md:w-auto text-center font-bold bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]">{moneyBox &&  (moneyBox.cumulativeAmount - moneyBox.amount).toFixed(2)}</h1>
         </div>
         <div className='flex md:flex-col w-full md:w-auto items-center justify-center gap-[1rem]'>
-          <h1 className="md:text-[1.1rem] w-full sm:w-1/2 md:w-auto font-bold bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]">الأعضاء المفعلون </h1>
-          <h1 className="text-[1.1rem] font-bold bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]">{activeMember}</h1>
+          <h1 className="text-[0.9rem] w-[70%] sm:w-[80%] md:w-auto font-bold bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]">الأعضاء المفعلون </h1>
+          <h1 className="text-[0.9rem] w-[30%] sm:w-[20%] md:w-auto text-center font-bold bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]">{activeMember}</h1>
         </div>
         <div className='flex md:flex-col w-full md:w-auto items-center justify-center gap-[1rem]'>
-          <h1 className="md:text-[1.1rem] w-full sm:w-1/2 md:w-auto font-bold bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]">الأعضاء الجدد </h1>
-          <h1 className="text-[1.1rem] font-bold bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]">{newUser}</h1>
+          <h1 className="text-[0.9rem] w-[70%] sm:w-[80%] md:w-auto font-bold bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]">الأعضاء الجدد </h1>
+          <h1 className="text-[0.9rem] w-[30%] sm:w-[20%] md:w-auto text-center font-bold bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]">{newUser}</h1>
         </div>
       </div>
       {showAlert.display ? <Alert msg={showAlert} /> : ""}
       <div className="overflow-x-auto mt-[1rem]">
-        {!loading ? <div className='flex justify-center'> <span className=" loading loading-ring loading-lg"></span></div> : <table className="text-[1rem] table border-separate border-spacing-2 border w-[1700px] mx-auto">
+        {!loading ? <div className='flex justify-center'> <span className=" loading loading-ring loading-lg"></span></div> : <table className="text-[1rem] table border-separate border-spacing-2 border w-[1300px] mx-auto">
           <thead className='text-[1rem] text-center'>
             <tr>
               <th className='border border-slate-600'>اسم العضو</th>
-              <th className='border border-slate-600'>رصيد العضو منذ بداية اشتراكه</th>
-              <th className='border border-slate-600'> المصروف من رصيده العضو</th>
-              <th className='border border-slate-600'>الرصيد الحالي للعضو</th>
-              <th className='border border-slate-600'>نسبة العضو من رصيد الصندوق</th>
+              <th className='border border-slate-600'>رصيد العضو <br/>منذ بداية اشتراكه</th>
+              <th className='border border-slate-600'> المصروف من <br/>رصيده العضو</th>
+              <th className='border border-slate-600'>الرصيد الحالي <br/>للعضو</th>
+              <th className='border border-slate-600'>نسبة العضو <br/>من رصيد الصندوق</th>
               <th className='border border-slate-600'>ملاحظات</th>
               <th className='border border-slate-600'>تفاصيل أكثر</th>
             </tr>

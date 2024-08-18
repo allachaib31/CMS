@@ -17,7 +17,6 @@ function Election() {
   });
   useEffect(() => {
     getElectionFetch().then((res) => {
-      console.log(res)
       setVotes(res.data.vote);
     }).catch((err) => {
       if (err.response && err.response.status === 401) {
@@ -26,7 +25,6 @@ function Election() {
     })
   }, []);
   const handleSubmit = () => {
-    console.log(inputs)
     setShowAlert({
       display: false,
     });
@@ -79,7 +77,7 @@ function Election() {
                     <tr className="text-center">
                       <td className="border border-slate-600">{vote.id}</td>
                       <td className="border border-slate-600">{vote.subject}</td>
-                      <td className="border border-slate-600">{vote.votingEndDate}</td>
+                      <td className="border border-slate-600">{vote.votingEndDate && new Date(vote.votingEndDate).getUTCFullYear() + "-" + (new Date(vote.votingEndDate).getUTCMonth() + 1) + "-" + new Date(vote.votingEndDate).getUTCDate()}</td>
                       <td className='border border-slate-600'><button onClick={() => {
                         setData(vote);
                         setInputs({

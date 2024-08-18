@@ -67,7 +67,7 @@ function FormContributionPurchaseCommodity() {
                     });
                 }} className="select xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
                     {yearOptions.map((value) => (
-                        <option key={value} value={value} selected={inputs.year === value}>
+                        <option key={value} value={value} selected={inputs.year == value}>
                             {value}
                         </option>
                     ))}
@@ -92,7 +92,7 @@ function FormContributionPurchaseCommodity() {
                 </select>
                 <select onChange={(event) => {
                     setId(event.target.value);
-                }} className="select xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
+                }} className="select w-[8rem] xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
                     <option selected disabled>قم باختيار العدد الخاص بنموذج شراء السلع</option>
                     {idList && idList.map((list) => (
                         <option value={list._id}>{list.id}</option>
@@ -112,7 +112,7 @@ function FormContributionPurchaseCommodity() {
                     <span className=" loading loading-ring loading-lg"></span>
                 </div> : <div className="overflow-x-auto mt-[1rem]">
                     {
-                        commodityRevenu && <table className="text-[1.1rem] table border-separate border-spacing-2 border w-[1900px]  mx-auto">
+                        commodityRevenu && <table className="text-[1.1rem] table border-separate border-spacing-2 border w-[1200px]  mx-auto">
                             <tr className='text-center'>
                                 <th className="border text-center border-slate-600" colSpan={7}>البيانات: العميل \ سلعة \ الكفيل</th>
                             </tr>
@@ -145,9 +145,9 @@ function FormContributionPurchaseCommodity() {
                                     <td className="border text-center border-slate-600">{commodityRevenu.id}</td>
                                     <td className="border text-center border-slate-600">{commodityRevenu.customerData.name}</td>
                                     <td className="border text-center border-slate-600">{commodityRevenu.commodityData.itemType}</td>
-                                    <td className="border text-center border-slate-600">{commodityRevenu.commodityData.purchaseAmount}</td>
-                                    <td className="border text-center border-slate-600">{commodityRevenu.commodityData.saleAmount}</td>
-                                    <td className="border text-center border-slate-600">{commodityRevenu.commodityData.saleDate}</td>
+                                    <td className="border text-center border-slate-600">{commodityRevenu.commodityData.purchaseAmount.toFixed(2)}</td>
+                                    <td className="border text-center border-slate-600">{commodityRevenu.commodityData.saleAmount.toFixed(2)}</td>
+                                    <td className="border text-center border-slate-600">{new Date(commodityRevenu.commodityData.saleDate).getUTCFullYear() + "-" + (new Date(commodityRevenu.commodityData.saleDate).getUTCMonth() + 1) + "-" + new Date(commodityRevenu.commodityData.saleDate).getUTCDate()}</td>
                                     <td className="border text-center border-slate-600">{commodityRevenu.commodityData.saleDateHijri.year}-{commodityRevenu.commodityData.saleDateHijri.month.number}-{commodityRevenu.commodityData.saleDateHijri.day}</td>
                                 </tr>
                             </tbody>
@@ -166,7 +166,7 @@ function FormContributionPurchaseCommodity() {
                                 <tr>
                                     <td className="border text-center border-slate-600" colSpan={3}>{commodityRevenu.sponsorData.name}</td>
                                     <td className="border text-center border-slate-600" colSpan={2}>{commodityRevenu.sponsorData.sponsorRatio}%</td>
-                                    <td className="border text-center border-slate-600" colSpan={2}>{commodityRevenu.sponsorData.amount}</td>
+                                    <td className="border text-center border-slate-600" colSpan={2}>{commodityRevenu.sponsorData.amount.toFixed(2)}</td>
                                 </tr>
                             </tbody>
                             <tr className='text-center'>
@@ -182,12 +182,12 @@ function FormContributionPurchaseCommodity() {
                             </tr>
                             <tbody>
                                 <tr>
-                                    <td className="border text-center border-slate-600">{commodityRevenu.commodityData.currentBalanceFund}</td>
-                                    <td className="border text-center border-slate-600">{commodityRevenu.commodityData.contributionAmount}</td>
+                                    <td className="border text-center border-slate-600">{commodityRevenu.commodityData.currentBalanceFund.toFixed(2)}</td>
+                                    <td className="border text-center border-slate-600">{commodityRevenu.commodityData.contributionAmount.toFixed(2)}</td>
                                     <td className="border text-center border-slate-600">{commodityRevenu.commodityData.contributionPercentage.toFixed(2)}%</td>
-                                    <td className="border text-center border-slate-600">{commodityRevenu.commodityData.profitRatio}%</td>
-                                    <td className="border text-center border-slate-600">{commodityRevenu.commodityData.profitAmount}</td>
-                                    <td className="border text-center border-slate-600" colSpan={3}>{commodityRevenu.commodityData.balance}</td>
+                                    <td className="border text-center border-slate-600">{commodityRevenu.commodityData.profitRatio.toFixed(2)}%</td>
+                                    <td className="border text-center border-slate-600">{commodityRevenu.commodityData.profitAmount.toFixed(2)}</td>
+                                    <td className="border text-center border-slate-600" colSpan={3}>{commodityRevenu.commodityData.balance.toFixed(2)}</td>
                                 </tr>
                             </tbody>
                             <tr className='text-center'>

@@ -1,4 +1,4 @@
-import { faRightLong } from '@fortawesome/free-solid-svg-icons'
+import { faPrint, faRightLong } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useEffect, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
@@ -40,7 +40,7 @@ function InstallmentSchedule() {
                     {" "}
                     <span className=" loading loading-ring loading-lg"></span>
                 </div> : <div className="overflow-x-auto mt-[1rem]">
-                    {installmentSchedule && <table className="text-[1rem] table border-separate border-spacing-2 border w-[1900px] mx-auto">
+                    {installmentSchedule && <table className="text-[1rem] table border-separate border-spacing-2 border w-[1400px] mx-auto">
                         <tr className='text-center'>
                             <th className="border text-center border-slate-600" colSpan={9}>جدول الاقساط</th>
                         </tr>
@@ -78,12 +78,12 @@ function InstallmentSchedule() {
                                 <td className="border text-center border-slate-600">{installmentSchedule[0].idCommodityRevenue.id}</td>
                                 <td className="border text-center border-slate-600">{installmentSchedule[0].idCommodityRevenue.customerData.name}</td>
                                 <td className="border text-center border-slate-600">{installmentSchedule[0].idCommodityRevenue.commodityData.itemType}</td>
-                                <td className="border text-center border-slate-600">{installmentSchedule[0].idCommodityRevenue.commodityData.saleAmount}</td>
+                                <td className="border text-center border-slate-600">{installmentSchedule[0].idCommodityRevenue.commodityData.saleAmount.toFixed(2)}</td>
                                 <td className="border text-center border-slate-600">{installmentSchedule.length}</td>
                                 <td className="border text-center border-slate-600">{installmentspaid}</td>
                                 <td className="border text-center border-slate-600">{unpaidInstallments}</td>
-                                <td className="border text-center border-slate-600">{installmentspaid * installmentSchedule[0].premiumAmount}</td>
-                                <td className="border text-center border-slate-600">{unpaidInstallments * installmentSchedule[0].premiumAmount}</td>
+                                <td className="border text-center border-slate-600">{(installmentspaid * installmentSchedule[0].premiumAmount).toFixed(2)}</td>
+                                <td className="border text-center border-slate-600">{(unpaidInstallments * installmentSchedule[0].premiumAmount).toFixed(2)}</td>
                             </tr>
                         </tbody>
                         <tr>
@@ -133,11 +133,11 @@ function InstallmentSchedule() {
                                 return (
                                     <tr>
                                         <td className="border text-center border-slate-600">{installment.id}</td>
-                                        <td className="border text-center border-slate-600">{installment.premiumAmount}</td>
+                                        <td className="border text-center border-slate-600">{installment.premiumAmount.toFixed(2)}</td>
                                         <td className="border text-center border-slate-600">{installment.itPaid ? "نعم" : "لا"}</td>
-                                        <td className="border text-center border-slate-600">{installment.requiredPaymentDate}</td>
+                                        <td className="border text-center border-slate-600">{new Date(installment.requiredPaymentDate).getUTCFullYear() + "-" + (new Date(installment.requiredPaymentDate).getUTCMonth() + 1) + "-" + new Date(installment.requiredPaymentDate).getDate()}</td>
                                         <td className="border text-center border-slate-600">{installment.requiredPaymentDateHijri.year}-{installment.requiredPaymentDateHijri.month.number}-{installment.requiredPaymentDateHijri.day}</td>
-                                        <td className="border text-center border-slate-600">{installment.itPaid ? installment.actualPaymentDate : ""}</td>
+                                        <td className="border text-center border-slate-600">{installment.itPaid ? (new Date(installment.actualPaymentDate).getUTCFullYear() + "-" + (new Date(installment.actualPaymentDate).getUTCMonth() + 1) + "-" + new Date(installment.actualPaymentDate).getDate()) : ""}</td>
                                         <td className="border text-center border-slate-600">{installment.itPaid ? installment.requiredPaymentDateHijri.year + "-" + installment.requiredPaymentDateHijri.month.number + "-" + installment.requiredPaymentDateHijri.day : ""}</td>
                                         <td colSpan={2} className="border text-center border-slate-600">{late}</td>
                                     </tr>
@@ -148,6 +148,9 @@ function InstallmentSchedule() {
                     </table>}
                 </div>
             }
+            <div className='container mx-auto'>
+                <Link to={"/print/goodsPurchaseContract?id=" + query.get("id")} className='btn mt-[1rem] btn-info font-bold' target='_blank'><FontAwesomeIcon icon={faPrint} />  طباعة عقد شراء السلعة</Link>
+            </div>
         </div>
     )
 }

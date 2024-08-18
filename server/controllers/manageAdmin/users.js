@@ -1,9 +1,11 @@
 const userModel = require("../../models/user");
+const { Readable } = require('stream');
 const getHijriDate = require("../../utils/getHijriDate");
 const bcrypt = require("bcrypt");
 const { schemaSearchValidation, schemaUpdateUserValidation } = require("../../utils/validation/schemaValidation");
+const { File } = require("../../models/advertising/advertising");
 const SALTROUNDS = Number(process.env.SALTROUNDS);
-
+const { bucket } = require('../../app');
 //POST METHODS
 exports.addUser = async (req, res) => {
   const { name, password, NationalIdentificationNumber, phoneNumber } =
@@ -57,6 +59,80 @@ exports.addUser = async (req, res) => {
     });
   }
 };
+exports.uploadImage = async (req, res) => {
+  const { file } = req;
+  const { NationalIdentificationNumber } = req.user;
+  try {
+    if (file) {
+      const { originalname, mimetype, buffer } = file;
+      let uploadStream = bucket.openUploadStream(originalname, {
+        contentType: mimetype
+      });
+      let readBuffer = new Readable();
+      readBuffer.push(buffer);
+      readBuffer.push(null);
+      // Pipe the buffer to GridFS
+      await new Promise((resolve, reject) => {
+        readBuffer.pipe(uploadStream)
+          .on('finish', resolve)
+          .on('error', reject);
+      });
+      let newFile = new File({
+        filename: originalname,
+        contentType: mimetype,
+        length: buffer.length,
+        id: uploadStream.id
+      });
+      let savedFile = await newFile.save();
+      if (!savedFile) {
+        return res.status(404).send("حدث خطأ أثناء حفظ البيانات التعريفية للملف");
+      }
+      const user = await userModel.findOne({
+        NationalIdentificationNumber
+      });
+      user.profileImage = newFile._id;
+      await user.save();
+      return res.status(200).send({ msg: "لقد تم رفع الصورة بنجاح", profileImage: newFile._id});
+    }
+    return res.status(404).send({ msg: "لم تصل الصورة حاول مجددا" });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send({
+      msg: "حدث خطأ أثناء معالجة طلبك"
+    });
+  }
+}
+exports.getProfileImage = async (req, res) => {
+  const { id } = req.params;
+  try {
+    // Retrieve file metadata from your database
+    const file = await File.findById(id);
+
+    if (!file) {
+        return res.status(404).send("File not found.");
+    }
+
+    // Use file metadata to get content type
+    const contentType = file.contentType || 'application/octet-stream'; // Default content type if not found
+
+    // Open a download stream using the file's ObjectId
+    const downloadStream = bucket.openDownloadStream(file.id);
+
+    downloadStream.on('error', (error) => {
+        console.log(error);
+        return res.status(500).send("Error occurred while retrieving the file.");
+    });
+
+    // Set the content type from the metadata
+    res.setHeader('Content-Type', contentType);
+
+    // Pipe the download stream to the response
+    downloadStream.pipe(res);
+} catch (error) {
+    console.log(error);
+    return res.status(500).send("Error occurred while retrieving the file.");
+}
+}
 exports.updatePassword = async (req, res) => {
   const { idUser, password } = req.body;
   console.log(password);
@@ -81,7 +157,7 @@ exports.updatePassword = async (req, res) => {
   } catch (error) {
     return res.status(500).send({
       msg: "حدث خطأ أثناء معالجة طلبك",
-  });
+    });
   }
 }
 //GET METHODS
@@ -177,23 +253,28 @@ exports.updateUser = async (req, res) => {
     const user = await userModel.findOne({
       id: _id
     });
-   /* const user = await userModel.findByIdAndUpdate(_id, {
-      name,
-      NationalIdentificationNumber,
-      phoneNumber,
-      status,
-      comments,
-    })*/
+    /* const user = await userModel.findByIdAndUpdate(_id, {
+       name,
+       NationalIdentificationNumber,
+       phoneNumber,
+       status,
+       comments,
+     })*/
     if (!user) {
       return res.status(404).send({
         msg: "المستخدم غير موجود"
       });
     }
-    if(user.status != status){
-      if(req.user.admin.userPermission.indexOf("تفعيل اشتراك و ايقاف اشتراك عضو") == -1){
+    if (user.status != status) {
+      if (req.user.admin.userPermission.indexOf("تفعيل اشتراك و ايقاف اشتراك عضو") == -1) {
         return res.status(403).send({
           msg: "ليس لديك إذن تفعيل اشتراك و ايقاف اشتراك عضو",
         });
+      }
+      if (user.oneYear == false) {
+        return res.status(403).send({
+          msg: "لم تمر سنة على تسجيلك"
+        })
       }
     }
     user.name = name;

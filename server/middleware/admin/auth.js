@@ -22,6 +22,7 @@ module.exports = async (req, res, next) => {
             NationalIdentificationNumber: admin.NationalIdentificationNumber,
             phoneNumber: admin.phoneNumber,
             status: admin.status,
+            profileImage: admin.profileImage,
             admin: {
                 userPermission: admin.admin.userPermissions,
             }

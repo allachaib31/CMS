@@ -88,6 +88,7 @@ export { default as VoteDetails } from "./adminComponents/manageVote/voteDetails
 export { default as ManageAdvertising } from "./adminComponents/manageAdvertising/manageAdvertising";
 export { default as DisplayAdvertising } from "./adminComponents/manageAdvertising/displayAdvertising";
 export { default as AddAd } from "./adminComponents/manageAdvertising/addAd";
+export { default as SlideShow } from "./adminComponents/manageAdvertising/slideShow";
 /*MANAGE AGREEMENTS */
 export { default as Agreements } from "./adminComponents/agreements/agreements";
 export { default as DisplayAgreements } from "./adminComponents/agreements/displayAgreements";
@@ -109,6 +110,11 @@ export { default as Loading } from "./loading/loading";
 export { default as Alert} from "./alert/alert";
 /*MANAGE PAGINATION */
 export { default as Pagination } from "./pagination/pagination";
+/*MANAGE BLOOD MONEY */
+export { default as BloodMoney } from "./adminComponents/bloodMoney/bloodMoney";
+export { default as RequestBloodMoney } from "./adminComponents/bloodMoney/requestBloodMoney";
+export { default as PaymentBloodMoney } from "./adminComponents/bloodMoney/paymentBloodMoney";
+export { default as RecordBloodMoney } from "./adminComponents/bloodMoney/recordBloodMoney"
 /*MANAGE PRINT */
 export { default as RecordAnnual } from "./adminComponents/print/recordAnnual";
 export { default as RecordAnnualDetails } from "./adminComponents/print/recordAnnualDetails";
@@ -117,6 +123,7 @@ export { default as FormContribution } from "./adminComponents/print/formContrib
 export { default as UnrecoverExpenses } from "./adminComponents/print/unrecoverExpenses";
 export { default as RecoverExpenses } from "./adminComponents/print/recoverExpenses";
 export { default as PrintRecordInstallments } from "./adminComponents/print/printRecordInstallments";
+export { default as GoodsPurchaseContract } from "./adminComponents/print/goodsPurchaseContract";
 //CLIENT COMPONENETS
 export { default as LoginClient } from "./clientComponents/authClient/loginClient";
 export { default as Dashboard } from "./clientComponents/dashboard/dashboard";
