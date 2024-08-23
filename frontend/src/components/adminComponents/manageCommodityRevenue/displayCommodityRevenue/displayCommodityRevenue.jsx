@@ -54,6 +54,7 @@ function DisplayCommodityRevenue() {
       newInstallment[index].itPaid = true;
       setTotal((prev) => prev + amount)
       setInstallmentSchedule(newInstallment)
+      //setIndex(index);
       //document.getElementById(id + "pay").innerHTML = "تم الدفع بنجاح";
     }).catch((err) => {
       if (err.response && err.response.status === 401) {

@@ -194,36 +194,41 @@ exports.payAmount = async (req, res) => {
             })
         }
         commodityRevenu.commodityData.amountItPaid = true;
-        const sponsorAmount = (commodityRevenu.sponsorData.sponsorRatio / 100) * commodityRevenu.commodityData.amountPaid;
-        const userAmount = commodityRevenu.commodityData.amountPaid - sponsorAmount;
-        commodityRevenu.sponsorData.balance += sponsorAmount;
-        await userModel.updateOne({
-            NationalIdentificationNumber: commodityRevenu.sponsorData.nationalIdentificationNumber
-        }, {
-            $inc: {
-                memberBalance: sponsorAmount,
-                cumulativeBalance: sponsorAmount,
-                commodityProfitsContributions: sponsorAmount
-            }
-        })
-        const userContributions = await userContributionGoodModel.find({
-            idCommodityRevenue: commodityRevenu._id
-        });
-        const amount = userAmount / userContributions.length;
-        for (const contribution of userContributions) {
-            const newBalance = contribution.balance + amount;
-            await userContributionGoodModel.updateOne(
-                { _id: contribution._id },
-                { $set: { balance: newBalance } }
-            );
-            await userModel.findByIdAndUpdate(contribution.idUser, {
-                $inc: {
-                    memberBalance: amount,
-                    cumulativeBalance: amount,
-                    commodityProfitsContributions: amount
+        let amountPaid = commodityRevenu.commodityData.amountPaid;
+        if(commodityRevenu.sponsorData.amount != 0){
+            if(!commodityRevenu.sponsorData.itPaid){
+                const sponsorRemainingAmount = commodityRevenu.sponsorData.amount - commodityRevenu.sponsorData.balance;
+                let memberBalance;
+                if(sponsorRemainingAmount == amountPaid){
+                    memberBalance = amountPaid;
+                    commodityRevenu.sponsorData.balance += amountPaid;
+                    commodityRevenu.sponsorData.itPaid = true;
+                    amountPaid = 0;
+                }else if (commodityRevenu.commodityData.amountPaid > sponsorRemainingAmount) {
+                    amountPaid -= sponsorRemainingAmount;
+                    memberBalance = sponsorRemainingAmount;
+                    commodityRevenu.sponsorData.balance += sponsorRemainingAmount;
+                    if(commodityRevenu.sponsorData.balance == commodityRevenu.sponsorData.amount){
+                        commodityRevenu.sponsorData.itPaid = true;
+                    }
+                }else if (commodityRevenu.commodityData.amountPaid < sponsorRemainingAmount) {
+                    memberBalance = amountPaid;
+                    commodityRevenu.sponsorData.balance += amountPaid;
+                    amountPaid = 0;
+                    if(commodityRevenu.sponsorData.balance == commodityRevenu.sponsorData.amount){
+                        commodityRevenu.sponsorData.itPaid = true;
+                    }
                 }
-            },
-                { new: true })
+                await userModel.updateOne({
+                    NationalIdentificationNumber: commodityRevenu.sponsorData.nationalIdentificationNumber
+                }, {
+                    $inc: {
+                        memberBalance: memberBalance,
+                        cumulativeBalance: memberBalance,
+                        commodityProfitsContributions: memberBalance
+                    }
+                })
+            }
         }
         const moneyBox = await moneyBoxModel.findByIdAndUpdate(moneyBoxId,
             {
@@ -241,6 +246,31 @@ exports.payAmount = async (req, res) => {
         }
         commodityRevenu.commodityData.balance += commodityRevenu.commodityData.amountPaid;
         await commodityRevenu.save();
+
+        if(amountPaid == 0){
+            return res.status(200).send({
+                msg: "لقد تم الدفع بنجاح"
+            });
+        }
+        const userContributions = await userContributionGoodModel.find({
+            idCommodityRevenue: commodityRevenu._id
+        });
+        const amount = amountPaid / userContributions.length;
+        for (const contribution of userContributions) {
+            const newBalance = contribution.balance + amount;
+            await userContributionGoodModel.updateOne(
+                { _id: contribution._id },
+                { $set: { balance: newBalance } }
+            );
+            await userModel.findByIdAndUpdate(contribution.idUser, {
+                $inc: {
+                    memberBalance: amount,
+                    cumulativeBalance: amount,
+                    commodityProfitsContributions: amount
+                }
+            },
+                { new: true })
+        }
         return res.status(200).send({
             msg: "لقد تم الدفع بنجاح"
         });
@@ -294,22 +324,53 @@ exports.payInstallmentSchedule = async (req, res) => {
         installmentSchedule.itPaid = true;
         await installmentSchedule.save();
         const commodityRevenu = await commodityRevenueModel.findById(installmentSchedule.idCommodityRevenue);
+        let amountPaid = installmentSchedule.premiumAmount;
+        if(commodityRevenu.sponsorData.amount != 0){
+            if(!commodityRevenu.sponsorData.itPaid){
+                const sponsorRemainingAmount = commodityRevenu.sponsorData.amount - commodityRevenu.sponsorData.balance;
+                let memberBalance;
+                if(sponsorRemainingAmount == amountPaid){
+                    memberBalance = amountPaid;
+                    commodityRevenu.sponsorData.balance += amountPaid;
+                    commodityRevenu.sponsorData.itPaid = true;
+                    amountPaid = 0;
+                }else if (commodityRevenu.commodityData.amountPaid > sponsorRemainingAmount) {
+                    amountPaid -= sponsorRemainingAmount;
+                    memberBalance = sponsorRemainingAmount;
+                    commodityRevenu.sponsorData.balance += sponsorRemainingAmount;
+                    if(commodityRevenu.sponsorData.balance == commodityRevenu.sponsorData.amount){
+                        commodityRevenu.sponsorData.itPaid = true;
+                    }
+                }else if (commodityRevenu.commodityData.amountPaid < sponsorRemainingAmount) {
+                    memberBalance = amountPaid;
+                    commodityRevenu.sponsorData.balance += amountPaid;
+                    amountPaid = 0;
+                    if(commodityRevenu.sponsorData.balance == commodityRevenu.sponsorData.amount){
+                        commodityRevenu.sponsorData.itPaid = true;
+                    }
+                }
+                await userModel.updateOne({
+                    NationalIdentificationNumber: commodityRevenu.sponsorData.nationalIdentificationNumber
+                }, {
+                    $inc: {
+                        memberBalance: memberBalance,
+                        cumulativeBalance: memberBalance,
+                        commodityProfitsContributions: memberBalance
+                    }
+                })
+            }
+        }
+        commodityRevenu.commodityData.balance += installmentSchedule.premiumAmount;
+        await commodityRevenu.save();
+        if(amountPaid == 0){
+            return res.status(200).send({
+                msg: "لقد تم الدفع بنجاح"
+            });
+        }
         const userContributions = await userContributionGoodModel.find({
             idCommodityRevenue: installmentSchedule.idCommodityRevenue
         });
-        const sponsorAmount = (commodityRevenu.sponsorData.sponsorRatio / 100) * installmentSchedule.premiumAmount;
-        const userAmount =  installmentSchedule.premiumAmount - sponsorAmount;
-        const amount = userAmount / userContributions.length;
-        commodityRevenu.sponsorData.balance += sponsorAmount;
-        await userModel.updateOne({
-            NationalIdentificationNumber: commodityRevenu.sponsorData.nationalIdentificationNumber
-        }, {
-            $inc: {
-                memberBalance: sponsorAmount,
-                cumulativeBalance: sponsorAmount,
-                commodityProfitsContributions: sponsorAmount
-            }
-        })
+        const amount = amountPaid / userContributions.length;
         for (const contribution of userContributions) {
             const newBalance = contribution.balance + amount;
             await userContributionGoodModel.updateOne(
@@ -325,8 +386,6 @@ exports.payInstallmentSchedule = async (req, res) => {
             },
                 { new: true })
         }
-        commodityRevenu.commodityData.balance += installmentSchedule.premiumAmount;
-        await commodityRevenu.save();
         return res.status(200).send({
             msg: "لقد تم الدفع بنجاح"
         });

@@ -64,10 +64,10 @@ function RegisterMemberFinancialData() {
                                         <td className='border border-slate-600'>{user.idUser.memberBalance.toFixed(2)}</td>
                                         <td className='border border-slate-600'>{(user.idUser.cumulativeBalance - user.idUser.memberBalance).toFixed(2)}</td>
                                         <td className='border border-slate-600'>{user.idUser.loans.number}</td>
-                                        <td className='border border-slate-600'>{user.idUser.loans.amount}</td>
+                                        <td className='border border-slate-600'>{user.idUser.loans.amount.toFixed(2)}</td>
                                         <td className='border border-slate-600'>{user.idUser.subsidies.number}</td>
-                                        <td className='border border-slate-600'>{user.idUser.subsidies.amount}</td>
-                                        <td className='border border-slate-600'>{user.idUser.commodityProfitsContributions}</td>
+                                        <td className='border border-slate-600'>{user.idUser.subsidies.amount.toFixed(2)}</td>
+                                        <td className='border border-slate-600'>{user.idUser.commodityProfitsContributions.toFixed(2)}</td>
                                         <td className='border border-slate-600'>{user.idUser.subscriptionExpiryDate}</td>
                                         <td className='border border-slate-600'>{user.idUser.subscriptionExpiryDateHijri && user.idUser.subscriptionExpiryDateHijri.year + "-" + user.idUser.subscriptionExpiryDateHijri.month.number + "-" + user.idUser.subscriptionExpiryDateHijri.day}</td>
                                         <td className='border border-slate-600'>{user.idUser.status == "not active" ? "غير مفعل" : "مفعل"}</td>
