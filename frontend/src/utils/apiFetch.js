@@ -123,7 +123,15 @@ import {
     GETADS_ROUTE,
     GETADSCLIENT_ROUTE,
     UPLOADIMAGE_ROUTE,
-    UPLOADCLIENTIMAGE_ROUTE
+    UPLOADCLIENTIMAGE_ROUTE,
+    ENDDATEUSER_ROUTE,
+    GETENDUSER_ROUTE,
+    WITHDRAWBALANCE_ROUTE,
+    CURRENTPRICE_ROUTE,
+    SELLSTOCK_ROUTE,
+    GETSTOCKCONTRIBUTIONRECORD,
+    GETREGISTERSHAREHOLDERSSHARES_ROUTE,
+    GETACTIVESTOCK_ROUTE
 } from "./apiRoutes";
 
 
@@ -261,9 +269,21 @@ export const addCommentMonthlyFetch = async (comment) => {
     const data = await axios.patch(ADDCOMMENTMONTHLY_ROUTE,comment);
     return data;
 }
+export const endDateUserFetch = async (inputs) => {
+    const data = await axios.post(ENDDATEUSER_ROUTE, inputs);
+    return data;
+}
+export const getEndUserFetch = async () => {
+    const data = await axios.get(GETENDUSER_ROUTE);
+    return data;
+}
 // Manage moneyBox
 export const getMoneyBoxFetch = async () => {
     const data = await axios.get(GETMONEYBOX_ROUTE);
+    return data;
+}
+export const withdrawBalanceFetch = async (inputs) => {
+    const data = await axios.post(WITHDRAWBALANCE_ROUTE, inputs);
     return data;
 }
 // Manage commodity revenu
@@ -336,6 +356,26 @@ export const getIdStockFetch = async (inputs) => {
 }
 export const getStockFetch = async (id) => {
     const data = await axios.get(`${GETSTOCK_ROUTE}?id=${id}`);
+    return data;
+}
+export const currentPriceFetch = async (input) => {
+    const data = await axios.post(CURRENTPRICE_ROUTE, input);
+    return data;
+}
+export const sellStockFetch = async (inputs) => {
+    const data = await axios.post(SELLSTOCK_ROUTE, inputs);
+    return data;
+}
+export const getStockContributionRecord = async () => {
+    const data = await axios.get(GETSTOCKCONTRIBUTIONRECORD);
+    return data;
+}
+export const getRegisterShareholdersSharesFetch = async (id) => {
+    const data = await axios.get(`${GETREGISTERSHAREHOLDERSSHARES_ROUTE}?id=${id}`);
+    return data;
+}
+export const getActiveStockFetch = async (date) => {
+    const data = await axios.get(`${GETACTIVESTOCK_ROUTE}?date=${date}`);
     return data;
 }
 // Manage Loans

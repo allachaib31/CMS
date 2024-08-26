@@ -75,6 +75,11 @@ const stockSchema = new mongoose.Schema({
         required: true,
         default: 0
     },
+    costPreviousSharesWithAdditionalShares:{
+        type: Number,
+        required: true,
+        default: 0
+    },
     totalNumberOfStock: {
         type: Number,
         required: true,

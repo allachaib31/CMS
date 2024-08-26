@@ -432,7 +432,6 @@ exports.getActiveCommodityRevenue = async (req, res) => {
             itPaid: true
         });
         let total = 0;
-        console.log(installmentSchedule)
         for (let i = 0; i < installmentSchedule.length; i++) {
             total += installmentSchedule[i].premiumAmount;
         }

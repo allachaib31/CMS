@@ -202,6 +202,14 @@ function Home() {
                         </li>
                         <li>
                           <Link
+                            to="/subscription/withdrawMemberBalance"
+                            className="sm:text-[1rem]"
+                          >
+                          سحب رصيد العضو
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
                             to="/subscription/managingLatePayments"
                             className="sm:text-[1rem]"
                           >
@@ -238,13 +246,14 @@ function Home() {
                     </details>
                     <details>
                       <summary>
-                        <Link to="/stocks">
                           <FontAwesomeIcon icon={faArrowTrendUp} /> الأسهم
-                        </Link>
                       </summary>
                       <ul>
-                        <li><Link to="/stocks/contributionForm" className="sm:text-[1rem]">طلب المساهمة</Link></li>
                         <li><Link to="/stocks/displayContributionForm" className="sm:text-[1rem]">نموذج المساهمة</Link></li>
+                        <li><Link to="/stocks" className="sm:text-[1rem]">سجل المساهمات</Link></li>
+                        <li><Link to="/stocks/registerShareholdersShares" className="sm:text-[1rem]">سجل المساهمين</Link></li>
+                        <li><Link to="/stocks/stockRevenue" className="sm:text-[1rem]">إيرادات الأسهم</Link></li>
+                        <li><Link to="/stocks/contributionForm" className="sm:text-[1rem]">طلب المساهمة</Link></li>
                       </ul>
                     </details>
                     <details>

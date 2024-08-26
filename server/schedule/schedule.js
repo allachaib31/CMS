@@ -6,8 +6,11 @@ const momentHijri = require("moment-hijri");
 function scheduleUpdate() {
     cron.schedule('*/10 * * * *', async () => {
         const hijriDate = getHijriDate();
-        const foundationSubscription = await foundationSubscriptionModel.find();
+        const foundationSubscription = await foundationSubscriptionModel.find().populate("idUser");
         for (let i = 0; i < foundationSubscription.length; i++) {
+            if(foundationSubscription[i].idUser.subscriptionExpiryDate) {
+                continue;
+            }
             let existingSubscription = await monthlySubscriptionModel.findOne({ idUser: foundationSubscription[i].idUser, year: hijriDate[2] });
             if (!existingSubscription) {
                 existingSubscription = new monthlySubscriptionModel({

@@ -1,5 +1,5 @@
-export const HOST = `http://localhost:4000/`;
-//export const HOST = `/`;
+//export const HOST = `http://localhost:4000/`;
+export const HOST = `/`;
 // Auth admin Route
 export const LOGIN_ROUTE = `${HOST}api/v1.0/auth/login`;
 export const VALIDATION_ROUTE = `${HOST}api/v1.0/auth/validation`;
@@ -37,6 +37,9 @@ export const GETSUBSCRIPTIONSFORM_ROUTE = `${HOST}api/v1.0/subscriptions/getSubs
 export const GETOVERDUESUBSCRIPTIONS_ROUTE = `${HOST}api/v1.0/subscriptions/getOverdueSubscriptions`;
 export const UPDATEINVOICEOVERDUE_ROUTE = `${HOST}api/v1.0/subscriptions/isInvoiceOverdue`;
 export const ADDCOMMENTMONTHLY_ROUTE = `${HOST}api/v1.0/subscriptions/addCommentMonthly`;
+export const ENDDATEUSER_ROUTE = `${HOST}api/v1.0/subscriptions/endDateUser`;
+export const GETENDUSER_ROUTE = `${HOST}api/v1.0/subscriptions/getEndUser`;
+export const WITHDRAWBALANCE_ROUTE = `${HOST}api/v1.0/subscriptions/withdrawBalance`
 // Manage moneyBox
 export const GETMONEYBOX_ROUTE = `${HOST}api/v1.0/moneyBox`;
 // Manage commodity revenu
@@ -58,6 +61,11 @@ export const GETACTIVEUSER_ROUTE = `${HOST}api/v1.0/stock/getIdUsers`;
 export const GETIDSTOCK_ROUTE = `${HOST}api/v1.0/stock/getIdStock`;
 export const GETSTOCK_ROUTE = `${HOST}api/v1.0/stock/getStock`;
 export const ADDADDITIONALSTOCK = `${HOST}api/v1.0/stock/addAdditionalStock`;
+export const CURRENTPRICE_ROUTE = `${HOST}api/v1.0/stock/currentPrice`;
+export const SELLSTOCK_ROUTE = `${HOST}api/v1.0/stock/sell`;
+export const GETSTOCKCONTRIBUTIONRECORD = `${HOST}api/v1.0/stock/stockContributionRecord`;
+export const GETREGISTERSHAREHOLDERSSHARES_ROUTE = `${HOST}api/v1.0/stock/getRegisterShareholdersShares`;
+export const GETACTIVESTOCK_ROUTE = `${HOST}api/v1.0/stock/getActiveStock`;
 // Manage Loans
 export const ADDLOANS_ROUTE = `${HOST}api/v1.0/loans`;
 export const PAYINSTALLMENTS_ROUTE = `${HOST}api/v1.0/loans/payInstallments`;

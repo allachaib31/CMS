@@ -311,6 +311,11 @@ exports.deleteUser = async (req, res) => {
     const user = await userModel.findOne({
       id: id
     });
+    if(user.subscriptionExpiryDate) {
+      return res.status(400).send({
+        msg: "تم الغاء اشتراك هذا الشخص"
+      })
+    }
     user.disable = !user.disable;
     await user.save();
     /*const user = await userModel.findByIdAndUpdate(id,{

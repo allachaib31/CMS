@@ -3,7 +3,7 @@ import { hijriDateObject } from '../../../utils/getHijriDate';
 import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMoneyBill, faRightLong } from '@fortawesome/free-solid-svg-icons';
-import { addAdditionalStockFetch, getIdStockFetch, getStockFetch } from '../../../utils/apiFetch';
+import { addAdditionalStockFetch, currentPriceFetch, getIdStockFetch, getStockFetch, sellStockFetch } from '../../../utils/apiFetch';
 import Alert from '../../alert/alert';
 
 function DisplayStocksContributionForm() {
@@ -19,6 +19,10 @@ function DisplayStocksContributionForm() {
         buyAdditionalStock: 0,
         additionalStockCost: 0,
         idStock: ""
+    })
+    const [currentPrice, setCurrentPrice] = useState({
+        idStock: "",
+        price: 0
     })
     const [id, setId] = useState("");
     const [idList, setIdList] = useState([]);
@@ -58,6 +62,59 @@ function DisplayStocksContributionForm() {
             });
             setStock(res.data.stocks);
             setUserStock(res.data.userStock)
+        }).catch((err) => {
+            if (err.response && err.response.status === 401) {
+                navigate("/auth");
+            }
+            setSubmit((e) => !e);
+            setShowAlert({
+                display: true,
+                status: false,
+                text: err.response.data.msg
+            });
+        })
+    }
+    const handleSell = () => {
+        setShowAlert({
+            display: false,
+        });
+        setSubmit((e) => !e);
+        sellStockFetch({
+            idStock: id
+        }).then((res) => {
+            setSubmit((e) => !e);
+            setShowAlert({
+                display: true,
+                status: true,
+                text: res.data.msg
+            });
+            setStock(res.data.stocks);
+            setUserStock(res.data.userStock)
+        }).catch((err) => {
+            if (err.response && err.response.status === 401) {
+                navigate("/auth");
+            }
+            setSubmit((e) => !e);
+            setShowAlert({
+                display: true,
+                status: false,
+                text: err.response.data.msg
+            });
+        })
+    }
+    const handleCurrentPrice = () => {
+        setShowAlert({
+            display: false,
+        });
+        setSubmit((e) => !e);
+        currentPriceFetch(currentPrice).then((res) => {
+            setSubmit((e) => !e);
+            setShowAlert({
+                display: true,
+                status: true,
+                text: res.data.msg
+            });
+            setStock(res.data.stocks);
         }).catch((err) => {
             if (err.response && err.response.status === 401) {
                 navigate("/auth");
@@ -134,7 +191,11 @@ function DisplayStocksContributionForm() {
                             additionalStockCost: 0,
                             idStock: event.target.value
                         })
-                    }} className="select xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
+                        setCurrentPrice({
+                            price: 0,
+                            idStock: event.target.value
+                        })
+                    }} className="select w-[7rem] xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
                         <option selected disabled>قم باختيار العدد الخاص بالاسهم</option>
                         {idList && idList.map((list) => (
                             <option value={list._id}>{list.id}</option>
@@ -152,7 +213,7 @@ function DisplayStocksContributionForm() {
                 </div> : <div className="overflow-x-auto mt-[1rem]">
                     {
                         stock && <>
-                            <table className="text-[1rem] table border-separate border-spacing-2 border w-[1900px] mx-auto">
+                            <table className="text-[1rem] table border-separate border-spacing-2 border w-[1400px] mx-auto">
                                 <tr className='text-center'>
                                     <th className="border text-center border-slate-600" colSpan={6}>بيانات المساهمة</th>
                                 </tr>
@@ -217,10 +278,13 @@ function DisplayStocksContributionForm() {
                                     </tr>
                                 </tbody>
                             </table>
-                            <div className='my-[1rem] flex gap-[7rem] pr-[2rem]'>
-                                <button className='btn btn-primary' onClick={() => document.getElementById('my_modal_1').showModal()}>شراء اسهم اضافية</button>
+                            <div className='container mx-auto my-[1rem] flex gap-[0.5rem] pr-[2rem]'>
+                                {/*<button className='btn btn-primary' onClick={() => document.getElementById('my_modal_1').showModal()}>شراء اسهم اضافية</button>*/}
+                                <button className='btn btn-success' onClick={() => {
+                                    document.getElementById('sell').showModal()
+                                }}>{submit ? <span className="loading loading-ring loading-lg"></span> : "بيع"}</button>
                             </div>
-                            <table className="text-[1rem] table border-separate border-spacing-2 border w-[1900px] mx-auto">
+                            <table className="text-[1rem] table border-separate border-spacing-2 border w-[1400px] mx-auto">
                                 <tr>
                                     <th className="border text-center border-slate-600" rowSpan={2}>
                                         شراء أسهم إضافية
@@ -233,6 +297,9 @@ function DisplayStocksContributionForm() {
                                     </th>
                                     <th className="border text-center border-slate-600" rowSpan={2}>
                                         تكلفة السهم سابقاً مع السهم الإضافي
+                                    </th>
+                                    <th className="border text-center border-slate-600" rowSpan={2}>
+                                        تكلفة الاسهم السابقة مع الاسهم الاضافية
                                     </th>
                                     <th colSpan={2} className="border text-center border-slate-600" rowSpan={2}>
                                         إجمالي عدد الأسهم
@@ -247,8 +314,11 @@ function DisplayStocksContributionForm() {
                                         <td className="border text-center border-slate-600">{stock.additionalStockCost.toFixed(2)}</td>
                                         <td className="border text-center border-slate-600">{stock.additionalStocksCost.toFixed(2)}</td>
                                         <td className="border text-center border-slate-600">{stock.previousStockCostWithAdditionalStock.toFixed(2)}</td>
+                                        <td className="border text-center border-slate-600">{stock.costPreviousSharesWithAdditionalShares.toFixed(2)}</td>
                                         <td colSpan={2} className="border text-center border-slate-600">{stock.totalNumberOfStock.toFixed(2)}</td>
-                                        <td colSpan={2} className="border text-center border-slate-600">{stock.currentValueOfStock.toFixed(2)}</td>
+                                        <td colSpan={2} className="border text-center border-slate-600" onClick={() => {
+                                            document.getElementById('currentPrice').showModal()
+                                        }}>{stock.currentValueOfStock.toFixed(2)}</td>
                                     </tr>
                                 </tbody>
                                 <tr>
@@ -281,13 +351,21 @@ function DisplayStocksContributionForm() {
                                     {/**stock.additionalStocksCost + stock.previousCostOfStockWithFreeStock => ((stock.totalCostOfStock.toFixed(2) - (0 + 3690.00)) / (0 + 3690.00)) * 100 */}
                                     <tr>
                                         <td className="border text-center border-slate-600">{stock.totalCostOfStock.toFixed(2)}</td>
-                                        <td className="border text-center border-slate-600">{(stock.totalCostOfStock - (stock.additionalStocksCost + stock.previousCostOfStockWithFreeStock)).toFixed(2)}</td>
-                                        <td className="border text-center border-slate-600">{(((stock.totalCostOfStock - (stock.additionalStocksCost + stock.previousCostOfStockWithFreeStock)) / (stock.additionalStocksCost + stock.previousCostOfStockWithFreeStock)) * 100).toFixed(2)}%</td>
+                                        <td className="border text-center border-slate-600" style={{
+                                            color: ((stock.currentValueOfStock * stock.totalNumberOfStock) - (stock.totalCostOfStock)) > 0 ? "green" : "red"
+                                        }}>{((stock.currentValueOfStock * stock.totalNumberOfStock) - (stock.totalCostOfStock)).toFixed(2)}</td>
+                                        <td className="border text-center border-slate-600" style={{
+                                            color: ((stock.currentValueOfStock * stock.totalNumberOfStock) - (stock.totalCostOfStock)) > 0 ? "green" : "red"
+                                        }}>{((((stock.currentValueOfStock * stock.totalNumberOfStock) - (stock.totalCostOfStock)) / stock.totalCostOfStock) * 100).toFixed(2)}%</td>
                                         <td className="border text-center border-slate-600">{stock.stockSaleValue}</td>
-                                        <td className="border text-center border-slate-600">{stock.dateSaleMiladi}</td>
+                                        <td className="border text-center border-slate-600">{stock.dateSaleMiladi && new Date(stock.dateSaleMiladi).getUTCFullYear() + "-" + (new Date(stock.dateSaleMiladi).getUTCMonth() + 1) + "-" + new Date(stock.dateSaleMiladi).getUTCDate()}</td>
                                         <td className="border text-center border-slate-600">{stock.dateSaleHijri && stock.dateSaleHijri.year + "-" + stock.dateSaleHijri.month.number + "-" + stock.dateSaleHijri.day}</td>
-                                        <td className="border text-center border-slate-600">{stock.stockSaleValue == 0 ? "" : (stock.stockSaleValue - (stock.additionalStocksCost + stock.previousCostOfStockWithFreeStock)).toFixed(2)}</td>
-                                        <td className="border text-center border-slate-600">{stock.stockSaleValue == 0 ? "" : (((stock.stockSaleValue - (stock.additionalStocksCost + stock.previousCostOfStockWithFreeStock)) / (stock.additionalStocksCost + stock.previousCostOfStockWithFreeStock)) * 100).toFixed(2) + "%"}</td>
+                                        <td className="border text-center border-slate-600" style={{
+                                            color: (stock.stockSaleValue - (stock.additionalStocksCost + stock.previousCostOfStockWithFreeStock)) > 0 ? "green" : "red"
+                                        }}>{stock.stockSaleValue == 0 ? "" : (stock.stockSaleValue - (stock.additionalStocksCost + stock.previousCostOfStockWithFreeStock)).toFixed(2)}</td>
+                                        <td className="border text-center border-slate-600" style={{
+                                            color: (stock.stockSaleValue - (stock.additionalStocksCost + stock.previousCostOfStockWithFreeStock)) > 0 ? "green" : "red"
+                                        }}>{stock.stockSaleValue == 0 ? "" : (((stock.stockSaleValue - (stock.additionalStocksCost + stock.previousCostOfStockWithFreeStock)) / (stock.additionalStocksCost + stock.previousCostOfStockWithFreeStock)) * 100).toFixed(2) + "%"}</td>
                                     </tr>
                                 </tbody>
                                 <tr className='text-center'>
@@ -321,8 +399,8 @@ function DisplayStocksContributionForm() {
                                         <td className="border text-center border-slate-600" >{stock.previousFundBalance.toFixed(2)}</td>
                                         <td className="border text-center border-slate-600" >{stock.contributionAmount.toFixed(2)}</td>
                                         <td className="border text-center border-slate-600" >{stock.contributionRate.toFixed(2)}</td>
-                                        <td className="border text-center border-slate-600" ></td>
-                                        <td className="border text-center border-slate-600" colSpan={2}></td>
+                                        <td className="border text-center border-slate-600" >{stock.balanceAfterSale && ((stock.balanceAfterSale - stock.previousFundBalance) * 100) / stock.contributionAmount}</td>
+                                        <td className="border text-center border-slate-600" colSpan={2}>{stock.balanceAfterSale && (stock.balanceAfterSale - stock.previousFundBalance).toFixed(2)}</td>
                                         <td className="border text-center border-slate-600" colSpan={2}>{stock.balanceAfterSale.toFixed(2)}</td>
 
                                     </tr>
@@ -349,10 +427,10 @@ function DisplayStocksContributionForm() {
                                                     <td className="border text-center border-slate-600">{user.prevBalance.toFixed(2)}</td>
                                                     <td className="border text-center border-slate-600">{user.contributionRate.toFixed(2)}%</td>
                                                     <td className="border text-center border-slate-600">{user.contributionAmount.toFixed(2)}</td>
-                                                    <td className="border text-center border-slate-600">{user.rate}%</td>
-                                                    <td className="border text-center border-slate-600">{user.amount}</td>
-                                                    <td className="border text-center border-slate-600">{user.amountProfitPercentage}%</td>
-                                                    <td className="border text-center border-slate-600">{user.balanceAfterSale}</td>
+                                                    <td className="border text-center border-slate-600">{user.rate.toFixed(2)}%</td>
+                                                    <td className="border text-center border-slate-600">{user.amount.toFixed(2)}</td>
+                                                    <td className="border text-center border-slate-600">{user.amountProfitPercentage.toFixed(2)}%</td>
+                                                    <td className="border text-center border-slate-600">{user.balanceAfterSale.toFixed(2)}</td>
                                                 </tr>
                                             )
                                         })
@@ -365,10 +443,53 @@ function DisplayStocksContributionForm() {
             }
             {/* Open the modal using document.getElementById('ID').showModal() method */}
             {/*<button className="btn mt-[1rem]" onClick={() => document.getElementById('my_modal_1').showModal()}>اضافة المعلومات الناقصة</button>*/}
+            <dialog id="sell" className="modal">
+                <div className="modal-box">
+                    <h3 className="font-bold text-lg">هل انت متاكد من انك تريد البيع</h3>
+                    {showAlert.display ? <Alert msg={showAlert} /> : ""}
+                    <div className="modal-action">
+                        <form method="dialog">
+                            {/* if there is a button in form, it will close the modal */}
+                            <button onClick={(event) => {
+                                event.preventDefault();
+                                handleSell();
+                            }} disabled={submit} className='btn btn-primary'> {submit ? <span className="loading loading-ring loading-lg"></span> : "تاكيد"}</button>
+                            <button className="btn">اغلاق</button>
+                        </form>
+                    </div>
+                </div>
+            </dialog>
+            <dialog id="currentPrice" className="modal">
+                <div className="modal-box">
+                    <h3 className="font-bold text-lg">القيمة الحالية للسهم</h3>
+                    {showAlert.display ? <Alert msg={showAlert} /> : ""}
+                    <div className="relative w-full mb-[1rem]">
+                        <FontAwesomeIcon icon={faMoneyBill} className="absolute top-[1rem] right-[1rem]" />
+                        <input type="number" onChange={(event) => {
+                            setCurrentPrice((prev) => {
+                                return {
+                                    ...prev,
+                                    price: Number(event.target.value)
+                                }
+                            })
+                        }} required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder={`القيمة الحالية للسهم`} />
+                    </div>
+                    <div className="modal-action">
+                        <form method="dialog">
+                            {/* if there is a button in form, it will close the modal */}
+                            <button onClick={(event) => {
+                                event.preventDefault();
+                                handleCurrentPrice();
+                            }} disabled={submit} className='btn btn-primary'> {submit ? <span className="loading loading-ring loading-lg"></span> : "تاكيد"}</button>
+                            <button className="btn">اغلاق</button>
+                        </form>
+                    </div>
+                </div>
+            </dialog>
             <dialog id="my_modal_1" className="modal">
                 <div className="modal-box">
                     <form action="">
-                    {showAlert.display ? <Alert msg={showAlert} /> : ""}
+                        {showAlert.display ? <Alert msg={showAlert} /> : ""}
                         <div className="relative w-full mb-[1rem]">
                             <FontAwesomeIcon icon={faMoneyBill} className="absolute top-[1rem] right-[1rem]" />
                             <input type="number" onChange={(event) => {

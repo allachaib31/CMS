@@ -95,7 +95,7 @@ function DisplayUser() {
       </div>
       {showAlert.display ? <Alert msg={showAlert} /> : ""}
       <div className="overflow-x-auto xl:flex xl:justify-center  mt-[2rem]">
-        <table className="table w-[1400px]">
+        <table className="table w-[1500px]">
           {/* head */}
           <thead>
             <tr className="text-center text-[1rem]">

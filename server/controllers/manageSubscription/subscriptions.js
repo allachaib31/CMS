@@ -101,7 +101,7 @@ exports.addFoundationSubscriptions = async (req, res) => {
                 Subscription.months[monthIndex].pendingPayment = false;
             } else {
                 const dueDate = addDaysToHijriDate([hijriDate[0], { number: Number(monthIndex), ar: Subscription.months[Number(monthIndex)].name }, hijriDate[2]]);
-                Subscription.months[monthIndex].dueDate = momentHijri(dueDate[2] + "-" + dueDate[1].number + "-" + dueDate[0] ,'iYYYY-iMM-iDD').locale("en").format('YYYY-MM-DD');
+                Subscription.months[monthIndex].dueDate = momentHijri(dueDate[2] + "-" + dueDate[1].number + "-" + dueDate[0], 'iYYYY-iMM-iDD').locale("en").format('YYYY-MM-DD');
                 const toHijriDate = getHijriDate(Subscription.months[monthIndex].dueDate);
                 Subscription.months[monthIndex].dueDateHijri = {
                     day: toHijriDate[0],
@@ -236,8 +236,95 @@ exports.addMonthlySubscriptions = async (req, res) => {
         });
     }
 };
-
-exports.addCommentMonthly = async (req,res) => {
+exports.endDateUser = async (req, res) => {
+    const { id } = req.body;
+    try {
+        const user = await userModel.findById(id);
+        user.disable = true;
+        user.enableAccount = false;
+        user.status = "not active";
+        user.subscriptionExpiryDate = new Date();
+        const hijriDate = getHijriDate();
+        user.subscriptionExpiryDateHijri = {
+            day: hijriDate[0],
+            month: hijriDate[1],
+            year: hijriDate[2],
+        };
+        await user.save();
+        const users = await foundationSubscriptionModel.find().populate("idUser", {
+            password: false
+        });
+        return res.status(200).send({
+            users
+        })
+    } catch (error) {
+        return res.status(500).send({
+            msg: "حدث خطأ أثناء معالجة طلبك",
+            error: error.message,
+        });
+    }
+}
+exports.getEndUser = async (req, res) => {
+    try {
+        const currentDate = new Date();
+        const users = await userModel.find({
+            subscriptionExpiryDate: { $lt: currentDate }
+        }).select('-password');
+        return res.status(200).send({
+            users
+        })
+    } catch (error) {
+        if (error.error) {
+            return res.status(422).send({
+                msg: "احد المدخلات فيه خطاء",
+            });
+        }
+        return res.status(500).send({
+            msg: "حدث خطأ أثناء معالجة طلبك"
+        });
+    }
+}
+exports.withdrawBalance = async (req, res) => {
+    const { id } = req.body;
+    try {
+        const user = await userModel.findById(id);
+        let amount = user.memberBalance;
+        if (user.memberBalance == 0) {
+            return res.status(400).send({
+                msg: "رصيد 0 حاليا لا تستطيع سحب"
+            })
+        }
+        user.memberBalance = 0;
+        await user.save();
+        const currentDate = new Date();
+        const users = await userModel.find({
+            subscriptionExpiryDate: { $lt: currentDate }
+        }).select('-password');
+        const moneyBox = await moneyBoxModel.findByIdAndUpdate(
+            moneyBoxId,
+            {
+                $inc: {
+                    amount: amount * -1,
+                }
+            },
+            { new: true }
+        );
+        if (!moneyBox) {
+            return res.status(400).send({
+                msg: "حدث خطأ أثناء معالجة طلبك",
+            });
+        }
+        return res.status(200).send({
+            users,
+            msg: "تم سحب بنجاح"
+        })
+    } catch (error) {
+        return res.status(500).send({
+            msg: "حدث خطأ أثناء معالجة طلبك"
+        });
+    }
+}
+exports.addCommentMonthly = async (req, res) => {
     const { _id, comment, month } = req.body;
     try {
         const existingSubscription = await monthlySubscriptionModel.findById(_id);
@@ -266,7 +353,7 @@ exports.addCommentMonthly = async (req,res) => {
 //GET METHODS
 exports.getRegisterFinancialData = async (req, res) => {
     try {
-        const users = await foundationSubscriptionModel.find().populate("idUser",{
+        const users = await foundationSubscriptionModel.find().populate("idUser", {
             password: false
         });
         return res.status(200).send({
@@ -299,9 +386,20 @@ exports.getSubscriptionsForm = async (req, res) => {
     if (!date || !dateHijri) {
         return res.status(400).send({ msg: "مطلوب الشهر والسنة" });
     }
-    console.log("hi")
     try {
-        const subscriptions = await monthlySubscriptionModel.find({ year: dateHijri.year }).populate("idUser", "name");
+        const sub = await monthlySubscriptionModel
+            .find({ year: dateHijri.year })
+            .populate("idUser", "name subscriptionExpiryDate");
+
+        // Filter out users who have a subscriptionExpiryDate
+        const subscriptions = sub.filter(subscription => !subscription.idUser?.subscriptionExpiryDate);
+
+        // Now you can work with `subscriptionsWithoutExpiryDate`
+        subscriptions.forEach(subscription => {
+            console.log(subscription.idUser.name); // This will log the name of users who don't have a subscriptionExpiryDate
+        });
+
+        console.log(subscriptions)
         if (subscriptions.length === 0) {
             return res.status(404).send({ msg: "لم يتم العثور على اشتراكات للسنة المحددة" });
         }
@@ -310,8 +408,6 @@ exports.getSubscriptionsForm = async (req, res) => {
         for (let i = 0; i < subscriptions.length; i++) {
             const monthData = subscriptions[i].months[dateHijri.month.number];
             //&& monthData.dueDateHijri.day == dateHijri.day
-            console.log(monthData);
-            console.log(dateHijri)
             if (monthData) {
                 //results.push(subscriptions[i])
                 if (monthData.dueDateHijri /*&& monthData.dueDateHijri.month.number == dateHijri.month.number && monthData.dueDateHijri.year == dateHijri.year*/) {
@@ -323,7 +419,6 @@ exports.getSubscriptionsForm = async (req, res) => {
             }
         }
         const typeSubscription = await typeSubscriptionModel.find();
-        console.log(results)
         return res.status(200).send({
             subscriptions: results,
             typeSubscription,

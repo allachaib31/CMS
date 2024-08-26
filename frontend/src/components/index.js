@@ -23,6 +23,7 @@ export { default as PaymentOfSubscriptions } from "./adminComponents/manageSubsc
 export { default as FoundationSubscription } from "./adminComponents/manageSubscription/foundationSubscription";
 export { default as AnnualSubscriptionRecordDetails } from "./adminComponents/manageSubscription/annualSubscriptionRecordDetails";
 export { default as ManagingLatePayments } from "./adminComponents/manageSubscription/managingLatePayments";
+export { default as WithdrawMemberBalance } from "./adminComponents/manageSubscription/withdrawMemberBalance";
 /*MANAGE COMMODITY REVENUE */
 export { default as ManageCommodityRevenue } from "./adminComponents/manageCommodityRevenue/manageCommodityRevenue";
 export { default as DisplayCommodityRevenue } from "./adminComponents/manageCommodityRevenue/displayCommodityRevenue/displayCommodityRevenue";
@@ -43,6 +44,8 @@ export { default as Stocks } from "./adminComponents/stocks/stocks";
 export { default as RegisterOfStockContributions } from "./adminComponents/stocks/registerOfStockContributions";
 export { default as StocksContributionForm } from "./adminComponents/stocks/stocksContributionForm";
 export { default as DisplayStocksContributionForm } from "./adminComponents/stocks/displayStocksContributionForm";
+export { default as RegisterShareholdersShares } from "./adminComponents/stocks/registerShareholdersShares";
+export { default as StockRevenue } from "./adminComponents/stocks/stockRevenue"
 /*MANAGE INVESTMENT BOX */
 export { default as InvestmentBox } from "./adminComponents/investmentBox/investmentBox";
 export { default as DisplayContributionRecord } from "./adminComponents/investmentBox/displayContributionRecord";
