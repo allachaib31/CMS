@@ -17,8 +17,12 @@ function Checkbox({inputs, setInputs}) {
                     "إضافة المصروفات الغير مسترجعة بأنواعها",
                     "إضافة نوع إيراد جديد",
                     "إضافة نوع مصروف جديد",
+                    "إضافة إيرادات (شراء السلع)",
+                    "إدارة الإعلانات",
+                    "تعبئة عقد شراء سلعة وأقساطها",
+                    "إضافة إيرادات المساهمات في الأسهم",
+                    "إدارة التصويت",
                     "طباعة القروض و أقساطها (كل الأعضاء أو عضو محدد)",
-                    "إضافة إيرادات (المساهمات وشراء السلع)",
                     "طباعة طلب شراء سلعة (بعد التعبئة)",
                     "طباعة جدول أقساط سلعة (بعد التعبئة)",
                     "طباعة سجل المساهمة في شراء السلع",
@@ -87,7 +91,7 @@ function Checkbox({inputs, setInputs}) {
                     <div className="w-full sm:w-1/2 flex-row form-control">
                         <label className="label gap-[1rem] cursor-pointer">
                             <input type="checkbox" value="اضافة او حذف او تعديل عضو جديد" onChange={handleCheckboxChange} className="checkbox checkbox-primary" />
-                            <span className="label-text text-[1.3rem]">إضافة بيانات عضو جديد أو حذف أو تعديل</span>
+                            <span className="label-text text-[1.3rem]">إضافة بيانات الأعضاء الجدد أو الحذف أو التعديل</span>
                         </label>
                     </div>
                     <div className="w-full sm:w-1/2 flex-row form-control">
@@ -105,19 +109,31 @@ function Checkbox({inputs, setInputs}) {
                     <div className="w-full sm:w-1/2 flex-row form-control">
                         <label className="label gap-[1rem] cursor-pointer">
                             <input type="checkbox" value="إضافة بيانات شراء السلع وأقساطها" onChange={handleCheckboxChange} className="checkbox checkbox-primary" />
-                            <span className="label-text text-[1.3rem]">إضافة بيانات شراء السلع وأقساطها</span>
+                            <span className="label-text text-[1.3rem]">إضافة بيانات (شراء السلع)</span>
+                        </label>
+                    </div>
+                    <div className="w-full sm:w-1/2 flex-row form-control">
+                        <label className="label gap-[1rem] cursor-pointer">
+                            <input type="checkbox" value="إضافة إيرادات (شراء السلع)" onChange={handleCheckboxChange} className="checkbox checkbox-primary" />
+                            <span className="label-text text-[1.3rem]">إضافة إيرادات (شراء السلع)</span>
                         </label>
                     </div>
                     <div className="w-full sm:w-1/2 flex-row form-control">
                         <label className="label gap-[1rem] cursor-pointer">
                             <input type="checkbox" value="إضافة بيانات المساهمات (أسهم، صندوق استثماري، شركة مالية، أخرى)" onChange={handleCheckboxChange} className="checkbox checkbox-primary" />
-                            <span className="label-text text-[1.3rem]">إضافة بيانات المساهمات (أسهم، صندوق استثماري، شركة مالية، أخرى)</span>
+                            <span className="label-text text-[1.3rem]">إضافة بيانات المساهمات في الأسهم</span>
+                        </label>
+                    </div>
+                    <div className="w-full sm:w-1/2 flex-row form-control">
+                        <label className="label gap-[1rem] cursor-pointer">
+                            <input type="checkbox" value="إضافة إيرادات المساهمات في الأسهم" onChange={handleCheckboxChange} className="checkbox checkbox-primary" />
+                            <span className="label-text text-[1.3rem]">إضافة إيرادات المساهمات في الأسهم</span>
                         </label>
                     </div>
                     <div className="w-full sm:w-1/2 flex-row form-control">
                         <label className="label gap-[1rem] cursor-pointer">
                             <input type="checkbox" value="إضافة أقساط قروض الأعضاء" onChange={handleCheckboxChange} className="checkbox checkbox-primary" />
-                            <span className="label-text text-[1.3rem]">إضافة القروض و أقساطها</span>
+                            <span className="label-text text-[1.3rem]">إضافة بيانات القروض </span>
                         </label>
                     </div>
                     <div className="w-full sm:w-1/2 flex-row form-control">
@@ -128,20 +144,8 @@ function Checkbox({inputs, setInputs}) {
                     </div>
                     <div className="w-full sm:w-1/2 flex-row form-control">
                         <label className="label gap-[1rem] cursor-pointer">
-                            <input type="checkbox" value="إضافة إيرادات (المساهمات وشراء السلع)" onChange={handleCheckboxChange} className="checkbox checkbox-primary" />
-                            <span className="label-text text-[1.3rem]">إضافة إيرادات (المساهمات وشراء السلع)</span>
-                        </label>
-                    </div>
-                    <div className="w-full sm:w-1/2 flex-row form-control">
-                        <label className="label gap-[1rem] cursor-pointer">
-                            <input type="checkbox" value="إضافة المصروفات المسترجعة بأنواعها" onChange={handleCheckboxChange} className="checkbox checkbox-primary" />
-                            <span className="label-text text-[1.3rem]">إضافة المصروفات المسترجعة</span>
-                        </label>
-                    </div>
-                    <div className="w-full sm:w-1/2 flex-row form-control">
-                        <label className="label gap-[1rem] cursor-pointer">
                             <input type="checkbox" value="إضافة المصروفات الغير مسترجعة بأنواعها" onChange={handleCheckboxChange} className="checkbox checkbox-primary" />
-                            <span className="label-text text-[1.3rem]">إضافة المصروفات الغير مسترجعة</span>
+                            <span className="label-text text-[1.3rem]">إضافة المصروفات  </span>
                         </label>
                     </div>
                     <div className="w-full sm:w-1/2 flex-row form-control">
@@ -158,14 +162,26 @@ function Checkbox({inputs, setInputs}) {
                     </div>
                     <div className="w-full sm:w-1/2 flex-row form-control">
                         <label className="label gap-[1rem] cursor-pointer">
-                            <input type="checkbox" value="طباعة المصروفات الغير مسترجعة (كلي أو جزئي حسب المدة)" onChange={handleCheckboxChange} className="checkbox checkbox-primary" />
-                            <span className="label-text text-[1.3rem]">طباعة المصروفات الغير مسترجعة (كلي أو جزئي حسب المدة)</span>
+                            <input type="checkbox" value="التعامل مع صفحة شجرة العائلة" onChange={handleCheckboxChange} className="checkbox checkbox-primary" />
+                            <span className="label-text text-[1.3rem]">إدارة شجرة العائلة</span>
                         </label>
                     </div>
                     <div className="w-full sm:w-1/2 flex-row form-control">
                         <label className="label gap-[1rem] cursor-pointer">
-                            <input type="checkbox" value="طباعة مصروفات عضو (كلي أو جزئي حسب المدة)" onChange={handleCheckboxChange} className="checkbox checkbox-primary" />
-                            <span className="label-text text-[1.3rem]">طباعة مصروفات عضو (كلي أو جزئي حسب المدة)</span>
+                            <input type="checkbox" value="التعامل مع صفحة بنود واتفاقيات الصندوق" onChange={handleCheckboxChange} className="checkbox checkbox-primary" />
+                            <span className="label-text text-[1.3rem]">إدارة اتفاقيات الصندوق</span>
+                        </label>
+                    </div>
+                    <div className="w-full sm:w-1/2 flex-row form-control">
+                        <label className="label gap-[1rem] cursor-pointer">
+                            <input type="checkbox" value="إدارة التصويت" onChange={handleCheckboxChange} className="checkbox checkbox-primary" />
+                            <span className="label-text text-[1.3rem]">إدارة التصويت</span>
+                        </label>
+                    </div>
+                    <div className="w-full sm:w-1/2 flex-row form-control">
+                        <label className="label gap-[1rem] cursor-pointer">
+                            <input type="checkbox" value="إدارة الإعلانات" onChange={handleCheckboxChange} className="checkbox checkbox-primary" />
+                            <span className="label-text text-[1.3rem]">إدارة الإعلانات</span>
                         </label>
                     </div>
                     <div className="w-full sm:w-1/2 flex-row form-control">
@@ -182,8 +198,14 @@ function Checkbox({inputs, setInputs}) {
                     </div>
                     <div className="w-full sm:w-1/2 flex-row form-control">
                         <label className="label gap-[1rem] cursor-pointer">
-                            <input type="checkbox" value="طباعة المصروفات المسترجعة (كلي أو جزئي حسب المدة)" onChange={handleCheckboxChange} className="checkbox checkbox-primary" />
-                            <span className="label-text text-[1.3rem]">طباعة المصروفات المسترجعة (كلي أو جزئي حسب المدة)</span>
+                            <input type="checkbox" value="طباعة سجل الاشتراكات (سنوي ، شهري ، أو مدة محددة)" onChange={handleCheckboxChange} className="checkbox checkbox-primary" />
+                            <span className="label-text text-[1.3rem]">طباعة سجل الاشتراكات (سنوي ، شهري ، أو مدة محددة)</span>
+                        </label>
+                    </div>
+                    <div className="w-full sm:w-1/2 flex-row form-control">
+                        <label className="label gap-[1rem] cursor-pointer">
+                            <input type="checkbox" value="طباعة مصروفات عضو (كلي أو جزئي حسب المدة)" onChange={handleCheckboxChange} className="checkbox checkbox-primary" />
+                            <span className="label-text text-[1.3rem]">طباعة مصروفات عضو (كلي أو جزئي حسب المدة)</span>
                         </label>
                     </div>
                     <div className="w-full sm:w-1/2 flex-row form-control">
@@ -194,8 +216,8 @@ function Checkbox({inputs, setInputs}) {
                     </div>
                     <div className="w-full sm:w-1/2 flex-row form-control">
                         <label className="label gap-[1rem] cursor-pointer">
-                            <input type="checkbox" value="طباعة سجل المساهمات بأنواعها" onChange={handleCheckboxChange} className="checkbox checkbox-primary" />
-                            <span className="label-text text-[1.3rem]">طباعة سجل المساهمات بأنواعها</span>
+                            <input type="checkbox" value="طباعة سجل المساهمة في شراء السلع" onChange={handleCheckboxChange} className="checkbox checkbox-primary" />
+                            <span className="label-text text-[1.3rem]">طباعة سجل المساهمة في شراء السلع</span>
                         </label>
                     </div>
                     <div className="w-full sm:w-1/2 flex-row form-control">
@@ -206,14 +228,8 @@ function Checkbox({inputs, setInputs}) {
                     </div>
                     <div className="w-full sm:w-1/2 flex-row form-control">
                         <label className="label gap-[1rem] cursor-pointer">
-                            <input type="checkbox" value="طباعة جدول أقساط سلعة (بعد التعبئة)" onChange={handleCheckboxChange} className="checkbox checkbox-primary" />
-                            <span className="label-text text-[1.3rem]">طباعة جدول أقساط سلعة (بعد التعبئة)</span>
-                        </label>
-                    </div>
-                    <div className="w-full sm:w-1/2 flex-row form-control">
-                        <label className="label gap-[1rem] cursor-pointer">
-                            <input type="checkbox" value="طباعة سجل المساهمة في شراء السلع" onChange={handleCheckboxChange} className="checkbox checkbox-primary" />
-                            <span className="label-text text-[1.3rem]">طباعة سجل المساهمة في شراء السلع</span>
+                            <input type="checkbox" value="طباعة سجل المساهمة في الأسهم" onChange={handleCheckboxChange} className="checkbox checkbox-primary" />
+                            <span className="label-text text-[1.3rem]">طباعة سجل المساهمة في الأسهم</span>
                         </label>
                     </div>
                     <div className="w-full sm:w-1/2 flex-row form-control">
@@ -224,38 +240,8 @@ function Checkbox({inputs, setInputs}) {
                     </div>
                     <div className="w-full sm:w-1/2 flex-row form-control">
                         <label className="label gap-[1rem] cursor-pointer">
-                            <input type="checkbox" value="طباعة سجل المساهمة في الأسهم" onChange={handleCheckboxChange} className="checkbox checkbox-primary" />
-                            <span className="label-text text-[1.3rem]">طباعة سجل المساهمة في الأسهم</span>
-                        </label>
-                    </div>
-                    <div className="w-full sm:w-1/2 flex-row form-control">
-                        <label className="label gap-[1rem] cursor-pointer">
-                            <input type="checkbox" value="طباعة سجل المساهمة في الصناديق الاستثمارية" onChange={handleCheckboxChange} className="checkbox checkbox-primary" />
-                            <span className="label-text text-[1.3rem]">طباعة سجل المساهمة في الصناديق الاستثمارية</span>
-                        </label>
-                    </div>
-                    <div className="w-full sm:w-1/2 flex-row form-control">
-                        <label className="label gap-[1rem] cursor-pointer">
-                            <input type="checkbox" value="طباعة سجل المساهمة في شركة مالية" onChange={handleCheckboxChange} className="checkbox checkbox-primary" />
-                            <span className="label-text text-[1.3rem]">طباعة سجل المساهمة في شركة مالية</span>
-                        </label>
-                    </div>
-                    <div className="w-full sm:w-1/2 flex-row form-control">
-                        <label className="label gap-[1rem] cursor-pointer">
-                            <input type="checkbox" value="طباعة سجل الاشتراكات (سنوي ، شهري ، أو مدة محددة)" onChange={handleCheckboxChange} className="checkbox checkbox-primary" />
-                            <span className="label-text text-[1.3rem]">طباعة سجل الاشتراكات (سنوي ، شهري ، أو مدة محددة)</span>
-                        </label>
-                    </div>
-                    <div className="w-full sm:w-1/2 flex-row form-control">
-                        <label className="label gap-[1rem] cursor-pointer">
-                            <input type="checkbox" value="التعامل مع صفحة بنود واتفاقيات الصندوق" onChange={handleCheckboxChange} className="checkbox checkbox-primary" />
-                            <span className="label-text text-[1.3rem]">التعامل مع صفحة بنود واتفاقيات الصندوق</span>
-                        </label>
-                    </div>
-                    <div className="w-full sm:w-1/2 flex-row form-control">
-                        <label className="label gap-[1rem] cursor-pointer">
-                            <input type="checkbox" value="التعامل مع صفحة شجرة العائلة" onChange={handleCheckboxChange} className="checkbox checkbox-primary" />
-                            <span className="label-text text-[1.3rem]">التعامل مع صفحة شجرة العائلة</span>
+                            <input type="checkbox" value="طباعة المصروفات الغير مسترجعة (كلي أو جزئي حسب المدة)" onChange={handleCheckboxChange} className="checkbox checkbox-primary" />
+                            <span className="label-text text-[1.3rem]">طباعة المصروفات   (كلي أو جزئي حسب المدة)</span>
                         </label>
                     </div>
                 </div>

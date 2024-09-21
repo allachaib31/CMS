@@ -64,7 +64,7 @@ function LoginClient() {
                                 setInputs((input) => {
                                     return { ...input, NationalIdentificationNumber: e.target.value.trim() }
                                 })
-                            }} required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder={"رقم الهوية الوطنية"} pattern="[1-9]\d{9}" />
+                            }} required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder={"اسم المستخدم"} pattern="[1-9]\d{9}" />
                         </div>
                         <div className="relative">
                             <FontAwesomeIcon icon={faKey} className="absolute top-[1rem] right-[1rem]" />

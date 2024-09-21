@@ -88,10 +88,10 @@ function LoansData() {
                                 الأقساط <br/>المتبقية
                             </th>
                             <th className="border border-slate-600" rowSpan={2}>
-                                مبلغ <br/>المسدد
+                            المبلغ <br/>المسدد
                             </th>
                             <th className="border border-slate-600" rowSpan={2}>
-                                مبلغ <br/>المتبقي
+                            المبلغ <br/>المتبقي
                             </th>
                         </tr>
                         <tr>
@@ -136,12 +136,12 @@ function LoansData() {
                                 <td className="border border-slate-600">{new Date(loanInfo.paymentEndDate).toLocaleDateString('en-CA')}</td>
                                 <td className="border border-slate-600">{loanInfo.paymentEndDateHijri.year}-{loanInfo.paymentEndDateHijri.month.number}-{loanInfo.paymentEndDateHijri.day}</td>
                                 <td className="border border-slate-600">{loanInfo.numberOfInstallments}</td>
-                                <td className='border border-slate-600'>{loanInfo.premiumAmount}</td>
-                                <td className='border border-slate-600'>{loanInfo.premiumAmount}</td>
+                                <td className='border border-slate-600'>{loanInfo.premiumAmount.toFixed(2)}</td>
+                                <td className='border border-slate-600'>{loanInfo.premiumAmount.toFixed(2)}</td>
                                 <td className="border border-slate-600">{installmentsPaid}</td>
                                 <td className="border border-slate-600">{loanInfo.numberOfInstallments - installmentsPaid}</td>
-                                <td className="border border-slate-600">{loanInfo.balance}</td>
-                                <td className="border border-slate-600">{loanInfo.amount - loanInfo.balance}</td>
+                                <td className="border border-slate-600">{loanInfo.balance.toFixed(2)}</td>
+                                <td className="border border-slate-600">{(loanInfo.amount - loanInfo.balance).toFixed(2)}</td>
                             </tr>
                         }
                     </tbody>

@@ -65,7 +65,7 @@ function RegisterMemberFinancialData() {
                 سجل البيانات المالية للعضو
             </h1>
             <div className="overflow-x-auto mt-[1rem]">
-                <table className="text-[1rem] table border-separate border-spacing-2 border w-[1700px] mx-auto">
+                <table className="text-[1rem] table border-separate border-spacing-2 border w-[1800px] mx-auto">
                     {/* head */}
                     <thead className='text-center text-[0.9rem]'>
                         <tr>
@@ -76,7 +76,8 @@ function RegisterMemberFinancialData() {
                             <th className='text-center border border-slate-600' colSpan={2}>القروض</th>
                             <th className='text-center border border-slate-600' colSpan={2}>الاعانات</th>
                             <th rowSpan={2} className='border border-slate-600'>ارباح السلع<br /> و المساهمات</th>
-                            <th colSpan={2} className='border border-slate-600'>تاريخ انتهاء اشتراكه</th>
+                            <th rowSpan={2} className='border border-slate-600'>تاريخ انتهاء اشتراكه <br/> الميلادي</th>
+                            <th rowSpan={2} className='border border-slate-600'>تاريخ انتهاء اشتراكه <br/> الهجري</th>
                             <th rowSpan={2} className='border border-slate-600'>الحالة</th>
                             <th rowSpan={2} className='border border-slate-600'>ملاحظات</th>
                         </tr>
@@ -89,8 +90,6 @@ function RegisterMemberFinancialData() {
                             <th className='border border-slate-600'>مبلغها</th>
                             <th className='border border-slate-600'>عددها</th>
                             <th className='border border-slate-600'>مبلغها</th>
-                            <th className='border border-slate-600'>الميلادي</th>
-                            <th className='border border-slate-600'>الهجري</th>
                         </tr>
                     </thead>
                     <tbody>

@@ -1,14 +1,15 @@
 import { faIdCard, faMoneyBill, faRightLong } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Alert from '../../alert/alert';
 import { hijriDateObject } from '../../../utils/getHijriDate';
-import { addLoansFetch } from '../../../utils/apiFetch';
+import { addLoansFetch, getActiveUserFetch } from '../../../utils/apiFetch';
 
 function LoansOrder() {
     const navigate = useNavigate();
     const [submit, setSubmit] = useState(false);
+    const [listId, setListsId] = useState(false);
     const [inputs, setInputs] = useState({
         nationalIdentificationNumber: "",
         amount: 0,
@@ -44,6 +45,15 @@ function LoansOrder() {
             });
         })
     }
+    useEffect(() => {
+        getActiveUserFetch().then((res) => {
+            setListsId(res.data.users)
+        }).catch((err) => {
+            if (err.response && err.response.status === 401) {
+                navigate("/auth");
+            }
+        })
+    }, [])
     return (
         <div className="sm:p-0 px-[1rem] container mx-auto">
             <div>
@@ -52,21 +62,30 @@ function LoansOrder() {
                 </Link>
             </div>
             <h1 className="text-center text-[1.5rem] font-bold py-[1rem]">
-                نموذج طلب قرض
+                طلب قرض
             </h1>
             <form action="" className="py-[2rem] flex flex-col gap-[1rem]">
                 {showAlert.display ? <Alert msg={showAlert} /> : ""}
                 <div className="flex sm:flex-row flex-col gap-[1rem]">
                     <div className="relative sm:w-1/2">
-                        <FontAwesomeIcon icon={faIdCard} className="absolute top-[1rem] right-[1rem]" />
-                        <input type="text" required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder={`رقم الهوية`} onChange={(event) => {
+                        <select required onChange={(event) => {
                             return setInputs((prevInput) => {
                                 return {
                                     ...prevInput,
                                     nationalIdentificationNumber: event.target.value.trim()
                                 }
                             })
-                        }} pattern="[1-9]\d{9}" />
+                        }}
+                            className="select formInput select-bordered w-full">
+                            <option disabled selected>اختار العضو المساهم باسم الصندوق</option>
+                            {
+                                listId && listId.map((user) => {
+                                    return (
+                                        <option value={user._id}>{user.id} ({user.name})</option>
+                                    )
+                                })
+                            }
+                        </select>
                     </div>
                     <div className="relative sm:w-1/2">
                         <FontAwesomeIcon icon={faMoneyBill} className="absolute top-[1rem] right-[1rem]" />

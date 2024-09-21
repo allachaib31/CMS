@@ -136,7 +136,7 @@ function FoundationSubscription() {
               <th>رقم الهوية</th>
               <th>رقم الجوال</th>
               <th>نوع المبلغ</th>
-              <th>سعر الاشتراك</th>
+              <th>مبلغ الاشتراك</th>
               <th>ملحوظات</th>
               <th>دفع</th>
             </tr>

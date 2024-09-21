@@ -26,11 +26,11 @@ function DisplayRecordUnrecoveredExpenses() {
         </Link>
       </div>
       <h1 className="text-center text-[1.5rem] font-bold py-[1rem]">
-        سجل المصروفات الغير مستردة
+        سجل المصروفات 
       </h1>
       <div className="mt-[1rem] flex flex-col md:flex-row gap-[1rem] justify-center">
         <div className="flex md:flex-col items-center gap-[1rem]">
-          <h1 className="text-[0.8rem] sm:text-[1.1rem] md:w-auto w-[70%] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">إجمالي المصروفات الغير مستردة </h1>
+          <h1 className="text-[0.8rem] sm:text-[1.1rem] md:w-auto w-[70%] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">إجمالي المصروفات  </h1>
           <h1 className="text-[0.8rem] sm:text-[1.1rem] md:w-auto w-[30%] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem] text-center">{total.toFixed(2)}</h1>
         </div>
         <div className="flex md:flex-col items-center gap-[1rem]">
@@ -75,9 +75,9 @@ function DisplayRecordUnrecoveredExpenses() {
             <th className="border text-center border-slate-600" rowSpan={2}>
               البيان
             </th>
-            <th className="border text-center border-slate-600" rowSpan={2}>
+            {/*<th className="border text-center border-slate-600" rowSpan={2}>
               تفاصيل أكثر
-            </th>
+            </th>*/}
           </tr>
           <tr>
             <th className="border text-center border-slate-600">
@@ -124,7 +124,6 @@ function DisplayRecordUnrecoveredExpenses() {
                     <td className="border text-center border-slate-600">{d.getUTCFullYear() + "-" + (d.getUTCMonth() + 1) + "-" + d.getDate()}</td>
                     <td className="border text-center border-slate-600">{expenses.hijriDate.year}/{expenses.hijriDate.month.number}/{expenses.hijriDate.day}</td>
                     <td className="border text-center border-slate-600">{expenses.comments}</td>
-                    <td className="border text-center border-slate-600"></td>
                   </tr>
                 )
               })

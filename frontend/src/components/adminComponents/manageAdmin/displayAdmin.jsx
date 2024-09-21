@@ -57,7 +57,7 @@ function DisplayAdmin() {
     <div className="px-[1rem] sm:px-0">
       <div className="container mx-auto mb-[1rem] flex sm:flex-row sm:gap-0 gap-[1rem] flex-col justify-between">
         <Link to="/admin/addAdmin" className="text-[1rem] btn btn-primary">
-        إضافة مسئول 
+        إضافة مسؤول 
         </Link>
         <div className="join flex-wrap ">
           <div>

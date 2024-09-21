@@ -3,13 +3,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { hijriDateObject } from '../../../../utils/getHijriDate';
-import { addCommodityRevenueFetch, getMoneyBoxFetch } from '../../../../utils/apiFetch';
+import { addCommodityRevenueFetch, getActiveUserFetch, getMoneyBoxFetch } from '../../../../utils/apiFetch';
 import Alert from '../../../alert/alert';
 
 function OrderToPurchaseGoods() {
     const navigate = useNavigate();
     const [submit, setSubmit] = useState(false);
     const [moneyBox, setMoneyBox] = useState(false);
+    const [listId, setListsId] = useState(false);
     const [inputs, setInputs] = useState({
         customerData: {
             name: "",
@@ -20,6 +21,7 @@ function OrderToPurchaseGoods() {
             address: "",
         },
         sponsorData: {
+            idSponsor: "",
             name: "",
             nationalIdentificationNumber: "",
             sponsorRatio: 0,
@@ -97,6 +99,15 @@ function OrderToPurchaseGoods() {
             }
             navigate("/commodityRevenue")
         })
+    }, []);
+    useEffect(() => {
+        getActiveUserFetch().then((res) => {
+            setListsId(res.data.users)
+        }).catch((err) => {
+            if (err.response && err.response.status === 401) {
+                navigate("/auth");
+            }
+        })
     }, [])
     return (
         <div className="container mx-auto sm:p-0 px-[1rem]">
@@ -106,7 +117,7 @@ function OrderToPurchaseGoods() {
                 </Link>
             </div>
             <h1 className="text-center text-[1.3rem] sm:text-[1.5rem] font-bold py-[1rem]">
-                نموذج طلب شراء سلعة
+                طلب شراء سلعة
             </h1>
             {
                 !moneyBox ? <div className="flex justify-center">
@@ -203,6 +214,8 @@ function OrderToPurchaseGoods() {
                     </div>
                     <div className='flex flex-col gap-[1rem]'>
                         <h1>بيانات الكفيل (العضو المشرف على شراء السلعة)</h1>
+                        {
+                            /*
                         <div className="flex sm:flex-row flex-col gap-[1rem]">
                             <div className="relative sm:w-1/2">
                                 <FontAwesomeIcon icon={faUser} className="absolute top-[1rem] right-[1rem]" />
@@ -245,21 +258,29 @@ function OrderToPurchaseGoods() {
                                     })
                                 }} pattern="05\d{8}" />
                             </div>
-                            <div className="relative sm:w-1/2">
-                                <FontAwesomeIcon icon={faLocationDot} className="absolute top-[1rem] right-[1rem]" />
-                                <input type="text" required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder="المنطقة" onChange={(event) => {
-                                    return setInputs((prevInput) => {
-                                        return {
-                                            ...prevInput, sponsorData: {
-                                                ...prevInput.sponsorData,
-                                                region: event.target.value.trim()
-                                            }
-                                        }
-                                    })
-                                }} pattern="^.{3,1024}$" />
-                            </div>
                         </div>
+                            */
+                        }
                         <div className="flex sm:flex-row flex-col gap-[1rem]">
+                            <select required onChange={(event) => {
+                                setInputs((prevInput) => {
+                                    return {
+                                        ...prevInput, sponsorData: {
+                                            ...prevInput.sponsorData,
+                                            idSponsor: event.target.value.trim()
+                                        }
+                                    }
+                                })
+                            }} className="select formInput select-bordered w-full sm:w-1/2">
+                                <option disabled selected>اختار العضو المساهم باسم الصندوق</option>
+                                {
+                                    listId && listId.map((user) => {
+                                        return (
+                                            <option value={user._id}>{user.id} ({user.name})</option>
+                                        )
+                                    })
+                                }
+                            </select>
                             <div className="relative sm:w-1/2">
                                 <FontAwesomeIcon icon={faPercent} className="absolute top-[1rem] right-[1rem]" />
                                 <input type="number" required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" onChange={(event) => {
@@ -272,6 +293,21 @@ function OrderToPurchaseGoods() {
                                         }
                                     })
                                 }} placeholder="نسبة الكفيل" />
+                            </div>
+                        </div>
+                        <div className="flex sm:flex-row flex-col gap-[1rem]">
+                            <div className="relative sm:w-1/2">
+                                <FontAwesomeIcon icon={faLocationDot} className="absolute top-[1rem] right-[1rem]" />
+                                <input type="text" required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder="المنطقة" onChange={(event) => {
+                                    return setInputs((prevInput) => {
+                                        return {
+                                            ...prevInput, sponsorData: {
+                                                ...prevInput.sponsorData,
+                                                region: event.target.value.trim()
+                                            }
+                                        }
+                                    })
+                                }} pattern="^.{3,1024}$" />
                             </div>
                             <div className="relative sm:w-1/2">
                                 <FontAwesomeIcon icon={faMapLocationDot} className="absolute top-[1rem] right-[1rem]" />
@@ -361,7 +397,7 @@ function OrderToPurchaseGoods() {
                                             }
                                         }
                                     })
-                                }} placeholder={`المبلغ المسدد`}/>
+                                }} placeholder={`المبلغ المسدد`} />
                             </div>
                             <div className="relative sm:w-1/2">
                                 <FontAwesomeIcon icon={faMoneyBill} className="absolute top-[1rem] right-[1rem]" />
@@ -409,7 +445,7 @@ function OrderToPurchaseGoods() {
                         </div>
                         <div className="flex sm:flex-row flex-col gap-[1rem]">
                             <div className="flex gap-[1rem] items-center relative sm:w-1/2">
-                                <label>تاريخ السداد (الميلادي)</label>
+                                <label>تاريخ بدء السداد بالميلادي</label>
                                 <input type="date" onChange={(event) => {
                                     return setInputs((prevInput) => {
                                         const hijriDate = hijriDateObject(event.target.value);
@@ -428,7 +464,7 @@ function OrderToPurchaseGoods() {
                                 }} required className="formInput input pr-[2.3rem] input-bordered flex items-center gap-2" />
                             </div>
                             <div className="flex gap-[1rem] items-center relative sm:w-1/2">
-                                <label>تاريخ السداد (الهجري)</label>
+                                <label>تاريخ بدء السداد بالهجري</label>
                                 {
                                     inputs.commodityData.dateOfPaymentHijri ? <span>{inputs.commodityData.dateOfPaymentHijri.day}/{inputs.commodityData.dateOfPaymentHijri.month.number}/{inputs.commodityData.dateOfPaymentHijri.year}</span> : ""
                                 }
@@ -448,9 +484,9 @@ function OrderToPurchaseGoods() {
                                             }
                                         }
                                     })
-                                }}  required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder="عدد الاقساط" />
+                                }} required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder="عدد الاقساط" />
                             </div>
-                          {
+                            {
                             /*
                              <div className="relative sm:w-1/2">
                                 <FontAwesomeIcon icon={faMoneyBill} className="absolute top-[1rem] right-[1rem]" />

@@ -1,9 +1,9 @@
 const jwt = require('jsonwebtoken');
-const userModel = require('../models/user');
+const { adminContestModel } = require('../models/admin');
 const JWTKEY = process.env.JWTKEY;
 
 module.exports = async (req, res, next) => {
-    const token = req.cookies.token;
+    const token = req.cookies.tokenAdmin;
     if (!token) {
         return res.sendStatus(401);
     }
@@ -13,16 +13,15 @@ module.exports = async (req, res, next) => {
                 msg: "حدث خطأ أثناء معالجة طلبك"
             });
         }
-        const user = await userModel.findById(userInfo._id);
+        const user = await adminContestModel.findById(userInfo._id);
         if(!user){
             return res.sendStatus(401);
         }
         req.user = {
             id: user._id,
             name: user.name,
-            NationalIdentificationNumber: user.NationalIdentificationNumber,
+            email: user.email,
             phoneNumber: user.phoneNumber,
-            status: user.status,
         };
         next();
     });

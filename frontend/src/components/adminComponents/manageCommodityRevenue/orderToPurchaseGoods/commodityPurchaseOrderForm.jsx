@@ -85,7 +85,7 @@ function CommodityPurchaseOrderForm() {
                 </Link>
             </div>
             <h1 className="text-center text-[1.3rem] sm:text-[1.5rem] font-bold py-[1rem]">
-                نموذج طلب شراء سلعة
+                نموذج شراء سلعة
             </h1>
             <div className="container mx-auto">
                 <select onChange={(event) => {
@@ -132,19 +132,6 @@ function CommodityPurchaseOrderForm() {
                     <button onClick={handleSearch} className="btn btn-primary join-item  md:mt-[0rem] mt-[1rem]">ابحث</button>
                 </div>
             </div>
-            {
-                commodityRevenu && <div className='container mx-auto'>
-                    <Link to={`/print/commodityPurchaseOrderForm?id=` + commodityRevenu._id} target='_blank' className='btn mt-[1rem] btn-info font-bold'><FontAwesomeIcon icon={faPrint} /> طباعة</Link>
-                </div>
-            }
-            {
-                commodityRevenu && <div className=' mt-[1rem] container mx-auto'>
-                    {showAlert.display ? <Alert msg={showAlert} /> : ""}
-                    <button disabled={load} onClick={() => {
-                        handleSubmit();
-                    }} className='btn btn-success'>{load ?  <span className=" loading loading-ring loading-lg"></span> : "دفع الدفعة الاولى ان وجدت"}</button>
-                </div>
-            }
             {
                 !loading ? <div className="flex justify-center">
                     {" "}
@@ -311,6 +298,19 @@ function CommodityPurchaseOrderForm() {
                         </table>
                     }
 
+                </div>
+            }
+                        {
+                commodityRevenu && <div className='container mx-auto'>
+                    <Link to={`/print/commodityPurchaseOrderForm?id=` + commodityRevenu._id} target='_blank' className='btn mt-[1rem] btn-info font-bold'><FontAwesomeIcon icon={faPrint} /> طباعة</Link>
+                </div>
+            }
+            {
+                commodityRevenu && <div className=' mt-[1rem] container mx-auto'>
+                    {showAlert.display ? <Alert msg={showAlert} /> : ""}
+                    <button disabled={load} onClick={() => {
+                        handleSubmit();
+                    }} className='btn btn-success'>{load ?  <span className=" loading loading-ring loading-lg"></span> : "دفع الدفعة الاولى ان وجدت"}</button>
                 </div>
             }
             <div className='container mx-auto'>

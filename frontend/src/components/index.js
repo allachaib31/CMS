@@ -34,6 +34,7 @@ export { default as OrderToPurchaseGoods } from "./adminComponents/manageCommodi
 export { default as CommodityPurchaseOrderForm } from "./adminComponents/manageCommodityRevenue/orderToPurchaseGoods/commodityPurchaseOrderForm";
 export { default as PaymentOfInstallments } from "./adminComponents/manageCommodityRevenue/installmentModel/paymentOfInstallments";
 export { default as InstallmentSchedule } from "./adminComponents/manageCommodityRevenue/installmentModel/installmentSchedule";
+export { default as ContractsRegister } from "./adminComponents/manageCommodityRevenue/displayCommodityRevenue/contractsRegister";
 /*MANAGE CONTRIBUTION REVENUE */
 export { default as ManageContributionRevenue } from "./adminComponents/manageContributionRevenue/manageContributionRevenue";
 export { default as DisplayContributionRevenue } from "./adminComponents/manageContributionRevenue/displayContributionRevenue/displayContributionRevenue";
@@ -96,6 +97,10 @@ export { default as SlideShow } from "./adminComponents/manageAdvertising/slideS
 export { default as Agreements } from "./adminComponents/agreements/agreements";
 export { default as DisplayAgreements } from "./adminComponents/agreements/displayAgreements";
 export { default as AddAgreements } from "./adminComponents/agreements/addAgreements";
+/*MANAGE AGREEMENTS */
+export { default as AgreementsFamily } from "./adminComponents/agreementsFmily/agreementsFamily";
+export { default as DisplayAgreementsFamily } from "./adminComponents/agreementsFmily/displayAgreementsFamily";
+export { default as AddAgreementsFamily } from "./adminComponents//agreementsFmily/addAgreementsFamily";
 /*FAMILY TREE */
 export { default as FamilyTree } from "./adminComponents/familyTree/familyTree";
 export { default as DisplayFamilyTree } from "./adminComponents/familyTree/displayFamilyTree";

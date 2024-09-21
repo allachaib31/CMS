@@ -20,12 +20,12 @@ function ConsolidatedRecordRevenues() {
     return (
         <div className="sm:p-0 px-[1rem]">
             <div className='container mx-auto'>
-                <Link to="/contributionRevenue/" className="btn btn-primary text-[2rem] px-[2rem]">
+                <Link to="/subscription/payMonthlySubscriptions" className="btn btn-primary text-[2rem] px-[2rem]">
                     <FontAwesomeIcon icon={faRightLong} />
                 </Link>
             </div>
 
-            <h1 className="text-center text-[1.1rem]ss sm:text-[1.5rem] font-bold py-[1rem]">سجل الموحد للإيرادات</h1>
+            <h1 className="text-center text-[1.1rem]ss sm:text-[1.5rem] font-bold py-[1rem]">السجل الموحد للإيرادات</h1>
             <div className="mt-[1rem] flex md:flex-row flex-col gap-[1rem] justify-center">
                 <div className="flex md:flex-col items-center gap-[1rem]">
                     <h1 className="text-[0.8rem] w-[70%] md:w-auto md:text-center font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">إجمالي الايرادات</h1>

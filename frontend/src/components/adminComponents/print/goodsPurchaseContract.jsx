@@ -9,6 +9,10 @@ const GoodsPurchaseContract = () => {
     const [commodityRevenu, setCommodityRevenu] = useState(false);
     useEffect(() => {
         getCommodityRevenueFetch(query.get("id")).then((res) => {
+            if(!res.data.print){
+                alert("ليس لديك الاذن طباعة عقد شراء سلعة و أقساطها ")
+                navigate("/commodityRevenue/commodityPurchaseOrderForm")
+            }
             setCommodityRevenu(res.data.commodityRevenue);
         }).catch((err) => {
             if (err.response && err.response.status === 401) {
@@ -26,8 +30,8 @@ const GoodsPurchaseContract = () => {
         <div className="contract-container">
             {
                 commodityRevenu &&  <div className="contract-content">
+                    <h1 className="text-[4rem] font-semibold text-center mb-[2rem]">بسم الله الرحمن الرحيم</h1>
                 <div className="text-center mb-[2rem]">
-                    <h1 className="text-[4rem] font-semibold">بسم الله الرحمن الرحيم</h1>
                     <h2 className="text-[3rem] font-semibold mt-2">نموذج عقد بيع بالتقسيط</h2>
                     <h3 className="text-[3rem] font-semibold mt-2"> رقم العقد {commodityRevenu.id}</h3>
                 </div>
@@ -41,21 +45,22 @@ const GoodsPurchaseContract = () => {
                 </p>
 
                 <ul className="list-disc pr-4 text-right mb-[1rem] text-lg">
-                    <li>الطرف الأول : {commodityRevenu.sponsorData.name}</li>
-                    <li> مشتري السلعة :{commodityRevenu.customerData.name}</li>
+                    <li>الطرف الأول : {commodityRevenu.sponsorData.name} (ممثل الصندوق)</li>
+                    <li className='mt-[1rem]'>الطرف الثاني :{commodityRevenu.customerData.name} (مشتري السلعة)</li>
                 </ul>
 
-                <h3 className="text-right text-xl font-semibold mb-[1rem]">نص العقد :</h3>
+                <h3 className="text-center text-xl font-semibold mb-[1rem]">نص العقد</h3>
                 <p className="text-right mb-4 text-lg">
                     اتفق كل من الطرفين الموضحة بياناتهما أعلاه على شراء الطرف الثاني من الطرف الأول السلعة / السلع التالية:
                 </p>
 
                 <div className="text-right mb-[1rem] text-lg">
-                    <p className="mb-1">نوعها: <span className="border-b border-gray-400 text-center inline-block w-64">{commodityRevenu.commodityData.itemType}</span></p>
-                    <p className="mb-1">قيمتها: <span className="border-b border-gray-400 text-center inline-block w-[3.5rem]">{commodityRevenu.commodityData.purchaseAmount.toFixed(2)}</span> ريال ، يسدد منها (الدفعة اولى أن وجدت)مبلغاً قدره (<span className="border-b border-gray-400 text-center inline-block w-[4rem]">{commodityRevenu.commodityData.amountPaid.toFixed(2)}</span>)  ريال ، والمبلغ المتبقي قدره (<span className="border-b border-gray-400 text-center inline-block w-[4rem]">{(commodityRevenu.commodityData.purchaseAmount - commodityRevenu.commodityData.amountPaid).toFixed(2)}</span>) ريال يسدد على عدد (<span className="border-b border-gray-400 text-center inline-block w-[2rem]">{commodityRevenu.commodityData.numberOfInstallments}</span>) قسط / أقساط ، تكون كالتالي : </p>
+                    <p>نوعها: <span className="border-b border-gray-400 text-center inline-block w-64">{commodityRevenu.commodityData.itemType}</span></p>
+                    <p className="mt-[1rem]">قيمتها: <span className="border-b border-gray-400 text-center inline-block w-[3.5rem]">{commodityRevenu.commodityData.purchaseAmount.toFixed(2)}</span> ريال ، يسدد منها (الدفعة الأولى أن وجدت)مبلغاً قدره (<span className="border-b border-gray-400 text-center inline-block w-[4rem]">{commodityRevenu.commodityData.amountPaid.toFixed(2)}</span>)  ريال ، والمبلغ المتبقي قدره </p>
+                    <p className='mt-[1rem]'>(<span className="border-b border-gray-400 text-center inline-block w-[4rem]">{(commodityRevenu.commodityData.purchaseAmount - commodityRevenu.commodityData.amountPaid).toFixed(2)}</span>) ريال يسدد على عدد (<span className="border-b border-gray-400 text-center inline-block w-[2rem]">{commodityRevenu.commodityData.numberOfInstallments}</span>) قسط / أقساط ، تكون كالتالي : </p>
                 </div>
                 <div className="text-right mb-[1rem] text-lg">
-                    <p className='mb-1'> القسط الاول مبلغاً قدره ({commodityRevenu.commodityData.premiumAmount.toFixed(2)}) ، يسدد بتاريخ : {new Date(commodityRevenu.commodityData.dateOfPayment).getUTCDate() + "-" + (new Date(commodityRevenu.commodityData.dateOfPayment).getUTCMonth() + 1) + "-" + new Date(commodityRevenu.commodityData.dateOfPayment).getUTCFullYear()} مـ الموافق : {commodityRevenu.commodityData.dateOfPaymentHijri.day}-{commodityRevenu.commodityData.dateOfPaymentHijri.month.number}-{commodityRevenu.commodityData.dateOfPaymentHijri.year}ه</p>
+                    <p className='mt-[1rem]'> القسط الاول مبلغاً قدره ({commodityRevenu.commodityData.premiumAmount.toFixed(2)}) ريال ، يسدد بتاريخ : {new Date(commodityRevenu.commodityData.dateOfPayment).getUTCDate() + "-" + (new Date(commodityRevenu.commodityData.dateOfPayment).getUTCMonth() + 1) + "-" + new Date(commodityRevenu.commodityData.dateOfPayment).getUTCFullYear()} / الموافق : {commodityRevenu.commodityData.dateOfPaymentHijri.day}-{commodityRevenu.commodityData.dateOfPaymentHijri.month.number}-{commodityRevenu.commodityData.dateOfPaymentHijri.year}</p>
                 </div>
                 <p className="text-right mb-[1rem] text-lg">
                 وبقية الاقساط عددها ({commodityRevenu.commodityData.numberOfInstallments - 1}) قسط / أقساط . 
@@ -64,38 +69,38 @@ const GoodsPurchaseContract = () => {
                 تسدد على أقساط شهرية بمبلغ قدره ({commodityRevenu.commodityData.premiumAmount.toFixed(2)}) ريال ابتداءً  :
                 </p>
                 <p className="text-center mb-[1rem] text-lg">
-                    في تاريخ :<span className="border-b border-gray-400 inline-block w-32">{new Date(commodityRevenu.commodityData.dateOfPayment).getUTCFullYear() + "-" + (new Date(commodityRevenu.commodityData.dateOfPayment).getUTCMonth() + 1) + "-" + new Date(commodityRevenu.commodityData.dateOfPayment).getUTCDate()}</span> هـ. الموافق <span className="border-b border-gray-400 inline-block w-32">{commodityRevenu.commodityData.dateOfPaymentHijri.year}-{commodityRevenu.commodityData.dateOfPaymentHijri.month.number}-{commodityRevenu.commodityData.dateOfPaymentHijri.day}</span> 
+                من تاريخ :<span className="border-b border-gray-400 inline-block w-32">{new Date(commodityRevenu.commodityData.dateOfPayment).getUTCFullYear() + "-" + (new Date(commodityRevenu.commodityData.dateOfPayment).getUTCMonth() + 1) + "-" + new Date(commodityRevenu.commodityData.dateOfPayment).getUTCDate()}</span> الموافق <span className="border-b border-gray-400 inline-block w-32">{commodityRevenu.commodityData.dateOfPaymentHijri.year}-{commodityRevenu.commodityData.dateOfPaymentHijri.month.number}-{commodityRevenu.commodityData.dateOfPaymentHijri.day}</span> 
                 </p>
                 <p className="text-center mb-[1rem] text-lg">
-                وحتى تاريخ :<span className="border-b border-gray-400 inline-block w-32">{new Date(commodityRevenu.commodityData.paymentExpiryDate).getUTCFullYear() + "-" + (new Date(commodityRevenu.commodityData.paymentExpiryDate).getUTCMonth() + 1) + "-" + new Date(commodityRevenu.commodityData.paymentExpiryDate).getUTCDate()}</span> هـ. الموافق <span className="border-b border-gray-400 inline-block w-32">{commodityRevenu.commodityData.paymentExpiryDateHijri.year}-{commodityRevenu.commodityData.paymentExpiryDateHijri.month.number}-{commodityRevenu.commodityData.paymentExpiryDateHijri.day}</span> 
+                وحتى تاريخ :<span className="border-b border-gray-400 inline-block w-32">{new Date(commodityRevenu.commodityData.paymentExpiryDate).getUTCFullYear() + "-" + (new Date(commodityRevenu.commodityData.paymentExpiryDate).getUTCMonth() + 1) + "-" + new Date(commodityRevenu.commodityData.paymentExpiryDate).getUTCDate()}</span>  الموافق <span className="border-b border-gray-400 inline-block w-32">{commodityRevenu.commodityData.paymentExpiryDateHijri.year}-{commodityRevenu.commodityData.paymentExpiryDateHijri.month.number}-{commodityRevenu.commodityData.paymentExpiryDateHijri.day}</span> 
                 </p>
                 <p className="text-center mb-[1rem] text-lg">
-                حسب جدول الاقساط الموضح أدناه : 
+                حسب جدول الأقساط المرفق : 
                 </p>
-                <table className="table-auto w-full border border-gray-300 mt-4 mb-2 text-lg">
+                <table className="table-auto w-full border border-gray-300 mt-4 mb-2">
                     <thead>
                         <tr>
-                            <th className="border border-gray-300 p-2 text-center">الطرف</th>
-                            <th className="border border-gray-300 p-2 text-center">الاسم</th>
-                            <th className="border border-gray-300 p-2 text-center">التوقيع</th>
-                            <th className="border border-gray-300 p-2 text-center">التاريخ الميلادي</th>
-                            <th className="border border-gray-300 p-2 text-center">التاريخ الهجري</th>
+                            <td className="border border-gray-300 py-[1rem] px-2 text-center">الطرف</td>
+                            <td className="border border-gray-300 py-[1rem] px-2 text-center">الاسم</td>
+                            <td className="border border-gray-300 py-[1rem] px-2 text-center">التوقيع</td>
+                            <td className="border border-gray-300 py-[1rem] px-0 text-center">التاريخ الميلادي</td>
+                            <td className="border border-gray-300 py-[1rem] px-0 text-center">التاريخ الهجري</td>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td className="border border-gray-300 p-2 text-center">الأول</td>
-                            <td className="border border-gray-300 p-2 text-center">{commodityRevenu.sponsorData.name}</td>
-                            <td className="border border-gray-300 p-2 text-center">..............</td>
-                            <td className="border border-gray-300 p-2 text-center">{new Date(commodityRevenu.commodityData.dateOfPurchase).getUTCFullYear() + "-" + (new Date(commodityRevenu.commodityData.dateOfPurchase).getUTCMonth() + 1) + "-" + new Date(commodityRevenu.commodityData.dateOfPurchase).getUTCDate()}</td>
-                            <td className="border border-gray-300 p-2 text-center">{commodityRevenu.commodityData.dateOfPurchaseHijri.year}-{commodityRevenu.commodityData.dateOfPurchaseHijri.month.number}-{commodityRevenu.commodityData.dateOfPurchaseHijri.day}</td>
+                        <tr className='py-[2rem]'>
+                            <td className="border border-gray-300 py-[1rem] px-2 text-center">الأول</td>
+                            <td className="border border-gray-300 py-[1rem] px-2 text-center">{commodityRevenu.sponsorData.name}</td>
+                            <td className="border border-gray-300 py-[1rem] px-2 text-center">..............................</td>
+                            <td className="border border-gray-300 py-[1rem] px-0 text-center">{new Date(commodityRevenu.commodityData.dateOfPurchase).getUTCFullYear() + "-" + (new Date(commodityRevenu.commodityData.dateOfPurchase).getUTCMonth() + 1) + "-" + new Date(commodityRevenu.commodityData.dateOfPurchase).getUTCDate()}</td>
+                            <td className="border border-gray-300 py-[1rem] px-0 text-center">{commodityRevenu.commodityData.dateOfPurchaseHijri.year}-{commodityRevenu.commodityData.dateOfPurchaseHijri.month.number}-{commodityRevenu.commodityData.dateOfPurchaseHijri.day}</td>
                         </tr>
                         <tr>
-                            <td className="border border-gray-300 p-2 text-center">الثاني</td>
-                            <td className="border border-gray-300 p-2 text-center">{commodityRevenu.customerData.name}</td>
-                            <td className="border border-gray-300 p-2 text-center">..............</td>
-                            <td className="border border-gray-300 p-2 text-center">{new Date(commodityRevenu.commodityData.dateOfPurchase).getUTCFullYear() + "-" + (new Date(commodityRevenu.commodityData.dateOfPurchase).getUTCMonth() + 1) + "-" + new Date(commodityRevenu.commodityData.dateOfPurchase).getUTCDate()}</td>
-                            <td className="border border-gray-300 p-2 text-center">{commodityRevenu.commodityData.dateOfPurchaseHijri.year}-{commodityRevenu.commodityData.dateOfPurchaseHijri.month.number}-{commodityRevenu.commodityData.dateOfPurchaseHijri.day}</td>
+                            <td className="border border-gray-300 py-[1rem] px-2 text-center">الثاني</td>
+                            <td className="border border-gray-300 py-[1rem] px-2 text-center">{commodityRevenu.customerData.name}</td>
+                            <td className="border border-gray-300 py-[1rem] px-2 text-center">..............................</td>
+                            <td className="border border-gray-300 py-[1rem] px-0 text-center">{new Date(commodityRevenu.commodityData.dateOfPurchase).getUTCFullYear() + "-" + (new Date(commodityRevenu.commodityData.dateOfPurchase).getUTCMonth() + 1) + "-" + new Date(commodityRevenu.commodityData.dateOfPurchase).getUTCDate()}</td>
+                            <td className="border border-gray-300 py-[1rem] px-0 text-center">{commodityRevenu.commodityData.dateOfPurchaseHijri.year}-{commodityRevenu.commodityData.dateOfPurchaseHijri.month.number}-{commodityRevenu.commodityData.dateOfPurchaseHijri.day}</td>
                         </tr>
                     </tbody>
                 </table>

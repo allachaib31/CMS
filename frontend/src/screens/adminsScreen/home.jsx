@@ -3,8 +3,8 @@ import { Link, Outlet, useNavigate } from "react-router-dom";
 import profileImage from "../../images/profileImage.png";
 import logo from "../../images/logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChartPie, faBuilding, faUser, faChartSimple, faFileInvoiceDollar, faSackDollar, faUserTie, faHandHoldingDollar, faGift, faRecycle, faArrowTrendUp, faShapes, faCheckToSlot, faGamepad, faMicrophone, faListCheck, faTree, faHandHoldingDroplet, faUpload } from "@fortawesome/free-solid-svg-icons";
-import { uploadImageFetch, validationFetch } from "../../utils/apiFetch";
+import { faChartPie, faBuilding, faUser, faChartSimple, faFileInvoiceDollar, faSackDollar, faUserTie, faHandHoldingDollar, faGift, faRecycle, faArrowTrendUp, faShapes, faCheckToSlot, faGamepad, faMicrophone, faListCheck, faTree, faHandHoldingDroplet, faUpload, faGauge } from "@fortawesome/free-solid-svg-icons";
+import { getClientAdsFetch, uploadImageFetch, validationFetch } from "../../utils/apiFetch";
 import { Alert, Loading } from "../../components";
 import Cookies from "cookies-js";
 
@@ -13,6 +13,7 @@ export const UserContext = React.createContext();
 function Home() {
   const navigate = useNavigate();
   const [submit, setSubmit] = useState(false);
+  const [ads, setAds] = useState(false);
   const fileInputRef = useRef(null);
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(false);
@@ -45,6 +46,13 @@ function Home() {
       })
     }
   };
+  useEffect(() => {
+    getClientAdsFetch().then((res) => {
+      setAds(res.data.ads)
+    }).catch((err) => {
+      navigate("/auth");
+    });
+  }, [])
   const handleSubmit = () => {
     setShowAlert({
       display: false,
@@ -139,6 +147,15 @@ function Home() {
                     <img src={logo} alt="" />
                   </div>
                   <li className="sm:text-[1.3rem] space-y-1">
+                    <Link to="/admin/dashboard">
+                      <FontAwesomeIcon icon={faGauge} /> لوحة القيادة
+                    </Link>
+                    <Link to="/admin/advetising">
+                      <FontAwesomeIcon icon={faMicrophone} /> اعلانات
+                    </Link>
+                    <Link to="/admin/election">
+                      <FontAwesomeIcon icon={faCheckToSlot} /> انتخابات
+                    </Link>
                     <Link to="/admin">
                       <FontAwesomeIcon icon={faUserTie} /> إدارة المسؤولين
                     </Link>
@@ -147,9 +164,9 @@ function Home() {
                     </Link>
                     <details>
                       <summary>
-                        <Link to="/subscription">
-                          <FontAwesomeIcon icon={faFileInvoiceDollar} /> الاشتراكات
-                        </Link>
+                        {/*<Link to="/subscription">*/}
+                        <FontAwesomeIcon icon={faFileInvoiceDollar} /> الاشتراكات
+                        {/*</Link>*/}
                       </summary>
                       <ul>
                         <li>
@@ -159,6 +176,30 @@ function Home() {
                           >
                             إضافة مبلغ الاشتراكات
                           </Link></li>
+                        <li>
+                          <Link
+                            to="/subscription/paymentOfSubscriptions"
+                            className="sm:text-[1rem]"
+                          >
+                            تسديد اشتراك التأسيس
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            to="/subscription/payMonthlySubscriptions"
+                            className="sm:text-[1rem]"
+                          >
+                            نموذج الاشتراكات
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            to="/subscription/subscriptionHistory"
+                            className="sm:text-[1rem]"
+                          >
+                            سجل الاشتراكات
+                          </Link>
+                        </li>
                         <li>
                           <Link
                             to="/subscription/annualSubscriptionRecord"
@@ -175,37 +216,16 @@ function Home() {
                             البيانات المالية للعضو
                           </Link>
                         </li>
-                        <li><Link to="/contributionRevenue/consolidatedRecordRevenues" className="sm:text-[1rem]">السجل الموحد للإيرادات</Link></li>
                         <li>
-                          <Link
-                            to="/subscription/subscriptionHistory"
-                            className="sm:text-[1rem]"
-                          >
-                            سجل الاشتراكات
-                          </Link>
-                        </li>
-                        <li>
-                          <Link
-                            to="/subscription/payMonthlySubscriptions"
-                            className="sm:text-[1rem]"
-                          >
-                            تسديد الاشتراك الشهري
-                          </Link>
-                        </li>
-                        <li>
-                          <Link
-                            to="/subscription/paymentOfSubscriptions"
-                            className="sm:text-[1rem]"
-                          >
-                            تسديد اشتراك التأسيس
-                          </Link>
-                        </li>
+                          <Link to="/contributionRevenue/consolidatedRecordRevenues" className="sm:text-[1rem]"
+                          >السجل الموحد للإيرادات
+                          </Link></li>
                         <li>
                           <Link
                             to="/subscription/withdrawMemberBalance"
                             className="sm:text-[1rem]"
                           >
-                          سحب رصيد العضو
+                            تصفية رصيد العضو
                           </Link>
                         </li>
                         <li>
@@ -221,46 +241,49 @@ function Home() {
 
                     <details>
                       <summary>
-                        <Link to="/loans">
-                          <FontAwesomeIcon icon={faHandHoldingDollar} /> القروض
-                        </Link>
+                        {/*<Link to="/loans">*/}
+                        <FontAwesomeIcon icon={faHandHoldingDollar} /> القروض
+                        {/*</Link>*/}
                       </summary>
                       <ul>
                         <li><Link to="/loans/order">طلب قرض</Link></li>
+                        <li><Link to="/loans">بيانات القرض</Link></li>
                         <li><Link to="/loans/history">سجل القروض</Link></li>
                       </ul>
                     </details>
                     <details>
                       <summary>
-                        <Link to="/commodityRevenue">
-                          <FontAwesomeIcon icon={faChartPie} /> السلع
-                        </Link>
+                        {/*<Link to="/commodityRevenue">*/}
+                        <FontAwesomeIcon icon={faChartPie} /> السلع
+                        {/*</Link>*/}
                       </summary>
                       <ul>
                         <li><Link to="/commodityRevenue/orderToPurchaseGoods" className="sm:text-[1rem]">طلب شراء سلعة</Link></li>
-                        <li><Link to="/commodityRevenue/formContributionPurchaseCommodity" className="sm:text-[1rem]">نموذج المساهمة</Link></li>
-                        <li><Link to="/commodityRevenue/goodsRevenueRecord" className="sm:text-[1rem]">سجل إيرادات السلع</Link></li>
-                        <li><Link to="/commodityRevenue/recordContributionPurchaseCommodity" className="sm:text-[1rem]">سجل المساهمين</Link></li>
                         <li><Link to="/commodityRevenue/commodityPurchaseOrderForm" className="sm:text-[1rem]">نموذج شراء سلعة</Link></li>
+                        <li><Link to="/commodityRevenue/formContributionPurchaseCommodity" className="sm:text-[1rem]">نموذج المساهمة</Link></li>
+                        <li><Link to="/commodityRevenue/recordContributionPurchaseCommodity" className="sm:text-[1rem]">سجل المساهمين</Link></li>
+                        <li><Link to="/commodityRevenue" className="sm:text-[1rem]">إيرادات السلع</Link></li>
+                        <li><Link to="/commodityRevenue/goodsRevenueRecord" className="sm:text-[1rem]">سجل السلع</Link></li>
+                        <li><Link to="/commodityRevenue/contractsRegister" className="sm:text-[1rem]">سجل العقود</Link></li>
                       </ul>
                     </details>
                     <details>
                       <summary>
-                          <FontAwesomeIcon icon={faArrowTrendUp} /> الأسهم
+                        <FontAwesomeIcon icon={faArrowTrendUp} /> الأسهم
                       </summary>
                       <ul>
+                        <li><Link to="/stocks/contributionForm" className="sm:text-[1rem]">طلب المساهمة</Link></li>
                         <li><Link to="/stocks/displayContributionForm" className="sm:text-[1rem]">نموذج المساهمة</Link></li>
-                        <li><Link to="/stocks" className="sm:text-[1rem]">سجل المساهمات</Link></li>
                         <li><Link to="/stocks/registerShareholdersShares" className="sm:text-[1rem]">سجل المساهمين</Link></li>
                         <li><Link to="/stocks/stockRevenue" className="sm:text-[1rem]">إيرادات الأسهم</Link></li>
-                        <li><Link to="/stocks/contributionForm" className="sm:text-[1rem]">طلب المساهمة</Link></li>
+                        <li><Link to="/stocks" className="sm:text-[1rem]">سجل المساهمات</Link></li>
                       </ul>
                     </details>
                     <details>
                       <summary>
-                        <Link to="/unreimbursedExpenses">
-                          <FontAwesomeIcon icon={faGift} /> المصروفات الغير مستردة
-                        </Link>
+                        {/*<Link to="/unreimbursedExpenses">*/}
+                        <FontAwesomeIcon icon={faGift} /> المصروفات
+                        {/*</Link>*/}
                       </summary>
                       <ul>
                         <li>
@@ -270,6 +293,9 @@ function Home() {
                           <Link to="/unreimbursedExpenses/paymentExpenses">تسديد مصروف</Link>
                         </li>
                         <li>
+                          <Link to="/unreimbursedExpenses">نموذج المصروفات</Link>
+                        </li>
+                        <li>
                           <Link to="/unreimbursedExpenses/displayRecord">سجل المصروفات</Link>
                         </li>
                         <li>
@@ -277,24 +303,26 @@ function Home() {
                         </li>
                       </ul>
                     </details>
-                    <details>
-                      <summary>
-                        <Link to="/reimbusedExpenses">
-                          <FontAwesomeIcon icon={faRecycle} /> المصروفات المستردة
-                        </Link>
-                      </summary>
-                      <ul>
-                        <li>
-                          <Link to="/reimbusedExpenses/expenseRequest">طلب مصروف</Link>
-                        </li>
-                        <li>
-                          <Link to="/reimbusedExpenses/displayRecord">سجل المصروفات</Link>
-                        </li>
-                        <li>
-                          <Link to="/reimbusedExpenses/addExpenseType">إضافة نوع مصروف</Link>
-                        </li>
-                      </ul>
-                    </details>
+                    {
+                      /*<details>
+                        <summary>
+                          <Link to="/reimbusedExpenses">
+                            <FontAwesomeIcon icon={faRecycle} /> المصروفات المستردة
+                          </Link>
+                        </summary>
+                        <ul>
+                          <li>
+                            <Link to="/reimbusedExpenses/expenseRequest">طلب مصروف</Link>
+                          </li>
+                          <li>
+                            <Link to="/reimbusedExpenses/displayRecord">سجل المصروفات</Link>
+                          </li>
+                          <li>
+                            <Link to="/reimbusedExpenses/addExpenseType">إضافة نوع مصروف</Link>
+                          </li>
+                        </ul>
+                      </details>*/
+                    }
                     <details>
                       <summary>
                         <h1>
@@ -303,13 +331,13 @@ function Home() {
                       </summary>
                       <ul>
                         <li>
-                          <Link to="/bloodMoney">طلب صرف دية مستردة</Link>
+                          <Link to="/bloodMoney">طلب صرف  </Link>
                         </li>
                         <li>
-                          <Link to="/bloodMoney/payment">تسديد مبلغ دية مستردة</Link>
+                          <Link to="/bloodMoney/payment">تسديد مبلغ  </Link>
                         </li>
                         <li>
-                          <Link to="/bloodMoney/record">سجل الديات المستردة</Link>
+                          <Link to="/bloodMoney/record">سجل الديات </Link>
                         </li>
                       </ul>
                     </details>
@@ -365,11 +393,24 @@ function Home() {
                     </details>
                     <details>
                       <summary>
-                        <p><FontAwesomeIcon icon={faListCheck} /> اتفاقيات الصندوق </p>
+                        <p><FontAwesomeIcon icon={faListCheck} />اتفاقية العائلة</p>
                       </summary>
                       <ul>
                         <li>
-                          <Link to="/agreements/add">إضافة اتفاقية</Link>
+                          <Link to="/agreementsFamily/add">إضافة اتفاقية جديدة</Link>
+                        </li>
+                        <li>
+                          <Link to="/agreementsFamily/">الاتفاقيات السابقة</Link>
+                        </li>
+                      </ul>
+                    </details>
+                    <details>
+                      <summary>
+                        <p><FontAwesomeIcon icon={faListCheck} />اتفاقية الصندوق</p>
+                      </summary>
+                      <ul>
+                        <li>
+                          <Link to="/agreements/add">إضافة اتفاقية جديدة</Link>
                         </li>
                         <li>
                           <Link to="/agreements/">الاتفاقيات السابقة</Link>
@@ -429,7 +470,7 @@ function Home() {
                   listMenu.classList.toggle("hidden");
                 }}
                 src={user && user.profileImage ? "/api/v1.0/users/getProfileImage/" + user.profileImage : profileImage}
-                className="cursor-pointer w-[64.58px] h-[64.58px] rounded-full"
+                className="cursor-pointer w-[165px] xs:w-[115px] h-[70px] sm:w-[97px] sm:h-[70px] lg:w-[75.58px] lg:h-[75.58px] rounded-full"
                 alt=""
               />
               <div
@@ -451,6 +492,19 @@ function Home() {
               </div>
             </div>
           </header>
+          <div className="scrolling-text flex w-full overflow-hidden">
+            <div className="flex justify-center gap-[8rem] min-w-full animate-scroll">
+              {
+                ads && ads.map((ad) => {
+                  return (
+                    <h1 className="text-[2rem] inline-block min-w-max text-center whitespace-nowrap">
+                      {ad.text}
+                    </h1>
+                  )
+                })
+              }
+            </div>
+          </div>
           <dialog id="my_modal_ImageProfile" className="modal">
             <div className="modal-box">
               {showAlert.display ? <Alert msg={showAlert} /> : ""}

@@ -64,7 +64,7 @@ exports.getTypeExpenses = async (req, res) => {
 }
 
 exports.addExpenses = async (req, res) => {
-    const { NationalIdentificationNumber, amount, typeExpenses, comments } = req.body;
+    const { name, amount, typeExpenses, comments } = req.body;
     try {
         if (
             req.user.admin.userPermission.indexOf(
@@ -81,14 +81,14 @@ exports.addExpenses = async (req, res) => {
                 msg: "لايوجد رصيد كافي في الصندوق",
             });
         }
-        const user = await userModel.findOne({
+        /*const user = await userModel.findOne({
             NationalIdentificationNumber: NationalIdentificationNumber
         })
         if (!user) {
             return res.status(404).send({
                 msg: "لا وجود لهذا المستخدم"
             })
-        }
+        }*/
         const typeExpensesName = await typeExpensesModel.findOne({
             id: typeExpenses
         });
@@ -98,7 +98,7 @@ exports.addExpenses = async (req, res) => {
             })
         }
         const { error } = validateUnReimbursedExpenses({
-            name: user.name, amount, typeExpenses: typeExpensesName.name, comments
+            name: name, amount, typeExpenses: typeExpensesName.name, comments
         })
         if (error) {
             return res.status(422).send({
@@ -111,7 +111,7 @@ exports.addExpenses = async (req, res) => {
         });
         const paymentAmount = amount / users.length;
         const unReimbursedExpenses = new unReimbursedExpensesModel({
-            name: user.name,
+            name: name,
             amount,
             expensememberbalance: paymentAmount,
             typeExpenses: typeExpensesName.name,
@@ -169,7 +169,7 @@ exports.addExpenses = async (req, res) => {
                 msg: "حدث خطأ أثناء معالجة طلبك",
             });
         }
-        const userUpdate = await userModel.findOneAndUpdate({
+        /*const userUpdate = await userModel.findOneAndUpdate({
             NationalIdentificationNumber: NationalIdentificationNumber
         }, {
             $inc: {
@@ -177,7 +177,7 @@ exports.addExpenses = async (req, res) => {
                 "subsidies.amount": Number(amount)
             }
         },
-            { new: true })
+            { new: true })*/
         return res.status(200).send({
             msg: "لقد تمت اضافته بنجاح",
         });

@@ -118,6 +118,10 @@ export const DELETEADS_ROUTE = `${HOST}api/v1.0/ads`;
 export const ADDAGREEMENTS_ROUTE = `${HOST}api/v1.0/agreements/add`
 export const GETAGREEMENTS_ROUTE = `${HOST}api/v1.0/agreements/`;
 export const UPDATEAGREEMENTSACTIVE_ROUTE = `${HOST}api/v1.0/agreements/`
+//Manage agreements
+export const ADDAGREEMENTSFAMILY_ROUTE = `${HOST}api/v1.0/agreementsFamily/add`
+export const GETAGREEMENTSFAMILY_ROUTE = `${HOST}api/v1.0/agreementsFamily/`;
+export const UPDATEAGREEMENTSACTIVEFAMILY_ROUTE = `${HOST}api/v1.0/agreementsFamily/`
 //Manage familyTree
 export const CREATEFAMILYTREE_ROUTE = `${HOST}api/v1.0/familyTree/createNewFamilyTree`;
 export const ADDTOFAMILYTREE_ROUTE = `${HOST}api/v1.0/familyTree`;

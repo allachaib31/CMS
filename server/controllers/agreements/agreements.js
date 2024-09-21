@@ -2,7 +2,7 @@ const { validateAgreement, agreementsModel } = require("../../models/agreements/
 const getHijriDate = require("../../utils/getHijriDate");
 
 exports.addAgreements = async (req, res) => {
-    const { text } = req.body;
+    const { title,text } = req.body;
     try {
         if (
             req.user.admin.userPermission.indexOf(
@@ -24,6 +24,7 @@ exports.addAgreements = async (req, res) => {
         }
         const hijriDate = getHijriDate()
         const agreements = new agreementsModel({
+            title,
             text,hijriDate: {
                 day: hijriDate[0],
                 month: hijriDate[1],
@@ -44,9 +45,7 @@ exports.addAgreements = async (req, res) => {
 
 exports.getAgreements = async (req, res) => {
     try {
-        const agreements = await agreementsModel.find().sort({
-            createdAt: -1
-        });
+        const agreements = await agreementsModel.find();
         return res.status(200).send({
             agreements
         })

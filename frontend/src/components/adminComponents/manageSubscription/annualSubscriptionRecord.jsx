@@ -26,7 +26,9 @@ function AnnualSubscriptionRecord() {
 
     const calculateTotal = (subscriptions) => {
         const newTotal = Array(12).fill(0);
+        console.log(subscriptions)
         subscriptions.forEach(subscription => {
+            console.log(newTotal)
             Object.entries(subscription.months).forEach(([month, details], index) => {
                 newTotal[index] += Number(details.amount);
             });
@@ -87,7 +89,10 @@ function AnnualSubscriptionRecord() {
                 </Link>
             </div>
             <h1 className="text-center text-[1.1rem] sm:text-[1.5rem] font-bold py-[0.5rem]">
-                سجل الاشتراكات السنوية لعام {year} الرصيد : {total.reduce((total, value) => {
+                سجل الاشتراكات السنوية لعام 
+            </h1>
+            <h1  className="text-center text-[1.1rem] sm:text-[1.5rem] font-bold py-[0.5rem]">
+            {year} الرصيد : {total.reduce((total, value) => {
                     return total + Number(value);
                 })}
             </h1>
@@ -98,7 +103,7 @@ function AnnualSubscriptionRecord() {
                     className="select xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item"
                 >
                     {yearOptions.map((value) => (
-                        <option key={value} value={value} selected={year === value}>
+                        <option key={value} value={value} selected={year == value}>
                             {value}
                         </option>
                     ))}
@@ -114,7 +119,7 @@ function AnnualSubscriptionRecord() {
             </div>
             <div className='flex justify-center'>
                 <div className="overflow-x-auto mt-[0.5rem]">
-                    {!loading ? <div className='flex justify-center'> <span className=" loading loading-ring loading-lg"></span></div> : <table className="table border-separate border-spacing-2 border text-[1rem] w-[1450px]">
+                    {!loading ? <div className='flex justify-center'> <span className=" loading loading-ring loading-lg"></span></div> : <table className="table border-separate border-spacing-2 border text-[1rem] w-[1650px]">
                         <thead className='text-[1rem]'>
                             <tr className='text-center'>
                                 <th className='border border-slate-600'>الاسم</th>

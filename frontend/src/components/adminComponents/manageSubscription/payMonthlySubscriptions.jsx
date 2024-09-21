@@ -190,7 +190,7 @@ function PayMonthlySubscriptions() {
                                                 {subscription.idUser.name}
                                             </th>
                                             <td className="border border-slate-600">اشتراك شهري</td>
-                                            <td className="border border-slate-600">{amount}</td>
+                                            <td className="border border-slate-600">{subscription.months[month].amount ? subscription.months[month].amount : amount}</td>
                                             <td className="border border-slate-600">{subscription.months[month].dueDate}</td>
                                             <td className="border border-slate-600">
                                                 {subscription.months[month].dueDateHijri.year}-

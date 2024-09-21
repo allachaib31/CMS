@@ -52,7 +52,7 @@ function RecordUnrecoveredExpenses() {
     return (
         <div className="px-[1rem] sm:px-0">
             <h1 className="text-center text-[1.5rem] font-bold py-[1rem]">
-                المصروفات الغير مستردة
+            نموذج المصروفات 
             </h1>
             <div className='text-[1.1rem] flex sm:flex-row flex-col gap-[1rem] items-center justify-center'>
                 <input type="date" id="dateInput" className='input input-bordered' onChange={(event) => {
@@ -90,7 +90,7 @@ function RecordUnrecoveredExpenses() {
             </div>
             <div className="mt-[1rem] flex md:flex-row flex-col gap-[1rem] justify-center">
                 <div className="flex md:flex-col items-center justify-center gap-[1rem]">
-                    <h1 className="text-[0.8rem] sm:text-[1.1rem] font-bold bg-primary w-[70%] md:w-auto text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">إجمالي المصروفات الغير مستردة لهذا الشهر</h1>
+                    <h1 className="text-[0.8rem] sm:text-[1.1rem] font-bold bg-primary w-[70%] md:w-auto text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">إجمالي المصروفات لهذا الشهر</h1>
                     <h1 className="text-[0.8rem] sm:text-[1.1rem] font-bold bg-primary w-[30%] text-center md:w-auto text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">{totalAmountMonth.toFixed(2)}</h1>
                 </div>
                 <div className="flex md:flex-col items-center justify-center gap-[1rem]">
@@ -129,10 +129,10 @@ function RecordUnrecoveredExpenses() {
                             الإجمالي
                         </th>
                         <th className="border text-center border-slate-600" rowSpan={2}>
-                            تاريخ <br/> الميلادي
+                        التاريخ <br/> الميلادي
                         </th>
                         <th className="border text-center border-slate-600" rowSpan={2}>
-                            تاريخ <br/> الهجري
+                        التاريخ <br/> الهجري
                         </th>
                         <th className="border text-center border-slate-600" rowSpan={2}>
                             البيان

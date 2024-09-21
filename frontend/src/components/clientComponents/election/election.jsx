@@ -20,7 +20,7 @@ function Election() {
       setVotes(res.data.vote);
     }).catch((err) => {
       if (err.response && err.response.status === 401) {
-        navigate("/authClient");
+        navigate("/auth");
       }
     })
   }, []);
@@ -86,7 +86,7 @@ function Election() {
                         })
                         document.getElementById('my_modal_1').showModal()
                       }} className='btn btn-success'>تصويت</button></td>
-                      <td className="border border-slate-600"><Link to={"/client/electionDetails?id=" + vote._id} className="btn btn-info">تفاصيل</Link></td>
+                      <td className="border border-slate-600"><Link to={"/admin/electionDetails?id=" + vote._id} className="btn btn-info">تفاصيل</Link></td>
                     </tr>
                   )
                 })

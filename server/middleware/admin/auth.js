@@ -4,6 +4,7 @@ const JWTKEY = process.env.JWTKEY;
 
 module.exports = async (req, res, next) => {
     const token = req.cookies.token;
+    console.log(token)
     if (!token) {
         return res.sendStatus(401);
     }
@@ -18,6 +19,7 @@ module.exports = async (req, res, next) => {
             return res.sendStatus(401);
         }
         req.user = {
+            id: admin._id,
             name: admin.name,
             NationalIdentificationNumber: admin.NationalIdentificationNumber,
             phoneNumber: admin.phoneNumber,

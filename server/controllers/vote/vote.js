@@ -4,6 +4,15 @@ const getHijriDate = require("../../utils/getHijriDate");
 exports.addVote = async (req, res) => {
     const { subject, votingStartDate, votingEndDate, choices, numberOfChoices } = req.body;
     try {
+        if (
+            req.user.admin.userPermission.indexOf(
+                "إدارة التصويت"
+            ) == -1
+        ) {
+            return res.status(403).send({
+                msg: "لا يمكنك عمل انتخابات",
+            });
+        }
         const { error } = validateVote({
             subject, votingStartDate, votingEndDate, choices, numberOfChoices
         });

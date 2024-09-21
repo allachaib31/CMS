@@ -7,6 +7,7 @@ exports.login = async (req, res) => {
     const { NationalIdentificationNumber, password } = req.body;
     try {
         const admin = await userModel.findOne({ NationalIdentificationNumber: NationalIdentificationNumber, "admin.isAdmin": true });
+        console.log(admin)
         if (!admin) {
             return res.status(401).send({
                 msg: "رقم الهوية الوطنية أو كلمة المرور غير صحيحة"
@@ -17,6 +18,7 @@ exports.login = async (req, res) => {
                 msg: "هذا الحساب معطل"
             });
         }
+        console.log(admin)
         const match = await bcrypt.compare(password, admin.password);
         if (!match) {
             return res.status(401).send({

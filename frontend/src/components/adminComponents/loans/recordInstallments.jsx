@@ -89,22 +89,22 @@ function RecordInstallments() {
                                     الأقساط المتبقية
                                 </th>
                                 <th className="border border-slate-600" rowSpan={2}>
-                                    مبلغ المسدد
+                                المبلغ المسدد
                                 </th>
                                 <th className="border border-slate-600" colSpan={2} rowSpan={2}>
-                                    مبلغ المتبقي
+                                المبلغ المتبقي
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr className='text-center'>
                                 <td className="border border-slate-600">{loanInfo.name}</td>
-                                <td className="border border-slate-600">{loanInfo.amount}</td>
+                                <td className="border border-slate-600">{loanInfo.amount.toFixed(2)}</td>
                                 <td className="border border-slate-600">{loanInfo.numberOfInstallments}</td>
                                 <td className="border border-slate-600">{installmentsPaid}</td>
                                 <td className="border border-slate-600">{loanInfo.numberOfInstallments - installmentsPaid}</td>
-                                <td className="border border-slate-600">{loanInfo.balance}</td>
-                                <td className="border border-slate-600" colSpan={2}>{loanInfo.amount - loanInfo.balance}</td>
+                                <td className="border border-slate-600">{loanInfo.balance.toFixed(2)}</td>
+                                <td className="border border-slate-600" colSpan={2}>{(loanInfo.amount - loanInfo.balance).toFixed(2)}</td>
                             </tr>
                         </tbody>
                         <tr className='text-center'>
@@ -150,7 +150,7 @@ function RecordInstallments() {
                                     return (
                                         <tr className='text-center'>
                                             <td className="border border-slate-600">{installment.id}</td>
-                                            <td className="border border-slate-600">{installment.premiumAmount}</td>
+                                            <td className="border border-slate-600">{installment.premiumAmount.toFixed(2)}</td>
                                             <td className="border border-slate-600">{installment.actualPaymentDate && d.getUTCFullYear() + "-" + (d.getUTCMonth() + 1) + "-" + d.getUTCDate()}</td>
                                             <td className="border border-slate-600">{installment.actualPaymentDateHijri && installment.actualPaymentDateHijri.year + "-" + installment.actualPaymentDateHijri.month.number + "-" + installment.actualPaymentDateHijri.day}</td>
                                             <td className="border border-slate-600">{d2.getUTCFullYear() + "-" + (d2.getUTCMonth() + 1) + "-" + d2.getUTCDate()}</td>

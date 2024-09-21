@@ -6,3 +6,16 @@ export { default as Result } from "./result";
 export { default as Alert } from "./alert/alert";
 export { default as Loading } from "./loading/loading";
 export { default as Admin } from "./admin/admin";
+export { default as User } from "./admin/user";
+export { default as LandingPage } from "./landingPage";
+export { default as Branches } from "./branches";
+export { default as PreviousContest } from "./previousContest";
+export { default as UserResult } from "./userResult";
+
+export { default as ManageContest } from "./manageContest/manageContest";
+export { default as DisplayContest } from "./manageContest/displayContest";
+export { default as AddContest } from "./manageContest/addContest";
+export { default as ControllerContest } from "./manageContest/controllerContest";
+export { default as CompetitionBranches } from "./manageContest/competitionBranches";
+export { default as AddQuestion } from "./manageContest/addQuestion";
+export { default as ResultBranche } from "./manageContest/resultBranche";

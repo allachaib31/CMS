@@ -131,7 +131,10 @@ import {
     SELLSTOCK_ROUTE,
     GETSTOCKCONTRIBUTIONRECORD,
     GETREGISTERSHAREHOLDERSSHARES_ROUTE,
-    GETACTIVESTOCK_ROUTE
+    GETACTIVESTOCK_ROUTE,
+    ADDAGREEMENTSFAMILY_ROUTE,
+    GETAGREEMENTSFAMILY_ROUTE,
+    UPDATEAGREEMENTSACTIVEFAMILY_ROUTE
 } from "./apiRoutes";
 
 
@@ -542,6 +545,20 @@ export const getAgreementsFetch = async () => {
 
 export const updateAgreementsActiveFetch = async (inputs) => {
     const data = await axios.patch(UPDATEAGREEMENTSACTIVE_ROUTE, inputs);
+    return data;
+}
+export const addAgreementsFamilyFetch = async (inputs) => {
+    const data = await axios.post (ADDAGREEMENTSFAMILY_ROUTE,inputs);
+    return data;
+}
+
+export const getAgreementsFamilyFetch = async () => {
+    const data = await axios.get (GETAGREEMENTSFAMILY_ROUTE);
+    return data;
+}
+
+export const updateAgreementsActiveFamilyFetch = async (inputs) => {
+    const data = await axios.patch(UPDATEAGREEMENTSACTIVEFAMILY_ROUTE, inputs);
     return data;
 }
 //Manage advertising

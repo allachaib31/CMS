@@ -4,6 +4,7 @@ const JWTKEY = process.env.JWTKEY;
 
 module.exports = async (req, res, next) => {
     const token = req.cookies.tokenClient;
+    console.log("hi")
     if (!token) {
         return res.sendStatus(401);
     }

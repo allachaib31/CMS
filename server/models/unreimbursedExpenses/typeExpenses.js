@@ -19,7 +19,7 @@ const typeExpensesSchema = new mongoose.Schema({
 });
 typeExpensesSchema.pre('save', async function(next) {
     if (this.isNew) { // Check if the document is new
-        this.id = await generateNextId("typeUnreimbursedExpenses", "TUR");
+        this.id = await generateNextId("typeUnreimbursedExpenses", "R");
     }
     next();
 });

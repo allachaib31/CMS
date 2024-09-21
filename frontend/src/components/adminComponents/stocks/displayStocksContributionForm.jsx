@@ -16,8 +16,7 @@ function DisplayStocksContributionForm() {
         year: date[2],
     });
     const [additionalStock, setAdditionalStock] = useState({
-        buyAdditionalStock: 0,
-        additionalStockCost: 0,
+        addFreeStock: 0,
         idStock: ""
     })
     const [currentPrice, setCurrentPrice] = useState({
@@ -61,7 +60,7 @@ function DisplayStocksContributionForm() {
                 text: res.data.msg
             });
             setStock(res.data.stocks);
-            setUserStock(res.data.userStock)
+            //setUserStock(res.data.userStock)
         }).catch((err) => {
             if (err.response && err.response.status === 401) {
                 navigate("/auth");
@@ -213,7 +212,7 @@ function DisplayStocksContributionForm() {
                 </div> : <div className="overflow-x-auto mt-[1rem]">
                     {
                         stock && <>
-                            <table className="text-[1rem] table border-separate border-spacing-2 border w-[1400px] mx-auto">
+                            <table className="text-[1rem] table border-separate border-spacing-2 border w-[1500px] mx-auto">
                                 <tr className='text-center'>
                                     <th className="border text-center border-slate-600" colSpan={6}>بيانات المساهمة</th>
                                 </tr>
@@ -279,13 +278,13 @@ function DisplayStocksContributionForm() {
                                 </tbody>
                             </table>
                             <div className='container mx-auto my-[1rem] flex gap-[0.5rem] pr-[2rem]'>
-                                {/*<button className='btn btn-primary' onClick={() => document.getElementById('my_modal_1').showModal()}>شراء اسهم اضافية</button>*/}
+                                <button className='btn btn-primary' onClick={() => document.getElementById('my_modal_1').showModal()}>اضافة اسهم مجانية</button>
                                 <button className='btn btn-success' onClick={() => {
                                     document.getElementById('sell').showModal()
                                 }}>{submit ? <span className="loading loading-ring loading-lg"></span> : "بيع"}</button>
                             </div>
-                            <table className="text-[1rem] table border-separate border-spacing-2 border w-[1400px] mx-auto">
-                                <tr>
+                            <table className="text-[1rem] table border-separate border-spacing-2 border w-[1500px] mx-auto">
+                            {/*    <tr>
                                     <th className="border text-center border-slate-600" rowSpan={2}>
                                         شراء أسهم إضافية
                                     </th>
@@ -320,6 +319,20 @@ function DisplayStocksContributionForm() {
                                             document.getElementById('currentPrice').showModal()
                                         }}>{stock.currentValueOfStock.toFixed(2)}</td>
                                     </tr>
+                                </tbody>*/}
+                                <tr>
+                                    <th colSpan={4} className="border text-center border-slate-600" rowSpan={2}>
+                                        إجمالي عدد الأسهم
+                                    </th>
+                                    <th colSpan={4} className="border text-center border-slate-600" rowSpan={2}>
+                                        القيمة الحالية للسهم
+                                    </th>
+                                </tr>
+                                <tbody>
+                                <td colSpan={4} className="border text-center border-slate-600">{stock.totalNumberOfStock.toFixed(2)}</td>
+                                        <td colSpan={4} className="border text-center border-slate-600" onClick={() => {
+                                            document.getElementById('currentPrice').showModal()
+                                        }}>{stock.currentValueOfStock.toFixed(2)}</td>
                                 </tbody>
                                 <tr>
                                     <th className="border text-center border-slate-600" rowSpan={2}>
@@ -379,7 +392,7 @@ function DisplayStocksContributionForm() {
                                 <tbody>
                                     <tr>
                                         <td className="border text-center border-slate-600" colSpan={3}>{stock.memberId.name}</td>
-                                        <td className="border text-center border-slate-600" colSpan={3}>{stock.memberPercentage}</td>
+                                        <td className="border text-center border-slate-600" colSpan={3}>{stock.memberPercentage.toFixed(2)}</td>
                                         <td className="border text-center border-slate-600" colSpan={2}>{stock.amountPercentage.toFixed(2)}</td>
                                     </tr>
                                 </tbody>
@@ -399,7 +412,7 @@ function DisplayStocksContributionForm() {
                                         <td className="border text-center border-slate-600" >{stock.previousFundBalance.toFixed(2)}</td>
                                         <td className="border text-center border-slate-600" >{stock.contributionAmount.toFixed(2)}</td>
                                         <td className="border text-center border-slate-600" >{stock.contributionRate.toFixed(2)}</td>
-                                        <td className="border text-center border-slate-600" >{stock.balanceAfterSale && ((stock.balanceAfterSale - stock.previousFundBalance) * 100) / stock.contributionAmount}</td>
+                                        <td className="border text-center border-slate-600" >{stock.balanceAfterSale && (((stock.balanceAfterSale - stock.previousFundBalance) * 100) / stock.contributionAmount).toFixed(2)}</td>
                                         <td className="border text-center border-slate-600" colSpan={2}>{stock.balanceAfterSale && (stock.balanceAfterSale - stock.previousFundBalance).toFixed(2)}</td>
                                         <td className="border text-center border-slate-600" colSpan={2}>{stock.balanceAfterSale.toFixed(2)}</td>
 
@@ -429,8 +442,8 @@ function DisplayStocksContributionForm() {
                                                     <td className="border text-center border-slate-600">{user.contributionAmount.toFixed(2)}</td>
                                                     <td className="border text-center border-slate-600">{user.rate.toFixed(2)}%</td>
                                                     <td className="border text-center border-slate-600">{user.amount.toFixed(2)}</td>
-                                                    <td className="border text-center border-slate-600">{user.amountProfitPercentage.toFixed(2)}%</td>
-                                                    <td className="border text-center border-slate-600">{user.balanceAfterSale.toFixed(2)}</td>
+                                                    <td className="border text-center border-slate-600">{user.amountProfitPercentage != 0 ? stock.amountPercentage.toFixed(2) : 0}</td>
+                                                    <td className="border text-center border-slate-600">{user.amountProfitPercentage != 0 ? (user.balanceAfterSale + stock.amountPercentage).toFixed(2) : user.balanceAfterSale.toFixed(2)}</td>
                                                 </tr>
                                             )
                                         })
@@ -496,22 +509,12 @@ function DisplayStocksContributionForm() {
                                 setAdditionalStock((prev) => {
                                     return {
                                         ...prev,
-                                        buyAdditionalStock: Number(event.target.value)
+                                        addFreeStock: Number(event.target.value)
                                     }
                                 })
-                            }} required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder={`عدد الاسهم الاضافية`} />
+                            }} required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder={`عدد الاسهم المجانية`} />
                         </div>
-                        <div className="relative w-full">
-                            <FontAwesomeIcon icon={faMoneyBill} className="absolute top-[1rem] right-[1rem]" />
-                            <input type="number" onChange={(event) => {
-                                setAdditionalStock((prev) => {
-                                    return {
-                                        ...prev,
-                                        additionalStockCost: Number(event.target.value)
-                                    }
-                                })
-                            }} required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder={`تكلفة الاسهم الاضافية`} />
-                        </div>
+
                     </form>
                     <div className="modal-action">
                         <form method="dialog">

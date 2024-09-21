@@ -43,8 +43,8 @@ function LoansHistory() {
                     <tbody>
                         <tr className='text-center text-[0.8rem]'>
                             <td className='border border-slate-600' colSpan={2}>{totalLoans}</td>
-                            <td className='border border-slate-600' colSpan={2}>{totalAmountsPaid}</td>
-                            <td className='border border-slate-600' colSpan={2}>{totalLoans - totalAmountsPaid}</td>
+                            <td className='border border-slate-600' colSpan={2}>{totalAmountsPaid.toFixed(2)}</td>
+                            <td className='border border-slate-600' colSpan={2}>{(totalLoans - totalAmountsPaid).toFixed(2)}</td>
                             <td className='border border-slate-600' colSpan={1}>{loansInfo.length}</td>
                         </tr>
                     </tbody>

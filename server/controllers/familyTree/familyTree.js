@@ -16,7 +16,7 @@ exports.createNewFamilyTree = async (req, res) => {
             ) == -1
         ) {
             return res.status(403).send({
-                msg: "التعامل مع صفحة شجرة العائلة",
+                msg: "لا يمكنك التعامل مع صفحة شجرة العائلة",
             });
         }
         const hijriDate = getHijriDate();
@@ -44,6 +44,15 @@ exports.addToFamilyTree = async (req, res) => {
     const { file } = req;
     const { idTree, nameTree, title, titleBgColor, titleTextColor, subtitles, sex, badges } = req.body;
     try {
+        if (
+            req.user.admin.userPermission.indexOf(
+                "التعامل مع صفحة شجرة العائلة"
+            ) == -1
+        ) {
+            return res.status(403).send({
+                msg: "لا يمكنك التعامل مع صفحة شجرة العائلة",
+            });
+        }
         // Create a writable stream to GridFS
         if(file){
             const { originalname, mimetype, buffer } = file;
@@ -109,6 +118,15 @@ exports.addToFamilyTree = async (req, res) => {
 exports.addNewRelation = async (req, res) => {
     const { idTree, relationType, prettyType, toId, fromId, isInnerFamily } = req.body;
     try {
+        if (
+            req.user.admin.userPermission.indexOf(
+                "التعامل مع صفحة شجرة العائلة"
+            ) == -1
+        ) {
+            return res.status(403).send({
+                msg: "لا يمكنك التعامل مع صفحة شجرة العائلة",
+            });
+        }
         const familyTree = await familyTreeModel.findById(idTree);
         if (!familyTree) {
             return res.status(404).send({
@@ -222,6 +240,15 @@ exports.deleteFamilyTree = async (req, res) => {
     }
 
     try {
+        if (
+            req.user.admin.userPermission.indexOf(
+                "التعامل مع صفحة شجرة العائلة"
+            ) == -1
+        ) {
+            return res.status(403).send({
+                msg: "لا يمكنك التعامل مع صفحة شجرة العائلة",
+            });
+        }
         // Attempt to find and delete the document
         const familyTree = await familyTreeModel.findByIdAndDelete(id);
 

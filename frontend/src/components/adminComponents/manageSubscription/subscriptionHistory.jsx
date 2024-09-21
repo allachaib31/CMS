@@ -117,7 +117,7 @@ function SubscriptionHistory() {
       <div className="mt-[1rem] flex md:flex-row flex-col items-center container mx-auto justify-center gap-[0.2rem] md:gap-[1rem]">
         <div className='flex md:flex-col w-full  md:w-auto items-center justify-center gap-[1rem]'>
           <h1 className="text-[0.9rem] w-[70%] sm:w-[80%] md:w-auto font-bold bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]">رصيد الصندوق منذ إنشائه </h1>
-          <h1 className="text-[0.9rem] w-[30%] sm:w-[20%] md:w-auto text-center font-bold bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]"> {moneyBox && moneyBox.cumulativeAmount}</h1>
+          <h1 className="text-[0.9rem] w-[30%] sm:w-[20%] md:w-auto text-center font-bold bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]"> {moneyBox && moneyBox.cumulativeAmount.toFixed(2)}</h1>
         </div>
         <div className='flex md:flex-col w-full  md:w-auto items-center justify-center gap-[1rem]'>
           <h1 className="text-[0.9rem] w-[70%] sm:w-[80%] md:w-auto font-bold bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]">المصروفات </h1>
@@ -139,7 +139,7 @@ function SubscriptionHistory() {
             <tr>
               <th className='border border-slate-600'>اسم العضو</th>
               <th className='border border-slate-600'>رصيد العضو <br/>منذ بداية اشتراكه</th>
-              <th className='border border-slate-600'> المصروف من <br/>رصيده العضو</th>
+              <th className='border border-slate-600'> المصروف من <br/>رصيد العضو</th>
               <th className='border border-slate-600'>الرصيد الحالي <br/>للعضو</th>
               <th className='border border-slate-600'>نسبة العضو <br/>من رصيد الصندوق</th>
               <th className='border border-slate-600'>ملاحظات</th>

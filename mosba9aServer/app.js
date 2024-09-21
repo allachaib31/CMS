@@ -49,8 +49,14 @@ app
     .use(escape);
 
 const auth = require("./routes/auth/auth");
+const authClient = require("./routes/auth/authClient");
+const contest = require("./routes/contest/contest");
+const competition = require("./routes/competition/competition");
 app
-    .use(auth);
+    .use(auth)
+    .use(authClient)
+    .use(contest)
+    .use(competition);
 
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'build', 'index.html'));

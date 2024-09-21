@@ -91,7 +91,7 @@ function HomeClient() {
             screen.setAttribute("data-theme", theme);
         } catch (error) { }
     }, [theme]);
-    useEffect(() => {
+    /*useEffect(() => {
         validationClientFetch()
             .then((res) => {
                 setUser(res.user);
@@ -107,7 +107,7 @@ function HomeClient() {
         }).catch((err) => {
             navigate("/authClient");
         });
-    }, [])
+    }, [])*/
     return (
         <div>
             {loading ? (
@@ -233,7 +233,7 @@ function HomeClient() {
                                     listMenu.classList.toggle("hidden");
                                 }}
                                 src={user && user.profileImage ? "/api/v1.0/users/getProfileImage/" + user.profileImage : profileImage}
-                                className="cursor-pointer w-[64.58px] h-[64.58px] rounded-full"
+                                className="cursor-pointer w-[165px] xs:w-[115px] h-[70px] sm:w-[97px] sm:h-[70px] lg:w-[75.58px] lg:h-[75.58px] rounded-full"
                                 alt=""
                             />
                             <div

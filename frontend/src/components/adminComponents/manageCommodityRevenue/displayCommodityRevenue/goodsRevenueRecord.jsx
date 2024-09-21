@@ -39,7 +39,7 @@ function GoodsRevenueRecord() {
                 </Link>
             </div>
             <h1 className="text-center text-[1.3rem] sm:text-[1.5rem] font-bold py-[1rem]">
-                سجل إيرادات السلع
+                سجل السلع
             </h1>
             {
                 !loading ? "" : <div className="mt-[1rem] flex sm:flex-row flex-col gap-[1rem] justify-center">
@@ -77,7 +77,7 @@ function GoodsRevenueRecord() {
                                 مبلغ <br/>البيع
                             </th>
                             <th className="border text-center border-slate-600" rowSpan={2}>
-                                مبلغ <br/>
+                                مبلغ <br/> الربح
                             </th>
                             <th className="border text-center border-slate-600" rowSpan={2}>
                                 عدد <br/>الاقساط
@@ -92,7 +92,7 @@ function GoodsRevenueRecord() {
                                 ملاحظات
                             </th>
                             <th className="border text-center border-slate-600" rowSpan={2}>
-                                تفاصيل اكثر
+                                تفاصيل <br/>اكثر
                             </th>
                         </tr>
                         <tr>

@@ -1,5 +1,5 @@
 const express = require("express");
-const authMiddleware = require("../../../middleware/client/auth");
+const authMiddleware = require("../../../middleware/admin/auth");
 const { getTiming, getInformation, enterToContest, getBrancheForUser,getQuestion, saveResponse, getUserResult, getContestResult } = require("../../../controllers/client/competition/competition");
 const Router = express.Router();
 

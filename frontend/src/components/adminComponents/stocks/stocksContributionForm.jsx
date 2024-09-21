@@ -69,7 +69,7 @@ function StocksContributionForm() {
                 </Link>
             </div>
             <h1 className="text-center text-[1.5rem] font-bold py-[1rem]">
-                نموذج المساهمة في شراء الأسهم
+            طلب مساهمة
             </h1>
             <form action="" className="py-[2rem] flex flex-col gap-[1rem]">
                 {showAlert.display ? <Alert msg={showAlert} /> : ""}
@@ -78,7 +78,7 @@ function StocksContributionForm() {
                     <div className="flex sm:flex-row flex-col gap-[1rem]">
                         <div className="relative sm:w-1/2">
                             <FontAwesomeIcon icon={faArrowTrendUp} className="absolute top-[1rem] right-[1rem]" />
-                            <input type="text" required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder={`سم الجهة المساهم فيها`} pattern="^.{3,1024}$" onChange={(event) => {
+                            <input type="text" required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder={`اسم الجهة المساهم فيها`} pattern="^.{3,1024}$" onChange={(event) => {
                                 setInputs((prevInput) => {
                                     return {
                                         ...prevInput,
@@ -109,8 +109,8 @@ function StocksContributionForm() {
                                         numberStocks: event.target.value,
                                         numberOfPreviousStockWithFreeStock: Number(event.target.value) + Number(prevInput.freeStocks),
                                         totalCostStocks: event.target.value * prevInput.costStocks,
-                                        previousStockCostWithFreeShare: prevInput.totalCostStocks / (Number(event.target.value) + Number(prevInput.freeStocks)),
-                                        previousCostOfStockWithFreeStock: prevInput.numberOfPreviousStockWithFreeStock * (prevInput.totalCostStocks / (Number(event.target.value) + Number(prevInput.freeStocks)))
+                                        //previousStockCostWithFreeShare: prevInput.totalCostStocks / (Number(event.target.value) + Number(prevInput.freeStocks)),
+                                        //previousCostOfStockWithFreeStock: prevInput.numberOfPreviousStockWithFreeStock * (prevInput.totalCostStocks / (Number(event.target.value) + Number(prevInput.freeStocks)))
                                     }
                                 })
                             }} />
@@ -123,8 +123,8 @@ function StocksContributionForm() {
                                         ...prevInput,
                                         costStocks: event.target.value,
                                         totalCostStocks: event.target.value * prevInput.numberStocks,
-                                        previousStockCostWithFreeShare: (event.target.value * prevInput.numberStocks) / (Number(prevInput.numberStocks) + Number(prevInput.freeStocks)),
-                                        previousCostOfStockWithFreeStock: prevInput.numberOfPreviousStockWithFreeStock * ((event.target.value * prevInput.numberStocks) / (Number(prevInput.numberStocks) + Number(prevInput.freeStocks))),
+                                        previousStockCostWithFreeShare: event.target.value,//(event.target.value * prevInput.numberStocks) / (Number(prevInput.numberStocks) + Number(prevInput.freeStocks)),
+                                        previousCostOfStockWithFreeStock: event.target.value * prevInput.numberStocks,//prevInput.numberOfPreviousStockWithFreeStock * ((event.target.value * prevInput.numberStocks) / (Number(prevInput.numberStocks) + Number(prevInput.freeStocks))),
                                     }
                                 })
                             }} />
@@ -198,7 +198,7 @@ function StocksContributionForm() {
                             }
                         </div>
                     </div>
-                    <div className="flex sm:flex-row flex-col gap-[1rem]">
+                   {/* <div className="flex sm:flex-row flex-col gap-[1rem]">
                         <div className="relative sm:w-1/2">
                             <FontAwesomeIcon icon={faArrowUpWideShort} className="absolute top-[1rem] right-[1rem]" />
                             <input type="number" required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder={`الأسهم المجانية`} onChange={(event) => {
@@ -224,31 +224,33 @@ function StocksContributionForm() {
                                 })
                             }} />
                         </div>
-                    </div>
-                    <div className="flex sm:flex-row flex-col gap-[1rem]">
-                        <div className="relative sm:w-1/2">
-                            <FontAwesomeIcon icon={faMoneyBill} className="absolute top-[1rem] right-[1rem]" />
-                            <input type="number" required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" disabled value={inputs.previousStockCostWithFreeShare} title={`تكلفة السهم سابقا مع السهم المجاني`} onChange={(event) => {
-                                setInputs((prevInput) => {
-                                    return {
-                                        ...prevInput,
-                                        previousStockCostWithFreeShare: event.target.value
-                                    }
-                                })
-                            }} />
-                        </div>
-                        <div className="relative sm:w-1/2">
-                            <FontAwesomeIcon icon={faMoneyBill} className="absolute top-[1rem] right-[1rem]" />
-                            <input type="number" required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" disabled value={inputs.previousCostOfStockWithFreeStock} title={`تكلفة الاسهم السابقة مع الاسهم المجانية`} onChange={(event) => {
-                                setInputs((prevInput) => {
-                                    return {
-                                        ...prevInput,
-                                        previousCostOfStockWithFreeStock: event.target.value
-                                    }
-                                })
-                            }} />
-                        </div>
-                    </div>
+                    </div>*/}
+                    {
+                                 /*           <div className="flex sm:flex-row flex-col gap-[1rem]">
+                                            <div className="relative sm:w-1/2">
+                                                <FontAwesomeIcon icon={faMoneyBill} className="absolute top-[1rem] right-[1rem]" />
+                                                <input type="number" required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" disabled value={inputs.previousStockCostWithFreeShare} title={`تكلفة السهم سابقا مع السهم المجاني`} onChange={(event) => {
+                                                    setInputs((prevInput) => {
+                                                        return {
+                                                            ...prevInput,
+                                                            previousStockCostWithFreeShare: event.target.value
+                                                        }
+                                                    })
+                                                }} />
+                                            </div>
+                                            <div className="relative sm:w-1/2">
+                                                <FontAwesomeIcon icon={faMoneyBill} className="absolute top-[1rem] right-[1rem]" />
+                                                <input type="number" required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" disabled value={inputs.previousCostOfStockWithFreeStock} title={`تكلفة الاسهم السابقة مع الاسهم المجانية`} onChange={(event) => {
+                                                    setInputs((prevInput) => {
+                                                        return {
+                                                            ...prevInput,
+                                                            previousCostOfStockWithFreeStock: event.target.value
+                                                        }
+                                                    })
+                                                }} />
+                                            </div>
+                                        </div>*/
+                    }
                 </div>
                 <button onClick={(event) => {
                     event.preventDefault();

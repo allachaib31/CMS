@@ -67,7 +67,7 @@ function DisplayAdvertising() {
                 return (
                   <tr className="text-center" key={ad.id}>
                     <td className="border border-slate-600">{ad.id}</td>
-                    <td className="border border-slate-600"><button onClick={() => {
+                    <td className="border border-slate-600"><p onClick={() => {
                       const parser = new DOMParser();
                       const dom = parser.parseFromString(
                         ad.text,
@@ -78,7 +78,7 @@ function DisplayAdvertising() {
                         image: ad.imageId
                       })
                       document.getElementById("my_modal_1").showModal()
-                    }} className='btn btn-info'>تفاصيل</button></td>
+                    }} className='btn btn-info'>{ad.title}</p></td>
                     <td className="border border-slate-600"><button className='btn btn-error' onClick={() => {
                       handleDelete(ad._id, index)
                     }}>حدف</button></td>

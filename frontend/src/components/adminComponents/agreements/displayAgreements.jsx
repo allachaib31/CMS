@@ -65,8 +65,9 @@ function DisplayAgreements() {
           <thead className="text-[1rem] text-center">
             <tr>
               <th className="border border-slate-600">رقم</th>
+              <th className="border border-slate-600">العنوان</th>
               <th className="border border-slate-600">الحالة</th>
-              <th className="border border-slate-600">حدف</th>
+              <th className="border border-slate-600">تفاصيل</th>
             </tr>
           </thead>
           <tbody>
@@ -74,6 +75,7 @@ function DisplayAgreements() {
               agreements.map((agreement) => (
                 <tr className="text-center" key={agreement.id}>
                   <td className="border border-slate-600">{agreement.id}</td>
+                  <td className="border border-slate-600">{agreement.title}</td>
                   <td className="border border-slate-600">
                     {agreement.active ? "مفعل" : "غير مفعل"}
                   </td>

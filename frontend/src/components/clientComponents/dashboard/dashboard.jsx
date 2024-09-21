@@ -30,7 +30,7 @@ function Dashboard() {
             })
         }).catch((err) => {
             if (err.response && err.response.status === 401) {
-                navigate("/authClient");
+                navigate("/auth");
             }
         })
     }, [])

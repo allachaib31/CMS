@@ -90,7 +90,7 @@ function RecordRecoveredExpenses() {
                     <h1 className="text-[0.8rem] sm:text-[1.1rem] font-bold md:w-auto w-[30%] bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem] text-center">{totalAmountMonth.toFixed(2)}</h1>
                 </div>
                 <div className="flex md:flex-col items-center justify-center gap-[1rem]">
-                    <h1 className="text-[0.8rem] sm:text-[1.1rem] md:w-auto w-[70%] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">جمالي المصروفات المستردة</h1>
+                    <h1 className="text-[0.8rem] sm:text-[1.1rem] md:w-auto w-[70%] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">إجمالي المصروفات المستردة</h1>
                     <h1 className="text-[0.8rem] sm:text-[1.1rem] font-bold md:w-auto w-[30%] bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem] text-center">{totalAmount.toFixed(2)}</h1>
                 </div>
             </div>

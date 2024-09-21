@@ -45,6 +45,8 @@ conn.once('open', () => {
     });
 
     app
+        .use(express.json({ limit: '50mb' }))
+        .use(express.urlencoded({ limit: '50mb', extended: true }))
         .use(express.static(path.join(__dirname, 'build')))
         .use(express.json())
         .use(helmet())
@@ -75,6 +77,7 @@ conn.once('open', () => {
     const stocks = require("./routes/manageStock/stock");
     const vote = require("./routes/vote/vote");
     const agreements = require("./routes/agreement/agreement");
+    const agreementsFamily = require("./routes/agreementFamily/agreement");
     const familyTree = require("./routes/familyTree/familyTree");
     const clientAuth = require("./routes/client/login/login");
     const userInformation = require("./routes/client/userInformation/information");
@@ -101,6 +104,7 @@ conn.once('open', () => {
         .use(contest)
         .use(vote)
         .use(agreements)
+        .use(agreementsFamily)
         .use(familyTree)
         .use(advertising)
         .use(competition)

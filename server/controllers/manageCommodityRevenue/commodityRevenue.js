@@ -6,28 +6,30 @@ const userModel = require("../../models/user");
 const getHijriDate = require("../../utils/getHijriDate");
 const moneyBoxId = process.env.moneyBoxId;
 exports.addCommodityRevenue = async (req, res) => {
-    const { customerData, sponsorData, commodityData, comments } = req.body;
+    var { customerData, sponsorData, commodityData, comments } = req.body;
     commodityData.profitAmount = (commodityData.saleAmount - commodityData.purchaseAmount)// - ((commodityData.saleAmount - commodityData.purchaseAmount) * (sponsorData.sponsorRatio / 100))
     commodityData.profitRatio = (commodityData.profitAmount / commodityData.purchaseAmount) * 100
     commodityData.premiumAmount = ((commodityData.purchaseAmount + commodityData.profitAmount) - commodityData.amountPaid) / commodityData.numberOfInstallments;
     try {
         if (
             req.user.admin.userPermission.indexOf(
-                "إضافة إيرادات (المساهمات وشراء السلع)"
+                "إضافة إيرادات (شراء السلع)"
             ) == -1
         ) {
             return res.status(403).send({
-                msg: "ليس لديك إذن إضافة إيرادات (المساهمات وشراء السلع)",
+                msg: "ليس لديك إذن إضافة إيرادات (شراء السلع)",
             });
         }
-        const sponsorUser = await userModel.findOne({
-            NationalIdentificationNumber: sponsorData.nationalIdentificationNumber
-        })
+        const sponsorUser = await userModel.findById(sponsorData.idSponsor)
         if (!sponsorUser) {
             return res.status(404).send({
                 msg: "هذا الكفيل غير موجود"
             })
         }
+        delete sponsorData.idSponsor;
+        sponsorData.name = sponsorUser.name;
+        sponsorData.nationalIdentificationNumber = sponsorUser.NationalIdentificationNumber;
+        sponsorData.phoneNumber = sponsorUser.phoneNumber;
         const amountMoneyBox = await moneyBoxModel.findById(moneyBoxId);
         if (commodityData.purchaseAmount > amountMoneyBox.amount) {
             return res.status(403).send({
@@ -500,7 +502,7 @@ exports.getCommodityRevenue = async (req, res) => {
         }
         return res.status(200).send({
             commodityRevenue,
-            print: req.user.admin.userPermission.indexOf("طباعة طلب شراء سلعة (بعد التعبئة)") > -1 ? true : false,
+            print: req.user.admin.userPermission.indexOf("طباعة عقد شراء سلعة و أقساطها (بعد التعبئة)") > -1 ? true : false,
         })
     } catch (error) {
         return res.status(500).send({
@@ -563,9 +565,7 @@ exports.getFormContributionPurchaseCommodity = async (req, res) => {
 
 exports.getAllCommodityRevenue = async (req, res) => {
     try {
-        const commodityRevenue = await commodityRevenueModel.find().sort({
-            _id: -1
-        });
+        const commodityRevenue = await commodityRevenueModel.find();
         let saleAmount = 0;
         let profitAmount = 0;
         commodityRevenue.forEach((value) => {

@@ -5,9 +5,18 @@ const { adsModel } = require("../../models/advertising/ads")
 
 exports.addAdvertising = async (req, res) => {
     const { file } = req;
-    const { text, endDate } = req.body;
+    const { title, text, endDate } = req.body;
 
     try {
+        if (
+            req.user.admin.userPermission.indexOf(
+                "إدارة الإعلانات"
+            ) == -1
+        ) {
+            return res.status(403).send({
+                msg: "لا تستطيع ادارة الاعلانات",
+            });
+        }
         // Create a writable stream to GridFS
         if(file){
             const { originalname, mimetype, buffer } = file;
@@ -40,12 +49,12 @@ exports.addAdvertising = async (req, res) => {
                 return res.status(404).send("حدث خطأ أثناء حفظ البيانات التعريفية للملف");
             }
             const advertising = new advertisingModel({
-                text,endDate,imageId: newFile._id
+                title,text,endDate,imageId: newFile._id
             })
             await advertising.save();
         }else{
             const advertising = new advertisingModel({
-                text,endDate
+                title,text,endDate
             })
             await advertising.save();
         }

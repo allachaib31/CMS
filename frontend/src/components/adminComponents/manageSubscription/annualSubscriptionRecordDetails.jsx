@@ -52,7 +52,7 @@ function AnnualSubscriptionRecordDetails() {
                 </Link>
             </div>
             <h1 className="text-center text-[1rem] sm:text-[1.2rem] lg:text-[1.5rem] font-bold py-[0.5rem]">
-                سجل الاشتراكات السنوية الخاصة بي {query.get('smallId')} : للعضو {query.get("name")}
+                سجل الاشتراكات السنوية  للعضو : {query.get("name")}
             </h1>
             <div className='container mx-auto flex flex-wrap '>
                 <select onChange={(event) => {

@@ -69,12 +69,12 @@ function PrintRecordInstallments() {
             <tbody>
                 <tr className='text-center'>
                     <td className="border border-slate-600">{loanInfo.name}</td>
-                    <td className="border border-slate-600">{loanInfo.amount}</td>
+                    <td className="border border-slate-600">{loanInfo.amount.toFixed(2)}</td>
                     <td className="border border-slate-600">{loanInfo.numberOfInstallments}</td>
                     <td className="border border-slate-600">{installmentsPaid}</td>
                     <td className="border border-slate-600">{loanInfo.numberOfInstallments - installmentsPaid}</td>
-                    <td className="border border-slate-600">{loanInfo.balance}</td>
-                    <td className="border border-slate-600" colSpan={2}>{loanInfo.amount - loanInfo.balance}</td>
+                    <td className="border border-slate-600">{loanInfo.balance.toFixed(2)}</td>
+                    <td className="border border-slate-600" colSpan={2}>{(loanInfo.amount - loanInfo.balance).toFixed(2)}</td>
                 </tr>
             </tbody>
             <tr className='text-[0.8rem] text-center'>

@@ -59,7 +59,7 @@ function AddAdmin() {
         </Link>
       </div>
       <h1 className="text-center text-[1.5rem] font-bold py-[1rem]">
-      إضافة مسئول  جديد
+      إضافة مسؤول  جديد
       </h1>
       <form action="" className="py-[2rem] flex flex-col gap-[1rem]">
         {showAlert.display ? <Alert msg={showAlert} /> : ""}

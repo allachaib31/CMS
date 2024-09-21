@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Auth from "./screens/adminsScreen/auth";
 import Home from "./screens/adminsScreen/home";
-import { Welcome, AddAdmin, AddUser, AnnualSubscriptionRecord, AnnualSubscriptionRecordDetails, DisplayAdmin, DisplayCommodityRevenue, DisplaySubscription, DisplayUser, FoundationSubscription, ManageAdmin, ManageCommodityRevenue, ManageSubscription, ManageUser, ManagingLatePayments, ModifySubscriptionAmount, MonthlySubscription, OrderToPurchaseGoods, PaymentOfSubscriptions, RegisterMemberFinancialData, SubscriptionHistory, UpdateAdmin, UpdateUser, CommodityPurchaseOrderForm, PaymentOfInstallments, InstallmentSchedule, GoodsRevenueRecord, FormContributionPurchaseCommodity, RecordContributionPurchaseCommodity, RecordAnnual, RecordAnnualDetails, ManageContributionRevenue, DisplayContributionRevenue, RecordContributions, ConsolidatedRecordRevenues, ManageStock, ContributionRormForPurchasingShares, CommodityPurchase, FormContribution, InvestmentBox, DisplayContributionRecord, ContributionForm, DisplayContributionForm, FinancialCompany, DisplayContributionfinancialCompanyRecord, FinancialCompanyForm, DisplayfinancialCompanyForm, Loans, LoansData, RecordInstallments, LoansHistory, UnreimbursedExpenses, RecordUnrecoveredExpenses, DisplayRecordUnrecoveredExpenses, AddExpenseType, PaymentExpenses, ExpenseRequest, ReimbusedExpenses, RecordRecoveredExpenses, DisplayRecordRecoveredExpenses, ReimbursedExpenseRequest, AddReimbursedExprensesType, Stocks, RegisterOfStockContributions, StocksContributionForm, DisplayStocksContributionForm, LoansOrder, PayMonthlySubscriptions, ManageContest, DisplayContest, AddContest, ControllerContest, CompetitionBranches, AddQuestion, ManageVote, DisplayVote, AddVote, VoteDetails, ManageAdvertising, DisplayAdvertising, AddAd, Agreements, DisplayAgreements, AddAgreements, FamilyTree, DisplayFamilyTree, AddFamilyTree, Dashboard, Contest, AgreementsClient, Election, ElectionDetails, AdvertisingClient, UnrecoverExpenses, RecoverExpenses, PrintRecordInstallments, UserResultContest, SubscribeClient, ContestResult, GoodsPurchaseContract, BloodMoney, RequestBloodMoney, PaymentBloodMoney, RecordBloodMoney, SlideShow, WithdrawMemberBalance, RegisterShareholdersShares, StockRevenue } from "./components";
+import { Welcome, AddAdmin, AddUser, AnnualSubscriptionRecord, AnnualSubscriptionRecordDetails, DisplayAdmin, DisplayCommodityRevenue, DisplaySubscription, DisplayUser, FoundationSubscription, ManageAdmin, ManageCommodityRevenue, ManageSubscription, ManageUser, ManagingLatePayments, ModifySubscriptionAmount, MonthlySubscription, OrderToPurchaseGoods, PaymentOfSubscriptions, RegisterMemberFinancialData, SubscriptionHistory, UpdateAdmin, UpdateUser, CommodityPurchaseOrderForm, PaymentOfInstallments, InstallmentSchedule, GoodsRevenueRecord, FormContributionPurchaseCommodity, RecordContributionPurchaseCommodity, RecordAnnual, RecordAnnualDetails, ManageContributionRevenue, DisplayContributionRevenue, RecordContributions, ConsolidatedRecordRevenues, ManageStock, ContributionRormForPurchasingShares, CommodityPurchase, FormContribution, InvestmentBox, DisplayContributionRecord, ContributionForm, DisplayContributionForm, FinancialCompany, DisplayContributionfinancialCompanyRecord, FinancialCompanyForm, DisplayfinancialCompanyForm, Loans, LoansData, RecordInstallments, LoansHistory, UnreimbursedExpenses, RecordUnrecoveredExpenses, DisplayRecordUnrecoveredExpenses, AddExpenseType, PaymentExpenses, ExpenseRequest, ReimbusedExpenses, RecordRecoveredExpenses, DisplayRecordRecoveredExpenses, ReimbursedExpenseRequest, AddReimbursedExprensesType, Stocks, RegisterOfStockContributions, StocksContributionForm, DisplayStocksContributionForm, LoansOrder, PayMonthlySubscriptions, ManageContest, DisplayContest, AddContest, ControllerContest, CompetitionBranches, AddQuestion, ManageVote, DisplayVote, AddVote, VoteDetails, ManageAdvertising, DisplayAdvertising, AddAd, Agreements, DisplayAgreements, AddAgreements, FamilyTree, DisplayFamilyTree, AddFamilyTree, Dashboard, Contest, AgreementsClient, Election, ElectionDetails, AdvertisingClient, UnrecoverExpenses, RecoverExpenses, PrintRecordInstallments, UserResultContest, SubscribeClient, ContestResult, GoodsPurchaseContract, BloodMoney, RequestBloodMoney, PaymentBloodMoney, RecordBloodMoney, SlideShow, WithdrawMemberBalance, RegisterShareholdersShares, StockRevenue, ContractsRegister, AgreementsFamily, DisplayAgreementsFamily, AddAgreementsFamily } from "./components";
 import Print from "./screens/adminsScreen/print";
 import AuthClient from "./screens/clientScreen/authClient";
 import HomeClient from "./screens/clientScreen/homeClient";
@@ -15,6 +15,10 @@ function App() {
         <Routes>
           <Route exact path="/" element={<Home />}>
             <Route exact path="/" element={<Welcome />} />
+            <Route exact path="/admin/dashboard" element={<Dashboard />} />
+            <Route path="/admin/advetising" element={<AdvertisingClient />} />
+            <Route path="/admin/election" element={<Election />} />
+            <Route path="/admin/electionDetails" element={<ElectionDetails />} />
             <Route exact path="/user" element={<ManageUser />}>
               <Route exact path="/user" element={<DisplayUser />} />
               <Route path="/user/addUser" element={<AddUser />} />
@@ -46,6 +50,7 @@ function App() {
               <Route path="/commodityRevenue/commodityPurchaseOrderForm" element={<CommodityPurchaseOrderForm />} />
               <Route path="/commodityRevenue/paymentOfInstallments" element={<PaymentOfInstallments />} />
               <Route path="/commodityRevenue/installmentSchedule" element={<InstallmentSchedule />} />
+              <Route path="/commodityRevenue/contractsRegister" element={<ContractsRegister />}/>
             </Route>
             <Route exact path="/contributionRevenue" element={<ManageContributionRevenue />}>
               <Route exact path="/contributionRevenue" element={<DisplayContributionRevenue />} />
@@ -82,12 +87,12 @@ function App() {
               <Route path="/unreimbursedExpenses/paymentExpenses" element={<PaymentExpenses />} />
               <Route path="/unreimbursedExpenses/addExpenseType" element={<AddExpenseType />} />
             </Route>
-            <Route exact path="/reimbusedExpenses" element={<ReimbusedExpenses />}>
+            {/*<Route exact path="/reimbusedExpenses" element={<ReimbusedExpenses />}>
               <Route path="/reimbusedExpenses" element={<RecordRecoveredExpenses />} />
               <Route path="/reimbusedExpenses/displayRecord" element={<DisplayRecordRecoveredExpenses />} />
               <Route path="/reimbusedExpenses/expenseRequest" element={<ReimbursedExpenseRequest />} />
               <Route path="/reimbusedExpenses/addExpenseType" element={<AddReimbursedExprensesType />} />
-            </Route>
+            </Route>*/}
             <Route exact path="/bloodMoney" element={<BloodMoney />}>
               <Route path="/bloodMoney/" element={<RequestBloodMoney />}/>
               <Route path="/bloodMoney/payment" element={<PaymentBloodMoney />}/>
@@ -110,6 +115,10 @@ function App() {
               <Route path="/manageAdvertising/addAd" element={<AddAd />} />
               <Route path="/manageAdvertising/slideShow" element={<SlideShow />}/>
             </Route>
+            <Route exact path="/agreementsFamily/" element={<AgreementsFamily />}>
+              <Route path="/agreementsFamily/" element={<DisplayAgreementsFamily />} />
+              <Route path="/agreementsFamily/add" element={<AddAgreementsFamily />} />
+            </Route>
             <Route exact path="/agreements/" element={<Agreements />}>
               <Route path="/agreements/" element={<DisplayAgreements />} />
               <Route path="/agreements/add" element={<AddAgreements />} />
@@ -120,7 +129,7 @@ function App() {
             </Route>
           </Route>
           <Route exact path="/client" element={<HomeClient />}>
-            <Route exact path="/client" element={<Dashboard />} />
+            {/*<Route exact path="/client" element={<Dashboard />} />*/}
             <Route path="/client/contest" element={<Contest />} />
             <Route path="/client/subscribe" element={<SubscribeClient />}/>
             <Route path="/client/agreements" element={<AgreementsClient />} />

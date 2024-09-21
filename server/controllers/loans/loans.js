@@ -31,9 +31,7 @@ exports.addLoans = async (req, res) => {
         date.setDate(new Date(dateOfReceipt).getDate() + (numberOfInstallments * 30));
         const paymentEndDate = date.toLocaleDateString();
         const paymentEndDateHijri = getHijriDate(date);
-        const user = await userModel.findOne({
-            NationalIdentificationNumber: nationalIdentificationNumber
-        });
+        const user = await userModel.findById(nationalIdentificationNumber);
         if (!user) {
             return res.status(422).send({
                 msg: "لا وجود هذا المستخدم",

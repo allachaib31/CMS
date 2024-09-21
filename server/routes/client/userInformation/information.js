@@ -1,7 +1,7 @@
 const express = require("express");
 const multer = require("multer");
 const { GridFsStorage } = require('multer-gridfs-storage');
-const authMiddleware = require("../../../middleware/client/auth");
+const authMiddleware = require("../../../middleware/admin/auth");
 const { getClientInformation, getAgreements, getElection, setVote, ElectionDetails, getAdvertising, uploadImage,getSubscribeClient, payMonthlySubscribe, getClientAds} = require("../../../controllers/client/userInformation/information");
 const Router = express.Router();
 const  storage = multer.memoryStorage()

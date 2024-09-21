@@ -9,7 +9,7 @@ function ExpenseRequest() {
     const navigate = useNavigate();
     const [submit, setSubmit] = useState(false);
     const [inputs, setInputs] = useState({
-        NationalIdentificationNumber: "",
+        name: "",
         amount: 0,
         typeExpenses: "",
         comments: ""
@@ -59,7 +59,7 @@ function ExpenseRequest() {
                 </Link>
             </div>
             <h1 className="text-center text-[1.5rem] font-bold py-[1rem]">
-                نموذج طلب مصروف
+             طلب مصروف
             </h1>
             <form action="" className="py-[2rem] flex flex-col gap-[1rem]">
                 {showAlert.display ? <Alert msg={showAlert} /> : ""}
@@ -68,9 +68,9 @@ function ExpenseRequest() {
                         <FontAwesomeIcon icon={faIdCard} className="absolute top-[1rem] right-[1rem]" />
                         <input type="text" onChange={(e) => {
                             setInputs((prevInputs) => {
-                                return { ...prevInputs, NationalIdentificationNumber: e.target.value.trim() }
+                                return { ...prevInputs, name: e.target.value.trim() }
                             })
-                        }} required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder="رقم الهوية الوطنية" pattern="[1-9]\d{9}" />
+                        }} required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder="اسم المستفيد"/>
                     </div>
                     <div className="relative sm:w-1/2">
                         <FontAwesomeIcon icon={faMoneyBill} className="absolute top-[1rem] right-[1rem]" />

@@ -276,6 +276,11 @@ exports.updateUser = async (req, res) => {
           msg: "لم تمر سنة على تسجيلك"
         })
       }
+      if(user.subscriptionExpiryDate) {
+        return res.status(403).send({
+          msg: "العضو انتهى اشتراكه"
+        })
+      }
     }
     user.name = name;
     user.NationalIdentificationNumber = NationalIdentificationNumber;

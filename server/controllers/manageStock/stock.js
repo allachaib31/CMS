@@ -114,7 +114,6 @@ exports.addStock = async (req, res) => {
 }
 exports.currentPrice = async (req, res) => {
     const { idStock, price } = req.body;
-    console.log(req.body)
     try {
         if (
             req.user.admin.userPermission.indexOf(
@@ -146,7 +145,7 @@ exports.currentPrice = async (req, res) => {
     }
 }
 exports.addAdditionalStock = async (req, res) => {
-    const { buyAdditionalStock, additionalStockCost, idStock } = req.body;
+    const { addFreeStock, idStock } = req.body;
     try {
         if (
             req.user.admin.userPermission.indexOf(
@@ -157,26 +156,34 @@ exports.addAdditionalStock = async (req, res) => {
                 msg: "ليس لديك إذن إضافة بيانات المساهمات (أسهم، صندوق استثماري، شركة مالية، أخرى)",
             });
         }
-        const amountMoneyBox = await moneyBoxModel.findById(moneyBoxId);
+        /*const amountMoneyBox = await moneyBoxModel.findById(moneyBoxId);
         const totalCost = additionalStockCost * buyAdditionalStock;
         if (totalCost > amountMoneyBox.amount) {
             return res.status(403).send({
                 msg: "لايوجد رصيد كافي في الصندوق",
             });
-        }
+        }*/
         const stocks = await stocksModel.findById(idStock);
         if (!stocks) {
             return res.status(404).send({
                 msg: "لا توجد هدى المساهمة"
             })
         }
-        stocks.buyAdditionalStock += buyAdditionalStock;
-        stocks.additionalStockCost = additionalStockCost;
-        stocks.additionalStocksCost = totalCost;
-        stocks.previousStockCostWithAdditionalStock = (stocks.previousStockCostWithAdditionalStock + additionalStockCost) / (stocks.totalNumberOfStock + buyAdditionalStock);
-        stocks.totalNumberOfStock += buyAdditionalStock;
+        if(stocks.dateSaleMiladi){
+            return res.status(403).send({
+                msg: "لقد تم البيع من قبل"
+            })
+        }
+        stocks.freeStocks += addFreeStock;
+        stocks.numberOfPreviousStockWithFreeStock += addFreeStock
+        stocks.previousStockCostWithFreeShare = stocks.totalCostStocks / (stocks.numberStocks + stocks.freeStocks);
+        stocks.previousCostOfStockWithFreeStock = (stocks.freeStocks + stocks.numberStocks) * (stocks.totalCostStocks / (stocks.numberStocks + stocks.freeStocks))
+        //stocks.additionalStockCost = additionalStockCost;
+        //stocks.additionalStocksCost = totalCost;
+        //stocks.previousStockCostWithAdditionalStock = (stocks.previousStockCostWithAdditionalStock + additionalStockCost) / (stocks.totalNumberOfStock + buyAdditionalStock);
+        stocks.totalNumberOfStock += addFreeStock;
         await stocks.save();
-        const numberOfUser = await userModel.countDocuments({ "status": "active", "disable": false });
+        /*const numberOfUser = await userModel.countDocuments({ "status": "active", "disable": false });
         const activeUsers = await userModel.find({
             status: "active",
             disable: false,
@@ -195,8 +202,8 @@ exports.addAdditionalStock = async (req, res) => {
             user.memberBalance -= amount;
             await user.save();
             await userStock.save();
-        });
-        const moneyBox = await moneyBoxModel.findByIdAndUpdate(moneyBoxId,
+        });*/
+        /*const moneyBox = await moneyBoxModel.findByIdAndUpdate(moneyBoxId,
             {
                 $inc: {
                     amount: (totalCost * (-1)),
@@ -207,16 +214,16 @@ exports.addAdditionalStock = async (req, res) => {
             return res.status(400).send({
                 msg: "حدث خطأ أثناء معالجة طلبك",
             });
-        }
-        const userStock = await userStockModel.find({
+        }*/
+        /*const userStock = await userStockModel.find({
             idStock: idStock
         }).populate("idUser", {
             password: false
-        })
+        })*/
         return res.status(200).send({
             msg: "لقد تمت اضافته بنجاح",
             stocks,
-            userStock
+            //userStock
         });
     } catch (error) {
         console.log(error)
@@ -359,6 +366,7 @@ exports.getStock = async (req, res) => {
         const stock = await stocksModel.findById(id).populate("memberId", {
             password: false
         });
+        console.log(stock)
         const userStock = await userStockModel.find({
             idStock: id
         }).populate("idUser", {
