@@ -159,9 +159,11 @@ function RecordInstallments() {
                                             <td className="border border-slate-600">
                                                 {
                                                     installment.itPaid ? "لقد تم دفع" : <button onClick={() => {
-                                                        handleSubmit({
-                                                            id: installment._id
-                                                        })
+                                                        if (window.confirm("هل انت متاكد من انك تريد القيام به العملية")) {
+                                                            handleSubmit({
+                                                                id: installment._id
+                                                            })
+                                                        }
                                                     }} className='btn btn-success'>دفع</button>
                                                 }</td>
                                         </tr>

@@ -40,7 +40,7 @@ function DisplayCommodityRevenue() {
     })
 
   }, [id]);
-  const handleSubmit = (id,index,amount) => {
+  const handleSubmit = (id, index, amount) => {
     setShowAlert({
       display: false,
     });
@@ -102,31 +102,31 @@ function DisplayCommodityRevenue() {
           <thead className="text-[0.8rem] text-center">
             <tr>
               <th className="border border-slate-600" rowSpan={2}>
-                رقم <br/>الطلب
+                رقم <br />الطلب
               </th>
               <th className="border border-slate-600" rowSpan={2}>
-                اسم <br/>العميل
+                اسم <br />العميل
               </th>
               <th className="border border-slate-600" rowSpan={2}>
-                نوع <br/>السلعة
+                نوع <br />السلعة
               </th>
               <th className="border border-slate-600" rowSpan={2}>
-                رقم <br/>القسط
+                رقم <br />القسط
               </th>
               <th className="border border-slate-600" rowSpan={2}>
-                مبلغ <br/>القسط
+                مبلغ <br />القسط
               </th>
               <th className="text-center border border-slate-600" >
-                تاريخ الاستحقاق <br/>بالميلادي
+                تاريخ الاستحقاق <br />بالميلادي
               </th>
               <th className="text-center border border-slate-600" >
-                تاريخ الاستحقاق <br/>بالهجري
+                تاريخ الاستحقاق <br />بالهجري
               </th>
               <th className="text-center border border-slate-600">
-                تاريخ السداد <br/>بالميلادي
+                تاريخ السداد <br />بالميلادي
               </th>
               <th className="text-center border border-slate-600">
-                تاريخ السداد <br/>بالهجري
+                تاريخ السداد <br />بالهجري
               </th>
               <th className="border border-slate-600" rowSpan={2}>
                 ملاحظات
@@ -200,7 +200,9 @@ function DisplayCommodityRevenue() {
                   </td>
                   <td id={installmentSchedule[index]._id + "pay"} className="border border-slate-600">
                     {installmentSchedule[index].itPaid ? "تم الدفع بنجاح" : <button onClick={() => {
-                      handleSubmit(installmentSchedule[index]._id,index,installmentSchedule[index].premiumAmount)
+                      if (window.confirm("هل انت متاكد من انك تريد القيام به العملية")) {
+                        handleSubmit(installmentSchedule[index]._id, index, installmentSchedule[index].premiumAmount)
+                      }
                     }} className='btn btn-success'>دفع</button>
                     }
                   </td>
@@ -211,7 +213,7 @@ function DisplayCommodityRevenue() {
           </tbody>
         </table>
       </div>
-      <AddNoteInstallmentSchedule inputs={inputs} setInputs={setInputs} installmentSchedule={installmentSchedule} setInstallmentSchedule={setInstallmentSchedule}/>
+      <AddNoteInstallmentSchedule inputs={inputs} setInputs={setInputs} installmentSchedule={installmentSchedule} setInstallmentSchedule={setInstallmentSchedule} />
     </div>
   )
 }

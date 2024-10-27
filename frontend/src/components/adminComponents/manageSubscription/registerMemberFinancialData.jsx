@@ -62,7 +62,7 @@ function RegisterMemberFinancialData() {
                 </Link>
             </div>
             <h1 className="text-center text-[1.1rem] sm:text-[1.5rem] font-bold py-[1rem]">
-                سجل البيانات المالية للعضو
+                سجل البيانات المالية للاعضاء
             </h1>
             <div className="overflow-x-auto mt-[1rem]">
                 <table className="text-[1rem] table border-separate border-spacing-2 border w-[1800px] mx-auto">

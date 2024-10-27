@@ -45,10 +45,10 @@ function RequestBloodMoney() {
     }
     return <div className="sm:p-0 px-[1rem] container mx-auto">
         <h1 className="text-center text-[1.5rem] font-bold py-[1rem]">
-            طلب صرف دية مستردة
+            طلب صرف دية 
         </h1>
         <form action="" className="py-[2rem] flex flex-col gap-[1rem]">
-        {showAlert.display ? <Alert msg={showAlert} /> : ""}
+            {showAlert.display ? <Alert msg={showAlert} /> : ""}
             <div className="flex sm:flex-row flex-col gap-[1rem]">
                 <div className="relative sm:w-1/2">
                     <FontAwesomeIcon icon={faUser} className="absolute top-[1rem] right-[1rem]" />
@@ -70,7 +70,7 @@ function RequestBloodMoney() {
                                 amount: event.target.value
                             }
                         })
-                    }}  required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder="المبلغ المصروف" />
+                    }} required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder="المبلغ المصروف" />
                 </div>
             </div>
             <div className="flex sm:flex-row flex-col gap-[1rem]">
@@ -99,14 +99,19 @@ function RequestBloodMoney() {
                 </div>
             </div>
             <input type="text" onChange={(event) => {
-                    setInputs((prevInputs) => {
-                        return {
-                            ...prevInputs,
-                            comments: event.target.value
-                        }
-                    })
-                }} required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder="اكتب بيان" pattern='^.{3,1024}$' />
-                <button onClick={handleSubmit} disabled={submit} className='btn text-white font-bold text-[20px] btn-primary'>{submit ? <span className="loading loading-ring loading-lg"></span> : "اضافة"}</button>
+                setInputs((prevInputs) => {
+                    return {
+                        ...prevInputs,
+                        comments: event.target.value
+                    }
+                })
+            }} required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder="اكتب بيان" pattern='^.{3,1024}$' />
+            <button onClick={() => {
+                if (window.confirm("هل انت متاكد من انك تريد القيام به العملية")) {
+                    handleSubmit()
+                }
+
+            }} disabled={submit} className='btn text-white font-bold text-[20px] btn-primary'>{submit ? <span className="loading loading-ring loading-lg"></span> : "اضافة"}</button>
         </form>
     </div>;
 }

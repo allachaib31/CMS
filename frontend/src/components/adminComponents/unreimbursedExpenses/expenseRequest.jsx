@@ -2,17 +2,20 @@ import { faIdCard, faMoneyBill, faRightLong } from '@fortawesome/free-solid-svg-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { addUnReimbursedExpensesFetch, getTypeUnReimbursedExpensesFetch } from '../../../utils/apiFetch';
+import { addUnReimbursedExpensesFetch, getActiveUserFetch, getTypeUnReimbursedExpensesFetch } from '../../../utils/apiFetch';
 import Alert from '../../alert/alert';
 
 function ExpenseRequest() {
     const navigate = useNavigate();
     const [submit, setSubmit] = useState(false);
+    const [listId, setListsId] = useState(false);
+    const [selectType, setSelectType] = useState(false);
     const [inputs, setInputs] = useState({
         name: "",
         amount: 0,
         typeExpenses: "",
-        comments: ""
+        comments: "",
+        selectType: false
     });
     const [expensesType, setExpensesType] = useState(false);
     const [showAlert, setShowAlert] = useState({
@@ -51,6 +54,16 @@ function ExpenseRequest() {
             }
         })
     }, []);
+    useEffect(() => {
+        getActiveUserFetch().then((res) => {
+            console.log(res.data)
+            setListsId(res.data.users)
+        }).catch((err) => {
+            if (err.response && err.response.status === 401) {
+                navigate("/auth");
+            }
+        })
+    }, [])
     return (
         <div className="sm:p-0 px-[1rem] container mx-auto">
             <div>
@@ -59,18 +72,46 @@ function ExpenseRequest() {
                 </Link>
             </div>
             <h1 className="text-center text-[1.5rem] font-bold py-[1rem]">
-             طلب مصروف
+                طلب مصروف
             </h1>
             <form action="" className="py-[2rem] flex flex-col gap-[1rem]">
                 {showAlert.display ? <Alert msg={showAlert} /> : ""}
+                <button onClick={(event) => {
+                    event.preventDefault();
+                    setSelectType((e) => !e)
+                    setInputs((prevInputs) => {
+                        return { ...prevInputs, name: "",selectType: !prevInputs.selectType }
+                    })
+                    }} className='btn btn-info'>تغيير طريقة اضافة الاسم</button>
                 <div className="flex sm:flex-row flex-col gap-[1rem]">
                     <div className="relative sm:w-1/2">
-                        <FontAwesomeIcon icon={faIdCard} className="absolute top-[1rem] right-[1rem]" />
-                        <input type="text" onChange={(e) => {
-                            setInputs((prevInputs) => {
-                                return { ...prevInputs, name: e.target.value.trim() }
-                            })
-                        }} required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder="اسم المستفيد"/>
+                        {
+                            selectType ? <select required onChange={(event) => {
+                                return setInputs((prevInput) => {
+                                    return {
+                                        ...prevInput,
+                                        name: event.target.value.trim()
+                                    }
+                                })
+                            }}
+                                className="select formInput select-bordered w-full">
+                                <option disabled selected>اختار العضو</option>
+                                {
+                                    listId && listId.map((user) => {
+                                        return (
+                                            <option value={user._id}>{user.name}</option>
+                                        )
+                                    })
+                                }
+                            </select> : <>                        
+                            <FontAwesomeIcon icon={faIdCard} className="absolute top-[1rem] right-[1rem]" />
+                                <input type="text" onChange={(e) => {
+                                    setInputs((prevInputs) => {
+                                        return { ...prevInputs, name: e.target.value.trim() }
+                                    })
+                                }} required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder="اسم المستفيد" /></>
+                        }
+
                     </div>
                     <div className="relative sm:w-1/2">
                         <FontAwesomeIcon icon={faMoneyBill} className="absolute top-[1rem] right-[1rem]" />

@@ -16,6 +16,7 @@ function PaymentExpenses() {
     useEffect(() => {
         getIdUnReimbursedExpensesFetch().then((res) => {
             setListId(res.data.unReimbursedExpenses);
+            console.log(res.data)
         })
     }, []);
     const handleSearch = () => {
@@ -23,7 +24,7 @@ function PaymentExpenses() {
             setUsers(res.data.cashPayUsers)
         })
     }
-    const handleSubmit = (id,idUser,index) => {
+    const handleSubmit = (id, idUser, index) => {
         setShowAlert({
             display: false,
         });
@@ -56,7 +57,7 @@ function PaymentExpenses() {
                 </Link>
             </div>
             <h1 className="text-center text-[1.5rem] font-bold py-[1rem]">
-            تسديد المصروفات
+                تسديد المصروفات
             </h1>
             <form action="" className='container mx-auto'>
                 <select onChange={(event) => {
@@ -95,7 +96,7 @@ function PaymentExpenses() {
                     </tr>
                     <tbody>
                         {
-                            users && users.map((user,index) => {
+                            users && users.map((user, index) => {
                                 return (
                                     <tr>
                                         <td className="border text-center border-slate-600">{user.idUser.id}</td>
@@ -103,9 +104,11 @@ function PaymentExpenses() {
                                         <td className="border text-center border-slate-600">{user.amount.toFixed(2)}</td>
                                         <td id={user.idUser._id} className="border text-center border-slate-600">
                                             {user.itPaid ? "تم الدفع" : <button onClick={() => {
-                                                handleSubmit({
-                                                    id: user._id
-                                                },user.idUser._id,index)
+                                                if (window.confirm("هل انت متاكد من انك تريد القيام به العملية")) {
+                                                    handleSubmit({
+                                                        id: user._id
+                                                    }, user.idUser._id, index)
+                                                }
                                             }} className='btn btn-success'>دفع</button>}
                                         </td>
                                     </tr>

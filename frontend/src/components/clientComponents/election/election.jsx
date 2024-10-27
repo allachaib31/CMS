@@ -32,41 +32,44 @@ function Election() {
     setVoteFetch(inputs).then((res) => {
       setSubmit((e) => !e);
       setShowAlert({
-          display: true,
-          status: true,
-          text: res.data.msg
+        display: true,
+        status: true,
+        text: res.data.msg
       });
-  }).catch((err) => {
+    }).catch((err) => {
       if (err.response && err.response.status === 401) {
-          navigate("/auth");
+        navigate("/auth");
       }
       setSubmit((e) => !e);
       setShowAlert({
-          display: true,
-          status: false,
-          text: err.response.data.msg
+        display: true,
+        status: false,
+        text: err.response.data.msg
       });
-  })
+    })
   }
   return (
     <div className="px-[1rem] sm:px-0 py-[2rem]">
+      <h1 className="text-center text-[1.5rem] font-bold py-[1rem]">
+        سجل التصويتات
+      </h1>
       <div className='container mx-auto'>
         <div className="overflow-x-auto mt-[1rem]">
           <table className="text-[1rem] table border-separate border-spacing-2 border w-[1000px] mx-auto">
             <thead className="text-[1rem] text-center">
               <tr>
-                <th className="border border-slate-600">رقم الانتخابات</th>
+                <th className="border border-slate-600">رقم التصويت</th>
                 <th className="border border-slate-600">
                   الموضوع
                 </th>
                 <th className="border border-slate-600">
-                تاريخ الانتهاء
+                  تاريخ الانتهاء
                 </th>
                 <th className="border border-slate-600">
-                  تصويت
+                الإجراء
                 </th>
                 <th className="border border-slate-600">
-                  تفاصيل
+                  تفاصيل <br/>أكثر
                 </th>
               </tr>
             </thead>
@@ -97,7 +100,7 @@ function Election() {
       </div>
       <dialog id="my_modal_1" className="modal">
         <div className="modal-box">
-        {showAlert.display ? <Alert msg={showAlert} /> : ""}
+          {showAlert.display ? <Alert msg={showAlert} /> : ""}
           <h3 className="font-bold text-lg">{data.subject}</h3>
           <div className='flex gap-[1rem] flex-col justify-center'>
             {

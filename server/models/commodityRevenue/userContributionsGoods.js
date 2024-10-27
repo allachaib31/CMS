@@ -47,7 +47,7 @@ const userContributionGoodSchema = new mongoose.Schema({
 })
 userContributionGoodSchema.pre('save', async function(next) {
     if (this.isNew) { // Check if the document is new
-        this.id = await generateNextId("userContributionGood", "UCG");
+        this.id = await generateNextId("userContributionGood", "UG");
     }
     next();
 });

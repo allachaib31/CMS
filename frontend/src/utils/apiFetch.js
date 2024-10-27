@@ -134,7 +134,20 @@ import {
     GETACTIVESTOCK_ROUTE,
     ADDAGREEMENTSFAMILY_ROUTE,
     GETAGREEMENTSFAMILY_ROUTE,
-    UPDATEAGREEMENTSACTIVEFAMILY_ROUTE
+    UPDATEAGREEMENTSACTIVEFAMILY_ROUTE,
+    ADDFATWAS_ROUTE,
+    GETFATWAS_ROUTE,
+    UPDATEFATWAS_ROUTE,
+    DELETEVOTE_ROUTE,
+    ADDFINANCIAL_ROUTE,
+    GETIDFinancial_ROUTE,
+    GETFINANCIAL_ROUTE,
+    ADDINVESTMENT_ROUTE,
+    GETIDINVESTMENT_ROUTE,
+    GETINVESTMENT_ROUTE,
+    PAYMENTFINANCIALCOMPANY_ROUTE,
+    PAYMENTINVESMENT_ROUTE,
+    REPOSTADS_ROUTE
 } from "./apiRoutes";
 
 
@@ -381,6 +394,40 @@ export const getActiveStockFetch = async (date) => {
     const data = await axios.get(`${GETACTIVESTOCK_ROUTE}?date=${date}`);
     return data;
 }
+//Manage financial
+export const addFinancialFetch = async (inputs) => {
+    const data = await axios.post(ADDFINANCIAL_ROUTE, inputs);
+    return data;
+}
+export const getIdFinancialFetch = async (inputs) => {
+    const data = await axios.get(`${GETIDFinancial_ROUTE}?month=${inputs.month}&year=${inputs.year}`);
+    return data;
+}
+export const getFinancialFetch = async (id) => {
+    const data = await axios.get(`${GETFINANCIAL_ROUTE}?id=${id}`);
+    return data;
+}
+export const paymentFinancialFetch = async (inputs) => {
+    const data = await axios.post(PAYMENTFINANCIALCOMPANY_ROUTE, inputs);
+    return data;
+}
+//Manage investment
+export const addInvestmentFetch = async (inputs) => {
+    const data = await axios.post(ADDINVESTMENT_ROUTE, inputs);
+    return data;
+}
+export const getIdInvestmentFetch = async (inputs) => {
+    const data = await axios.get(`${GETIDINVESTMENT_ROUTE}?month=${inputs.month}&year=${inputs.year}`);
+    return data;
+}
+export const getInvestmentFetch = async (id) => {
+    const data = await axios.get(`${GETINVESTMENT_ROUTE}?id=${id}`);
+    return data;
+}
+export const paymentInvesmentFetch = async (inputs) => {
+    const data = await axios.post(PAYMENTINVESMENT_ROUTE, inputs);
+    return data;
+}
 // Manage Loans
 export const addLoansFetch = async (inputs) => {
     const data = await axios.post(ADDLOANS_ROUTE,inputs);
@@ -533,6 +580,10 @@ export const voteDetailsFetch = async (id) => {
     const data = await axios.get(`${VOTEDETAILS_ROUTE}?id=${id}`);
     return data;
 }
+export const delteVoteFetch = async (id) => {
+    const data = await axios.delete(`${DELETEVOTE_ROUTE}?id=${id}`);
+    return data;
+}
 export const addAgreementsFetch = async (inputs) => {
     const data = await axios.post (ADDAGREEMENTS_ROUTE,inputs);
     return data;
@@ -561,6 +612,24 @@ export const updateAgreementsActiveFamilyFetch = async (inputs) => {
     const data = await axios.patch(UPDATEAGREEMENTSACTIVEFAMILY_ROUTE, inputs);
     return data;
 }
+
+export const addFatwasFetch = async (inputs) => {
+    const data = await axios.post (ADDFATWAS_ROUTE,inputs);
+    return data;
+}
+
+export const getFatwasFetch = async () => {
+    const data = await axios.get (GETFATWAS_ROUTE);
+    return data;
+}
+
+export const updateFatwasFetch = async (inputs) => {
+    const data = await axios.patch(UPDATEFATWAS_ROUTE, inputs);
+    return data;
+}
+
+
+
 //Manage advertising
 export const addAdvertisingFetch = async (inputs) => {
     const data = await axios.post(ADDADVERTISING_ROUTE,inputs);
@@ -584,6 +653,10 @@ export const getAdsFetch = async () => {
 }
 export const deleteAdsFetch = async (id) => {
     const data = await axios.delete(`${DELETEADS_ROUTE}?id=${id}`);
+    return data;
+}
+export const repostAdsFetch = async (inputs) => {
+    const data = await axios.post(REPOSTADS_ROUTE, inputs);
     return data;
 }
 //Manage family tree

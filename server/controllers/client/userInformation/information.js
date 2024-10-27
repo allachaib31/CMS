@@ -3,6 +3,7 @@ const { Readable } = require('stream');
 const moneyBoxModel = require("../../../models/moneybox");
 const { advertisingModel, File } = require("../../../models/advertising/advertising")
 const userModel = require("../../../models/user");
+const {loansModel} = require("../../../models/loans/loans");
 const { voteModel } = require("../../../models/voting/vote");
 const monthlySubscriptionModel = require("../../../models/subscription/monthlySubscription");
 const typeSubscriptionModel = require("../../../models/subscription/typeSubscription");
@@ -15,15 +16,24 @@ exports.getClientInformation = async (req, res) => {
     try {
         const user = await userModel.findById(id);
         const moneyBox = await moneyBoxModel.findById(moneyBoxId);
+        const loansUser = await loansModel.find({
+            name: user.name
+        });
+        let balance = 0;
+        loansUser.forEach((loan) => {
+            balance += loan.balance;
+        })
         return res.status(200).send({
             memberBalance: user.memberBalance,
             cumulativeBalance: user.cumulativeBalance,
             commodityProfitsContributions: user.commodityProfitsContributions,
             subsidies: user.subsidies,
             loans: user.loans,
+            loansPaid: balance,
             moneyBox
         })
     } catch (error) {
+        console.log(error)
         return res.status(500).send({
             msg: "حدث خطأ أثناء معالجة طلبك"
         });

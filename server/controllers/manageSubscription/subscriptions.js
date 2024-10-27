@@ -86,6 +86,7 @@ exports.addFoundationSubscriptions = async (req, res) => {
                 month: hijriDate[1],
                 year: hijriDate[2],
             },
+            total: amount
         });
         function addDaysToHijriDate(hijriDate) {
             const newDate = [...hijriDate];
@@ -98,7 +99,33 @@ exports.addFoundationSubscriptions = async (req, res) => {
         for (let i = 0; i < 12; i++) {
             const monthIndex = (i + 1).toString();
             if (Number(monthIndex) <= hijriDate[1].number) {//tfkar
-                Subscription.months[monthIndex].pendingPayment = false;
+                if(Number(monthIndex) == hijriDate[1].number){
+                    const dueDate = addDaysToHijriDate([hijriDate[0], { number: Number(monthIndex), ar: Subscription.months[Number(monthIndex)].name }, hijriDate[2]]);
+                    Subscription.months[monthIndex].dueDate = momentHijri(dueDate[2] + "-" + dueDate[1].number + "-" + dueDate[0], 'iYYYY-iMM-iDD').locale("en").format('YYYY-MM-DD');
+                    const toHijriDate = getHijriDate(Subscription.months[monthIndex].dueDate);
+                    Subscription.months[monthIndex] = {
+                        dueDateHijri: {
+                            day: toHijriDate[0],
+                            month: {
+                                number: dueDate[1].number,
+                                ar: dueDate[1].ar
+                            },
+                            year: dueDate[2]
+                        },
+                        amount: amount,
+                        pendingPayment: true,
+                        isInvoiceOverdue: false,
+                        comments: "",
+                        hijriDate: {
+                            day: hijriDate[0],
+                            month: hijriDate[1],
+                            year: hijriDate[2],
+                        },
+                        createdAt: new Date()
+                    };
+                    
+                }
+                else Subscription.months[monthIndex].pendingPayment = false;
             } else {
                 const dueDate = addDaysToHijriDate([hijriDate[0], { number: Number(monthIndex), ar: Subscription.months[Number(monthIndex)].name }, hijriDate[2]]);
                 Subscription.months[monthIndex].dueDate = momentHijri(dueDate[2] + "-" + dueDate[1].number + "-" + dueDate[0], 'iYYYY-iMM-iDD').locale("en").format('YYYY-MM-DD');
@@ -536,10 +563,10 @@ exports.getSubscriptionHistory = async (req, res) => {
         const totalUsers = await userModel.countDocuments();
         const totalPages = Math.ceil(totalUsers / pageSize);
         const moneyBox = await moneyBoxModel.findById(moneyBoxId)
-        var activeMembers = 0;
+        var activeMembers = (await userModel.find({status: "active"})).length;
         var newUser = 0;
         for (let i = 0; i < users.length; i++) {
-            if (users[i].status == "active") activeMembers++;
+            //if (users[i].status == "active") activeMembers++;
             var creationDate = moment(users[i].createdAt).locale("en");
 
             // Get the current date

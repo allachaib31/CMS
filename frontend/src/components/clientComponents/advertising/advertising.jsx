@@ -18,7 +18,7 @@ function AdvertisingClient() {
         <div className="px-[1rem] sm:px-0 py-[2rem]">
             <h1 className="text-center text-[1.5rem] font-bold py-[1rem]">
                 {" "}
-                الاعلانات            
+                الاعلانات
             </h1>
             <div className='container mx-auto'>
                 {
@@ -29,16 +29,7 @@ function AdvertisingClient() {
                             "text/html"
                         );
                         return (
-                            <div className={`hero ${ad.imageId == undefined ? "place-items-start" : ""} bg-base-200 mt-[1rem]`}>
-                                <div className="hero-content flex-col lg:flex-row">
-                                    {
-                                        ad.imageId != undefined && <img
-                                            src={"/api/v1.0/advertisingImage/" + ad.imageId}
-                                            className="max-w-sm rounded-lg shadow-2xl" />
-                                    }
-                                    <div dangerouslySetInnerHTML={{ __html: dom.body.innerHTML }}>
-                                    </div>
-                                </div>
+                            <div className='bg-base-200' dangerouslySetInnerHTML={{ __html: dom.body.innerHTML }}>
                             </div>
                         )
                     })

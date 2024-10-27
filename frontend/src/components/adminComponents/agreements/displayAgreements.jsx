@@ -107,8 +107,8 @@ function DisplayAgreements() {
         </table>
       </div>
       <dialog ref={modalRef} id="my_modal_1" className="modal">
-        <div className="modal-box">
-          <div id="text" className="py-4"></div>
+        <div className="modal-box max-w-[70rem]">
+          <div id="text" className="py-4 flex justify-center"></div>
           <div className="modal-action">
             <form method="dialog">
               {/* if there is a button in form, it will close the modal */}
@@ -116,7 +116,9 @@ function DisplayAgreements() {
               <button
               onClick={(event) => {
                 event.preventDefault();
-                updateAgreements();
+                if(window.confirm("هل انت متاكد من انك تريد القيام به العملية")){
+                  updateAgreements();
+              }
                // document.getElementById("my_modal_1").closeModal();
               }}
                 className={`btn ${inputs.active ? "btn-error" : "btn-success"}`}

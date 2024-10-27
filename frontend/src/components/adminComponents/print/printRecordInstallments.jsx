@@ -117,12 +117,12 @@ function PrintRecordInstallments() {
                         return (
                             <tr className='text-center'>
                                 <td className="border border-slate-600">{installment.id}</td>
-                                <td className="border border-slate-600">{installment.premiumAmount}</td>
+                                <td className="border border-slate-600">{installment.premiumAmount.toFixed(2)}</td>
                                 <td className="border border-slate-600">{installment.actualPaymentDate && d.getUTCFullYear() + "-" + (d.getUTCMonth() + 1) + "-" + d.getUTCDate()}</td>
                                 <td className="border border-slate-600">{installment.actualPaymentDateHijri && installment.actualPaymentDateHijri.year + "-" + installment.actualPaymentDateHijri.month.number + "-" + installment.actualPaymentDateHijri.day}</td>
                                 <td className="border border-slate-600">{d2.getUTCFullYear() + "-" + (d2.getUTCMonth() + 1) + "-" + d2.getUTCDate()}</td>
                                 <td className="border border-slate-600">{installment.requiredPaymentDateHijri.year}-{installment.requiredPaymentDateHijri.month.number}-{installment.requiredPaymentDateHijri.day}</td>
-                                <td className="border border-slate-600">{amount}</td>
+                                <td className="border border-slate-600">{amount && amount.toFixed(2)}</td>
                             </tr>
                         )
                     })

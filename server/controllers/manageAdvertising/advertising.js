@@ -66,6 +66,29 @@ exports.addAdvertising = async (req, res) => {
         });
     }
 };
+exports.repostAds = async (req, res) => {
+    console.log(req.body)
+    const { id, date, type} = req.body;
+    try{
+        if(type == "advertisings"){
+            const ads = await advertisingModel.findByIdAndUpdate(id, {
+                endDate: date
+            });
+        }else {
+            const ads = await adsModel.findByIdAndUpdate(id, {
+                endDate: date
+            });
+        }
+        return res.status(200).send({
+            msg: "تم اعادة النشر بنجاح"
+        })
+    }catch (error) {
+        console.log(error);
+        return res.status(500).send({
+            msg: "حدث خطأ أثناء معالجة طلبك"
+        });
+    }
+}
 exports.getAdvertising = async (req, res) => {
     try{
         const advertising = await advertisingModel.find().sort({

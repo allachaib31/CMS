@@ -9,7 +9,6 @@ function ConsolidatedRecordRevenues() {
     const [moneyBox, setMoneyBox] = useState(false);
     useEffect(() => {
         getConsolidatedRecordRevenuesFetch().then((res) => {
-            console.log(res)
             setMoneyBox(res.data.moneyBox);
         }).catch((err) => {
             if (err.response.status == 401) {
@@ -26,26 +25,34 @@ function ConsolidatedRecordRevenues() {
             </div>
 
             <h1 className="text-center text-[1.1rem]ss sm:text-[1.5rem] font-bold py-[1rem]">السجل الموحد للإيرادات</h1>
-            <div className="mt-[1rem] flex md:flex-row flex-col gap-[1rem] justify-center">
-                <div className="flex md:flex-col items-center gap-[1rem]">
-                    <h1 className="text-[0.8rem] w-[70%] md:w-auto md:text-center font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">إجمالي الايرادات</h1>
-                    <h1 className="text-[0.8rem] w-[30%] md:w-auto text-center font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">{moneyBox &&(moneyBox.source.subscriptions + moneyBox.source.commodityRevenue + moneyBox.source.contributionRevenues + moneyBox.source.loanIncome).toFixed(2)}</h1>
+            <div className="mt-[1rem] flex lg:flex-row flex-col gap-[1rem] justify-center">
+                <div className="flex lg:flex-col items-center gap-[1rem]">
+                    <h1 className="text-[0.8rem] w-[70%] lg:w-auto md:text-center font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">إجمالي الايرادات</h1>
+                    <h1 className="text-[0.8rem] w-[30%] lg:w-auto text-center font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">{moneyBox &&(moneyBox.source.subscriptions + moneyBox.source.commodityRevenue + moneyBox.source.contributionRevenues + moneyBox.source.financialCompany + moneyBox.source.investmentBox).toFixed(2)}</h1>
                 </div>
-                <div className="flex md:flex-col items-center gap-[1rem]">
-                    <h1 className="text-[0.8rem] w-[70%] md:w-auto md:text-center font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">إجمالي الاشتراكات</h1>
-                    <h1 className="text-[0.8rem] w-[30%] md:w-auto  text-center font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">{moneyBox && moneyBox.source.subscriptions.toFixed(2)}</h1>
+                <div className="flex lg:flex-col items-center gap-[1rem]">
+                    <h1 className="text-[0.8rem] w-[70%] lg:w-auto md:text-center font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">إجمالي الاشتراكات</h1>
+                    <h1 className="text-[0.8rem] w-[30%] lg:w-auto  text-center font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">{moneyBox && moneyBox.source.subscriptions.toFixed(2)}</h1>
                 </div>
-                <div className="flex md:flex-col items-center gap-[1rem]">
-                    <h1 className="text-[0.8rem] w-[70%] md:w-auto md:text-center font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">اجمالي إيراد السلع</h1>
-                    <h1 className="text-[0.8rem] w-[30%] md:w-auto  text-center font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">{moneyBox && moneyBox.source.commodityRevenue.toFixed(2)}</h1>
+                <div className="flex lg:flex-col items-center gap-[1rem]">
+                    <h1 className="text-[0.8rem] w-[70%] lg:w-auto md:text-center font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">اجمالي إيراد السلع</h1>
+                    <h1 className="text-[0.8rem] w-[30%] lg:w-auto  text-center font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">{moneyBox && moneyBox.source.commodityRevenue.toFixed(2)}</h1>
                 </div>
-                <div className="flex md:flex-col items-center gap-[1rem]">
-                    <h1 className="text-[0.8rem] w-[70%] md:w-auto md:text-center font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">إجمالي إيرادات الأسهم</h1>
-                    <h1 className="text-[0.8rem] w-[30%] md:w-auto  text-center font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">{moneyBox && moneyBox.source.contributionRevenues.toFixed(2)}</h1>
+                <div className="flex lg:flex-col items-center gap-[1rem]">
+                    <h1 className="text-[0.8rem] w-[70%] lg:w-auto md:text-center font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">إجمالي إيرادات الأسهم</h1>
+                    <h1 className="text-[0.8rem] w-[30%] lg:w-auto  text-center font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">{moneyBox && moneyBox.source.contributionRevenues.toFixed(2)}</h1>
                 </div>
-                <div className="flex md:flex-col items-center gap-[1rem]">
-                    <h1 className="text-[0.8rem] w-[70%] md:w-auto md:text-center font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">إجمالي إيرادات القروض</h1>
-                    <h1 className="text-[0.8rem] w-[30%] md:w-auto  text-center font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">{moneyBox && moneyBox.source.loanIncome.toFixed(2)}</h1>
+                <div className="flex lg:flex-col items-center gap-[1rem]">
+                    <h1 className="text-[0.8rem] w-[70%] lg:w-auto md:text-center font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">إجمالي الشركات المالية</h1>
+                    <h1 className="text-[0.8rem] w-[30%] lg:w-auto  text-center font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">{moneyBox && moneyBox.source.financialCompany.toFixed(2)}</h1>
+                </div>
+                <div className="flex lg:flex-col items-center gap-[1rem]">
+                    <h1 className="text-[0.8rem] w-[70%] lg:w-auto md:text-center font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">إجمالي الصناديق الاستثمارية</h1>
+                    <h1 className="text-[0.8rem] w-[30%] lg:w-auto  text-center font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">{moneyBox && moneyBox.source.investmentBox.toFixed(2)}</h1>
+                </div>
+                <div className="flex lg:flex-col items-center gap-[1rem]">
+                    <h1 className="text-[0.8rem] w-[70%] lg:w-auto md:text-center font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">إجمالي إيرادات القروض</h1>
+                    <h1 className="text-[0.8rem] w-[30%] lg:w-auto  text-center font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">{moneyBox && moneyBox.source.loanIncome.toFixed(2)}</h1>
                 </div>
             </div>
             <div className="overflow-x-auto mt-[1rem]">
@@ -97,6 +104,26 @@ function ConsolidatedRecordRevenues() {
                                     </td>
                                     <td className="border border-slate-600">
                                         <Link to="/contributionRevenue" className='btn btn-info'>التفاصيل</Link> 
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th className="border border-slate-600">الشركات المالية</th>
+                                    <td className="border border-slate-600">{moneyBox.source.financialCompany.toFixed(2)}</td>
+                                    <td className="border border-slate-600">
+                                    {moneyBox.source.comments}
+                                    </td>
+                                    <td className="border border-slate-600">
+                                        <Link to="/financialCompany/contributionData" className='btn btn-info'>التفاصيل</Link> 
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th className="border border-slate-600">الصناديق الاستثمارية</th>
+                                    <td className="border border-slate-600">{moneyBox.source.investmentBox.toFixed(2)}</td>
+                                    <td className="border border-slate-600">
+                                    {moneyBox.source.comments}
+                                    </td>
+                                    <td className="border border-slate-600">
+                                        <Link to="/investmentBox/contributionData" className='btn btn-info'>التفاصيل</Link> 
                                     </td>
                                 </tr>
                                 <tr>

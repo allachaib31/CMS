@@ -40,10 +40,10 @@ function PaymentBloodMoney() {
     return (
         <div className="px-[1rem] sm:px-0">
             <h1 className="text-center text-[1.5rem] font-bold py-[1rem]">
-                تسديد مبلغ دية مستردة
+                تسديد مبلغ دية 
             </h1>
             <div className='container mx-auto'>
-            {showAlert.display ? <Alert msg={showAlert} /> : ""}
+                {showAlert.display ? <Alert msg={showAlert} /> : ""}
             </div>
             <div className="overflow-x-auto mt-[1rem]">
                 <table className="text-[1rem] table border-separate border-spacing-2 border w-[1000px] mx-auto">
@@ -68,7 +68,7 @@ function PaymentBloodMoney() {
                                 ملحوظات
                             </th>
                             <th className="border border-slate-600">
-                            دفع
+                                دفع
                             </th>
                         </tr>
                     </thead>
@@ -85,12 +85,14 @@ function PaymentBloodMoney() {
                                         <td className="border border-slate-600">{bdMoney.exchangeDateHijri.year}-{bdMoney.exchangeDateHijri.month.number}-{bdMoney.exchangeDateHijri.day}</td>
                                         <td className="border border-slate-600">{bdMoney.comments}</td>
                                         <td className="border border-slate-600">                                                {
-                                                    bdMoney.itPaid ? "لقد تم دفع" : <button onClick={() => {
-                                                        handleSubmit({
-                                                            id: bdMoney._id
-                                                        })
-                                                    }} className='btn btn-success'>دفع</button>
-                                                }</td>
+                                            bdMoney.itPaid ? "لقد تم دفع" : <button onClick={() => {
+                                                if (window.confirm("هل انت متاكد من انك تريد القيام به العملية")) {
+                                                    handleSubmit({
+                                                        id: bdMoney._id
+                                                    })
+                                                }
+                                            }} className='btn btn-success'>دفع</button>
+                                        }</td>
                                     </tr>
                                 )
                             })

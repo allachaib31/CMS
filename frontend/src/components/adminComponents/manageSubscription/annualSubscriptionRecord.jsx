@@ -89,10 +89,10 @@ function AnnualSubscriptionRecord() {
                 </Link>
             </div>
             <h1 className="text-center text-[1.1rem] sm:text-[1.5rem] font-bold py-[0.5rem]">
-                سجل الاشتراكات السنوية لعام 
+            سجل الاشتراكات لعام : {year}
             </h1>
             <h1  className="text-center text-[1.1rem] sm:text-[1.5rem] font-bold py-[0.5rem]">
-            {year} الرصيد : {total.reduce((total, value) => {
+             الرصيد : {total.reduce((total, value) => {
                     return total + Number(value);
                 })}
             </h1>

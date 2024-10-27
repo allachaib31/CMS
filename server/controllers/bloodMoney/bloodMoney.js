@@ -97,7 +97,7 @@ exports.payBloodMoney = async (req, res) => {
             {
                 $inc: {
                     amount: bloodMoney.amount,
-                    cumulativeAmount: bloodMoney.amount,
+                    //cumulativeAmount: bloodMoney.amount,
                 }
             },
         { new: true });

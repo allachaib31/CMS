@@ -32,7 +32,7 @@ function PayMonthlySubscriptions() {
                 status: true,
                 text: res.data.msg
             });
-            document.getElementById(data.idUser).innerHTML = "تم الدفع بنجاح" ;
+            document.getElementById(data.idUser).innerHTML = "تم الدفع بنجاح";
         }).catch((err) => {
             if (err.response.status == 401) {
                 navigate("/auth");
@@ -160,16 +160,16 @@ function PayMonthlySubscriptions() {
                                     المبلغ
                                 </th>
                                 <th className="text-center border border-slate-600" >
-                                    تاريخ الاستحقاق الميلادي
+                                    تاريخ الاستحقاق <br/> الميلادي
                                 </th>
                                 <th className="text-center border border-slate-600" >
-                                    تاريخ الاستحقاق الهجري
+                                    تاريخ الاستحقاق <br/> الهجري
                                 </th>
                                 <th className="text-center border border-slate-600" >
-                                    تاريخ الايداع الميلادي
+                                    تاريخ الايداع <br/> الميلادي
                                 </th>
                                 <th className="text-center border border-slate-600" >
-                                    تاريخ الايداع الهجري
+                                    تاريخ الايداع <br/> الهجري
                                 </th>
                                 <th className="border border-slate-600">
                                     ملاحظات
@@ -216,14 +216,16 @@ function PayMonthlySubscriptions() {
                                             </td>
                                             <td id={subscription.idUser._id} className="border border-slate-600">
                                                 {subscription.months[month].amount != 0 ? "تم الدفع بنجاح" : <button onClick={() => {
-                                                    handleSubmit({
-                                                        idUser: subscription.idUser._id,
-                                                        amount,
-                                                        month,
-                                                        dueDateHijri: subscription.months[month].dueDateHijri,
-                                                        dueDate: inputs.date,
-                                                        year: subscription.months[month].dueDateHijri.year,
-                                                    })
+                                                    if (window.confirm("هل انت متاكد من انك تريد القيام به العملية")) {
+                                                        handleSubmit({
+                                                            idUser: subscription.idUser._id,
+                                                            amount,
+                                                            month,
+                                                            dueDateHijri: subscription.months[month].dueDateHijri,
+                                                            dueDate: inputs.date,
+                                                            year: subscription.months[month].dueDateHijri.year,
+                                                        })
+                                                    }
                                                 }} className="btn btn-success">دفع</button>}
                                             </td>
                                         </tr>
@@ -233,7 +235,7 @@ function PayMonthlySubscriptions() {
                     </table>
                 )}
             </div>
-            <AddNoteMonthly comment={comment} setComment={setComment}/>
+            <AddNoteMonthly comment={comment} setComment={setComment} />
         </div>
     );
 }

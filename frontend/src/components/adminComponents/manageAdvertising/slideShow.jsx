@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { addAdsFetch, deleteAdsFetch, getAdsFetch } from '../../../utils/apiFetch';
+import { addAdsFetch, deleteAdsFetch, getAdsFetch, repostAdsFetch } from '../../../utils/apiFetch';
 import Alert from '../../alert/alert';
 
 function SlideShow() {
@@ -11,6 +11,11 @@ function SlideShow() {
         text: "",
         endDate: "",
     });
+    const [repost, setRepost] = useState({
+        id: "",
+        date: "",
+        type: "ads",
+    })
     const [showAlert, setShowAlert] = useState({
         display: false,
     });
@@ -65,6 +70,30 @@ function SlideShow() {
             });
         })
     }
+    const handleRepost = () => {
+        setSubmit((e) => !e);
+        setShowAlert({
+            display: false,
+        });
+        repostAdsFetch(repost).then((res) => {
+            setSubmit((e) => !e);
+            setShowAlert({
+                display: true,
+                status: true,
+                text: res.data.msg
+            });
+        }).catch((err) => {
+            setSubmit((e) => !e);
+            if (err.response && err.response.status === 401) {
+                navigate("/auth");
+            }
+            setShowAlert({
+                display: true,
+                status: false,
+                text: err.response.data.msg
+            });
+        });
+    }
     useEffect(() => {
         getAdsFetch().then((res) => {
             setAds(res.data.ads)
@@ -105,18 +134,22 @@ function SlideShow() {
                             <button className="btn">اغلاق</button>
                             <button onClick={(event) => {
                                 event.preventDefault();
-                                handleSubmit();
+                                if (window.confirm("هل انت متاكد من انك تريد القيام به العملية")) {
+                                    handleSubmit();
+                                }
                             }} disabled={submit} className="btn btn-success">{submit ? <span className="loading loading-ring loading-lg"></span> : "إضافة"}</button>
                         </form>
                     </div>
                 </div>
             </dialog>
+            {showAlert.display ? <Alert msg={showAlert} /> : ""}
             <div className="overflow-x-auto mt-[1rem]">
                 <table className="text-[1rem] table border-separate border-spacing-2 border w-[1000px] mx-auto">
                     <thead className="text-[1rem] text-center">
                         <tr>
                             <th className="border border-slate-600">رقم</th>
                             <th className="border border-slate-600">الاعلان</th>
+                            <th className='border border-slate-600'>اعادة النشر</th>
                             <th className="border border-slate-600">حدف</th>
                         </tr>
                     </thead>
@@ -127,8 +160,19 @@ function SlideShow() {
                                     <tr className="text-center" key={ad.id}>
                                         <td className="border border-slate-600">{ad.id}</td>
                                         <td className="border border-slate-600">{ad.text}</td>
+                                        <td className='border border-slate-600'><button onClick={() => {
+                                            setRepost((prev) => {
+                                                return {
+                                                    ...prev,
+                                                    id: ad._id
+                                                }
+                                            })
+                                            document.getElementById("repost2").showModal()
+                                        }} className='btn btn-success'>اعادة النشر</button></td>
                                         <td className="border border-slate-600"><button className='btn btn-error' onClick={() => {
-                                            handleDelete(ad._id, index)
+                                            if (window.confirm("هل انت متاكد من انك تريد القيام به العملية")) {
+                                                handleDelete(ad._id, index)
+                                            }
                                         }}>حدف</button></td>
                                     </tr>
                                 )
@@ -137,6 +181,28 @@ function SlideShow() {
                     </tbody>
                 </table>
             </div>
+            <dialog id="repost2" className="modal">
+                <div className="modal-box ">
+                    <input type="date" className='input input-bordered' onChange={((event) => {
+                        setRepost((prevInputs) => {
+                            return {
+                                ...prevInputs,
+                                date: event.target.value
+                            }
+                        })
+                    })} />
+                    <div className="modal-action">
+                        <form method="dialog">
+                            {/* if there is a button in form, it will close the modal */}
+                            <button className="btn">اغلاق</button>
+                            <button className="btn btn-success" onClick={(event) => {
+                                event.preventDefault();
+                                handleRepost();
+                            }}>{submit ? <span className="loading loading-ring loading-lg"></span> : "تاكيد"}</button>
+                        </form>
+                    </div>
+                </div>
+            </dialog>
         </div>
     )
 }

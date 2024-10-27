@@ -300,7 +300,7 @@ function CommodityPurchaseOrderForm() {
 
                 </div>
             }
-                        {
+            {
                 commodityRevenu && <div className='container mx-auto'>
                     <Link to={`/print/commodityPurchaseOrderForm?id=` + commodityRevenu._id} target='_blank' className='btn mt-[1rem] btn-info font-bold'><FontAwesomeIcon icon={faPrint} /> طباعة</Link>
                 </div>
@@ -309,15 +309,17 @@ function CommodityPurchaseOrderForm() {
                 commodityRevenu && <div className=' mt-[1rem] container mx-auto'>
                     {showAlert.display ? <Alert msg={showAlert} /> : ""}
                     <button disabled={load} onClick={() => {
-                        handleSubmit();
-                    }} className='btn btn-success'>{load ?  <span className=" loading loading-ring loading-lg"></span> : "دفع الدفعة الاولى ان وجدت"}</button>
+                        if (window.confirm("هل انت متاكد من انك تريد القيام به العملية")) {
+                            handleSubmit();
+                        }
+                    }} className='btn btn-success'>{load ? <span className=" loading loading-ring loading-lg"></span> : "دفع الدفعة الاولى ان وجدت"}</button>
                 </div>
             }
             <div className='container mx-auto'>
-            {
-                commodityRevenu && <h1 className='mt-[1rem] text-[1.1rem] font-bold'>للذهاب إلى جدول الأقساط <Link to={"/commodityRevenue/installmentSchedule?id=" + commodityRevenu._id} className='text-error'>اضغط هنا</Link></h1>
+                {
+                    commodityRevenu && <h1 className='mt-[1rem] text-[1.1rem] font-bold'>للذهاب إلى جدول الأقساط <Link to={"/commodityRevenue/installmentSchedule?id=" + commodityRevenu._id} className='text-error'>اضغط هنا</Link></h1>
 
-            }
+                }
             </div>
         </div>
     )

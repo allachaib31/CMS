@@ -3,7 +3,7 @@ import React from 'react'
 function Checkbox({inputs, setInputs}) {
     const handleCheckboxChange = (e) => {
         const { value, checked } = e.target;
-        if(value == "إضافة إيرادات (اشتراكات الأعضاء)") return;
+        //if(value == "إضافة إيرادات (اشتراكات الأعضاء)") return;
         if (value === "الكل") {
             const checkInput = document.querySelectorAll(".checkbox");
             if (checked) {
@@ -54,7 +54,7 @@ function Checkbox({inputs, setInputs}) {
             } else {
                 setInputs((prevInputs) => ({
                     ...prevInputs,
-                    UserPermission: ["إضافة إيرادات (اشتراكات الأعضاء)"],
+                    UserPermission: [],
                 }));
                 checkInput.forEach((input) => {
                     input.checked = false;
@@ -138,7 +138,7 @@ function Checkbox({inputs, setInputs}) {
                     </div>
                     <div className="w-full sm:w-1/2 flex-row form-control">
                         <label className="label gap-[1rem] cursor-pointer">
-                            <input type="checkbox" checked={true} value="إضافة إيرادات (اشتراكات الأعضاء)" onChange={handleCheckboxChange} className="checkbox checkbox-primary" />
+                            <input type="checkbox" value="إضافة إيرادات (اشتراكات الأعضاء)" onChange={handleCheckboxChange} className="checkbox checkbox-primary" />
                             <span className="label-text text-[1.3rem]">إضافة إيرادات (اشتراكات الأعضاء)</span>
                         </label>
                     </div>

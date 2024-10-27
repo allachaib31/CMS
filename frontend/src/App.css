@@ -215,19 +215,7 @@ textarea:valid,
 	}
 }
 
-@layer utilities {
-	@keyframes scroll {
-		0% {
-			transform: translateX(100%);
-		}
-
-		100% {
-			transform: translateX(-100%);
-		}
-	}
-
-	.animate-scroll {
-		animation: scroll 30s linear infinite;
-		display: flex;
-	}
+figure {
+	display: flex;
+	justify-content: center;
 }

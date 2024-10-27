@@ -211,7 +211,7 @@ function FormContributionPurchaseCommodity() {
                                                 <td className="border text-center border-slate-600">{user.contributionPercentage.toFixed(2)}%</td>
                                                 <td className="border text-center border-slate-600">{user.contributionAmount.toFixed(2)}</td>
                                                 <td className="border text-center border-slate-600">{user.profitAmount.toFixed(2)}</td>
-                                                <td className="border text-center border-slate-600" colSpan={3}>{user.balance.toFixed(2)}</td>
+                                                <td className="border text-center border-slate-600" colSpan={3}>{(user.profitAmount + user.previousBalance).toFixed(2)}</td>
                                             </tr>
                                         )
                                     })

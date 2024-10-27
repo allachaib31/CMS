@@ -91,7 +91,7 @@ function UpdateAdmin() {
         </Link>
       </div>
       <h1 className="text-center text-[1.5rem] font-bold py-[1rem]">
-        تحديث معلومات المستخدم {id} للعضو  : {name}
+        تحديث معلومات المستخدم : {name}
       </h1>
       {loading ? <div className="flex justify-center"><span className="loading loading-ring w-[4rem]"></span></div> :
         <form action="" className="py-[2rem] flex flex-col gap-[1rem]">

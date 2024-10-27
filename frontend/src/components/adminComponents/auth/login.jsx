@@ -82,7 +82,7 @@ function Login() {
             onClick={(event) => {
               event.preventDefault();
               handleSubmit();
-            }} className="btn w-full bg-[#2563EB] text-white text-[18px] font-bold">{submit ? <span className="loading loading-ring loading-lg"></span> : "تسجيل الدخول"} </button>
+            }} className="btn w-full bg-[#2563EB] text-white text-[18px] font-bold">{submit ? <span className="loading loading-ring loading-lg"></span> : "الدخول"} </button>
           </form>
         </div>
       </div>

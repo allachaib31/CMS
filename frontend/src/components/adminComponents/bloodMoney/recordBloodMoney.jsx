@@ -19,7 +19,7 @@ function RecordBloodMoney() {
     return (
         <div className="px-[1rem] sm:px-0">
             <h1 className="text-center text-[1.5rem] font-bold py-[1rem]">
-            سجل مبالغ الدية المستردة 
+            سجل مبالغ الديات  
             </h1>
             <div className="mt-[1rem] flex justify-center">
                 <div className="flex gap-[0.2rem] sm:gap-[1rem]">

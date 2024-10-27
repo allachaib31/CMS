@@ -17,7 +17,7 @@ function WithdrawMemberBalance() {
         setShowAlert({
             display: false,
         });
-        withdrawBalanceFetch({id}).then((res) => {
+        withdrawBalanceFetch({ id }).then((res) => {
             setSubmit((e) => !e)
             setShowAlert({
                 display: true,
@@ -82,11 +82,13 @@ function WithdrawMemberBalance() {
                                 return (
                                     <tr className='text-center text-[0.8rem]'>
                                         <th className='border border-slate-600'>{user.name}</th>
-                                        <th className='border border-slate-600'>{user.memberBalance}</th>
+                                        <th className='border border-slate-600'>{user.memberBalance.toFixed(2)}</th>
                                         <th className='border border-slate-600'>{user.subscriptionExpiryDate && new Date(user.subscriptionExpiryDate).getUTCFullYear() + "-" + (new Date(user.subscriptionExpiryDate).getUTCMonth() + 1) + "-" + new Date(user.subscriptionExpiryDate).getUTCDate()}</th>
                                         <th className='border border-slate-600'>{user.subscriptionExpiryDateHijri && user.subscriptionExpiryDateHijri.year + "-" + user.subscriptionExpiryDateHijri.month.number + "-" + user.subscriptionExpiryDateHijri.day}</th>
                                         <th className='border border-slate-600'><button onClick={() => {
-                                            handleSubmit(user._id);
+                                            if (window.confirm("هل انت متاكد من انك تريد القيام به العملية")) {
+                                                handleSubmit(user._id);
+                                            }
                                         }} className='btn btn-success'>{submit ? <span className="loading loading-ring loading-lg"></span> : "سحب"}</button></th>
                                     </tr>
                                 )

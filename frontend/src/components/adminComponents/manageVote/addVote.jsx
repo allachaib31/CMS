@@ -50,7 +50,7 @@ function AddVote() {
                 </Link>
             </div>
             <h1 className="text-center text-[1.5rem] font-bold py-[1rem]">
-                نموذج التصويت
+            سجل التصويتات
             </h1>
             <form action="" className="py-[2rem] flex flex-col gap-[1rem]">
                 {showAlert.display ? <Alert msg={showAlert} /> : ""}

@@ -81,7 +81,7 @@ function LoansOrder() {
                             {
                                 listId && listId.map((user) => {
                                     return (
-                                        <option value={user._id}>{user.id} ({user.name})</option>
+                                        <option value={user._id}>{user.name}</option>
                                     )
                                 })
                             }
@@ -144,7 +144,9 @@ function LoansOrder() {
                 </div>
                 <button onClick={(event) => {
                     event.preventDefault();
-                    handleSubmit();
+                    if (window.confirm("هل انت متاكد من انك تريد القيام به العملية")) {
+                        handleSubmit();
+                    }
                 }} disabled={submit} className='btn text-white font-bold text-[20px] btn-primary'>
                     {submit ? <span className="loading loading-ring loading-lg"></span> : "تاكيد"}
                 </button>

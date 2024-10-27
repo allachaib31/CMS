@@ -9,6 +9,7 @@ function Dashboard() {
         cumulativeBalance: 0,
         memberBalance: 0,
         loans: 0,
+        loansPaid: 0,
         moneyBox: {
             amount: 0,
             cumulativeAmount: 0
@@ -22,6 +23,7 @@ function Dashboard() {
                 cumulativeBalance: res.data.cumulativeBalance,
                 memberBalance: res.data.memberBalance,
                 loans: res.data.loans.amount,
+                loansPaid: res.data.loansPaid,
                 moneyBox: {
                     amount: res.data.moneyBox.amount,
                     cumulativeAmount: res.data.moneyBox.cumulativeAmount
@@ -37,8 +39,48 @@ function Dashboard() {
     return (
         <div className="px-[1rem] sm:px-0 py-[2rem]">
             <div className="container mx-auto">
-                <div className='flex flex-col gap-[1rem] justify-center items-center'>
-                    <div className='flex gap-[1rem] flex-col items-center justify-center md:flex-row w-full bg-base-100'>
+                <div className='flex flex-wrap gap-[1rem] justify-center items-center'>
+                    <div className='rounded-[14px] bg-primary text-secondary-content flex flex-col justify-center items-center w-full lg:w-1/4 py-[2rem]'>
+                        <h1 className='text-[1.3rem] text-center font-bold'>رصيد الصندوق منذ إنشائه</h1>
+                        <h1 className='text-[1.3rem] text-center font-bold text-orange-400 '>{data.moneyBox.cumulativeAmount.toFixed(2)}</h1>
+                    </div>
+                    <div className='rounded-[14px] bg-primary text-secondary-content flex flex-col justify-center items-center w-full lg:w-1/4 py-[2rem]'>
+                        <h1 className='text-[1.3rem] text-center font-bold'>المصروفات</h1>
+                        <h1 className='text-[1.3rem] text-center font-bold text-orange-400 '>{(data.moneyBox.cumulativeAmount - data.moneyBox.amount).toFixed(2)}</h1>
+                    </div>
+                    <div className='rounded-[14px] bg-primary text-secondary-content flex flex-col justify-center items-center w-full lg:w-1/4 py-[2rem]'>
+                        <h1 className='text-[1.3rem] text-center font-bold'>رصيد الحالي لصندوق</h1>
+                        <h1 className='text-[1.3rem] text-center font-bold text-orange-400 '>{data.moneyBox.amount.toFixed(2)}</h1>
+                    </div>
+                    <div className='rounded-[14px] bg-primary text-secondary-content flex flex-col justify-center items-center w-full lg:w-1/4 py-[2rem]'>
+                        <h1 className='text-[1.3rem] text-center font-bold'>رصيدك منذ بداية اشتراكك</h1>
+                        <h1 className='text-[1.3rem] text-center font-bold text-orange-400'>{data.cumulativeBalance.toFixed(2)}</h1>
+                    </div>
+                    <div className='rounded-[14px] bg-primary text-secondary-content flex flex-col justify-center items-center w-full lg:w-1/4 py-[2rem]'>
+                        <h1 className='text-[1.3rem] text-center font-bold'>المصروف من رصيدك</h1>
+                        <h1 className='text-[1.3rem] text-center font-bold text-orange-400'>{(data.cumulativeBalance - data.memberBalance).toFixed(2)}</h1>
+                    </div>
+                    <div className='rounded-[14px] bg-primary text-secondary-content flex flex-col justify-center items-center w-full lg:w-1/4 py-[2rem]'>
+                        <h1 className='text-[1.3rem] text-center font-bold'>رصيدك الحالي</h1>
+                        <h1 className='text-[1.3rem] text-center font-bold text-orange-400'>{data.memberBalance.toFixed(2)}</h1>
+                    </div>
+                    <div className='rounded-[14px] bg-primary text-secondary-content flex flex-col justify-center items-center w-full lg:w-1/4 py-[2rem]'>
+                        <h1 className='text-[1.3rem] text-center font-bold'>مبالغ قروضك</h1>
+                        <h1 className='text-[1.3rem] text-center font-bold text-orange-400'>{data.loans.toFixed(2)}</h1>
+                    </div>
+                    <div className='rounded-[14px] bg-primary text-secondary-content flex flex-col justify-center items-center w-full lg:w-1/4 py-[2rem]'>
+                        <h1 className='text-[1.3rem] text-center font-bold'>مبالغ قروضك الغير مسددة</h1>
+                        <h1 className='text-[1.3rem] text-center font-bold text-orange-400'>{(data.loans - data.loansPaid).toFixed(2)}</h1>
+                    </div>
+                    <div className='rounded-[14px] bg-primary text-secondary-content flex flex-col justify-center items-center w-full lg:w-1/4 py-[2rem]'>
+                        <h1 className='text-[1.3rem] text-center font-bold'>أرباح المساهمات والسلع</h1>
+                        <h1 className='text-[1.3rem] text-center font-bold text-orange-400'>{data.commodityProfitsContributions.toFixed(2)}</h1>
+                    </div>
+                    <div className='rounded-[14px] bg-primary text-secondary-content flex flex-col justify-center items-center w-full lg:w-1/4 py-[2rem]'>
+                        <h1 className='text-[1.3rem] text-center font-bold'>مبالغ الإعانات التي استلمتها</h1>
+                        <h1 className='text-[1.3rem] text-center font-bold text-orange-400'>0.00</h1>
+                    </div>
+                    {/*<div className='flex gap-[1rem] flex-col items-center justify-center md:flex-row w-full bg-base-100'>
                         <div className='bg-primary text-secondary-content flex flex-col justify-center items-center w-full md:w-1/2 py-[2rem]'>
                             <h1 className='text-[1.3rem] text-center font-bold'>رصيدك المالي الحالي</h1>
                             <h1 className='text-[1.3rem] text-center font-bold'>{data.memberBalance.toFixed(2)}</h1>
@@ -74,7 +116,7 @@ function Dashboard() {
                             <h1 className='text-[1.3rem] text-center font-bold'>{data.loans.toFixed(2)}</h1>
                         </div>
                     </div>
-                    
+                    */}
                 </div>
             </div>
         </div>

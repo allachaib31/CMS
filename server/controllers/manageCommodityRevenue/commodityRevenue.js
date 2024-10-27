@@ -236,8 +236,8 @@ exports.payAmount = async (req, res) => {
             {
                 $inc: {
                     amount: commodityRevenu.commodityData.amountPaid,
-                    cumulativeAmount: commodityRevenu.commodityData.amountPaid,
-                    "source.commodityRevenue": commodityRevenu.commodityData.amountPaid
+                    //cumulativeAmount: (commodityRevenu.commodityData.amountPaid * commodityRevenu.commodityData.purchaseAmount) / commodityRevenu.commodityData.saleAmount,
+                    //"source.commodityRevenue": (commodityRevenu.commodityData.amountPaid * commodityRevenu.commodityData.purchaseAmount) / commodityRevenu.commodityData.saleAmount
                 }
             },
             { new: true })
@@ -260,6 +260,8 @@ exports.payAmount = async (req, res) => {
         const amount = amountPaid / userContributions.length;
         for (const contribution of userContributions) {
             const newBalance = contribution.balance + amount;
+            //let total = contribution.profitAmount / commodityRevenu.commodityData.numberOfInstallments;
+            //let percn = (amount * 100) / total
             await userContributionGoodModel.updateOne(
                 { _id: contribution._id },
                 { $set: { balance: newBalance } }
@@ -267,8 +269,8 @@ exports.payAmount = async (req, res) => {
             await userModel.findByIdAndUpdate(contribution.idUser, {
                 $inc: {
                     memberBalance: amount,
-                    cumulativeBalance: amount,
-                    commodityProfitsContributions: amount
+                    //cumulativeBalance: total ,
+                    //commodityProfitsContributions: total
                 }
             },
                 { new: true })
@@ -299,20 +301,6 @@ exports.payInstallmentSchedule = async (req, res) => {
         if (installmentSchedule.itPaid) {
             return res.status(400).send({
                 msg: "لقد تم سداد القسط من قبل"
-            });
-        }
-        const moneyBox = await moneyBoxModel.findByIdAndUpdate(moneyBoxId,
-            {
-                $inc: {
-                    amount: installmentSchedule.premiumAmount,
-                    cumulativeAmount: installmentSchedule.premiumAmount,
-                    "source.commodityRevenue": installmentSchedule.premiumAmount
-                }
-            },
-            { new: true })
-        if (!moneyBox) {
-            return res.status(400).send({
-                msg: "حدث خطأ أثناء معالجة طلبك",
             });
         }
         const dateMiladi = new Date();
@@ -375,6 +363,7 @@ exports.payInstallmentSchedule = async (req, res) => {
         const amount = amountPaid / userContributions.length;
         for (const contribution of userContributions) {
             const newBalance = contribution.balance + amount;
+            let total = contribution.profitAmount / commodityRevenu.commodityData.numberOfInstallments;
             await userContributionGoodModel.updateOne(
                 { _id: contribution._id },
                 { $set: { balance: newBalance } }
@@ -382,11 +371,25 @@ exports.payInstallmentSchedule = async (req, res) => {
             await userModel.findByIdAndUpdate(contribution.idUser, {
                 $inc: {
                     memberBalance: amount,
-                    cumulativeBalance: amount,
-                    commodityProfitsContributions: amount
+                    cumulativeBalance: total,
+                    commodityProfitsContributions: total
                 }
             },
                 { new: true })
+        }
+        const moneyBox = await moneyBoxModel.findByIdAndUpdate(moneyBoxId,
+            {
+                $inc: {
+                    amount: installmentSchedule.premiumAmount,
+                    cumulativeAmount: commodityRevenu.commodityData.profitAmount / commodityRevenu.commodityData.numberOfInstallments,
+                    "source.commodityRevenue": commodityRevenu.commodityData.profitAmount / commodityRevenu.commodityData.numberOfInstallments,
+                }
+            },
+            { new: true })
+        if (!moneyBox) {
+            return res.status(400).send({
+                msg: "حدث خطأ أثناء معالجة طلبك",
+            });
         }
         return res.status(200).send({
             msg: "لقد تم الدفع بنجاح"

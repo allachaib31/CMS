@@ -74,3 +74,17 @@ exports.voteDetails = async (req, res) => {
         });
     }
 }
+exports.deleteVote = async (req, res) => {
+    const { id }  = req.query;
+    try{
+        const vote = await voteModel.findByIdAndDelete(id);
+        return res.status(200).send({
+            msg: "تم حذف العنصر بنجاح"
+        })
+    }catch (error) {
+        console.log(error);
+        return res.status(500).send({
+            msg: "حدث خطأ أثناء معالجة طلبك"
+        });
+    }
+}

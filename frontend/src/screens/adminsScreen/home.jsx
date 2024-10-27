@@ -3,10 +3,11 @@ import { Link, Outlet, useNavigate } from "react-router-dom";
 import profileImage from "../../images/profileImage.png";
 import logo from "../../images/logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChartPie, faBuilding, faUser, faChartSimple, faFileInvoiceDollar, faSackDollar, faUserTie, faHandHoldingDollar, faGift, faRecycle, faArrowTrendUp, faShapes, faCheckToSlot, faGamepad, faMicrophone, faListCheck, faTree, faHandHoldingDroplet, faUpload, faGauge } from "@fortawesome/free-solid-svg-icons";
+import { faChartPie, faBuilding, faUser, faChartSimple, faFileInvoiceDollar, faSackDollar, faUserTie, faHandHoldingDollar, faGift, faRecycle, faArrowTrendUp, faShapes, faCheckToSlot, faGamepad, faMicrophone, faListCheck, faTree, faHandHoldingDroplet, faUpload, faGauge, faVault } from "@fortawesome/free-solid-svg-icons";
 import { getClientAdsFetch, uploadImageFetch, validationFetch } from "../../utils/apiFetch";
 import { Alert, Loading } from "../../components";
 import Cookies from "cookies-js";
+import Marquee from "react-fast-marquee";
 
 export const UserContext = React.createContext();
 
@@ -148,13 +149,13 @@ function Home() {
                   </div>
                   <li className="sm:text-[1.3rem] space-y-1">
                     <Link to="/admin/dashboard">
-                      <FontAwesomeIcon icon={faGauge} /> لوحة القيادة
+                      <FontAwesomeIcon icon={faGauge} /> الإحصائيات
                     </Link>
                     <Link to="/admin/advetising">
-                      <FontAwesomeIcon icon={faMicrophone} /> اعلانات
+                      <FontAwesomeIcon icon={faMicrophone} /> الإعلانات
                     </Link>
                     <Link to="/admin/election">
-                      <FontAwesomeIcon icon={faCheckToSlot} /> انتخابات
+                      <FontAwesomeIcon icon={faCheckToSlot} /> التصويتات
                     </Link>
                     <Link to="/admin">
                       <FontAwesomeIcon icon={faUserTie} /> إدارة المسؤولين
@@ -213,7 +214,7 @@ function Home() {
                             to="/subscription/registerMemberFinancialData"
                             className="sm:text-[1rem]"
                           >
-                            البيانات المالية للعضو
+                            سجل البيانات المالية للاعضاء
                           </Link>
                         </li>
                         <li>
@@ -277,6 +278,28 @@ function Home() {
                         <li><Link to="/stocks/registerShareholdersShares" className="sm:text-[1rem]">سجل المساهمين</Link></li>
                         <li><Link to="/stocks/stockRevenue" className="sm:text-[1rem]">إيرادات الأسهم</Link></li>
                         <li><Link to="/stocks" className="sm:text-[1rem]">سجل المساهمات</Link></li>
+                      </ul>
+                    </details>
+
+
+                    <details>
+                      <summary>
+                      <FontAwesomeIcon icon={faBuilding} /> الشركات المالية
+                      </summary>
+                      <ul>
+                        <li><Link to="/financialCompany/" className="sm:text-[1rem]">طلب المساهمة</Link></li>
+                        <li><Link to="/financialCompany/displayContributionForm" className="sm:text-[1rem]">نموذج المساهمة</Link></li>
+                        <li><Link to="/financialCompany/contributionData" className="sm:text-[1rem]">بيانات المساهمة</Link></li>
+                      </ul>
+                    </details>
+                    <details>
+                      <summary>
+                      <FontAwesomeIcon icon={faVault} /> الصناديق الاستثمارية
+                      </summary>
+                      <ul>
+                        <li><Link to="/investmentBox/" className="sm:text-[1rem]">طلب المساهمة</Link></li>
+                        <li><Link to="/investmentBox/displayContributionForm" className="sm:text-[1rem]">نموذج المساهمة</Link></li>
+                        <li><Link to="/investmentBox/contributionData" className="sm:text-[1rem]">بيانات المساهمة</Link></li>
                       </ul>
                     </details>
                     <details>
@@ -371,7 +394,7 @@ function Home() {
                           <Link to="/manageVote/addVote">إضافة تصويت</Link>
                         </li>
                         <li>
-                          <Link to="/manageVote/">التصويتات السابقة</Link>
+                          <Link to="/manageVote/">سجل التصويتات</Link>
                         </li>
                       </ul>
                     </details>
@@ -381,39 +404,52 @@ function Home() {
                       </summary>
                       <ul>
                         <li>
-                          <Link to="/manageAdvertising/addAd">إضافة اعلان</Link>
+                          <Link to="/manageAdvertising/addAd">إضافة إعلان</Link>
                         </li>
                         <li>
                           <Link to="/manageAdvertising/slideShow">اضافة نص متحرك</Link>
                         </li>
                         <li>
-                          <Link to="/manageAdvertising/">الإعلانات السابقة</Link>
+                          <Link to="/manageAdvertising/">سجل الإعلانات</Link>
                         </li>
                       </ul>
                     </details>
                     <details>
                       <summary>
-                        <p><FontAwesomeIcon icon={faListCheck} />اتفاقية العائلة</p>
+                        <p><FontAwesomeIcon icon={faListCheck} />اتفاقيات العائلة</p>
                       </summary>
                       <ul>
                         <li>
-                          <Link to="/agreementsFamily/add">إضافة اتفاقية جديدة</Link>
+                          <Link to="/agreementsFamily/add">إضافة اتفاقية </Link>
                         </li>
                         <li>
-                          <Link to="/agreementsFamily/">الاتفاقيات السابقة</Link>
+                          <Link to="/agreementsFamily/">سجل الاتفاقيات</Link>
                         </li>
                       </ul>
                     </details>
                     <details>
                       <summary>
-                        <p><FontAwesomeIcon icon={faListCheck} />اتفاقية الصندوق</p>
+                        <p><FontAwesomeIcon icon={faListCheck} />اتفاقيات الصندوق</p>
                       </summary>
                       <ul>
                         <li>
-                          <Link to="/agreements/add">إضافة اتفاقية جديدة</Link>
+                          <Link to="/agreements/add">إضافة اتفاقية </Link>
                         </li>
                         <li>
-                          <Link to="/agreements/">الاتفاقيات السابقة</Link>
+                          <Link to="/agreements/">سجل الاتفاقيات</Link>
+                        </li>
+                      </ul>
+                    </details>
+                    <details>
+                      <summary>
+                        <p><FontAwesomeIcon icon={faListCheck} />فتاوى الصندوق</p>
+                      </summary>
+                      <ul>
+                        <li>
+                          <Link to="/fatwa/add">اضافة فتوى جديدة</Link>
+                        </li>
+                        <li>
+                          <Link to="/fatwa/">الفتاوى السابقة</Link>
                         </li>
                       </ul>
                     </details>
@@ -463,7 +499,7 @@ function Home() {
                 <path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z" />
               </svg>
             </label>
-            <div className="relative bg-white rounded-full">
+            <div className="relative bg-white rounded-full z-[999]">
               <img
                 onClick={() => {
                   const listMenu = document.getElementById("listMenu");
@@ -492,23 +528,20 @@ function Home() {
               </div>
             </div>
           </header>
-          <div className="scrolling-text flex w-full overflow-hidden">
-            <div className="flex justify-center gap-[8rem] min-w-full animate-scroll">
-              {
-                ads && ads.map((ad) => {
-                  return (
-                    <h1 className="text-[2rem] inline-block min-w-max text-center whitespace-nowrap">
-                      {ad.text}
-                    </h1>
-                  )
-                })
-              }
-            </div>
+          <div dir="ltr">
+          <Marquee direction="right" speed={150} gradient={true}>
+            {ads &&
+              ads.reverse().map((ad, index) => (
+                    <h1 className="text-[1.1rem] sm:text-[2rem] mx-[30px]">{ad.text}</h1>
+              ))}
+          </Marquee>
+
           </div>
+
           <dialog id="my_modal_ImageProfile" className="modal">
-            <div className="modal-box">
+            <div className="modal-box ">
               {showAlert.display ? <Alert msg={showAlert} /> : ""}
-              <h3 className="font-bold text-lg">رفع صورة جديدة</h3>
+              <h3 className="font-bold text-lg ">رفع صورة جديدة</h3>
               <button className='btn btn-info max-w-sm' type="button" onClick={handleFileClick}>
                 <FontAwesomeIcon icon={faUpload} /> تحميل صورة
               </button>

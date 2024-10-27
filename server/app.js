@@ -75,9 +75,12 @@ conn.once('open', () => {
     const contributionRevenue = require("./routes/manageContributionRevenue/contributionRevenue");
     const contest = require("./routes/contest/contest");
     const stocks = require("./routes/manageStock/stock");
+    const financialCompany = require("./routes/financialCompany/financialCompany");
+    const investmentBox = require("./routes/investmentBox/investmentBox");
     const vote = require("./routes/vote/vote");
     const agreements = require("./routes/agreement/agreement");
     const agreementsFamily = require("./routes/agreementFamily/agreement");
+    const fatwa = require("./routes/fatwa/fatwa");
     const familyTree = require("./routes/familyTree/familyTree");
     const clientAuth = require("./routes/client/login/login");
     const userInformation = require("./routes/client/userInformation/information");
@@ -97,6 +100,8 @@ conn.once('open', () => {
         .use(commodityRevenu)
         .use(loans)
         .use(stocks)
+        .use(financialCompany)
+        .use(investmentBox)
         .use(reimbursedExpenses)
         .use(unReimbursedExpenses)
         .use(moneyBox)
@@ -107,6 +112,7 @@ conn.once('open', () => {
         .use(agreementsFamily)
         .use(familyTree)
         .use(advertising)
+        .use(fatwa)
         .use(competition)
         .use(bloodMoney);
 

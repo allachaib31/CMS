@@ -10,7 +10,7 @@ exports.login = async (req, res) => {
         console.log(admin)
         if (!admin) {
             return res.status(401).send({
-                msg: "رقم الهوية الوطنية أو كلمة المرور غير صحيحة"
+                msg: "رقم الهوية أو كلمة المرور غير صحيحة"
             });
         }
         if(admin.disable){
@@ -22,7 +22,7 @@ exports.login = async (req, res) => {
         const match = await bcrypt.compare(password, admin.password);
         if (!match) {
             return res.status(401).send({
-                msg: "رقم الهوية الوطنية أو كلمة المرور غير صحيحة"
+                msg: "رقم الهوية أو كلمة المرور غير صحيحة"
             });
         }
         const token = jwt.sign({

@@ -276,9 +276,9 @@ exports.sellStock = async (req, res) => {
             id: stocks.memberId._id
         }, {
             $inc: {
-                memberBalance: amountPercentage,
-                cumulativeBalance: amountPercentage,
-                commodityProfitsContributions: amountPercentage
+                memberBalance: amountPercentage < 0 ? 0 : amountPercentage,
+                cumulativeBalance: amountPercentage < 0 ? 0 : amountPercentage,
+                commodityProfitsContributions: amountPercentage < 0 ? 0 : amountPercentage
             }
         })
         const userStock = await userStockModel.find({
@@ -287,6 +287,7 @@ exports.sellStock = async (req, res) => {
             password: false
         })
         const amountUser = (amount - amountPercentage) / userStock.length;
+        const prevAmount = stocks.totalCostOfStock / userStock.length;
         for(const user of userStock) {
             const profitAmount = amountUser;
             user.rate = (profitAmount * 100) / user.contributionAmount;
@@ -295,9 +296,9 @@ exports.sellStock = async (req, res) => {
             await user.save();
             await userModel.findByIdAndUpdate(user.idUser, {
                 $inc: {
-                    memberBalance: amountUser,
-                    cumulativeBalance: amountUser,
-                    commodityProfitsContributions: amountUser
+                    memberBalance: user.amount + user.contributionAmount,
+                    cumulativeBalance: profitAmount,
+                    commodityProfitsContributions: profitAmount
                 }
             },
                 { new: true })
@@ -307,8 +308,8 @@ exports.sellStock = async (req, res) => {
             {
                 $inc: {
                     amount: stocks.stockSaleValue,
-                    cumulativeAmount: stocks.stockSaleValue,
-                    "source.contributionRevenues": stocks.stockSaleValue
+                    cumulativeAmount: stocks.balanceAfterSale - stocks.previousFundBalance,
+                    "source.contributionRevenues": stocks.balanceAfterSale - stocks.previousFundBalance
                 }
             },
             { new: true })

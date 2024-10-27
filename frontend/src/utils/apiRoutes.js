@@ -1,5 +1,5 @@
-//export const HOST = `http://localhost:4000/`;
-export const HOST = `/`;
+export const HOST = `http://localhost:4000/`;
+//export const HOST = `/`;
 // Auth admin Route
 export const LOGIN_ROUTE = `${HOST}api/v1.0/auth/login`;
 export const VALIDATION_ROUTE = `${HOST}api/v1.0/auth/validation`;
@@ -66,6 +66,16 @@ export const SELLSTOCK_ROUTE = `${HOST}api/v1.0/stock/sell`;
 export const GETSTOCKCONTRIBUTIONRECORD = `${HOST}api/v1.0/stock/stockContributionRecord`;
 export const GETREGISTERSHAREHOLDERSSHARES_ROUTE = `${HOST}api/v1.0/stock/getRegisterShareholdersShares`;
 export const GETACTIVESTOCK_ROUTE = `${HOST}api/v1.0/stock/getActiveStock`;
+//Manage financial
+export const ADDFINANCIAL_ROUTE = `${HOST}api/v1.0/financial/add`;
+export const GETIDFinancial_ROUTE = `${HOST}api/v1.0/financial/getIdFinancial`;
+export const GETFINANCIAL_ROUTE = `${HOST}api/v1.0/financial/getFinancial`;
+export const PAYMENTFINANCIALCOMPANY_ROUTE = `${HOST}api/v1.0/financial/payment`;
+//Manage investment
+export const ADDINVESTMENT_ROUTE = `${HOST}api/v1.0/investmentBox/add`;
+export const GETIDINVESTMENT_ROUTE = `${HOST}api/v1.0/investmentBox/getIdInvestmentBox`;
+export const GETINVESTMENT_ROUTE = `${HOST}api/v1.0/investmentBox/getInvestmentBox`;
+export const PAYMENTINVESMENT_ROUTE = `${HOST}api/v1.0/investmentBox/payment`;
 // Manage Loans
 export const ADDLOANS_ROUTE = `${HOST}api/v1.0/loans`;
 export const PAYINSTALLMENTS_ROUTE = `${HOST}api/v1.0/loans/payInstallments`;
@@ -107,6 +117,7 @@ export const REMOVEQUESTION_ROUTE = `${HOST}api/v1.0/removeQuestion`;
 export const ADDVOTE_ROUTE = `${HOST}api/v1.0/vote/addVote`;
 export const GETVOTE_ROUTE = `${HOST}api/v1.0/vote/getVote`;
 export const VOTEDETAILS_ROUTE = `${HOST}api/v1.0/vote/voteDetails`;
+export const DELETEVOTE_ROUTE = `${HOST}api/v1.0/vote/delete`;
 //Manage advertising
 export const ADDADVERTISING_ROUTE = `${HOST}api/v1.0/advertising`;
 export const GETALLADVERTISING_ROUTE = `${HOST}api/v1.0/advertising/getAll`;
@@ -114,6 +125,7 @@ export const DELETEADVERTISING_ROUTE = `${HOST}api/v1.0/advertising/delete`;
 export const ADDADS_ROUTE = `${HOST}api/v1.0/ads/add`;
 export const GETADS_ROUTE = `${HOST}api/v1.0/ads/`;
 export const DELETEADS_ROUTE = `${HOST}api/v1.0/ads`;
+export const REPOSTADS_ROUTE = `${HOST}api/v1.0/ads/repost`;
 //Manage agreements
 export const ADDAGREEMENTS_ROUTE = `${HOST}api/v1.0/agreements/add`
 export const GETAGREEMENTS_ROUTE = `${HOST}api/v1.0/agreements/`;
@@ -122,6 +134,10 @@ export const UPDATEAGREEMENTSACTIVE_ROUTE = `${HOST}api/v1.0/agreements/`
 export const ADDAGREEMENTSFAMILY_ROUTE = `${HOST}api/v1.0/agreementsFamily/add`
 export const GETAGREEMENTSFAMILY_ROUTE = `${HOST}api/v1.0/agreementsFamily/`;
 export const UPDATEAGREEMENTSACTIVEFAMILY_ROUTE = `${HOST}api/v1.0/agreementsFamily/`
+//Manage agreements
+export const ADDFATWAS_ROUTE = `${HOST}api/v1.0/fatwa/add`
+export const GETFATWAS_ROUTE = `${HOST}api/v1.0/fatwa/`;
+export const UPDATEFATWAS_ROUTE = `${HOST}api/v1.0/fatwa/`
 //Manage familyTree
 export const CREATEFAMILYTREE_ROUTE = `${HOST}api/v1.0/familyTree/createNewFamilyTree`;
 export const ADDTOFAMILYTREE_ROUTE = `${HOST}api/v1.0/familyTree`;

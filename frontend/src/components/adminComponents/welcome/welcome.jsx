@@ -4,7 +4,7 @@ function Welcome() {
     const user = useContext(UserContext);
     return (
         <div className='flex justify-center items-center min-h-[calc(100vh_-_6.034375rem)] '>
-            <h1 className='font-bold text-[1.3rem]'>مرحبًا بك، {user.name}! لقد قمت بتسجيل الدخول كمسؤول.</h1>
+            <h1 className='font-bold text-[1.3rem]'>مرحبًا بك، {user.name.split(" ")[0]} {user.name.split(" ")[1]}! لقد قمت بتسجيل الدخول كمسؤول.</h1>
         </div>
     )
 }

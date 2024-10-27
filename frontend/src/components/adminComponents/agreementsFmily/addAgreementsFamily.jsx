@@ -441,7 +441,7 @@ function AddAgreementsFamily() {
                 </LRouter>
             </div>
             <h1 className="text-center text-[1.5rem] font-bold py-[1rem]">
-                نموذج اتفاقية العائلة
+            إضافة اتفاقية جديدة
             </h1>
             <form action="" className="py-[2rem] flex flex-col gap-[1rem]">
                 {showAlert.display ? <Alert msg={showAlert} /> : ""}                <div>
@@ -463,7 +463,9 @@ function AddAgreementsFamily() {
                 </div>
                 <button onClick={(event) => {
                     event.preventDefault();
-                    handleSubmit();
+                    if(window.confirm("هل انت متاكد من انك تريد القيام به العملية")){
+                        handleSubmit();
+                    }
                 }} disabled={submit} className='btn btn-primary w-full font-bold'>
                     {submit ? <span className="loading loading-ring loading-lg"></span> : "إضافة"}
                 </button>

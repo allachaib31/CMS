@@ -100,7 +100,11 @@ export { default as AddAgreements } from "./adminComponents/agreements/addAgreem
 /*MANAGE AGREEMENTS */
 export { default as AgreementsFamily } from "./adminComponents/agreementsFmily/agreementsFamily";
 export { default as DisplayAgreementsFamily } from "./adminComponents/agreementsFmily/displayAgreementsFamily";
-export { default as AddAgreementsFamily } from "./adminComponents//agreementsFmily/addAgreementsFamily";
+export { default as AddAgreementsFamily } from "./adminComponents/agreementsFmily/addAgreementsFamily";
+/*MANAGE AGREEMENTS */
+export { default as Fatwas } from "./adminComponents/fatwa/fatwas";
+export { default as DisplayFatwas } from "./adminComponents/fatwa/displayFatwas";
+export { default as AddFatwa } from "./adminComponents/fatwa/addFatwa";
 /*FAMILY TREE */
 export { default as FamilyTree } from "./adminComponents/familyTree/familyTree";
 export { default as DisplayFamilyTree } from "./adminComponents/familyTree/displayFamilyTree";

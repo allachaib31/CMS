@@ -64,7 +64,7 @@ exports.getTypeExpenses = async (req, res) => {
 }
 
 exports.addExpenses = async (req, res) => {
-    const { name, amount, typeExpenses, comments } = req.body;
+    const { name, amount, typeExpenses, comments, selectType } = req.body;
     try {
         if (
             req.user.admin.userPermission.indexOf(
@@ -81,14 +81,15 @@ exports.addExpenses = async (req, res) => {
                 msg: "لايوجد رصيد كافي في الصندوق",
             });
         }
-        /*const user = await userModel.findOne({
-            NationalIdentificationNumber: NationalIdentificationNumber
-        })
-        if (!user) {
-            return res.status(404).send({
-                msg: "لا وجود لهذا المستخدم"
-            })
-        }*/
+        let user;
+        if(selectType){
+            user = await userModel.findById(name)
+            if (!user) {
+                return res.status(404).send({
+                    msg: "لا وجود لهذا المستخدم"
+                })
+            }
+        }
         const typeExpensesName = await typeExpensesModel.findOne({
             id: typeExpenses
         });
@@ -98,7 +99,7 @@ exports.addExpenses = async (req, res) => {
             })
         }
         const { error } = validateUnReimbursedExpenses({
-            name: name, amount, typeExpenses: typeExpensesName.name, comments
+            name: selectType ? user.name : name, amount, typeExpenses: typeExpensesName.name, comments
         })
         if (error) {
             return res.status(422).send({
@@ -111,7 +112,7 @@ exports.addExpenses = async (req, res) => {
         });
         const paymentAmount = amount / users.length;
         const unReimbursedExpenses = new unReimbursedExpensesModel({
-            name: name,
+            name:  selectType ? user.name : name,
             amount,
             expensememberbalance: paymentAmount,
             typeExpenses: typeExpensesName.name,
@@ -169,15 +170,15 @@ exports.addExpenses = async (req, res) => {
                 msg: "حدث خطأ أثناء معالجة طلبك",
             });
         }
-        /*const userUpdate = await userModel.findOneAndUpdate({
-            NationalIdentificationNumber: NationalIdentificationNumber
-        }, {
-            $inc: {
-                "subsidies.number": 1,
-                "subsidies.amount": Number(amount)
-            }
-        },
-            { new: true })*/
+        if(selectType){
+            const userUpdate = await userModel.findByIdAndUpdate(name, {
+                $inc: {
+                    "subsidies.number": 1,
+                    "subsidies.amount": Number(amount)
+                }
+            },
+                { new: true })
+        }
         return res.status(200).send({
             msg: "لقد تمت اضافته بنجاح",
         });
@@ -233,7 +234,7 @@ exports.getRecordUnrecovereExpenses = async (req, res) => {
             unReimbursedExpenses,
             total,
             expensesPaidCash,
-            numberOfBeneficiaries: cashPayUser.length
+            numberOfBeneficiaries: unReimbursedExpenses.length
 
         })
     } catch (error) {
@@ -291,20 +292,18 @@ exports.payCash = async (req, res) => {
         }
         cashPayUser.itPaid = true;
         const unReimbursedExpenses = await unReimbursedExpensesModel.findById(cashPayUser.unReimbursedExpensesId);
-        //console.log(unReimbursedExpenses);
-        //console.log(cashPayUser)
         unReimbursedExpenses.total += cashPayUser.amount;
         unReimbursedExpenses.expensesPaidCash.push({
             name: cashPayUser.idUser.name,
             amount: cashPayUser.amount
         })
-        const moneyBox = await moneyBoxModel.findByIdAndUpdate(moneyBoxId,
+        /*const moneyBox = await moneyBoxModel.findByIdAndUpdate(moneyBoxId,
             {
                 $inc: {
-                    amount: cashPayUser.amount,
+                    amount: cashPayUser.amount,//remvoe this
                 }
             },
-            { new: true })
+            { new: true })*/
         await cashPayUser.save();
         await unReimbursedExpenses.save();
         return res.status(200).send({

@@ -37,6 +37,11 @@ exports.addLoans = async (req, res) => {
                 msg: "لا وجود هذا المستخدم",
             });
         }
+        if(user.subscriptionExpiryDate){
+            return res.status(401).send({
+                msg: "لقد تم ايقاف الاشتراك العضو"
+            })
+        }
         const { error } = validateLoans({
             name: user.name, amount, premiumAmount, numberOfInstallments, dateOfReceipt, dateOfReceiptHijri, paymentStartDate, paymentStartDateHijri: {
                 day: paymentStartDateHijri[0],
@@ -113,7 +118,7 @@ exports.addLoans = async (req, res) => {
             }
         }
 
-        const numberOfUser = await userModel.countDocuments({ "status": "active", "disable": false });
+        /*const numberOfUser = await userModel.countDocuments({ "status": "active", "disable": false });
         const activeUsers = await userModel.find({
             status: "active",
             disable: false,
@@ -141,7 +146,7 @@ exports.addLoans = async (req, res) => {
                     }
                 }
             }
-        }
+        }*/
         /*for (const user of activeUsers) {
             const userContribution = new userContributionLoansModel({
                 idUser: user._id,
@@ -233,12 +238,12 @@ exports.payInstallments = async (req, res) => {
             {
                 $inc: {
                     amount: installmentsLoans.premiumAmount,
-                    cumulativeAmount: installmentsLoans.premiumAmount,
+                    //cumulativeAmount: installmentsLoans.premiumAmount,
                     "source.loanIncome": installmentsLoans.premiumAmount
                 }
             },
             { new: true });
-        const userContribution = await userContributionLoansModel.find({
+        /*const userContribution = await userContributionLoansModel.find({
             idLoans: installmentsLoans.idLoans
         });
         const amount = installmentsLoans.premiumAmount / userContribution.length;
@@ -250,7 +255,7 @@ exports.payInstallments = async (req, res) => {
                 }
             },
                 { new: true })
-        })
+        })*/
         return res.status(200).send({
             msg: "لقد تم دفع بنجاح",
         });

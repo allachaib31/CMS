@@ -74,10 +74,10 @@ function RecordAnnualDetails() {
                                     <th className='border border-slate-600'>السنة</th>
                                     <th className='border border-slate-600'>محرم</th>
                                     <th className='border border-slate-600'>صفر</th>
-                                    <th className='border border-slate-600'>ربيع الاول</th>
-                                    <th className='border border-slate-600'>ربيع الثاني</th>
-                                    <th className='border border-slate-600'>جمادى الاول</th>
-                                    <th className='border border-slate-600'>جمادى الثاني</th>
+                                    <th className='border border-slate-600'>ربيع <br/> الاول</th>
+                                    <th className='border border-slate-600'>ربيع <br/> الثاني</th>
+                                    <th className='border border-slate-600'>جمادى <br/> الاول</th>
+                                    <th className='border border-slate-600'>جمادى <br/> الثاني</th>
                                     <th className='border border-slate-600'>رجب</th>
                                     <th className='border border-slate-600'>شعبان</th>
                                     <th className='border border-slate-600'>رمضان</th>

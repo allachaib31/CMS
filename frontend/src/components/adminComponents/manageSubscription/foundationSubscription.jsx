@@ -157,13 +157,15 @@ function FoundationSubscription() {
                     /*setInputs((prevInputs) => {
                       return { ...prevInputs, comments: event.target.value.trim() }
                     })*/
-                  }} placeholder="أكتب هنا" className="input input-bordered w-full max-w-xs" /> }</td>
+                  }} placeholder="أكتب هنا" className="input input-bordered w-full max-w-xs" />}</td>
                   <td id={user._id}>{user.enableAccount ? "لقد تم دفع" : <button onClick={() => {
-                    handleSubmit({
-                      idUser: user._id,
-                      amount: foundationPrice,
-                      comments: comment
-                    })
+                    if (window.confirm("هل انت متاكد من انك تريد القيام به العملية")) {
+                      handleSubmit({
+                        idUser: user._id,
+                        amount: foundationPrice,
+                        comments: comment
+                      })
+                    }
                   }} className='btn btn-success'>دفع</button>}</td>
                 </tr>
               )

@@ -69,7 +69,7 @@ function StocksContributionForm() {
                 </Link>
             </div>
             <h1 className="text-center text-[1.5rem] font-bold py-[1rem]">
-            طلب مساهمة
+                طلب مساهمة
             </h1>
             <form action="" className="py-[2rem] flex flex-col gap-[1rem]">
                 {showAlert.display ? <Alert msg={showAlert} /> : ""}
@@ -132,18 +132,18 @@ function StocksContributionForm() {
                     </div>
                     <div className="flex sm:flex-row flex-col gap-[1rem]">
                         <select required onChange={(event) => {
-                                setInputs((prevInput) => {
-                                    return {
-                                        ...prevInput,
-                                        memberId: event.target.value
-                                    }
-                                })
-                            }} className="select formInput select-bordered w-full sm:w-1/2">
+                            setInputs((prevInput) => {
+                                return {
+                                    ...prevInput,
+                                    memberId: event.target.value
+                                }
+                            })
+                        }} className="select formInput select-bordered w-full sm:w-1/2">
                             <option disabled selected>اختار العضو المساهم باسم الصندوق</option>
                             {
                                 listId && listId.map((user) => {
                                     return (
-                                        <option value={user._id}>{user.id} ({user.name})</option>
+                                        <option value={user._id}>{user.name}</option>
                                     )
                                 })
                             }
@@ -198,7 +198,7 @@ function StocksContributionForm() {
                             }
                         </div>
                     </div>
-                   {/* <div className="flex sm:flex-row flex-col gap-[1rem]">
+                    {/* <div className="flex sm:flex-row flex-col gap-[1rem]">
                         <div className="relative sm:w-1/2">
                             <FontAwesomeIcon icon={faArrowUpWideShort} className="absolute top-[1rem] right-[1rem]" />
                             <input type="number" required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder={`الأسهم المجانية`} onChange={(event) => {
@@ -226,35 +226,37 @@ function StocksContributionForm() {
                         </div>
                     </div>*/}
                     {
-                                 /*           <div className="flex sm:flex-row flex-col gap-[1rem]">
-                                            <div className="relative sm:w-1/2">
-                                                <FontAwesomeIcon icon={faMoneyBill} className="absolute top-[1rem] right-[1rem]" />
-                                                <input type="number" required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" disabled value={inputs.previousStockCostWithFreeShare} title={`تكلفة السهم سابقا مع السهم المجاني`} onChange={(event) => {
-                                                    setInputs((prevInput) => {
-                                                        return {
-                                                            ...prevInput,
-                                                            previousStockCostWithFreeShare: event.target.value
-                                                        }
-                                                    })
-                                                }} />
-                                            </div>
-                                            <div className="relative sm:w-1/2">
-                                                <FontAwesomeIcon icon={faMoneyBill} className="absolute top-[1rem] right-[1rem]" />
-                                                <input type="number" required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" disabled value={inputs.previousCostOfStockWithFreeStock} title={`تكلفة الاسهم السابقة مع الاسهم المجانية`} onChange={(event) => {
-                                                    setInputs((prevInput) => {
-                                                        return {
-                                                            ...prevInput,
-                                                            previousCostOfStockWithFreeStock: event.target.value
-                                                        }
-                                                    })
-                                                }} />
-                                            </div>
-                                        </div>*/
+                        /*           <div className="flex sm:flex-row flex-col gap-[1rem]">
+                                   <div className="relative sm:w-1/2">
+                                       <FontAwesomeIcon icon={faMoneyBill} className="absolute top-[1rem] right-[1rem]" />
+                                       <input type="number" required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" disabled value={inputs.previousStockCostWithFreeShare} title={`تكلفة السهم سابقا مع السهم المجاني`} onChange={(event) => {
+                                           setInputs((prevInput) => {
+                                               return {
+                                                   ...prevInput,
+                                                   previousStockCostWithFreeShare: event.target.value
+                                               }
+                                           })
+                                       }} />
+                                   </div>
+                                   <div className="relative sm:w-1/2">
+                                       <FontAwesomeIcon icon={faMoneyBill} className="absolute top-[1rem] right-[1rem]" />
+                                       <input type="number" required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" disabled value={inputs.previousCostOfStockWithFreeStock} title={`تكلفة الاسهم السابقة مع الاسهم المجانية`} onChange={(event) => {
+                                           setInputs((prevInput) => {
+                                               return {
+                                                   ...prevInput,
+                                                   previousCostOfStockWithFreeStock: event.target.value
+                                               }
+                                           })
+                                       }} />
+                                   </div>
+                               </div>*/
                     }
                 </div>
                 <button onClick={(event) => {
                     event.preventDefault();
-                    handleSubmit();
+                    if (window.confirm("هل انت متاكد من انك تريد القيام به العملية")) {
+                        handleSubmit();
+                    }
                 }} disabled={submit} className='btn text-white font-bold text-[20px] btn-primary'>
                     {submit ? <span className="loading loading-ring loading-lg"></span> : "تاكيد"}
                 </button>
