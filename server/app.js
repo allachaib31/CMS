@@ -3,8 +3,8 @@ const express = require("express");
 const morgan = require("morgan");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
-const cluster = require("cluster");
-const numCPUs = require("os").cpus().length;
+//const cluster = require("cluster");
+//const numCPUs = require("os").cpus().length;
 const compression = require("compression");
 const { rateLimit } = require("express-rate-limit");
 const mongoose = require("mongoose");
@@ -119,8 +119,12 @@ conn.once('open', () => {
     app.get('*', (req, res) => {
         res.sendFile(path.join(__dirname, 'build', 'index.html'));
     });
-
-    const startServer = () => {
+    const PORT = process.env.PORT || 5000;
+    const server = app.listen(PORT, (req, res) => {
+        //if (cluster.worker.id === 1) scheduleUpdate();
+        console.log(`server is start running in ${PORT}`);
+    });
+    /*const startServer = () => {
         const PORT = process.env.PORT || 5000;
         const server = app.listen(PORT, (req, res) => {
             if (cluster.worker.id === 1) scheduleUpdate();
@@ -140,6 +144,6 @@ conn.once('open', () => {
         });
     } else {
         startServer();
-    }
+    }*/
 
 });

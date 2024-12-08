@@ -74,6 +74,7 @@ function User() {
     }, [])
     return (
         <div className='p-[2rem]'>
+            <h1 className='text-xl text-center font-bold'>إدارة الأعضاء</h1>
             {showAlert.display ? <Alert msg={showAlert} /> : ""}
             <div className="overflow-x-auto flex justify-center mt-[2rem]">
                 <table className="bg-white text-black table w-[1000px]">
@@ -81,11 +82,10 @@ function User() {
                         <tr className="text-center text-black text-[1rem]">
                             <th>العدد</th>
                             <th>الاسم</th>
-                            <th>الفخذ</th>
-                            <th>بريد إلكتروني</th>
+                            <th>البريد الإلكتروني</th>
                             <th>رقم الهاتف</th>
-                            <th>تفعيل</th>
-                            <th>حدف</th>
+                            <th>الحالة</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody className="text-center text-[1rem]">
@@ -93,9 +93,8 @@ function User() {
                             users && users.map((user, index) => {
                                 return (
                                     <tr>
-                                        <th>{user.id}</th>
-                                        <td>{user.name}</td>
-                                        <td>{user.fakhidName}</td>
+                                        <th>{index + 1}</th>
+                                        <td>{user.name} {user.fakhidName}</td>
                                         <td>{user.email}</td>
                                         <td>{user.phoneNumber}</td>
                                         <td>{user.active ? "مفعل" : <button onClick={() => {

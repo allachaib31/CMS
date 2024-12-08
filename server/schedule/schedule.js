@@ -41,7 +41,7 @@ function scheduleUpdate() {
         console.log('running a task every minute');
     });
     cron.schedule("*/10 * * * *", async () => {
-    const hijriDate = getHijriDate();
+        const hijriDate = getHijriDate();
         const existingSubscriptions = await monthlySubscriptionModel.find({ year: hijriDate[2] });
         existingSubscriptions.forEach(async (subscription) => {
             // Get the current month index

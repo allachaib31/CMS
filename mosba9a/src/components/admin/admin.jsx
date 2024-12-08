@@ -79,7 +79,8 @@ function Admin() {
     }, [])
     return (
         <div className='p-[2rem]'>
-            <button onClick={() => document.getElementById('my_modal_1').showModal()} className='btn btn-primary'>اضافة مسؤل</button>
+            <h1 className='text-xl text-center font-bold'>إدارة المسؤولين</h1>
+            <button onClick={() => document.getElementById('my_modal_1').showModal()} className='btn btn-primary'>اضافة مسؤول</button>
             {/* Open the modal using document.getElementById('ID').showModal() method */}
             <dialog id="my_modal_1" className="modal">
                 <div className="modal-box bg-white">
@@ -217,9 +218,9 @@ function Admin() {
                         <tr className="text-center text-black text-[1rem]">
                             <th>العدد</th>
                             <th>الاسم</th>
-                            <th>بريد إلكتروني</th>
+                            <th>البريد الإلكتروني</th>
                             <th>رقم الهاتف</th>
-                            <th>حدف</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody className="text-center text-[1rem]">
@@ -227,7 +228,7 @@ function Admin() {
                             admins && admins.map((admin,index) => {
                                 return (
                                     <tr>
-                                        <th>{admin.id}</th>
+                                        <th>{index + 1}</th>
                                         <td>{admin.name}</td>
                                         <td>{admin.email}</td>
                                         <td>{admin.phoneNumber}</td>

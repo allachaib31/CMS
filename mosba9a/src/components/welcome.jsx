@@ -45,7 +45,8 @@ function Welcome() {
                 {contestsClose && <h1 className='text-[1.3rem] text-white font-bold text-center'>{contestsClose}</h1>}
                 {
                     contests && <>
-                        <h1 className='text-[1.3rem] text-white font-bold text-center'>مرحبا بك {contests.name}</h1>
+                        <h1 className='text-[1.3rem] text-white font-bold text-center'>مرحباً بكم</h1>
+                        <h1 className='text-[1.3rem] text-white font-bold text-center'> في المسابقة الرمضانية لقبيلة بني حسين </h1>
                         <div className="overflow-y-auto">
                             <div className='h-[80vh] mt-[2rem] flex flex-col gap-[1rem] justify-center items-center'>
                                 <div className="text-white justify-center grid grid-flow-col gap-5 text-center auto-cols-max">

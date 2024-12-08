@@ -1,0 +1,18 @@
+[{
+  "_id": {
+    "$oid": "664c768ca63db8b8796efbd8"
+  },
+  "amount": 94962.06315789474,
+  "cumulativeAmount": 196300,
+  "createdAt": {
+    "$date": "2024-05-23T08:56:48.163Z"
+  },
+  "source": {
+    "subscriptions": 196300,
+    "commodityRevenue": 0,
+    "contributionRevenues": 0,
+    "loanIncome": 32000,
+    "investmentBox": 0,
+    "financialCompany": 0
+  }
+}]

@@ -20,31 +20,31 @@ function LandingPage() {
         <div>
             {loading ? <Loading /> : <>
                 <div
-                    className="hero items-start min-h-screen"
+                    className="hero items-start sm:min-h-screen"
                     style={{
                         backgroundImage: `url(${backgroundIslamic})`,
                     }}>
                     <div className="navbar z-[999]">
                         <div className="navbar-start">
-                            <Link to="/auth" className="btn btn-primary font-bold w-36">تسجيل</Link>
+                            <Link to="/auth" className="btn btn-primary font-bold w-36">تسجيل الدخول</Link>
                         </div>
                         <div className="navbar-end">
                             <img src={logo} alt="" className='w-[140px] h-[100px]' />
                         </div>
                     </div>
-                    <div className='flex items-center justify-around w-full h-screen'>
+                    <div className='flex items-center justify-around w-full h-[70vh] sm:h-screen'>
                         <div className='h-full flex flex-col justify-center'>
                             <h1 className='px-[0.5rem] font-bold text-[16px] sm:text-[25px] md:text-[30px] mb-[2rem]'>
                                 انضموا إلينا في مسابقات رمضان الشيقة واكتشفوا <br /> متعة المنافسة والجوائز القيمة!
                             </h1>
-                            <Link to="/auth" className='mx-[0.5rem] btn btn-primary font-bold sm:text-[20px] sm:w-[20rem] h-auto btn-md'>المشاركة في المسابقة</Link>
+                            <Link to="/signUp" className='mx-[0.5rem] btn btn-primary font-bold sm:text-[20px] sm:w-[20rem] h-auto btn-md'>المشاركة في المسابقة</Link>
                         </div>
                         <div className='hidden min-h-screen xl:grid content-end'>
                             <img src={mosque} alt="" className=' w-[600px] h-[400px] xxl:w-[750px] xxl:h-[550px]' />
                         </div>
                     </div>
                 </div>
-                <div className="min-h-screen py-[4rem]">
+                <div className="sm:min-h-screen py-[1rem] sm:py-[4rem]">
                     <div className="flex flex-col lg:flex-row items-center justify-around">
                         <img
                             src={quran}
@@ -58,7 +58,6 @@ function LandingPage() {
                             </p>
                             <p className='px-[0.5rem]'>شاركوا في مجموعة متنوعة من المسابقات، من تلاوة القرآن إلى المسابقات
                                 الثقافية الإسلامية، واحصلوا على فرصة الفوز بجوائز رائعة.</p>
-                            <Link to="/auth" className="mx-[0.5rem] mt-[2rem] btn btn-primary font-bold text-[1.1rem] lg:text-[1.3rem] w-[10rem] lg:w-[15rem]">شارك الآن</Link>
                         </div>
                     </div>
                 </div></>}

@@ -82,7 +82,7 @@ function AddContest() {
                         })
                     }} required className="formInput input pr-[2.3rem] input-bordered flex items-center gap-2" />
                 </div>
-                <input type="number" onChange={(event) => {
+                {/*<input type="number" onChange={(event) => {
                     return setInputs((prevInput) => {
                         return {
                             ...prevInput,
@@ -97,7 +97,7 @@ function AddContest() {
                             awards: event.target.value.split(",")
                         }
                     })
-                }} required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder={`قم باضافة جوائز بترتيب مع الفصل بينهم بفاصلة`} />
+                }} required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder={`قم باضافة جوائز بترتيب مع الفصل بينهم بفاصلة`} />*/}
                 <button onClick={(event) => {
                     event.preventDefault();
                     handleSubmit();

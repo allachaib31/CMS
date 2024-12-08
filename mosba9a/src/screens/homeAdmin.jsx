@@ -88,11 +88,14 @@ function HomeAdmin() {
                                             <li className="sm:text-[1.3rem] space-y-1">
                                                 <details>
                                                     <summary>
-                                                        <Link to="/admin/manageContest/"><FontAwesomeIcon icon={faGamepad} /> إدارة المسابقة</Link>
+                                                        إدارة المسابقة
                                                     </summary>
                                                     <ul>
                                                         <li>
                                                             <Link to="/admin/manageContest/addContest">إضافة مسابقة</Link>
+                                                        </li>
+                                                        <li>
+                                                        <Link to="/admin/manageContest/"><FontAwesomeIcon icon={faGamepad} /> المسابقات السابقة</Link>
                                                         </li>
                                                     </ul>
                                                 </details>

@@ -252,7 +252,7 @@ exports.sellStock = async (req, res) => {
                 msg: "لا توجد هدى المساهمة"
             })
         }
-       if(stocks.dateSaleMiladi){
+        if(stocks.dateSaleMiladi){
             return res.status(403).send({
                 msg: "لقد تم البيع من قبل"
             })
@@ -266,21 +266,23 @@ exports.sellStock = async (req, res) => {
             year: hijriDate[2],
         }
         stocks.balanceAfterSale = (stocks.previousFundBalance - stocks.contributionAmount) + stocks.stockSaleValue;
-        let amount = stocks.stockSaleValue - stocks.totalCostOfStock;
+        var amount = stocks.stockSaleValue - stocks.totalCostOfStock;
+        var amountPercentage = 0;
         if(amount <= 0) {
             stocks.amountPercentage = 0;
+        }else {
+            amountPercentage = amount * (stocks.memberPercentage / 100);
+            stocks.amountPercentage = amountPercentage;
+            await userModel.updateOne({
+                _id: stocks.memberId._id
+            }, {
+                $inc: {
+                    memberBalance: amountPercentage < 0 ? 0 : amountPercentage,
+                    cumulativeBalance: amountPercentage < 0 ? 0 : amountPercentage,
+                    commodityProfitsContributions: amountPercentage < 0 ? 0 : amountPercentage
+                }
+            })
         }
-        let amountPercentage = amount * (stocks.memberPercentage / 100);
-        stocks.amountPercentage = amountPercentage;
-        await userModel.updateOne({
-            id: stocks.memberId._id
-        }, {
-            $inc: {
-                memberBalance: amountPercentage < 0 ? 0 : amountPercentage,
-                cumulativeBalance: amountPercentage < 0 ? 0 : amountPercentage,
-                commodityProfitsContributions: amountPercentage < 0 ? 0 : amountPercentage
-            }
-        })
         const userStock = await userStockModel.find({
             idStock: stocks._id
         }).populate("idUser", {
@@ -297,8 +299,8 @@ exports.sellStock = async (req, res) => {
             await userModel.findByIdAndUpdate(user.idUser, {
                 $inc: {
                     memberBalance: user.amount + user.contributionAmount,
-                    cumulativeBalance: profitAmount,
-                    commodityProfitsContributions: profitAmount
+                    cumulativeBalance: amount > 0 ? profitAmount : 0,
+                    commodityProfitsContributions: amount > 0 ? profitAmount : 0,
                 }
             },
                 { new: true })
@@ -308,8 +310,8 @@ exports.sellStock = async (req, res) => {
             {
                 $inc: {
                     amount: stocks.stockSaleValue,
-                    cumulativeAmount: stocks.balanceAfterSale - stocks.previousFundBalance,
-                    "source.contributionRevenues": stocks.balanceAfterSale - stocks.previousFundBalance
+                    cumulativeAmount: amount > 0 ? stocks.balanceAfterSale - stocks.previousFundBalance : 0,
+                    "source.contributionRevenues": amount > 0 ? stocks.balanceAfterSale - stocks.previousFundBalance : 0,
                 }
             },
             { new: true })
@@ -324,6 +326,7 @@ exports.sellStock = async (req, res) => {
             userStock
         });
     } catch (err) {
+        console.log(err)
         return res.status(500).send({
             msg: "حدث خطأ أثناء معالجة طلبك"
         });

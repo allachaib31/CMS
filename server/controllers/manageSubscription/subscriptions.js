@@ -268,7 +268,7 @@ exports.endDateUser = async (req, res) => {
     try {
         const user = await userModel.findById(id);
         user.disable = true;
-        user.enableAccount = false;
+        //user.enableAccount = false;
         user.status = "not active";
         user.subscriptionExpiryDate = new Date();
         const hijriDate = getHijriDate();
@@ -395,9 +395,7 @@ exports.getRegisterFinancialData = async (req, res) => {
 }
 exports.getUserForFoundationSubscripe = async (req, res) => {
     try {
-        const users = await userModel.find({
-            disable: false
-        }).select("id name NationalIdentificationNumber phoneNumber enableAccount");
+        const users = await userModel.find().select("id name NationalIdentificationNumber phoneNumber enableAccount");
         return res.status(200).send({
             users
         })

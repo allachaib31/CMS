@@ -2,7 +2,7 @@ import { faRightLong, faUpload } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useEffect, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { addNewRelationFetch, addToFamilyTreeFetch, createFamilyTreeFetch, deleteFamilyTreeFetch, getFamilyTreeFetch, getMemberFamilyTreeFetch } from '../../../utils/apiFetch';
+import { addNewRelationFetch, addToFamilyTreeFetch, createFamilyTreeFetch, deleteFamilyTreeFetch, getFamilyTreeFetch, getFamilyTreeUseIdFetch, getMemberFamilyTreeFetch } from '../../../utils/apiFetch';
 import Alert from '../../alert/alert';
 
 function AddFamilyTree() {
@@ -13,6 +13,7 @@ function AddFamilyTree() {
     const [inputs, setInputs] = useState({
         nameTree: "",
     });
+    const [idTree, setIdTree] = useState("");
     const [addToFamily, setAddToFamily] = useState({
         idTree: "",
         nameTree: "",
@@ -33,6 +34,8 @@ function AddFamilyTree() {
         fromId: "",
         isInnerFamily: false
     })
+    const [family, setFamily] = useState([]);
+    const [relations, setRelations] = useState([]);
     const [memberFamilyTree, setMemberFamilyTree] = useState(false);
     const [familyTree, setFamilyTree] = useState(false);
     // const [updateFamilyTree, setUpdateFamilyTree] = useState(false);
@@ -128,6 +131,10 @@ function AddFamilyTree() {
                 status: true,
                 text: res.data.msg
             });
+            getFamilyTreeUseIdFetch(idTree).then((res) => {
+                setFamily(res.data.familyMembers);
+                setRelations(res.data.familyRelations);
+            });
             //setUpdateFamilyTree(res.data.familyTree)
         }).catch((err) => {
             if (err.response && err.response.status === 401) {
@@ -152,6 +159,10 @@ function AddFamilyTree() {
                 display: true,
                 status: true,
                 text: res.data.msg
+            });
+            getFamilyTreeUseIdFetch(idTree).then((res) => {
+                setFamily(res.data.familyMembers);
+                setRelations(res.data.familyRelations);
             });
             //setUpdateFamilyTree(res.data.familyTree)
         }).catch((err) => {
@@ -179,21 +190,14 @@ function AddFamilyTree() {
     useEffect(() => {
         getFamilyTree();
     }, [])
-    /*function getAllNames(node, names = []) {
-        if (node.name) {
-            names.push({ name: node.name, value: node.value });
-        }
-        if (node.children) {
-            node.children.forEach(child => getAllNames(child, names));
-        }
-        console.log(names)
-        return names;
-    }
     useEffect(() => {
-        if (updateFamilyTree != false) {
-            setNames(getAllNames(updateFamilyTree.familyTree));
+        if (idTree !== "") {
+            getFamilyTreeUseIdFetch(idTree).then((res) => {
+                setFamily(res.data.familyMembers);
+                setRelations(res.data.familyRelations);
+            });
         }
-    }, [updateFamilyTree])*/
+    }, [idTree]);
     return (
         <div className="sm:p-0 px-[1rem] container mx-auto">
             <div>
@@ -206,49 +210,48 @@ function AddFamilyTree() {
                 نموذج شجرة العائلة
             </h1>
             <button onClick={() => document.getElementById('my_modal_1').showModal()} className='btn btn-primary'>انشاء شجرة عائلة جديدة</button>
-            <div className='mt-[2rem] flex md:flex-row flex-col flex-wrap justify-center items-center'>
-                {
-                    familyTree && familyTree.map((tree) => {
-                        return (
-                            <div className='mb-[1rem] w-full md:w-1/2 flex justify-center items-center'>
-                                <div className='bg-primary rounded-[14px] text-center w-full lg:w-[70%] text-white text-[1.1rem] sm:text-[1.5rem] p-[2rem] sm:p-[4rem]'>
-                                    {tree.name}
-                                    <div className='flex gap-[0.2rem] justify-center'>
-                                        <button className='btn btn-success' onClick={() => {
-                                            // setUpdateFamilyTree(tree)
-                                            setAddToFamily((prev) => {
-                                                return {
-                                                    ...prev, idTree: tree._id, nameTree: tree.name
-                                                }
-                                            })
-                                            document.getElementById('my_modal_2').showModal()
-                                        }
-                                        } >اضافة عضو</button>
-                                        <button onClick={() => {
-                                            // setUpdateFamilyTree(tree)
-                                            setFamilyRelations((prev) => {
-                                                return {
-                                                    ...prev,
-                                                    idTree: tree._id,
-                                                    nameTree: tree.name
-                                                }
-                                            })
-                                            getMemberFamilyTreeFetch(tree._id).then((res) => {
-                                                console.log(res)
-                                                setMemberFamilyTree(res.data.familyMember)
-                                                document.getElementById('my_modal_3').showModal()
-                                            }).catch((err) => {
-                                                alert(err.response.data.msg)
-                                            })
-                                        }
-                                        } className='btn btn-info'>اضافة علاقة</button>
-                                    </div>
-                                </div>
-                            </div>
-                        )
+            <div className='my-[2rem]'>
+                <select onChange={(event) => {
+                    let obj = JSON.parse(event.target.value);
+                    setIdTree(obj._id)
+                    setAddToFamily((prev) => {
+                        return {
+                            ...prev, idTree: obj._id, nameTree: obj.name
+                        }
                     })
-                }
+                    setFamilyRelations((prev) => {
+                        return {
+                            ...prev,
+                            idTree: obj._id,
+                            nameTree: obj.name
+                        }
+                    })
+                }} className="select select-bordered w-full max-w-xs">
+                    <option selected disabled>اختر العائلة</option>
+                    {
+                        familyTree && familyTree.map((tree) => {
+                            return (
+                                <option value={JSON.stringify(tree)}>{tree.name}</option>
+                            )
+                        })
+                    }
+                </select>
             </div>
+            <button className='btn btn-success' onClick={() => {
+                // setUpdateFamilyTree(tree)
+                document.getElementById('my_modal_2').showModal()
+            }
+            } >اضافة عضو</button>
+            <button onClick={() => {
+                // setUpdateFamilyTree(tree)
+                getMemberFamilyTreeFetch(familyRelations.idTree).then((res) => {
+                    setMemberFamilyTree(res.data.familyMember)
+                    document.getElementById('my_modal_3').showModal()
+                }).catch((err) => {
+                    alert(err.response.data.msg)
+                })
+            }
+            } className='btn btn-info'>اضافة علاقة</button>
             <dialog id="my_modal_1" className="modal">
                 <div className="modal-box">
                     {showAlert.display ? <Alert msg={showAlert} /> : ""}
@@ -278,7 +281,7 @@ function AddFamilyTree() {
                     {
                         <form className='flex flex-col justify-center gap-[1rem]'>
                             <button disabled={deleteSubmit} onClick={() => {
-                                //handleDelete(updateFamilyTree._id)
+                                handleDelete(addToFamily.idTree)
                             }} className='btn btn-error mb-1'>{deleteSubmit ? <span className="loading loading-ring loading-lg"></span> : "حذف شجرة العائلة"}</button>
                             <input type="text" className='formInput input input-bordered' disabled placeholder='شجرة عائلة' value={addToFamily.nameTree} required />
                             <input type="text" className='formInput input input-bordered' onChange={(event) => {
@@ -405,7 +408,7 @@ function AddFamilyTree() {
                                 {
                                     memberFamilyTree && memberFamilyTree.map((member) => {
                                         return (
-                                            <option value={member.id}>{member.data.title} {member.id}</option>
+                                            <option value={member.id}>{member.data.title}</option>
                                         )
                                     })
                                 }
@@ -424,7 +427,7 @@ function AddFamilyTree() {
                                 {
                                     memberFamilyTree && memberFamilyTree.map((member) => {
                                         return (
-                                            <option value={member.id}>{member.data.title} {member.id}</option>
+                                            <option value={member.id}>{member.data.title}</option>
                                         )
                                     })
                                 }
@@ -445,6 +448,73 @@ function AddFamilyTree() {
                     </div>
                 </div>
             </dialog>
+            <div role="tablist" className="mt-[1rem] tabs tabs-lifted">
+                <input type="radio" name="my_tabs_2" role="tab" className="tab" aria-label="الاعضاء" />
+                <div role="tabpanel" className="tab-content bg-base-100 border-base-300 rounded-box p-6">
+                    <div className="overflow-x-auto">
+                        <table className="table">
+                            {/* head */}
+                            <thead>
+                                <tr>
+                                    <th>المعرف</th>
+                                    <th>الاسم</th>
+                                    <th>وصف</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    family && family.map((member) => {
+                                        return (
+                                            <tr>
+                                                <th>{member.id}</th>
+                                                <th>{member.data.title}</th>
+                                                <th>{member.data.subtitles.join(",")}</th>
+                                                <th><button className='btn btn-error'>حذف</button></th>
+                                            </tr>
+                                        )
+                                    })
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <input
+                    type="radio"
+                    name="my_tabs_2"
+                    role="tab"
+                    className="tab"
+                    aria-label="العلاقات"
+                    defaultChecked />
+                <div role="tabpanel" className="tab-content bg-base-100 border-base-300 rounded-box p-6">
+                <div className="overflow-x-auto">
+                        <table className="table">
+                            {/* head */}
+                            <thead>
+                                <tr>
+                                    <th>من</th>
+                                    <th>الى</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    relations && relations.map((relation) => {
+                                        return (
+                                            <tr>
+                                                <th>{relation.fromId}</th>
+                                                <th>{relation.toId}</th>
+                                                <th><button className='btn btn-error'>حذف</button></th>
+                                            </tr>
+                                        )
+                                    })
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
         </div>
     )
 }

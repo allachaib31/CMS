@@ -197,27 +197,27 @@ exports.payAmount = async (req, res) => {
         }
         commodityRevenu.commodityData.amountItPaid = true;
         let amountPaid = commodityRevenu.commodityData.amountPaid;
-        if(commodityRevenu.sponsorData.amount != 0){
-            if(!commodityRevenu.sponsorData.itPaid){
+        if (commodityRevenu.sponsorData.amount != 0) {
+            if (!commodityRevenu.sponsorData.itPaid) {
                 const sponsorRemainingAmount = commodityRevenu.sponsorData.amount - commodityRevenu.sponsorData.balance;
                 let memberBalance;
-                if(sponsorRemainingAmount == amountPaid){
+                if (sponsorRemainingAmount == amountPaid) {
                     memberBalance = amountPaid;
                     commodityRevenu.sponsorData.balance += amountPaid;
                     commodityRevenu.sponsorData.itPaid = true;
                     amountPaid = 0;
-                }else if (commodityRevenu.commodityData.amountPaid > sponsorRemainingAmount) {
+                } else if (commodityRevenu.commodityData.amountPaid > sponsorRemainingAmount) {
                     amountPaid -= sponsorRemainingAmount;
                     memberBalance = sponsorRemainingAmount;
                     commodityRevenu.sponsorData.balance += sponsorRemainingAmount;
-                    if(commodityRevenu.sponsorData.balance == commodityRevenu.sponsorData.amount){
+                    if (commodityRevenu.sponsorData.balance == commodityRevenu.sponsorData.amount) {
                         commodityRevenu.sponsorData.itPaid = true;
                     }
-                }else if (commodityRevenu.commodityData.amountPaid < sponsorRemainingAmount) {
+                } else if (commodityRevenu.commodityData.amountPaid < sponsorRemainingAmount) {
                     memberBalance = amountPaid;
                     commodityRevenu.sponsorData.balance += amountPaid;
                     amountPaid = 0;
-                    if(commodityRevenu.sponsorData.balance == commodityRevenu.sponsorData.amount){
+                    if (commodityRevenu.sponsorData.balance == commodityRevenu.sponsorData.amount) {
                         commodityRevenu.sponsorData.itPaid = true;
                     }
                 }
@@ -249,7 +249,7 @@ exports.payAmount = async (req, res) => {
         commodityRevenu.commodityData.balance += commodityRevenu.commodityData.amountPaid;
         await commodityRevenu.save();
 
-        if(amountPaid == 0){
+        if (amountPaid == 0) {
             return res.status(200).send({
                 msg: "لقد تم الدفع بنجاح"
             });
@@ -298,6 +298,17 @@ exports.payInstallmentSchedule = async (req, res) => {
             });
         }
         const installmentSchedule = await installmentsGoodsModel.findById(idInstallmentSchedule);
+        const commodityRevenu = await commodityRevenueModel.findById(installmentSchedule.idCommodityRevenue);
+        if (!commodityRevenu) {
+            return res.status(404).send({
+                msg: "لم يتم ايجاد هذا الطلب",
+            });
+        }
+        if (!commodityRevenu.commodityData.amountItPaid) {
+            return res.status(403).send({
+                msg: "يرجى تسديد الدفعه الاولى"
+            })
+        }
         if (installmentSchedule.itPaid) {
             return res.status(400).send({
                 msg: "لقد تم سداد القسط من قبل"
@@ -313,29 +324,28 @@ exports.payInstallmentSchedule = async (req, res) => {
         };
         installmentSchedule.itPaid = true;
         await installmentSchedule.save();
-        const commodityRevenu = await commodityRevenueModel.findById(installmentSchedule.idCommodityRevenue);
         let amountPaid = installmentSchedule.premiumAmount;
-        if(commodityRevenu.sponsorData.amount != 0){
-            if(!commodityRevenu.sponsorData.itPaid){
+        if (commodityRevenu.sponsorData.amount != 0) {
+            if (!commodityRevenu.sponsorData.itPaid) {
                 const sponsorRemainingAmount = commodityRevenu.sponsorData.amount - commodityRevenu.sponsorData.balance;
                 let memberBalance;
-                if(sponsorRemainingAmount == amountPaid){
+                if (sponsorRemainingAmount == amountPaid) {
                     memberBalance = amountPaid;
                     commodityRevenu.sponsorData.balance += amountPaid;
                     commodityRevenu.sponsorData.itPaid = true;
                     amountPaid = 0;
-                }else if (commodityRevenu.commodityData.amountPaid > sponsorRemainingAmount) {
+                } else if (commodityRevenu.commodityData.amountPaid > sponsorRemainingAmount) {
                     amountPaid -= sponsorRemainingAmount;
                     memberBalance = sponsorRemainingAmount;
                     commodityRevenu.sponsorData.balance += sponsorRemainingAmount;
-                    if(commodityRevenu.sponsorData.balance == commodityRevenu.sponsorData.amount){
+                    if (commodityRevenu.sponsorData.balance == commodityRevenu.sponsorData.amount) {
                         commodityRevenu.sponsorData.itPaid = true;
                     }
-                }else if (commodityRevenu.commodityData.amountPaid < sponsorRemainingAmount) {
+                } else if (commodityRevenu.commodityData.amountPaid < sponsorRemainingAmount) {
                     memberBalance = amountPaid;
                     commodityRevenu.sponsorData.balance += amountPaid;
                     amountPaid = 0;
-                    if(commodityRevenu.sponsorData.balance == commodityRevenu.sponsorData.amount){
+                    if (commodityRevenu.sponsorData.balance == commodityRevenu.sponsorData.amount) {
                         commodityRevenu.sponsorData.itPaid = true;
                     }
                 }
@@ -352,7 +362,7 @@ exports.payInstallmentSchedule = async (req, res) => {
         }
         commodityRevenu.commodityData.balance += installmentSchedule.premiumAmount;
         await commodityRevenu.save();
-        if(amountPaid == 0){
+        if (amountPaid == 0) {
             return res.status(200).send({
                 msg: "لقد تم الدفع بنجاح"
             });

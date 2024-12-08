@@ -47,19 +47,19 @@ function DisplayContest() {
     return (
         <div className="sm:p-0 px-[1rem]">
             <h1 className="text-center text-[1.3rem] sm:text-[1.5rem] font-bold py-[1rem]">
-                إدارة المسابقة
+            المسابقات السابقة
             </h1>
             {showAlert.display ? <Alert msg={showAlert} /> : ""}
             <div className="mt-[2rem] container mx-auto flex md:flex-row flex-col flex-wrap justify-center items-center">
                 <div className="overflow-x-auto">
-                    <table className="table w-[1400px]">
+                    <table className="table w-[1000px]">
                         {/* head */}
                         <thead>
                             <tr>
                                 <th>العدد</th>
                                 <th>اسم المسابقة</th>
-                                <th>عدد الجوائز</th>
-                                <th>الجوائز</th>
+                                {/*<th>عدد الجوائز</th>*/}
+                                {/*<th>الجوائز</th>*/}
                                 <th>تاريخ البدء</th>
                                 <th>تاريخ النهاية</th>
                                 <th>المتسابقون</th>
@@ -76,7 +76,7 @@ function DisplayContest() {
                                         <tr key={contest._id}>
                                             <th>{contest.id}</th>
                                             <td><Link className="underline" to={"/admin/manageContest/controllerContest?id=" + contest._id}>{contest.name}</Link></td>
-                                            <td>{contest.numberOfAwards}</td>
+                                            {/*<td>{contest.numberOfAwards}</td>
                                             <td>
                                                 <select className="input input-bordered">
                                                     {
@@ -87,7 +87,7 @@ function DisplayContest() {
                                                         })
                                                     }
                                                 </select>
-                                            </td>
+                                            </td>*/}
                                             <td>
                                                 {startDate.getUTCFullYear() + "-" + (startDate.getUTCMonth() + 1) + "-" + startDate.getUTCDate()}
                                             </td>
