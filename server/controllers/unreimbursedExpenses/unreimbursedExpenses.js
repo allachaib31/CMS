@@ -26,6 +26,7 @@ exports.addTypeExpenses = async (req, res) => {
             typeExpenses
         });
     } catch (error) {
+        console.log(error)
         return res.status(500).send({
             msg: "حدث خطأ أثناء معالجة طلبك"
         });
