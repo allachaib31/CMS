@@ -54,35 +54,35 @@ function Login() {
           <img src={logoPng} alt="" srcset="" />
         </div>
         <div className="flex flex-col gap-[2rem] justify-center items-center">
-          <h1 className="text-[2rem]">تسجيل الدخول</h1>
-          <form action="" className="flex flex-col gap-[2rem]">
+          <h1 className="text-xl">تسجيل الدخول</h1>
+          <form action="" className="flex flex-col gap-[0.5rem]">
             {showAlert.display ? <Alert msg={showAlert} /> : ""}
             <div className="relative">
-              <FontAwesomeIcon icon={faIdCard} className="absolute top-[1rem] right-[1rem]" />
+              <FontAwesomeIcon icon={faIdCard} className="absolute top-[0.5rem] right-[1rem]" />
               <input type="text" onChange={(e) => {
                 if(e.target.validity.valid) setDisbledSubmit(value => {return {...value,NationalIdentificationNumber: true}});
                 else setDisbledSubmit(value => {return {...value,NationalIdentificationNumber: false}});
                 setInputs((input) => {
                   return { ...input, NationalIdentificationNumber: e.target.value.trim() }
                 })
-              }} required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder={"اسم المستخدم"} pattern="[1-9]\d{9}" />
+              }} required className="formInput w-full input input-sm pr-[2.3rem] input-bordered flex items-center gap-2" placeholder={"اسم المستخدم"} pattern="[1-9]\d{9}" />
             </div>
             <div className="relative">
-              <FontAwesomeIcon icon={faKey} className="absolute top-[1rem] right-[1rem]" />
+              <FontAwesomeIcon icon={faKey} className="absolute top-[0.5rem] right-[1rem]" />
               <input type="password" onChange={(e) => {
                 if(e.target.validity.valid) setDisbledSubmit(value => {return {...value,password: true}});
                 else setDisbledSubmit(value => {return {...value,password: false}});
                 setInputs((input) => {
                   return { ...input, password: e.target.value.trim() }
                 })
-              }} required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder="كلمة المرور" pattern="^.{4,1024}$" />
+              }} required className="formInput w-full input input-sm pr-[2.3rem] input-bordered flex items-center gap-2" placeholder="كلمة المرور" pattern="^.{4,1024}$" />
             </div>
             <button
             disabled={!disbledSubmit.NationalIdentificationNumber || !disbledSubmit.password}
             onClick={(event) => {
               event.preventDefault();
               handleSubmit();
-            }} className="btn w-full bg-[#2563EB] text-white text-[18px] font-bold">{submit ? <span className="loading loading-ring loading-lg"></span> : "الدخول"} </button>
+            }} className="btn btn-sm w-full bg-[#2563EB] text-white text-sm font-bold">{submit ? <span className="loading loading-ring loading-lg"></span> : "الدخول"} </button>
           </form>
         </div>
       </div>

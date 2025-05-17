@@ -88,13 +88,13 @@ function PayMonthlySubscriptions() {
         });
     }, []);
     return (
-        <div className="px-[0rem] sm:px-0">
-            <h1 className="text-center text-[1.5rem] font-bold py-[1rem]">
+        <div>
+            <h1 className="text-center font-bold py-[0.5rem]">
                 نموذج الاشتراكات
             </h1>
             <div className="join items-center justify-center w-full gap-[1rem]">
                 <input
-                    className="input input-bordered"
+                    className="input input-sm input-bordered"
                     onChange={(event) => {
                         const hijriDate = hijriDateObject(event.target.value);
                         setInputs((prevInput) => {
@@ -121,7 +121,7 @@ function PayMonthlySubscriptions() {
                     id="dateInput"
                     name="dateInput"
                 />
-                <label htmlFor="">
+                <label htmlFor="" className="text-sm">
                     الموافق {" "}
                     {inputs.dateHijri ? (
                         <span>
@@ -134,9 +134,9 @@ function PayMonthlySubscriptions() {
                 </label>
             </div>
             <div className="mt-[1rem] flex justify-center">
-                <div className="flex gap-[0.2rem] sm:gap-[1rem]">
-                    <h1 className="text-[0.8rem] sm:text-[1rem] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">إجمالي الاشتراكات لهذا الشهر</h1>
-                    <h1 className="text-[0.8rem] sm:text-[1rem] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">{total}</h1>
+                <div className="flex gap-[0.2rem]">
+                    <h1 className="text-sm bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">إجمالي الاشتراكات لهذا الشهر</h1>
+                    <h1 className="text-sm font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">{total}</h1>
                 </div>
             </div>
             {showAlert.display ? <Alert msg={showAlert} /> : ""}
@@ -147,9 +147,9 @@ function PayMonthlySubscriptions() {
                         <span className=" loading loading-ring loading-lg"></span>
                     </div>
                 ) : (
-                    <table className="text-[1rem] table border-separate border-spacing-2 border w-[1500px] mx-auto">
-                        <thead className="text-[1rem] text-center">
-                            <tr>
+                    <table className="table border-separate border-spacing-2 border w-[1000px] sm:w-[1500px] mx-auto">
+                        <thead className="text-center text-sm">
+                            <tr className="text-sm">
                                 <th className="border border-slate-600">
                                     اسم العضو
                                 </th>
@@ -179,7 +179,7 @@ function PayMonthlySubscriptions() {
                                 </th>
                             </tr>
                         </thead>
-                        <tbody className="text-center">
+                        <tbody className="text-center text-sm">
                             {subscriptions &&
                                 subscriptions.map((subscription) => {
                                     const date = subscription.months[month].createdAt == null ? new Date() : new Date(subscription.months[month].createdAt);
@@ -226,7 +226,7 @@ function PayMonthlySubscriptions() {
                                                             year: subscription.months[month].dueDateHijri.year,
                                                         })
                                                     }
-                                                }} className="btn btn-success">دفع</button>}
+                                                }} className="btn btn-sm btn-success text-sm">دفع</button>}
                                             </td>
                                         </tr>
                                     );

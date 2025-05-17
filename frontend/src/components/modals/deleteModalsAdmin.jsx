@@ -43,7 +43,7 @@ function DeleteAdminModals({user, setShowAlert, users, setUsers, deleteFetch}) {
     return (
         <dialog id="deleteModel" className="modal">
             <div className="modal-box">
-                <h3 className="font-bold text-[1rem]">هل تريد حقًا إزالة هذا المستخدم {user.id}؟</h3>
+                <h3 className="font-bold text-sm">هل تريد حقًا إزالة هذا المستخدم {user.id}؟</h3>
                 <div className="flex justify-center my-[1rem]">
                     {!submit ? "" : <span className="loading loading-ring loading-lg"></span>}
                 </div>
@@ -51,11 +51,11 @@ function DeleteAdminModals({user, setShowAlert, users, setUsers, deleteFetch}) {
                 <div className="modal-action">
                     <form method="dialog">
                         {/* if there is a button in form, it will close the modal */}
-                        <button className="btn ml-[0.5rem]">أغلق</button>
+                        <button className="btn btn-sm ml-[0.5rem]">أغلق</button>
                         <button onClick={(event) => {
                             event.preventDefault();
                             handleDelete(user.id,user.index);
-                        }} className="btn btn-error">حدف</button>
+                        }} className="btn btn-sm btn-error">حدف</button>
                     </form>
                 </div>
             </div>

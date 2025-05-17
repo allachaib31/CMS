@@ -63,44 +63,44 @@ function AnnualSubscriptionRecord() {
 
     const renderSubscriptionAmounts = (months) => {
         return Object.entries(months).map(([month, details], index) => (
-            <td className='border border-slate-600' key={index}>{details.amount}</td>
+            <td className='border border-slate-600 text-ms' key={index}>{details.amount}</td>
         ));
     };
 
     const renderSubscriptions = () => {
         return subscriptions.map((subscription, subIndex) => (
-            <tr className='text-center' key={subIndex}>
-                <th className='border border-slate-600'>{subscription.idUser.name}</th>
+            <tr className='text-center text-sm' key={subIndex}>
+                <th className='border border-slate-600 text-sm'>{subscription.idUser.name}</th>
                 {renderSubscriptionAmounts(subscription.months)}
                 <td className='border border-slate-600'>{subscription.total}</td>
                 <td className='border border-slate-600'>{subscription.numberofArrears}</td>
                 <td className='border border-slate-600'>
-                    <Link to={`/subscription/annualSubscriptionRecordDetails?id=${subscription.idUser._id}&smallId=${subscription.idUser.id}&name=${subscription.idUser.name}`} className="btn btn-info">التفاصيل</Link>
+                    <Link to={`/subscription/annualSubscriptionRecordDetails?id=${subscription.idUser._id}&smallId=${subscription.idUser.id}&name=${subscription.idUser.name}`} className="btn btn-sm text-sm btn-info">التفاصيل</Link>
                 </td>
             </tr>
         ));
     };
 
     return (
-        <div className="sm:p-0 px-[1rem]">
+        <div className="sm:p-0 px-4">
             <div className='container mx-auto'>
-                <Link to="/subscription" className="btn btn-primary text-[2rem] px-[2rem]">
+                <Link to="/subscription" className="btn btn-sm btn-primary px-[2rem]">
                     <FontAwesomeIcon icon={faRightLong} />
                 </Link>
             </div>
-            <h1 className="text-center text-[1.1rem] sm:text-[1.5rem] font-bold py-[0.5rem]">
+            <h1 className="text-center font-bold">
             سجل الاشتراكات لعام : {year}
             </h1>
-            <h1  className="text-center text-[1.1rem] sm:text-[1.5rem] font-bold py-[0.5rem]">
+            <h1  className="text-center font-bold">
              الرصيد : {total.reduce((total, value) => {
                     return total + Number(value);
                 })}
             </h1>
             <div className="container mx-auto flex-wrap">
-                <Link to={`/print/recordAnnual?year=${year}`} target='_blank' className='ml-[1rem] btn btn-info font-bold'><FontAwesomeIcon icon={faPrint} /> طباعة</Link>
+                <Link to={`/print/recordAnnual?year=${year}`} target='_blank' className='ml-[1rem] btn btn-sm btn-info font-bold'><FontAwesomeIcon icon={faPrint} /> طباعة</Link>
                 <select
                     onChange={(event) => setYear(event.target.value)}
-                    className="select xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item"
+                    className="select select-sm xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item"
                 >
                     {yearOptions.map((value) => (
                         <option key={value} value={value} selected={year == value}>
@@ -112,15 +112,15 @@ function AnnualSubscriptionRecord() {
                     <button onClick={() => {
                         setLoading(e => !e);
                         getAnnualSubscriptions()
-                    }} className="btn xs:w-auto bg-primary text-[20px] text-white join-item">
+                    }} className="btn btn-sm xs:w-auto bg-primary text-white join-item">
                         ابحث
                     </button>
                 </div>
             </div>
             <div className='flex justify-center'>
                 <div className="overflow-x-auto mt-[0.5rem]">
-                    {!loading ? <div className='flex justify-center'> <span className=" loading loading-ring loading-lg"></span></div> : <table className="table border-separate border-spacing-2 border text-[1rem] w-[1650px]">
-                        <thead className='text-[1rem]'>
+                    {!loading ? <div className='flex justify-center'> <span className=" loading loading-ring loading-lg"></span></div> : <table className="table border-separate border-spacing-2 border w-[1350px]">
+                        <thead>
                             <tr className='text-center'>
                                 <th className='border border-slate-600'>الاسم</th>
                                 <th className='border border-slate-600'>محرم</th>
@@ -137,7 +137,7 @@ function AnnualSubscriptionRecord() {
                                 <th className='border border-slate-600'>ذو الحجة</th>
                                 <th className='border border-slate-600'>رصيد <br />العضو</th>
                                 <th className='border border-slate-600'>المتأخرات</th>
-                                <th className='border border-slate-600'>تفاصيل <br />أكثر</th>
+                                <th className='border border-slate-600'>تفاصيل</th>
                             </tr>
                         </thead>
                         <tbody>

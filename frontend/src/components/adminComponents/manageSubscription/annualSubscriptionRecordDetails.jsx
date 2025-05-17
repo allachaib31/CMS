@@ -47,11 +47,11 @@ function AnnualSubscriptionRecordDetails() {
     return (
         <div className="px-[1rem]">
             <div className='container mx-auto'>
-                <Link to="/subscription/annualSubscriptionRecord" className="btn btn-primary text-[2rem] px-[2rem]">
+                <Link to="/subscription/annualSubscriptionRecord" className="btn btn-sm btn-primary px-[2rem]">
                     <FontAwesomeIcon icon={faRightLong} />
                 </Link>
             </div>
-            <h1 className="text-center text-[1rem] sm:text-[1.2rem] lg:text-[1.5rem] font-bold py-[0.5rem]">
+            <h1 className="text-center text-sm font-bold py-[0.5rem]">
                 سجل الاشتراكات السنوية  للعضو : {query.get("name")}
             </h1>
             <div className='container mx-auto flex flex-wrap '>
@@ -59,7 +59,7 @@ function AnnualSubscriptionRecordDetails() {
                     setInputs((prevInput) => {
                         return { ...prevInput, typeSearch: event.target.value, endYear: (event.target.value == "years") ? hijriDateObject()[2] : "" }
                     })
-                }} className="select select-bordered w-full max-w-[7rem]">
+                }} className="select select-sm select-bordered w-full max-w-[7rem]">
                     <option value="oneYear">لسنة</option>
                     <option value="years">لسنوات</option>
                 </select>
@@ -68,32 +68,32 @@ function AnnualSubscriptionRecordDetails() {
                         setInputs((prevInput) => {
                             return { ...prevInput, startYear: event.target.value.trim() }
                         })
-                    }} type="text" className="formInput input input-bordered w-full max-w-[6rem]" placeholder='السنة' required pattern='\b(1[0-9]{3}|2[0-9]{3}|3[0-9]{3}|4[0-9]{3}|5[0-9]{3}|6[0-9]{3}|7[0-9]{3}|8[0-9]{3}|9[0-9]{3})\b' />
-                        <button onClick={() => handleSearch("oneYear")} className='btn xs:w-auto bg-primary text-[20px] text-white'>ابحث</button>
+                    }} type="text" className="formInput input input-sm input-bordered w-full max-w-[6rem]" placeholder='السنة' required pattern='\b(1[0-9]{3}|2[0-9]{3}|3[0-9]{3}|4[0-9]{3}|5[0-9]{3}|6[0-9]{3}|7[0-9]{3}|8[0-9]{3}|9[0-9]{3})\b' />
+                        <button onClick={() => handleSearch("oneYear")} className='btn btn-sm xs:w-auto bg-primary text-white'>ابحث</button>
                     </div> : <div className='flex'>
                         <input onChange={(event) => {
                             setInputs((prevInput) => {
                                 return { ...prevInput, startYear: event.target.value.trim() }
                             })
-                        }} type="text" className="formInput input input-bordered w-full max-w-[5rem]" placeholder='من ' required pattern='\b(1[0-9]{3}|2[0-9]{3}|3[0-9]{3}|4[0-9]{3}|5[0-9]{3}|6[0-9]{3}|7[0-9]{3}|8[0-9]{3}|9[0-9]{3})\b' />
+                        }} type="text" className="formInput input input-sm input-bordered w-full max-w-[5rem]" placeholder='من ' required pattern='\b(1[0-9]{3}|2[0-9]{3}|3[0-9]{3}|4[0-9]{3}|5[0-9]{3}|6[0-9]{3}|7[0-9]{3}|8[0-9]{3}|9[0-9]{3})\b' />
                         <input onChange={(event) => {
                             setInputs((prevInput) => {
                                 return { ...prevInput, endYear: event.target.value.trim() }
                             })
-                        }} type="text" className="formInput input input-bordered w-full max-w-[5rem]" placeholder='الى' required pattern='\b(1[0-9]{3}|2[0-9]{3}|3[0-9]{3}|4[0-9]{3}|5[0-9]{3}|6[0-9]{3}|7[0-9]{3}|8[0-9]{3}|9[0-9]{3})\b' />
-                        <button onClick={() => handleSearch("customYear")} className='btn xs:w-auto bg-primary text-[20px] text-white'>ابحث</button>
+                        }} type="text" className="formInput input input-sm input-bordered w-full max-w-[5rem]" placeholder='الى' required pattern='\b(1[0-9]{3}|2[0-9]{3}|3[0-9]{3}|4[0-9]{3}|5[0-9]{3}|6[0-9]{3}|7[0-9]{3}|8[0-9]{3}|9[0-9]{3})\b' />
+                        <button onClick={() => handleSearch("customYear")} className='btn btn-sm xs:w-auto bg-primary text-white'>ابحث</button>
                     </div>
                 }
             </div>
             <div className='container mx-auto'>
-                <Link to={`/print/recordAnnualDetails?idUser=${inputs.idUser}&tyeSearch=${inputs.typeSearch}&startYear=${inputs.startYear}&endYear=${inputs.endYear}`} target='_blank' className='mt-[1rem] btn btn-info font-bold'><FontAwesomeIcon icon={faPrint} /> طباعة</Link>
+                <Link to={`/print/recordAnnualDetails?idUser=${inputs.idUser}&tyeSearch=${inputs.typeSearch}&startYear=${inputs.startYear}&endYear=${inputs.endYear}`} target='_blank' className='mt-[1rem] btn btn-sm btn-info font-bold'><FontAwesomeIcon icon={faPrint} /> طباعة</Link>
             </div>
             <div className='flex justify-center'>
                 {
-                    inputs.typeSearch == "oneYear" ? <div className="overflow-x-auto mt-[0.5rem]">
+                    inputs.typeSearch == "oneYear" ? <div className="overflow-x-auto">
                         {!loading ? <div className='flex justify-center'> <span className=" loading loading-ring loading-lg"></span></div> :
-                            <table className="table border-separate border-spacing-2 w-[600px] border text-[1rem]">
-                                <thead className='text-[1rem] text-center'>
+                            <table className="table table-sm border-separate border-spacing-2 w-[300px] border text-sm">
+                                <thead className='text-sm text-center'>
                                     <tr>
                                         <th className='border border-slate-600'>الاشهر</th>
                                         <th className='border border-slate-600'>المبلغ</th>
@@ -105,7 +105,7 @@ function AnnualSubscriptionRecordDetails() {
                                     {
                                         subscriptions && subscriptions.map((subscription) => {
                                             return Object.entries(subscription.months).map(([month, details], index) => (
-                                                <tr className='text-center'>
+                                                <tr className='text-center text-sm'>
                                                     <td className='border border-slate-600'>{details.name}</td>
                                                     <td className='border border-slate-600'>{details.amount}</td>
                                                     <td className='border border-slate-600'>{details.hijriDate && details.hijriDate.day ? details.hijriDate.day + "/" + details.hijriDate.month.number + "/" + details.hijriDate.year : "لم يتم دفع"}</td>
@@ -119,10 +119,10 @@ function AnnualSubscriptionRecordDetails() {
                                 </tbody>
                             </table>
                         }
-                    </div> : <div className="overflow-x-auto mt-[2rem]">
-                        <table className="table border-separate border-spacing-2 border text-[1rem] w-[1600px]">
-                            <thead className='text-center text-[1rem]'>
-                                <tr>
+                    </div> : <div className="overflow-x-auto mt-[0.5rem]">
+                        <table className="table table-sm border-separate border-spacing-2 border text-sm w-[1200px]">
+                            <thead className='text-center text-sm'>
+                                <tr className='text-sm'>
                                     <th className='border border-slate-600'>الاسم</th>
                                     <th className='border border-slate-600'>السنة</th>
                                     <th className='border border-slate-600'>محرم</th>
@@ -143,7 +143,7 @@ function AnnualSubscriptionRecordDetails() {
                             <tbody>
                                 {
                                     subscriptions && subscriptions.map(((subscription, subIndex) => (
-                                        <tr className='text-center'>
+                                        <tr className='text-center text-sm'>
                                             <th className='border border-slate-600'>{subscription.idUser.name}</th>
                                             <th className='border border-slate-600'>{subscription.year}</th>
                                             {

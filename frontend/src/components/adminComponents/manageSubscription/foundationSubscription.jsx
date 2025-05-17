@@ -90,7 +90,7 @@ function FoundationSubscription() {
     })
   }, []);
   return (
-    <div className="mt-[1rem]">
+    <div>
       {
         /**
          *       <div className="container mx-auto flex flex-wrap mb-[1rem]">
@@ -127,9 +127,9 @@ function FoundationSubscription() {
       }
 
       {showAlert.display ? <Alert msg={showAlert} /> : ""}
-      <div className="overflow-x-auto  mt-[2rem]">
-        <table className="table text-[1rem] mx-auto w-[1400px]">
-          <thead className="text-center text-[1rem]">
+      <div className="overflow-x-auto ">
+        <table className="table mx-auto w-[700px] sm:w-[1400px]">
+          <thead className="text-center text-sm">
             <tr>
               <th>العدد</th>
               <th>اسم العضو</th>
@@ -145,7 +145,7 @@ function FoundationSubscription() {
             {user && user.map((user, index) => {
               let comment = "";
               return (
-                <tr className='text-center'>
+                <tr className='text-center text-sm'>
                   <td>{user.id}</td>
                   <td>{user.name}</td>
                   <td>{user.NationalIdentificationNumber}</td>

@@ -80,11 +80,11 @@ function CommodityPurchaseOrderForm() {
     return (
         <div className="sm:p-0 px-[1rem]">
             <div className='container mx-auto'>
-                <Link to="/commodityRevenue" className="btn btn-primary text-[2rem] px-[2rem]">
+                <Link to="/commodityRevenue" className="btn btn-sm btn-primary text-sm px-[2rem]">
                     <FontAwesomeIcon icon={faRightLong} />
                 </Link>
             </div>
-            <h1 className="text-center text-[1.3rem] sm:text-[1.5rem] font-bold py-[1rem]">
+            <h1 className="text-center text-sm font-bold py-[1rem]">
                 نموذج شراء سلعة
             </h1>
             <div className="container mx-auto">
@@ -92,7 +92,7 @@ function CommodityPurchaseOrderForm() {
                     setInputs((prevInput) => {
                         return { ...prevInput, year: event.target.value }
                     });
-                }} className="select xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
+                }} className="select select-sm select-bordered join-item">
                     {yearOptions.map((value) => (
                         <option key={value} value={value} selected={inputs.year == value}>
                             {value}
@@ -103,7 +103,7 @@ function CommodityPurchaseOrderForm() {
                     setInputs((prevInput) => {
                         return { ...prevInput, month: event.target.value }
                     });
-                }} className="select xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
+                }} className="select select-sm select-bordered join-item">
                     <option value="1" selected={"1" == inputs.month}>محرم</option>
                     <option value="2" selected={"2" == inputs.month}>صفر</option>
                     <option value="3" selected={"3" == inputs.month}>ربيع الاول</option>
@@ -122,14 +122,14 @@ function CommodityPurchaseOrderForm() {
                     setPayAmount({
                         id: event.target.value
                     })
-                }} className="select w-[8rem] xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
+                }} className="select w-[8rem] select-sm select-bordered join-item">
                     <option selected disabled>قم باختيار العدد الخاص بنموذج شراء السلع</option>
                     {idList && idList.map((list) => (
                         <option value={list._id}>{list.id}</option>
                     ))}
                 </select>
                 <div className="indicator">
-                    <button onClick={handleSearch} className="btn btn-primary join-item  md:mt-[0rem] mt-[1rem]">ابحث</button>
+                    <button onClick={handleSearch} className="btn btn-sm btn-primary join-item  md:mt-[0rem] mt-[0.5rem]">ابحث</button>
                 </div>
             </div>
             {
@@ -138,11 +138,11 @@ function CommodityPurchaseOrderForm() {
                     <span className=" loading loading-ring loading-lg"></span>
                 </div> : <div className="overflow-x-auto mt-[1rem]">
                     {
-                        commodityRevenu && <table className="text-[1rem] table border-separate border-spacing-2 border w-[1400px] mx-auto">
-                            <tr className='text-center'>
+                        commodityRevenu && <table className="table table-xs border-separate border-spacing-2 border w-[800px] sm:w-[1000px] mx-auto">
+                            <tr className='text-center text-xs'>
                                 <th className="border text-center border-slate-600" colSpan={8}>بيانات العميل</th>
                             </tr>
-                            <tr>
+                            <tr className='text-xs'>
                                 <th className="border text-center border-slate-600" rowSpan={2}>
                                     رقم الطلب
                                 </th>
@@ -166,7 +166,7 @@ function CommodityPurchaseOrderForm() {
                                 </th>
                             </tr>
                             <tbody>
-                                <tr>
+                                <tr className='text-xs'>
                                     <td rowSpan={2} className="border text-center border-slate-600">{commodityRevenu.id}</td>
                                     <td rowSpan={2} className="border text-center border-slate-600">{commodityRevenu.customerData.name}</td>
                                     <td rowSpan={2} className="border text-center border-slate-600">{commodityRevenu.customerData.job}</td>
@@ -176,10 +176,10 @@ function CommodityPurchaseOrderForm() {
                                     <td rowSpan={2} colSpan={2} className="border text-center border-slate-600">{commodityRevenu.customerData.address}</td>
                                 </tr>
                             </tbody>
-                            <tr className='text-center'>
+                            <tr className='text-center text-xs'>
                                 <th className="border border-slate-600" colSpan={8}>بيانات الكفيل (العضو المشرف على شراء السلعة)</th>
                             </tr>
-                            <tr>
+                            <tr className='text-xs'>
                                 <th colSpan={2} className="border text-center border-slate-600" rowSpan={2}>
                                     اسم الكفيل
                                 </th>
@@ -197,7 +197,7 @@ function CommodityPurchaseOrderForm() {
                                 </th>
                             </tr>
                             <tbody>
-                                <tr>
+                                <tr className='text-xs'>
                                     <td colSpan={2} rowSpan={2} className="border text-center border-slate-600">{commodityRevenu.sponsorData.name}</td>
                                     <td rowSpan={2} className="border text-center border-slate-600">{commodityRevenu.sponsorData.nationalIdentificationNumber}</td>
                                     <td rowSpan={2} className="border text-center border-slate-600">{commodityRevenu.sponsorData.phoneNumber}</td>
@@ -205,10 +205,10 @@ function CommodityPurchaseOrderForm() {
                                     <td colSpan={3} rowSpan={2} className="border text-center border-slate-600">{commodityRevenu.sponsorData.address}</td>
                                 </tr>
                             </tbody>
-                            <tr className='text-center'>
+                            <tr className='text-center text-xs'>
                                 <th className="border border-slate-600" colSpan={8}>بيانات السلعة</th>
                             </tr>
-                            <tr>
+                            <tr className='text-xs'>
                                 <th colSpan={2} className="border text-center border-slate-600" rowSpan={2}>
                                     نوع السلعة
                                 </th>
@@ -225,12 +225,12 @@ function CommodityPurchaseOrderForm() {
                                     مبلغ البيع
                                 </th>
                             </tr>
-                            <tr>
+                            <tr className='text-xs'>
                                 <th className="border text-center border-slate-600">الميلادي</th>
                                 <th className="border text-center border-slate-600">الهجري</th>
                             </tr>
                             <tbody>
-                                <tr>
+                                <tr className='text-xs'>
                                     <td colSpan={2} className="border text-center border-slate-600">{commodityRevenu.commodityData.itemType}</td>
                                     <td className="border text-center border-slate-600">{commodityRevenu.commodityData.purchaseAmount.toFixed(2)}</td>
                                     <td className="border text-center border-slate-600">{new Date(commodityRevenu.commodityData.dateOfPurchase).getUTCFullYear() + "-" + (new Date(commodityRevenu.commodityData.dateOfPurchase).getUTCMonth() + 1) + "-" + new Date(commodityRevenu.commodityData.dateOfPurchase).getUTCDate()}</td>
@@ -238,7 +238,7 @@ function CommodityPurchaseOrderForm() {
                                     <td className="border text-center border-slate-600">{commodityRevenu.commodityData.amountPaid}</td>
                                     <td className="border text-center border-slate-600" colSpan={2}>{commodityRevenu.commodityData.saleAmount.toFixed(2)}</td>
                                 </tr>
-                                <tr>
+                                <tr className='text-xs'>
                                     <th colSpan={2} className="border text-center border-slate-600">
                                         تاريخ البيع
                                     </th>
@@ -255,7 +255,7 @@ function CommodityPurchaseOrderForm() {
                                         عدد الاقساط
                                     </th>
                                 </tr>
-                                <tr>
+                                <tr className='text-xs'>
                                     <th className="border text-center border-slate-600">الميلادي</th>
                                     <th className="border text-center border-slate-600">الهجري</th>
                                     <th className="border text-center border-slate-600">الميلادي</th>
@@ -263,7 +263,7 @@ function CommodityPurchaseOrderForm() {
                                     <th className="border text-center border-slate-600">الميلادي</th>
                                     <th className="border text-center border-slate-600">الهجري</th>
                                 </tr>
-                                <tr>
+                                <tr className='text-xs'>
                                     <td className="border text-center border-slate-600">{new Date(commodityRevenu.commodityData.saleDate).getUTCFullYear() + "-" + (new Date(commodityRevenu.commodityData.saleDate).getUTCMonth() + 1) + "-" + new Date(commodityRevenu.commodityData.saleDate).getUTCDate()}</td>
                                     <td className="border text-center border-slate-600">{commodityRevenu.commodityData.saleDateHijri.year}-{commodityRevenu.commodityData.saleDateHijri.month.number}-{commodityRevenu.commodityData.saleDateHijri.day}</td>
                                     <td className="border text-center border-slate-600">{new Date(commodityRevenu.commodityData.dateOfPayment).getUTCFullYear() + "-" + (new Date(commodityRevenu.commodityData.dateOfPayment).getUTCMonth() + 1) + "-" + new Date(commodityRevenu.commodityData.dateOfPayment).getUTCDate()}</td>
@@ -277,7 +277,7 @@ function CommodityPurchaseOrderForm() {
                             <tr className='text-center'>
                                 <th className="border border-slate-600" colSpan={8}>بيانات الصندوق</th>
                             </tr>
-                            <tr>
+                            <tr className='text-xs'>
                                 <th className="border text-center border-slate-600">الرصيد السابق لصندوق</th>
                                 <th className="border text-center border-slate-600">مبلغ المساهمة</th>
                                 <th className="border text-center border-slate-600">نسبة المساهمة</th>
@@ -286,7 +286,7 @@ function CommodityPurchaseOrderForm() {
                                 <th className="border text-center border-slate-600" colSpan={3}>الرصيد</th>
                             </tr>
                             <tbody>
-                                <tr>
+                                <tr className='text-xs'>
                                     <td className="border text-center border-slate-600">{commodityRevenu.commodityData.currentBalanceFund.toFixed(2)}</td>
                                     <td className="border text-center border-slate-600">{commodityRevenu.commodityData.contributionAmount.toFixed(2)}</td>
                                     <td className="border text-center border-slate-600">{commodityRevenu.commodityData.contributionPercentage.toFixed(2)}%</td>
@@ -302,22 +302,22 @@ function CommodityPurchaseOrderForm() {
             }
             {
                 commodityRevenu && <div className='container mx-auto'>
-                    <Link to={`/print/commodityPurchaseOrderForm?id=` + commodityRevenu._id} target='_blank' className='btn mt-[1rem] btn-info font-bold'><FontAwesomeIcon icon={faPrint} /> طباعة</Link>
+                    <Link to={`/print/commodityPurchaseOrderForm?id=` + commodityRevenu._id} target='_blank' className='btn btn-sm mt-[0.5rem] btn-info font-bold'><FontAwesomeIcon icon={faPrint} /> طباعة</Link>
                 </div>
             }
             {
-                commodityRevenu && <div className=' mt-[1rem] container mx-auto'>
+                commodityRevenu && <div className=' mt-[0.5rem] container mx-auto'>
                     {showAlert.display ? <Alert msg={showAlert} /> : ""}
                     <button disabled={load} onClick={() => {
                         if (window.confirm("هل انت متاكد من انك تريد القيام به العملية")) {
                             handleSubmit();
                         }
-                    }} className='btn btn-success'>{load ? <span className=" loading loading-ring loading-lg"></span> : "دفع الدفعة الاولى ان وجدت"}</button>
+                    }} className='btn btn-sm btn-success'>{load ? <span className=" loading loading-ring loading-lg"></span> : "دفع الدفعة الاولى ان وجدت"}</button>
                 </div>
             }
             <div className='container mx-auto'>
                 {
-                    commodityRevenu && <h1 className='mt-[1rem] text-[1.1rem] font-bold'>للذهاب إلى جدول الأقساط <Link to={"/commodityRevenue/installmentSchedule?id=" + commodityRevenu._id} className='text-error'>اضغط هنا</Link></h1>
+                    commodityRevenu && <h1 className='mt-[1rem] text-sm font-bold'>للذهاب إلى جدول الأقساط <Link to={"/commodityRevenue/installmentSchedule?id=" + commodityRevenu._id} className='text-error'>اضغط هنا</Link></h1>
 
                 }
             </div>

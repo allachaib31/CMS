@@ -53,11 +53,11 @@ function FormContributionPurchaseCommodity() {
     return (
         <div className="sm:p-0 px-[1rem]">
             <div className='container mx-auto'>
-                <Link to="/commodityRevenue/" className="btn btn-primary text-[2rem] px-[2rem]">
+                <Link to="/commodityRevenue/" className="btn btn-sm btn-primary text-sm px-[2rem]">
                     <FontAwesomeIcon icon={faRightLong} />
                 </Link>
             </div>
-            <h1 className="text-center text-[1.3rem] sm:text-[1.5rem] font-bold py-[1rem]">
+            <h1 className="text-center text-sm font-bold py-[1rem]">
                 نموذج المساهمة في شراء سلعة
             </h1>
             <div className=" container mx-auto ">
@@ -65,7 +65,7 @@ function FormContributionPurchaseCommodity() {
                     setInputs((prevInput) => {
                         return { ...prevInput, year: event.target.value }
                     });
-                }} className="select xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
+                }} className="select select-sm xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
                     {yearOptions.map((value) => (
                         <option key={value} value={value} selected={inputs.year == value}>
                             {value}
@@ -76,7 +76,7 @@ function FormContributionPurchaseCommodity() {
                     setInputs((prevInput) => {
                         return { ...prevInput, month: event.target.value }
                     });
-                }} className="select xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
+                }} className="select select-sm xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
                     <option value="1" selected={"1" == inputs.month}>محرم</option>
                     <option value="2" selected={"2" == inputs.month}>صفر</option>
                     <option value="3" selected={"3" == inputs.month}>ربيع الاول</option>
@@ -92,31 +92,31 @@ function FormContributionPurchaseCommodity() {
                 </select>
                 <select onChange={(event) => {
                     setId(event.target.value);
-                }} className="select w-[8rem] xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
+                }} className="select select-sm w-[8rem] xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
                     <option selected disabled>قم باختيار العدد الخاص بنموذج شراء السلع</option>
                     {idList && idList.map((list) => (
                         <option value={list._id}>{list.id}</option>
                     ))}
                 </select>
                 <div className="indicator">
-                    <button onClick={handleSearch} className="btn btn-primary join-item md:mt-[0rem] mt-[1rem]">ابحث</button>
+                    <button onClick={handleSearch} className="btn btn-sm text-sm btn-primary join-item md:mt-[0rem] mt-[1rem]">ابحث</button>
                 </div>
             </div>
             {
                 commodityRevenu && <div className='container mx-auto'>
-                    <Link to={`/print/formContribution?id=` + commodityRevenu._id} target='_blank' className='btn mt-[1rem] btn-info font-bold'><FontAwesomeIcon icon={faPrint} /> طباعة</Link></div>
+                    <Link to={`/print/formContribution?id=` + commodityRevenu._id} target='_blank' className='btn btn-sm mt-[0.5rem] btn-info font-bold'><FontAwesomeIcon icon={faPrint} /> طباعة</Link></div>
             }
             {
                 !loading ? <div className="flex justify-center">
                     {" "}
                     <span className=" loading loading-ring loading-lg"></span>
-                </div> : <div className="overflow-x-auto mt-[1rem]">
+                </div> : <div className="overflow-x-auto mt-[0.5rem]">
                     {
-                        commodityRevenu && <table className="text-[1.1rem] table border-separate border-spacing-2 border w-[1200px]  mx-auto">
-                            <tr className='text-center'>
+                        commodityRevenu && <table className="text-xs table table-xs border-separate border-spacing-2 border w-[600px] sm:w-[800px]  mx-auto">
+                            <tr className='text-center text-xs'>
                                 <th className="border text-center border-slate-600" colSpan={7}>البيانات: العميل \ سلعة \ الكفيل</th>
                             </tr>
-                            <tr>
+                            <tr className='text-xs'>
                                 <th className="border text-center border-slate-600" rowSpan={2}>
                                     رقم الطلب
                                 </th>
@@ -136,12 +136,12 @@ function FormContributionPurchaseCommodity() {
                                     تاريخ البيع
                                 </th>
                             </tr>
-                            <tr>
+                            <tr className='text-xs'>
                                 <th className="border text-center border-slate-600">الميلادي</th>
                                 <th className="border text-center border-slate-600">الهجري</th>
                             </tr>
                             <tbody>
-                                <tr>
+                                <tr className='text-xs'>
                                     <td className="border text-center border-slate-600">{commodityRevenu.id}</td>
                                     <td className="border text-center border-slate-600">{commodityRevenu.customerData.name}</td>
                                     <td className="border text-center border-slate-600">{commodityRevenu.commodityData.itemType}</td>
@@ -151,7 +151,7 @@ function FormContributionPurchaseCommodity() {
                                     <td className="border text-center border-slate-600">{commodityRevenu.commodityData.saleDateHijri.year}-{commodityRevenu.commodityData.saleDateHijri.month.number}-{commodityRevenu.commodityData.saleDateHijri.day}</td>
                                 </tr>
                             </tbody>
-                            <tr>
+                            <tr className='text-xs'>
                                 <th className="border text-center border-slate-600" colSpan={3}>
                                     اسم الكفيل
                                 </th>
@@ -163,16 +163,16 @@ function FormContributionPurchaseCommodity() {
                                 </th>
                             </tr>
                             <tbody>
-                                <tr>
+                                <tr className='text-xs'>
                                     <td className="border text-center border-slate-600" colSpan={3}>{commodityRevenu.sponsorData.name}</td>
                                     <td className="border text-center border-slate-600" colSpan={2}>{commodityRevenu.sponsorData.sponsorRatio}%</td>
                                     <td className="border text-center border-slate-600" colSpan={2}>{commodityRevenu.sponsorData.amount.toFixed(2)}</td>
                                 </tr>
                             </tbody>
-                            <tr className='text-center'>
+                            <tr className='text-center text-xs'>
                                 <th className="border border-slate-600" colSpan={7}>بيانات الصندوق</th>
                             </tr>
-                            <tr>
+                            <tr className='text-xs'>
                                 <th className="border text-center border-slate-600">الرصيد السابق لصندوق</th>
                                 <th className="border text-center border-slate-600">مبلغ المساهمة</th>
                                 <th className="border text-center border-slate-600">نسبة المساهمة</th>
@@ -181,7 +181,7 @@ function FormContributionPurchaseCommodity() {
                                 <th className="border text-center border-slate-600" colSpan={2}>الرصيد</th>
                             </tr>
                             <tbody>
-                                <tr>
+                                <tr className='text-xs'>
                                     <td className="border text-center border-slate-600">{commodityRevenu.commodityData.currentBalanceFund.toFixed(2)}</td>
                                     <td className="border text-center border-slate-600">{commodityRevenu.commodityData.contributionAmount.toFixed(2)}</td>
                                     <td className="border text-center border-slate-600">{commodityRevenu.commodityData.contributionPercentage.toFixed(2)}%</td>
@@ -190,10 +190,10 @@ function FormContributionPurchaseCommodity() {
                                     <td className="border text-center border-slate-600" colSpan={3}>{commodityRevenu.commodityData.balance.toFixed(2)}</td>
                                 </tr>
                             </tbody>
-                            <tr className='text-center'>
+                            <tr className='text-center text-xs'>
                                 <th className="border border-slate-600" colSpan={7}>بيانات المساهمين</th>
                             </tr>
-                            <tr>
+                            <tr className='text-xs'>
                                 <th className="border text-center border-slate-600">اسم العضو</th>
                                 <th className="border text-center border-slate-600">رصيده السابق</th>
                                 <th className="border text-center border-slate-600">نسبة المساهمة</th>
@@ -205,7 +205,7 @@ function FormContributionPurchaseCommodity() {
                                 {
                                     userContribution && userContribution.map((user) => {
                                         return (
-                                            <tr>
+                                            <tr className='text-xs'>
                                                 <td className="border text-center border-slate-600">{user.idUser.name}</td>
                                                 <td className="border text-center border-slate-600">{user.previousBalance.toFixed(2)}</td>
                                                 <td className="border text-center border-slate-600">{user.contributionPercentage.toFixed(2)}%</td>

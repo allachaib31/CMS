@@ -57,21 +57,21 @@ function WithdrawMemberBalance() {
     return (
         <div className="sm:p-0 px-[1rem]">
             <div className='container mx-auto'>
-                <Link to="/subscription" className="btn btn-primary text-[2rem] px-[2rem]">
+                <Link to="/subscription" className="btn btn-sm btn-primary px-[2rem]">
                     <FontAwesomeIcon icon={faRightLong} />
                 </Link>
             </div>
             {showAlert.display ? <Alert msg={showAlert} /> : ""}
-            <div className="overflow-x-auto mt-[1rem]">
-                <table className="text-[1rem] table border-separate border-spacing-2 border w-[1000px] mx-auto">
-                    <thead className='text-center text-[0.9rem]'>
-                        <tr>
+            <div className="overflow-x-auto mt-[0.5rem]">
+                <table className="table table-xs border-separate border-spacing-2 border w-[500px] mx-auto">
+                    <thead className='text-center text-xs'>
+                        <tr className='text-xs'>
                             <th rowSpan={2} className='border border-slate-600'>اسم العضو</th>
                             <th rowSpan={2} className='text-center border border-slate-600'>رصيد العضو</th>
                             <th colSpan={2} className='border border-slate-600'>تاريخ انتهاء اشتراكه</th>
                             <th rowSpan={2} className='text-center border border-slate-600'>سحب</th>
                         </tr>
-                        <tr>
+                        <tr className='text-xs'>
                             <th className='text-center border border-slate-600'>الميلادي</th>
                             <th className='text-center border border-slate-600'>الهجري</th>
                         </tr>
@@ -80,7 +80,7 @@ function WithdrawMemberBalance() {
                         {
                             users && users.map((user) => {
                                 return (
-                                    <tr className='text-center text-[0.8rem]'>
+                                    <tr className='text-center text-xs'>
                                         <th className='border border-slate-600'>{user.name}</th>
                                         <th className='border border-slate-600'>{user.memberBalance.toFixed(2)}</th>
                                         <th className='border border-slate-600'>{user.subscriptionExpiryDate && new Date(user.subscriptionExpiryDate).getUTCFullYear() + "-" + (new Date(user.subscriptionExpiryDate).getUTCMonth() + 1) + "-" + new Date(user.subscriptionExpiryDate).getUTCDate()}</th>
@@ -89,7 +89,7 @@ function WithdrawMemberBalance() {
                                             if (window.confirm("هل انت متاكد من انك تريد القيام به العملية")) {
                                                 handleSubmit(user._id);
                                             }
-                                        }} className='btn btn-success'>{submit ? <span className="loading loading-ring loading-lg"></span> : "سحب"}</button></th>
+                                        }} className='btn btn-sm text-xs btn-success'>{submit ? <span className="loading loading-ring loading-lg"></span> : "سحب"}</button></th>
                                     </tr>
                                 )
                             })

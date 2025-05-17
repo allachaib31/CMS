@@ -86,22 +86,22 @@ function UpdateAdmin() {
   return (
     <div className="container mx-auto  sm:p-0 px-[1rem]">
       <div>
-        <Link to="/admin" className="btn btn-primary text-[2rem] px-[2rem]">
+        <Link to="/admin" className="btn btn-sm btn-primary px-[2rem]">
           <FontAwesomeIcon icon={faRightLong} />
         </Link>
       </div>
-      <h1 className="text-center text-[1.5rem] font-bold py-[1rem]">
+      <h1 className="text-center font-bold py-[1rem]">
         تحديث معلومات المستخدم : {name}
       </h1>
       {loading ? <div className="flex justify-center"><span className="loading loading-ring w-[4rem]"></span></div> :
-        <form action="" className="py-[2rem] flex flex-col gap-[1rem]">
+        <form action="" className="py-[1rem] flex flex-col gap-[1rem]">
           {showAlert.display ? <Alert msg={showAlert} /> : ""}
           <Checkbox inputs={inputs} setInputs={setInputs} />
           <button
             onClick={(event) => {
               event.preventDefault();
               handleUpdate();
-            }} className="btn text-white font-bold text-[20px] bg-primary">{submit ? <span className="loading loading-ring loading-lg"></span> : "تحديث"}</button>
+            }} className="btn btn-sm text-white font-bold bg-primary">{submit ? <span className="loading loading-ring loading-lg"></span> : "تحديث"}</button>
         </form>}
     </div>
   )

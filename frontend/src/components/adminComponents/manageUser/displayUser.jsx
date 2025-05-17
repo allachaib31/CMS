@@ -57,7 +57,7 @@ function DisplayUser() {
   return (
     <div className="px-[1rem] sm:px-0">
       <div className="container mx-auto flex sm:flex-row sm:gap-0 gap-[1rem] flex-col justify-between mb-[1rem]">
-        <Link to="/user/addUser" className="text-[1rem] btn btn-primary">
+        <Link to="/user/addUser" className="btn btn-sm btn-primary">
           اضافة عضو
         </Link>
         <div className="join flex-wrap ">
@@ -70,7 +70,7 @@ function DisplayUser() {
                     return { ...search, searchValue: input.target.value.trim() }
                   })
                 }}
-                className="input input-bordered join-item"
+                className="input input-sm input-bordered join-item"
                 placeholder="أكتب هنا"
               />
             </div>
@@ -79,7 +79,7 @@ function DisplayUser() {
             setSearch((search) => {
               return { ...search, searchMethod: input.target.value.trim() }
             })
-          }} className="select xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
+          }} className="select select-sm xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
             <option value="_id">العدد</option>
             <option value="name">اسم</option>
             <option value="NationalIdentificationNumber">رقم الهوية</option>
@@ -87,19 +87,19 @@ function DisplayUser() {
             <option value="status">الحالة</option>
           </select>
           <div className="indicator xs:mt-0 mt-[1rem] ">
-            <button onClick={handleSearch} className="btn xs:w-auto bg-primary text-[20px] text-white join-item">
+            <button onClick={handleSearch} className="btn btn-sm xs:w-auto bg-primary text-white join-item">
             {loadingSearch ? <span className="loading loading-ring loading-lg"></span> : "ابحث"}
             </button>
           </div>
         </div>
       </div>
       {showAlert.display ? <Alert msg={showAlert} /> : ""}
-      <div className="overflow-x-auto xl:flex xl:justify-center  mt-[2rem]">
+      <div className="overflow-x-auto xl:flex xl:justify-center  mt-[0.5rem]">
         <table className="table w-[1500px]">
           {/* head */}
           <thead>
-            <tr className="text-center text-[1rem]">
-              <th>العدد</th>
+            <tr className="text-center text-sm">
+              {/*<th>العدد</th>*/}
               <th>اسم العضو</th>
               <th>رقم الهوية</th>
               <th>رقم الجوال</th>
@@ -107,24 +107,24 @@ function DisplayUser() {
               <th>تاريخ الاشتراك الهجري </th>
               <th>الحالة</th>
               <th>ملاحظات</th>
-              <th>تعديل</th>
-              <th>تعطيل</th>
+              <th></th>
+              <th></th>
             </tr>
           </thead>
-          <tbody className="text-[1rem]">
+          <tbody className="text-sm">
             {users && users.map((user, index) => {
               const date = new Date(user.createdAt);
               return (
                 <tr className="text-center">
-                  <td>{user.id}</td>
+                  {/*<td>{user.id}</td>*/}
                   <td>{user.name}</td>
                   <td>{user.NationalIdentificationNumber}</td>
                   <td>{user.phoneNumber}</td>
                   <td className="text-center">{date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()}</td>
                   <td className="text-center">{user.hijriDate.year + "-" + user.hijriDate.month.number + "-" + user.hijriDate.day}</td>
-                  <td className={(user.status == "not active" ? "text-error" : "text-success") + " font-bold text-[1.3rem]"}>{user.status == "not active" ? "غير مفعل" : "مفعل"}</td>
+                  <td className={(user.status == "not active" ? "text-error" : "text-success") + " font-bold"}>{user.status == "not active" ? "غير مفعل" : "مفعل"}</td>
                   <td>{user.comments}</td>
-                  <td><Link to={`/user/updateUser?id=${user.id}`} className="btn btn-warning">تعديل</Link></td>
+                  <td><Link to={`/user/updateUser?id=${user.id}`} className="btn btn-sm text-sm btn-warning">تعديل</Link></td>
                   <td><button data-disable={user.disable} id={user.id} onClick={(event) => {
                     setUserDelete({
                       id: user.id,
@@ -132,7 +132,7 @@ function DisplayUser() {
                       disable: event.target.getAttribute("data-disable") == "true" ? true: false
                     });
                     document.getElementById('deleteModel').showModal()
-                  }} className="btn btn-error">{user.disable ? "تنشيط" : "تعطيل"}</button></td>
+                  }} className="btn btn-sm text-sm btn-error">{user.disable ? "تنشيط" : "تعطيل"}</button></td>
                 </tr>)
             })}
           </tbody>

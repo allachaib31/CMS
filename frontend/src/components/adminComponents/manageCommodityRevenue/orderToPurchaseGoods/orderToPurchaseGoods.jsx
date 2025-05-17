@@ -112,11 +112,11 @@ function OrderToPurchaseGoods() {
     return (
         <div className="container mx-auto sm:p-0 px-[1rem]">
             <div>
-                <Link to="/commodityRevenue" className="btn btn-primary text-[2rem] px-[2rem]">
+                <Link to="/commodityRevenue" className="btn btn-sm btn-primary  px-[2rem]">
                     <FontAwesomeIcon icon={faRightLong} />
                 </Link>
             </div>
-            <h1 className="text-center text-[1.3rem] sm:text-[1.5rem] font-bold py-[1rem]">
+            <h1 className="text-center text-sm font-bold py-[1rem]">
                 طلب شراء سلعة
             </h1>
             {
@@ -129,8 +129,8 @@ function OrderToPurchaseGoods() {
                         <h1>بيانات العميل</h1>
                         <div className="flex sm:flex-row flex-col gap-[1rem]">
                             <div className="relative sm:w-1/2">
-                                <FontAwesomeIcon icon={faUser} className="absolute top-[1rem] right-[1rem]" />
-                                <input type="text" required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder={`اسم العميل`} onChange={(event) => {
+                                <FontAwesomeIcon icon={faUser} className="absolute top-[0.5rem] right-[1rem]" />
+                                <input type="text" required className="formInput w-full input input-sm pr-[2.3rem] input-bordered flex items-center gap-2" placeholder={`اسم العميل`} onChange={(event) => {
                                     return setInputs((prevInput) => {
                                         return {
                                             ...prevInput, customerData: {
@@ -142,8 +142,8 @@ function OrderToPurchaseGoods() {
                                 }} pattern="^.{3,1024}$" />
                             </div>
                             <div className="relative sm:w-1/2">
-                                <FontAwesomeIcon icon={faBriefcase} className="absolute top-[1rem] right-[1rem]" />
-                                <input type="text" required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder="الوظيفة" onChange={(event) => {
+                                <FontAwesomeIcon icon={faBriefcase} className="absolute top-[0.5rem] right-[1rem]" />
+                                <input type="text" required className="formInput w-full input input-sm pr-[2.3rem] input-bordered flex items-center gap-2" placeholder="الوظيفة" onChange={(event) => {
                                     return setInputs((prevInput) => {
                                         return {
                                             ...prevInput, customerData: {
@@ -157,8 +157,8 @@ function OrderToPurchaseGoods() {
                         </div>
                         <div className="flex sm:flex-row flex-col gap-[1rem]">
                             <div className="relative sm:w-1/2">
-                                <FontAwesomeIcon icon={faIdCard} className="absolute top-[1rem] right-[1rem]" />
-                                <input type="text" required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder="رقم الهوية الوطنية" onChange={(event) => {
+                                <FontAwesomeIcon icon={faIdCard} className="absolute top-[0.5rem] right-[1rem]" />
+                                <input type="text" required className="formInput w-full input input-sm pr-[2.3rem] input-bordered flex items-center gap-2" placeholder="رقم الهوية الوطنية" onChange={(event) => {
                                     return setInputs((prevInput) => {
                                         return {
                                             ...prevInput, customerData: {
@@ -170,8 +170,8 @@ function OrderToPurchaseGoods() {
                                 }} pattern="[1-9]\d{9}" />
                             </div>
                             <div className="relative sm:w-1/2">
-                                <FontAwesomeIcon icon={faPhone} className="absolute top-[1rem] right-[1rem]" />
-                                <input type="text" required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder="رقم الجوال" onChange={(event) => {
+                                <FontAwesomeIcon icon={faPhone} className="absolute top-[0.5rem] right-[1rem]" />
+                                <input type="text" required className="formInput w-full input input-sm pr-[2.3rem] input-bordered flex items-center gap-2" placeholder="رقم الجوال" onChange={(event) => {
                                     return setInputs((prevInput) => {
                                         return {
                                             ...prevInput, customerData: {
@@ -185,8 +185,8 @@ function OrderToPurchaseGoods() {
                         </div>
                         <div className="flex sm:flex-row flex-col gap-[1rem]">
                             <div className="relative sm:w-1/2">
-                                <FontAwesomeIcon icon={faLocationDot} className="absolute top-[1rem] right-[1rem]" />
-                                <input type="text" required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder="المنطقة" onChange={(event) => {
+                                <FontAwesomeIcon icon={faLocationDot} className="absolute top-[0.5rem] right-[1rem]" />
+                                <input type="text" required className="formInput w-full input input-sm pr-[2.3rem] input-bordered flex items-center gap-2" placeholder="المنطقة" onChange={(event) => {
                                     return setInputs((prevInput) => {
                                         return {
                                             ...prevInput, customerData: {
@@ -198,8 +198,8 @@ function OrderToPurchaseGoods() {
                                 }} pattern="^.{3,1024}$" />
                             </div>
                             <div className="relative sm:w-1/2">
-                                <FontAwesomeIcon icon={faMapLocationDot} className="absolute top-[1rem] right-[1rem]" />
-                                <input type="text" required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder="العنوان" onChange={(event) => {
+                                <FontAwesomeIcon icon={faMapLocationDot} className="absolute top-[0.5rem] right-[1rem]" />
+                                <input type="text" required className="formInput w-full input input-sm pr-[2.3rem] input-bordered flex items-center gap-2" placeholder="العنوان" onChange={(event) => {
                                     return setInputs((prevInput) => {
                                         return {
                                             ...prevInput, customerData: {
@@ -218,8 +218,8 @@ function OrderToPurchaseGoods() {
                             /*
                         <div className="flex sm:flex-row flex-col gap-[1rem]">
                             <div className="relative sm:w-1/2">
-                                <FontAwesomeIcon icon={faUser} className="absolute top-[1rem] right-[1rem]" />
-                                <input type="text" required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder={`اسم الكفيل`} onChange={(event) => {
+                                <FontAwesomeIcon icon={faUser} className="absolute top-[0.5rem] right-[1rem]" />
+                                <input type="text" required className="formInput w-full input input-sm pr-[2.3rem] input-bordered flex items-center gap-2" placeholder={`اسم الكفيل`} onChange={(event) => {
                                     return setInputs((prevInput) => {
                                         return {
                                             ...prevInput, sponsorData: {
@@ -231,8 +231,8 @@ function OrderToPurchaseGoods() {
                                 }} pattern="^.{3,1024}$" />
                             </div>
                             <div className="relative sm:w-1/2">
-                                <FontAwesomeIcon icon={faIdCard} className="absolute top-[1rem] right-[1rem]" />
-                                <input type="text" required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder="رقم الهوية الوطنية" onChange={(event) => {
+                                <FontAwesomeIcon icon={faIdCard} className="absolute top-[0.5rem] right-[1rem]" />
+                                <input type="text" required className="formInput w-full input input-sm pr-[2.3rem] input-bordered flex items-center gap-2" placeholder="رقم الهوية الوطنية" onChange={(event) => {
                                     return setInputs((prevInput) => {
                                         return {
                                             ...prevInput, sponsorData: {
@@ -246,8 +246,8 @@ function OrderToPurchaseGoods() {
                         </div>
                         <div className="flex sm:flex-row flex-col gap-[1rem]">
                             <div className="relative sm:w-1/2">
-                                <FontAwesomeIcon icon={faPhone} className="absolute top-[1rem] right-[1rem]" />
-                                <input type="text" required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder="رقم الجوال" onChange={(event) => {
+                                <FontAwesomeIcon icon={faPhone} className="absolute top-[0.5rem] right-[1rem]" />
+                                <input type="text" required className="formInput w-full input input-sm pr-[2.3rem] input-bordered flex items-center gap-2" placeholder="رقم الجوال" onChange={(event) => {
                                     return setInputs((prevInput) => {
                                         return {
                                             ...prevInput, sponsorData: {
@@ -271,7 +271,7 @@ function OrderToPurchaseGoods() {
                                         }
                                     }
                                 })
-                            }} className="select formInput select-bordered w-full sm:w-1/2">
+                            }} className="select select-sm formInput select-bordered w-full sm:w-1/2">
                                 <option disabled selected>اختار العضو المساهم باسم الصندوق</option>
                                 {
                                     listId && listId.map((user) => {
@@ -282,8 +282,8 @@ function OrderToPurchaseGoods() {
                                 }
                             </select>
                             <div className="relative sm:w-1/2">
-                                <FontAwesomeIcon icon={faPercent} className="absolute top-[1rem] right-[1rem]" />
-                                <input type="number" required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" onChange={(event) => {
+                                <FontAwesomeIcon icon={faPercent} className="absolute top-[0.5rem] right-[1rem]" />
+                                <input type="number" required className="formInput w-full input input-sm pr-[2.3rem] input-bordered flex items-center gap-2" onChange={(event) => {
                                     return setInputs((prevInput) => {
                                         return {
                                             ...prevInput, sponsorData: {
@@ -297,8 +297,8 @@ function OrderToPurchaseGoods() {
                         </div>
                         <div className="flex sm:flex-row flex-col gap-[1rem]">
                             <div className="relative sm:w-1/2">
-                                <FontAwesomeIcon icon={faLocationDot} className="absolute top-[1rem] right-[1rem]" />
-                                <input type="text" required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder="المنطقة" onChange={(event) => {
+                                <FontAwesomeIcon icon={faLocationDot} className="absolute top-[0.5rem] right-[1rem]" />
+                                <input type="text" required className="formInput w-full input input-sm pr-[2.3rem] input-bordered flex items-center gap-2" placeholder="المنطقة" onChange={(event) => {
                                     return setInputs((prevInput) => {
                                         return {
                                             ...prevInput, sponsorData: {
@@ -310,8 +310,8 @@ function OrderToPurchaseGoods() {
                                 }} pattern="^.{3,1024}$" />
                             </div>
                             <div className="relative sm:w-1/2">
-                                <FontAwesomeIcon icon={faMapLocationDot} className="absolute top-[1rem] right-[1rem]" />
-                                <input type="text" required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder="العنوان" onChange={(event) => {
+                                <FontAwesomeIcon icon={faMapLocationDot} className="absolute top-[0.5rem] right-[1rem]" />
+                                <input type="text" required className="formInput w-full input input-sm pr-[2.3rem] input-bordered flex items-center gap-2" placeholder="العنوان" onChange={(event) => {
                                     return setInputs((prevInput) => {
                                         return {
                                             ...prevInput, sponsorData: {
@@ -328,8 +328,8 @@ function OrderToPurchaseGoods() {
                         <h1> بيانات السلع</h1>
                         <div className="flex sm:flex-row flex-col gap-[1rem]">
                             <div className="relative sm:w-1/2">
-                                <FontAwesomeIcon icon={faStore} className="absolute top-[1rem] right-[1rem]" />
-                                <input type="text" required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder={`نوع السلعة`} onChange={(event) => {
+                                <FontAwesomeIcon icon={faStore} className="absolute top-[0.5rem] right-[1rem]" />
+                                <input type="text" required className="formInput w-full input input-sm pr-[2.3rem] input-bordered flex items-center gap-2" placeholder={`نوع السلعة`} onChange={(event) => {
                                     return setInputs((prevInput) => {
                                         return {
                                             ...prevInput, commodityData: {
@@ -341,8 +341,8 @@ function OrderToPurchaseGoods() {
                                 }} pattern="^.{3,1024}$" />
                             </div>
                             <div className="relative sm:w-1/2">
-                                <FontAwesomeIcon icon={faMoneyBill} className="absolute top-[1rem] right-[1rem]" />
-                                <input type="number" required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" onChange={(event) => {
+                                <FontAwesomeIcon icon={faMoneyBill} className="absolute top-[0.5rem] right-[1rem]" />
+                                <input type="number" required className="formInput w-full input input-sm pr-[2.3rem] input-bordered flex items-center gap-2" onChange={(event) => {
                                     return setInputs((prevInput) => {
                                         return {
                                             ...prevInput, commodityData: {
@@ -361,7 +361,7 @@ function OrderToPurchaseGoods() {
                         <div className="flex sm:flex-row flex-col gap-[1rem]">
                             <div className="flex gap-[1rem] items-center relative sm:w-1/2">
                                 <label>تاريخ الشراء (الميلادي)</label>
-                                <input type="date" required className="formInput input pr-[2.3rem] input-bordered flex items-center gap-2" onChange={(event) => {
+                                <input type="date" required className="formInput input input-sm pr-[2.3rem] input-bordered flex items-center gap-2" onChange={(event) => {
                                     return setInputs((prevInput) => {
                                         const hijriDate = hijriDateObject(event.target.value);
                                         return {
@@ -387,8 +387,8 @@ function OrderToPurchaseGoods() {
                         </div>
                         <div className="flex sm:flex-row flex-col gap-[1rem]">
                             <div className="relative sm:w-1/2">
-                                <FontAwesomeIcon icon={faMoneyBill} className="absolute top-[1rem] right-[1rem]" />
-                                <input type="number" required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" onChange={(event) => {
+                                <FontAwesomeIcon icon={faMoneyBill} className="absolute top-[0.5rem] right-[1rem]" />
+                                <input type="number" required className="formInput w-full input input-sm pr-[2.3rem] input-bordered flex items-center gap-2" onChange={(event) => {
                                     return setInputs((prevInput) => {
                                         return {
                                             ...prevInput, commodityData: {
@@ -400,8 +400,8 @@ function OrderToPurchaseGoods() {
                                 }} placeholder={`المبلغ المسدد`} />
                             </div>
                             <div className="relative sm:w-1/2">
-                                <FontAwesomeIcon icon={faMoneyBill} className="absolute top-[1rem] right-[1rem]" />
-                                <input type="number" required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" onChange={(event) => {
+                                <FontAwesomeIcon icon={faMoneyBill} className="absolute top-[0.5rem] right-[1rem]" />
+                                <input type="number" required className="formInput w-full input input-sm pr-[2.3rem] input-bordered flex items-center gap-2" onChange={(event) => {
                                     return setInputs((prevInput) => {
                                         //let amount = (Number(event.target.value.trim()) - prevInput.commodityData.purchaseAmount) - ((Number(event.target.value.trim()) - prevInput.commodityData.purchaseAmount) * (prevInput.sponsorData.sponsorRatio / 100));
                                         return {
@@ -434,7 +434,7 @@ function OrderToPurchaseGoods() {
                                             }
                                         }
                                     })
-                                }} required className="formInput input pr-[2.3rem] input-bordered flex items-center gap-2" />
+                                }} required className="formInput input input-sm pr-[2.3rem] input-bordered flex items-center gap-2" />
                             </div>
                             <div className="flex gap-[1rem] items-center relative sm:w-1/2">
                                 <label>تاريخ البيع (الهجري)</label>
@@ -461,7 +461,7 @@ function OrderToPurchaseGoods() {
                                             }
                                         }
                                     })
-                                }} required className="formInput input pr-[2.3rem] input-bordered flex items-center gap-2" />
+                                }} required className="formInput input input-sm pr-[2.3rem] input-bordered flex items-center gap-2" />
                             </div>
                             <div className="flex gap-[1rem] items-center relative sm:w-1/2">
                                 <label>تاريخ بدء السداد بالهجري</label>
@@ -473,7 +473,7 @@ function OrderToPurchaseGoods() {
 
                         <div className="flex sm:flex-row flex-col gap-[1rem]">
                             <div className="relative w-full">
-                                <FontAwesomeIcon icon={faMoneyBill} className="absolute top-[1rem] right-[1rem]" />
+                                <FontAwesomeIcon icon={faMoneyBill} className="absolute top-[0.5rem] right-[1rem]" />
                                 <input type="number" min={0} onChange={(event) => {
                                     return setInputs((prevInput) => {
                                         return {
@@ -484,25 +484,25 @@ function OrderToPurchaseGoods() {
                                             }
                                         }
                                     })
-                                }} required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder="عدد الاقساط" />
+                                }} required className="formInput w-full input input-sm pr-[2.3rem] input-bordered flex items-center gap-2" placeholder="عدد الاقساط" />
                             </div>
                             {
                             /*
                              <div className="relative sm:w-1/2">
-                                <FontAwesomeIcon icon={faMoneyBill} className="absolute top-[1rem] right-[1rem]" />
-                                <input type="number" disabled value={inputs.commodityData.premiumAmount} required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder={`مبلغ القسط`} />
+                                <FontAwesomeIcon icon={faMoneyBill} className="absolute top-[0.5rem] right-[1rem]" />
+                                <input type="number" disabled value={inputs.commodityData.premiumAmount} required className="formInput w-full input input-sm pr-[2.3rem] input-bordered flex items-center gap-2" placeholder={`مبلغ القسط`} />
                             </div>*/}
                         </div>
                         {
                             /**
                              *                         <div className="flex sm:flex-row flex-col gap-[1rem]">
                             <div className="relative sm:w-1/2">
-                                <FontAwesomeIcon icon={faLandmark} className="absolute top-[1rem] right-[1rem]" />
-                                <input type="number" value={inputs.commodityData.currentBalanceFund} disabled className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder={`الرصيد الحالي صندوق`} title={`الرصيد الحالي صندوق`} />
+                                <FontAwesomeIcon icon={faLandmark} className="absolute top-[0.5rem] right-[1rem]" />
+                                <input type="number" value={inputs.commodityData.currentBalanceFund} disabled className="formInput w-full input input-sm pr-[2.3rem] input-bordered flex items-center gap-2" placeholder={`الرصيد الحالي صندوق`} title={`الرصيد الحالي صندوق`} />
                             </div>
                             <div className="relative sm:w-1/2">
-                                <FontAwesomeIcon icon={faMoneyBill} className="absolute top-[1rem] right-[1rem]" />
-                                <input type="number" value={inputs.commodityData.contributionAmount} disabled required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" onChange={(event) => {
+                                <FontAwesomeIcon icon={faMoneyBill} className="absolute top-[0.5rem] right-[1rem]" />
+                                <input type="number" value={inputs.commodityData.contributionAmount} disabled required className="formInput w-full input input-sm pr-[2.3rem] input-bordered flex items-center gap-2" onChange={(event) => {
                                     if (event.target.value > inputs.commodityData.currentBalanceFund) event.target.value = inputs.commodityData.currentBalanceFund;
                                     return setInputs((prevInput) => {
                                         return {
@@ -518,12 +518,12 @@ function OrderToPurchaseGoods() {
                         </div>
                         <div className="flex sm:flex-row flex-col gap-[1rem]">
                             <div className="relative sm:w-1/2">
-                                <FontAwesomeIcon icon={faPercent} className="absolute top-[1rem] right-[1rem]" />
-                                <input type="number" value={inputs.commodityData.contributionPercentage.toFixed(2)} disabled className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder={`نسبة المساهمة`} title={`نسبة المساهمة`} />
+                                <FontAwesomeIcon icon={faPercent} className="absolute top-[0.5rem] right-[1rem]" />
+                                <input type="number" value={inputs.commodityData.contributionPercentage.toFixed(2)} disabled className="formInput w-full input input-sm pr-[2.3rem] input-bordered flex items-center gap-2" placeholder={`نسبة المساهمة`} title={`نسبة المساهمة`} />
                             </div>
                             <div className="relative sm:w-1/2">
-                                <FontAwesomeIcon icon={faPercentage} className="absolute top-[1rem] right-[1rem]" />
-                                <input type="number" disabled value={inputs.commodityData.profitRatio} required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" onChange={(event) => {
+                                <FontAwesomeIcon icon={faPercentage} className="absolute top-[0.5rem] right-[1rem]" />
+                                <input type="number" disabled value={inputs.commodityData.profitRatio} required className="formInput w-full input input-sm pr-[2.3rem] input-bordered flex items-center gap-2" onChange={(event) => {
                                     return setInputs((prevInput) => {
                                         return {
                                             ...prevInput, commodityData: {
@@ -537,12 +537,12 @@ function OrderToPurchaseGoods() {
                         </div>
                         <div className="flex sm:flex-row flex-col gap-[1rem]">
                             <div className="relative sm:w-1/2">
-                                <FontAwesomeIcon icon={faMoneyBill} required className="absolute top-[1rem] right-[1rem]" />
-                                <input type="number" disabled value={inputs.commodityData.profitAmount} className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" title='مبلغ الربح' placeholder={`مبلغ الربح`} />
+                                <FontAwesomeIcon icon={faMoneyBill} required className="absolute top-[0.5rem] right-[1rem]" />
+                                <input type="number" disabled value={inputs.commodityData.profitAmount} className="formInput w-full input input-sm pr-[2.3rem] input-bordered flex items-center gap-2" title='مبلغ الربح' placeholder={`مبلغ الربح`} />
                             </div>
                             <div className="relative sm:w-1/2">
-                                <FontAwesomeIcon icon={faMoneyBill} className="absolute top-[1rem] right-[1rem]" />
-                                <input type="number" value={inputs.commodityData.balance} disabled required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder="الرصيد" title="الرصيد" />
+                                <FontAwesomeIcon icon={faMoneyBill} className="absolute top-[0.5rem] right-[1rem]" />
+                                <input type="number" value={inputs.commodityData.balance} disabled required className="formInput w-full input input-sm pr-[2.3rem] input-bordered flex items-center gap-2" placeholder="الرصيد" title="الرصيد" />
                             </div>
                         </div>
                              */
@@ -553,7 +553,7 @@ function OrderToPurchaseGoods() {
                         if (window.confirm("هل انت متاكد من انك تريد القيام به العملية")) {
                             handleSubmit();
                         }
-                    }} disabled={submit} className='btn text-white font-bold text-[20px] btn-primary'>{submit ? <span className="loading loading-ring loading-lg"></span> : "تاكيد"}</button>
+                    }} disabled={submit} className='btn btn-sm text-white font-bold btn-primary'>{submit ? <span className="loading loading-ring loading-lg"></span> : "تاكيد"}</button>
                 </form>
             }
         </div>

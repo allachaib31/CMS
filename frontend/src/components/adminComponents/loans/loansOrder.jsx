@@ -57,14 +57,14 @@ function LoansOrder() {
     return (
         <div className="sm:p-0 px-[1rem] container mx-auto">
             <div>
-                <Link to="/loans" className="btn btn-primary text-[2rem] px-[2rem]">
+                <Link to="/loans" className="btn btn-sm btn-primary text-sm px-[2rem]">
                     <FontAwesomeIcon icon={faRightLong} />
                 </Link>
             </div>
-            <h1 className="text-center text-[1.5rem] font-bold py-[1rem]">
+            <h1 className="text-center text-sm font-bold py-[0.5rem]">
                 طلب قرض
             </h1>
-            <form action="" className="py-[2rem] flex flex-col gap-[1rem]">
+            <form action="" className="py-[0.5rem] flex flex-col gap-[1rem]">
                 {showAlert.display ? <Alert msg={showAlert} /> : ""}
                 <div className="flex sm:flex-row flex-col gap-[1rem]">
                     <div className="relative sm:w-1/2">
@@ -76,7 +76,7 @@ function LoansOrder() {
                                 }
                             })
                         }}
-                            className="select formInput select-bordered w-full">
+                            className="select select-sm formInput select-bordered w-full">
                             <option disabled selected>اختار العضو المساهم باسم الصندوق</option>
                             {
                                 listId && listId.map((user) => {
@@ -88,8 +88,8 @@ function LoansOrder() {
                         </select>
                     </div>
                     <div className="relative sm:w-1/2">
-                        <FontAwesomeIcon icon={faMoneyBill} className="absolute top-[1rem] right-[1rem]" />
-                        <input type="number" required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder="مبلغ القرض " onChange={(event) => {
+                        <FontAwesomeIcon icon={faMoneyBill} className="absolute top-[0.5rem] right-[1rem]" />
+                        <input type="number" required className="formInput w-full input input-sm pr-[2.3rem] input-bordered flex items-center gap-2" placeholder="مبلغ القرض " onChange={(event) => {
                             return setInputs((prevInput) => {
                                 return {
                                     ...prevInput,
@@ -101,8 +101,8 @@ function LoansOrder() {
                 </div>
                 <div className="flex sm:flex-row flex-col gap-[1rem]">
                     <div className="relative sm:w-1/2">
-                        <FontAwesomeIcon icon={faIdCard} className="absolute top-[1rem] right-[1rem]" />
-                        <input type="number" required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder={`عدد الأقساط`} onChange={(event) => {
+                        <FontAwesomeIcon icon={faIdCard} className="absolute top-[0.5rem] right-[1rem]" />
+                        <input type="number" required className="formInput w-full input input-sm pr-[2.3rem] input-bordered flex items-center gap-2" placeholder={`عدد الأقساط`} onChange={(event) => {
                             return setInputs((prevInput) => {
                                 return {
                                     ...prevInput,
@@ -113,14 +113,14 @@ function LoansOrder() {
                         }} />
                     </div>
                     <div className="relative sm:w-1/2">
-                        <FontAwesomeIcon icon={faMoneyBill} className="absolute top-[1rem] right-[1rem]" />
-                        <input type="number" required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder="مبلغ القسط" title="مبلغ القسط " disabled value={inputs.premiumAmount} />
+                        <FontAwesomeIcon icon={faMoneyBill} className="absolute top-[0.5rem] right-[1rem]" />
+                        <input type="number" required className="formInput w-full input input-sm pr-[2.3rem] input-bordered flex items-center gap-2" placeholder="مبلغ القسط" title="مبلغ القسط " disabled value={inputs.premiumAmount} />
                     </div>
                 </div>
                 <div className="flex sm:flex-row flex-col gap-[1rem]">
-                    <div className="flex gap-[1rem] items-center relative sm:w-1/2">
+                    <div className="flex gap-[1rem] items-center text-sm relative sm:w-1/2">
                         <label>تاريخ استلام القرض  (الميلادي)</label>
-                        <input type="date" required className="formInput input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder={`عدد الأقساط`} onChange={(event) => {
+                        <input type="date" required className="formInput input input-sm pr-[2.3rem] input-bordered flex items-center gap-2" placeholder={`عدد الأقساط`} onChange={(event) => {
                             return setInputs((prevInput) => {
                                 const hijriDate = hijriDateObject(event.target.value);
                                 return {
@@ -135,7 +135,7 @@ function LoansOrder() {
                             })
                         }} />
                     </div>
-                    <div className="flex gap-[1rem] items-center relative sm:w-1/2">
+                    <div className="text-sm flex gap-[1rem] items-center relative sm:w-1/2">
                         <label>تاريخ استلام القرض  (الهجري)</label>
                         {
                             inputs.dateOfReceiptHijri ? <span>{inputs.dateOfReceiptHijri.day}/{inputs.dateOfReceiptHijri.month.number}/{inputs.dateOfReceiptHijri.year}</span> : ""
@@ -147,7 +147,7 @@ function LoansOrder() {
                     if (window.confirm("هل انت متاكد من انك تريد القيام به العملية")) {
                         handleSubmit();
                     }
-                }} disabled={submit} className='btn text-white font-bold text-[20px] btn-primary'>
+                }} disabled={submit} className='btn btn-sm text-white font-bold btn-primary'>
                     {submit ? <span className="loading loading-ring loading-lg"></span> : "تاكيد"}
                 </button>
             </form>

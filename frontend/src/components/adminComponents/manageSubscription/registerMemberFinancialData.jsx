@@ -57,18 +57,18 @@ function RegisterMemberFinancialData() {
     return (
         <div className="sm:p-0 px-[1rem]">
             <div className='container mx-auto'>
-                <Link to="/subscription" className="btn btn-primary text-[2rem] px-[2rem]">
+                <Link to="/subscription" className="btn btn-sm btn-primary px-[2rem]">
                     <FontAwesomeIcon icon={faRightLong} />
                 </Link>
             </div>
-            <h1 className="text-center text-[1.1rem] sm:text-[1.5rem] font-bold py-[1rem]">
+            <h1 className="text-center font-bold py-[0.5rem]">
                 سجل البيانات المالية للاعضاء
             </h1>
-            <div className="overflow-x-auto mt-[1rem]">
-                <table className="text-[1rem] table border-separate border-spacing-2 border w-[1800px] mx-auto">
+            <div className="overflow-x-auto mt-[0.5rem]">
+                <table className="table table-sm border-separate border-spacing-2 border w-[1500px] mx-auto">
                     {/* head */}
-                    <thead className='text-center text-[0.9rem]'>
-                        <tr>
+                    <thead className='text-center'>
+                        <tr className='text-xs'>
                             <th rowSpan={2} className='border border-slate-600'>اسم العضو</th>
                             <th className='text-center border border-slate-600' colSpan={2}>تاريخ الاشتراك</th>
                             <th className='text-center border border-slate-600' colSpan={2}>رصيد العضو</th>
@@ -81,7 +81,7 @@ function RegisterMemberFinancialData() {
                             <th rowSpan={2} className='border border-slate-600'>الحالة</th>
                             <th rowSpan={2} className='border border-slate-600'>ملاحظات</th>
                         </tr>
-                        <tr>
+                        <tr className='text-xs'>
                             <th className='text-center border border-slate-600'>الميلادي</th>
                             <th className='text-center border border-slate-600'>الهجري</th>
                             <th className='text-center border border-slate-600'>مند بداية <br />اشتراكه</th>
@@ -97,7 +97,7 @@ function RegisterMemberFinancialData() {
                             users && users.map((user) => {
                                 const createdAt = new Date(user.createdAt);
                                 return (
-                                    <tr className='text-center text-[0.8rem]'>
+                                    <tr className='text-center text-xs'>
                                         <th className='border border-slate-600'>{user.idUser.name}</th>
                                         <td className='border border-slate-600'>{createdAt.getUTCFullYear() + "-" + (createdAt.getUTCMonth() + 1) + "-" + createdAt.getUTCDate()}</td>
                                         <td className='border border-slate-600'>{user.hijriDate.year}-{user.hijriDate.month.number}-{user.hijriDate.day}</td>
@@ -131,13 +131,13 @@ function RegisterMemberFinancialData() {
             <dialog id="endInscription" className="modal">
                 <div className="modal-box">
                     {showAlert.display ? <Alert msg={showAlert} /> : ""}
-                    <h3 className="font-bold text-lg">انهاء الاشتراك لي  {endDate.name}</h3>
+                    <h3 className="font-bold text-sm">انهاء الاشتراك لي  {endDate.name}</h3>
                     <p className="py-4">تنبيه في حالة انهاء اشتراكه لن تستطيع اعادة تفعيله</p>
                     <div className="modal-action">
                         <form method="dialog">
                             {/* if there is a button in form, it will close the modal */}
-                            <button className="btn">اغلاق</button>
-                            <button className="btn btn-success" onClick={(event) => {
+                            <button className="btn btn-sm">اغلاق</button>
+                            <button className="btn btn-sm btn-success" onClick={(event) => {
                                 event.preventDefault();
                                 handleSubmit();
                             }}>{submit ? <span className="loading loading-ring loading-lg"></span> : "تاكيد"}</button>

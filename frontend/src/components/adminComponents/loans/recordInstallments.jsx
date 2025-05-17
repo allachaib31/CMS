@@ -57,18 +57,18 @@ function RecordInstallments() {
     return (
         <div className="px-[1rem] sm:px-0">
             <div className='container mx-auto'>
-                <Link to="/loans" className="btn btn-primary text-[2rem] px-[2rem]">
+                <Link to="/loans" className="btn btn-sm btn-primary text-sm px-[2rem]">
                     <FontAwesomeIcon icon={faRightLong} />
                 </Link>
             </div>
             <div className='container mx-auto'>
             {showAlert.display ? <Alert msg={showAlert} /> : ""}
-            <Link to={`/print/loans/recordInstallments?id=${queryParams.get('id')}`} target='_blank' className='mt-[1rem] btn btn-info font-bold'><FontAwesomeIcon icon={faPrint} /> طباعة</Link>
+            <Link to={`/print/loans/recordInstallments?id=${queryParams.get('id')}`} target='_blank' className='mt-[0.5rem] btn btn-sm text-sm btn-info font-bold'><FontAwesomeIcon icon={faPrint} /> طباعة</Link>
             </div>
-            <div className="overflow-x-auto mt-[1rem]">
+            <div className="overflow-x-auto mt-[0.5rem]">
                 {
-                    loanInfo && <table className="text-[1rem] table border-separate border-spacing-2 border w-[1300px] mx-auto">
-                        <thead className="text-[1rem] text-center">
+                    loanInfo && <table className="text-xs table table-xs border-separate border-spacing-2 border w-[900px] mx-auto">
+                        <thead className="text-xs text-center">
                             <tr>
                                 <td className='border border-slate-600' colSpan={9}>سجل الاقساط</td>
                             </tr>
@@ -97,7 +97,7 @@ function RecordInstallments() {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr className='text-center'>
+                            <tr className='text-center text-xs'>
                                 <td className="border border-slate-600">{loanInfo.name}</td>
                                 <td className="border border-slate-600">{loanInfo.amount.toFixed(2)}</td>
                                 <td className="border border-slate-600">{loanInfo.numberOfInstallments}</td>
@@ -107,7 +107,7 @@ function RecordInstallments() {
                                 <td className="border border-slate-600" colSpan={2}>{(loanInfo.amount - loanInfo.balance).toFixed(2)}</td>
                             </tr>
                         </tbody>
-                        <tr className='text-center'>
+                        <tr className='text-center text-xs'>
                             <th className="border border-slate-600" rowSpan={2}>
                                 رقم القسط
                             </th>
@@ -148,7 +148,7 @@ function RecordInstallments() {
                                     const d = new Date(installment.actualPaymentDate);
                                     const d2 = new Date(installment.requiredPaymentDate)
                                     return (
-                                        <tr className='text-center'>
+                                        <tr className='text-center text-xs'>
                                             <td className="border border-slate-600">{installment.id}</td>
                                             <td className="border border-slate-600">{installment.premiumAmount.toFixed(2)}</td>
                                             <td className="border border-slate-600">{installment.actualPaymentDate && d.getUTCFullYear() + "-" + (d.getUTCMonth() + 1) + "-" + d.getUTCDate()}</td>
@@ -164,7 +164,7 @@ function RecordInstallments() {
                                                                 id: installment._id
                                                             })
                                                         }
-                                                    }} className='btn btn-success'>دفع</button>
+                                                    }} className='btn btn-xs btn-success'>دفع</button>
                                                 }</td>
                                         </tr>
                                     )

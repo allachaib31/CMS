@@ -61,25 +61,25 @@ function ManagingLatePayments() {
       <div className="container mx-auto">
         <Link
           to="/subscription"
-          className="btn btn-primary text-[2rem] px-[2rem]"
+          className="btn btn-sm btn-primary text-sm px-[2rem]"
         >
           <FontAwesomeIcon icon={faRightLong} />
         </Link>
       </div>
-      <h1 className="text-center text-[1.5rem] font-bold py-[1rem]">
+      <h1 className="text-center text-sm font-bold py-[0.5rem]">
         إدارة المتأخرات
       </h1>
       {showAlert.display ? <Alert msg={showAlert} /> : ""}
-      <div className="overflow-x-auto mt-[1rem]">
+      <div className="overflow-x-auto mt-[0.5rem]">
         {!loading ? (
           <div className="flex justify-center">
             {" "}
             <span className=" loading loading-ring loading-lg"></span>
           </div>
         ) : (
-          <table className="text-[1rem] table border-separate border-spacing-2 border w-[800px] mx-auto">
-            <thead className="text-[1rem] text-center">
-              <tr>
+          <table className="table table-sm border-separate border-spacing-2 border w-[600px] mx-auto">
+            <thead className="text-center">
+              <tr className="text-xs">
                 <th className="border border-slate-600" rowSpan={2}>
                   اسم العضو
                 </th>
@@ -91,7 +91,7 @@ function ManagingLatePayments() {
                 </th>
                 <th className="text-center border border-slate-600" rowSpan={2}>دفع</th>
               </tr>
-              <tr>
+              <tr className="text-xs">
                 <th className="text-center border border-slate-600">الميلادي</th>
                 <th className="text-center border border-slate-600">الهجري</th>
               </tr>
@@ -101,7 +101,7 @@ function ManagingLatePayments() {
                 subscriptions.map((subscription) => {
                   const dateHijri = subscription.dueDateHijri.year + "-" + subscription.dueDateHijri.month.number + "-" + subscription.dueDateHijri.day;
                   return (
-                    <tr>
+                    <tr className="text-xs">
                       <th className="border border-slate-600">
                         {subscription.name}
                       </th>
@@ -120,7 +120,7 @@ function ManagingLatePayments() {
                             dueDate: subscription.dueDate,
                             year: subscription.dueDateHijri.year,
                           })
-                        }} className="btn btn-success">دفع</button>
+                        }} className="btn btn-sm text-xs btn-success">دفع</button>
                       </td>
                     </tr>
                   );

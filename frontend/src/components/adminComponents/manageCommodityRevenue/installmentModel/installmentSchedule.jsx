@@ -28,23 +28,23 @@ function InstallmentSchedule() {
     return (
         <div className="sm:p-0 px-[1rem]">
             <div className='container mx-auto'>
-                <Link to="/commodityRevenue/commodityPurchaseOrderForm" className="btn btn-primary text-[2rem] px-[2rem]">
+                <Link to="/commodityRevenue/commodityPurchaseOrderForm" className="btn btn-sm btn-primary text-sm px-[2rem]">
                     <FontAwesomeIcon icon={faRightLong} />
                 </Link>
             </div>
-            <h1 className="text-center text-[1.5rem] font-bold py-[1rem]">
+            <h1 className="text-center text-sm font-bold py-[0.5rem]">
                 جدول الاقساط
             </h1>
             {
                 !loading ? <div className="flex justify-center">
                     {" "}
                     <span className=" loading loading-ring loading-lg"></span>
-                </div> : <div className="overflow-x-auto mt-[1rem]">
-                    {installmentSchedule && <table className="text-[1rem] table border-separate border-spacing-2 border w-[1400px] mx-auto">
-                        <tr className='text-center'>
+                </div> : <div className="overflow-x-auto mt-[0.5rem]">
+                    {installmentSchedule && <table className="text-xs table table-xs border-separate border-spacing-2 border w-[600px] sm:w-[900px] mx-auto">
+                        <tr className='text-center text-xs'>
                             <th className="border text-center border-slate-600" colSpan={9}>جدول الاقساط</th>
                         </tr>
-                        <tr>
+                        <tr className='text-xs'>
                             <th className="border text-center border-slate-600">
                                 رقم الطلب
                             </th>
@@ -74,7 +74,7 @@ function InstallmentSchedule() {
                             </th>
                         </tr>
                         <tbody>
-                            <tr>
+                            <tr className='text-xs'>
                                 <td className="border text-center border-slate-600">{installmentSchedule[0].idCommodityRevenue.id}</td>
                                 <td className="border text-center border-slate-600">{installmentSchedule[0].idCommodityRevenue.customerData.name}</td>
                                 <td className="border text-center border-slate-600">{installmentSchedule[0].idCommodityRevenue.commodityData.itemType}</td>
@@ -86,7 +86,7 @@ function InstallmentSchedule() {
                                 <td className="border text-center border-slate-600">{(unpaidInstallments * installmentSchedule[0].premiumAmount).toFixed(2)}</td>
                             </tr>
                         </tbody>
-                        <tr>
+                        <tr className='text-xs'>
                             <th rowSpan={2} className="border text-center border-slate-600">
                                 رقم القسط
                             </th>
@@ -106,7 +106,7 @@ function InstallmentSchedule() {
                                 الاقساط المتاخرة
                             </th>
                         </tr>
-                        <tr>
+                        <tr className='text-xs'>
                             <th className="border text-center border-slate-600">الميلادي</th>
                             <th className="border text-center border-slate-600">الهجري</th>
                             <th className="border text-center border-slate-600">الميلادي</th>
@@ -131,7 +131,7 @@ function InstallmentSchedule() {
                                     late = "لا"
                                 }
                                 return (
-                                    <tr>
+                                    <tr className='text-xs'>
                                         <td className="border text-center border-slate-600">{installment.id}</td>
                                         <td className="border text-center border-slate-600">{installment.premiumAmount.toFixed(2)}</td>
                                         <td className="border text-center border-slate-600">{installment.itPaid ? "نعم" : "لا"}</td>
@@ -149,7 +149,7 @@ function InstallmentSchedule() {
                 </div>
             }
             <div className='container mx-auto'>
-                <Link to={"/print/goodsPurchaseContract?id=" + query.get("id")} className='btn mt-[1rem] btn-info font-bold' target='_blank'><FontAwesomeIcon icon={faPrint} />  طباعة عقد شراء السلعة</Link>
+                <Link to={"/print/goodsPurchaseContract?id=" + query.get("id")} className='btn btn-sm mt-[0.5rem] btn-info font-bold' target='_blank'><FontAwesomeIcon icon={faPrint} />  طباعة عقد شراء السلعة</Link>
             </div>
         </div>
     )

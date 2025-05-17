@@ -29,13 +29,13 @@ function LoansData() {
     }, []);
     return (
         <div className="px-[1rem] sm:px-0">
-            <h1 className="text-center text-[1.5rem] font-bold py-[1rem]">
+            <h1 className="text-center text-sm font-bold py-[0.5rem]">
                 بيانات القرض
             </h1>
             <div className="container mx-auto">
                 <select onChange={(event) => {
                     setId(event.target.value)
-                }} className="select pr-[1rem] pl-[2rem] select-bordered w-[15rem]">
+                }} className="select select-sm pr-[1rem] pl-[2rem] select-bordered w-[15rem]">
                     <option disabled selected>رقم القرض</option>
                     {
                         loansId && loansId.map((loanId) => {
@@ -45,11 +45,11 @@ function LoansData() {
                         })
                     }
                 </select>
-                <button onClick={handleSearch} disabled={!id} className="btn btn-primary text-[1.1rem] font-bold join-item ">ابحث</button>
+                <button onClick={handleSearch} disabled={!id} className="btn btn-sm btn-primary text-sm font-bold join-item ">ابحث</button>
             </div>
-            <div className="overflow-x-auto mt-[1rem]">
-                <table className="text-[1rem] table border-separate border-spacing-2 border w-[1900px] mx-auto">
-                    <thead className="text-[0.8rem] text-center">
+            <div className="overflow-x-auto mt-[0.5rem]">
+                <table className="table table-xs border-separate border-spacing-2 border w-[1500px] mx-auto">
+                    <thead className="text-xs text-center">
                         <tr>
                             <th className="border border-slate-600" rowSpan={2}>
                                 اسم <br/>العضو
@@ -94,7 +94,7 @@ function LoansData() {
                             المبلغ <br/>المتبقي
                             </th>
                         </tr>
-                        <tr>
+                        <tr className="text-xs">
                             <th className="border border-slate-600">
                                 الميلادي
                             </th>
@@ -123,7 +123,7 @@ function LoansData() {
                     </thead>
                     <tbody>
                         {
-                            loanInfo && <tr className="text-center text-[0.8rem]">
+                            loanInfo && <tr className="text-center text-xs">
                                 <td className="border border-slate-600">{loanInfo.name}</td>
                                 <td className="border border-slate-600">{loanInfo.id}</td>
                                 <td className="border border-slate-600">{new Date(loanInfo.createdAt).toLocaleDateString('en-CA')}</td>

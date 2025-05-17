@@ -146,11 +146,11 @@ function DisplayStocksContributionForm() {
         <div className="sm:p-0 px-[1rem]">
             <div className='sm:container sm:mx-auto'>
                 <div>
-                    <Link to="/stocks" className="btn btn-primary text-[2rem] px-[2rem]">
+                    <Link to="/stocks" className="btn btn-sm btn-primary px-[2rem]">
                         <FontAwesomeIcon icon={faRightLong} />
                     </Link>
                 </div>
-                <h1 className="text-center text-[1.5rem] font-bold py-[1rem]">
+                <h1 className="text-center text-sm font-bold py-[0.5rem]">
                     نموذج المساهمة في شراء الأسهم
                 </h1>
                 <div className="md:join ">
@@ -158,7 +158,7 @@ function DisplayStocksContributionForm() {
                         setInputs((prevInput) => {
                             return { ...prevInput, year: event.target.value }
                         });
-                    }} className="select xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
+                    }} className="select select-sm xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
                         {yearOptions.map((value) => (
                             <option key={value} value={value} selected={inputs.year == value}>
                                 {value}
@@ -169,7 +169,7 @@ function DisplayStocksContributionForm() {
                         setInputs((prevInput) => {
                             return { ...prevInput, month: event.target.value }
                         });
-                    }} className="select xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
+                    }} className="select select-sm xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
                         <option value="1" selected={"1" == inputs.month}>محرم</option>
                         <option value="2" selected={"2" == inputs.month}>صفر</option>
                         <option value="3" selected={"3" == inputs.month}>ربيع الاول</option>
@@ -194,14 +194,14 @@ function DisplayStocksContributionForm() {
                             price: 0,
                             idStock: event.target.value
                         })
-                    }} className="select w-[7rem] xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
+                    }} className="select select-sm w-[7rem] xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
                         <option selected disabled>قم باختيار العدد الخاص بالاسهم</option>
                         {idList && idList.map((list) => (
                             <option value={list._id}>{list.id}</option>
                         ))}
                     </select>
                     <div className="indicator">
-                        <button onClick={handleSearch} className="btn btn-primary join-item  md:mt-[0rem] mt-[1rem]">ابحث</button>
+                        <button onClick={handleSearch} className="btn btn-sm btn-primary join-item  md:mt-[0rem] mt-[1rem]">ابحث</button>
                     </div>
                 </div>
             </div>
@@ -209,14 +209,14 @@ function DisplayStocksContributionForm() {
                 !loading ? <div className="flex justify-center">
                     {" "}
                     <span className=" loading loading-ring loading-lg"></span>
-                </div> : <div className="overflow-x-auto mt-[1rem]">
+                </div> : <div className="overflow-x-auto mt-[0.5rem]">
                     {
                         stock && <>
-                            <table className="text-[1rem] table border-separate border-spacing-2 border w-[1500px] mx-auto">
-                                <tr className='text-center'>
+                            <table className="text-xs table table-xs border-separate border-spacing-2 border w-[600px] sm:w-[900px] mx-auto">
+                                <tr className='text-center text-xs'>
                                     <th className="border text-center border-slate-600" colSpan={6}>بيانات المساهمة</th>
                                 </tr>
-                                <tr>
+                                <tr className='text-xs'>
                                     <th className="border text-center border-slate-600" rowSpan={2}>
                                         رقم المساهمة
                                     </th>
@@ -237,7 +237,7 @@ function DisplayStocksContributionForm() {
                                     </th>
                                 </tr>
                                 <tbody>
-                                    <tr>
+                                    <tr className='text-xs'>
                                         <td className="border text-center border-slate-600">{stock.id}</td>
                                         <td className="border text-center border-slate-600">{stock.nameContributingParty}</td>
                                         <td className="border text-center border-slate-600">{stock.nameContributingBank}</td>
@@ -246,7 +246,7 @@ function DisplayStocksContributionForm() {
                                         <td className="border text-center border-slate-600">{stock.totalCostStocks.toFixed(2)}</td>
                                     </tr>
                                 </tbody>
-                                <tr>
+                                <tr className='text-xs'>
                                     <th className="border text-center border-slate-600" rowSpan={2}>
                                         تاريخ المساهمة بالميلادي
                                     </th>
@@ -267,7 +267,7 @@ function DisplayStocksContributionForm() {
                                     </th>
                                 </tr>
                                 <tbody>
-                                    <tr>
+                                    <tr className='text-xs'>
                                         <td className="border text-center border-slate-600">{new Date(stock.contributionDateMiladi).getUTCFullYear() + "-" + (new Date(stock.contributionDateMiladi).getUTCMonth() + 1) + "-" + new Date(stock.contributionDateMiladi).getUTCDate()}</td>
                                         <td className="border text-center border-slate-600">{stock.contributionDateHijri && stock.contributionDateHijri.year + "-" + stock.contributionDateHijri.month.number + "-" + stock.contributionDateHijri.day}</td>
                                         <td className="border text-center border-slate-600">{stock.freeStocks}</td>
@@ -278,13 +278,13 @@ function DisplayStocksContributionForm() {
                                 </tbody>
                             </table>
                             <div className='container mx-auto my-[1rem] flex gap-[0.5rem] pr-[2rem]'>
-                                <button className='btn btn-primary' onClick={() => document.getElementById('my_modal_1').showModal()}>اضافة اسهم مجانية</button>
-                                <button className='btn btn-success' onClick={() => {
+                                <button className='btn btn-sm btn-primary' onClick={() => document.getElementById('my_modal_1').showModal()}>اضافة اسهم مجانية</button>
+                                <button className='btn btn-sm btn-success' onClick={() => {
                                     document.getElementById('sell').showModal()
                                 }}>{submit ? <span className="loading loading-ring loading-lg"></span> : "بيع"}</button>
                             </div>
-                            <table className="text-[1rem] table border-separate border-spacing-2 border w-[1500px] mx-auto">
-                            {/*    <tr>
+                            <table className="text-xs table table-xs border-separate border-spacing-2 border w-[500px] sm:w-[900px] mx-auto">
+                            {/*    <tr className='text-xs'>
                                     <th className="border text-center border-slate-600" rowSpan={2}>
                                         شراء أسهم إضافية
                                     </th>
@@ -308,7 +308,7 @@ function DisplayStocksContributionForm() {
                                     </th>
                                 </tr>
                                 <tbody>
-                                    <tr>
+                                    <tr className='text-xs'>
                                         <td className="border text-center border-slate-600">{stock.buyAdditionalStock}</td>
                                         <td className="border text-center border-slate-600">{stock.additionalStockCost.toFixed(2)}</td>
                                         <td className="border text-center border-slate-600">{stock.additionalStocksCost.toFixed(2)}</td>
@@ -320,7 +320,7 @@ function DisplayStocksContributionForm() {
                                         }}>{stock.currentValueOfStock.toFixed(2)}</td>
                                     </tr>
                                 </tbody>*/}
-                                <tr>
+                                <tr className='text-xs'>
                                     <th colSpan={4} className="border text-center border-slate-600" rowSpan={2}>
                                         إجمالي عدد الأسهم
                                     </th>
@@ -334,7 +334,7 @@ function DisplayStocksContributionForm() {
                                             document.getElementById('currentPrice').showModal()
                                         }}>{stock.currentValueOfStock.toFixed(2)}</td>
                                 </tbody>
-                                <tr>
+                                <tr className='text-xs'>
                                     <th className="border text-center border-slate-600" rowSpan={2}>
                                         اجمالي تكلفة الاسهم
                                     </th>
@@ -362,7 +362,7 @@ function DisplayStocksContributionForm() {
                                 </tr>
                                 <tbody>
                                     {/**stock.additionalStocksCost + stock.previousCostOfStockWithFreeStock => ((stock.totalCostOfStock.toFixed(2) - (0 + 3690.00)) / (0 + 3690.00)) * 100 */}
-                                    <tr>
+                                    <tr className='text-xs'>
                                         <td className="border text-center border-slate-600">{stock.totalCostOfStock.toFixed(2)}</td>
                                         <td className="border text-center border-slate-600" style={{
                                             color: ((stock.currentValueOfStock * stock.totalNumberOfStock) - (stock.totalCostOfStock)) > 0 ? "green" : "red"
@@ -381,25 +381,25 @@ function DisplayStocksContributionForm() {
                                         }}>{stock.stockSaleValue == 0 ? "" : (((stock.stockSaleValue - (stock.additionalStocksCost + stock.previousCostOfStockWithFreeStock)) / (stock.additionalStocksCost + stock.previousCostOfStockWithFreeStock)) * 100).toFixed(2) + "%"}</td>
                                     </tr>
                                 </tbody>
-                                <tr className='text-center'>
+                                <tr className='text-center text-xs'>
                                     <th className="border border-slate-600" colSpan={8}>بيانات العضو المساهم باسم صندوق</th>
                                 </tr>
-                                <tr>
+                                <tr className='text-xs'>
                                     <th className="border text-center border-slate-600" colSpan={3}>اسم العضو</th>
                                     <th className="border text-center border-slate-600" colSpan={3}>نسبته من الربح</th>
                                     <th className="border text-center border-slate-600" colSpan={2}>مبلغ نسبته من الربح</th>
                                 </tr>
                                 <tbody>
-                                    <tr>
+                                    <tr className='text-xs'>
                                         <td className="border text-center border-slate-600" colSpan={3}>{stock.memberId.name}</td>
                                         <td className="border text-center border-slate-600" colSpan={3}>{stock.memberPercentage.toFixed(2)}</td>
                                         <td className="border text-center border-slate-600" colSpan={2}>{stock.amountPercentage.toFixed(2)}</td>
                                     </tr>
                                 </tbody>
-                                <tr className='text-center'>
+                                <tr className='text-center text-xs'>
                                     <th className="border border-slate-600" colSpan={8}>بيانات الصندوق</th>
                                 </tr>
-                                <tr>
+                                <tr className='text-xs'>
                                     <th className="border text-center border-slate-600" >الرصيد السابق لصندوق</th>
                                     <th className="border text-center border-slate-600" >مبلغ المساهمة</th>
                                     <th className="border text-center border-slate-600" >نسبة المساهمة</th>
@@ -408,7 +408,7 @@ function DisplayStocksContributionForm() {
                                     <th className="border text-center border-slate-600" colSpan={2}>الرصيد بعد البيع </th>
                                 </tr>
                                 <tbody>
-                                    <tr>
+                                    <tr className='text-xs'>
                                         <td className="border text-center border-slate-600" >{stock.previousFundBalance.toFixed(2)}</td>
                                         <td className="border text-center border-slate-600" >{stock.contributionAmount.toFixed(2)}</td>
                                         <td className="border text-center border-slate-600" >{stock.contributionRate.toFixed(2)}</td>
@@ -418,10 +418,10 @@ function DisplayStocksContributionForm() {
 
                                     </tr>
                                 </tbody>
-                                <tr className='text-center'>
+                                <tr className='text-center text-xs'>
                                     <th className="border border-slate-600" colSpan={8}>بيانات المساهمين</th>
                                 </tr>
-                                <tr>
+                                <tr className='text-xs'>
                                     <th className="border text-center border-slate-600" >اسم العضو</th>
                                     <th className="border text-center border-slate-600" >رصيده السابق</th>
                                     <th className="border text-center border-slate-600" >نسبة المساهمة</th>
@@ -435,7 +435,7 @@ function DisplayStocksContributionForm() {
                                     {
                                         userStock && userStock.map((user) => {
                                             return (
-                                                <tr>
+                                                <tr className='text-xs'>
                                                     <td className="border text-center border-slate-600">{user.idUser.name}</td>
                                                     <td className="border text-center border-slate-600">{user.prevBalance.toFixed(2)}</td>
                                                     <td className="border text-center border-slate-600">{user.contributionRate.toFixed(2)}%</td>
@@ -458,7 +458,7 @@ function DisplayStocksContributionForm() {
             {/*<button className="btn mt-[1rem]" onClick={() => document.getElementById('my_modal_1').showModal()}>اضافة المعلومات الناقصة</button>*/}
             <dialog id="sell" className="modal">
                 <div className="modal-box">
-                    <h3 className="font-bold text-lg">هل انت متاكد من انك تريد البيع</h3>
+                    <h3 className="font-bold text-sm">هل انت متاكد من انك تريد البيع</h3>
                     {showAlert.display ? <Alert msg={showAlert} /> : ""}
                     <div className="modal-action">
                         <form method="dialog">
@@ -466,8 +466,8 @@ function DisplayStocksContributionForm() {
                             <button onClick={(event) => {
                                 event.preventDefault();
                                 handleSell();
-                            }} disabled={submit} className='btn btn-primary'> {submit ? <span className="loading loading-ring loading-lg"></span> : "تاكيد"}</button>
-                            <button className="btn">اغلاق</button>
+                            }} disabled={submit} className='btn btn-sm  text-sm btn-primary'> {submit ? <span className="loading loading-ring loading-lg"></span> : "تاكيد"}</button>
+                            <button className="btn btn-sm  text-sm">اغلاق</button>
                         </form>
                     </div>
                 </div>
@@ -477,15 +477,15 @@ function DisplayStocksContributionForm() {
                     <h3 className="font-bold text-lg">القيمة الحالية للسهم</h3>
                     {showAlert.display ? <Alert msg={showAlert} /> : ""}
                     <div className="relative w-full mb-[1rem]">
-                        <FontAwesomeIcon icon={faMoneyBill} className="absolute top-[1rem] right-[1rem]" />
-                        <input type="number" onChange={(event) => {
+                        <FontAwesomeIcon icon={faMoneyBill} className="absolute top-[0.5rem] right-[1rem]" />
+                        <input type="number" step={"any"} onChange={(event) => {
                             setCurrentPrice((prev) => {
                                 return {
                                     ...prev,
                                     price: Number(event.target.value)
                                 }
                             })
-                        }} required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder={`القيمة الحالية للسهم`} />
+                        }} required className="formInput w-full input input-sm pr-[2.3rem] input-bordered flex items-center gap-2" placeholder={`القيمة الحالية للسهم`} />
                     </div>
                     <div className="modal-action">
                         <form method="dialog">
@@ -493,8 +493,8 @@ function DisplayStocksContributionForm() {
                             <button onClick={(event) => {
                                 event.preventDefault();
                                 handleCurrentPrice();
-                            }} disabled={submit} className='btn btn-primary'> {submit ? <span className="loading loading-ring loading-lg"></span> : "تاكيد"}</button>
-                            <button className="btn">اغلاق</button>
+                            }} disabled={submit} className='btn btn-sm  text-sm btn-primary'> {submit ? <span className="loading loading-ring loading-lg"></span> : "تاكيد"}</button>
+                            <button className="btn btn-sm  text-sm">اغلاق</button>
                         </form>
                     </div>
                 </div>
@@ -504,15 +504,15 @@ function DisplayStocksContributionForm() {
                     <form action="">
                         {showAlert.display ? <Alert msg={showAlert} /> : ""}
                         <div className="relative w-full mb-[1rem]">
-                            <FontAwesomeIcon icon={faMoneyBill} className="absolute top-[1rem] right-[1rem]" />
-                            <input type="number" onChange={(event) => {
+                            <FontAwesomeIcon icon={faMoneyBill} className="absolute top-[0.5rem] right-[1rem]" />
+                            <input type="number" step={"any"} onChange={(event) => {
                                 setAdditionalStock((prev) => {
                                     return {
                                         ...prev,
                                         addFreeStock: Number(event.target.value)
                                     }
                                 })
-                            }} required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder={`عدد الاسهم المجانية`} />
+                            }} required className="formInput w-full input input-sm pr-[2.3rem] input-bordered flex items-center gap-2" placeholder={`عدد الاسهم المجانية`} />
                         </div>
 
                     </form>
@@ -522,8 +522,8 @@ function DisplayStocksContributionForm() {
                             <button onClick={(event) => {
                                 event.preventDefault();
                                 handleSubmit();
-                            }} disabled={submit} className='btn btn-primary'> {submit ? <span className="loading loading-ring loading-lg"></span> : "تاكيد"}</button>
-                            <button className="btn">اغلاق</button>
+                            }} disabled={submit} className='btn btn-sm text-sm btn-primary'> {submit ? <span className="loading loading-ring loading-lg"></span> : "تاكيد"}</button>
+                            <button className="btn btn-sm  text-sm">اغلاق</button>
                         </form>
                     </div>
                 </div>

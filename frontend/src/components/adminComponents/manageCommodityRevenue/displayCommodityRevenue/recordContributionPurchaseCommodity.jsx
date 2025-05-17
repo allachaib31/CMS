@@ -51,11 +51,11 @@ function RecordContributionPurchaseCommodity() {
   return (
     <div className="sm:p-0 px-[1rem]">
       <div className='container mx-auto'>
-        <Link to="/commodityRevenue/" className="btn btn-primary text-[2rem] px-[2rem]">
+        <Link to="/commodityRevenue/" className="btn btn-sm btn-primary text-sm px-[2rem]">
           <FontAwesomeIcon icon={faRightLong} />
         </Link>
       </div>
-      <h1 className="text-center text-[1.3rem] sm:text-[1.5rem] font-bold py-[1rem]">
+      <h1 className="text-center text-sm font-bold py-[1rem]">
         سجل المساهمين في شراء السلع
       </h1>
       <div className="container mx-auto ">
@@ -63,7 +63,7 @@ function RecordContributionPurchaseCommodity() {
           setInputs((prevInput) => {
             return { ...prevInput, year: event.target.value }
           });
-        }} className="select xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
+        }} className="select select-sm xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
           {yearOptions.map((value) => (
             <option key={value} value={value} selected={inputs.year == value}>
               {value}
@@ -74,7 +74,7 @@ function RecordContributionPurchaseCommodity() {
           setInputs((prevInput) => {
             return { ...prevInput, month: event.target.value }
           });
-        }} className="select xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
+        }} className="select select-sm xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
           <option value="1" selected={"1" == inputs.month}>محرم</option>
           <option value="2" selected={"2" == inputs.month}>صفر</option>
           <option value="3" selected={"3" == inputs.month}>ربيع الاول</option>
@@ -90,14 +90,14 @@ function RecordContributionPurchaseCommodity() {
         </select>
         <select onChange={(event) => {
           setId(event.target.value);
-        }} className="select w-[8rem] xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
+        }} className="select select-sm w-[8rem] xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
           <option selected disabled>قم باختيار العدد الخاص بنموذج شراء السلع</option>
           {idList && idList.map((list) => (
             <option value={list._id}>{list.id}</option>
           ))}
         </select>
         <div className="indicator">
-          <button onClick={handleSearch} className="btn btn-primary join-item  md:mt-[0rem] mt-[1rem]">ابحث</button>
+          <button onClick={handleSearch} className="btn btn-sm btn-primary join-item  md:mt-[0rem] mt-[1rem]">ابحث</button>
         </div>
       </div>
       {
@@ -105,8 +105,8 @@ function RecordContributionPurchaseCommodity() {
           {" "}
           <span className=" loading loading-ring loading-lg"></span>
         </div> : <div className="overflow-x-auto mt-[1rem]">
-          {userContribution && <table className="text-[1.1rem] table border-separate border-spacing-2 border w-[900px]  mx-auto">
-            <tr>
+          {userContribution && <table className="text-xs table table-xs border-separate border-spacing-2 border w-[500px] sm:w-[900px]  mx-auto">
+            <tr className='text-xs'>
               <th className="border text-center border-slate-600" >
                 رقم الطلب
               </th>
@@ -127,7 +127,7 @@ function RecordContributionPurchaseCommodity() {
               {
                 userContribution && userContribution.map((user) => {
                   return (
-                    <tr>
+                    <tr className='text-xs'>
                       <td className="border text-center border-slate-600">{user.idCommodityRevenue.id}</td>
                       <td className="border text-center border-slate-600">{user.idUser.name}</td>
                       <td className="border text-center border-slate-600">{user.contributionPercentage.toFixed(2)}%</td>

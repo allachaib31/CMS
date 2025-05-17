@@ -73,13 +73,13 @@ function SubscriptionHistory() {
   }, [currentPage]);
 
   return (
-    <div className="sm:p-0 px-[1rem]">
+    <div className="">
       <div className='container mx-auto'>
-        <Link to="/subscription" className="btn btn-primary text-[2rem] px-[2rem]">
+        <Link to="/subscription" className="btn btn-sm btn-primary px-[2rem]">
           <FontAwesomeIcon icon={faRightLong} />
         </Link>
       </div>
-      <h1 className="text-center text-[1.5rem] font-bold py-[1rem]">
+      <h1 className="text-center font-bold py-[0.5rem]">
         سجل الاشتراكات
       </h1>
       {/*<div className="container mx-auto sm:flex  mb-[1rem]">
@@ -114,29 +114,29 @@ function SubscriptionHistory() {
           </button>
         </div>
       </div>*/}
-      <div className="mt-[1rem] flex md:flex-row flex-col items-center container mx-auto justify-center gap-[0.2rem] md:gap-[1rem]">
-        <div className='flex md:flex-col w-full  md:w-auto items-center justify-center gap-[1rem]'>
-          <h1 className="text-[0.9rem] w-[70%] sm:w-[80%] md:w-auto font-bold bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]">رصيد الصندوق منذ إنشائه </h1>
-          <h1 className="text-[0.9rem] w-[30%] sm:w-[20%] md:w-auto text-center font-bold bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]"> {moneyBox && moneyBox.cumulativeAmount.toFixed(2)}</h1>
+      <div className=" flex md:flex-row flex-col items-center container mx-auto justify-center gap-[0.2rem] md:gap-[0.5rem]">
+        <div className='flex md:flex-col w-full  md:w-auto items-center justify-center gap-[0.5rem]'>
+          <h1 className="text-sm w-[70%] sm:w-[80%] md:w-auto  bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]">رصيد الصندوق منذ إنشائه </h1>
+          <h1 className="text-sm w-[30%] sm:w-[20%] md:w-auto text-center  bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]"> {moneyBox && moneyBox.cumulativeAmount.toFixed(2)}</h1>
         </div>
-        <div className='flex md:flex-col w-full  md:w-auto items-center justify-center gap-[1rem]'>
-          <h1 className="text-[0.9rem] w-[70%] sm:w-[80%] md:w-auto font-bold bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]">المصروفات </h1>
-          <h1 className="text-[0.9rem] w-[30%] sm:w-[20%] md:w-auto text-center font-bold bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]">{moneyBox &&  (moneyBox.cumulativeAmount - moneyBox.amount).toFixed(2)}</h1>
+        <div className='flex md:flex-col w-full  md:w-auto items-center justify-center gap-[0.5rem]'>
+          <h1 className="text-sm w-[70%] sm:w-[80%] md:w-auto  bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]">المصروفات </h1>
+          <h1 className="text-sm w-[30%] sm:w-[20%] md:w-auto text-center  bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]">{moneyBox &&  (moneyBox.cumulativeAmount - moneyBox.amount).toFixed(2)}</h1>
         </div>
-        <div className='flex md:flex-col w-full md:w-auto items-center justify-center gap-[1rem]'>
-          <h1 className="text-[0.9rem] w-[70%] sm:w-[80%] md:w-auto font-bold bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]">الأعضاء المفعلون </h1>
-          <h1 className="text-[0.9rem] w-[30%] sm:w-[20%] md:w-auto text-center font-bold bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]">{activeMember}</h1>
+        <div className='flex md:flex-col w-full md:w-auto items-center justify-center gap-[0.5rem]'>
+          <h1 className="text-sm w-[70%] sm:w-[80%] md:w-auto  bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]">الأعضاء المفعلون </h1>
+          <h1 className="text-sm w-[30%] sm:w-[20%] md:w-auto text-center  bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]">{activeMember}</h1>
         </div>
-        <div className='flex md:flex-col w-full md:w-auto items-center justify-center gap-[1rem]'>
-          <h1 className="text-[0.9rem] w-[70%] sm:w-[80%] md:w-auto font-bold bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]">الأعضاء الجدد </h1>
-          <h1 className="text-[0.9rem] w-[30%] sm:w-[20%] md:w-auto text-center font-bold bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]">{newUser}</h1>
+        <div className='flex md:flex-col w-full md:w-auto items-center justify-center gap-[0.5rem]'>
+          <h1 className="text-sm w-[70%] sm:w-[80%] md:w-auto  bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]">الأعضاء الجدد </h1>
+          <h1 className="text-sm w-[30%] sm:w-[20%] md:w-auto text-center  bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]">{newUser}</h1>
         </div>
       </div>
       {showAlert.display ? <Alert msg={showAlert} /> : ""}
-      <div className="overflow-x-auto mt-[1rem]">
-        {!loading ? <div className='flex justify-center'> <span className=" loading loading-ring loading-lg"></span></div> : <table className="text-[1rem] table border-separate border-spacing-2 border w-[1300px] mx-auto">
-          <thead className='text-[1rem] text-center'>
-            <tr>
+      <div className="overflow-x-auto mt-[0.5rem]">
+        {!loading ? <div className='flex justify-center'> <span className=" loading loading-ring loading-lg"></span></div> : <table className="table border-separate border-spacing-2 border w-[900px] sm:w-[1300px] mx-auto">
+          <thead className='text-sm text-center'>
+            <tr className='text-sm'>
               <th className='border border-slate-600'>اسم العضو</th>
               <th className='border border-slate-600'>رصيد العضو <br/>منذ بداية اشتراكه</th>
               <th className='border border-slate-600'> المصروف من <br/>رصيد العضو</th>
@@ -150,7 +150,7 @@ function SubscriptionHistory() {
             {
               users && users.map((user) => {
                 return (
-                  <tr>
+                  <tr className='text-sm'>
                     <td className='border border-slate-600'>{user.name}</td>
                     <td className='border border-slate-600'>{user.cumulativeBalance.toFixed(2)}</td>
                     <td className='border border-slate-600'>{(user.cumulativeBalance - user.memberBalance).toFixed(2)}</td>
@@ -165,7 +165,7 @@ function SubscriptionHistory() {
                       document.getElementById('addNote').showModal()
                     }
                     } id={user._id} className='border cursor-pointer border-slate-600'>{user.commentSubscribeHistory}</td>
-                    <td className='border border-slate-600'><Link to={`/subscription/annualSubscriptionRecordDetails?id=${user._id}&name=${user.name}`} className='btn btn-info'>التفاصيل</Link></td>
+                    <td className='border border-slate-600'><Link to={`/subscription/annualSubscriptionRecordDetails?id=${user._id}&name=${user.name}`} className='btn btn-sm text-sm btn-info'>التفاصيل</Link></td>
                   </tr>
                 )
               })

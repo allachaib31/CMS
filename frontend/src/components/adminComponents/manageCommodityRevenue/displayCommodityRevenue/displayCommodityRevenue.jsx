@@ -69,21 +69,21 @@ function DisplayCommodityRevenue() {
   }
   return (
     <div className="px-[1rem] sm:px-0">
-      <h1 className="text-center text-[1.5rem] font-bold py-[1rem]">
+      <h1 className="text-center text-sm font-bold py-[0.5rem]">
         إيرادات السلع
       </h1>
-      <div className='text-[1.1rem] flex sm:flex-row flex-col gap-[1rem] items-center justify-center'>
+      <div className='text-sm flex sm:flex-row flex-col gap-[1rem] items-center justify-center'>
         <label>إيرادات اقساط السلع لشهر</label>
         <input type="date" onChange={(event) => {
           setDate(event.target.value);
           setHijriDate(hijriDateObject(event.target.value))
           setCommodityRevenue(false);
           setInstallmentSchedule(false);
-        }} value={date} className='input input-bordered' />
+        }} value={date} className='input input-sm input-bordered' />
         <label>
           الموافق {" "}
           {hijriDate ? (
-            <span>
+            <span className='text-sm'>
               {hijriDate[2]}/{hijriDate[1].number}/
               {hijriDate[0]}
             </span>
@@ -92,15 +92,15 @@ function DisplayCommodityRevenue() {
           )}
         </label>
       </div>
-      <div className='mt-[1rem] flex justify-center gap-[0.2rem] sm:gap-[1rem]'>
-        <h1 className='text-[0.8rem] sm:text-[1rem] w-[70%] sm:w-auto font-bold bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]'>إجمالي إيرادات السلع لهذا الشهر</h1>
-        <span className='text-[0.8rem] sm:text-[1rem] w-[30%] text-center sm:w-auto font-bold bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]'>{total.toFixed(2)}</span>
+      <div className='mt-[0.5rem] flex justify-center gap-[0.2rem] sm:gap-[1rem]'>
+        <h1 className='text-sm w-[70%] sm:w-auto bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]'>إجمالي إيرادات السلع لهذا الشهر</h1>
+        <span className='text-sm w-[30%] text-center sm:w-auto bg-primary text-white py-[0.7rem] px-[1.3rem] rounded-[1rem]'>{total.toFixed(2)}</span>
       </div>
       {showAlert.display ? <Alert msg={showAlert} /> : ""}
       <div className="overflow-x-auto mt-[1rem]">
-        <table className="text-[1rem] table border-separate border-spacing-2 border w-[1600px] mx-auto">
-          <thead className="text-[0.8rem] text-center">
-            <tr>
+        <table className="text-xs table table-xs border-separate border-spacing-2 border w-[700px] sm:w-[1000px] mx-auto">
+          <thead className="text-xs text-center">
+            <tr className='text-xs'>
               <th className="border border-slate-600" rowSpan={2}>
                 رقم <br />الطلب
               </th>
@@ -140,11 +140,11 @@ function DisplayCommodityRevenue() {
             </tr>
           </thead>
           <tbody className='text-center'>
-            <tr className='text-[0.8rem]'>
-              <th className="border border-slate-600">
+            <tr className='text-xs'>
+              <th className="border border-slate-600 text-xs">
                 <select onChange={(event) => {
                   setId(event.target.value);
-                }} className='select w-[8rem] xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered'>
+                }} className='select select-xs w-[8rem] xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered'>
                   <option selected disabled>قم باختيار رقم الطلب</option>
                   {idList && idList.map((list) => (
                     <option value={list._id}>{list.id}</option>
@@ -162,7 +162,7 @@ function DisplayCommodityRevenue() {
                   <td className="border border-slate-600">
                     <select onChange={(event) => {
                       setIndex(event.target.value)
-                    }} className='select xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered'>
+                    }} className='select select-xs xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered'>
                       {
                         installmentSchedule && installmentSchedule.map((installment, index) => (
                           <option value={index} >{index + 1}</option>
@@ -196,14 +196,14 @@ function DisplayCommodityRevenue() {
                     {installmentSchedule[index].comments}
                   </td>
                   <td className="border border-slate-600">
-                    <Link to={"/commodityRevenue/installmentSchedule?id=" + commodityRevenue._id} className='btn btn-info'>تفاصيل</Link>
+                    <Link to={"/commodityRevenue/installmentSchedule?id=" + commodityRevenue._id} className='btn btn-xs btn-info'>تفاصيل</Link>
                   </td>
                   <td id={installmentSchedule[index]._id + "pay"} className="border border-slate-600">
                     {installmentSchedule[index].itPaid ? "تم الدفع بنجاح" : <button onClick={() => {
                       if (window.confirm("هل انت متاكد من انك تريد القيام به العملية")) {
                         handleSubmit(installmentSchedule[index]._id, index, installmentSchedule[index].premiumAmount)
                       }
-                    }} className='btn btn-success'>دفع</button>
+                    }} className='btn btn-xs btn-success'>دفع</button>
                     }
                   </td>
                 </>

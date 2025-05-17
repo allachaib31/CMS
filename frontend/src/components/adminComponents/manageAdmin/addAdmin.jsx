@@ -54,19 +54,19 @@ function AddAdmin() {
   return (
     <div className="container mx-auto sm:p-0 px-[1rem]">
       <div>
-        <Link to="/admin" className=" btn btn-primary text-[2rem] px-[2rem]">
+        <Link to="/admin" className=" btn btn-sm btn-primary px-[2rem]">
           <FontAwesomeIcon icon={faRightLong} />
         </Link>
       </div>
-      <h1 className="text-center text-[1.5rem] font-bold py-[1rem]">
+      <h1 className="text-center font-bold py-[0.5rem]">
       إضافة مسؤول  جديد
       </h1>
-      <form action="" className="py-[2rem] flex flex-col gap-[1rem]">
+      <form action="" className="flex flex-col gap-[1rem]">
         {showAlert.display ? <Alert msg={showAlert} /> : ""}
         <div className="relative w-full">
           <FontAwesomeIcon
             icon={faIdBadge}
-            className="absolute top-[1rem] right-[1rem]"
+            className="absolute top-[0.5rem] right-[1rem]"
           />
           <input
             type="text"
@@ -78,7 +78,7 @@ function AddAdmin() {
               })
             }}
             required
-            className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2"
+            className="formInput w-full input input-sm pr-[2.3rem] input-bordered flex items-center gap-2"
             placeholder={`رقم المسؤول`}
           />
         </div>
@@ -88,7 +88,7 @@ function AddAdmin() {
           onClick={(event) => {
             event.preventDefault();
             handleSubmit();
-          }} className="btn text-white font-bold text-[20px] bg-primary">{submit ? <span className="loading loading-ring loading-lg"></span> : "تاكيد"}</button>
+          }} className="btn btn-sm text-white font-bold bg-primary">{submit ? <span className="loading loading-ring loading-lg"></span> : "تاكيد"}</button>
       </form>
     </div>
   );

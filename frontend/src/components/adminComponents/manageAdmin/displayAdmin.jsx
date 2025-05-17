@@ -56,7 +56,7 @@ function DisplayAdmin() {
   return (
     <div className="px-[1rem] sm:px-0">
       <div className="container mx-auto mb-[1rem] flex sm:flex-row sm:gap-0 gap-[1rem] flex-col justify-between">
-        <Link to="/admin/addAdmin" className="text-[1rem] btn btn-primary">
+        <Link to="/admin/addAdmin" className="btn btn-sm text-sm btn-primary">
         إضافة مسؤول 
         </Link>
         <div className="join flex-wrap ">
@@ -69,7 +69,7 @@ function DisplayAdmin() {
                     return { ...search, searchValue: input.target.value.trim() }
                   })
                 }}
-                className="input input-bordered join-item"
+                className="input input-sm input-bordered join-item"
                 placeholder="أكتب هنا"
               />
             </div>
@@ -78,7 +78,7 @@ function DisplayAdmin() {
             setSearch((search) => {
               return { ...search, searchMethod: input.target.value.trim() }
             })
-          }} className="select xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
+          }} className="select select-sm xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
             <option value="_id">العدد</option>
             <option value="name">اسم</option>
             <option value="NationalIdentificationNumber">رقم الهوية</option>
@@ -86,18 +86,18 @@ function DisplayAdmin() {
             <option value="status">الحالة</option>
           </select>
           <div className="indicator xs:mt-0 mt-[1rem] ">
-            <button onClick={handleSearch} className="btn xs:w-auto bg-primary text-[20px] text-white join-item">
+            <button onClick={handleSearch} className="btn btn-sm xs:w-auto bg-primary text-white join-item">
             {loadingSearch ? <span className="loading loading-ring loading-lg"></span> : "ابحث"}
             </button>
           </div>
         </div>
       </div>
       {showAlert.display ? <Alert msg={showAlert} /> : ""}
-      <div className=" overflow-x-auto xl:flex xl:justify-center  mt-[2rem]">
+      <div className="overflow-x-auto xl:flex xl:justify-center">
         <table className="table w-[1400px]">
           {/* head */}
           <thead>
-            <tr className="text-center text-[1rem]">
+            <tr className="text-center text-sm">
               <th>العدد</th>
               <th>اسم العضو</th>
               <th>رقم الهوية</th>
@@ -118,22 +118,22 @@ function DisplayAdmin() {
             {admins && admins.map((admin, index) => {
               const date = new Date(admin.createdAt);
               return (
-                <tr className="text-center">
+                <tr className="text-center text-sm">
                   <td>{admin.id}</td>
                   <td>{admin.name}</td>
                   <td>{admin.NationalIdentificationNumber}</td>
                   <td>{admin.phoneNumber}</td>
                   <td className="text-center">{date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()}</td>
                   <td className="text-center">{admin.hijriDate.year + "-" + admin.hijriDate.month.number + "-" + admin.hijriDate.day}</td>
-                  <td className={(admin.status == "not active" ? "text-error" : "text-success") + " font-bold text-[1.3rem]"}>{admin.status == "not active" ? "غير مفعل" : "مفعل"}</td>
-                  <td><Link to={`/admin/updateAdmin?id=${admin.id}&name=${admin.name}`} className="btn btn-warning">تعديل</Link></td>
+                  <td className={(admin.status == "not active" ? "text-error" : "text-success") + " text-sm font-bold"}>{admin.status == "not active" ? "غير مفعل" : "مفعل"}</td>
+                  <td><Link to={`/admin/updateAdmin?id=${admin.id}&name=${admin.name}`} className="btn btn-sm btn-warning">تعديل</Link></td>
                   <td><button onClick={() => {
                     setUserDelete({
                       id: admin.id,
                       index
                     });
                     document.getElementById('deleteModel').showModal()
-                  }} className="btn btn-error">حدف</button></td>
+                  }} className="btn btn-sm btn-error">حدف</button></td>
                 </tr>)
             })}
           </tbody>

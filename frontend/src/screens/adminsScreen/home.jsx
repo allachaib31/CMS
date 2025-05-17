@@ -104,7 +104,7 @@ function Home() {
     <div>
       {
         loading ? <Loading /> : <UserContext.Provider value={user}>
-          <header className="flex items-center bg-base-300 p-[1rem]">
+          <header className="flex items-center bg-base-300 p-[0.5rem]">
             <div className="drawer">
               <input id="my-drawer" type="checkbox" className="drawer-toggle" />
               <div className="drawer-content">
@@ -147,13 +147,13 @@ function Home() {
                   <div className="flex justify-center mb-[2rem]">
                     <img src={logo} alt="" />
                   </div>
-                  <li className="sm:text-[1.3rem] space-y-1">
+                  <li className="space-y-1">
                     <Link to="/admin/dashboard">
                       <FontAwesomeIcon icon={faGauge} /> الإحصائيات
                     </Link>
-                    <Link to="/admin/advetising">
+                    {/*<Link to="/admin/advetising">
                       <FontAwesomeIcon icon={faMicrophone} /> الإعلانات
-                    </Link>
+                    </Link>*/}
                     <Link to="/admin/election">
                       <FontAwesomeIcon icon={faCheckToSlot} /> التصويتات
                     </Link>
@@ -173,30 +173,30 @@ function Home() {
                         <li>
                           <Link
                             to="/subscription/modifySubscriptionAmount"
-                            className="sm:text-[1rem]"
+                            className=""
                           >
-                            إضافة مبلغ الاشتراكات
+                            مبلغ الاشتراكات
                           </Link></li>
                         <li>
                           <Link
                             to="/subscription/paymentOfSubscriptions"
-                            className="sm:text-[1rem]"
+                            className=""
                           >
-                            تسديد اشتراك التأسيس
+                            مبلغ التأسيس
                           </Link>
                         </li>
                         <li>
                           <Link
                             to="/subscription/payMonthlySubscriptions"
-                            className="sm:text-[1rem]"
+                            className=""
                           >
-                            نموذج الاشتراكات
+                            الاشتراكات الشهرية
                           </Link>
                         </li>
                         <li>
                           <Link
                             to="/subscription/subscriptionHistory"
-                            className="sm:text-[1rem]"
+                            className=""
                           >
                             سجل الاشتراكات
                           </Link>
@@ -204,7 +204,7 @@ function Home() {
                         <li>
                           <Link
                             to="/subscription/annualSubscriptionRecord"
-                            className="sm:text-[1rem]"
+                            className=""
                           >
                             الاشتراكات السنوية
                           </Link>
@@ -212,19 +212,19 @@ function Home() {
                         <li>
                           <Link
                             to="/subscription/registerMemberFinancialData"
-                            className="sm:text-[1rem]"
+                            className=""
                           >
-                            سجل البيانات المالية للاعضاء
+                            سجل البيانات المالية 
                           </Link>
                         </li>
                         <li>
-                          <Link to="/contributionRevenue/consolidatedRecordRevenues" className="sm:text-[1rem]"
+                          <Link to="/contributionRevenue/consolidatedRecordRevenues" className=""
                           >السجل الموحد للإيرادات
                           </Link></li>
                         <li>
                           <Link
                             to="/subscription/withdrawMemberBalance"
-                            className="sm:text-[1rem]"
+                            className=""
                           >
                             تصفية رصيد العضو
                           </Link>
@@ -232,7 +232,7 @@ function Home() {
                         <li>
                           <Link
                             to="/subscription/managingLatePayments"
-                            className="sm:text-[1rem]"
+                            className=""
                           >
                             المتأخرات
                           </Link>
@@ -259,13 +259,13 @@ function Home() {
                         {/*</Link>*/}
                       </summary>
                       <ul>
-                        <li><Link to="/commodityRevenue/orderToPurchaseGoods" className="sm:text-[1rem]">طلب شراء سلعة</Link></li>
-                        <li><Link to="/commodityRevenue/commodityPurchaseOrderForm" className="sm:text-[1rem]">نموذج شراء سلعة</Link></li>
-                        <li><Link to="/commodityRevenue/formContributionPurchaseCommodity" className="sm:text-[1rem]">نموذج المساهمة</Link></li>
-                        <li><Link to="/commodityRevenue/recordContributionPurchaseCommodity" className="sm:text-[1rem]">سجل المساهمين</Link></li>
-                        <li><Link to="/commodityRevenue" className="sm:text-[1rem]">إيرادات السلع</Link></li>
-                        <li><Link to="/commodityRevenue/goodsRevenueRecord" className="sm:text-[1rem]">سجل السلع</Link></li>
-                        <li><Link to="/commodityRevenue/contractsRegister" className="sm:text-[1rem]">سجل العقود</Link></li>
+                        <li><Link to="/commodityRevenue/orderToPurchaseGoods" className="">طلب شراء سلعة</Link></li>
+                        <li><Link to="/commodityRevenue/commodityPurchaseOrderForm" className="">نموذج شراء سلعة</Link></li>
+                        <li><Link to="/commodityRevenue/formContributionPurchaseCommodity" className="">نموذج مساهمة</Link></li>
+                        <li><Link to="/commodityRevenue/recordContributionPurchaseCommodity" className="">سجل المساهمين</Link></li>
+                        <li><Link to="/commodityRevenue" className="">إيرادات السلع</Link></li>
+                        <li><Link to="/commodityRevenue/goodsRevenueRecord" className="">سجل السلع</Link></li>
+                        <li><Link to="/commodityRevenue/contractsRegister" className="">سجل العقود</Link></li>
                       </ul>
                     </details>
                     <details>
@@ -273,11 +273,11 @@ function Home() {
                         <FontAwesomeIcon icon={faArrowTrendUp} /> الأسهم
                       </summary>
                       <ul>
-                        <li><Link to="/stocks/contributionForm" className="sm:text-[1rem]">طلب المساهمة</Link></li>
-                        <li><Link to="/stocks/displayContributionForm" className="sm:text-[1rem]">نموذج المساهمة</Link></li>
-                        <li><Link to="/stocks/registerShareholdersShares" className="sm:text-[1rem]">سجل المساهمين</Link></li>
-                        <li><Link to="/stocks/stockRevenue" className="sm:text-[1rem]">إيرادات الأسهم</Link></li>
-                        <li><Link to="/stocks" className="sm:text-[1rem]">سجل المساهمات</Link></li>
+                        <li><Link to="/stocks/contributionForm" className="">طلب مساهمة</Link></li>
+                        <li><Link to="/stocks/displayContributionForm" className="">نموذج مساهمة</Link></li>
+                        <li><Link to="/stocks/registerShareholdersShares" className="">سجل المساهمين</Link></li>
+                        <li><Link to="/stocks/stockRevenue" className="">إيرادات الأسهم</Link></li>
+                        <li><Link to="/stocks" className="">سجل المساهمات</Link></li>
                       </ul>
                     </details>
 
@@ -287,9 +287,9 @@ function Home() {
                       <FontAwesomeIcon icon={faBuilding} /> الشركات المالية
                       </summary>
                       <ul>
-                        <li><Link to="/financialCompany/" className="sm:text-[1rem]">طلب المساهمة</Link></li>
-                        <li><Link to="/financialCompany/displayContributionForm" className="sm:text-[1rem]">نموذج المساهمة</Link></li>
-                        <li><Link to="/financialCompany/contributionData" className="sm:text-[1rem]">بيانات المساهمة</Link></li>
+                        <li><Link to="/financialCompany/" className="">طلب مساهمة</Link></li>
+                        <li><Link to="/financialCompany/displayContributionForm" className="">نموذج مساهمة</Link></li>
+                        <li><Link to="/financialCompany/contributionData" className="">سجل المساهمين</Link></li>
                       </ul>
                     </details>
                     <details>
@@ -297,9 +297,9 @@ function Home() {
                       <FontAwesomeIcon icon={faVault} /> الصناديق الاستثمارية
                       </summary>
                       <ul>
-                        <li><Link to="/investmentBox/" className="sm:text-[1rem]">طلب المساهمة</Link></li>
-                        <li><Link to="/investmentBox/displayContributionForm" className="sm:text-[1rem]">نموذج المساهمة</Link></li>
-                        <li><Link to="/investmentBox/contributionData" className="sm:text-[1rem]">بيانات المساهمة</Link></li>
+                        <li><Link to="/investmentBox/" className="">طلب مساهمة</Link></li>
+                        <li><Link to="/investmentBox/displayContributionForm" className="">نموذج مساهمة</Link></li>
+                        <li><Link to="/investmentBox/contributionData" className="">سجل المساهمين</Link></li>
                       </ul>
                     </details>
                     <details>
@@ -313,7 +313,7 @@ function Home() {
                           <Link to="/unreimbursedExpenses/expenseRequest">طلب مصروف</Link>
                         </li>
                         <li>
-                          <Link to="/unreimbursedExpenses/paymentExpenses">تسديد مصروف</Link>
+                          <Link to="/unreimbursedExpenses/paymentExpenses">تسديد مصروف نقدي</Link>
                         </li>
                         <li>
                           <Link to="/unreimbursedExpenses">نموذج المصروفات</Link>
@@ -346,7 +346,7 @@ function Home() {
                         </ul>
                       </details>*/
                     }
-                    <details>
+                    {/*<details>
                       <summary>
                         <h1>
                           <FontAwesomeIcon icon={faHandHoldingDroplet} /> الدية المستردة
@@ -363,7 +363,7 @@ function Home() {
                           <Link to="/bloodMoney/record">سجل الديات </Link>
                         </li>
                       </ul>
-                    </details>
+                    </details>*/}
                     {/*<details>
                       <summary>
                         <Link to="/contributionRevenue">
@@ -404,11 +404,11 @@ function Home() {
                       </summary>
                       <ul>
                         <li>
-                          <Link to="/manageAdvertising/addAd">إضافة إعلان</Link>
+                          <Link to="/manageAdvertising/slideShow">إضافة إعلان</Link>
                         </li>
-                        <li>
-                          <Link to="/manageAdvertising/slideShow">اضافة نص متحرك</Link>
-                        </li>
+                        {/*<li>
+                          <Link to="/manageAdvertising/addAd">اضافة نص متحرك</Link>
+                        </li>*/}
                         <li>
                           <Link to="/manageAdvertising/">سجل الإعلانات</Link>
                         </li>
@@ -446,7 +446,7 @@ function Home() {
                       </summary>
                       <ul>
                         <li>
-                          <Link to="/fatwa/add">اضافة فتوى جديدة</Link>
+                          <Link to="/fatwa/add">إضافة فتوى جديدة</Link>
                         </li>
                         <li>
                           <Link to="/fatwa/">الفتاوى السابقة</Link>
@@ -459,7 +459,7 @@ function Home() {
                       </summary>
                       <ul>
                         <li>
-                          <Link to="/familyTree/manage">تحكم فيها</Link>
+                          <Link to="/familyTree/manage">التحكم فيها</Link>
                         </li>
                       </ul>
                     </details>
@@ -467,7 +467,7 @@ function Home() {
                 </ul>
               </div>
             </div>
-            <label className="btn rounded-full mx-[1rem] swap swap-rotate">
+            <label className="btn btn-sm rounded-full p-[0.5rem] m-[0.5rem] swap swap-rotate">
               {/* this hidden checkbox controls the state */}
               <input
                 checked={theme == "lofi" ? true : false}
@@ -506,7 +506,7 @@ function Home() {
                   listMenu.classList.toggle("hidden");
                 }}
                 src={user && user.profileImage ? "/api/v1.0/users/getProfileImage/" + user.profileImage : profileImage}
-                className="cursor-pointer w-[165px] xs:w-[115px] h-[70px] sm:w-[97px] sm:h-[70px] lg:w-[75.58px] lg:h-[75.58px] rounded-full"
+                className="cursor-pointer w-[70px] h-[70px] object-cover rounded-full"
                 alt=""
               />
               <div
@@ -532,7 +532,7 @@ function Home() {
           <Marquee direction="right" speed={150} gradient={true}>
             {ads &&
               ads.reverse().map((ad, index) => (
-                    <h1 className="text-[1.1rem] sm:text-[2rem] mx-[30px]">{ad.text}</h1>
+                    <h1 className="mx-[30px]">{ad.text}</h1>
               ))}
           </Marquee>
 
@@ -541,8 +541,8 @@ function Home() {
           <dialog id="my_modal_ImageProfile" className="modal">
             <div className="modal-box ">
               {showAlert.display ? <Alert msg={showAlert} /> : ""}
-              <h3 className="font-bold text-lg ">رفع صورة جديدة</h3>
-              <button className='btn btn-info max-w-sm' type="button" onClick={handleFileClick}>
+              <h3 className="font-bold ">رفع صورة جديدة</h3>
+              <button className='btn btn-sm btn-info max-w-sm' type="button" onClick={handleFileClick}>
                 <FontAwesomeIcon icon={faUpload} /> تحميل صورة
               </button>
               <input

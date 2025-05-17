@@ -34,26 +34,26 @@ function GoodsRevenueRecord() {
     return (
         <div className="sm:p-0 px-[1rem]">
             <div className='container mx-auto'>
-                <Link to="/commodityRevenue/" className="btn btn-primary text-[2rem] px-[2rem]">
+                <Link to="/commodityRevenue/" className="btn btn-sm btn-primary px-[2rem]">
                     <FontAwesomeIcon icon={faRightLong} />
                 </Link>
             </div>
-            <h1 className="text-center text-[1.3rem] sm:text-[1.5rem] font-bold py-[1rem]">
+            <h1 className="text-center text-sm font-bold py-[0.5rem]">
                 سجل السلع
             </h1>
             {
-                !loading ? "" : <div className="mt-[1rem] flex sm:flex-row flex-col gap-[1rem] justify-center">
-                    <div className="flex sm:flex-col items-center justify-center gap-[1rem]">
-                        <h1 className="text-[0.8rem] md:text-[1.1rem] w-[70%] sm:w-auto  font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">إجمالي مبالغ إيرادات السلع</h1>
-                        <h1 className="text-[0.8rem] md:text-[1.1rem] text-center w-[30%] sm:w-auto font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">{saleAmount && saleAmount.toFixed(2)}</h1>
+                !loading ? "" : <div className="mt-[0.5rem] flex sm:flex-row flex-col gap-[0.5rem] justify-center">
+                    <div className="flex sm:flex-col items-center justify-center gap-[0.5rem]">
+                        <h1 className="text-xs w-[70%] sm:w-auto  font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">إجمالي مبالغ إيرادات السلع</h1>
+                        <h1 className="text-xs text-center w-[30%] sm:w-auto font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">{saleAmount && saleAmount.toFixed(2)}</h1>
                     </div>
-                    <div className="flex sm:flex-col items-center justify-center gap-[1rem]">
-                        <h1 className="text-[0.8rem] md:text-[1.1rem] w-[70%] sm:w-auto font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">إجمالي الارباح</h1>
-                        <h1 className="text-[0.8rem] md:text-[1.1rem] text-center w-[30%] sm:w-auto font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">{profitAmount && profitAmount.toFixed(2)}</h1>
+                    <div className="flex sm:flex-col items-center justify-center gap-[0.5rem]">
+                        <h1 className="text-xs w-[70%] sm:w-auto font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">إجمالي الارباح</h1>
+                        <h1 className="text-xs text-center w-[30%] sm:w-auto font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">{profitAmount && profitAmount.toFixed(2)}</h1>
                     </div>
-                    <div className="flex sm:flex-col items-center justify-center gap-[1rem]">
-                        <h1 className="text-[0.8rem] md:text-[1.1rem] w-[70%] sm:w-auto font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">عدد المستفيدين</h1>
-                        <h1 className="text-[0.8rem] md:text-[1.1rem] text-center w-[30%] sm:w-auto font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">{numberOfBeneficiaries && numberOfBeneficiaries.toFixed(2)}</h1>
+                    <div className="flex sm:flex-col items-center justify-center gap-[0.5rem]">
+                        <h1 className="text-xs w-[70%] sm:w-auto font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">عدد المستفيدين</h1>
+                        <h1 className="text-xs text-center w-[30%] sm:w-auto font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">{numberOfBeneficiaries && numberOfBeneficiaries.toFixed(2)}</h1>
                     </div>
                 </div>
             }
@@ -61,9 +61,9 @@ function GoodsRevenueRecord() {
                 !loading ? <div className="flex justify-center">
                     {" "}
                     <span className=" loading loading-ring loading-lg"></span>
-                </div> : <div className="overflow-x-auto mt-[1rem]">
-                    <table className="text-[1rem] table border-separate border-spacing-2 border w-[1500px] mx-auto">
-                        <tr>
+                </div> : <div className="overflow-x-auto mt-[0.5rem]">
+                    <table className="text-xs table table-xs border-separate border-spacing-2 border w-[550px] sm:w-[900px] mx-auto">
+                        <tr className='text-xs'>
                             <th className="border text-center border-slate-600" rowSpan={2}>
                                 رقم <br/>الطلب
                             </th>
@@ -95,7 +95,7 @@ function GoodsRevenueRecord() {
                                 تفاصيل <br/>اكثر
                             </th>
                         </tr>
-                        <tr>
+                        <tr className='text-xs'>
                             <th className="border text-center border-slate-600">الميلادي</th>
                             <th className="border text-center border-slate-600">الهجري</th>
                             <th className="border text-center border-slate-600">الميلادي</th>
@@ -107,7 +107,7 @@ function GoodsRevenueRecord() {
                                 const d2 = new Date(commodity.commodityData.paymentExpiryDate);
                                 return (
                                     <tbody>
-                                        <tr>
+                                        <tr className='text-xs'>
                                             <td className="border text-center border-slate-600">{commodity.id}</td>
                                             <td className="border text-center border-slate-600">{commodity.customerData.name}</td>
                                             <td className="border text-center border-slate-600">{commodity.commodityData.purchaseAmount}</td>
@@ -128,7 +128,7 @@ function GoodsRevenueRecord() {
                                                 {commodity.comments}
                                             </td>
                                             <td className="border text-center border-slate-600">
-                                                <Link to={"/commodityRevenue/installmentSchedule?id=" + commodity._id} className='btn btn-info'>التفاصيل</Link>
+                                                <Link to={"/commodityRevenue/installmentSchedule?id=" + commodity._id} className='btn btn-xs btn-info'>التفاصيل</Link>
                                             </td>
                                         </tr>
                                     </tbody>

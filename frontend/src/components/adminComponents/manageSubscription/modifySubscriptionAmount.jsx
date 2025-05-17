@@ -60,20 +60,20 @@ function ModifySubscriptionAmount() {
     return (
         <div className="container mx-auto sm:p-0 px-[1rem]">
             <div>
-                <Link to="/subscription" className="btn btn-primary text-[2rem] px-[2rem]">
+                <Link to="/subscription" className="btn btn-sm btn-primary px-[2rem]">
                     <FontAwesomeIcon icon={faRightLong} />
                 </Link>
             </div>
-            <h1 className="text-center text-[1.5rem] font-bold py-[1rem]">
+            <h1 className="text-center font-bold py-[0.5rem]">
             إضافة مبلغ الاشتراكات
             </h1>
             {showAlert.display ? <Alert msg={showAlert} /> : ""}
             {
-                (monthlyInput && foundationInput) && <div className="overflow-x-auto mt-[1rem]">
+                (monthlyInput && foundationInput) && <div className="overflow-x-auto">
                     <table className="table w-[400px] mx-auto">
                         {/* head */}
                         <thead>
-                            <tr className='text-center'>
+                            <tr className='text-center text-sm'>
                                 <th>النوع</th>
                                 <th>المبلغ</th>
                                 <th>تعديل</th>
@@ -81,28 +81,28 @@ function ModifySubscriptionAmount() {
                         </thead>
                         <tbody>
                             {/* row 1 */}
-                            <tr className='text-center'>
+                            <tr className='text-center text-sm'>
                                 <th>إشتراك شهري</th>
                                 <td><input type="number" placeholder="اكتب المبلغ" onChange={(event) => {
                                     setMonthlyInput((prevInput) => {
                                         return { ...prevInput, amount: event.target.value };
                                     })
-                                }} value={monthlyInput.amount} required className="formInput input input-bordered w-full max-w-[5rem]" /></td>
+                                }} value={monthlyInput.amount} required className="formInput input input-sm input-bordered w-full max-w-[5rem]" /></td>
                                 <td><button onClick={() => {
                                     handleUpdate(monthlyInput, setMonthlySubmit);
-                                }} className="btn btn-warning">{monthlySubmit ? <span className="loading loading-ring loading-lg"></span> : "تعديل"}</button></td>
+                                }} className="btn btn-sm btn-warning">{monthlySubmit ? <span className="loading loading-ring loading-lg"></span> : "تعديل"}</button></td>
                             </tr>
                             {/* row 2 */}
-                            <tr className='text-center'>
+                            <tr className='text-center text-sm'>
                                 <th>إشتراك التأسيس</th>
                                 <td><input type="number" placeholder="اكتب المبلغ" onChange={(event) => {
                                     setFoundationInput((prevInput) => {
                                         return { ...prevInput, amount: event.target.value };
                                     })
-                                }} value={foundationInput.amount} required className="formInput input input-bordered w-full max-w-[5rem]" /></td>
+                                }} value={foundationInput.amount} required className="formInput input input-sm input-bordered w-full max-w-[5rem]" /></td>
                                 <td><button onClick={() => {
                                     handleUpdate(foundationInput, setFoundationSubmit);
-                                }} className="btn btn-warning">{foundationSubmit ? <span className="loading loading-ring loading-lg"></span> : "تعديل"}</button></td>
+                                }} className="btn btn-sm btn-warning">{foundationSubmit ? <span className="loading loading-ring loading-lg"></span> : "تعديل"}</button></td>
                             </tr>
                         </tbody>
                     </table>
