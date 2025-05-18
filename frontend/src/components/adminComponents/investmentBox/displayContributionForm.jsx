@@ -97,7 +97,7 @@ function DisplayContributionForm() {
     return (
         <div className="sm:p-0 px-[1rem]">
             <div className='container mx-auto'>
-                <h1 className="text-center text-[1.5rem] font-bold py-[1rem]">
+                <h1 className="text-center font-bold py-[1rem]">
                     نموذج المساهمة في صندوق استثماري
                 </h1>
                 <div className="md:join ">
@@ -105,7 +105,7 @@ function DisplayContributionForm() {
                         setInputs((prevInput) => {
                             return { ...prevInput, year: event.target.value }
                         });
-                    }} className="select xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
+                    }} className="select select-sm xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
                         {yearOptions.map((value) => (
                             <option key={value} value={value} selected={inputs.year == value}>
                                 {value}
@@ -116,7 +116,7 @@ function DisplayContributionForm() {
                         setInputs((prevInput) => {
                             return { ...prevInput, month: event.target.value }
                         });
-                    }} className="select xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
+                    }} className="select select-sm xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
                         <option value="1" selected={"1" == inputs.month}>محرم</option>
                         <option value="2" selected={"1" == inputs.month}>صفر</option>
                         <option value="3" selected={"3" == inputs.month}>ربيع الاول</option>
@@ -138,14 +138,14 @@ function DisplayContributionForm() {
                             }
                         })
                         setId(event.target.value);
-                    }} className="select w-[7rem] xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
+                    }} className="select select-sm w-[7rem] xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
                         <option selected disabled>قم باختيار العدد الخاص نموذج المساهمة في صندوق استثماري</option>
                         {idList && idList.map((list) => (
                             <option value={list._id}>{list.id}</option>
                         ))}
                     </select>
                     <div className="indicator">
-                        <button onClick={handleSearch} className="btn btn-primary join-item">ابحث</button>
+                        <button onClick={handleSearch} className="btn btn-sm btn-primary join-item">ابحث</button>
                     </div>
                 </div>
             </div>
@@ -156,7 +156,7 @@ function DisplayContributionForm() {
                 </div> : <div className="overflow-x-auto mt-[1rem]">
                     {
                         investmentBox && <>
-                            <table className="text-[1rem] table border-separate border-spacing-2 border w-[1600px] mx-auto">
+                            <table className="table table-xs text-xs border-separate border-spacing-0 border w-[400px]  md:w-[1000px] mx-auto">
                                 <tr className='text-center'>
                                     <th className="border text-center border-slate-600" colSpan={11}>بيانات المساهمة</th>
                                 </tr>
@@ -165,7 +165,7 @@ function DisplayContributionForm() {
                                         رقم <br />المساهمة
                                     </th>
                                     <th className="border text-center border-slate-600" rowSpan={2}>
-                                        اسم الصندوق <br />
+                                        اسم <br />الصندوق 
                                     </th>
                                     <th className="border text-center border-slate-600" rowSpan={2}>
                                         اسم البنك الذي سددت <br />المساهمة عن طريقه
@@ -273,14 +273,14 @@ function DisplayContributionForm() {
 
             {/* Open the modal using document.getElementById('ID').showModal() method */}
             <div className='container mx-auto'>
-                <button className="btn mt-[1rem]" onClick={() => document.getElementById('my_modal_1').showModal()}>اضافة المعلومات الناقصة</button>
+                <button className="btn btn-sm mt-[0.5rem]" onClick={() => document.getElementById('my_modal_1').showModal()}>اضافة المعلومات الناقصة</button>
             </div>
             <dialog id="my_modal_1" className="modal">
                 <div className="modal-box">
                     <form action="">
                         {showAlert.display ? <Alert msg={showAlert} /> : ""}
                         <div className="relative w-full">
-                            <FontAwesomeIcon icon={faMoneyBill} className="absolute top-[1rem] right-[1rem]" />
+                            <FontAwesomeIcon icon={faMoneyBill} className="absolute top-[0.5rem] right-[1rem]" />
                             <input type="number" onChange={(event) => {
                                 setInvesmentDone((prev) => {
                                     return {
@@ -288,7 +288,7 @@ function DisplayContributionForm() {
                                         money: event.target.value
                                     }
                                 })
-                            }} required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder={`المبلغ بعد انتهاء المساهمة`} />
+                            }} required className="formInput w-full input input-sm pr-[2.3rem] input-bordered flex items-center gap-2" placeholder={`المبلغ بعد انتهاء المساهمة`} />
                         </div>
                     </form>
                     <div className="modal-action">
@@ -299,8 +299,8 @@ function DisplayContributionForm() {
                                 onClick={(event) => {
                                     event.preventDefault();
                                     handleSubmit();
-                                }} className='btn btn-primary'>{submit ? <span className="loading loading-ring loading-lg"></span> : "تاكيد"}</button>
-                            <button className="btn">اغلاق</button>
+                                }} className='btn btn-sm btn-primary'>{submit ? <span className="loading loading-ring loading-lg"></span> : "تاكيد"}</button>
+                            <button className="btn btn-sm">اغلاق</button>
                         </form>
                     </div>
                 </div>

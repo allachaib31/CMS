@@ -212,7 +212,7 @@ function DisplayStocksContributionForm() {
                 </div> : <div className="overflow-x-auto mt-[0.5rem]">
                     {
                         stock && <>
-                            <table className="text-xs table table-xs border-separate border-spacing-2 border w-[600px] sm:w-[900px] mx-auto">
+                            <table className="text-xs table table-xs border-separate border-spacing-0 border w-[450px] md:w-[900px] mx-auto">
                                 <tr className='text-center text-xs'>
                                     <th className="border text-center border-slate-600" colSpan={6}>بيانات المساهمة</th>
                                 </tr>
@@ -283,7 +283,7 @@ function DisplayStocksContributionForm() {
                                     document.getElementById('sell').showModal()
                                 }}>{submit ? <span className="loading loading-ring loading-lg"></span> : "بيع"}</button>
                             </div>
-                            <table className="text-xs table table-xs border-separate border-spacing-2 border w-[500px] sm:w-[900px] mx-auto">
+                            <table className="text-xs table table-xs border-separate border-spacing-0 border w-[450px] md:w-[900px] mx-auto">
                             {/*    <tr className='text-xs'>
                                     <th className="border text-center border-slate-600" rowSpan={2}>
                                         شراء أسهم إضافية

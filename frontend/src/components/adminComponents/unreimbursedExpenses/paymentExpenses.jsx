@@ -52,17 +52,17 @@ function PaymentExpenses() {
     return (
         <div className="sm:p-0 px-[1rem]">
             <div className='container mx-auto'>
-                <Link to="/unreimbursedExpenses/" className="btn btn-primary text-[2rem] px-[2rem]">
+                <Link to="/unreimbursedExpenses/" className="btn btn-sm btn-primary px-[2rem]">
                     <FontAwesomeIcon icon={faRightLong} />
                 </Link>
             </div>
-            <h1 className="text-center text-[1.5rem] font-bold py-[1rem]">
+            <h1 className="text-center font-bold py-[0.5rem]">
                 تسديد المصروفات
             </h1>
             <form action="" className='container mx-auto'>
                 <select onChange={(event) => {
                     setSelectId(event.target.value)
-                }} className="select select-bordered w-full max-w-[9rem]">
+                }} className="select select-sm select-bordered w-full max-w-[9rem]">
                     <option disabled selected>اختر رقم الطلب </option>
                     {
                         listId && listId.map((value) => {
@@ -75,17 +75,17 @@ function PaymentExpenses() {
                 <button onClick={(event) => {
                     event.preventDefault();
                     handleSearch()
-                }} className='btn btn-primary text-[1.1rem] font-bold'>ابحث</button>
+                }} className='btn btn-sm btn-primary font-bold'>ابحث</button>
             </form>
             {showAlert.display ? <Alert msg={showAlert} /> : ""}
-            <div className="overflow-x-auto mt-[1rem]">
-                <table className="text-[1rem] table border-separate border-spacing-2 border w-[600px] mx-auto">
-                    <tr>
+            <div className="overflow-x-auto mt-[0.5rem]">
+                <table className=" table table-xs border-separate border-spacing-0 border w-[300px] md:w-[600px] mx-auto">
+                    <tr className='text-xs'>
                         <th className="border text-center border-slate-600">
-                            رقم المستخدم
+                            رقم <br />المستخدم
                         </th>
                         <th className="border text-center border-slate-600">
-                            اسم المستخدم
+                            اسم <br />المستخدم
                         </th>
                         <th className="border text-center border-slate-600">
                             المبلغ
@@ -109,7 +109,7 @@ function PaymentExpenses() {
                                                         id: user._id
                                                     }, user.idUser._id, index)
                                                 }
-                                            }} className='btn btn-success'>دفع</button>}
+                                            }} className='btn btn-xs btn-success'>دفع</button>}
                                         </td>
                                     </tr>
                                 )

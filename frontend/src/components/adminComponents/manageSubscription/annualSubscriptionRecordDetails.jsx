@@ -92,8 +92,8 @@ function AnnualSubscriptionRecordDetails() {
                 {
                     inputs.typeSearch == "oneYear" ? <div className="overflow-x-auto">
                         {!loading ? <div className='flex justify-center'> <span className=" loading loading-ring loading-lg"></span></div> :
-                            <table className="table table-sm border-separate border-spacing-2 w-[300px] border text-sm">
-                                <thead className='text-sm text-center'>
+                            <table className="table table-xs border-separate border-spacing-0 w-[300px] border text-sm">
+                                <thead className='text-xs text-center'>
                                     <tr>
                                         <th className='border border-slate-600'>الاشهر</th>
                                         <th className='border border-slate-600'>المبلغ</th>
@@ -105,7 +105,7 @@ function AnnualSubscriptionRecordDetails() {
                                     {
                                         subscriptions && subscriptions.map((subscription) => {
                                             return Object.entries(subscription.months).map(([month, details], index) => (
-                                                <tr className='text-center text-sm'>
+                                                <tr className='text-center text-xs'>
                                                     <td className='border border-slate-600'>{details.name}</td>
                                                     <td className='border border-slate-600'>{details.amount}</td>
                                                     <td className='border border-slate-600'>{details.hijriDate && details.hijriDate.day ? details.hijriDate.day + "/" + details.hijriDate.month.number + "/" + details.hijriDate.year : "لم يتم دفع"}</td>
@@ -120,9 +120,9 @@ function AnnualSubscriptionRecordDetails() {
                             </table>
                         }
                     </div> : <div className="overflow-x-auto mt-[0.5rem]">
-                        <table className="table table-sm border-separate border-spacing-2 border text-sm w-[1200px]">
-                            <thead className='text-center text-sm'>
-                                <tr className='text-sm'>
+                        <table className="table table-xs border-separate border-spacing-0 border text-xs w-[800px] md:w-[1200px]">
+                            <thead className='text-center text-xs'>
+                                <tr className='text-xs'>
                                     <th className='border border-slate-600'>الاسم</th>
                                     <th className='border border-slate-600'>السنة</th>
                                     <th className='border border-slate-600'>محرم</th>

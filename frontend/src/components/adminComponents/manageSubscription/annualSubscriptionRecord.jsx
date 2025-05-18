@@ -69,13 +69,13 @@ function AnnualSubscriptionRecord() {
 
     const renderSubscriptions = () => {
         return subscriptions.map((subscription, subIndex) => (
-            <tr className='text-center text-sm' key={subIndex}>
-                <th className='border border-slate-600 text-sm'>{subscription.idUser.name}</th>
+            <tr className='text-center text-xs' key={subIndex}>
+                <th className='border border-slate-600 text-xs'>{subscription.idUser.name}</th>
                 {renderSubscriptionAmounts(subscription.months)}
                 <td className='border border-slate-600'>{subscription.total}</td>
                 <td className='border border-slate-600'>{subscription.numberofArrears}</td>
                 <td className='border border-slate-600'>
-                    <Link to={`/subscription/annualSubscriptionRecordDetails?id=${subscription.idUser._id}&smallId=${subscription.idUser.id}&name=${subscription.idUser.name}`} className="btn btn-sm text-sm btn-info">التفاصيل</Link>
+                    <Link to={`/subscription/annualSubscriptionRecordDetails?id=${subscription.idUser._id}&smallId=${subscription.idUser.id}&name=${subscription.idUser.name}`} className="btn btn-xs text-xs btn-info">التفاصيل</Link>
                 </td>
             </tr>
         ));
@@ -119,9 +119,9 @@ function AnnualSubscriptionRecord() {
             </div>
             <div className='flex justify-center'>
                 <div className="overflow-x-auto mt-[0.5rem]">
-                    {!loading ? <div className='flex justify-center'> <span className=" loading loading-ring loading-lg"></span></div> : <table className="table border-separate border-spacing-2 border w-[1350px]">
+                    {!loading ? <div className='flex justify-center'> <span className=" loading loading-ring loading-lg"></span></div> : <table className="table table-xs border-separate border-spacing-0 border w-[800px] md:w-[1350px]">
                         <thead>
-                            <tr className='text-center'>
+                            <tr className='text-center text-xs'>
                                 <th className='border border-slate-600'>الاسم</th>
                                 <th className='border border-slate-600'>محرم</th>
                                 <th className='border border-slate-600'>صفر</th>

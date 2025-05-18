@@ -112,28 +112,28 @@ function FormContributionPurchaseCommodity() {
                     <span className=" loading loading-ring loading-lg"></span>
                 </div> : <div className="overflow-x-auto mt-[0.5rem]">
                     {
-                        commodityRevenu && <table className="text-xs table table-xs border-separate border-spacing-2 border w-[600px] sm:w-[800px]  mx-auto">
+                        commodityRevenu && <table className="text-xs table table-xs border-separate border-spacing-0 border w-[500px] md:w-[800px]  mx-auto">
                             <tr className='text-center text-xs'>
                                 <th className="border text-center border-slate-600" colSpan={7}>البيانات: العميل \ سلعة \ الكفيل</th>
                             </tr>
                             <tr className='text-xs'>
                                 <th className="border text-center border-slate-600" rowSpan={2}>
-                                    رقم الطلب
+                                    رقم <br/>الطلب
                                 </th>
                                 <th className="border text-center border-slate-600" rowSpan={2}>
-                                    اسم العميل
+                                    اسم <br/>العميل
                                 </th>
                                 <th className="border text-center border-slate-600" rowSpan={2}>
-                                    نوع السلعة
+                                    نوع<br/> السلعة
                                 </th>
                                 <th className="border text-center border-slate-600" rowSpan={2}>
-                                    مبلغ الشراء
+                                    مبلغ <br/>الشراء
                                 </th>
                                 <th className="border text-center border-slate-600" rowSpan={2}>
-                                    مبلغ البيع
+                                    مبلغ <br/>البيع
                                 </th>
                                 <th className="border text-center border-slate-600" colSpan={2}>
-                                    تاريخ البيع
+                                    تاريخ <br/>البيع
                                 </th>
                             </tr>
                             <tr className='text-xs'>
@@ -153,13 +153,13 @@ function FormContributionPurchaseCommodity() {
                             </tbody>
                             <tr className='text-xs'>
                                 <th className="border text-center border-slate-600" colSpan={3}>
-                                    اسم الكفيل
+                                    اسم <br/>الكفيل
                                 </th>
                                 <th className="border text-center border-slate-600" colSpan={2}>
-                                    نسبة الكفيل
+                                    نسبة<br/> الكفيل
                                 </th>
                                 <th className="border text-center border-slate-600" colSpan={2}>
-                                    مبلغ نسبته
+                                    مبلغ<br/> نسبته
                                 </th>
                             </tr>
                             <tbody>
@@ -173,11 +173,11 @@ function FormContributionPurchaseCommodity() {
                                 <th className="border border-slate-600" colSpan={7}>بيانات الصندوق</th>
                             </tr>
                             <tr className='text-xs'>
-                                <th className="border text-center border-slate-600">الرصيد السابق لصندوق</th>
-                                <th className="border text-center border-slate-600">مبلغ المساهمة</th>
-                                <th className="border text-center border-slate-600">نسبة المساهمة</th>
-                                <th className="border text-center border-slate-600">نسبة الربح</th>
-                                <th className="border text-center border-slate-600">مبلغ الربح</th>
+                                <th className="border text-center border-slate-600">الرصيد السابق<br/> لصندوق</th>
+                                <th className="border text-center border-slate-600">مبلغ <br/>المساهمة</th>
+                                <th className="border text-center border-slate-600">نسبة <br/>المساهمة</th>
+                                <th className="border text-center border-slate-600">نسبة <br/>الربح</th>
+                                <th className="border text-center border-slate-600">مبلغ <br/>الربح</th>
                                 <th className="border text-center border-slate-600" colSpan={2}>الرصيد</th>
                             </tr>
                             <tbody>
@@ -194,11 +194,11 @@ function FormContributionPurchaseCommodity() {
                                 <th className="border border-slate-600" colSpan={7}>بيانات المساهمين</th>
                             </tr>
                             <tr className='text-xs'>
-                                <th className="border text-center border-slate-600">اسم العضو</th>
-                                <th className="border text-center border-slate-600">رصيده السابق</th>
-                                <th className="border text-center border-slate-600">نسبة المساهمة</th>
-                                <th className="border text-center border-slate-600">مبلغ المساهمة</th>
-                                <th className="border text-center border-slate-600">مبلغ الربح</th>
+                                <th className="border text-center border-slate-600">اسم <br/>العضو</th>
+                                <th className="border text-center border-slate-600">رصيده<br/> السابق</th>
+                                <th className="border text-center border-slate-600">نسبة <br/>المساهمة</th>
+                                <th className="border text-center border-slate-600">مبلغ<br/> المساهمة</th>
+                                <th className="border text-center border-slate-600">مبلغ <br/>الربح</th>
                                 <th className="border text-center border-slate-600" colSpan={2}>الرصيد</th>
                             </tr>
                             <tbody>

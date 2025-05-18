@@ -98,7 +98,7 @@ function DisplayfinancialCompanyForm() {
   return (
     <div className="sm:p-0 px-[1rem]">
       <div className='container mx-auto'>
-        <h1 className="text-center text-[1.5rem] font-bold py-[1rem]">
+        <h1 className="text-center font-bold py-[0.5rem]">
           نموذج المساهمة في شركة مالية
         </h1>
         <div className="md:join ">
@@ -106,7 +106,7 @@ function DisplayfinancialCompanyForm() {
             setInputs((prevInput) => {
               return { ...prevInput, year: event.target.value }
             });
-          }} className="select xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
+          }} className="select select-sm xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
             {yearOptions.map((value) => (
               <option key={value} value={value} selected={inputs.year == value}>
                 {value}
@@ -117,7 +117,7 @@ function DisplayfinancialCompanyForm() {
             setInputs((prevInput) => {
               return { ...prevInput, month: event.target.value }
             });
-          }} className="select xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
+          }} className="select select-sm xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
             <option value="1" selected={"1" == inputs.month}>محرم</option>
             <option value="2" selected={"1" == inputs.month}>صفر</option>
             <option value="3" selected={"3" == inputs.month}>ربيع الاول</option>
@@ -139,14 +139,14 @@ function DisplayfinancialCompanyForm() {
               }
             })
             setId(event.target.value);
-          }} className="select w-[7rem] xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
+          }} className="select select-sm w-[7rem] xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
             <option selected disabled>قم باختيار العدد الخاص نموذج المساهمة في صندوق استثماري</option>
             {idList && idList.map((list) => (
               <option value={list._id}>{list.id}</option>
             ))}
           </select>
           <div className="indicator">
-            <button onClick={handleSearch} className="btn btn-primary join-item">ابحث</button>
+            <button onClick={handleSearch} className="btn btn-sm btn-primary join-item">ابحث</button>
           </div>
         </div>
       </div>
@@ -158,11 +158,11 @@ function DisplayfinancialCompanyForm() {
         </div> : <div className="overflow-x-auto mt-[1rem]">
           {
             financialCompany && <>
-              <table className="text-[1rem] table border-separate border-spacing-2 border w-[1600px] mx-auto">
-                <tr className='text-center'>
+              <table className="text-xs table table-xs border-separate border-spacing-0 border w-[550px] md:w-[1000px] mx-auto">
+                <tr className='text-center text-xs'>
                   <th className="border text-center border-slate-600" colSpan={11}>بيانات المساهمة</th>
                 </tr>
-                <tr>
+                <tr className='text-xs'>
                   <th className="border text-center border-slate-600" rowSpan={2}>
                     رقم <br />المساهمة
                   </th>
@@ -191,14 +191,14 @@ function DisplayfinancialCompanyForm() {
                     الربح / الخسارة
                   </th>
                 </tr>
-                <tr>
+                <tr className='text-xs'>
                   <th className="border text-center border-slate-600">الميلادي</th>
                   <th className="border text-center border-slate-600">الهجري</th>
                   <th className="border text-center border-slate-600">الميلادي</th>
                   <th className="border text-center border-slate-600">الهجري</th>
                 </tr>
                 <tbody>
-                  <tr>
+                  <tr className='text-xs'>
                     <td className="border text-center border-slate-600">{financialCompany.id}</td>
                     <td className="border text-center border-slate-600">{financialCompany.nameContributingParty}</td>
                     <td className="border text-center border-slate-600">{financialCompany.nameContributingBank}</td>
@@ -212,10 +212,10 @@ function DisplayfinancialCompanyForm() {
                     <td className={`border text-center border-slate-600 ${financialCompany.isDone && (financialCompany.amountAfterEnd - financialCompany.amount) > 0 ? "text-green-600" : "text-error"}`}>{financialCompany.isDone && (financialCompany.amountAfterEnd - financialCompany.amount).toFixed(2)}</td>
                   </tr>
                 </tbody>
-                <tr className='text-center'>
+                <tr className='text-center text-xs'>
                   <th className="border border-slate-600" colSpan={11}>بيانات الصندوق</th>
                 </tr>
-                <tr>
+                <tr className='text-xs'>
                   <th className="border text-center border-slate-600" colSpan={2}>الرصيد السابق <br /> لصندوق</th>
                   <th className="border text-center border-slate-600" colSpan={2}>مبلغ <br />المساهمة</th>
                   <th className="border text-center border-slate-600" colSpan={2}>نسبة <br />المساهمة</th>
@@ -225,7 +225,7 @@ function DisplayfinancialCompanyForm() {
                   <th className="border text-center border-slate-600" >الرصيد بعد <br />انتهاء المساهمة</th>
                 </tr>
                 <tbody>
-                  <tr>
+                  <tr className='text-xs'>
                     <td className="border text-center border-slate-600" colSpan={2}>{financialCompany.previousFundBalance.toFixed(2)}</td>
                     <td className="border text-center border-slate-600" colSpan={2}>{financialCompany.contributionAmount.toFixed(2)}</td>
                     <td className="border text-center border-slate-600" colSpan={2}>{financialCompany.contributionRate.toFixed(2)}</td>
@@ -236,10 +236,10 @@ function DisplayfinancialCompanyForm() {
 
                   </tr>
                 </tbody>
-                <tr className='text-center'>
+                <tr className='text-center text-xs'>
                   <th className="border border-slate-600" colSpan={11}>بيانات المساهمين</th>
                 </tr>
-                <tr>
+                <tr className='text-xs'>
                   <th className="border text-center border-slate-600" colSpan={2}>اسم <br />العضو</th>
                   <th className="border text-center border-slate-600" colSpan={2}>رصيده <br /> السابق</th>
                   <th className="border text-center border-slate-600" colSpan={2}>نسبة <br />المساهمة</th>
@@ -252,7 +252,7 @@ function DisplayfinancialCompanyForm() {
                   {
                     userFinancialCompany && userFinancialCompany.map((user) => {
                       return (
-                        <tr>
+                        <tr className='text-xs'>
                           <td className="border text-center border-slate-600" colSpan={2}>{user.idUser.name}</td>
                           <td className="border text-center border-slate-600" colSpan={2}>{user.prevBalance.toFixed(2)}</td>
                           <td className="border text-center border-slate-600" colSpan={2}>{user.contributionRate.toFixed(2)}</td>
@@ -275,7 +275,7 @@ function DisplayfinancialCompanyForm() {
 
 
       <div className='container mx-auto'>
-        <button className="btn mt-[1rem]" onClick={() => document.getElementById('my_modal_1').showModal()}>اضافة المعلومات الناقصة</button>
+        <button className="btn btn-sm mt-[1rem]" onClick={() => document.getElementById('my_modal_1').showModal()}>اضافة المعلومات الناقصة</button>
 
       </div>
       {/* Open the modal using document.getElementById('ID').showModal() method */}
@@ -284,7 +284,7 @@ function DisplayfinancialCompanyForm() {
           <form action="">
             {showAlert.display ? <Alert msg={showAlert} /> : ""}
             <div className="relative w-full">
-              <FontAwesomeIcon icon={faMoneyBill} className="absolute top-[1rem] right-[1rem]" />
+              <FontAwesomeIcon icon={faMoneyBill} className="absolute top-[0.5rem] right-[1rem]" />
               <input type="number" onChange={(event) => {
                 setFinancialDone((prev) => {
                   return {
@@ -292,7 +292,7 @@ function DisplayfinancialCompanyForm() {
                     money: event.target.value
                   }
                 })
-              }} required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder={`المبلغ بعد انتهاء المساهمة`} />
+              }} required className="formInput w-full input input-sm pr-[2.3rem] input-bordered flex items-center gap-2" placeholder={`المبلغ بعد انتهاء المساهمة`} />
             </div>
           </form>
           <div className="modal-action">
@@ -303,8 +303,8 @@ function DisplayfinancialCompanyForm() {
                 onClick={(event) => {
                   event.preventDefault();
                   handleSubmit();
-                }} className='btn btn-primary'>{submit ? <span className="loading loading-ring loading-lg"></span> : "تاكيد"}</button>
-              <button className="btn">اغلاق</button>
+                }} className='btn btn-sm btn-primary'>{submit ? <span className="loading loading-ring loading-lg"></span> : "تاكيد"}</button>
+              <button className="btn btn-sm">اغلاق</button>
             </form>
           </div>
         </div>

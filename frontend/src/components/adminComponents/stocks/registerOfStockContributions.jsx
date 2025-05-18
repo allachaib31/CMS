@@ -27,48 +27,48 @@ function RegisterOfStockContributions() {
     }, [])
     return (
         <div className="px-[1rem] sm:px-0">
-            <h1 className="text-center text-[1.5rem] font-bold py-[1rem]">
+            <h1 className="text-center text-sm font-bold py-[0.5rem]">
                 سجل المساهمات في الأسهم
             </h1>
-            <div className="mt-[1rem] flex flex-col md:flex-row gap-[1rem] justify-center">
-                <div className="flex md:flex-col items-center gap-[1rem]">
-                    <h1 className="text-[0.8rem] sm:text-[1.1rem] md:w-auto w-[70%] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">إجمالي مبالغ الأسهم </h1>
-                    <h1 className="text-[0.8rem] sm:text-[1.1rem] md:w-auto w-[30%] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem] text-center">{data && data.totalShareAmount}</h1>
+            <div className="mt-[0.5rem] flex flex-col md:flex-row gap-[0.5rem] justify-center">
+                <div className="flex md:flex-col items-center gap-[0.5rem]">
+                    <h1 className="text-sm md:w-auto w-[70%] bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">إجمالي مبالغ الأسهم </h1>
+                    <h1 className="text-sm md:w-auto w-[30%] bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem] text-center">{data && data.totalShareAmount}</h1>
                 </div>
-                <div className="flex md:flex-col items-center gap-[1rem]">
-                    <h1 className="text-[0.8rem] sm:text-[1.1rem] md:w-auto w-[70%] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">إجمالي مبالغ الأرباح</h1>
-                    <h1 className="text-[0.8rem] sm:text-[1.1rem] md:w-auto w-[30%] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem] text-center">{data && data.totalProfitAmount}</h1>
+                <div className="flex md:flex-col items-center gap-[0.5rem]">
+                    <h1 className="text-sm md:w-auto w-[70%] bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">إجمالي مبالغ الأرباح</h1>
+                    <h1 className="text-sm md:w-auto w-[30%] bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem] text-center">{data && data.totalProfitAmount}</h1>
                 </div>
-                <div className="flex md:flex-col items-center gap-[1rem]">
-                    <h1 className="text-[0.8rem] sm:text-[1.1rem] md:w-auto w-[70%] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">إجمالي عدد المساهمات</h1>
-                    <h1 className="text-[0.8rem] sm:text-[1.1rem] md:w-auto w-[30%] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem] text-center">{data && data.totalNumberContribution}</h1>
+                <div className="flex md:flex-col items-center gap-[0.5rem]">
+                    <h1 className="text-sm md:w-auto w-[70%] bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">إجمالي عدد المساهمات</h1>
+                    <h1 className="text-sm md:w-auto w-[30%] bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem] text-center">{data && data.totalNumberContribution}</h1>
                 </div>
             </div>
-            <div className="overflow-x-auto mt-[1rem]">
-                <table className="text-[1rem] table border-separate border-spacing-2 border w-[1000px] mx-auto">
-                    <thead className="text-[1rem] text-center">
+            <div className="overflow-x-auto mt-[0.5rem]">
+                <table className="text-xs table table-xs border-separate border-spacing-0 border w-[400px] sm:w-[550px] mx-auto">
+                    <thead className="text-xs text-center">
                         <tr>
                             <th className="border border-slate-600">
-                                رقم المساهمة
+                                رقم <br/>المساهمة
                             </th>
                             <th className="border border-slate-600">
-                                اسم الجهة المساهم فيها
+                                اسم الجهة<br/> المساهم فيها
                             </th>
                             <th className="border border-slate-600">
                                 مبلغ
                                 المساهمة
                             </th>
                             <th className="border border-slate-600">
-                                التاريخ الميلادي
+                                التاريخ <br/>الميلادي
                             </th>
                             <th className="border border-slate-600">
-                                التاريخ الهجري
+                                التاريخ <br/>الهجري
                             </th>
                             <th className="text-center border border-slate-600">
-                                مبلغ البيع
+                                مبلغ<br/> البيع
                             </th>
                             <th className="text-center border border-slate-600">
-                                مبلغ الريح
+                                مبلغ<br/> الريح
                             </th>
                         </tr>
                     </thead>
@@ -76,7 +76,7 @@ function RegisterOfStockContributions() {
                         {
                             stocks && stocks.map((stock) => {
                                 return (
-                                    <tr>
+                                    <tr className='text-xs'>
                                         <th className="border border-slate-600">
                                             {stock.id}
                                         </th>

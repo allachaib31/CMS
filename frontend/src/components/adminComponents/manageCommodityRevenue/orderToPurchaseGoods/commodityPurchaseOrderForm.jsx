@@ -138,7 +138,7 @@ function CommodityPurchaseOrderForm() {
                     <span className=" loading loading-ring loading-lg"></span>
                 </div> : <div className="overflow-x-auto mt-[1rem]">
                     {
-                        commodityRevenu && <table className="table table-xs border-separate border-spacing-2 border w-[800px] sm:w-[1000px] mx-auto">
+                        commodityRevenu && <table className="table table-xs border-separate border-spacing-0 border w-[600px] md:w-[1000px] mx-auto">
                             <tr className='text-center text-xs'>
                                 <th className="border text-center border-slate-600" colSpan={8}>بيانات العميل</th>
                             </tr>

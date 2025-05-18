@@ -98,7 +98,7 @@ function DisplayCommodityRevenue() {
       </div>
       {showAlert.display ? <Alert msg={showAlert} /> : ""}
       <div className="overflow-x-auto mt-[1rem]">
-        <table className="text-xs table table-xs border-separate border-spacing-2 border w-[700px] sm:w-[1000px] mx-auto">
+        <table className="text-xs table table-xs border-separate border-spacing-0 border w-[400px] md:w-[1000px] mx-auto">
           <thead className="text-xs text-center">
             <tr className='text-xs'>
               <th className="border border-slate-600" rowSpan={2}>
@@ -171,7 +171,7 @@ function DisplayCommodityRevenue() {
                     </select>
                   </td>
                   <td className="border border-slate-600">
-                    {installmentSchedule[index].premiumAmount}
+                    {installmentSchedule[index]?.premiumAmount?.toFixed(2)}
                   </td>
                   <td className="border border-slate-600">
                     {new Date(installmentSchedule[index].requiredPaymentDate).getUTCFullYear() + "-" + (new Date(installmentSchedule[index].requiredPaymentDate).getUTCMonth() + 1) + "-" + new Date(installmentSchedule[index].requiredPaymentDate).getUTCDate()}

@@ -134,9 +134,9 @@ function SubscriptionHistory() {
       </div>
       {showAlert.display ? <Alert msg={showAlert} /> : ""}
       <div className="overflow-x-auto mt-[0.5rem]">
-        {!loading ? <div className='flex justify-center'> <span className=" loading loading-ring loading-lg"></span></div> : <table className="table border-separate border-spacing-2 border w-[900px] sm:w-[1300px] mx-auto">
+        {!loading ? <div className='flex justify-center'> <span className=" loading loading-ring loading-lg"></span></div> : <table className="table table-xs border-separate border-spacing-0 border w-[600px] sm:w-[1300px] mx-auto">
           <thead className='text-sm text-center'>
-            <tr className='text-sm'>
+            <tr className='text-xs'>
               <th className='border border-slate-600'>اسم العضو</th>
               <th className='border border-slate-600'>رصيد العضو <br/>منذ بداية اشتراكه</th>
               <th className='border border-slate-600'> المصروف من <br/>رصيد العضو</th>
@@ -150,7 +150,7 @@ function SubscriptionHistory() {
             {
               users && users.map((user) => {
                 return (
-                  <tr className='text-sm'>
+                  <tr className='text-xs'>
                     <td className='border border-slate-600'>{user.name}</td>
                     <td className='border border-slate-600'>{user.cumulativeBalance.toFixed(2)}</td>
                     <td className='border border-slate-600'>{(user.cumulativeBalance - user.memberBalance).toFixed(2)}</td>
@@ -165,7 +165,7 @@ function SubscriptionHistory() {
                       document.getElementById('addNote').showModal()
                     }
                     } id={user._id} className='border cursor-pointer border-slate-600'>{user.commentSubscribeHistory}</td>
-                    <td className='border border-slate-600'><Link to={`/subscription/annualSubscriptionRecordDetails?id=${user._id}&name=${user.name}`} className='btn btn-sm text-sm btn-info'>التفاصيل</Link></td>
+                    <td className='border border-slate-600'><Link to={`/subscription/annualSubscriptionRecordDetails?id=${user._id}&name=${user.name}`} className='btn btn-xs text-xs btn-info'>التفاصيل</Link></td>
                   </tr>
                 )
               })

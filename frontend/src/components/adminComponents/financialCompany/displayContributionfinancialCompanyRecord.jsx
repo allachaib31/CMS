@@ -50,7 +50,7 @@ function DisplayContributionfinancialCompanyRecord() {
   }, [inputs])
   return (
     <div className="px-[1rem] sm:px-0">
-      <h1 className="text-center text-[1.5rem] font-bold py-[1rem]">
+      <h1 className="text-center  font-bold py-[1rem]">
         سجل المساهمين في الشركات المالية
       </h1>
       <div className='container mx-auto'>
@@ -59,7 +59,7 @@ function DisplayContributionfinancialCompanyRecord() {
             setInputs((prevInput) => {
               return { ...prevInput, year: event.target.value }
             });
-          }} className="select xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
+          }} className="select select-sm xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
             {yearOptions.map((value) => (
               <option key={value} value={value} selected={inputs.year == value}>
                 {value}
@@ -70,7 +70,7 @@ function DisplayContributionfinancialCompanyRecord() {
             setInputs((prevInput) => {
               return { ...prevInput, month: event.target.value }
             });
-          }} className="select xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
+          }} className="select select-sm xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
             <option value="1" selected={"1" == inputs.month}>محرم</option>
             <option value="2" selected={"2" == inputs.month}>صفر</option>
             <option value="3" selected={"3" == inputs.month}>ربيع الاول</option>
@@ -86,14 +86,14 @@ function DisplayContributionfinancialCompanyRecord() {
           </select>
           <select onChange={(event) => {
             setId(event.target.value);
-          }} className="select w-[7rem] xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
+          }} className="select select-sm w-[7rem] xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
             <option selected disabled>قم باختيار العدد الخاص بالاسهم</option>
             {idList && idList.map((list) => (
               <option value={list._id}>{list.id}</option>
             ))}
           </select>
           <div className="indicator">
-            <button onClick={handleSearch} className="btn btn-primary join-item  md:mt-[0rem] mt-[1rem]">ابحث</button>
+            <button onClick={handleSearch} className="btn btn-sm btn-primary join-item  md:mt-[0rem] mt-[1rem]">ابحث</button>
           </div>
         </div>
       </div>
@@ -104,23 +104,23 @@ function DisplayContributionfinancialCompanyRecord() {
         </div> : <div className="overflow-x-auto mt-[1rem]">
           {
             userFinancialCompany && <>
-              <table className="text-[1rem] table border-separate border-spacing-2 border w-[1000px] mx-auto">
-                <thead className="text-[1rem] text-center">
+              <table className="text-xs table table-xs border-separate border-spacing-0 border w-[350px] md:w-[1000px] mx-auto">
+                <thead className="text-xs text-center">
                   <tr>
                     <th className="border border-slate-600">
-                      رقم المساهمة
+                      رقم <br />المساهمة
                     </th>
                     <th className="border border-slate-600">
-                      اسم العضو
+                      اسم <br />العضو
                     </th>
                     <th className="border border-slate-600">
-                      نسبة المساهمة
+                      نسبة<br /> المساهمة
                     </th>
                     <th className="border border-slate-600">
-                      مبلغ المساهمة
+                      مبلغ<br /> المساهمة
                     </th>
                     <th className="text-center border border-slate-600">
-                      مبلغ الريح
+                      مبلغ <br />الريح
                     </th>
                   </tr>
                 </thead>

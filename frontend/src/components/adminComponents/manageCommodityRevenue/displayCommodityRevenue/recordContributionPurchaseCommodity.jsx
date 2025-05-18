@@ -105,22 +105,22 @@ function RecordContributionPurchaseCommodity() {
           {" "}
           <span className=" loading loading-ring loading-lg"></span>
         </div> : <div className="overflow-x-auto mt-[1rem]">
-          {userContribution && <table className="text-xs table table-xs border-separate border-spacing-2 border w-[500px] sm:w-[900px]  mx-auto">
+          {userContribution && <table className="text-xs table table-xs border-separate border-spacing-0 border w-[350px] md:w-[900px]  mx-auto">
             <tr className='text-xs'>
               <th className="border text-center border-slate-600" >
-                رقم الطلب
+                رقم <br/>الطلب
               </th>
               <th className="border text-center border-slate-600" >
-                اسم العضو
+                اسم<br/> العضو
               </th>
               <th className="border text-center border-slate-600" >
-                نسبة المساهمة
+                نسبة<br/> المساهمة
               </th>
               <th className="border text-center border-slate-600" >
-                مبلغ المساهمة
+                مبلغ <br/>المساهمة
               </th>
               <th className="border text-center border-slate-600" >
-                مبلغ الربح
+                مبلغ <br/>الربح
               </th>
             </tr>
             <tbody>

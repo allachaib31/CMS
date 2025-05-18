@@ -80,16 +80,16 @@ function AddExpenseType() {
     return (
         <div className="sm:p-0 px-[1rem]">
             <div className='container mx-auto'>
-                <Link to="/unreimbursedExpenses/" className="btn btn-primary text-[2rem] px-[2rem]">
+                <Link to="/unreimbursedExpenses/" className="btn btn-sm btn-primary px-[2rem]">
                     <FontAwesomeIcon icon={faRightLong} />
                 </Link>
             </div>
-            <h1 className="text-center text-[1.5rem] font-bold py-[1rem]">
+            <h1 className="text-center font-bold py-[0.5rem]">
                 اضافة نوع مصروف
             </h1>
             <form action="" className='container mx-auto'>
                 {showAlert.display ? <Alert msg={showAlert} /> : ""}
-                <input type="text" placeholder="اكتب نوع مصروف" className="input input-bordered w-full max-w-[10rem]" onChange={(event) => {
+                <input type="text" placeholder="اكتب نوع مصروف" className="input input-sm input-bordered w-full max-w-[10rem]" onChange={(event) => {
                     setInputs((prevInput) => {
                         return {
                             ...prevInput,
@@ -97,10 +97,10 @@ function AddExpenseType() {
                         }
                     })
                 }} />
-                <button onClick={handleSubmit} disabled={submit} className='btn btn-primary text-[1.1rem] font-bold'>{submit ? <span className="loading loading-ring loading-lg"></span> : "اضافة"}</button>
+                <button onClick={handleSubmit} disabled={submit} className='btn btn-sm btn-primary font-bold'>{submit ? <span className="loading loading-ring loading-lg"></span> : "اضافة"}</button>
             </form>
-            <div className="overflow-x-auto mt-[1rem]">
-                <table className="text-[1rem] table border-separate border-spacing-2 border w-[500px] mx-auto">
+            <div className="overflow-x-auto mt-[0.5rem]">
+                <table className="table table-xs border-separate border-spacing-0 border w-[350px] mx-auto">
                     <tr>
                         <th className="border text-center border-slate-600">
                             رقم النوع
@@ -120,7 +120,7 @@ function AddExpenseType() {
                                     <td className="border text-center border-slate-600">{expenses.name}</td>
                                     <td className="border text-center border-slate-600"><button onClick={() => {
                                         handleDelete({ id: expenses._id },index)
-                                    }} className='btn btn-error'>حدف</button></td>
+                                    }} className='btn btn-xs btn-error'>حدف</button></td>
                                 </tr>)
                             })
                         }

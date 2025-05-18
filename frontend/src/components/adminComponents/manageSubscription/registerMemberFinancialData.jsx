@@ -65,7 +65,7 @@ function RegisterMemberFinancialData() {
                 سجل البيانات المالية للاعضاء
             </h1>
             <div className="overflow-x-auto mt-[0.5rem]">
-                <table className="table table-sm border-separate border-spacing-2 border w-[1500px] mx-auto">
+                <table className="table table-xs border-separate border-spacing-0 border w-[800px] md:w-[1500px] mx-auto">
                     {/* head */}
                     <thead className='text-center'>
                         <tr className='text-xs'>

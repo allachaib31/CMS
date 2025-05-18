@@ -67,32 +67,32 @@ function RecordInstallments() {
             </div>
             <div className="overflow-x-auto mt-[0.5rem]">
                 {
-                    loanInfo && <table className="text-xs table table-xs border-separate border-spacing-2 border w-[900px] mx-auto">
+                    loanInfo && <table className="text-xs table table-xs border-separate border-spacing-0 border w-[700px] md:w-[900px] mx-auto">
                         <thead className="text-xs text-center">
                             <tr>
                                 <td className='border border-slate-600' colSpan={9}>سجل الاقساط</td>
                             </tr>
                             <tr>
                                 <th className="border border-slate-600" rowSpan={2}>
-                                    اسم العضو
+                                    اسم <br /> العضو
                                 </th>
                                 <th className="border border-slate-600" rowSpan={2}>
-                                    مبلغ القرض
+                                    مبلغ <br/> القرض
                                 </th>
                                 <th className="border border-slate-600" rowSpan={2}>
-                                    عدد الأقساط
+                                    عدد <br/>الأقساط
                                 </th>
                                 <th className="border border-slate-600" rowSpan={2}>
-                                    الأقساط المسددة
+                                    الأقساط <br/>المسددة
                                 </th>
                                 <th className="border border-slate-600" rowSpan={2}>
-                                    الأقساط المتبقية
+                                    الأقساط <br/>المتبقية
                                 </th>
                                 <th className="border border-slate-600" rowSpan={2}>
-                                المبلغ المسدد
+                                المبلغ <br/>المسدد
                                 </th>
                                 <th className="border border-slate-600" colSpan={2} rowSpan={2}>
-                                المبلغ المتبقي
+                                المبلغ <br/>المتبقي
                                 </th>
                             </tr>
                         </thead>
@@ -109,10 +109,10 @@ function RecordInstallments() {
                         </tbody>
                         <tr className='text-center text-xs'>
                             <th className="border border-slate-600" rowSpan={2}>
-                                رقم القسط
+                                رقم <br/>القسط
                             </th>
                             <th className="border border-slate-600" rowSpan={2}>
-                                مبلغ القسط
+                                مبلغ <br/>القسط
                             </th>
                             <th className="border border-slate-600" >
                                 تاريخ التسديد الفعلي بالميلادي
@@ -127,7 +127,7 @@ function RecordInstallments() {
                                 تاريخ التسديد المطلوب بالهجري
                             </th>
                             <th className="border border-slate-600" rowSpan={2}>
-                                مبلغ القسط المتأخر
+                                مبلغ القسط<br/> المتأخر
                             </th>
                             <th className="border border-slate-600" rowSpan={2}>
                                 دفع

@@ -51,11 +51,11 @@ function RecordUnrecoveredExpenses() {
     }, []);
     return (
         <div className="px-[1rem] sm:px-0">
-            <h1 className="text-center text-[1.5rem] font-bold py-[1rem]">
+            <h1 className="text-center font-bold py-[0.5rem]">
             نموذج المصروفات 
             </h1>
-            <div className='text-[1.1rem] flex sm:flex-row flex-col gap-[1rem] items-center justify-center'>
-                <input type="date" id="dateInput" className='input input-bordered' onChange={(event) => {
+            <div className='flex sm:flex-row flex-col gap-[1rem] items-center justify-center'>
+                <input type="date" id="dateInput" className='input input-sm input-bordered' onChange={(event) => {
                     const hijriDate = hijriDateObject(event.target.value);
                     setInputs((prevInput) => {
                         return {
@@ -88,24 +88,24 @@ function RecordUnrecoveredExpenses() {
 
                 </label>
             </div>
-            <div className="mt-[1rem] flex md:flex-row flex-col gap-[1rem] justify-center">
-                <div className="flex md:flex-col items-center justify-center gap-[1rem]">
-                    <h1 className="text-[0.8rem] sm:text-[1.1rem] font-bold bg-primary w-[70%] md:w-auto text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">إجمالي المصروفات لهذا الشهر</h1>
-                    <h1 className="text-[0.8rem] sm:text-[1.1rem] font-bold bg-primary w-[30%] text-center md:w-auto text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">{totalAmountMonth.toFixed(2)}</h1>
+            <div className="mt-[1rem] flex md:flex-row flex-col gap-[0.5rem] justify-center">
+                <div className="flex md:flex-col items-center justify-center gap-[0.5rem]">
+                    <h1 className="text-xs bg-primary w-[70%] md:w-auto text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">إجمالي المصروفات لهذا الشهر</h1>
+                    <h1 className="text-xs bg-primary w-[30%] text-center md:w-auto text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">{totalAmountMonth.toFixed(2)}</h1>
                 </div>
-                <div className="flex md:flex-col items-center justify-center gap-[1rem]">
-                    <h1 className="text-[0.8rem] sm:text-[1.1rem] font-bold bg-primary w-[70%] md:w-auto text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">المصروفات المسددة نقداً</h1>
-                    <h1 className="text-[0.8rem] sm:text-[1.1rem] font-bold bg-primary w-[30%] text-center md:w-auto text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">{totalAmount.toFixed(2)}</h1>
+                <div className="flex md:flex-col items-center justify-center gap-[0.5rem]">
+                    <h1 className="text-xs bg-primary w-[70%] md:w-auto text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">المصروفات المسددة نقداً</h1>
+                    <h1 className="text-xs bg-primary w-[30%] text-center md:w-auto text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">{totalAmount.toFixed(2)}</h1>
                 </div>
             </div>
             <div className='container mx-auto'>
-            <button onClick={()=>document.getElementById('my_modal_1').showModal()} className='mt-[1rem] btn btn-info font-bold'><FontAwesomeIcon icon={faPrint} /> طباعة</button>
+            <button onClick={()=>document.getElementById('my_modal_1').showModal()} className='mt-[0.5rem] btn btn-sm btn-info font-bold'><FontAwesomeIcon icon={faPrint} /> طباعة</button>
             </div>
-            <div className="overflow-x-auto mt-[1rem]">
-                <table className="text-[0.8rem] table border-separate border-spacing-2 border w-[1450px] mx-auto">
-                    <tr>
+            <div className="overflow-x-auto mt-[0.5rem]">
+                <table className="table table-xs border-separate border-spacing-0 border w-[500px] md:w-[1000px] mx-auto">
+                    <tr className='text-xs'>
                         <th className="border text-center border-slate-600" rowSpan={2}>
-                            رقم الطلب
+                            رقم <br />الطلب
                         </th>
                         <th className="border text-center border-slate-600" rowSpan={2}>
                         المستفيد
@@ -123,7 +123,7 @@ function RecordUnrecoveredExpenses() {
                             المصروف من <br />رصيد الصندوق
                         </th>
                         <th colSpan={2} className="border text-center border-slate-600">
-                            المصروفات المسددة نقداً
+                            المصروفات <br />المسددة نقداً
                         </th>
                         <th className="border text-center border-slate-600" rowSpan={2}>
                             الإجمالي
@@ -202,20 +202,20 @@ function RecordUnrecoveredExpenses() {
                                 from: event.target.value
                             }
                         })
-                    }} className='input input-bordered' name="" id="" /> الى <input type="date" onChange={(event) => {
+                    }} className='input input-sm input-bordered' name="" id="" /> الى <input type="date" onChange={(event) => {
                         setPrint((prevInput) => {
                             return {
                                 ...prevInput,
                                 to: event.target.value
                             }
                         })
-                    }} name="" className='input input-bordered' id="" />
+                    }} name="" className='input input-sm input-bordered' id="" />
                     </div>
                     <div className="modal-action">
                         <form method="dialog">
                             {/* if there is a button in form, it will close the modal */}
-                            <button className='mt-[1rem] btn  font-bold'>اغلاق</button>
-                            <Link to={`/print/unrecoverdExpenses?from=${print.from}&to=${print.to}`} target='_blank' className='mt-[1rem] btn btn-info font-bold'><FontAwesomeIcon icon={faPrint} /> طباعة</Link>
+                            <button className='mt-[1rem] btn btn-sm font-bold'>اغلاق</button>
+                            <Link to={`/print/unrecoverdExpenses?from=${print.from}&to=${print.to}`} target='_blank' className='mt-[1rem] btn btn-sm btn-info font-bold'><FontAwesomeIcon icon={faPrint} /> طباعة</Link>
                         </form>
                     </div>
                 </div>

@@ -21,30 +21,30 @@ function DisplayRecordUnrecoveredExpenses() {
   return (
     <div className="px-[1rem] sm:px-0">
       <div className='container mx-auto'>
-        <Link to="/unreimbursedExpenses/" className="btn btn-primary text-[2rem] px-[2rem]">
+        <Link to="/unreimbursedExpenses/" className="btn btn-sm btn-primary px-[2rem]">
           <FontAwesomeIcon icon={faRightLong} />
         </Link>
       </div>
-      <h1 className="text-center text-[1.5rem] font-bold py-[1rem]">
+      <h1 className="text-center font-bold py-[0.5rem]">
         سجل المصروفات 
       </h1>
-      <div className="mt-[1rem] flex flex-col md:flex-row gap-[1rem] justify-center">
-        <div className="flex md:flex-col items-center gap-[1rem]">
-          <h1 className="text-[0.8rem] sm:text-[1.1rem] md:w-auto w-[70%] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">إجمالي المصروفات  </h1>
-          <h1 className="text-[0.8rem] sm:text-[1.1rem] md:w-auto w-[30%] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem] text-center">{total.toFixed(2)}</h1>
+      <div className="mt-[0.5rem] flex flex-col md:flex-row gap-[0.5rem] justify-center">
+        <div className="flex md:flex-col items-center gap-[0.5rem]">
+          <h1 className="md:w-auto w-[70%] bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">إجمالي المصروفات  </h1>
+          <h1 className="md:w-auto w-[30%] bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem] text-center">{total.toFixed(2)}</h1>
         </div>
-        <div className="flex md:flex-col items-center gap-[1rem]">
-          <h1 className="text-[0.8rem] sm:text-[1.1rem] md:w-auto w-[70%] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">المصروفات المسددة نقداً</h1>
-          <h1 className="text-[0.8rem] sm:text-[1.1rem] md:w-auto w-[30%] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem] text-center">{expensesPaidCash.toFixed(2)}</h1>
+        <div className="flex md:flex-col items-center gap-[0.5rem]">
+          <h1 className="md:w-auto w-[70%] bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">المصروفات المسددة نقداً</h1>
+          <h1 className="md:w-auto w-[30%] bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem] text-center">{expensesPaidCash.toFixed(2)}</h1>
         </div>
-        <div className="flex md:flex-col items-center gap-[1rem]">
-          <h1 className="text-[0.8rem] sm:text-[1.1rem] md:w-auto w-[70%] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">عدد المستفيدين</h1>
-          <h1 className="text-[0.8rem] sm:text-[1.1rem] md:w-auto w-[30%] font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem] text-center">{numberOfBeneficiaries}</h1>
+        <div className="flex md:flex-col items-center gap-[0.5rem]">
+          <h1 className="md:w-auto w-[70%] bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">عدد المستفيدين</h1>
+          <h1 className="md:w-auto w-[30%] bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem] text-center">{numberOfBeneficiaries}</h1>
         </div>
       </div>
-      <div className="overflow-x-auto mt-[1rem]">
-        <table className="text-[0.8rem] table border-separate border-spacing-2 border w-[1500px] mx-auto">
-          <tr>
+      <div className="overflow-x-auto mt-[0.5rem]">
+        <table className="table table-xs border-separate border-spacing-0 border w-[500px] md:w-[1000px] mx-auto">
+          <tr className='text-xs'>
             <th className="border text-center border-slate-600" rowSpan={2}>
               رقم <br />الطلب
             </th>
@@ -92,7 +92,7 @@ function DisplayRecordUnrecoveredExpenses() {
               unReimbursedExpenses && unReimbursedExpenses.map((expenses) => {
                 const d = new Date(expenses.createdAt);
                 return (
-                  <tr >
+                  <tr className='text-xs'>
                     <td className="border text-center border-slate-600">{expenses.id}</td>
                     <td className="border text-center border-slate-600">{expenses.name}</td>
                     <td className="border text-center border-slate-600">{expenses.typeExpenses}</td>

@@ -70,7 +70,7 @@ function ModifySubscriptionAmount() {
             {showAlert.display ? <Alert msg={showAlert} /> : ""}
             {
                 (monthlyInput && foundationInput) && <div className="overflow-x-auto">
-                    <table className="table w-[400px] mx-auto">
+                    <table className="table table-xs w-[300px] mx-auto">
                         {/* head */}
                         <thead>
                             <tr className='text-center text-sm'>

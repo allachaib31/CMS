@@ -28,16 +28,16 @@ function LoansHistory() {
                 سجل القروض
             </h1>
             <div className="overflow-x-auto mt-[0.5rem]">
-                <table className="text-xs table table-xs border-separate border-spacing-2 border w-[500px] sm:w-[800px] mx-auto">
+                <table className="text-xs table table-xs border-separate border-spacing-0 border w-[500px] md:w-[800px] mx-auto">
                     <thead className="text-xs text-center">
                         <tr className='text-xs'>
                             <th className='border border-slate-600' colSpan={7}>سجل القروض </th>
                         </tr>
                         <tr className='text-xs'>
-                            <th className='border border-slate-600' colSpan={2}>إجمالي القروض  </th>
-                            <th className='border border-slate-600' colSpan={2}>إجمالي المبالغ المسددة </th>
-                            <th className='border border-slate-600' colSpan={2}>إجمالي المبالغ المتبقية</th>
-                            <th className='border border-slate-600' colSpan={1}>عدد القروض</th>
+                            <th className='border border-slate-600' colSpan={2}>إجمالي <br/>القروض  </th>
+                            <th className='border border-slate-600' colSpan={2}>إجمالي المبالغ <br/>المسددة </th>
+                            <th className='border border-slate-600' colSpan={2}>إجمالي المبالغ <br/>المتبقية</th>
+                            <th className='border border-slate-600' colSpan={1}>عدد <br/>القروض</th>
                         </tr>
                     </thead>
                     <tbody>

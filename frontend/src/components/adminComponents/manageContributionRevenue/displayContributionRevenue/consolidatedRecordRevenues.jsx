@@ -56,7 +56,7 @@ function ConsolidatedRecordRevenues() {
                 </div>
             </div>
             <div className="overflow-x-auto mt-[1rem]">
-                <table className="table table-sm border-separate border-spacing-2 border w-[400px] sm:w-[700px] mx-auto">
+                <table className="table table-xs border-separate border-spacing-0 border w-[300px] sm:w-[700px] mx-auto">
                     <thead className="text-center text-xs">
                         <tr>
                             <th className="border border-slate-600" rowSpan={2}>

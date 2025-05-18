@@ -147,8 +147,8 @@ function DisplaySubscription() {
                         <span className=" loading loading-ring loading-lg"></span>
                     </div>
                 ) : (
-                    <table className="text-[1rem] table border-separate border-spacing-2 border w-[1550px] mx-auto">
-                        <thead className="text-[1rem] text-center">
+                    <table className="text-xs table table-xs border-separate border-spacing-0 border w-[600px] md:w-[1550px] mx-auto">
+                        <thead className="text-xs text-center">
                             <tr>
                                 <th className="border border-slate-600">
                                     اسم العضو
@@ -182,7 +182,7 @@ function DisplaySubscription() {
                                     const date = new Date(subscription.months[month].createdAt);
                                     const hijriDate = hijriDateObject(date);
                                     return (
-                                        <tr>
+                                        <tr className="text-xs">
                                             <th className="border border-slate-600">
                                                 {subscription.idUser.name}
                                             </th>

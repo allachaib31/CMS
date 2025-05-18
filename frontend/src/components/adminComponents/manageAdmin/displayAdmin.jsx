@@ -78,7 +78,7 @@ function DisplayAdmin() {
             setSearch((search) => {
               return { ...search, searchMethod: input.target.value.trim() }
             })
-          }} className="select select-sm xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
+          }} className="select select-sm xs:mt-0  pl-[2rem] pr-[1.5rem] select-bordered join-item">
             <option value="_id">العدد</option>
             <option value="name">اسم</option>
             <option value="NationalIdentificationNumber">رقم الهوية</option>
@@ -94,7 +94,7 @@ function DisplayAdmin() {
       </div>
       {showAlert.display ? <Alert msg={showAlert} /> : ""}
       <div className="overflow-x-auto xl:flex xl:justify-center">
-        <table className="table w-[1400px]">
+        <table className="table table-xs w-[800px] md:w-[1400px]">
           {/* head */}
           <thead>
             <tr className="text-center text-sm">

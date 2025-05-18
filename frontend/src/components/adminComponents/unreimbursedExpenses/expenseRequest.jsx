@@ -67,14 +67,14 @@ function ExpenseRequest() {
     return (
         <div className="sm:p-0 px-[1rem] container mx-auto">
             <div>
-                <Link to="/unreimbursedExpenses/" className="btn btn-primary text-[2rem] px-[2rem]">
+                <Link to="/unreimbursedExpenses/" className="btn btn-sm btn-primary px-[2rem]">
                     <FontAwesomeIcon icon={faRightLong} />
                 </Link>
             </div>
-            <h1 className="text-center text-[1.5rem] font-bold py-[1rem]">
+            <h1 className="text-center font-bold py-[0.5rem]">
                 طلب مصروف
             </h1>
-            <form action="" className="py-[2rem] flex flex-col gap-[1rem]">
+            <form action="" className="py-[0.5rem] flex flex-col gap-[1rem]">
                 {showAlert.display ? <Alert msg={showAlert} /> : ""}
                 <button onClick={(event) => {
                     event.preventDefault();
@@ -82,7 +82,7 @@ function ExpenseRequest() {
                     setInputs((prevInputs) => {
                         return { ...prevInputs, name: "",selectType: !prevInputs.selectType }
                     })
-                    }} className='btn btn-info'>تغيير طريقة اضافة الاسم</button>
+                    }} className='btn btn-sm btn-info'>تغيير طريقة اضافة الاسم</button>
                 <div className="flex sm:flex-row flex-col gap-[1rem]">
                     <div className="relative sm:w-1/2">
                         {
@@ -94,7 +94,7 @@ function ExpenseRequest() {
                                     }
                                 })
                             }}
-                                className="select formInput select-bordered w-full">
+                                className="select select-sm formInput select-bordered w-full">
                                 <option disabled selected>اختار العضو</option>
                                 {
                                     listId && listId.map((user) => {
@@ -104,17 +104,17 @@ function ExpenseRequest() {
                                     })
                                 }
                             </select> : <>                        
-                            <FontAwesomeIcon icon={faIdCard} className="absolute top-[1rem] right-[1rem]" />
+                            <FontAwesomeIcon icon={faIdCard} className="absolute top-[0.5em] right-[1rem]" />
                                 <input type="text" onChange={(e) => {
                                     setInputs((prevInputs) => {
                                         return { ...prevInputs, name: e.target.value.trim() }
                                     })
-                                }} required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder="اسم المستفيد" /></>
+                                }} required className="formInput w-full input input-sm pr-[2.3rem] input-bordered flex items-center gap-2" placeholder="اسم المستفيد" /></>
                         }
 
                     </div>
                     <div className="relative sm:w-1/2">
-                        <FontAwesomeIcon icon={faMoneyBill} className="absolute top-[1rem] right-[1rem]" />
+                        <FontAwesomeIcon icon={faMoneyBill} className="absolute top-[0.5rem] right-[1rem]" />
                         <input type="number" onChange={(event) => {
                             setInputs((prevInputs) => {
                                 return {
@@ -122,7 +122,7 @@ function ExpenseRequest() {
                                     amount: event.target.value
                                 }
                             })
-                        }} required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder="المصروف من رصيد الصندوق " />
+                        }} required className="formInput w-full input input-sm pr-[2.3rem] input-bordered flex items-center gap-2" placeholder="المصروف من رصيد الصندوق " />
                     </div>
                 </div>
                 <input type="text" onChange={(event) => {
@@ -132,7 +132,7 @@ function ExpenseRequest() {
                             comments: event.target.value
                         }
                     })
-                }} required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder="اكتب بيان" pattern='^.{3,1024}$' />
+                }} required className="formInput w-full input input-sm pr-[2.3rem] input-bordered flex items-center gap-2" placeholder="اكتب بيان" pattern='^.{3,1024}$' />
                 <select onChange={(event) => {
                     setInputs((prevInputs) => {
                         return {
@@ -140,7 +140,7 @@ function ExpenseRequest() {
                             typeExpenses: event.target.value
                         }
                     })
-                }} pattern='^.{3,1024}$' className="select select-bordered w-full">
+                }} pattern='^.{3,1024}$' className="select select-sm select-bordered w-full">
                     <option disabled selected>اختر نوع المصروف</option>
                     {expensesType && expensesType.map((expenses) => {
                         return (
@@ -148,7 +148,7 @@ function ExpenseRequest() {
                         )
                     })}
                 </select>
-                <button onClick={handleSubmit} disabled={submit} className='btn text-white font-bold text-[20px] btn-primary'>{submit ? <span className="loading loading-ring loading-lg"></span> : "اضافة"}</button>
+                <button onClick={handleSubmit} disabled={submit} className='btn btn-sm text-white font-bold btn-primary'>{submit ? <span className="loading loading-ring loading-lg"></span> : "اضافة"}</button>
             </form>
         </div>
     )

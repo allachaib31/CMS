@@ -147,9 +147,9 @@ function PayMonthlySubscriptions() {
                         <span className=" loading loading-ring loading-lg"></span>
                     </div>
                 ) : (
-                    <table className="table border-separate border-spacing-2 border w-[1000px] sm:w-[1500px] mx-auto">
-                        <thead className="text-center text-sm">
-                            <tr className="text-sm">
+                    <table className="table table-xs border-separate border-spacing-0 border w-[800px] sm:w-[1500px] mx-auto">
+                        <thead className="text-center text-xs">
+                            <tr className="text-xs">
                                 <th className="border border-slate-600">
                                     اسم العضو
                                 </th>

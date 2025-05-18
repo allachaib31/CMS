@@ -77,7 +77,7 @@ function ManagingLatePayments() {
             <span className=" loading loading-ring loading-lg"></span>
           </div>
         ) : (
-          <table className="table table-sm border-separate border-spacing-2 border w-[600px] mx-auto">
+          <table className="table table-xs border-separate border-spacing-0 border w-[400px] md:w-[600px] mx-auto">
             <thead className="text-center">
               <tr className="text-xs">
                 <th className="border border-slate-600" rowSpan={2}>

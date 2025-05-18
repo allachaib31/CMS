@@ -79,7 +79,7 @@ function DisplayUser() {
             setSearch((search) => {
               return { ...search, searchMethod: input.target.value.trim() }
             })
-          }} className="select select-sm xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered join-item">
+          }} className="select select-sm xs:mt-0 pl-[2rem] pr-[1.5rem] select-bordered join-item">
             <option value="_id">العدد</option>
             <option value="name">اسم</option>
             <option value="NationalIdentificationNumber">رقم الهوية</option>
@@ -95,7 +95,7 @@ function DisplayUser() {
       </div>
       {showAlert.display ? <Alert msg={showAlert} /> : ""}
       <div className="overflow-x-auto xl:flex xl:justify-center  mt-[0.5rem]">
-        <table className="table w-[1500px]">
+        <table className="table table-xs w-[800px] md:w-[1500px]">
           {/* head */}
           <thead>
             <tr className="text-center text-sm">
@@ -103,8 +103,8 @@ function DisplayUser() {
               <th>اسم العضو</th>
               <th>رقم الهوية</th>
               <th>رقم الجوال</th>
-              <th>تاريخ الاشتراك الميلادي </th>
-              <th>تاريخ الاشتراك الهجري </th>
+              <th>تاريخ الاشتراك <br/> الميلادي </th>
+              <th>تاريخ الاشتراك <br/> الهجري </th>
               <th>الحالة</th>
               <th>ملاحظات</th>
               <th></th>
@@ -123,7 +123,7 @@ function DisplayUser() {
                   <td className="text-center">{date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()}</td>
                   <td className="text-center">{user.hijriDate.year + "-" + user.hijriDate.month.number + "-" + user.hijriDate.day}</td>
                   <td className={(user.status == "not active" ? "text-error" : "text-success") + " font-bold"}>{user.status == "not active" ? "غير مفعل" : "مفعل"}</td>
-                  <td>{user.comments}</td>
+                  <td className="text-xs">{user.comments}</td>
                   <td><Link to={`/user/updateUser?id=${user.id}`} className="btn btn-sm text-sm btn-warning">تعديل</Link></td>
                   <td><button data-disable={user.disable} id={user.id} onClick={(event) => {
                     setUserDelete({

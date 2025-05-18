@@ -107,22 +107,22 @@ function RegisterShareholdersShares() {
                     {" "}
                     <span className=" loading loading-ring loading-lg"></span>
                 </div> : <div className="overflow-x-auto mt-[0.5rem]">
-                    {userStock && <table className="text-xs table table-xs border-separate border-spacing-2 border w-[450px] sm:w-[550px]  mx-auto">
+                    {userStock && <table className="text-xs table table-xs border-separate border-spacing-0 border w-[350px] md:w-[550px]  mx-auto">
                         <tr className='text-xs'>
                             <th className="border text-center border-slate-600" >
-                                رقم المساهمة
+                                رقم <br/>المساهمة
                             </th>
                             <th className="border text-center border-slate-600" >
-                                اسم العضو
+                                اسم <br/>العضو
                             </th>
                             <th className="border text-center border-slate-600" >
-                                نسبة المساهمة
+                                نسبة <br/>المساهمة
                             </th>
                             <th className="border text-center border-slate-600" >
-                                مبلغ المساهمة
+                                مبلغ <br/>المساهمة
                             </th>
                             <th className="border text-center border-slate-600" >
-                                مبلغ الربح
+                                مبلغ <br/>الربح
                             </th>
                         </tr>
                         <tbody>

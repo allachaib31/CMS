@@ -35,7 +35,7 @@ function ContractsRegister() {
                     {" "}
                     <span className=" loading loading-ring loading-lg"></span>
                 </div> : <div className="overflow-x-auto mt-[0.5rem]">
-                    <table className="text-xs table table-xs border-separate border-spacing-2 border w-[600px] sm:w-[900px] mx-auto">
+                    <table className="text-xs table table-xs border-separate border-spacing-0 border w-[450px] md:w-[900px] mx-auto">
                         <tr className='text-xs'>
                             <th className="border text-center border-slate-600" rowSpan={2}>
                                 رقم  <br />العقد

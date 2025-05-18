@@ -48,7 +48,7 @@ function LoansData() {
                 <button onClick={handleSearch} disabled={!id} className="btn btn-sm btn-primary text-sm font-bold join-item ">ابحث</button>
             </div>
             <div className="overflow-x-auto mt-[0.5rem]">
-                <table className="table table-xs border-separate border-spacing-2 border w-[1500px] mx-auto">
+                <table className="table table-xs border-separate border-spacing-0 border w-[1000px] md:w-[1500px] mx-auto">
                     <thead className="text-xs text-center">
                         <tr>
                             <th className="border border-slate-600" rowSpan={2}>

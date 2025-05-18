@@ -128,7 +128,7 @@ function FoundationSubscription() {
 
       {showAlert.display ? <Alert msg={showAlert} /> : ""}
       <div className="overflow-x-auto ">
-        <table className="table mx-auto w-[700px] sm:w-[1400px]">
+        <table className="table table-x mx-auto w-[700px] sm:w-[1400px]">
           <thead className="text-center text-sm">
             <tr>
               <th>العدد</th>

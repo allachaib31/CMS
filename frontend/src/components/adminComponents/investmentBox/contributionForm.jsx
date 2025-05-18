@@ -49,21 +49,21 @@ function ContributionForm() {
     return (
         <div className="sm:p-0 px-[1rem] container mx-auto">
             <div>
-                <Link to="/investmentBox/displayContributionForm" className="btn btn-primary text-[2rem] px-[2rem]">
+                <Link to="/investmentBox/displayContributionForm" className="btn btn-sm btn-primary px-[2rem]">
                     <FontAwesomeIcon icon={faRightLong} />
                 </Link>
             </div>
-            <h1 className="text-center text-[1.5rem] font-bold py-[1rem]">
+            <h1 className="text-center font-bold py-[0.5rem]">
                 طلب مساهمة
             </h1>
-            <form action="" className="py-[2rem] flex flex-col gap-[1rem]">
+            <form action="" className="flex flex-col gap-[1rem]">
                 {showAlert.display ? <Alert msg={showAlert} /> : ""}
                 <div className='flex flex-col gap-[1rem]'>
                     <h1>بيانات المساهمة</h1>
                     <div className="flex sm:flex-row flex-col gap-[1rem]">
                         <div className="relative sm:w-1/2">
-                            <FontAwesomeIcon icon={faBoxOpen} className="absolute top-[1rem] right-[1rem]" />
-                            <input type="text" required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder={`اسم الشركة المالية`} pattern="^.{3,1024}$" onChange={(event) => {
+                            <FontAwesomeIcon icon={faBoxOpen} className="absolute top-[0.5rem] right-[1rem]" />
+                            <input type="text" required className="formInput w-full input input-sm pr-[2.3rem] input-bordered flex items-center gap-2" placeholder={`اسم الشركة المالية`} pattern="^.{3,1024}$" onChange={(event) => {
                                 setInputs((prevInput) => {
                                     return {
                                         ...prevInput,
@@ -73,8 +73,8 @@ function ContributionForm() {
                             }} />
                         </div>
                         <div className="relative sm:w-1/2">
-                            <FontAwesomeIcon icon={faBuildingColumns} className="absolute top-[1rem] right-[1rem]" />
-                            <input type="text" required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder="اسم البنك الذي سددت المساهمة عن طريقه" pattern="^.{3,1024}$" onChange={(event) => {
+                            <FontAwesomeIcon icon={faBuildingColumns} className="absolute top-[0.5rem] right-[1rem]" />
+                            <input type="text" required className="formInput w-full input input-sm  pr-[2.3rem] input-bordered flex items-center gap-2" placeholder="اسم البنك الذي سددت المساهمة عن طريقه" pattern="^.{3,1024}$" onChange={(event) => {
                                 setInputs((prevInput) => {
                                     return {
                                         ...prevInput,
@@ -86,8 +86,8 @@ function ContributionForm() {
                     </div>
                     <div className="flex sm:flex-row flex-col gap-[1rem]">
                         <div className="relative sm:w-1/2">
-                            <FontAwesomeIcon icon={faMoneyBill} className="absolute top-[1rem] right-[1rem]" />
-                            <input type="number" required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder={`مبلغ المساهمة`} onChange={(event) => {
+                            <FontAwesomeIcon icon={faMoneyBill} className="absolute top-[0.5rem] right-[1rem]" />
+                            <input type="number" required className="formInput w-full input input-sm  pr-[2.3rem] input-bordered flex items-center gap-2" placeholder={`مبلغ المساهمة`} onChange={(event) => {
                                 setInputs((prevInput) => {
                                     return {
                                         ...prevInput,
@@ -97,8 +97,8 @@ function ContributionForm() {
                             }} />
                         </div>
                         <div className="relative sm:w-1/2">
-                            <FontAwesomeIcon icon={faClock} className="absolute top-[1rem] right-[1rem]" />
-                            <input type="number" required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder="مدة المساهمة" onChange={(event) => {
+                            <FontAwesomeIcon icon={faClock} className="absolute top-[0.5rem] right-[1rem]" />
+                            <input type="number" required className="formInput w-full input input-sm  pr-[2.3rem] input-bordered flex items-center gap-2" placeholder="مدة المساهمة" onChange={(event) => {
                                 setInputs((prevInput) => {
                                     return {
                                         ...prevInput,
@@ -111,7 +111,7 @@ function ContributionForm() {
                     <div className="flex sm:flex-row flex-col gap-[1rem]">
                         <div className="flex gap-[1rem] items-center relative sm:w-1/2">
                             <label> تاريخ المساهمة  (الميلادي)</label>
-                            <input type="date" required className="formInput input pr-[2.3rem] input-bordered flex items-center gap-2" onChange={(event) => {
+                            <input type="date" required className="formInput input input-sm  pr-[2.3rem] input-bordered flex items-center gap-2" onChange={(event) => {
                                 const hijriDate = hijriDateObject(event.target.value);
                                 setInputs((prevInput) => {
                                     return {
@@ -136,7 +136,7 @@ function ContributionForm() {
                     <div className="flex sm:flex-row flex-col gap-[1rem]">
                         <div className="flex gap-[1rem] items-center relative sm:w-1/2">
                             <label> تاريخ انتهاء المساهمة  (الميلادي)</label>
-                            <input type="date" required className="formInput input pr-[2.3rem] input-bordered flex items-center gap-2" onChange={(event) => {
+                            <input type="date" required className="formInput input input-sm  pr-[2.3rem] input-bordered flex items-center gap-2" onChange={(event) => {
                                 const hijriDate = hijriDateObject(event.target.value);
                                 setInputs((prevInput) => {
                                     return {
@@ -164,7 +164,7 @@ function ContributionForm() {
                     if (window.confirm("هل انت متاكد من انك تريد القيام به العملية")) {
                         handleSubmit();
                     }
-                }} disabled={submit} className='btn text-white font-bold text-[20px] btn-primary'>
+                }} disabled={submit} className='btn btn-sm text-white font-bold btn-primary'>
                     {submit ? <span className="loading loading-ring loading-lg"></span> : "تاكيد"}
                 </button>
             </form>
