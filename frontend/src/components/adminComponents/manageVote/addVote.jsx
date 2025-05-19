@@ -45,17 +45,17 @@ function AddVote() {
     return (
         <div className="sm:p-0 px-[1rem] container mx-auto">
             <div>
-                <Link to="/manageVote" className="btn btn-primary text-[2rem] px-[2rem]">
+                <Link to="/manageVote" className="btn btn-sm btn-primary px-[2rem]">
                     <FontAwesomeIcon icon={faRightLong} />
                 </Link>
             </div>
-            <h1 className="text-center text-[1.5rem] font-bold py-[1rem]">
+            <h1 className="text-center font-bold py-[0.5rem]">
             سجل التصويتات
             </h1>
-            <form action="" className="py-[2rem] flex flex-col gap-[1rem]">
+            <form action="" className="py-[0.5rem] flex flex-col gap-[1rem]">
                 {showAlert.display ? <Alert msg={showAlert} /> : ""}
                 <div className="relative sm:w-full">
-                    <FontAwesomeIcon icon={faCheckToSlot} className="absolute top-[1rem] right-[1rem]" />
+                    <FontAwesomeIcon icon={faCheckToSlot} className="absolute top-[0.5rem] right-[1rem]" />
                     <input type="text" onChange={(event) => {
                         setInputs((prevInput) => {
                             return {
@@ -63,7 +63,7 @@ function AddVote() {
                                 subject: event.target.value
                             }
                         })
-                    }} required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder={`موضوع التصويت`} />
+                    }} required className="formInput w-full input input-sm pr-[2.3rem] input-bordered flex items-center gap-2" placeholder={`موضوع التصويت`} />
                 </div>
                 <div className='flex gap-[1rem] items-center'>
                     <h1>تاريخ بداية التصويت</h1>
@@ -74,7 +74,7 @@ function AddVote() {
                                 votingStartDate: event.target.value
                             }
                         })
-                    }} required className="formInput input pr-[2.3rem] input-bordered flex items-center gap-2" />
+                    }} required className="formInput input input-sm pr-[2.3rem] input-bordered flex items-center gap-2" />
                 </div>
                 <div className='flex gap-[1rem] items-center'>
                     <h1>تاريخ نهاية التصويت</h1>
@@ -85,7 +85,7 @@ function AddVote() {
                                 votingEndDate: event.target.value
                             }
                         })
-                    }} required className="formInput input pr-[2.3rem] input-bordered flex items-center gap-2" />
+                    }} required className="formInput input input-sm pr-[2.3rem] input-bordered flex items-center gap-2" />
                 </div>
                 <input type="number" onChange={(event) => {
                     setInputs((prevInput) => {
@@ -94,7 +94,7 @@ function AddVote() {
                             numberOfChoices: event.target.value
                         }
                     })
-                }} value={inputs.numberOfChoices} required className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder={`عدد اختيارات`} />
+                }} value={inputs.numberOfChoices} required className="formInput w-full input input-sm pr-[2.3rem] input-bordered flex items-center gap-2" placeholder={`عدد اختيارات`} />
                 {
                     Array.from({ length: inputs.numberOfChoices || 0 }).map((_, responseIndex) => (
                         <input
@@ -109,7 +109,7 @@ function AddVote() {
                                     }
                                 })
                             }}
-                            className='formInput input input-bordered w-full '
+                            className='formInput input input-sm input-bordered w-full '
                             required
                             placeholder={`الاختيار ${responseIndex + 1}`}
                             key={responseIndex}
@@ -119,7 +119,7 @@ function AddVote() {
                 <button onClick={(event) => {
                     event.preventDefault();
                     handleSubmit();
-                }} disabled={submit} className='btn btn-primary w-full  font-bold'>{submit ? <span className="loading loading-ring loading-lg"></span> : "إضافة"}</button>
+                }} disabled={submit} className='btn btn-sm btn-primary w-full  font-bold'>{submit ? <span className="loading loading-ring loading-lg"></span> : "إضافة"}</button>
             </form>
 
         </div>

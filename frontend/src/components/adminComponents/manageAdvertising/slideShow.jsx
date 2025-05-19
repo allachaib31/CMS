@@ -105,10 +105,10 @@ function SlideShow() {
     }, [])
     return (
         <div className="sm:p-0 px-[1rem] container mx-auto">
-            <h1 className="text-center text-[1.5rem] font-bold py-[1rem]">
+            <h1 className="text-center font-bold py-[0.5rem]">
                 نموذج النص المتحرك
             </h1>
-            <button onClick={() => document.getElementById('my_modal_1').showModal()} className='btn btn-primary text-[1.1rem] font-bold'>اضافة نص</button>
+            <button onClick={() => document.getElementById('my_modal_1').showModal()} className='btn btn-sm btn-primary font-bold'>اضافة نص</button>
             <dialog id="my_modal_1" className="modal">
                 <div className="modal-box">
                     {showAlert.display ? <Alert msg={showAlert} /> : ""}
@@ -119,7 +119,7 @@ function SlideShow() {
                                 text: event.target.value
                             }
                         })
-                    }} required type="text" placeholder="ادخل النص" className="formInput input input-bordered w-full mb-[1rem]" />
+                    }} required type="text" placeholder="ادخل النص" className="formInput input input-sm input-bordered w-full mb-[1rem]" />
                     تاريخ نهاية العرض <input type="date" onChange={(event) => {
                         setInputs((prevInput) => {
                             return {
@@ -127,29 +127,29 @@ function SlideShow() {
                                 endDate: event.target.value
                             }
                         })
-                    }} required className="formInput input input-bordered " />
+                    }} required className="formInput input input-sm input-bordered " />
                     <div className="modal-action">
                         <form method="dialog">
                             {/* if there is a button in form, it will close the modal */}
-                            <button className="btn">اغلاق</button>
+                            <button className="btn btn-sm">اغلاق</button>
                             <button onClick={(event) => {
                                 event.preventDefault();
                                 if (window.confirm("هل انت متاكد من انك تريد القيام به العملية")) {
                                     handleSubmit();
                                 }
-                            }} disabled={submit} className="btn btn-success">{submit ? <span className="loading loading-ring loading-lg"></span> : "إضافة"}</button>
+                            }} disabled={submit} className="btn btn-sm btn-success">{submit ? <span className="loading loading-ring loading-lg"></span> : "إضافة"}</button>
                         </form>
                     </div>
                 </div>
             </dialog>
             {showAlert.display ? <Alert msg={showAlert} /> : ""}
-            <div className="overflow-x-auto mt-[1rem]">
-                <table className="text-[1rem] table border-separate border-spacing-2 border w-[1000px] mx-auto">
-                    <thead className="text-[1rem] text-center">
+            <div className="overflow-x-auto mt-[0.5rem]">
+                <table className="text-xs table border-separate border-spacing-0 border w-[400px] md:w-[1000px] mx-auto">
+                    <thead className="text-xs text-center">
                         <tr>
                             <th className="border border-slate-600">رقم</th>
                             <th className="border border-slate-600">الاعلان</th>
-                            <th className='border border-slate-600'>اعادة النشر</th>
+                            <th className='border border-slate-600'>اعادة <br/>النشر</th>
                             <th className="border border-slate-600">حدف</th>
                         </tr>
                     </thead>
@@ -157,7 +157,7 @@ function SlideShow() {
                         {
                             ads && ads.map((ad, index) => {
                                 return (
-                                    <tr className="text-center" key={ad.id}>
+                                    <tr className="text-center text-xs" key={ad.id}>
                                         <td className="border border-slate-600">{ad.id}</td>
                                         <td className="border border-slate-600">{ad.text}</td>
                                         <td className='border border-slate-600'><button onClick={() => {
@@ -168,8 +168,8 @@ function SlideShow() {
                                                 }
                                             })
                                             document.getElementById("repost2").showModal()
-                                        }} className='btn btn-success'>اعادة النشر</button></td>
-                                        <td className="border border-slate-600"><button className='btn btn-error' onClick={() => {
+                                        }} className='btn btn-xs btn-success'>اعادة النشر</button></td>
+                                        <td className="border border-slate-600"><button className='btn btn-xs btn-error' onClick={() => {
                                             if (window.confirm("هل انت متاكد من انك تريد القيام به العملية")) {
                                                 handleDelete(ad._id, index)
                                             }
@@ -183,7 +183,7 @@ function SlideShow() {
             </div>
             <dialog id="repost2" className="modal">
                 <div className="modal-box ">
-                    <input type="date" className='input input-bordered' onChange={((event) => {
+                    <input type="date" className='input input-sm input-bordered' onChange={((event) => {
                         setRepost((prevInputs) => {
                             return {
                                 ...prevInputs,
@@ -194,8 +194,8 @@ function SlideShow() {
                     <div className="modal-action">
                         <form method="dialog">
                             {/* if there is a button in form, it will close the modal */}
-                            <button className="btn">اغلاق</button>
-                            <button className="btn btn-success" onClick={(event) => {
+                            <button className="btn btn-sm">اغلاق</button>
+                            <button className="btn btn-sm btn-success" onClick={(event) => {
                                 event.preventDefault();
                                 handleRepost();
                             }}>{submit ? <span className="loading loading-ring loading-lg"></span> : "تاكيد"}</button>

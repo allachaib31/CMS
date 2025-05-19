@@ -44,14 +44,14 @@ function DisplayVote() {
     }
     return (
         <div className="px-[1rem] sm:px-0">
-            <h1 className="text-center text-[1.5rem] font-bold py-[1rem]">
+            <h1 className="text-center font-bold py-[0.5rem]">
                 سجل التصويتات
             </h1>
-            <div className="overflow-x-auto mt-[1rem]">
-                <table className="text-[1rem] table border-separate border-spacing-2 border w-[700px] mx-auto">
-                    <thead className="text-[1rem] text-center">
+            <div className="overflow-x-auto mt-[0.5rem]">
+                <table className="table table-xs border-separate border-spacing-0 border w-[400px] md:w-[700px] mx-auto">
+                    <thead className="text-xs text-center">
                         <tr>
-                            <th className="border border-slate-600">رقم الانتخابات</th>
+                            <th className="border border-slate-600">رقم <br />الانتخابات</th>
                             <th className="border border-slate-600">
                                 الموضوع
                             </th>
@@ -68,8 +68,8 @@ function DisplayVote() {
                                     <tr className="text-center">
                                         <td className="border border-slate-600">{vote.id}</td>
                                         <td className="border border-slate-600">{vote.subject}</td>
-                                        <td className="border border-slate-600"><Link to={"/manageVote/voteDetails?id=" + vote._id} className="btn btn-info">تفاصيل</Link></td>
-                                        <td className="border border-slate-600"><button className='btn btn-error' onClick={() => {
+                                        <td className="border border-slate-600"><Link to={"/manageVote/voteDetails?id=" + vote._id} className="btn btn-xs btn-info">تفاصيل</Link></td>
+                                        <td className="border border-slate-600"><button className='btn btn-xs btn-error' onClick={() => {
                                             if (window.confirm("هل انت متاكد من انك تريد القيام به العملية")) {
                                                 handleDelete(vote._id, index)
                                             }

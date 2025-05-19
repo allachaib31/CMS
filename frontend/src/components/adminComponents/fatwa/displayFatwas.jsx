@@ -55,14 +55,14 @@ function DisplayFatwas() {
 
   return (
     <div className="px-[1rem] sm:px-0">
-      <h1 className="text-center text-[1.5rem] font-bold py-[1rem]">
+      <h1 className="text-center font-bold py-[0.5rem]">
         {" "}
         إدارة الفتاوى
       </h1>
       {showAlert.display ? <Alert msg={showAlert} /> : ""}
-      <div className="overflow-x-auto mt-[1rem]">
-        <table className="text-[1rem] table border-separate border-spacing-2 border w-[600px] mx-auto">
-          <thead className="text-[1rem] text-center">
+      <div className="overflow-x-auto mt-[0.5rem]">
+        <table className="text-xs table border-separate border-spacing-0 border w-[400px] md:w-[600px] mx-auto">
+          <thead className="text-xs text-center">
             <tr>
               <th className="border border-slate-600">رقم</th>
               <th className="border border-slate-600">العنوان</th>
@@ -113,7 +113,7 @@ function DisplayFatwas() {
             <div className="modal-action">
               <form method="dialog">
                 {/* if there is a button in form, it will close the modal */}
-                <button className="btn">اغلاق</button>
+                <button className="btn btn-sm">اغلاق</button>
                 <button
                   onClick={(event) => {
                     event.preventDefault();
@@ -122,7 +122,7 @@ function DisplayFatwas() {
                     }
                     // document.getElementById("my_modal_1").closeModal();
                   }}
-                  className={`btn ${inputs.active ? "btn-error" : "btn-success"}`}
+                  className={`btn btn-sm ${inputs.active ? "btn-error" : "btn-success"}`}
                 >
                   {inputs.active ? "تعطيل" : "تفعيل"}
                 </button>

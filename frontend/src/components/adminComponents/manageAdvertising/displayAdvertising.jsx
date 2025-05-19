@@ -79,14 +79,14 @@ function DisplayAdvertising() {
   }, [])
   return (
     <div className="px-[1rem] sm:px-0">
-      <h1 className="text-center text-[1.5rem] font-bold py-[1rem]">
+      <h1 className="text-center font-bold py-[0.5rem]">
         {" "}
         ادارة الاعلانات
       </h1>
       {showAlert.display ? <Alert msg={showAlert} /> : ""}
-      <div className="overflow-x-auto mt-[1rem]">
-        <table className="text-[1rem] table border-separate border-spacing-2 border w-[1000px] mx-auto">
-          <thead className="text-[1rem] text-center">
+      <div className="overflow-x-auto mt-[0.5rem]">
+        <table className="text-xs table border-separate border-spacing-0 border w-[400px] md:w-[1000px] mx-auto">
+          <thead className="text-xs text-center">
             <tr>
               <th className="border border-slate-600">رقم</th>
               <th className="border border-slate-600">الاعلان</th>
@@ -98,7 +98,7 @@ function DisplayAdvertising() {
             {
               advertising && advertising.map((ad, index) => {
                 return (
-                  <tr className="text-center" key={ad.id}>
+                  <tr className="text-center text-xs" key={ad.id}>
                     <td className="border border-slate-600">{ad.id}</td>
                     <td className="border border-slate-600"><p onClick={() => {
                       const parser = new DOMParser();
@@ -111,7 +111,7 @@ function DisplayAdvertising() {
                         image: ad.imageId
                       })
                       document.getElementById("my_modal_1").showModal()
-                    }} className='btn btn-info'>{ad.title}</p></td>
+                    }} className='btn btn-xs btn-info'>{ad.title}</p></td>
                     <td className='border border-slate-600'><button onClick={() => {
                       setInputs((prev) => {
                         return {
@@ -120,8 +120,8 @@ function DisplayAdvertising() {
                         }
                       })
                       document.getElementById("repost").showModal()
-                      }} className='btn btn-success'>اعادة النشر</button></td>
-                    <td className="border border-slate-600"><button className='btn btn-error' onClick={() => {
+                      }} className='btn btn-xs btn-success'>اعادة النشر</button></td>
+                    <td className="border border-slate-600"><button className='btn btn-xs btn-error' onClick={() => {
                       if (window.confirm("هل انت متاكد من انك تريد القيام به العملية")) {
                         handleDelete(ad._id, index)
                       }

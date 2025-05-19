@@ -436,18 +436,18 @@ function AddFatwa() {
     return (
         <div className="sm:p-0 px-[1rem] container mx-auto">
             <div>
-                <LRouter to="/fatwa" className="btn btn-primary text-[2rem] px-[2rem]">
+                <LRouter to="/fatwa" className="btn btn-sm btn-primary px-[2rem]">
                     <FontAwesomeIcon icon={faRightLong} />
                 </LRouter>
             </div>
-            <h1 className="text-center text-[1.5rem] font-bold py-[1rem]">
+            <h1 className="text-center font-bold py-[0.5rem]">
             إضافة فتوى جديدة
             </h1>
-            <form action="" className="py-[2rem] flex flex-col gap-[1rem]">
+            <form action="" className="py-[0.5rem] flex flex-col gap-[1rem]">
                 {showAlert.display ? <Alert msg={showAlert} /> : ""}                <div>
                 <input type="text" onChange={(event) => {
 						setTitle(event.target.value)
-					}} className='input input-bordered mb-[1rem]' placeholder='ادخل العنوان'/>
+					}} className='input input-sm input-bordered mb-[1rem]' placeholder='ادخل العنوان'/>
                     <div
                         className="editor-container editor-container_classic-editor editor-container_include-style editor-container_include-block-toolbar"
                         ref={editorContainerRef}
@@ -466,7 +466,7 @@ function AddFatwa() {
                     if (window.confirm("هل انت متاكد من انك تريد القيام به العملية")) {
                         handleSubmit()
                     }
-                }} disabled={submit} className='btn btn-primary w-full font-bold'>
+                }} disabled={submit} className='btn btn-sm btn-primary w-full font-bold'>
                     {submit ? <span className="loading loading-ring loading-lg"></span> : "إضافة"}
                 </button>
             </form>

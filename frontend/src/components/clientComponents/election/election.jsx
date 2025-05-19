@@ -50,20 +50,20 @@ function Election() {
   }
   return (
     <div className="px-[1rem] sm:px-0 py-[2rem]">
-      <h1 className="text-center text-[1.5rem] font-bold py-[1rem]">
+      <h1 className="text-center font-bold py-[0.5rem]">
         سجل التصويتات
       </h1>
       <div className='container mx-auto'>
-        <div className="overflow-x-auto mt-[1rem]">
-          <table className="text-[1rem] table border-separate border-spacing-2 border w-[1000px] mx-auto">
-            <thead className="text-[1rem] text-center">
-              <tr>
+        <div className="overflow-x-auto mt-[0.5rem]">
+          <table className="text-xs tabl table-xs border-separate border-spacing-0 border w-[350px] md:w-[1000px] mx-auto">
+            <thead className="text-xs text-center">
+              <tr className='text-xs'>
                 <th className="border border-slate-600">رقم التصويت</th>
                 <th className="border border-slate-600">
                   الموضوع
                 </th>
                 <th className="border border-slate-600">
-                  تاريخ الانتهاء
+                  تاريخ <br />الانتهاء
                 </th>
                 <th className="border border-slate-600">
                 الإجراء
@@ -77,7 +77,7 @@ function Election() {
               {
                 votes && votes.map((vote) => {
                   return (
-                    <tr className="text-center">
+                    <tr className="text-center text-xs">
                       <td className="border border-slate-600">{vote.id}</td>
                       <td className="border border-slate-600">{vote.subject}</td>
                       <td className="border border-slate-600">{vote.votingEndDate && new Date(vote.votingEndDate).getUTCFullYear() + "-" + (new Date(vote.votingEndDate).getUTCMonth() + 1) + "-" + new Date(vote.votingEndDate).getUTCDate()}</td>
@@ -88,8 +88,8 @@ function Election() {
                           choice: ""
                         })
                         document.getElementById('my_modal_1').showModal()
-                      }} className='btn btn-success'>تصويت</button></td>
-                      <td className="border border-slate-600"><Link to={"/admin/electionDetails?id=" + vote._id} className="btn btn-info">تفاصيل</Link></td>
+                      }} className='btn btn-xs btn-success'>تصويت</button></td>
+                      <td className="border border-slate-600"><Link to={"/admin/electionDetails?id=" + vote._id} className="btn btn-xs btn-info">تفاصيل</Link></td>
                     </tr>
                   )
                 })
@@ -101,7 +101,7 @@ function Election() {
       <dialog id="my_modal_1" className="modal">
         <div className="modal-box">
           {showAlert.display ? <Alert msg={showAlert} /> : ""}
-          <h3 className="font-bold text-lg">{data.subject}</h3>
+          <h3 className="font-bold text-sm">{data.subject}</h3>
           <div className='flex gap-[1rem] flex-col justify-center'>
             {
               data && data.choices.map((choice) => {
@@ -121,11 +121,11 @@ function Election() {
           <div className="modal-action">
             <form method="dialog">
               {/* if there is a button in form, it will close the modal */}
-              <button className="btn">اغلاق</button>
+              <button className="btn btn-sm">اغلاق</button>
               <button onClick={(event) => {
                 event.preventDefault();
                 handleSubmit();
-              }} disabled={submit} className='btn btn-success'>{submit ? <span className="loading loading-ring loading-lg"></span> : "تصويت"}</button>
+              }} disabled={submit} className='btn btn-sm btn-success'>{submit ? <span className="loading loading-ring loading-lg"></span> : "تصويت"}</button>
             </form>
           </div>
         </div>
