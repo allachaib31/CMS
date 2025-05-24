@@ -102,8 +102,8 @@ function RecordUnrecoveredExpenses() {
             <button onClick={()=>document.getElementById('my_modal_1').showModal()} className='mt-[0.5rem] btn btn-sm btn-info font-bold'><FontAwesomeIcon icon={faPrint} /> طباعة</button>
             </div>
             <div className="overflow-x-auto mt-[0.5rem]">
-                <table className="table table-xs border-separate border-spacing-0 border w-[500px] md:w-[1000px] mx-auto">
-                    <tr className='text-xs'>
+                <table className="table table-xs border-separate border-spacing-0 border w-[400px] md:w-[1000px] mx-auto">
+                    <tr className='text-[0.6rem] md:text-xs'>
                         <th className="border text-center border-slate-600" rowSpan={2}>
                             رقم <br />الطلب
                         </th>
@@ -138,7 +138,7 @@ function RecordUnrecoveredExpenses() {
                             البيان
                         </th>
                     </tr>
-                    <tr>
+                    <tr className='text-[0.6rem] md:text-xs'>
                         <th className="border text-center border-slate-600">
                             المبلغ
                         </th>

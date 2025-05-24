@@ -100,7 +100,7 @@ function DisplayCommodityRevenue() {
       <div className="overflow-x-auto mt-[1rem]">
         <table className="text-xs table table-xs border-separate border-spacing-0 border w-[400px] md:w-[1000px] mx-auto">
           <thead className="text-xs text-center">
-            <tr className='text-xs'>
+            <tr className='text-[0.6rem] md:text-xs'>
               <th className="border border-slate-600" rowSpan={2}>
                 رقم <br />الطلب
               </th>
@@ -117,16 +117,16 @@ function DisplayCommodityRevenue() {
                 مبلغ <br />القسط
               </th>
               <th className="text-center border border-slate-600" >
-                تاريخ الاستحقاق <br />بالميلادي
+               الاستحقاق <br />بالميلادي
               </th>
               <th className="text-center border border-slate-600" >
-                تاريخ الاستحقاق <br />بالهجري
+               الاستحقاق <br />بالهجري
               </th>
               <th className="text-center border border-slate-600">
-                تاريخ السداد <br />بالميلادي
+               السداد <br />بالميلادي
               </th>
               <th className="text-center border border-slate-600">
-                تاريخ السداد <br />بالهجري
+               السداد <br />بالهجري
               </th>
               <th className="border border-slate-600" rowSpan={2}>
                 ملاحظات
@@ -144,7 +144,7 @@ function DisplayCommodityRevenue() {
               <th className="border border-slate-600 text-xs">
                 <select onChange={(event) => {
                   setId(event.target.value);
-                }} className='select select-xs w-[8rem] xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered'>
+                }} className='select select-xs w-[4rem] xs:mt-0 mt-[1rem] pl-[2rem] pr-[1.5rem] select-bordered'>
                   <option selected disabled>قم باختيار رقم الطلب</option>
                   {idList && idList.map((list) => (
                     <option value={list._id}>{list.id}</option>

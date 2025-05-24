@@ -134,7 +134,7 @@ function SubscriptionHistory() {
       </div>
       {showAlert.display ? <Alert msg={showAlert} /> : ""}
       <div className="overflow-x-auto mt-[0.5rem]">
-        {!loading ? <div className='flex justify-center'> <span className=" loading loading-ring loading-lg"></span></div> : <table className="table table-xs border-separate border-spacing-0 border w-[600px] sm:w-[1300px] mx-auto">
+        {!loading ? <div className='flex justify-center'> <span className=" loading loading-ring loading-lg"></span></div> : <table className="table table-xs border-separate border-spacing-0 border w-[400px] md:w-[1300px] mx-auto">
           <thead className='text-sm text-center'>
             <tr className='text-xs'>
               <th className='border border-slate-600'>اسم العضو</th>

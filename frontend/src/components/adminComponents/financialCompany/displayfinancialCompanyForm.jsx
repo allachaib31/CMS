@@ -162,7 +162,7 @@ function DisplayfinancialCompanyForm() {
                 <tr className='text-center text-xs'>
                   <th className="border text-center border-slate-600" colSpan={11}>بيانات المساهمة</th>
                 </tr>
-                <tr className='text-xs'>
+                <tr className='text-[0.6rem] md:text-xs'>
                   <th className="border text-center border-slate-600" rowSpan={2}>
                     رقم <br />المساهمة
                   </th>
@@ -191,7 +191,7 @@ function DisplayfinancialCompanyForm() {
                     الربح / الخسارة
                   </th>
                 </tr>
-                <tr className='text-xs'>
+                <tr className='text-[0.6rem] md:text-xs'>
                   <th className="border text-center border-slate-600">الميلادي</th>
                   <th className="border text-center border-slate-600">الهجري</th>
                   <th className="border text-center border-slate-600">الميلادي</th>
@@ -215,7 +215,7 @@ function DisplayfinancialCompanyForm() {
                 <tr className='text-center text-xs'>
                   <th className="border border-slate-600" colSpan={11}>بيانات الصندوق</th>
                 </tr>
-                <tr className='text-xs'>
+                <tr className='text-[0.6rem] md:text-xs'>
                   <th className="border text-center border-slate-600" colSpan={2}>الرصيد السابق <br /> لصندوق</th>
                   <th className="border text-center border-slate-600" colSpan={2}>مبلغ <br />المساهمة</th>
                   <th className="border text-center border-slate-600" colSpan={2}>نسبة <br />المساهمة</th>
@@ -239,7 +239,7 @@ function DisplayfinancialCompanyForm() {
                 <tr className='text-center text-xs'>
                   <th className="border border-slate-600" colSpan={11}>بيانات المساهمين</th>
                 </tr>
-                <tr className='text-xs'>
+                <tr className='text-[0.6rem] md:text-xs'>
                   <th className="border text-center border-slate-600" colSpan={2}>اسم <br />العضو</th>
                   <th className="border text-center border-slate-600" colSpan={2}>رصيده <br /> السابق</th>
                   <th className="border text-center border-slate-600" colSpan={2}>نسبة <br />المساهمة</th>

@@ -67,8 +67,8 @@ function RecordInstallments() {
             </div>
             <div className="overflow-x-auto mt-[0.5rem]">
                 {
-                    loanInfo && <table className="text-xs table table-xs border-separate border-spacing-0 border w-[700px] md:w-[900px] mx-auto">
-                        <thead className="text-xs text-center">
+                    loanInfo && <table className="text-xs table table-xs border-separate border-spacing-0 border w-[500px] md:w-[900px] mx-auto">
+                        <thead className="text-[0.6rem] md:text-xs text-center">
                             <tr>
                                 <td className='border border-slate-600' colSpan={9}>سجل الاقساط</td>
                             </tr>
@@ -107,7 +107,7 @@ function RecordInstallments() {
                                 <td className="border border-slate-600" colSpan={2}>{(loanInfo.amount - loanInfo.balance).toFixed(2)}</td>
                             </tr>
                         </tbody>
-                        <tr className='text-center text-xs'>
+                        <tr className='text-center text-[0.6rem] md:text-xs'>
                             <th className="border border-slate-600" rowSpan={2}>
                                 رقم <br/>القسط
                             </th>

@@ -160,16 +160,16 @@ function DisplaySubscription() {
                                     المبلغ
                                 </th>
                                 <th className="text-center border border-slate-600" >
-                                    تاريخ الاستحقاق <br/> الميلادي
+                                 الاستحقاق <br/> الميلادي
                                 </th>
                                 <th className="text-center border border-slate-600" >
-                                    تاريخ الاستحقاق <br/> الهجري
+                                 الاستحقاق <br/> الهجري
                                 </th>
                                 <th className="text-center border border-slate-600" >
-                                    تاريخ الايداع <br />الميلادي
+                                 الايداع <br />الميلادي
                                 </th>
                                 <th className="text-center border border-slate-600" >
-                                    تاريخ الايداع <br /> الهجري
+                                 الايداع <br /> الهجري
                                 </th>
                                 <th className="border border-slate-600">
                                     ملاحظات

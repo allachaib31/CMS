@@ -120,7 +120,7 @@ function AnnualSubscriptionRecordDetails() {
                             </table>
                         }
                     </div> : <div className="overflow-x-auto mt-[0.5rem]">
-                        <table className="table table-xs border-separate border-spacing-0 border text-xs w-[800px] md:w-[1200px]">
+                        <table className="table table-xs border-separate border-spacing-0 border text-xs w-[500px] md:w-[1200px]">
                             <thead className='text-center text-xs'>
                                 <tr className='text-xs'>
                                     <th className='border border-slate-600'>الاسم</th>
@@ -135,8 +135,8 @@ function AnnualSubscriptionRecordDetails() {
                                     <th className='border border-slate-600'>شعبان</th>
                                     <th className='border border-slate-600'>رمضان</th>
                                     <th className='border border-slate-600'>شوال</th>
-                                    <th className='border border-slate-600'>ذو القعدة</th>
-                                    <th className='border border-slate-600'>ذو الحجة</th>
+                                    <th className='border border-slate-600'>ذو <br/>القعدة</th>
+                                    <th className='border border-slate-600'>ذو <br/>الحجة</th>
                                     <th className='border border-slate-600'>ملاحظات</th>
                                 </tr>
                             </thead>

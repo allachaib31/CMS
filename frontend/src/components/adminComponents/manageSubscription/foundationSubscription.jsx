@@ -128,37 +128,37 @@ function FoundationSubscription() {
 
       {showAlert.display ? <Alert msg={showAlert} /> : ""}
       <div className="overflow-x-auto ">
-        <table className="table table-x mx-auto w-[700px] sm:w-[1400px]">
-          <thead className="text-center text-sm">
+        <table className="table table-xs mx-auto w-[500px] md:w-[1400px]">
+          <thead className="text-center text-xs">
             <tr>
-              <th>العدد</th>
-              <th>اسم العضو</th>
-              <th>رقم الهوية</th>
-              <th>رقم الجوال</th>
-              <th>نوع المبلغ</th>
-              <th>مبلغ الاشتراك</th>
-              <th>ملحوظات</th>
-              <th>دفع</th>
+              <th className="border border-slate-600">العدد</th>
+              <th className="border border-slate-600">اسم العضو</th>
+              <th className="border border-slate-600">رقم الهوية</th>
+              <th className="border border-slate-600">رقم الجوال</th>
+              <th className="border border-slate-600">نوع المبلغ</th>
+              <th className="border border-slate-600">مبلغ الاشتراك</th>
+              <th className="border border-slate-600">ملحوظات</th>
+              <th className="border border-slate-600">دفع</th>
             </tr>
           </thead>
           <tbody>
             {user && user.map((user, index) => {
               let comment = "";
               return (
-                <tr className='text-center text-sm'>
-                  <td>{user.id}</td>
-                  <td>{user.name}</td>
-                  <td>{user.NationalIdentificationNumber}</td>
-                  <td>{user.phoneNumber}</td>
-                  <td>التأسيس</td>
-                  <td>{foundationPrice}</td>
-                  <td>{user.enableAccount ? "" : <input type="text" onChange={(event) => {
+                <tr className='text-center text-xs'>
+                  <td className="border border-slate-600">{user.id}</td>
+                  <td className="border border-slate-600">{user.name}</td>
+                  <td className="border border-slate-600">{user.NationalIdentificationNumber}</td>
+                  <td className="border border-slate-600">{user.phoneNumber}</td>
+                  <td className="border border-slate-600">التأسيس</td>
+                  <td className="border border-slate-600">{foundationPrice}</td>
+                  <td className="border border-slate-600">{user.enableAccount ? "" : <input type="text" onChange={(event) => {
                     comment = event.target.value.trim()
                     /*setInputs((prevInputs) => {
                       return { ...prevInputs, comments: event.target.value.trim() }
                     })*/
                   }} placeholder="أكتب هنا" className="input input-bordered w-full max-w-xs" />}</td>
-                  <td id={user._id}>{user.enableAccount ? "لقد تم دفع" : <button onClick={() => {
+                  <td className="border border-slate-600" id={user._id}>{user.enableAccount ? "لقد تم دفع" : <button onClick={() => {
                     if (window.confirm("هل انت متاكد من انك تريد القيام به العملية")) {
                       handleSubmit({
                         idUser: user._id,

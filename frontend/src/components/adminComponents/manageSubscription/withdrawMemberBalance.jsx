@@ -65,13 +65,13 @@ function WithdrawMemberBalance() {
             <div className="overflow-x-auto mt-[0.5rem]">
                 <table className="table table-xs border-separate border-spacing-0 border w-[300px] md:w-[500px] mx-auto">
                     <thead className='text-center text-xs'>
-                        <tr className='text-xs'>
+                        <tr className='text-[0.6rem] md:text-xs'>
                             <th rowSpan={2} className='border border-slate-600'>اسم العضو</th>
                             <th rowSpan={2} className='text-center border border-slate-600'>رصيد العضو</th>
-                            <th colSpan={2} className='border border-slate-600'>تاريخ انتهاء اشتراكه</th>
+                            <th colSpan={2} className='border border-slate-600'>انتهاء اشتراكه</th>
                             <th rowSpan={2} className='text-center border border-slate-600'>سحب</th>
                         </tr>
-                        <tr className='text-xs'>
+                        <tr className='text-[0.6rem] md:text-xs'>
                             <th className='text-center border border-slate-600'>الميلادي</th>
                             <th className='text-center border border-slate-600'>الهجري</th>
                         </tr>
@@ -80,12 +80,12 @@ function WithdrawMemberBalance() {
                         {
                             users && users.map((user) => {
                                 return (
-                                    <tr className='text-center text-xs'>
-                                        <th className='border border-slate-600'>{user.name}</th>
-                                        <th className='border border-slate-600'>{user.memberBalance.toFixed(2)}</th>
-                                        <th className='border border-slate-600'>{user.subscriptionExpiryDate && new Date(user.subscriptionExpiryDate).getUTCFullYear() + "-" + (new Date(user.subscriptionExpiryDate).getUTCMonth() + 1) + "-" + new Date(user.subscriptionExpiryDate).getUTCDate()}</th>
-                                        <th className='border border-slate-600'>{user.subscriptionExpiryDateHijri && user.subscriptionExpiryDateHijri.year + "-" + user.subscriptionExpiryDateHijri.month.number + "-" + user.subscriptionExpiryDateHijri.day}</th>
-                                        <th className='border border-slate-600'><button onClick={() => {
+                                    <tr className='text-center text-[0.6rem] md:text-xs'>
+                                        <th className='border border-slate-600 text-[0.6rem] md:text-xs'>{user.name}</th>
+                                        <th className='border border-slate-600 text-[0.6rem] md:text-xs'>{user.memberBalance.toFixed(2)}</th>
+                                        <th className='border border-slate-600 text-[0.6rem] md:text-xs'>{user.subscriptionExpiryDate && new Date(user.subscriptionExpiryDate).getUTCFullYear() + "-" + (new Date(user.subscriptionExpiryDate).getUTCMonth() + 1) + "-" + new Date(user.subscriptionExpiryDate).getUTCDate()}</th>
+                                        <th className='border border-slate-600 text-[0.6rem] md:text-xs'>{user.subscriptionExpiryDateHijri && user.subscriptionExpiryDateHijri.year + "-" + user.subscriptionExpiryDateHijri.month.number + "-" + user.subscriptionExpiryDateHijri.day}</th>
+                                        <th className='border border-slate-600 text-[0.6rem] md:text-xs'><button onClick={() => {
                                             if (window.confirm("هل انت متاكد من انك تريد القيام به العملية")) {
                                                 handleSubmit(user._id);
                                             }

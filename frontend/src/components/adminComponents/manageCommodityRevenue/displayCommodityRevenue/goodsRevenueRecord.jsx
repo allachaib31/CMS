@@ -63,7 +63,7 @@ function GoodsRevenueRecord() {
                     <span className=" loading loading-ring loading-lg"></span>
                 </div> : <div className="overflow-x-auto mt-[0.5rem]">
                     <table className="text-xs table table-xs border-separate border-spacing-0 border w-[450px] md:w-[900px] mx-auto">
-                        <tr className='text-xs'>
+                        <tr className='text-[0.6rem] md:text-xs'>
                             <th className="border text-center border-slate-600" rowSpan={2}>
                                 رقم <br/>الطلب
                             </th>
@@ -95,7 +95,7 @@ function GoodsRevenueRecord() {
                                 تفاصيل <br/>اكثر
                             </th>
                         </tr>
-                        <tr className='text-xs'>
+                        <tr className='text-[0.6rem] md:text-xs'>
                             <th className="border text-center border-slate-600">الميلادي</th>
                             <th className="border text-center border-slate-600">الهجري</th>
                             <th className="border text-center border-slate-600">الميلادي</th>

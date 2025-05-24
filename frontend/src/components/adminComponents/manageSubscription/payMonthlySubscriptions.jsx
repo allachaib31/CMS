@@ -147,7 +147,7 @@ function PayMonthlySubscriptions() {
                         <span className=" loading loading-ring loading-lg"></span>
                     </div>
                 ) : (
-                    <table className="table table-xs border-separate border-spacing-0 border w-[800px] sm:w-[1500px] mx-auto">
+                    <table className="table table-xs border-separate border-spacing-0 border w-[350px] md:w-[1500px] mx-auto">
                         <thead className="text-center text-xs">
                             <tr className="text-xs">
                                 <th className="border border-slate-600">
@@ -160,16 +160,16 @@ function PayMonthlySubscriptions() {
                                     المبلغ
                                 </th>
                                 <th className="text-center border border-slate-600" >
-                                    تاريخ الاستحقاق <br/> الميلادي
+                                     الاستحقاق <br/> الميلادي
                                 </th>
                                 <th className="text-center border border-slate-600" >
-                                    تاريخ الاستحقاق <br/> الهجري
+                                     الاستحقاق <br/> الهجري
                                 </th>
                                 <th className="text-center border border-slate-600" >
-                                    تاريخ الايداع <br/> الميلادي
+                                     الايداع <br/> الميلادي
                                 </th>
                                 <th className="text-center border border-slate-600" >
-                                    تاريخ الايداع <br/> الهجري
+                                     الايداع <br/> الهجري
                                 </th>
                                 <th className="border border-slate-600">
                                     ملاحظات

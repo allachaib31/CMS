@@ -119,7 +119,7 @@ function AnnualSubscriptionRecord() {
             </div>
             <div className='flex justify-center'>
                 <div className="overflow-x-auto mt-[0.5rem]">
-                    {!loading ? <div className='flex justify-center'> <span className=" loading loading-ring loading-lg"></span></div> : <table className="table table-xs border-separate border-spacing-0 border w-[800px] md:w-[1350px]">
+                    {!loading ? <div className='flex justify-center'> <span className=" loading loading-ring loading-lg"></span></div> : <table className="table table-xs border-separate border-spacing-0 border w-[450px] md:w-[1350px]">
                         <thead>
                             <tr className='text-center text-xs'>
                                 <th className='border border-slate-600'>الاسم</th>
@@ -133,8 +133,8 @@ function AnnualSubscriptionRecord() {
                                 <th className='border border-slate-600'>شعبان</th>
                                 <th className='border border-slate-600'>رمضان</th>
                                 <th className='border border-slate-600'>شوال</th>
-                                <th className='border border-slate-600'>ذو القعدة</th>
-                                <th className='border border-slate-600'>ذو الحجة</th>
+                                <th className='border border-slate-600'>ذو <br />القعدة</th>
+                                <th className='border border-slate-600'>ذو <br/>الحجة</th>
                                 <th className='border border-slate-600'>رصيد <br />العضو</th>
                                 <th className='border border-slate-600'>المتأخرات</th>
                                 <th className='border border-slate-600'>تفاصيل</th>

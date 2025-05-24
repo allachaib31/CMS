@@ -88,48 +88,55 @@ function DisplayUser() {
           </select>
           <div className="indicator xs:mt-0 mt-[1rem] ">
             <button onClick={handleSearch} className="btn btn-sm xs:w-auto bg-primary text-white join-item">
-            {loadingSearch ? <span className="loading loading-ring loading-lg"></span> : "ابحث"}
+              {loadingSearch ? <span className="loading loading-ring loading-lg"></span> : "ابحث"}
             </button>
           </div>
         </div>
       </div>
       {showAlert.display ? <Alert msg={showAlert} /> : ""}
       <div className="overflow-x-auto xl:flex xl:justify-center  mt-[0.5rem]">
-        <table className="table table-xs w-[800px] md:w-[1500px]">
+        <table className="table table-xs w-[500px] md:w-[1300px]">
           {/* head */}
           <thead>
-            <tr className="text-center text-sm">
+            <tr className="text-center text-xs">
               {/*<th>العدد</th>*/}
-              <th>اسم العضو</th>
-              <th>رقم الهوية</th>
-              <th>رقم الجوال</th>
-              <th>تاريخ الاشتراك <br/> الميلادي </th>
-              <th>تاريخ الاشتراك <br/> الهجري </th>
-              <th>الحالة</th>
-              <th>ملاحظات</th>
-              <th></th>
-              <th></th>
+              <th className="border border-slate-600" rowSpan={2}>اسم العضو</th>
+              <th className="border border-slate-600" rowSpan={2}>رقم الهوية</th>
+              <th className="border border-slate-600" rowSpan={2}>رقم الجوال</th>
+              <th className="border border-slate-600" colSpan={2}>تاريخ الاشتراك</th>
+              <th className="border border-slate-600" rowSpan={2}>الحالة</th>
+              <th className="border border-slate-600" rowSpan={2}>ملاحظات</th>
+              <th className="border border-slate-600" rowSpan={2}></th>
+              <th className="border border-slate-600" rowSpan={2}></th>
+            </tr>
+            <tr>
+              <th className="border border-slate-600">
+                الميلادي
+              </th>
+              <th className="border border-slate-600">
+                الهجري
+              </th>
             </tr>
           </thead>
-          <tbody className="text-sm">
+          <tbody className="text-xs">
             {users && users.map((user, index) => {
               const date = new Date(user.createdAt);
               return (
                 <tr className="text-center">
                   {/*<td>{user.id}</td>*/}
-                  <td>{user.name}</td>
-                  <td>{user.NationalIdentificationNumber}</td>
-                  <td>{user.phoneNumber}</td>
-                  <td className="text-center">{date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()}</td>
-                  <td className="text-center">{user.hijriDate.year + "-" + user.hijriDate.month.number + "-" + user.hijriDate.day}</td>
-                  <td className={(user.status == "not active" ? "text-error" : "text-success") + " font-bold"}>{user.status == "not active" ? "غير مفعل" : "مفعل"}</td>
-                  <td className="text-xs">{user.comments}</td>
-                  <td><Link to={`/user/updateUser?id=${user.id}`} className="btn btn-sm text-sm btn-warning">تعديل</Link></td>
-                  <td><button data-disable={user.disable} id={user.id} onClick={(event) => {
+                  <td className="border border-slate-600">{user.name}</td>
+                  <td className="border border-slate-600">{user.NationalIdentificationNumber}</td>
+                  <td className="border border-slate-600">{user.phoneNumber}</td>
+                  <td className="text-center border border-slate-600">{date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()}</td>
+                  <td className="text-center border border-slate-600">{user.hijriDate.year + "-" + user.hijriDate.month.number + "-" + user.hijriDate.day}</td>
+                  <td className={"border border-slate-600"}><span className={(user.status == "not active" ? "!text-error" : "!text-success") + " text-sm font-bold"}>{user.status == "not active" ? "غير مفعل" : "مفعل"}</span></td>
+                  <td className="w-fit border border-slate-600">{user.comments}</td>
+                  <td className="border border-slate-600"><Link to={`/user/updateUser?id=${user.id}`} className="btn btn-sm text-sm btn-warning">تعديل</Link></td>
+                  <td className="border border-slate-600"><button data-disable={user.disable} id={user.id} onClick={(event) => {
                     setUserDelete({
                       id: user.id,
                       index,
-                      disable: event.target.getAttribute("data-disable") == "true" ? true: false
+                      disable: event.target.getAttribute("data-disable") == "true" ? true : false
                     });
                     document.getElementById('deleteModel').showModal()
                   }} className="btn btn-sm text-sm btn-error">{user.disable ? "تنشيط" : "تعطيل"}</button></td>
@@ -138,7 +145,7 @@ function DisplayUser() {
           </tbody>
         </table>
       </div>
-      <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} totalPages={totalPages} setTotalPages={setTotalPages}/>
+      <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} totalPages={totalPages} setTotalPages={setTotalPages} />
       <DeleteUserModals user={userDelete} setShowAlert={setShowAlert} users={users} setUsers={setUsers} deleteFetch={deleteUserFetch} />
     </div>
   );

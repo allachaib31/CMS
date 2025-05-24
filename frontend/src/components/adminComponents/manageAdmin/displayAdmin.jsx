@@ -94,46 +94,51 @@ function DisplayAdmin() {
       </div>
       {showAlert.display ? <Alert msg={showAlert} /> : ""}
       <div className="overflow-x-auto xl:flex xl:justify-center">
-        <table className="table table-xs w-[800px] md:w-[1400px]">
+        <table className="table table-xs border-separate border-spacing-0 border w-[500px] md:w-[1400px]">
           {/* head */}
           <thead>
-            <tr className="text-center text-sm">
-              <th>العدد</th>
-              <th>اسم العضو</th>
-              <th>رقم الهوية</th>
-              <th>رقم الجوال</th>
-              <th colSpan="2" rowSpan="2" className="">
+            <tr className="text-center text-xs">
+              <th className="border border-slate-600" rowSpan={2}>العدد</th>
+              <th className="border border-slate-600" rowSpan={2}>اسم العضو</th>
+              <th className="border border-slate-600" rowSpan={2}>رقم الهوية</th>
+              <th className="border border-slate-600" rowSpan={2}>رقم الجوال</th>
+              <th colSpan="2" className="border border-slate-600">
                 <span className="flex w-full justify-center"> تاريخ الاشتراك  </span>
-                <div className="flex mt-[0.5rem]">
-                  <span className="w-1/2 text-center">الميلادي</span>
-                  <span className="w-1/2 text-center">الهجري</span>
-                </div>
+
               </th>
-              <th>الحالة</th>
-              <th>تعديل</th>
-              <th>حدف</th>
+              <th className="border border-slate-600" rowSpan={2}>الحالة</th>
+              <th className="border border-slate-600" rowSpan={2}>تعديل</th>
+              <th className="border border-slate-600" rowSpan={2}>حدف</th>
+            </tr>
+            <tr>
+              <th className="border border-slate-600">
+              الميلادي
+              </th>
+              <th className="border border-slate-600">
+              الهجري
+              </th>
             </tr>
           </thead>
           <tbody className="text-[1rem]">
             {admins && admins.map((admin, index) => {
               const date = new Date(admin.createdAt);
               return (
-                <tr className="text-center text-sm">
-                  <td>{admin.id}</td>
-                  <td>{admin.name}</td>
-                  <td>{admin.NationalIdentificationNumber}</td>
-                  <td>{admin.phoneNumber}</td>
-                  <td className="text-center">{date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()}</td>
-                  <td className="text-center">{admin.hijriDate.year + "-" + admin.hijriDate.month.number + "-" + admin.hijriDate.day}</td>
-                  <td className={(admin.status == "not active" ? "text-error" : "text-success") + " text-sm font-bold"}>{admin.status == "not active" ? "غير مفعل" : "مفعل"}</td>
-                  <td><Link to={`/admin/updateAdmin?id=${admin.id}&name=${admin.name}`} className="btn btn-sm btn-warning">تعديل</Link></td>
-                  <td><button onClick={() => {
+                <tr className="text-center text-xs">
+                  <td className="border border-slate-600">{admin.id}</td>
+                  <td className="border border-slate-600">{admin.name}</td>
+                  <td className="border border-slate-600">{admin.NationalIdentificationNumber}</td>
+                  <td className="border border-slate-600">{admin.phoneNumber}</td>
+                  <td className="text-center border border-slate-600">{date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()}</td>
+                  <td className="text-center border border-slate-600">{admin.hijriDate.year + "-" + admin.hijriDate.month.number + "-" + admin.hijriDate.day}</td>
+                  <td className={"border border-slate-600"}><span className={(admin.status == "not active" ? "!text-error" : "!text-success") + " text-sm font-bold"}>{admin.status == "not active" ? "غير مفعل" : "مفعل"}</span></td>
+                  <td className="border border-slate-600"><Link to={`/admin/updateAdmin?id=${admin.id}&name=${admin.name}`} className="btn btn-xs btn-warning">تعديل</Link></td>
+                  <td className="border border-slate-600"><button onClick={() => {
                     setUserDelete({
                       id: admin.id,
                       index
                     });
                     document.getElementById('deleteModel').showModal()
-                  }} className="btn btn-sm btn-error">حدف</button></td>
+                  }} className="btn btn-xs btn-error">حدف</button></td>
                 </tr>)
             })}
           </tbody>

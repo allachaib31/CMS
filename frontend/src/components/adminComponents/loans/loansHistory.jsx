@@ -33,7 +33,7 @@ function LoansHistory() {
                         <tr className='text-xs'>
                             <th className='border border-slate-600' colSpan={7}>سجل القروض </th>
                         </tr>
-                        <tr className='text-xs'>
+                        <tr className='text-[0.7rem] md:text-xs'>
                             <th className='border border-slate-600' colSpan={2}>إجمالي <br/>القروض  </th>
                             <th className='border border-slate-600' colSpan={2}>إجمالي المبالغ <br/>المسددة </th>
                             <th className='border border-slate-600' colSpan={2}>إجمالي المبالغ <br/>المتبقية</th>
@@ -41,15 +41,15 @@ function LoansHistory() {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr className='text-center text-xs'>
+                        <tr className='text-center text-[0.7rem] md:text-xs'>
                             <td className='border border-slate-600' colSpan={2}>{totalLoans}</td>
                             <td className='border border-slate-600' colSpan={2}>{totalAmountsPaid.toFixed(2)}</td>
                             <td className='border border-slate-600' colSpan={2}>{(totalLoans - totalAmountsPaid).toFixed(2)}</td>
                             <td className='border border-slate-600' colSpan={1}>{loansInfo.length}</td>
                         </tr>
                     </tbody>
-                    <thead className="text-xs text-center">
-                        <tr className='text-xs'>
+                    <thead className="text-[0.7rem] md:text-xs text-center">
+                        <tr className='text-[0.7rem] md:text-xs'>
                             <th className='border border-slate-600' rowSpan={2}>رقم <br/>الطلب  </th>
                             <th className='border border-slate-600' rowSpan={2}>اسم <br/>العضو</th>
                             <th className='border border-slate-600' rowSpan={2}>مبلغ <br/>القرض  </th>

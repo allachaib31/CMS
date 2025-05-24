@@ -48,8 +48,8 @@ function LoansData() {
                 <button onClick={handleSearch} disabled={!id} className="btn btn-sm btn-primary text-sm font-bold join-item ">ابحث</button>
             </div>
             <div className="overflow-x-auto mt-[0.5rem]">
-                <table className="table table-xs border-separate border-spacing-0 border w-[1000px] md:w-[1500px] mx-auto">
-                    <thead className="text-xs text-center">
+                <table className="table table-xs border-separate border-spacing-0 border w-[700px] md:w-[1500px] mx-auto">
+                    <thead className="text-[0.6rem] md:text-xs text-center">
                         <tr>
                             <th className="border border-slate-600" rowSpan={2}>
                                 اسم <br/>العضو
@@ -94,7 +94,7 @@ function LoansData() {
                             المبلغ <br/>المتبقي
                             </th>
                         </tr>
-                        <tr className="text-xs">
+                        <tr className="text-[0.6rem] md:text-xs">
                             <th className="border border-slate-600">
                                 الميلادي
                             </th>
