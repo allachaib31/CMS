@@ -4,6 +4,7 @@ const { userContributionGoodModel, validateUserContributionGood } = require("../
 const moneyBoxModel = require("../../models/moneybox");
 const userModel = require("../../models/user");
 const getHijriDate = require("../../utils/getHijriDate");
+const mongoose = require('mongoose');
 const moneyBoxId = process.env.moneyBoxId;
 exports.addCommodityRevenue = async (req, res) => {
     var { customerData, sponsorData, commodityData, comments } = req.body;
@@ -71,6 +72,7 @@ exports.addCommodityRevenue = async (req, res) => {
                 year: hijriDate[2],
             }
         })
+        if (commodityRevenu.commodityData.amountPaid == 0) commodityRevenu.commodityData.amountItPaid = true;
         await commodityRevenu.save();
         function calculateInstallmentDates(startDate, endDate, numberOfInstallments) {
             const start = new Date(startDate);
@@ -118,32 +120,50 @@ exports.addCommodityRevenue = async (req, res) => {
             disable: false,
             //memberBalance: { $gte: commodityData.purchaseAmount / Number(numberOfUser)}
         });
-        const amount = (commodityData.purchaseAmount) / activeUsers.length;
+        // 1. Compute total of all balances
+        const totalBalance = activeUsers.reduce((sum, u) => sum + u.memberBalance, 0);
+        if (totalBalance === 0) {
+            return res.status(400).send({ msg: "لا يمكن تقسيم المبلغ، إذ مجموع أرصدة الأعضاء صفر" });
+        }
+
+        // 2. Loop and split
         for (const user of activeUsers) {
             let isSaved = false;
+            const shareRatio = user.memberBalance / totalBalance;   // e.g. 0.15 if the user has 15% of the total
+
+            // 3. Per-user amounts
+            const contributionAmount = commodityData.purchaseAmount * shareRatio;
+            const profitAmount = (commodityData.profitAmount - sponsorData.amount) * shareRatio;
+            const contributionPercentage = shareRatio * 100;
+
             while (!isSaved) {
                 try {
+                    // build & save the contribution record
                     const userContribution = new userContributionGoodModel({
                         idUser: user._id,
                         idCommodityRevenue: commodityRevenu._id,
                         previousBalance: user.memberBalance,
-                        contributionPercentage: (amount * 100) / user.memberBalance,
-                        contributionAmount: amount,
-                        profitAmount: (commodityData.profitAmount - sponsorData.amount) / activeUsers.length
-                    })
-                    user.memberBalance -= amount;
+                        contributionPercentage,   // the % of their balance they’re contributing
+                        contributionAmount,       // how much they actually put in
+                        profitAmount              // their slice of the profit pool
+                    });
+
+                    // deduct from their balance
+                    user.memberBalance -= contributionAmount;
                     await user.save();
                     await userContribution.save();
                     isSaved = true;
                 } catch (error) {
                     if (error.code === 11000) {
-                        await new Promise(res => setTimeout(res, Math.random() * 100));
+                        // duplicate-key retry
+                        await new Promise(r => setTimeout(r, Math.random() * 100));
                     } else {
                         throw error;
                     }
                 }
             }
         }
+
         const moneyBox = await moneyBoxModel.findByIdAndUpdate(moneyBoxId,
             {
                 $inc: {
@@ -169,248 +189,280 @@ exports.addCommodityRevenue = async (req, res) => {
 
 exports.payAmount = async (req, res) => {
     const { id } = req.body;
+
     try {
+        // 1. Permission check
         if (
             req.user.admin.userPermission.indexOf(
                 "إضافة بيانات شراء السلع وأقساطها"
-            ) == -1
+            ) === -1
         ) {
             return res.status(403).send({
                 msg: "ليس لديك إذن إضافة بيانات شراء السلع وأقساطها",
             });
         }
-        const commodityRevenu = await commodityRevenueModel.findById(id);
-        if (!commodityRevenu) {
-            return res.status(404).send({
-                msg: "لم يتم ايجاد هذا الطلب",
-            });
+
+        // 2. Load the commodity revenue record
+        const revenue = await commodityRevenueModel.findById(id);
+        if (!revenue) {
+            return res.status(404).send({ msg: "لم يتم ايجاد هذا الطلب" });
         }
-        if (commodityRevenu.commodityData.amountItPaid) {
-            return res.status(403).send({
-                msg: "لقد تم الدفع بالفعل"
-            })
+
+        // 3. Must not have been paid before
+        if (revenue.commodityData.amountItPaid) {
+            return res.status(403).send({ msg: "لقد تم الدفع بالفعل" });
         }
-        if (commodityRevenu.commodityData.amountPaid == 0) {
-            return res.status(403).send({
-                msg: "المبلغ المسدد 0"
-            })
+        if (revenue.commodityData.amountPaid === 0) {
+            return res.status(403).send({ msg: "المبلغ المسدد 0" });
         }
-        commodityRevenu.commodityData.amountItPaid = true;
-        let amountPaid = commodityRevenu.commodityData.amountPaid;
-        if (commodityRevenu.sponsorData.amount != 0) {
-            if (!commodityRevenu.sponsorData.itPaid) {
-                const sponsorRemainingAmount = commodityRevenu.sponsorData.amount - commodityRevenu.sponsorData.balance;
-                let memberBalance;
-                if (sponsorRemainingAmount == amountPaid) {
-                    memberBalance = amountPaid;
-                    commodityRevenu.sponsorData.balance += amountPaid;
-                    commodityRevenu.sponsorData.itPaid = true;
-                    amountPaid = 0;
-                } else if (commodityRevenu.commodityData.amountPaid > sponsorRemainingAmount) {
-                    amountPaid -= sponsorRemainingAmount;
-                    memberBalance = sponsorRemainingAmount;
-                    commodityRevenu.sponsorData.balance += sponsorRemainingAmount;
-                    if (commodityRevenu.sponsorData.balance == commodityRevenu.sponsorData.amount) {
-                        commodityRevenu.sponsorData.itPaid = true;
-                    }
-                } else if (commodityRevenu.commodityData.amountPaid < sponsorRemainingAmount) {
-                    memberBalance = amountPaid;
-                    commodityRevenu.sponsorData.balance += amountPaid;
-                    amountPaid = 0;
-                    if (commodityRevenu.sponsorData.balance == commodityRevenu.sponsorData.amount) {
-                        commodityRevenu.sponsorData.itPaid = true;
+
+        // 4. Mark the initial payment as “paid”
+        revenue.commodityData.amountItPaid = true;
+        let remaining = revenue.commodityData.amountPaid;
+
+        // 5. First, pay out the sponsor (if any)
+        if (revenue.sponsorData.amount && !revenue.sponsorData.itPaid) {
+            const sponsorRemains = revenue.sponsorData.amount - revenue.sponsorData.balance;
+            let sponsorCredit = 0;
+
+            if (remaining >= sponsorRemains) {
+                sponsorCredit = sponsorRemains;
+                revenue.sponsorData.balance += sponsorRemains;
+                revenue.sponsorData.itPaid = true;
+                remaining -= sponsorRemains;
+            } else {
+                sponsorCredit = remaining;
+                revenue.sponsorData.balance += remaining;
+                remaining = 0;
+            }
+
+            // Credit sponsor’s user account
+            await userModel.updateOne(
+                { NationalIdentificationNumber: revenue.sponsorData.nationalIdentificationNumber },
+                {
+                    $inc: {
+                        memberBalance: sponsorCredit,
+                        cumulativeBalance: sponsorCredit,
+                        commodityProfitsContributions: sponsorCredit
                     }
                 }
-                await userModel.updateOne({
-                    NationalIdentificationNumber: commodityRevenu.sponsorData.nationalIdentificationNumber
-                }, {
-                    $inc: {
-                        memberBalance: memberBalance,
-                        cumulativeBalance: memberBalance,
-                        commodityProfitsContributions: memberBalance
-                    }
-                })
-            }
+            );
         }
-        const moneyBox = await moneyBoxModel.findByIdAndUpdate(moneyBoxId,
+
+        // 6. Update money box with the full paid amount
+        const moneyBox = await moneyBoxModel.findByIdAndUpdate(
+            moneyBoxId,
             {
                 $inc: {
-                    amount: commodityRevenu.commodityData.amountPaid,
-                    //cumulativeAmount: (commodityRevenu.commodityData.amountPaid * commodityRevenu.commodityData.purchaseAmount) / commodityRevenu.commodityData.saleAmount,
-                    //"source.commodityRevenue": (commodityRevenu.commodityData.amountPaid * commodityRevenu.commodityData.purchaseAmount) / commodityRevenu.commodityData.saleAmount
+                    amount: revenue.commodityData.amountPaid
                 }
             },
-            { new: true })
+            { new: true }
+        );
         if (!moneyBox) {
-            return res.status(400).send({
-                msg: "حدث خطأ أثناء معالجة طلبك",
-            });
+            return res.status(400).send({ msg: "حدث خطأ أثناء معالجة طلبك" });
         }
-        commodityRevenu.commodityData.balance += commodityRevenu.commodityData.amountPaid;
-        await commodityRevenu.save();
 
-        if (amountPaid == 0) {
-            return res.status(200).send({
-                msg: "لقد تم الدفع بنجاح"
-            });
+        // 7. Update revenue’s paid-to-date balance
+        revenue.commodityData.balance += revenue.commodityData.amountPaid;
+        await revenue.save();
+
+        // 8. If nothing left after sponsor, we’re done
+        if (remaining === 0) {
+            return res.status(200).send({ msg: "لقد تم الدفع بنجاح" });
         }
-        const userContributions = await userContributionGoodModel.find({
-            idCommodityRevenue: commodityRevenu._id
+
+        // 9. Load all user contributions for this revenue
+        const contributions = await userContributionGoodModel.find({
+            idCommodityRevenue: revenue._id
         });
-        const amount = amountPaid / userContributions.length;
-        for (const contribution of userContributions) {
-            const newBalance = contribution.balance + amount;
-            //let total = contribution.profitAmount / commodityRevenu.commodityData.numberOfInstallments;
-            //let percn = (amount * 100) / total
+        if (contributions.length === 0) {
+            return res.status(400).send({ msg: "لا توجد مساهمات لتوزيع المبلغ" });
+        }
+
+        // 10. Compute total principal contributed (to weight distribution)
+        const totalContributed = contributions
+            .reduce((sum, c) => sum + c.contributionAmount, 0);
+        if (totalContributed === 0) {
+            return res.status(400).send({ msg: "خطأ في توزيع المبلغ: مجموع المساهمات صفر" });
+        }
+
+        // 11. Distribute the remaining principal back to contributors
+        for (const c of contributions) {
+            const ratio = c.contributionAmount / totalContributed;
+            const userRefund = remaining * ratio;
+
+            // 11a. Update contribution record’s balance
             await userContributionGoodModel.updateOne(
-                { _id: contribution._id },
-                { $set: { balance: newBalance } }
+                { _id: c._id },
+                { $inc: { balance: userRefund } }
             );
-            await userModel.findByIdAndUpdate(contribution.idUser, {
-                $inc: {
-                    memberBalance: amount,
-                    //cumulativeBalance: total ,
-                    //commodityProfitsContributions: total
-                }
-            },
-                { new: true })
+
+            // 11b. Credit each user’s account with their refund
+            await userModel.findByIdAndUpdate(
+                c.idUser,
+                { $inc: { memberBalance: userRefund } },
+                { new: true }
+            );
         }
-        return res.status(200).send({
-            msg: "لقد تم الدفع بنجاح"
-        });
-    } catch (error) {
-        console.log(error)
-        return res.status(500).send({
-            msg: "حدث خطأ أثناء معالجة طلبك"
-        });
+
+        // 12. Final response
+        return res.status(200).send({ msg: "لقد تم الدفع بنجاح" });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).send({ msg: "حدث خطأ أثناء معالجة طلبك" });
     }
-}
+};
+
 exports.payInstallmentSchedule = async (req, res) => {
     const { idInstallmentSchedule } = req.body;
     try {
+        // 1. Permission check
         if (
             req.user.admin.userPermission.indexOf(
                 "إضافة بيانات شراء السلع وأقساطها"
-            ) == -1
+            ) === -1
         ) {
             return res.status(403).send({
                 msg: "ليس لديك إذن إضافة بيانات شراء السلع وأقساطها",
             });
         }
-        const installmentSchedule = await installmentsGoodsModel.findById(idInstallmentSchedule);
-        const commodityRevenu = await commodityRevenueModel.findById(installmentSchedule.idCommodityRevenue);
-        if (!commodityRevenu) {
-            return res.status(404).send({
-                msg: "لم يتم ايجاد هذا الطلب",
-            });
+
+        // 2. Load installment and parent revenue
+        const installment = await installmentsGoodsModel.findById(idInstallmentSchedule);
+        if (!installment) {
+            return res.status(404).send({ msg: "القسط غير موجود" });
         }
-        if (!commodityRevenu.commodityData.amountItPaid) {
-            return res.status(403).send({
-                msg: "يرجى تسديد الدفعه الاولى"
-            })
+        const revenue = await commodityRevenueModel.findById(installment.idCommodityRevenue);
+        if (!revenue) {
+            return res.status(404).send({ msg: "لم يتم إيجاد طلب الإيراد" });
         }
-        if (installmentSchedule.itPaid) {
-            return res.status(400).send({
-                msg: "لقد تم سداد القسط من قبل"
-            });
+
+        // 3. Ensure initial deposit was paid
+        if (!revenue.commodityData.amountItPaid) {
+            return res.status(403).send({ msg: "يرجى تسديد الدفعه الاولى" });
         }
-        const dateMiladi = new Date();
-        const hijriDate = getHijriDate(dateMiladi);
-        installmentSchedule.actualPaymentDate = dateMiladi;
-        installmentSchedule.actualPaymentDateHijri = {
-            day: hijriDate[0],
-            month: hijriDate[1],
-            year: hijriDate[2],
-        };
-        installmentSchedule.itPaid = true;
-        await installmentSchedule.save();
-        let amountPaid = installmentSchedule.premiumAmount;
-        if (commodityRevenu.sponsorData.amount != 0) {
-            if (!commodityRevenu.sponsorData.itPaid) {
-                const sponsorRemainingAmount = commodityRevenu.sponsorData.amount - commodityRevenu.sponsorData.balance;
-                let memberBalance;
-                if (sponsorRemainingAmount == amountPaid) {
-                    memberBalance = amountPaid;
-                    commodityRevenu.sponsorData.balance += amountPaid;
-                    commodityRevenu.sponsorData.itPaid = true;
-                    amountPaid = 0;
-                } else if (commodityRevenu.commodityData.amountPaid > sponsorRemainingAmount) {
-                    amountPaid -= sponsorRemainingAmount;
-                    memberBalance = sponsorRemainingAmount;
-                    commodityRevenu.sponsorData.balance += sponsorRemainingAmount;
-                    if (commodityRevenu.sponsorData.balance == commodityRevenu.sponsorData.amount) {
-                        commodityRevenu.sponsorData.itPaid = true;
-                    }
-                } else if (commodityRevenu.commodityData.amountPaid < sponsorRemainingAmount) {
-                    memberBalance = amountPaid;
-                    commodityRevenu.sponsorData.balance += amountPaid;
-                    amountPaid = 0;
-                    if (commodityRevenu.sponsorData.balance == commodityRevenu.sponsorData.amount) {
-                        commodityRevenu.sponsorData.itPaid = true;
-                    }
-                }
-                await userModel.updateOne({
-                    NationalIdentificationNumber: commodityRevenu.sponsorData.nationalIdentificationNumber
-                }, {
-                    $inc: {
-                        memberBalance: memberBalance,
-                        cumulativeBalance: memberBalance,
-                        commodityProfitsContributions: memberBalance
-                    }
-                })
+
+        // 4. Prevent double-pay
+        if (installment.itPaid) {
+            return res.status(400).send({ msg: "لقد تم سداد القسط من قبل" });
+        }
+
+        // 5. Mark this installment as paid (Miladi + Hijri)
+        const now = new Date();
+        const [hDay, hMonth, hYear] = getHijriDate(now);
+        installment.actualPaymentDate = now;
+        installment.actualPaymentDateHijri = { day: hDay, month: hMonth, year: hYear };
+        installment.itPaid = true;
+        await installment.save();
+
+        // 6. Allocate this payment first to sponsor (if any)
+        let remaining = installment.premiumAmount;
+        if (revenue.sponsorData.amount && !revenue.sponsorData.itPaid) {
+            const sponsorRemains = revenue.sponsorData.amount - revenue.sponsorData.balance;
+
+            // determine how much of this installment goes to sponsor
+            let sponsorCredit = 0;
+            if (remaining >= sponsorRemains) {
+                sponsorCredit = sponsorRemains;
+                revenue.sponsorData.balance += sponsorRemains;
+                revenue.sponsorData.itPaid = true;
+                remaining -= sponsorRemains;
+            } else {
+                sponsorCredit = remaining;
+                revenue.sponsorData.balance += remaining;
+                remaining = 0;
             }
-        }
-        commodityRevenu.commodityData.balance += installmentSchedule.premiumAmount;
-        await commodityRevenu.save();
-        if (amountPaid == 0) {
-            return res.status(200).send({
-                msg: "لقد تم الدفع بنجاح"
-            });
-        }
-        const userContributions = await userContributionGoodModel.find({
-            idCommodityRevenue: installmentSchedule.idCommodityRevenue
-        });
-        const amount = amountPaid / userContributions.length;
-        for (const contribution of userContributions) {
-            const newBalance = contribution.balance + amount;
-            let total = contribution.profitAmount / commodityRevenu.commodityData.numberOfInstallments;
-            await userContributionGoodModel.updateOne(
-                { _id: contribution._id },
-                { $set: { balance: newBalance } }
-            );
-            await userModel.findByIdAndUpdate(contribution.idUser, {
-                $inc: {
-                    memberBalance: amount,
-                    cumulativeBalance: total,
-                    commodityProfitsContributions: total
+
+            // credit sponsor user
+            await userModel.updateOne(
+                { NationalIdentificationNumber: revenue.sponsorData.nationalIdentificationNumber },
+                {
+                    $inc: {
+                        memberBalance: sponsorCredit,
+                        cumulativeBalance: sponsorCredit,
+                        commodityProfitsContributions: sponsorCredit,
+                    }
                 }
-            },
-                { new: true })
+            );
         }
-        const moneyBox = await moneyBoxModel.findByIdAndUpdate(moneyBoxId,
+
+        // 7. Credit the revenue’s paid-to-date and save
+        revenue.commodityData.balance += installment.premiumAmount;
+        await revenue.save();
+
+        // 8. If nothing left after sponsor, we’re done
+        if (remaining === 0) {
+            return res.status(200).send({ msg: "لقد تم الدفع بنجاح" });
+        }
+
+        // 9. Load all user contributions for this revenue
+        const contributions = await userContributionGoodModel.find({
+            idCommodityRevenue: revenue._id
+        });
+        if (contributions.length === 0) {
+            return res.status(400).send({ msg: "لا توجد مساهمات لتوزيع المبلغ" });
+        }
+
+        // 10. Compute total principal contributed
+        const totalContributed = contributions
+            .reduce((sum, c) => sum + c.contributionAmount, 0);
+
+        if (totalContributed === 0) {
+            return res.status(400).send({ msg: "خطأ في توزيع المبلغ: مجموع المساهمات صفر" });
+        }
+
+        // 11. Distribute remaining principal + profit-portion to each user
+        const perProfitInstallment = revenue.commodityData.profitAmount
+            / revenue.commodityData.numberOfInstallments;
+
+        for (const c of contributions) {
+            const ratio = c.contributionAmount / totalContributed;
+            const userPrincipalRefund = remaining * ratio;
+
+            // 11a. Update contribution record
+            await userContributionGoodModel.updateOne(
+                { _id: c._id },
+                { $inc: { balance: userPrincipalRefund } }
+            );
+
+            // 11b. Update user’s account: principal + this cycle’s profit slice
+            await userModel.findByIdAndUpdate(
+                c.idUser,
+                {
+                    $inc: {
+                        memberBalance: userPrincipalRefund,
+                        cumulativeBalance: perProfitInstallment,
+                        commodityProfitsContributions: perProfitInstallment
+                    }
+                },
+                { new: true }
+            );
+        }
+
+        // 12. Update money box
+        const moneyBox = await moneyBoxModel.findByIdAndUpdate(
+            moneyBoxId,
             {
                 $inc: {
-                    amount: installmentSchedule.premiumAmount,
-                    cumulativeAmount: commodityRevenu.commodityData.profitAmount / commodityRevenu.commodityData.numberOfInstallments,
-                    "source.commodityRevenue": commodityRevenu.commodityData.profitAmount / commodityRevenu.commodityData.numberOfInstallments,
+                    amount: installment.premiumAmount,
+                    cumulativeAmount: perProfitInstallment,
+                    "source.commodityRevenue": perProfitInstallment
                 }
             },
-            { new: true })
+            { new: true }
+        );
         if (!moneyBox) {
-            return res.status(400).send({
-                msg: "حدث خطأ أثناء معالجة طلبك",
-            });
+            return res.status(400).send({ msg: "حدث خطأ أثناء معالجة طلبك" });
         }
-        return res.status(200).send({
-            msg: "لقد تم الدفع بنجاح"
-        });
-    } catch (error) {
-        console.log(error)
-        return res.status(500).send({
-            msg: "حدث خطأ أثناء معالجة طلبك"
-        });
+
+        return res.status(200).send({ msg: "لقد تم الدفع بنجاح" });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).send({ msg: "حدث خطأ أثناء معالجة طلبك" });
     }
-}
+};
+
 
 exports.getActiveCommodityRevenue = async (req, res) => {
     try {
@@ -639,3 +691,4 @@ exports.addCommentInstallmentSchedule = async (req, res) => {
         });
     }
 }
+
