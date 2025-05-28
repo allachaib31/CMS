@@ -6,112 +6,165 @@ const getHijriDate = require("../../utils/getHijriDate");
 const moneyBoxId = process.env.moneyBoxId;
 
 exports.addStock = async (req, res) => {
-    const { nameContributingParty, nameContributingBank, numberStocks, costStocks, totalCostStocks, contributionDateMiladi, contributionDateHijri, freeStocks, numberOfPreviousStockWithFreeStock, previousStockCostWithFreeShare, previousCostOfStockWithFreeStock, memberId, memberPercentage } = req.body;
+    const {
+        nameContributingParty,
+        nameContributingBank,
+        numberStocks,
+        costStocks,
+        totalCostStocks,
+        contributionDateMiladi,
+        contributionDateHijri,
+        freeStocks,
+        numberOfPreviousStockWithFreeStock,
+        previousStockCostWithFreeShare,
+        previousCostOfStockWithFreeStock,
+        memberId,
+        memberPercentage
+    } = req.body;
+
     try {
+        // 1. Permission
         if (
             req.user.admin.userPermission.indexOf(
                 "إضافة بيانات المساهمات (أسهم، صندوق استثماري، شركة مالية، أخرى)"
-            ) == -1
+            ) === -1
         ) {
             return res.status(403).send({
-                msg: "ليس لديك إذن إضافة بيانات المساهمات (أسهم، صندوق استثماري، شركة مالية، أخرى)",
+                msg: "ليس لديك إذن إضافة بيانات المساهمات (أسهم، صندوق استثماري، شركة مالية، أخرى)"
             });
         }
-        const amountMoneyBox = await moneyBoxModel.findById(moneyBoxId);
-        if (totalCostStocks > amountMoneyBox.amount) {
-            return res.status(403).send({
-                msg: "لايوجد رصيد كافي في الصندوق",
-            });
+
+        // 2. Check money box balance
+        const box = await moneyBoxModel.findById(moneyBoxId);
+        if (totalCostStocks > box.amount) {
+            return res.status(403).send({ msg: "لايوجد رصيد كافي في الصندوق" });
         }
-        const userExsist = await userModel.findById(memberId);
-        if (!userExsist) {
-            return res.status(404).send({
-                msg: "العدد الخاص بهذا العضو غير موجود",
-            });
+
+        // 3. Validate member exists
+        const member = await userModel.findById(memberId);
+        if (!member) {
+            return res.status(404).send({ msg: "العضو غير موجود" });
         }
+
+        // 4. Input validation
         const { error } = validateStock({
-            nameContributingParty, nameContributingBank, numberStocks, costStocks, totalCostStocks, contributionDateMiladi, contributionDateHijri, freeStocks, numberOfPreviousStockWithFreeStock, previousStockCostWithFreeShare, previousCostOfStockWithFreeStock, memberId, memberPercentage
+            nameContributingParty, nameContributingBank, numberStocks,
+            costStocks, totalCostStocks, contributionDateMiladi,
+            contributionDateHijri, freeStocks, numberOfPreviousStockWithFreeStock,
+            previousStockCostWithFreeShare, previousCostOfStockWithFreeStock,
+            memberId, memberPercentage
         });
         if (error) {
-            console.log(error)
+            console.log(error);
             return res.status(422).send({
-                msg: "يرجى ادخال جميع المدخلات والتأكد من صحتها",
+                msg: "يرجى ادخال جميع المدخلات والتأكد من صحتها"
             });
         }
+
+        // 5. Prepare stock master record
         const hijriDate = getHijriDate();
-        let amountPercentage = totalCostStocks * (memberPercentage / 100)
-        const stocks = new stocksModel({
-            nameContributingParty, nameContributingBank, numberStocks, costStocks, totalCostStocks, contributionDateMiladi, contributionDateHijri, freeStocks, numberOfPreviousStockWithFreeStock, previousStockCostWithFreeShare, previousCostOfStockWithFreeStock, memberId, memberPercentage, amountPercentage: 0,
+        const stockMaster = new stocksModel({
+            nameContributingParty,
+            nameContributingBank,
+            numberStocks,
+            costStocks,
+            totalCostStocks,
+            contributionDateMiladi,
+            contributionDateHijri,
+            freeStocks,
+            numberOfPreviousStockWithFreeStock,
+            previousStockCostWithFreeShare,
+            previousCostOfStockWithFreeStock,
+            memberId,
+            memberPercentage,
+            amountPercentage: totalCostStocks * (memberPercentage / 100),
             previousStockCostWithAdditionalStock: previousStockCostWithFreeShare,
             costPreviousSharesWithAdditionalShares: previousCostOfStockWithFreeStock,
             totalNumberOfStock: numberOfPreviousStockWithFreeStock,
             currentValueOfStock: costStocks,
             totalCostOfStock: costStocks * numberOfPreviousStockWithFreeStock,
-            previousFundBalance: amountMoneyBox.amount,//>> 100%
-            contributionAmount: totalCostStocks,// >> x
-            contributionRate: (totalCostStocks * 100) / amountMoneyBox.amount,
+            previousFundBalance: box.amount,
+            contributionAmount: totalCostStocks,
+            contributionRate: (totalCostStocks * 100) / box.amount,
             hijriDate: {
                 day: hijriDate[0],
                 month: hijriDate[1],
-                year: hijriDate[2],
+                year: hijriDate[2]
             }
         });
-        await stocks.save();
-        const numberOfUser = await userModel.countDocuments({ "status": "active", "disable": false });
+        await stockMaster.save();
+
+        // 6. Debit the money box
+        await moneyBoxModel.findByIdAndUpdate(
+            moneyBoxId,
+            { $inc: { amount: -totalCostStocks } },
+            { new: true }
+        );
+
+        // 7. Load all active users
         const activeUsers = await userModel.find({
             status: "active",
-            disable: false,
-            //memberBalance: { $gte: (totalCostStocks - amountPercentage) / Number(numberOfUser)}
+            disable: false
         });
-        //const amount = (totalCostStocks - amountPercentage) / activeUsers.length;
-        const amount = totalCostStocks / activeUsers.length;
-        for (const user of activeUsers) {
-            let isSaved = false;
-            while (!isSaved) {
-                try {
-                    const userStock = new userStockModel({
-                        idStock: stocks._id,
-                        idUser: user._id,
-                        prevBalance: user.memberBalance,
-                        contributionAmount: amount,
-                        contributionRate: (amount * 100) / user.memberBalance,
-                        amountProfitPercentage: (user._id.toString() == memberId.toString()) ? memberPercentage : 0
-                    })
-                    user.memberBalance -= amount;
-                    await user.save();
-                    await userStock.save();
-                    isSaved = true;
-                } catch (error) {
-                    if (error.code === 11000) {
-                        await new Promise(res => setTimeout(res, Math.random() * 100));
-                    } else {
-                        throw error;
-                    }
-                }
-            }
-        }
-        const moneyBox = await moneyBoxModel.findByIdAndUpdate(moneyBoxId,
+
+        // 8. First, credit the special member’s free-percentage share:
+        //    they get `memberPercentage%` of totalCostStocks at no cost.
+        const freeShareAmount = totalCostStocks * (memberPercentage / 100);
+        await userModel.findByIdAndUpdate(
+            memberId,
             {
                 $inc: {
-                    amount: (totalCostStocks * (-1)),
+                    memberBalance: freeShareAmount,
+                    cumulativeBalance: freeShareAmount,
+                    stockContributionsFree: freeShareAmount
                 }
             },
-            { new: true })
-        if (!moneyBox) {
-            return res.status(400).send({
-                msg: "حدث خطأ أثناء معالجة طلبك",
-            });
+            { new: true }
+        );
+
+        // 9. Now distribute the **remaining** cost among all active users
+        const remainingCost = totalCostStocks - freeShareAmount;
+
+        // 10. Compute total of all users’ balances
+        const totalBalance = activeUsers.reduce((sum, u) => sum + u.memberBalance, 0);
+        if (totalBalance === 0) {
+            return res.status(400).send({ msg: "خطأ: أرصدة الأعضاء صفر" });
         }
+
+        // 11. Loop and create per-user stock contribution records
+        for (const user of activeUsers) {
+            const ratio = user.memberBalance / totalBalance;
+            const userContribution = remainingCost * ratio;
+            const userContributionPct = ratio * 100;
+
+            // a) update user balance
+            user.memberBalance -= userContribution;
+            await user.save();
+
+            // b) record the contribution
+            const us = new userStockModel({
+                idStock: stockMaster._id,
+                idUser: user._id,
+                prevBalance: user.memberBalance + userContribution, // before deduction
+                contributionAmount: userContribution,
+                contributionRate: userContributionPct,
+                amountProfitPercentage: user._id.equals(memberId) ? memberPercentage : 0
+            });
+            await us.save();
+        }
+
         return res.status(200).send({
-            msg: "لقد تمت اضافته بنجاح",
+            msg: "لقد تمت إضافته بنجاح"
         });
-    } catch (error) {
-        console.log(error)
+
+    } catch (err) {
+        console.error(err);
         return res.status(500).send({
             msg: "حدث خطأ أثناء معالجة طلبك"
         });
     }
-}
+};
+
 exports.currentPrice = async (req, res) => {
     const { idStock, price } = req.body;
     try {
@@ -169,7 +222,7 @@ exports.addAdditionalStock = async (req, res) => {
                 msg: "لا توجد هدى المساهمة"
             })
         }
-        if(stocks.dateSaleMiladi){
+        if (stocks.dateSaleMiladi) {
             return res.status(403).send({
                 msg: "لقد تم البيع من قبل"
             })
@@ -234,104 +287,149 @@ exports.addAdditionalStock = async (req, res) => {
 }
 exports.sellStock = async (req, res) => {
     const { idStock } = req.body;
+
     try {
+        // 1. Permission check
         if (
             req.user.admin.userPermission.indexOf(
                 "إضافة بيانات المساهمات (أسهم، صندوق استثماري، شركة مالية، أخرى)"
-            ) == -1
+            ) === -1
         ) {
             return res.status(403).send({
                 msg: "ليس لديك إذن إضافة بيانات المساهمات (أسهم، صندوق استثماري، شركة مالية، أخرى)",
             });
         }
-        const stocks = await stocksModel.findById(idStock).populate("memberId", {
-            password: false
-        });
-        if (!stocks) {
-            return res.status(404).send({
-                msg: "لا توجد هدى المساهمة"
-            })
+
+        // 2. Load stock master and validate
+        const stock = await stocksModel
+            .findById(idStock)
+            .populate("memberId", { password: false });
+        if (!stock) {
+            return res.status(404).send({ msg: "لا توجد بيانات المساهمة" });
         }
-        if(stocks.dateSaleMiladi){
-            return res.status(403).send({
-                msg: "لقد تم البيع من قبل"
-            })
+        if (stock.dateSaleMiladi) {
+            return res.status(403).send({ msg: "لقد تم البيع من قبل" });
         }
-        const hijriDate = getHijriDate();
-        stocks.stockSaleValue = stocks.currentValueOfStock * stocks.totalNumberOfStock;
-        stocks.dateSaleMiladi = new Date();
-        stocks.dateSaleHijri = {
-            day: hijriDate[0],
-            month: hijriDate[1],
-            year: hijriDate[2],
-        }
-        stocks.balanceAfterSale = (stocks.previousFundBalance - stocks.contributionAmount) + stocks.stockSaleValue;
-        var amount = stocks.stockSaleValue - stocks.totalCostOfStock;
-        var amountPercentage = 0;
-        if(amount <= 0) {
-            stocks.amountPercentage = 0;
-        }else {
-            amountPercentage = amount * (stocks.memberPercentage / 100);
-            stocks.amountPercentage = amountPercentage;
-            await userModel.updateOne({
-                _id: stocks.memberId._id
-            }, {
-                $inc: {
-                    memberBalance: amountPercentage < 0 ? 0 : amountPercentage,
-                    cumulativeBalance: amountPercentage < 0 ? 0 : amountPercentage,
-                    commodityProfitsContributions: amountPercentage < 0 ? 0 : amountPercentage
+
+        // 3. Compute sale values and dates
+        const saleValue = stock.currentValueOfStock * stock.totalNumberOfStock;
+        const profit = saleValue - stock.totalCostOfStock;  // can be negative
+        const now = new Date();
+        const [hDay, hMonth, hYear] = getHijriDate(now);
+
+        stock.stockSaleValue = saleValue;
+        stock.dateSaleMiladi = now;
+        stock.dateSaleHijri = { day: hDay, month: hMonth, year: hYear };
+        stock.balanceAfterSale = (stock.previousFundBalance - stock.contributionAmount) + saleValue;
+
+        // 4. Pay special member’s profit share first
+        let remainingProfit = profit;
+        let memberProfit = 0;
+        if (profit > 0 && stock.memberPercentage > 0) {
+            memberProfit = profit * (stock.memberPercentage / 100);
+            remainingProfit = profit - memberProfit;
+
+            // credit the special member
+            await userModel.updateOne(
+                { _id: stock.memberId._id },
+                {
+                    $inc: {
+                        memberBalance: memberProfit,
+                        cumulativeBalance: memberProfit,
+                        commodityProfitsContributions: memberProfit
+                    }
                 }
-            })
+            );
+
+            stock.amountPercentage = memberProfit;
+        } else {
+            stock.amountPercentage = 0;
         }
-        const userStock = await userStockModel.find({
-            idStock: stocks._id
-        }).populate("idUser", {
-            password: false
-        })
-        const amountUser = (amount - amountPercentage) / userStock.length;
-        const prevAmount = stocks.totalCostOfStock / userStock.length;
-        for(const user of userStock) {
-            const profitAmount = amountUser;
-            user.rate = (profitAmount * 100) / user.contributionAmount;
-            user.amount = profitAmount
-            user.balanceAfterSale = user.prevBalance + amountUser;
-            await user.save();
-            await userModel.findByIdAndUpdate(user.idUser, {
-                $inc: {
-                    memberBalance: user.amount + user.contributionAmount,
-                    cumulativeBalance: amount > 0 ? profitAmount : 0,
-                    commodityProfitsContributions: amount > 0 ? profitAmount : 0,
-                }
-            },
-                { new: true })
+
+        // 5. Load all contributor records
+        const contribs = await userStockModel
+            .find({ idStock: stock._id })
+            .populate("idUser", { password: false });
+        if (contribs.length === 0) {
+            // No contributors → nothing left to distribute
+            await stock.save();
+            await moneyBoxModel.findByIdAndUpdate(
+                moneyBoxId,
+                {
+                    $inc: {
+                        amount: saleValue,
+                        cumulativeAmount: Math.max(0, profit),
+                        "source.contributionRevenues": Math.max(0, profit)
+                    }
+                },
+                { new: true }
+            );
+            return res.status(200).send({ msg: "لقد تمت إضافته بنجاح", stock, userStock: [] });
         }
-        await stocks.save();
-        const moneyBox = await moneyBoxModel.findByIdAndUpdate(moneyBoxId,
+
+        // 6. Compute total principal contributed
+        const totalPrincipal = contribs.reduce((sum, c) => sum + c.contributionAmount, 0);
+        if (totalPrincipal === 0) {
+            return res.status(400).send({ msg: "خطأ: مجموع المساهمات صفر" });
+        }
+
+        // 7. Distribute remaining profit + refund principals
+        for (const rec of contribs) {
+            const ratio = rec.contributionAmount / totalPrincipal;
+            const userProfit = Math.max(0, remainingProfit) * ratio;  // no negative profit share
+            const principalRefund = rec.contributionAmount;
+
+            // Update userStock record
+            rec.rate = userProfit > 0
+                ? (userProfit * 100) / rec.contributionAmount
+                : 0;
+            rec.amount = userProfit;
+            rec.balanceAfterSale = rec.prevBalance + principalRefund + userProfit;
+            await rec.save();
+
+            // Credit user's account: principal + profit
+            await userModel.findByIdAndUpdate(
+                rec.idUser._id,
+                {
+                    $inc: {
+                        memberBalance: principalRefund + userProfit,
+                        cumulativeBalance: userProfit > 0 ? userProfit : 0,
+                        commodityProfitsContributions: userProfit > 0 ? userProfit : 0
+                    }
+                },
+                { new: true }
+            );
+        }
+
+        // 8. Persist stock master and update money box
+        await stock.save();
+        const netProfit = Math.max(0, profit);
+        await moneyBoxModel.findByIdAndUpdate(
+            moneyBoxId,
             {
                 $inc: {
-                    amount: stocks.stockSaleValue,
-                    cumulativeAmount: amount > 0 ? stocks.balanceAfterSale - stocks.previousFundBalance : 0,
-                    "source.contributionRevenues": amount > 0 ? stocks.balanceAfterSale - stocks.previousFundBalance : 0,
+                    amount: saleValue,
+                    cumulativeAmount: netProfit,
+                    "source.contributionRevenues": netProfit
                 }
             },
-            { new: true })
-        if (!moneyBox) {
-            return res.status(400).send({
-                msg: "حدث خطأ أثناء معالجة طلبك",
-            });
-        }
+            { new: true }
+        );
+
         return res.status(200).send({
-            msg: "لقد تمت اضافته بنجاح",
-            stocks,
-            userStock
+            msg: "لقد تمت إضافته بنجاح",
+            stock,
+            userStock: contribs
         });
+
     } catch (err) {
-        console.log(err)
+        console.error(err);
         return res.status(500).send({
             msg: "حدث خطأ أثناء معالجة طلبك"
         });
     }
-}
+};
+
 exports.getActiveUser = async (req, res) => {
     try {
         const users = await userModel.find({
@@ -388,7 +486,7 @@ exports.getStock = async (req, res) => {
 }
 
 exports.stockContributionRecord = async (req, res) => {
-    try{
+    try {
         const soldStocks = await stocksModel.find({
             dateSaleMiladi: { $exists: true, $ne: null }
         });
@@ -405,7 +503,7 @@ exports.stockContributionRecord = async (req, res) => {
             totalProfitAmount,
             totalNumberContribution
         })
-    }   catch (error) {
+    } catch (error) {
         return res.status(500).send({
             msg: "حدث خطأ أثناء معالجة طلبك"
         });
@@ -413,7 +511,7 @@ exports.stockContributionRecord = async (req, res) => {
 }
 exports.getRegisterShareholdersShares = async (req, res) => {
     const { id } = req.query;
-    try{
+    try {
         const userStock = await userStockModel.find({
             idStock: id
         }).populate("idUser", {
@@ -422,7 +520,7 @@ exports.getRegisterShareholdersShares = async (req, res) => {
         return res.status(200).send({
             userStock
         })
-    }catch (error) {
+    } catch (error) {
         return res.status(500).send({
             msg: "حدث خطأ أثناء معالجة طلبك"
         });
@@ -430,8 +528,8 @@ exports.getRegisterShareholdersShares = async (req, res) => {
 }
 
 exports.getActiveStocks = async (req, res) => {
-    const { date} = req.query;
-    try{
+    const { date } = req.query;
+    try {
         if (!date) {
             return res.status(400).send({ msg: "Please provide a date." });
         }

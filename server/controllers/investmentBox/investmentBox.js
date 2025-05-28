@@ -7,30 +7,36 @@ const moneyBoxId = process.env.moneyBoxId;
 
 
 exports.addInvestmentBox = async (req, res) => {
-    const { nameContributingParty,
+    const {
+        nameContributingParty,
         nameContributingBank,
         amount,
         duration,
         contributionDateMiladi,
         contributionDateHijri,
         contributionEndDateMiladi,
-        contributionEndDateHijri, } = req.body;
+        contributionEndDateHijri
+    } = req.body;
+
     try {
+        // 1. Permission check
         if (
             req.user.admin.userPermission.indexOf(
                 "إضافة بيانات المساهمات (أسهم، صندوق استثماري، شركة مالية، أخرى)"
-            ) == -1
+            ) === -1
         ) {
             return res.status(403).send({
-                msg: "ليس لديك إذن إضافة بيانات المساهمات (أسهم، صندوق استثماري، شركة مالية، أخرى)",
+                msg: "ليس لديك إذن إضافة بيانات المساهمات (أسهم، صندوق استثماري، شركة مالية، أخرى)"
             });
         }
-        const amountMoneyBox = await moneyBoxModel.findById(moneyBoxId);
-        if (amount > amountMoneyBox.amount) {
-            return res.status(403).send({
-                msg: "لايوجد رصيد كافي في الصندوق",
-            });
+
+        // 2. Check money box balance
+        const box = await moneyBoxModel.findById(moneyBoxId);
+        if (amount > box.amount) {
+            return res.status(403).send({ msg: "لايوجد رصيد كافي في الصندوق" });
         }
+
+        // 3. Validate input
         const { error } = validateInvestment({
             nameContributingParty,
             nameContributingBank,
@@ -42,11 +48,13 @@ exports.addInvestmentBox = async (req, res) => {
             contributionEndDateHijri
         });
         if (error) {
-            console.log(error)
+            console.log(error);
             return res.status(422).send({
-                msg: "يرجى ادخال جميع المدخلات والتأكد من صحتها",
+                msg: "يرجى ادخال جميع المدخلات والتأكد من صحتها"
             });
         }
+
+        // 4. Create investment master record
         const hijriDate = getHijriDate();
         const investment = new investmentBoxModel({
             nameContributingParty,
@@ -57,142 +65,189 @@ exports.addInvestmentBox = async (req, res) => {
             contributionDateHijri,
             contributionEndDateMiladi,
             contributionEndDateHijri,
-            previousFundBalance: amountMoneyBox.amount,
+            previousFundBalance: box.amount,
             contributionAmount: amount,
-            contributionRate: (amount * 100) / amountMoneyBox.amount,
+            contributionRate: (amount * 100) / box.amount,
             hijriDate: {
                 day: hijriDate[0],
                 month: hijriDate[1],
-                year: hijriDate[2],
+                year: hijriDate[2]
             }
-        })
+        });
         await investment.save();
-        const numberOfUser = await userModel.countDocuments({ "status": "active", "disable": false });
+
+        // 5. Debit the money box
+        await moneyBoxModel.findByIdAndUpdate(
+            moneyBoxId,
+            { $inc: { amount: -amount } },
+            { new: true }
+        );
+
+        // 6. Load active users
         const activeUsers = await userModel.find({
             status: "active",
-            disable: false,
+            disable: false
         });
-        const amountUser = amount / activeUsers.length;
+
+        // 7. Compute totalBalance for weighted split
+        const totalBalance = activeUsers.reduce((sum, u) => sum + u.memberBalance, 0);
+        if (totalBalance === 0) {
+            return res.status(400).send({ msg: "خطأ: أرصدة الأعضاء صفر" });
+        }
+
+        // 8. Distribute amount proportionally
         for (const user of activeUsers) {
-            let isSaved = false;
-            while (!isSaved) {
-                try {
-                    const userInvestment = new userInvestmentModel({
-                        idInvestment: investment._id,
-                        idUser: user._id,
-                        prevBalance: user.memberBalance,
-                        contributionAmount: amountUser,
-                        contributionRate: (amountUser * 100) / user.memberBalance,
-                    })
-                    user.memberBalance -= amountUser;
-                    await user.save();
-                    await userInvestment.save();
-                    isSaved = true;
-                } catch (error) {
-                    if (error.code === 11000) {
-                        await new Promise(res => setTimeout(res, Math.random() * 100));
-                    } else {
-                        throw error;
-                    }
-                }
-            }
-        }
-        const moneyBox = await moneyBoxModel.findByIdAndUpdate(moneyBoxId,
-            {
-                $inc: {
-                    amount: (amount * (-1)),
-                }
-            },
-            { new: true })
-        if (!moneyBox) {
-            return res.status(400).send({
-                msg: "حدث خطأ أثناء معالجة طلبك",
+            const shareRatio = user.memberBalance / totalBalance;
+            const userContribution = amount * shareRatio;
+            const contributionPct = shareRatio * 100;
+
+            // a) Deduct from user balance
+            user.memberBalance -= userContribution;
+            await user.save();
+
+            // b) Record the user’s investment
+            const ui = new userInvestmentModel({
+                idInvestment: investment._id,
+                idUser: user._id,
+                prevBalance: user.memberBalance + userContribution,
+                contributionAmount: userContribution,
+                contributionRate: contributionPct
             });
+            await ui.save();
         }
+
         return res.status(200).send({
-            msg: "لقد تمت اضافته بنجاح",
+            msg: "لقد تمت إضافته بنجاح"
         });
-    } catch (error) {
-        console.log(error)
+    } catch (err) {
+        console.error(err);
         return res.status(500).send({
             msg: "حدث خطأ أثناء معالجة طلبك"
         });
     }
-}
-exports.paymentInvesment = async (req, res) => {
-    const { idInvestment , money} = req.body;
+};
 
-    try{
+exports.paymentInvesment = async (req, res) => {
+    const { idInvestment, money } = req.body;
+
+    try {
+        // 1. Permission check
         if (
             req.user.admin.userPermission.indexOf(
                 "إضافة بيانات المساهمات (أسهم، صندوق استثماري، شركة مالية، أخرى)"
-            ) == -1
+            ) === -1
         ) {
             return res.status(403).send({
                 msg: "ليس لديك إذن إضافة بيانات المساهمات (أسهم، صندوق استثماري، شركة مالية، أخرى)",
             });
         }
-        const investment = await investmentBoxModel.findById(idInvestment)
+
+        // 2. Load the investment record
+        const investment = await investmentBoxModel.findById(idInvestment);
         if (!investment) {
-            return res.status(404).send({
-                msg: "لا توجد هدى المساهمة"
-            })
+            return res.status(404).send({ msg: "لا توجد بيانات المساهمة" });
         }
-        if(investment.isDone){
-            return res.status(403).send({
-                msg: "لقد تم البيع من قبل"
-            })
+        if (investment.isDone) {
+            return res.status(403).send({ msg: "لقد تم السداد من قبل" });
         }
+
+        // 3. Mark as done and record the payout
         investment.amountAfterEnd = money;
         investment.isDone = true;
-        const userInvestment = await userInvestmentModel.find({
-            idInvestment: investment._id
-        }).populate("idUser", {
-            password: false
-        });
-        const amountUser = money / userInvestment.length;
-        for(const user of userInvestment) {
-            //const profitAmount = amountUser;
-            user.rate = ((amountUser -  user.contributionAmount) / user.contributionAmount) * 100;
-            user.amount = amountUser
-            user.balanceAfterSale = user.prevBalance + (amountUser - user.contributionAmount);
-            await user.save();
-            await userModel.findByIdAndUpdate(user.idUser, {
-                $inc: {
-                    memberBalance: amountUser,
-                    cumulativeBalance: amountUser - user.contributionAmount > 0 ? amountUser - user.contributionAmount : 0,
-                    commodityProfitsContributions: amountUser - user.contributionAmount > 0 ? amountUser - user.contributionAmount : 0
-                }
-            },
-                { new: true })
-        }
-        await investment.save();
-        const moneyBox = await moneyBoxModel.findByIdAndUpdate(moneyBoxId,
-            {
-                $inc: {
-                    amount: investment.amountAfterEnd,
-                    cumulativeAmount: investment.amountAfterEnd - investment.amount > 0 ? investment.amountAfterEnd - investment.amount : 0,
-                    "source.investmentBox": investment.amountAfterEnd - investment.amount > 0 ? investment.amountAfterEnd - investment.amount : 0
-                }
-            },
-            { new: true })
-        if (!moneyBox) {
-            return res.status(400).send({
-                msg: "حدث خطأ أثناء معالجة طلبك",
+
+        // 4. Load all user-side records
+        const userRecs = await userInvestmentModel
+            .find({ idInvestment: investment._id })
+            .populate("idUser", { password: false });
+
+        // 5. If no participants, just credit the box
+        if (userRecs.length === 0) {
+            await investment.save();
+            await moneyBoxModel.findByIdAndUpdate(
+                moneyBoxId,
+                {
+                    $inc: {
+                        amount: money,
+                        cumulativeAmount: 0,
+                        "source.investmentBox": 0
+                    }
+                },
+                { new: true }
+            );
+            return res.status(200).send({
+                msg: "تم السداد بنجاح",
+                investment,
+                userInvestment: []
             });
         }
+
+        // 6. Compute total principal contributed
+        const totalPrincipal = userRecs.reduce((sum, u) => sum + u.contributionAmount, 0);
+        if (totalPrincipal === 0) {
+            return res.status(400).send({ msg: "خطأ: مجموع المساهمات صفر" });
+        }
+
+        // 7. Distribute the payout proportionally
+        let totalPositiveProfit = 0;
+        for (const rec of userRecs) {
+            const ratio = rec.contributionAmount / totalPrincipal;
+            const userTotal = money * ratio;                       // what this user receives
+            const userProfit = userTotal - rec.contributionAmount;  // net gain (can be negative)
+            const profitToCredit = Math.max(0, userProfit);
+
+            // a) Update the userInvestment record
+            rec.rate = profitToCredit > 0
+                ? (profitToCredit * 100) / rec.contributionAmount
+                : 0;
+            rec.amount = userTotal;
+            rec.balanceAfterSale = rec.prevBalance + userTotal;
+            await rec.save();
+
+            // b) Credit the user’s account
+            await userModel.findByIdAndUpdate(
+                rec.idUser._id,
+                {
+                    $inc: {
+                        memberBalance: userTotal,
+                        cumulativeBalance: profitToCredit,
+                        commodityProfitsContributions: profitToCredit
+                    }
+                },
+                { new: true }
+            );
+
+            totalPositiveProfit += profitToCredit;
+        }
+
+        // 8. Persist the investment and update the money box
+        await investment.save();
+        await moneyBoxModel.findByIdAndUpdate(
+            moneyBoxId,
+            {
+                $inc: {
+                    amount: money,
+                    cumulativeAmount: totalPositiveProfit,
+                    "source.investmentBox": totalPositiveProfit
+                }
+            },
+            { new: true }
+        );
+
+        // 9. Return success
         return res.status(200).send({
-            msg: "لقد تمت اضافته بنجاح",
+            msg: "لقد تم السداد بنجاح",
             investment,
-            userInvestment
+            userInvestment: userRecs
         });
-    } catch(error) {
-        console.log(error)
+
+    } catch (err) {
+        console.error(err);
         return res.status(500).send({
             msg: "حدث خطأ أثناء معالجة طلبك"
         });
     }
-}
+};
+
 exports.getIdInvestmentBox = async (req, res) => {
     const { month, year } = req.query;
     console.log(year)
