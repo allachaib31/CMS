@@ -14,11 +14,11 @@ function AnnualSubscriptionRecord() {
     const [showAlert, setShowAlert] = useState({
         display: false,
     });
-    const [year, setYear] = useState(hijriDateObject()[2]);
+    const [year, setYear] = useState(new Date().getFullYear());
 
     const generateYear = () => {
         const years = [];
-        for (let i = 1415; i <= year; i++) {
+        for (let i = 2019; i <= year; i++) {
             years.push(i);
         }
         setYearOptions(years);
@@ -89,10 +89,10 @@ function AnnualSubscriptionRecord() {
                 </Link>
             </div>
             <h1 className="text-center font-bold">
-            سجل الاشتراكات لعام : {year}
+                سجل الاشتراكات لعام : {year}
             </h1>
-            <h1  className="text-center font-bold">
-             الرصيد : {total.reduce((total, value) => {
+            <h1 className="text-center font-bold">
+                الرصيد : {total.reduce((total, value) => {
                     return total + Number(value);
                 })}
             </h1>
@@ -123,18 +123,19 @@ function AnnualSubscriptionRecord() {
                         <thead>
                             <tr className='text-center text-xs'>
                                 <th className='border border-slate-600'>الاسم</th>
-                                <th className='border border-slate-600'>محرم</th>
-                                <th className='border border-slate-600'>صفر</th>
-                                <th className='border border-slate-600'>ربيع <br />الاول</th>
-                                <th className='border border-slate-600'>ربيع <br />الثاني</th>
-                                <th className='border border-slate-600'>جمادى <br />الاول</th>
-                                <th className='border border-slate-600'>جمادى <br />الثاني</th>
-                                <th className='border border-slate-600'>رجب</th>
-                                <th className='border border-slate-600'>شعبان</th>
-                                <th className='border border-slate-600'>رمضان</th>
-                                <th className='border border-slate-600'>شوال</th>
-                                <th className='border border-slate-600'>ذو <br />القعدة</th>
-                                <th className='border border-slate-600'>ذو <br/>الحجة</th>
+                                <th className='border border-slate-600'>يناير</th>
+                                <th className='border border-slate-600'>فبراير</th>
+                                <th className='border border-slate-600'>مارس</th>
+                                <th className='border border-slate-600'>أبريل</th>
+                                <th className='border border-slate-600'>مايو</th>
+                                <th className='border border-slate-600'>يونيو</th>
+                                <th className='border border-slate-600'>يوليو</th>
+                                <th className='border border-slate-600'>أغسطس</th>
+                                <th className='border border-slate-600'>سبتمبر</th>
+                                <th className='border border-slate-600'>أكتوبر</th>
+                                <th className='border border-slate-600'>نوفمبر</th>
+                                <th className='border border-slate-600'>ديسمبر</th>
+
                                 <th className='border border-slate-600'>رصيد <br />العضو</th>
                                 <th className='border border-slate-600'>المتأخرات</th>
                                 <th className='border border-slate-600'>تفاصيل</th>

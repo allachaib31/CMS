@@ -1,0 +1,4695 @@
+[
+    {
+        "idUser": {
+            "$oid": "66ec5535f114ef61452922cc"
+        },
+        "months": {
+            "1": {
+                "name": "يناير",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-01-25",
+                "dueDateHijri": {
+                    "day": 25,
+                    "month": {
+                        "number": 7,
+                        "ar": "رَجَب"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 25,
+                    "month": {
+                        "number": 7,
+                        "ar": "رَجَب"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-01-25"
+            },
+            "2": {
+                "name": "فبراير",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-02-25",
+                "dueDateHijri": {
+                    "day": 26,
+                    "month": {
+                        "number": 8,
+                        "ar": "شَعْبَان"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 26,
+                    "month": {
+                        "number": 8,
+                        "ar": "شَعْبَان"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-02-25"
+            },
+            "3": {
+                "name": "مارس",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-03-25",
+                "dueDateHijri": {
+                    "day": 25,
+                    "month": {
+                        "number": 9,
+                        "ar": "رَمَضان"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 25,
+                    "month": {
+                        "number": 9,
+                        "ar": "رَمَضان"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-03-25"
+            },
+            "4": {
+                "name": "أبريل",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-04-25",
+                "dueDateHijri": {
+                    "day": 26,
+                    "month": {
+                        "number": 10,
+                        "ar": "شَوّال"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 26,
+                    "month": {
+                        "number": 10,
+                        "ar": "شَوّال"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-04-25"
+            },
+            "5": {
+                "name": "مايو",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-05-25",
+                "dueDateHijri": {
+                    "day": 27,
+                    "month": {
+                        "number": 11,
+                        "ar": "ذو القعدة"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 27,
+                    "month": {
+                        "number": 11,
+                        "ar": "ذو القعدة"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-05-25"
+            },
+            "6": {
+                "name": "يونيو",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-06-25",
+                "dueDateHijri": {
+                    "day": 29,
+                    "month": {
+                        "number": 12,
+                        "ar": "ذو الحِجّة"
+                    },
+                    "year": 1446
+                }
+            },
+            "7": {
+                "name": "يوليو",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-07-25",
+                "dueDateHijri": {
+                    "day": 30,
+                    "month": {
+                        "number": 1,
+                        "ar": "مُحَرَّم"
+                    },
+                    "year": 1447
+                }
+            },
+            "8": {
+                "name": "أغسطس",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-08-25",
+                "dueDateHijri": {
+                    "day": 2,
+                    "month": {
+                        "number": 3,
+                        "ar": "رَبِيع الأَوَّل"
+                    },
+                    "year": 1447
+                }
+            },
+            "9": {
+                "name": "سبتمبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-09-25",
+                "dueDateHijri": {
+                    "day": 3,
+                    "month": {
+                        "number": 4,
+                        "ar": "رَبِيع الآخِر"
+                    },
+                    "year": 1447
+                }
+            },
+            "10": {
+                "name": "أكتوبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-10-25",
+                "dueDateHijri": {
+                    "day": 3,
+                    "month": {
+                        "number": 5,
+                        "ar": "جُمادى الأولى"
+                    },
+                    "year": 1447
+                }
+            },
+            "11": {
+                "name": "نوفمبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-11-25",
+                "dueDateHijri": {
+                    "day": 4,
+                    "month": {
+                        "number": 6,
+                        "ar": "جُمادى الثانية"
+                    },
+                    "year": 1447
+                }
+            },
+            "12": {
+                "name": "ديسمبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-12-25",
+                "dueDateHijri": {
+                    "day": 5,
+                    "month": {
+                        "number": 7,
+                        "ar": "رَجَب"
+                    },
+                    "year": 1447
+                }
+            }
+        },
+        "total": 1400,
+        "year": "2025",
+        "numberofArrears": 0,
+        "comments": "",
+        "hijriDate": {
+            "day": 25,
+            "month": {
+                "number": 7,
+                "ar": "رَجَب"
+            },
+            "year": 1446
+        },
+        "createdAt": {
+            "$date": "2025-01-25T00:00:00.000Z"
+        }
+    },
+    {
+        "idUser": {
+            "$oid": "66ec5535f114ef61452922cd"
+        },
+        "months": {
+            "1": {
+                "name": "يناير",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-01-25",
+                "dueDateHijri": {
+                    "day": 25,
+                    "month": {
+                        "number": 7,
+                        "ar": "رَجَب"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 25,
+                    "month": {
+                        "number": 7,
+                        "ar": "رَجَب"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-01-25"
+            },
+            "2": {
+                "name": "فبراير",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-02-25",
+                "dueDateHijri": {
+                    "day": 26,
+                    "month": {
+                        "number": 8,
+                        "ar": "شَعْبَان"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 26,
+                    "month": {
+                        "number": 8,
+                        "ar": "شَعْبَان"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-02-25"
+            },
+            "3": {
+                "name": "مارس",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-03-25",
+                "dueDateHijri": {
+                    "day": 25,
+                    "month": {
+                        "number": 9,
+                        "ar": "رَمَضان"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 25,
+                    "month": {
+                        "number": 9,
+                        "ar": "رَمَضان"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-03-25"
+            },
+            "4": {
+                "name": "أبريل",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-04-25",
+                "dueDateHijri": {
+                    "day": 26,
+                    "month": {
+                        "number": 10,
+                        "ar": "شَوّال"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 26,
+                    "month": {
+                        "number": 10,
+                        "ar": "شَوّال"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-04-25"
+            },
+            "5": {
+                "name": "مايو",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-05-25",
+                "dueDateHijri": {
+                    "day": 27,
+                    "month": {
+                        "number": 11,
+                        "ar": "ذو القعدة"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 27,
+                    "month": {
+                        "number": 11,
+                        "ar": "ذو القعدة"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-05-25"
+            },
+            "6": {
+                "name": "يونيو",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-06-25",
+                "dueDateHijri": {
+                    "day": 29,
+                    "month": {
+                        "number": 12,
+                        "ar": "ذو الحِجّة"
+                    },
+                    "year": 1446
+                }
+            },
+            "7": {
+                "name": "يوليو",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-07-25",
+                "dueDateHijri": {
+                    "day": 30,
+                    "month": {
+                        "number": 1,
+                        "ar": "مُحَرَّم"
+                    },
+                    "year": 1447
+                }
+            },
+            "8": {
+                "name": "أغسطس",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-08-25",
+                "dueDateHijri": {
+                    "day": 2,
+                    "month": {
+                        "number": 3,
+                        "ar": "رَبِيع الأَوَّل"
+                    },
+                    "year": 1447
+                }
+            },
+            "9": {
+                "name": "سبتمبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-09-25",
+                "dueDateHijri": {
+                    "day": 3,
+                    "month": {
+                        "number": 4,
+                        "ar": "رَبِيع الآخِر"
+                    },
+                    "year": 1447
+                }
+            },
+            "10": {
+                "name": "أكتوبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-10-25",
+                "dueDateHijri": {
+                    "day": 3,
+                    "month": {
+                        "number": 5,
+                        "ar": "جُمادى الأولى"
+                    },
+                    "year": 1447
+                }
+            },
+            "11": {
+                "name": "نوفمبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-11-25",
+                "dueDateHijri": {
+                    "day": 4,
+                    "month": {
+                        "number": 6,
+                        "ar": "جُمادى الثانية"
+                    },
+                    "year": 1447
+                }
+            },
+            "12": {
+                "name": "ديسمبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-12-25",
+                "dueDateHijri": {
+                    "day": 5,
+                    "month": {
+                        "number": 7,
+                        "ar": "رَجَب"
+                    },
+                    "year": 1447
+                }
+            }
+        },
+        "total": 1400,
+        "year": "2025",
+        "numberofArrears": 0,
+        "comments": "",
+        "hijriDate": {
+            "day": 25,
+            "month": {
+                "number": 7,
+                "ar": "رَجَب"
+            },
+            "year": 1446
+        },
+        "createdAt": {
+            "$date": "2025-01-25T00:00:00.000Z"
+        }
+    },
+    {
+        "idUser": {
+            "$oid": "66ec5535f114ef61452922ce"
+        },
+        "months": {
+            "1": {
+                "name": "يناير",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-01-25",
+                "dueDateHijri": {
+                    "day": 25,
+                    "month": {
+                        "number": 7,
+                        "ar": "رَجَب"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 25,
+                    "month": {
+                        "number": 7,
+                        "ar": "رَجَب"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-01-25"
+            },
+            "2": {
+                "name": "فبراير",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-02-25",
+                "dueDateHijri": {
+                    "day": 26,
+                    "month": {
+                        "number": 8,
+                        "ar": "شَعْبَان"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 26,
+                    "month": {
+                        "number": 8,
+                        "ar": "شَعْبَان"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-02-25"
+            },
+            "3": {
+                "name": "مارس",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-03-25",
+                "dueDateHijri": {
+                    "day": 25,
+                    "month": {
+                        "number": 9,
+                        "ar": "رَمَضان"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 25,
+                    "month": {
+                        "number": 9,
+                        "ar": "رَمَضان"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-03-25"
+            },
+            "4": {
+                "name": "أبريل",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-04-25",
+                "dueDateHijri": {
+                    "day": 26,
+                    "month": {
+                        "number": 10,
+                        "ar": "شَوّال"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 26,
+                    "month": {
+                        "number": 10,
+                        "ar": "شَوّال"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-04-25"
+            },
+            "5": {
+                "name": "مايو",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-05-25",
+                "dueDateHijri": {
+                    "day": 27,
+                    "month": {
+                        "number": 11,
+                        "ar": "ذو القعدة"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 27,
+                    "month": {
+                        "number": 11,
+                        "ar": "ذو القعدة"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-05-25"
+            },
+            "6": {
+                "name": "يونيو",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-06-25",
+                "dueDateHijri": {
+                    "day": 29,
+                    "month": {
+                        "number": 12,
+                        "ar": "ذو الحِجّة"
+                    },
+                    "year": 1446
+                }
+            },
+            "7": {
+                "name": "يوليو",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-07-25",
+                "dueDateHijri": {
+                    "day": 30,
+                    "month": {
+                        "number": 1,
+                        "ar": "مُحَرَّم"
+                    },
+                    "year": 1447
+                }
+            },
+            "8": {
+                "name": "أغسطس",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-08-25",
+                "dueDateHijri": {
+                    "day": 2,
+                    "month": {
+                        "number": 3,
+                        "ar": "رَبِيع الأَوَّل"
+                    },
+                    "year": 1447
+                }
+            },
+            "9": {
+                "name": "سبتمبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-09-25",
+                "dueDateHijri": {
+                    "day": 3,
+                    "month": {
+                        "number": 4,
+                        "ar": "رَبِيع الآخِر"
+                    },
+                    "year": 1447
+                }
+            },
+            "10": {
+                "name": "أكتوبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-10-25",
+                "dueDateHijri": {
+                    "day": 3,
+                    "month": {
+                        "number": 5,
+                        "ar": "جُمادى الأولى"
+                    },
+                    "year": 1447
+                }
+            },
+            "11": {
+                "name": "نوفمبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-11-25",
+                "dueDateHijri": {
+                    "day": 4,
+                    "month": {
+                        "number": 6,
+                        "ar": "جُمادى الثانية"
+                    },
+                    "year": 1447
+                }
+            },
+            "12": {
+                "name": "ديسمبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-12-25",
+                "dueDateHijri": {
+                    "day": 5,
+                    "month": {
+                        "number": 7,
+                        "ar": "رَجَب"
+                    },
+                    "year": 1447
+                }
+            }
+        },
+        "total": 1400,
+        "year": "2025",
+        "numberofArrears": 0,
+        "comments": "",
+        "hijriDate": {
+            "day": 25,
+            "month": {
+                "number": 7,
+                "ar": "رَجَب"
+            },
+            "year": 1446
+        },
+        "createdAt": {
+            "$date": "2025-01-25T00:00:00.000Z"
+        }
+    },
+    {
+        "idUser": {
+            "$oid": "66ec5535f114ef61452922cf"
+        },
+        "months": {
+            "1": {
+                "name": "يناير",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-01-25",
+                "dueDateHijri": {
+                    "day": 25,
+                    "month": {
+                        "number": 7,
+                        "ar": "رَجَب"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 25,
+                    "month": {
+                        "number": 7,
+                        "ar": "رَجَب"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-01-25"
+            },
+            "2": {
+                "name": "فبراير",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-02-25",
+                "dueDateHijri": {
+                    "day": 26,
+                    "month": {
+                        "number": 8,
+                        "ar": "شَعْبَان"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 26,
+                    "month": {
+                        "number": 8,
+                        "ar": "شَعْبَان"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-02-25"
+            },
+            "3": {
+                "name": "مارس",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-03-25",
+                "dueDateHijri": {
+                    "day": 25,
+                    "month": {
+                        "number": 9,
+                        "ar": "رَمَضان"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 25,
+                    "month": {
+                        "number": 9,
+                        "ar": "رَمَضان"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-03-25"
+            },
+            "4": {
+                "name": "أبريل",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-04-25",
+                "dueDateHijri": {
+                    "day": 26,
+                    "month": {
+                        "number": 10,
+                        "ar": "شَوّال"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 26,
+                    "month": {
+                        "number": 10,
+                        "ar": "شَوّال"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-04-25"
+            },
+            "5": {
+                "name": "مايو",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-05-25",
+                "dueDateHijri": {
+                    "day": 27,
+                    "month": {
+                        "number": 11,
+                        "ar": "ذو القعدة"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 27,
+                    "month": {
+                        "number": 11,
+                        "ar": "ذو القعدة"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-05-25"
+            },
+            "6": {
+                "name": "يونيو",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-06-25",
+                "dueDateHijri": {
+                    "day": 29,
+                    "month": {
+                        "number": 12,
+                        "ar": "ذو الحِجّة"
+                    },
+                    "year": 1446
+                }
+            },
+            "7": {
+                "name": "يوليو",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-07-25",
+                "dueDateHijri": {
+                    "day": 30,
+                    "month": {
+                        "number": 1,
+                        "ar": "مُحَرَّم"
+                    },
+                    "year": 1447
+                }
+            },
+            "8": {
+                "name": "أغسطس",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-08-25",
+                "dueDateHijri": {
+                    "day": 2,
+                    "month": {
+                        "number": 3,
+                        "ar": "رَبِيع الأَوَّل"
+                    },
+                    "year": 1447
+                }
+            },
+            "9": {
+                "name": "سبتمبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-09-25",
+                "dueDateHijri": {
+                    "day": 3,
+                    "month": {
+                        "number": 4,
+                        "ar": "رَبِيع الآخِر"
+                    },
+                    "year": 1447
+                }
+            },
+            "10": {
+                "name": "أكتوبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-10-25",
+                "dueDateHijri": {
+                    "day": 3,
+                    "month": {
+                        "number": 5,
+                        "ar": "جُمادى الأولى"
+                    },
+                    "year": 1447
+                }
+            },
+            "11": {
+                "name": "نوفمبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-11-25",
+                "dueDateHijri": {
+                    "day": 4,
+                    "month": {
+                        "number": 6,
+                        "ar": "جُمادى الثانية"
+                    },
+                    "year": 1447
+                }
+            },
+            "12": {
+                "name": "ديسمبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-12-25",
+                "dueDateHijri": {
+                    "day": 5,
+                    "month": {
+                        "number": 7,
+                        "ar": "رَجَب"
+                    },
+                    "year": 1447
+                }
+            }
+        },
+        "total": 1400,
+        "year": "2025",
+        "numberofArrears": 0,
+        "comments": "",
+        "hijriDate": {
+            "day": 25,
+            "month": {
+                "number": 7,
+                "ar": "رَجَب"
+            },
+            "year": 1446
+        },
+        "createdAt": {
+            "$date": "2025-01-25T00:00:00.000Z"
+        }
+    },
+    {
+        "idUser": {
+            "$oid": "66ec5535f114ef61452922d0"
+        },
+        "months": {
+            "1": {
+                "name": "يناير",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-01-25",
+                "dueDateHijri": {
+                    "day": 25,
+                    "month": {
+                        "number": 7,
+                        "ar": "رَجَب"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 25,
+                    "month": {
+                        "number": 7,
+                        "ar": "رَجَب"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-01-25"
+            },
+            "2": {
+                "name": "فبراير",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-02-25",
+                "dueDateHijri": {
+                    "day": 26,
+                    "month": {
+                        "number": 8,
+                        "ar": "شَعْبَان"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 26,
+                    "month": {
+                        "number": 8,
+                        "ar": "شَعْبَان"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-02-25"
+            },
+            "3": {
+                "name": "مارس",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-03-25",
+                "dueDateHijri": {
+                    "day": 25,
+                    "month": {
+                        "number": 9,
+                        "ar": "رَمَضان"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 25,
+                    "month": {
+                        "number": 9,
+                        "ar": "رَمَضان"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-03-25"
+            },
+            "4": {
+                "name": "أبريل",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-04-25",
+                "dueDateHijri": {
+                    "day": 26,
+                    "month": {
+                        "number": 10,
+                        "ar": "شَوّال"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 26,
+                    "month": {
+                        "number": 10,
+                        "ar": "شَوّال"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-04-25"
+            },
+            "5": {
+                "name": "مايو",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-05-25",
+                "dueDateHijri": {
+                    "day": 27,
+                    "month": {
+                        "number": 11,
+                        "ar": "ذو القعدة"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 27,
+                    "month": {
+                        "number": 11,
+                        "ar": "ذو القعدة"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-05-25"
+            },
+            "6": {
+                "name": "يونيو",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-06-25",
+                "dueDateHijri": {
+                    "day": 29,
+                    "month": {
+                        "number": 12,
+                        "ar": "ذو الحِجّة"
+                    },
+                    "year": 1446
+                }
+            },
+            "7": {
+                "name": "يوليو",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-07-25",
+                "dueDateHijri": {
+                    "day": 30,
+                    "month": {
+                        "number": 1,
+                        "ar": "مُحَرَّم"
+                    },
+                    "year": 1447
+                }
+            },
+            "8": {
+                "name": "أغسطس",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-08-25",
+                "dueDateHijri": {
+                    "day": 2,
+                    "month": {
+                        "number": 3,
+                        "ar": "رَبِيع الأَوَّل"
+                    },
+                    "year": 1447
+                }
+            },
+            "9": {
+                "name": "سبتمبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-09-25",
+                "dueDateHijri": {
+                    "day": 3,
+                    "month": {
+                        "number": 4,
+                        "ar": "رَبِيع الآخِر"
+                    },
+                    "year": 1447
+                }
+            },
+            "10": {
+                "name": "أكتوبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-10-25",
+                "dueDateHijri": {
+                    "day": 3,
+                    "month": {
+                        "number": 5,
+                        "ar": "جُمادى الأولى"
+                    },
+                    "year": 1447
+                }
+            },
+            "11": {
+                "name": "نوفمبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-11-25",
+                "dueDateHijri": {
+                    "day": 4,
+                    "month": {
+                        "number": 6,
+                        "ar": "جُمادى الثانية"
+                    },
+                    "year": 1447
+                }
+            },
+            "12": {
+                "name": "ديسمبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-12-25",
+                "dueDateHijri": {
+                    "day": 5,
+                    "month": {
+                        "number": 7,
+                        "ar": "رَجَب"
+                    },
+                    "year": 1447
+                }
+            }
+        },
+        "total": 1400,
+        "year": "2025",
+        "numberofArrears": 0,
+        "comments": "",
+        "hijriDate": {
+            "day": 25,
+            "month": {
+                "number": 7,
+                "ar": "رَجَب"
+            },
+            "year": 1446
+        },
+        "createdAt": {
+            "$date": "2025-01-25T00:00:00.000Z"
+        }
+    },
+    {
+        "idUser": {
+            "$oid": "66ec5535f114ef61452922d1"
+        },
+        "months": {
+            "1": {
+                "name": "يناير",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-01-25",
+                "dueDateHijri": {
+                    "day": 25,
+                    "month": {
+                        "number": 7,
+                        "ar": "رَجَب"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 25,
+                    "month": {
+                        "number": 7,
+                        "ar": "رَجَب"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-01-25"
+            },
+            "2": {
+                "name": "فبراير",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-02-25",
+                "dueDateHijri": {
+                    "day": 26,
+                    "month": {
+                        "number": 8,
+                        "ar": "شَعْبَان"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 26,
+                    "month": {
+                        "number": 8,
+                        "ar": "شَعْبَان"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-02-25"
+            },
+            "3": {
+                "name": "مارس",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-03-25",
+                "dueDateHijri": {
+                    "day": 25,
+                    "month": {
+                        "number": 9,
+                        "ar": "رَمَضان"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 25,
+                    "month": {
+                        "number": 9,
+                        "ar": "رَمَضان"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-03-25"
+            },
+            "4": {
+                "name": "أبريل",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-04-25",
+                "dueDateHijri": {
+                    "day": 26,
+                    "month": {
+                        "number": 10,
+                        "ar": "شَوّال"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 26,
+                    "month": {
+                        "number": 10,
+                        "ar": "شَوّال"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-04-25"
+            },
+            "5": {
+                "name": "مايو",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-05-25",
+                "dueDateHijri": {
+                    "day": 27,
+                    "month": {
+                        "number": 11,
+                        "ar": "ذو القعدة"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 27,
+                    "month": {
+                        "number": 11,
+                        "ar": "ذو القعدة"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-05-25"
+            },
+            "6": {
+                "name": "يونيو",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-06-25",
+                "dueDateHijri": {
+                    "day": 29,
+                    "month": {
+                        "number": 12,
+                        "ar": "ذو الحِجّة"
+                    },
+                    "year": 1446
+                }
+            },
+            "7": {
+                "name": "يوليو",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-07-25",
+                "dueDateHijri": {
+                    "day": 30,
+                    "month": {
+                        "number": 1,
+                        "ar": "مُحَرَّم"
+                    },
+                    "year": 1447
+                }
+            },
+            "8": {
+                "name": "أغسطس",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-08-25",
+                "dueDateHijri": {
+                    "day": 2,
+                    "month": {
+                        "number": 3,
+                        "ar": "رَبِيع الأَوَّل"
+                    },
+                    "year": 1447
+                }
+            },
+            "9": {
+                "name": "سبتمبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-09-25",
+                "dueDateHijri": {
+                    "day": 3,
+                    "month": {
+                        "number": 4,
+                        "ar": "رَبِيع الآخِر"
+                    },
+                    "year": 1447
+                }
+            },
+            "10": {
+                "name": "أكتوبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-10-25",
+                "dueDateHijri": {
+                    "day": 3,
+                    "month": {
+                        "number": 5,
+                        "ar": "جُمادى الأولى"
+                    },
+                    "year": 1447
+                }
+            },
+            "11": {
+                "name": "نوفمبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-11-25",
+                "dueDateHijri": {
+                    "day": 4,
+                    "month": {
+                        "number": 6,
+                        "ar": "جُمادى الثانية"
+                    },
+                    "year": 1447
+                }
+            },
+            "12": {
+                "name": "ديسمبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-12-25",
+                "dueDateHijri": {
+                    "day": 5,
+                    "month": {
+                        "number": 7,
+                        "ar": "رَجَب"
+                    },
+                    "year": 1447
+                }
+            }
+        },
+        "total": 1400,
+        "year": "2025",
+        "numberofArrears": 0,
+        "comments": "",
+        "hijriDate": {
+            "day": 25,
+            "month": {
+                "number": 7,
+                "ar": "رَجَب"
+            },
+            "year": 1446
+        },
+        "createdAt": {
+            "$date": "2025-01-25T00:00:00.000Z"
+        }
+    },
+    {
+        "idUser": {
+            "$oid": "66ec5535f114ef61452922d2"
+        },
+        "months": {
+            "1": {
+                "name": "يناير",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-01-25",
+                "dueDateHijri": {
+                    "day": 25,
+                    "month": {
+                        "number": 7,
+                        "ar": "رَجَب"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 25,
+                    "month": {
+                        "number": 7,
+                        "ar": "رَجَب"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-01-25"
+            },
+            "2": {
+                "name": "فبراير",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-02-25",
+                "dueDateHijri": {
+                    "day": 26,
+                    "month": {
+                        "number": 8,
+                        "ar": "شَعْبَان"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 26,
+                    "month": {
+                        "number": 8,
+                        "ar": "شَعْبَان"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-02-25"
+            },
+            "3": {
+                "name": "مارس",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-03-25",
+                "dueDateHijri": {
+                    "day": 25,
+                    "month": {
+                        "number": 9,
+                        "ar": "رَمَضان"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 25,
+                    "month": {
+                        "number": 9,
+                        "ar": "رَمَضان"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-03-25"
+            },
+            "4": {
+                "name": "أبريل",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-04-25",
+                "dueDateHijri": {
+                    "day": 26,
+                    "month": {
+                        "number": 10,
+                        "ar": "شَوّال"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 26,
+                    "month": {
+                        "number": 10,
+                        "ar": "شَوّال"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-04-25"
+            },
+            "5": {
+                "name": "مايو",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-05-25",
+                "dueDateHijri": {
+                    "day": 27,
+                    "month": {
+                        "number": 11,
+                        "ar": "ذو القعدة"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 27,
+                    "month": {
+                        "number": 11,
+                        "ar": "ذو القعدة"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-05-25"
+            },
+            "6": {
+                "name": "يونيو",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-06-25",
+                "dueDateHijri": {
+                    "day": 29,
+                    "month": {
+                        "number": 12,
+                        "ar": "ذو الحِجّة"
+                    },
+                    "year": 1446
+                }
+            },
+            "7": {
+                "name": "يوليو",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-07-25",
+                "dueDateHijri": {
+                    "day": 30,
+                    "month": {
+                        "number": 1,
+                        "ar": "مُحَرَّم"
+                    },
+                    "year": 1447
+                }
+            },
+            "8": {
+                "name": "أغسطس",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-08-25",
+                "dueDateHijri": {
+                    "day": 2,
+                    "month": {
+                        "number": 3,
+                        "ar": "رَبِيع الأَوَّل"
+                    },
+                    "year": 1447
+                }
+            },
+            "9": {
+                "name": "سبتمبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-09-25",
+                "dueDateHijri": {
+                    "day": 3,
+                    "month": {
+                        "number": 4,
+                        "ar": "رَبِيع الآخِر"
+                    },
+                    "year": 1447
+                }
+            },
+            "10": {
+                "name": "أكتوبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-10-25",
+                "dueDateHijri": {
+                    "day": 3,
+                    "month": {
+                        "number": 5,
+                        "ar": "جُمادى الأولى"
+                    },
+                    "year": 1447
+                }
+            },
+            "11": {
+                "name": "نوفمبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-11-25",
+                "dueDateHijri": {
+                    "day": 4,
+                    "month": {
+                        "number": 6,
+                        "ar": "جُمادى الثانية"
+                    },
+                    "year": 1447
+                }
+            },
+            "12": {
+                "name": "ديسمبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-12-25",
+                "dueDateHijri": {
+                    "day": 5,
+                    "month": {
+                        "number": 7,
+                        "ar": "رَجَب"
+                    },
+                    "year": 1447
+                }
+            }
+        },
+        "total": 1400,
+        "year": "2025",
+        "numberofArrears": 0,
+        "comments": "",
+        "hijriDate": {
+            "day": 25,
+            "month": {
+                "number": 7,
+                "ar": "رَجَب"
+            },
+            "year": 1446
+        },
+        "createdAt": {
+            "$date": "2025-01-25T00:00:00.000Z"
+        }
+    },
+    {
+        "idUser": {
+            "$oid": "66ec5535f114ef61452922d3"
+        },
+        "months": {
+            "1": {
+                "name": "يناير",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-01-25",
+                "dueDateHijri": {
+                    "day": 25,
+                    "month": {
+                        "number": 7,
+                        "ar": "رَجَب"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 25,
+                    "month": {
+                        "number": 7,
+                        "ar": "رَجَب"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-01-25"
+            },
+            "2": {
+                "name": "فبراير",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-02-25",
+                "dueDateHijri": {
+                    "day": 26,
+                    "month": {
+                        "number": 8,
+                        "ar": "شَعْبَان"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 26,
+                    "month": {
+                        "number": 8,
+                        "ar": "شَعْبَان"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-02-25"
+            },
+            "3": {
+                "name": "مارس",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-03-25",
+                "dueDateHijri": {
+                    "day": 25,
+                    "month": {
+                        "number": 9,
+                        "ar": "رَمَضان"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 25,
+                    "month": {
+                        "number": 9,
+                        "ar": "رَمَضان"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-03-25"
+            },
+            "4": {
+                "name": "أبريل",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-04-25",
+                "dueDateHijri": {
+                    "day": 26,
+                    "month": {
+                        "number": 10,
+                        "ar": "شَوّال"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 26,
+                    "month": {
+                        "number": 10,
+                        "ar": "شَوّال"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-04-25"
+            },
+            "5": {
+                "name": "مايو",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-05-25",
+                "dueDateHijri": {
+                    "day": 27,
+                    "month": {
+                        "number": 11,
+                        "ar": "ذو القعدة"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 27,
+                    "month": {
+                        "number": 11,
+                        "ar": "ذو القعدة"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-05-25"
+            },
+            "6": {
+                "name": "يونيو",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-06-25",
+                "dueDateHijri": {
+                    "day": 29,
+                    "month": {
+                        "number": 12,
+                        "ar": "ذو الحِجّة"
+                    },
+                    "year": 1446
+                }
+            },
+            "7": {
+                "name": "يوليو",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-07-25",
+                "dueDateHijri": {
+                    "day": 30,
+                    "month": {
+                        "number": 1,
+                        "ar": "مُحَرَّم"
+                    },
+                    "year": 1447
+                }
+            },
+            "8": {
+                "name": "أغسطس",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-08-25",
+                "dueDateHijri": {
+                    "day": 2,
+                    "month": {
+                        "number": 3,
+                        "ar": "رَبِيع الأَوَّل"
+                    },
+                    "year": 1447
+                }
+            },
+            "9": {
+                "name": "سبتمبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-09-25",
+                "dueDateHijri": {
+                    "day": 3,
+                    "month": {
+                        "number": 4,
+                        "ar": "رَبِيع الآخِر"
+                    },
+                    "year": 1447
+                }
+            },
+            "10": {
+                "name": "أكتوبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-10-25",
+                "dueDateHijri": {
+                    "day": 3,
+                    "month": {
+                        "number": 5,
+                        "ar": "جُمادى الأولى"
+                    },
+                    "year": 1447
+                }
+            },
+            "11": {
+                "name": "نوفمبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-11-25",
+                "dueDateHijri": {
+                    "day": 4,
+                    "month": {
+                        "number": 6,
+                        "ar": "جُمادى الثانية"
+                    },
+                    "year": 1447
+                }
+            },
+            "12": {
+                "name": "ديسمبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-12-25",
+                "dueDateHijri": {
+                    "day": 5,
+                    "month": {
+                        "number": 7,
+                        "ar": "رَجَب"
+                    },
+                    "year": 1447
+                }
+            }
+        },
+        "total": 1400,
+        "year": "2025",
+        "numberofArrears": 0,
+        "comments": "",
+        "hijriDate": {
+            "day": 25,
+            "month": {
+                "number": 7,
+                "ar": "رَجَب"
+            },
+            "year": 1446
+        },
+        "createdAt": {
+            "$date": "2025-01-25T00:00:00.000Z"
+        }
+    },
+    {
+        "idUser": {
+            "$oid": "66ec5535f114ef61452922d4"
+        },
+        "months": {
+            "1": {
+                "name": "يناير",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-01-25",
+                "dueDateHijri": {
+                    "day": 25,
+                    "month": {
+                        "number": 7,
+                        "ar": "رَجَب"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 25,
+                    "month": {
+                        "number": 7,
+                        "ar": "رَجَب"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-01-25"
+            },
+            "2": {
+                "name": "فبراير",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-02-25",
+                "dueDateHijri": {
+                    "day": 26,
+                    "month": {
+                        "number": 8,
+                        "ar": "شَعْبَان"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 26,
+                    "month": {
+                        "number": 8,
+                        "ar": "شَعْبَان"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-02-25"
+            },
+            "3": {
+                "name": "مارس",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-03-25",
+                "dueDateHijri": {
+                    "day": 25,
+                    "month": {
+                        "number": 9,
+                        "ar": "رَمَضان"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 25,
+                    "month": {
+                        "number": 9,
+                        "ar": "رَمَضان"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-03-25"
+            },
+            "4": {
+                "name": "أبريل",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-04-25",
+                "dueDateHijri": {
+                    "day": 26,
+                    "month": {
+                        "number": 10,
+                        "ar": "شَوّال"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 26,
+                    "month": {
+                        "number": 10,
+                        "ar": "شَوّال"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-04-25"
+            },
+            "5": {
+                "name": "مايو",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-05-25",
+                "dueDateHijri": {
+                    "day": 27,
+                    "month": {
+                        "number": 11,
+                        "ar": "ذو القعدة"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 27,
+                    "month": {
+                        "number": 11,
+                        "ar": "ذو القعدة"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-05-25"
+            },
+            "6": {
+                "name": "يونيو",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-06-25",
+                "dueDateHijri": {
+                    "day": 29,
+                    "month": {
+                        "number": 12,
+                        "ar": "ذو الحِجّة"
+                    },
+                    "year": 1446
+                }
+            },
+            "7": {
+                "name": "يوليو",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-07-25",
+                "dueDateHijri": {
+                    "day": 30,
+                    "month": {
+                        "number": 1,
+                        "ar": "مُحَرَّم"
+                    },
+                    "year": 1447
+                }
+            },
+            "8": {
+                "name": "أغسطس",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-08-25",
+                "dueDateHijri": {
+                    "day": 2,
+                    "month": {
+                        "number": 3,
+                        "ar": "رَبِيع الأَوَّل"
+                    },
+                    "year": 1447
+                }
+            },
+            "9": {
+                "name": "سبتمبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-09-25",
+                "dueDateHijri": {
+                    "day": 3,
+                    "month": {
+                        "number": 4,
+                        "ar": "رَبِيع الآخِر"
+                    },
+                    "year": 1447
+                }
+            },
+            "10": {
+                "name": "أكتوبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-10-25",
+                "dueDateHijri": {
+                    "day": 3,
+                    "month": {
+                        "number": 5,
+                        "ar": "جُمادى الأولى"
+                    },
+                    "year": 1447
+                }
+            },
+            "11": {
+                "name": "نوفمبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-11-25",
+                "dueDateHijri": {
+                    "day": 4,
+                    "month": {
+                        "number": 6,
+                        "ar": "جُمادى الثانية"
+                    },
+                    "year": 1447
+                }
+            },
+            "12": {
+                "name": "ديسمبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-12-25",
+                "dueDateHijri": {
+                    "day": 5,
+                    "month": {
+                        "number": 7,
+                        "ar": "رَجَب"
+                    },
+                    "year": 1447
+                }
+            }
+        },
+        "total": 1400,
+        "year": "2025",
+        "numberofArrears": 0,
+        "comments": "",
+        "hijriDate": {
+            "day": 25,
+            "month": {
+                "number": 7,
+                "ar": "رَجَب"
+            },
+            "year": 1446
+        },
+        "createdAt": {
+            "$date": "2025-01-25T00:00:00.000Z"
+        }
+    },
+    {
+        "idUser": {
+            "$oid": "66ec5535f114ef61452922d5"
+        },
+        "months": {
+            "1": {
+                "name": "يناير",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-01-25",
+                "dueDateHijri": {
+                    "day": 25,
+                    "month": {
+                        "number": 7,
+                        "ar": "رَجَب"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 25,
+                    "month": {
+                        "number": 7,
+                        "ar": "رَجَب"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-01-25"
+            },
+            "2": {
+                "name": "فبراير",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-02-25",
+                "dueDateHijri": {
+                    "day": 26,
+                    "month": {
+                        "number": 8,
+                        "ar": "شَعْبَان"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 26,
+                    "month": {
+                        "number": 8,
+                        "ar": "شَعْبَان"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-02-25"
+            },
+            "3": {
+                "name": "مارس",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-03-25",
+                "dueDateHijri": {
+                    "day": 25,
+                    "month": {
+                        "number": 9,
+                        "ar": "رَمَضان"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 25,
+                    "month": {
+                        "number": 9,
+                        "ar": "رَمَضان"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-03-25"
+            },
+            "4": {
+                "name": "أبريل",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-04-25",
+                "dueDateHijri": {
+                    "day": 26,
+                    "month": {
+                        "number": 10,
+                        "ar": "شَوّال"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 26,
+                    "month": {
+                        "number": 10,
+                        "ar": "شَوّال"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-04-25"
+            },
+            "5": {
+                "name": "مايو",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-05-25",
+                "dueDateHijri": {
+                    "day": 27,
+                    "month": {
+                        "number": 11,
+                        "ar": "ذو القعدة"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 27,
+                    "month": {
+                        "number": 11,
+                        "ar": "ذو القعدة"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-05-25"
+            },
+            "6": {
+                "name": "يونيو",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-06-25",
+                "dueDateHijri": {
+                    "day": 29,
+                    "month": {
+                        "number": 12,
+                        "ar": "ذو الحِجّة"
+                    },
+                    "year": 1446
+                }
+            },
+            "7": {
+                "name": "يوليو",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-07-25",
+                "dueDateHijri": {
+                    "day": 30,
+                    "month": {
+                        "number": 1,
+                        "ar": "مُحَرَّم"
+                    },
+                    "year": 1447
+                }
+            },
+            "8": {
+                "name": "أغسطس",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-08-25",
+                "dueDateHijri": {
+                    "day": 2,
+                    "month": {
+                        "number": 3,
+                        "ar": "رَبِيع الأَوَّل"
+                    },
+                    "year": 1447
+                }
+            },
+            "9": {
+                "name": "سبتمبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-09-25",
+                "dueDateHijri": {
+                    "day": 3,
+                    "month": {
+                        "number": 4,
+                        "ar": "رَبِيع الآخِر"
+                    },
+                    "year": 1447
+                }
+            },
+            "10": {
+                "name": "أكتوبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-10-25",
+                "dueDateHijri": {
+                    "day": 3,
+                    "month": {
+                        "number": 5,
+                        "ar": "جُمادى الأولى"
+                    },
+                    "year": 1447
+                }
+            },
+            "11": {
+                "name": "نوفمبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-11-25",
+                "dueDateHijri": {
+                    "day": 4,
+                    "month": {
+                        "number": 6,
+                        "ar": "جُمادى الثانية"
+                    },
+                    "year": 1447
+                }
+            },
+            "12": {
+                "name": "ديسمبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-12-25",
+                "dueDateHijri": {
+                    "day": 5,
+                    "month": {
+                        "number": 7,
+                        "ar": "رَجَب"
+                    },
+                    "year": 1447
+                }
+            }
+        },
+        "total": 1400,
+        "year": "2025",
+        "numberofArrears": 0,
+        "comments": "",
+        "hijriDate": {
+            "day": 25,
+            "month": {
+                "number": 7,
+                "ar": "رَجَب"
+            },
+            "year": 1446
+        },
+        "createdAt": {
+            "$date": "2025-01-25T00:00:00.000Z"
+        }
+    },
+    {
+        "idUser": {
+            "$oid": "66ec5535f114ef61452922d6"
+        },
+        "months": {
+            "1": {
+                "name": "يناير",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-01-25",
+                "dueDateHijri": {
+                    "day": 25,
+                    "month": {
+                        "number": 7,
+                        "ar": "رَجَب"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 25,
+                    "month": {
+                        "number": 7,
+                        "ar": "رَجَب"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-01-25"
+            },
+            "2": {
+                "name": "فبراير",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-02-25",
+                "dueDateHijri": {
+                    "day": 26,
+                    "month": {
+                        "number": 8,
+                        "ar": "شَعْبَان"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 26,
+                    "month": {
+                        "number": 8,
+                        "ar": "شَعْبَان"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-02-25"
+            },
+            "3": {
+                "name": "مارس",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-03-25",
+                "dueDateHijri": {
+                    "day": 25,
+                    "month": {
+                        "number": 9,
+                        "ar": "رَمَضان"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 25,
+                    "month": {
+                        "number": 9,
+                        "ar": "رَمَضان"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-03-25"
+            },
+            "4": {
+                "name": "أبريل",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-04-25",
+                "dueDateHijri": {
+                    "day": 26,
+                    "month": {
+                        "number": 10,
+                        "ar": "شَوّال"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 26,
+                    "month": {
+                        "number": 10,
+                        "ar": "شَوّال"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-04-25"
+            },
+            "5": {
+                "name": "مايو",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-05-25",
+                "dueDateHijri": {
+                    "day": 27,
+                    "month": {
+                        "number": 11,
+                        "ar": "ذو القعدة"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 27,
+                    "month": {
+                        "number": 11,
+                        "ar": "ذو القعدة"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-05-25"
+            },
+            "6": {
+                "name": "يونيو",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-06-25",
+                "dueDateHijri": {
+                    "day": 29,
+                    "month": {
+                        "number": 12,
+                        "ar": "ذو الحِجّة"
+                    },
+                    "year": 1446
+                }
+            },
+            "7": {
+                "name": "يوليو",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-07-25",
+                "dueDateHijri": {
+                    "day": 30,
+                    "month": {
+                        "number": 1,
+                        "ar": "مُحَرَّم"
+                    },
+                    "year": 1447
+                }
+            },
+            "8": {
+                "name": "أغسطس",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-08-25",
+                "dueDateHijri": {
+                    "day": 2,
+                    "month": {
+                        "number": 3,
+                        "ar": "رَبِيع الأَوَّل"
+                    },
+                    "year": 1447
+                }
+            },
+            "9": {
+                "name": "سبتمبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-09-25",
+                "dueDateHijri": {
+                    "day": 3,
+                    "month": {
+                        "number": 4,
+                        "ar": "رَبِيع الآخِر"
+                    },
+                    "year": 1447
+                }
+            },
+            "10": {
+                "name": "أكتوبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-10-25",
+                "dueDateHijri": {
+                    "day": 3,
+                    "month": {
+                        "number": 5,
+                        "ar": "جُمادى الأولى"
+                    },
+                    "year": 1447
+                }
+            },
+            "11": {
+                "name": "نوفمبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-11-25",
+                "dueDateHijri": {
+                    "day": 4,
+                    "month": {
+                        "number": 6,
+                        "ar": "جُمادى الثانية"
+                    },
+                    "year": 1447
+                }
+            },
+            "12": {
+                "name": "ديسمبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-12-25",
+                "dueDateHijri": {
+                    "day": 5,
+                    "month": {
+                        "number": 7,
+                        "ar": "رَجَب"
+                    },
+                    "year": 1447
+                }
+            }
+        },
+        "total": 1400,
+        "year": "2025",
+        "numberofArrears": 0,
+        "comments": "",
+        "hijriDate": {
+            "day": 25,
+            "month": {
+                "number": 7,
+                "ar": "رَجَب"
+            },
+            "year": 1446
+        },
+        "createdAt": {
+            "$date": "2025-01-25T00:00:00.000Z"
+        }
+    },
+    {
+        "idUser": {
+            "$oid": "66ec5535f114ef61452922d7"
+        },
+        "months": {
+            "1": {
+                "name": "يناير",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-01-25",
+                "dueDateHijri": {
+                    "day": 25,
+                    "month": {
+                        "number": 7,
+                        "ar": "رَجَب"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 25,
+                    "month": {
+                        "number": 7,
+                        "ar": "رَجَب"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-01-25"
+            },
+            "2": {
+                "name": "فبراير",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-02-25",
+                "dueDateHijri": {
+                    "day": 26,
+                    "month": {
+                        "number": 8,
+                        "ar": "شَعْبَان"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 26,
+                    "month": {
+                        "number": 8,
+                        "ar": "شَعْبَان"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-02-25"
+            },
+            "3": {
+                "name": "مارس",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-03-25",
+                "dueDateHijri": {
+                    "day": 25,
+                    "month": {
+                        "number": 9,
+                        "ar": "رَمَضان"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 25,
+                    "month": {
+                        "number": 9,
+                        "ar": "رَمَضان"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-03-25"
+            },
+            "4": {
+                "name": "أبريل",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-04-25",
+                "dueDateHijri": {
+                    "day": 26,
+                    "month": {
+                        "number": 10,
+                        "ar": "شَوّال"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 26,
+                    "month": {
+                        "number": 10,
+                        "ar": "شَوّال"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-04-25"
+            },
+            "5": {
+                "name": "مايو",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-05-25",
+                "dueDateHijri": {
+                    "day": 27,
+                    "month": {
+                        "number": 11,
+                        "ar": "ذو القعدة"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 27,
+                    "month": {
+                        "number": 11,
+                        "ar": "ذو القعدة"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-05-25"
+            },
+            "6": {
+                "name": "يونيو",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-06-25",
+                "dueDateHijri": {
+                    "day": 29,
+                    "month": {
+                        "number": 12,
+                        "ar": "ذو الحِجّة"
+                    },
+                    "year": 1446
+                }
+            },
+            "7": {
+                "name": "يوليو",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-07-25",
+                "dueDateHijri": {
+                    "day": 30,
+                    "month": {
+                        "number": 1,
+                        "ar": "مُحَرَّم"
+                    },
+                    "year": 1447
+                }
+            },
+            "8": {
+                "name": "أغسطس",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-08-25",
+                "dueDateHijri": {
+                    "day": 2,
+                    "month": {
+                        "number": 3,
+                        "ar": "رَبِيع الأَوَّل"
+                    },
+                    "year": 1447
+                }
+            },
+            "9": {
+                "name": "سبتمبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-09-25",
+                "dueDateHijri": {
+                    "day": 3,
+                    "month": {
+                        "number": 4,
+                        "ar": "رَبِيع الآخِر"
+                    },
+                    "year": 1447
+                }
+            },
+            "10": {
+                "name": "أكتوبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-10-25",
+                "dueDateHijri": {
+                    "day": 3,
+                    "month": {
+                        "number": 5,
+                        "ar": "جُمادى الأولى"
+                    },
+                    "year": 1447
+                }
+            },
+            "11": {
+                "name": "نوفمبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-11-25",
+                "dueDateHijri": {
+                    "day": 4,
+                    "month": {
+                        "number": 6,
+                        "ar": "جُمادى الثانية"
+                    },
+                    "year": 1447
+                }
+            },
+            "12": {
+                "name": "ديسمبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-12-25",
+                "dueDateHijri": {
+                    "day": 5,
+                    "month": {
+                        "number": 7,
+                        "ar": "رَجَب"
+                    },
+                    "year": 1447
+                }
+            }
+        },
+        "total": 1400,
+        "year": "2025",
+        "numberofArrears": 0,
+        "comments": "",
+        "hijriDate": {
+            "day": 25,
+            "month": {
+                "number": 7,
+                "ar": "رَجَب"
+            },
+            "year": 1446
+        },
+        "createdAt": {
+            "$date": "2025-01-25T00:00:00.000Z"
+        }
+    },
+    {
+        "idUser": {
+            "$oid": "66ec5535f114ef61452922d8"
+        },
+        "months": {
+            "1": {
+                "name": "يناير",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-01-25",
+                "dueDateHijri": {
+                    "day": 25,
+                    "month": {
+                        "number": 7,
+                        "ar": "رَجَب"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 25,
+                    "month": {
+                        "number": 7,
+                        "ar": "رَجَب"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-01-25"
+            },
+            "2": {
+                "name": "فبراير",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-02-25",
+                "dueDateHijri": {
+                    "day": 26,
+                    "month": {
+                        "number": 8,
+                        "ar": "شَعْبَان"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 26,
+                    "month": {
+                        "number": 8,
+                        "ar": "شَعْبَان"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-02-25"
+            },
+            "3": {
+                "name": "مارس",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-03-25",
+                "dueDateHijri": {
+                    "day": 25,
+                    "month": {
+                        "number": 9,
+                        "ar": "رَمَضان"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 25,
+                    "month": {
+                        "number": 9,
+                        "ar": "رَمَضان"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-03-25"
+            },
+            "4": {
+                "name": "أبريل",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-04-25",
+                "dueDateHijri": {
+                    "day": 26,
+                    "month": {
+                        "number": 10,
+                        "ar": "شَوّال"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 26,
+                    "month": {
+                        "number": 10,
+                        "ar": "شَوّال"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-04-25"
+            },
+            "5": {
+                "name": "مايو",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-05-25",
+                "dueDateHijri": {
+                    "day": 27,
+                    "month": {
+                        "number": 11,
+                        "ar": "ذو القعدة"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 27,
+                    "month": {
+                        "number": 11,
+                        "ar": "ذو القعدة"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-05-25"
+            },
+            "6": {
+                "name": "يونيو",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-06-25",
+                "dueDateHijri": {
+                    "day": 29,
+                    "month": {
+                        "number": 12,
+                        "ar": "ذو الحِجّة"
+                    },
+                    "year": 1446
+                }
+            },
+            "7": {
+                "name": "يوليو",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-07-25",
+                "dueDateHijri": {
+                    "day": 30,
+                    "month": {
+                        "number": 1,
+                        "ar": "مُحَرَّم"
+                    },
+                    "year": 1447
+                }
+            },
+            "8": {
+                "name": "أغسطس",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-08-25",
+                "dueDateHijri": {
+                    "day": 2,
+                    "month": {
+                        "number": 3,
+                        "ar": "رَبِيع الأَوَّل"
+                    },
+                    "year": 1447
+                }
+            },
+            "9": {
+                "name": "سبتمبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-09-25",
+                "dueDateHijri": {
+                    "day": 3,
+                    "month": {
+                        "number": 4,
+                        "ar": "رَبِيع الآخِر"
+                    },
+                    "year": 1447
+                }
+            },
+            "10": {
+                "name": "أكتوبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-10-25",
+                "dueDateHijri": {
+                    "day": 3,
+                    "month": {
+                        "number": 5,
+                        "ar": "جُمادى الأولى"
+                    },
+                    "year": 1447
+                }
+            },
+            "11": {
+                "name": "نوفمبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-11-25",
+                "dueDateHijri": {
+                    "day": 4,
+                    "month": {
+                        "number": 6,
+                        "ar": "جُمادى الثانية"
+                    },
+                    "year": 1447
+                }
+            },
+            "12": {
+                "name": "ديسمبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-12-25",
+                "dueDateHijri": {
+                    "day": 5,
+                    "month": {
+                        "number": 7,
+                        "ar": "رَجَب"
+                    },
+                    "year": 1447
+                }
+            }
+        },
+        "total": 1400,
+        "year": "2025",
+        "numberofArrears": 0,
+        "comments": "",
+        "hijriDate": {
+            "day": 25,
+            "month": {
+                "number": 7,
+                "ar": "رَجَب"
+            },
+            "year": 1446
+        },
+        "createdAt": {
+            "$date": "2025-01-25T00:00:00.000Z"
+        }
+    },
+    {
+        "idUser": {
+            "$oid": "66ec5535f114ef61452922d9"
+        },
+        "months": {
+            "1": {
+                "name": "يناير",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-01-25",
+                "dueDateHijri": {
+                    "day": 25,
+                    "month": {
+                        "number": 7,
+                        "ar": "رَجَب"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 25,
+                    "month": {
+                        "number": 7,
+                        "ar": "رَجَب"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-01-25"
+            },
+            "2": {
+                "name": "فبراير",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-02-25",
+                "dueDateHijri": {
+                    "day": 26,
+                    "month": {
+                        "number": 8,
+                        "ar": "شَعْبَان"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 26,
+                    "month": {
+                        "number": 8,
+                        "ar": "شَعْبَان"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-02-25"
+            },
+            "3": {
+                "name": "مارس",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-03-25",
+                "dueDateHijri": {
+                    "day": 25,
+                    "month": {
+                        "number": 9,
+                        "ar": "رَمَضان"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 25,
+                    "month": {
+                        "number": 9,
+                        "ar": "رَمَضان"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-03-25"
+            },
+            "4": {
+                "name": "أبريل",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-04-25",
+                "dueDateHijri": {
+                    "day": 26,
+                    "month": {
+                        "number": 10,
+                        "ar": "شَوّال"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 26,
+                    "month": {
+                        "number": 10,
+                        "ar": "شَوّال"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-04-25"
+            },
+            "5": {
+                "name": "مايو",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-05-25",
+                "dueDateHijri": {
+                    "day": 27,
+                    "month": {
+                        "number": 11,
+                        "ar": "ذو القعدة"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 27,
+                    "month": {
+                        "number": 11,
+                        "ar": "ذو القعدة"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-05-25"
+            },
+            "6": {
+                "name": "يونيو",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-06-25",
+                "dueDateHijri": {
+                    "day": 29,
+                    "month": {
+                        "number": 12,
+                        "ar": "ذو الحِجّة"
+                    },
+                    "year": 1446
+                }
+            },
+            "7": {
+                "name": "يوليو",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-07-25",
+                "dueDateHijri": {
+                    "day": 30,
+                    "month": {
+                        "number": 1,
+                        "ar": "مُحَرَّم"
+                    },
+                    "year": 1447
+                }
+            },
+            "8": {
+                "name": "أغسطس",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-08-25",
+                "dueDateHijri": {
+                    "day": 2,
+                    "month": {
+                        "number": 3,
+                        "ar": "رَبِيع الأَوَّل"
+                    },
+                    "year": 1447
+                }
+            },
+            "9": {
+                "name": "سبتمبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-09-25",
+                "dueDateHijri": {
+                    "day": 3,
+                    "month": {
+                        "number": 4,
+                        "ar": "رَبِيع الآخِر"
+                    },
+                    "year": 1447
+                }
+            },
+            "10": {
+                "name": "أكتوبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-10-25",
+                "dueDateHijri": {
+                    "day": 3,
+                    "month": {
+                        "number": 5,
+                        "ar": "جُمادى الأولى"
+                    },
+                    "year": 1447
+                }
+            },
+            "11": {
+                "name": "نوفمبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-11-25",
+                "dueDateHijri": {
+                    "day": 4,
+                    "month": {
+                        "number": 6,
+                        "ar": "جُمادى الثانية"
+                    },
+                    "year": 1447
+                }
+            },
+            "12": {
+                "name": "ديسمبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-12-25",
+                "dueDateHijri": {
+                    "day": 5,
+                    "month": {
+                        "number": 7,
+                        "ar": "رَجَب"
+                    },
+                    "year": 1447
+                }
+            }
+        },
+        "total": 1400,
+        "year": "2025",
+        "numberofArrears": 0,
+        "comments": "",
+        "hijriDate": {
+            "day": 25,
+            "month": {
+                "number": 7,
+                "ar": "رَجَب"
+            },
+            "year": 1446
+        },
+        "createdAt": {
+            "$date": "2025-01-25T00:00:00.000Z"
+        }
+    },
+    {
+        "idUser": {
+            "$oid": "66ec5535f114ef61452922da"
+        },
+        "months": {
+            "1": {
+                "name": "يناير",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-01-25",
+                "dueDateHijri": {
+                    "day": 25,
+                    "month": {
+                        "number": 7,
+                        "ar": "رَجَب"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 25,
+                    "month": {
+                        "number": 7,
+                        "ar": "رَجَب"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-01-25"
+            },
+            "2": {
+                "name": "فبراير",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-02-25",
+                "dueDateHijri": {
+                    "day": 26,
+                    "month": {
+                        "number": 8,
+                        "ar": "شَعْبَان"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 26,
+                    "month": {
+                        "number": 8,
+                        "ar": "شَعْبَان"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-02-25"
+            },
+            "3": {
+                "name": "مارس",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-03-25",
+                "dueDateHijri": {
+                    "day": 25,
+                    "month": {
+                        "number": 9,
+                        "ar": "رَمَضان"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 25,
+                    "month": {
+                        "number": 9,
+                        "ar": "رَمَضان"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-03-25"
+            },
+            "4": {
+                "name": "أبريل",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-04-25",
+                "dueDateHijri": {
+                    "day": 26,
+                    "month": {
+                        "number": 10,
+                        "ar": "شَوّال"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 26,
+                    "month": {
+                        "number": 10,
+                        "ar": "شَوّال"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-04-25"
+            },
+            "5": {
+                "name": "مايو",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-05-25",
+                "dueDateHijri": {
+                    "day": 27,
+                    "month": {
+                        "number": 11,
+                        "ar": "ذو القعدة"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 27,
+                    "month": {
+                        "number": 11,
+                        "ar": "ذو القعدة"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-05-25"
+            },
+            "6": {
+                "name": "يونيو",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-06-25",
+                "dueDateHijri": {
+                    "day": 29,
+                    "month": {
+                        "number": 12,
+                        "ar": "ذو الحِجّة"
+                    },
+                    "year": 1446
+                }
+            },
+            "7": {
+                "name": "يوليو",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-07-25",
+                "dueDateHijri": {
+                    "day": 30,
+                    "month": {
+                        "number": 1,
+                        "ar": "مُحَرَّم"
+                    },
+                    "year": 1447
+                }
+            },
+            "8": {
+                "name": "أغسطس",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-08-25",
+                "dueDateHijri": {
+                    "day": 2,
+                    "month": {
+                        "number": 3,
+                        "ar": "رَبِيع الأَوَّل"
+                    },
+                    "year": 1447
+                }
+            },
+            "9": {
+                "name": "سبتمبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-09-25",
+                "dueDateHijri": {
+                    "day": 3,
+                    "month": {
+                        "number": 4,
+                        "ar": "رَبِيع الآخِر"
+                    },
+                    "year": 1447
+                }
+            },
+            "10": {
+                "name": "أكتوبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-10-25",
+                "dueDateHijri": {
+                    "day": 3,
+                    "month": {
+                        "number": 5,
+                        "ar": "جُمادى الأولى"
+                    },
+                    "year": 1447
+                }
+            },
+            "11": {
+                "name": "نوفمبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-11-25",
+                "dueDateHijri": {
+                    "day": 4,
+                    "month": {
+                        "number": 6,
+                        "ar": "جُمادى الثانية"
+                    },
+                    "year": 1447
+                }
+            },
+            "12": {
+                "name": "ديسمبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-12-25",
+                "dueDateHijri": {
+                    "day": 5,
+                    "month": {
+                        "number": 7,
+                        "ar": "رَجَب"
+                    },
+                    "year": 1447
+                }
+            }
+        },
+        "total": 1400,
+        "year": "2025",
+        "numberofArrears": 0,
+        "comments": "",
+        "hijriDate": {
+            "day": 25,
+            "month": {
+                "number": 7,
+                "ar": "رَجَب"
+            },
+            "year": 1446
+        },
+        "createdAt": {
+            "$date": "2025-01-25T00:00:00.000Z"
+        }
+    },
+    {
+        "idUser": {
+            "$oid": "66ec5535f114ef61452922db"
+        },
+        "months": {
+            "1": {
+                "name": "يناير",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-01-25",
+                "dueDateHijri": {
+                    "day": 25,
+                    "month": {
+                        "number": 7,
+                        "ar": "رَجَب"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 25,
+                    "month": {
+                        "number": 7,
+                        "ar": "رَجَب"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-01-25"
+            },
+            "2": {
+                "name": "فبراير",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-02-25",
+                "dueDateHijri": {
+                    "day": 26,
+                    "month": {
+                        "number": 8,
+                        "ar": "شَعْبَان"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 26,
+                    "month": {
+                        "number": 8,
+                        "ar": "شَعْبَان"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-02-25"
+            },
+            "3": {
+                "name": "مارس",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-03-25",
+                "dueDateHijri": {
+                    "day": 25,
+                    "month": {
+                        "number": 9,
+                        "ar": "رَمَضان"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 25,
+                    "month": {
+                        "number": 9,
+                        "ar": "رَمَضان"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-03-25"
+            },
+            "4": {
+                "name": "أبريل",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-04-25",
+                "dueDateHijri": {
+                    "day": 26,
+                    "month": {
+                        "number": 10,
+                        "ar": "شَوّال"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 26,
+                    "month": {
+                        "number": 10,
+                        "ar": "شَوّال"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-04-25"
+            },
+            "5": {
+                "name": "مايو",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-05-25",
+                "dueDateHijri": {
+                    "day": 27,
+                    "month": {
+                        "number": 11,
+                        "ar": "ذو القعدة"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 27,
+                    "month": {
+                        "number": 11,
+                        "ar": "ذو القعدة"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-05-25"
+            },
+            "6": {
+                "name": "يونيو",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-06-25",
+                "dueDateHijri": {
+                    "day": 29,
+                    "month": {
+                        "number": 12,
+                        "ar": "ذو الحِجّة"
+                    },
+                    "year": 1446
+                }
+            },
+            "7": {
+                "name": "يوليو",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-07-25",
+                "dueDateHijri": {
+                    "day": 30,
+                    "month": {
+                        "number": 1,
+                        "ar": "مُحَرَّم"
+                    },
+                    "year": 1447
+                }
+            },
+            "8": {
+                "name": "أغسطس",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-08-25",
+                "dueDateHijri": {
+                    "day": 2,
+                    "month": {
+                        "number": 3,
+                        "ar": "رَبِيع الأَوَّل"
+                    },
+                    "year": 1447
+                }
+            },
+            "9": {
+                "name": "سبتمبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-09-25",
+                "dueDateHijri": {
+                    "day": 3,
+                    "month": {
+                        "number": 4,
+                        "ar": "رَبِيع الآخِر"
+                    },
+                    "year": 1447
+                }
+            },
+            "10": {
+                "name": "أكتوبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-10-25",
+                "dueDateHijri": {
+                    "day": 3,
+                    "month": {
+                        "number": 5,
+                        "ar": "جُمادى الأولى"
+                    },
+                    "year": 1447
+                }
+            },
+            "11": {
+                "name": "نوفمبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-11-25",
+                "dueDateHijri": {
+                    "day": 4,
+                    "month": {
+                        "number": 6,
+                        "ar": "جُمادى الثانية"
+                    },
+                    "year": 1447
+                }
+            },
+            "12": {
+                "name": "ديسمبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-12-25",
+                "dueDateHijri": {
+                    "day": 5,
+                    "month": {
+                        "number": 7,
+                        "ar": "رَجَب"
+                    },
+                    "year": 1447
+                }
+            }
+        },
+        "total": 1400,
+        "year": "2025",
+        "numberofArrears": 0,
+        "comments": "",
+        "hijriDate": {
+            "day": 25,
+            "month": {
+                "number": 7,
+                "ar": "رَجَب"
+            },
+            "year": 1446
+        },
+        "createdAt": {
+            "$date": "2025-01-25T00:00:00.000Z"
+        }
+    },
+    {
+        "idUser": {
+            "$oid": "66ec5535f114ef61452922dc"
+        },
+        "months": {
+            "1": {
+                "name": "يناير",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-01-25",
+                "dueDateHijri": {
+                    "day": 25,
+                    "month": {
+                        "number": 7,
+                        "ar": "رَجَب"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 25,
+                    "month": {
+                        "number": 7,
+                        "ar": "رَجَب"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-01-25"
+            },
+            "2": {
+                "name": "فبراير",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-02-25",
+                "dueDateHijri": {
+                    "day": 26,
+                    "month": {
+                        "number": 8,
+                        "ar": "شَعْبَان"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 26,
+                    "month": {
+                        "number": 8,
+                        "ar": "شَعْبَان"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-02-25"
+            },
+            "3": {
+                "name": "مارس",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-03-25",
+                "dueDateHijri": {
+                    "day": 25,
+                    "month": {
+                        "number": 9,
+                        "ar": "رَمَضان"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 25,
+                    "month": {
+                        "number": 9,
+                        "ar": "رَمَضان"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-03-25"
+            },
+            "4": {
+                "name": "أبريل",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-04-25",
+                "dueDateHijri": {
+                    "day": 26,
+                    "month": {
+                        "number": 10,
+                        "ar": "شَوّال"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 26,
+                    "month": {
+                        "number": 10,
+                        "ar": "شَوّال"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-04-25"
+            },
+            "5": {
+                "name": "مايو",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-05-25",
+                "dueDateHijri": {
+                    "day": 27,
+                    "month": {
+                        "number": 11,
+                        "ar": "ذو القعدة"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 27,
+                    "month": {
+                        "number": 11,
+                        "ar": "ذو القعدة"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-05-25"
+            },
+            "6": {
+                "name": "يونيو",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-06-25",
+                "dueDateHijri": {
+                    "day": 29,
+                    "month": {
+                        "number": 12,
+                        "ar": "ذو الحِجّة"
+                    },
+                    "year": 1446
+                }
+            },
+            "7": {
+                "name": "يوليو",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-07-25",
+                "dueDateHijri": {
+                    "day": 30,
+                    "month": {
+                        "number": 1,
+                        "ar": "مُحَرَّم"
+                    },
+                    "year": 1447
+                }
+            },
+            "8": {
+                "name": "أغسطس",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-08-25",
+                "dueDateHijri": {
+                    "day": 2,
+                    "month": {
+                        "number": 3,
+                        "ar": "رَبِيع الأَوَّل"
+                    },
+                    "year": 1447
+                }
+            },
+            "9": {
+                "name": "سبتمبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-09-25",
+                "dueDateHijri": {
+                    "day": 3,
+                    "month": {
+                        "number": 4,
+                        "ar": "رَبِيع الآخِر"
+                    },
+                    "year": 1447
+                }
+            },
+            "10": {
+                "name": "أكتوبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-10-25",
+                "dueDateHijri": {
+                    "day": 3,
+                    "month": {
+                        "number": 5,
+                        "ar": "جُمادى الأولى"
+                    },
+                    "year": 1447
+                }
+            },
+            "11": {
+                "name": "نوفمبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-11-25",
+                "dueDateHijri": {
+                    "day": 4,
+                    "month": {
+                        "number": 6,
+                        "ar": "جُمادى الثانية"
+                    },
+                    "year": 1447
+                }
+            },
+            "12": {
+                "name": "ديسمبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-12-25",
+                "dueDateHijri": {
+                    "day": 5,
+                    "month": {
+                        "number": 7,
+                        "ar": "رَجَب"
+                    },
+                    "year": 1447
+                }
+            }
+        },
+        "total": 1400,
+        "year": "2025",
+        "numberofArrears": 0,
+        "comments": "",
+        "hijriDate": {
+            "day": 25,
+            "month": {
+                "number": 7,
+                "ar": "رَجَب"
+            },
+            "year": 1446
+        },
+        "createdAt": {
+            "$date": "2025-01-25T00:00:00.000Z"
+        }
+    },
+    {
+        "idUser": {
+            "$oid": "66ec8fc91b75a2b0239b374a"
+        },
+        "months": {
+            "1": {
+                "name": "يناير",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-01-25",
+                "dueDateHijri": {
+                    "day": 25,
+                    "month": {
+                        "number": 7,
+                        "ar": "رَجَب"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 25,
+                    "month": {
+                        "number": 7,
+                        "ar": "رَجَب"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-01-25"
+            },
+            "2": {
+                "name": "فبراير",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-02-25",
+                "dueDateHijri": {
+                    "day": 26,
+                    "month": {
+                        "number": 8,
+                        "ar": "شَعْبَان"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 26,
+                    "month": {
+                        "number": 8,
+                        "ar": "شَعْبَان"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-02-25"
+            },
+            "3": {
+                "name": "مارس",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-03-25",
+                "dueDateHijri": {
+                    "day": 25,
+                    "month": {
+                        "number": 9,
+                        "ar": "رَمَضان"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 25,
+                    "month": {
+                        "number": 9,
+                        "ar": "رَمَضان"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-03-25"
+            },
+            "4": {
+                "name": "أبريل",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-04-25",
+                "dueDateHijri": {
+                    "day": 26,
+                    "month": {
+                        "number": 10,
+                        "ar": "شَوّال"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 26,
+                    "month": {
+                        "number": 10,
+                        "ar": "شَوّال"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-04-25"
+            },
+            "5": {
+                "name": "مايو",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-05-25",
+                "dueDateHijri": {
+                    "day": 27,
+                    "month": {
+                        "number": 11,
+                        "ar": "ذو القعدة"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 27,
+                    "month": {
+                        "number": 11,
+                        "ar": "ذو القعدة"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-05-25"
+            },
+            "6": {
+                "name": "يونيو",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-06-25",
+                "dueDateHijri": {
+                    "day": 29,
+                    "month": {
+                        "number": 12,
+                        "ar": "ذو الحِجّة"
+                    },
+                    "year": 1446
+                }
+            },
+            "7": {
+                "name": "يوليو",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-07-25",
+                "dueDateHijri": {
+                    "day": 30,
+                    "month": {
+                        "number": 1,
+                        "ar": "مُحَرَّم"
+                    },
+                    "year": 1447
+                }
+            },
+            "8": {
+                "name": "أغسطس",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-08-25",
+                "dueDateHijri": {
+                    "day": 2,
+                    "month": {
+                        "number": 3,
+                        "ar": "رَبِيع الأَوَّل"
+                    },
+                    "year": 1447
+                }
+            },
+            "9": {
+                "name": "سبتمبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-09-25",
+                "dueDateHijri": {
+                    "day": 3,
+                    "month": {
+                        "number": 4,
+                        "ar": "رَبِيع الآخِر"
+                    },
+                    "year": 1447
+                }
+            },
+            "10": {
+                "name": "أكتوبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-10-25",
+                "dueDateHijri": {
+                    "day": 3,
+                    "month": {
+                        "number": 5,
+                        "ar": "جُمادى الأولى"
+                    },
+                    "year": 1447
+                }
+            },
+            "11": {
+                "name": "نوفمبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-11-25",
+                "dueDateHijri": {
+                    "day": 4,
+                    "month": {
+                        "number": 6,
+                        "ar": "جُمادى الثانية"
+                    },
+                    "year": 1447
+                }
+            },
+            "12": {
+                "name": "ديسمبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-12-25",
+                "dueDateHijri": {
+                    "day": 5,
+                    "month": {
+                        "number": 7,
+                        "ar": "رَجَب"
+                    },
+                    "year": 1447
+                }
+            }
+        },
+        "total": 1400,
+        "year": "2025",
+        "numberofArrears": 0,
+        "comments": "",
+        "hijriDate": {
+            "day": 25,
+            "month": {
+                "number": 7,
+                "ar": "رَجَب"
+            },
+            "year": 1446
+        },
+        "createdAt": {
+            "$date": "2025-01-25T00:00:00.000Z"
+        }
+    },
+    {
+        "idUser": {
+            "$oid": "66edbfb0cb63c34e1d6fe9f0"
+        },
+        "months": {
+            "1": {
+                "name": "يناير",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-01-25",
+                "dueDateHijri": {
+                    "day": 25,
+                    "month": {
+                        "number": 7,
+                        "ar": "رَجَب"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 25,
+                    "month": {
+                        "number": 7,
+                        "ar": "رَجَب"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-01-25"
+            },
+            "2": {
+                "name": "فبراير",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-02-25",
+                "dueDateHijri": {
+                    "day": 26,
+                    "month": {
+                        "number": 8,
+                        "ar": "شَعْبَان"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 26,
+                    "month": {
+                        "number": 8,
+                        "ar": "شَعْبَان"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-02-25"
+            },
+            "3": {
+                "name": "مارس",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-03-25",
+                "dueDateHijri": {
+                    "day": 25,
+                    "month": {
+                        "number": 9,
+                        "ar": "رَمَضان"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 25,
+                    "month": {
+                        "number": 9,
+                        "ar": "رَمَضان"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-03-25"
+            },
+            "4": {
+                "name": "أبريل",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-04-25",
+                "dueDateHijri": {
+                    "day": 26,
+                    "month": {
+                        "number": 10,
+                        "ar": "شَوّال"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 26,
+                    "month": {
+                        "number": 10,
+                        "ar": "شَوّال"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-04-25"
+            },
+            "5": {
+                "name": "مايو",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-05-25",
+                "dueDateHijri": {
+                    "day": 27,
+                    "month": {
+                        "number": 11,
+                        "ar": "ذو القعدة"
+                    },
+                    "year": 1446
+                },
+                "hijriDate": {
+                    "day": 27,
+                    "month": {
+                        "number": 11,
+                        "ar": "ذو القعدة"
+                    },
+                    "year": 1446
+                },
+                "createdAt": "2025-05-25"
+            },
+            "6": {
+                "name": "يونيو",
+                "amount": 200,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-06-25",
+                "dueDateHijri": {
+                    "day": 29,
+                    "month": {
+                        "number": 12,
+                        "ar": "ذو الحِجّة"
+                    },
+                    "year": 1446
+                }
+            },
+            "7": {
+                "name": "يوليو",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-07-25",
+                "dueDateHijri": {
+                    "day": 30,
+                    "month": {
+                        "number": 1,
+                        "ar": "مُحَرَّم"
+                    },
+                    "year": 1447
+                }
+            },
+            "8": {
+                "name": "أغسطس",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-08-25",
+                "dueDateHijri": {
+                    "day": 2,
+                    "month": {
+                        "number": 3,
+                        "ar": "رَبِيع الأَوَّل"
+                    },
+                    "year": 1447
+                }
+            },
+            "9": {
+                "name": "سبتمبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-09-25",
+                "dueDateHijri": {
+                    "day": 3,
+                    "month": {
+                        "number": 4,
+                        "ar": "رَبِيع الآخِر"
+                    },
+                    "year": 1447
+                }
+            },
+            "10": {
+                "name": "أكتوبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-10-25",
+                "dueDateHijri": {
+                    "day": 3,
+                    "month": {
+                        "number": 5,
+                        "ar": "جُمادى الأولى"
+                    },
+                    "year": 1447
+                }
+            },
+            "11": {
+                "name": "نوفمبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-11-25",
+                "dueDateHijri": {
+                    "day": 4,
+                    "month": {
+                        "number": 6,
+                        "ar": "جُمادى الثانية"
+                    },
+                    "year": 1447
+                }
+            },
+            "12": {
+                "name": "ديسمبر",
+                "amount": 0,
+                "pendingPayment": true,
+                "isInvoiceOverdue": false,
+                "dueDate": "2025-12-25",
+                "dueDateHijri": {
+                    "day": 5,
+                    "month": {
+                        "number": 7,
+                        "ar": "رَجَب"
+                    },
+                    "year": 1447
+                }
+            }
+        },
+        "total": 1400,
+        "year": "2025",
+        "numberofArrears": 0,
+        "comments": "",
+        "hijriDate": {
+            "day": 25,
+            "month": {
+                "number": 7,
+                "ar": "رَجَب"
+            },
+            "year": 1446
+        },
+        "createdAt": {
+            "$date": "2025-01-25T00:00:00.000Z"
+        }
+    }
+]

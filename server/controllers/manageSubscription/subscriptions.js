@@ -127,7 +127,7 @@ exports.addFoundationSubscriptions = async (req, res) => {
                 }
                 else Subscription.months[monthIndex].pendingPayment = false;
             } else {
-                const dueDate = addDaysToHijriDate([hijriDate[0], { number: Number(monthIndex), ar: Subscription.months[Number(monthIndex)].name }, hijriDate[2]]);
+                const dueDate = addDaysToHijriDate([25, { number: Number(monthIndex), ar: Subscription.months[Number(monthIndex)].name }, hijriDate[2]]);
                 Subscription.months[monthIndex].dueDate = momentHijri(dueDate[2] + "-" + dueDate[1].number + "-" + dueDate[0], 'iYYYY-iMM-iDD').locale("en").format('YYYY-MM-DD');
                 const toHijriDate = getHijriDate(Subscription.months[monthIndex].dueDate);
                 Subscription.months[monthIndex].dueDateHijri = {
@@ -203,12 +203,13 @@ exports.addMonthlySubscriptions = async (req, res) => {
             existingSubscription.numberofArrears -= 1;
         }
         existingSubscription.months[month] = {
-            name: existingSubscription.months[month].name,
+            ...existingSubscription.months[month],
+            //name: existingSubscription.months[month].name,
             amount: amount,
             isInvoiceOverdue: false,
             pendingPayment: true,
-            dueDate: dueDate,
-            dueDateHijri: dueDateHijri,
+            //dueDate: dueDate,
+            //dueDateHijri: dueDateHijri,
             hijriDate: {
                 day: hijriDate[0],
                 month: hijriDate[1],
@@ -412,8 +413,11 @@ exports.getSubscriptionsForm = async (req, res) => {
         return res.status(400).send({ msg: "مطلوب الشهر والسنة" });
     }
     try {
+        const year = new Date(date).getFullYear();
+        const month = new Date(date).getMonth() + 1; // JavaScript months are 0-based
+        console.log("Year:", year, "Month:", month);
         const sub = await monthlySubscriptionModel
-            .find({ year: dateHijri.year })
+            .find({ year: year })
             .populate("idUser", "name subscriptionExpiryDate");
 
         // Filter out users who have a subscriptionExpiryDate
@@ -421,21 +425,20 @@ exports.getSubscriptionsForm = async (req, res) => {
 
         // Now you can work with `subscriptionsWithoutExpiryDate`
         subscriptions.forEach(subscription => {
-            console.log(subscription.idUser.name); // This will log the name of users who don't have a subscriptionExpiryDate
         });
 
-        console.log(subscriptions)
         if (subscriptions.length === 0) {
             return res.status(404).send({ msg: "لم يتم العثور على اشتراكات للسنة المحددة" });
         }
         const results = []
         var total = 0;
         for (let i = 0; i < subscriptions.length; i++) {
-            const monthData = subscriptions[i].months[dateHijri.month.number];
+            const monthData = subscriptions[i].months[month.toString()];
             //&& monthData.dueDateHijri.day == dateHijri.day
             if (monthData) {
                 //results.push(subscriptions[i])
-                if (monthData.dueDateHijri /*&& monthData.dueDateHijri.month.number == dateHijri.month.number && monthData.dueDateHijri.year == dateHijri.year*/) {
+                if (monthData.dueDate /*&& monthData.dueDateHijri.month.number == dateHijri.month.number && monthData.dueDateHijri.year == dateHijri.year*/) {
+                    //console.log("Month Data:", monthData);
                     results.push(subscriptions[i]);
                 }
                 if (monthData.dueDateHijri && monthData.dueDateHijri.month.number == dateHijri.month.number) {
@@ -444,6 +447,7 @@ exports.getSubscriptionsForm = async (req, res) => {
             }
         }
         const typeSubscription = await typeSubscriptionModel.find();
+        console.log(results)
         return res.status(200).send({
             subscriptions: results,
             typeSubscription,

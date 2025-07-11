@@ -129,20 +129,20 @@ function UpdateUser() {
     return (
         <div className="container mx-auto  sm:p-0 px-[1rem]">
             <div>
-                <Link to="/user" className="btn btn-primary text-[2rem] px-[2rem]">
+                <Link to="/user" className="btn btn-primary btn-sm px-[2rem]">
                     <FontAwesomeIcon icon={faRightLong} />
                 </Link>
             </div>
-            <h1 className="text-center text-[1.5rem] font-bold py-[1rem]">
+            <h1 className="text-center  font-bold py-[1rem]">
                 تحديث معلومات المستخدم
             </h1>
             {loading ? <div className="flex justify-center"><span className="loading loading-ring w-[4rem]"></span></div> : <form action="" className="py-[2rem] flex flex-col gap-[1rem]">
             {showAlert.display ? <Alert msg={showAlert} /> : ""}
-                <div className="flex sm:flex-row flex-col gap-[1rem]">
+                <div className="flex sm:flex-row flex-col gap-[0.5rem]">
                     <div className="relative sm:w-1/2">
                         <FontAwesomeIcon
                             icon={faUser}
-                            className="absolute top-[1rem] right-[1rem]"
+                            className="absolute top-[0.5rem] right-[1rem]"
                         />
                         <input
                             type="text"
@@ -154,7 +154,7 @@ function UpdateUser() {
                                 })
                             }}
                             required
-                            className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2"
+                            className="formInput w-full input input-sm pr-[2.3rem] input-bordered flex items-center gap-2"
                             placeholder={`اسم`}
                             value={inputs.name}
                             pattern="^.{3,1024}$"
@@ -163,7 +163,7 @@ function UpdateUser() {
                     <div className="relative sm:w-1/2">
                         <FontAwesomeIcon
                             icon={faIdCard}
-                            className="absolute top-[1rem] right-[1rem]"
+                            className="absolute top-[0.5rem] right-[1rem]"
                         />
                         <input
                             type="text"
@@ -175,7 +175,7 @@ function UpdateUser() {
                                 })
                             }}
                             required
-                            className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2"
+                            className="formInput w-full input input-sm pr-[2.3rem] input-bordered flex items-center gap-2"
                             placeholder="رقم الهوية الوطنية"
                             value={inputs.NationalIdentificationNumber}
                             pattern="[1-9]\d{9}"
@@ -188,7 +188,7 @@ function UpdateUser() {
                         setInputs((input) => {
                             return { ...input, status: e.target.value }
                         })
-                    }} className="select w-full status" required>
+                    }} className="select select-sm w-full status" required>
                         <option value="not active" selected={inputs.status == "not active" ? true : false}>غير مفعل</option>
                         <option value="active" selected={inputs.status == "active" ? true : false}>مفعل</option>
                     </select>
@@ -196,7 +196,7 @@ function UpdateUser() {
                     <div className="relative sm:w-1/2">
                         <FontAwesomeIcon
                             icon={faPhone}
-                            className="absolute top-[1rem] right-[1rem]"
+                            className="absolute top-[0.5rem] right-[1rem]"
                         />
                         <input
                             type="text"
@@ -208,7 +208,7 @@ function UpdateUser() {
                                 })
                             }}
                             required
-                            className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2"
+                            className="formInput w-full input input-sm pr-[2.3rem] input-bordered flex items-center gap-2"
                             placeholder="رقم الجوال"
                             value={inputs.phoneNumber}
                             pattern="05\d{8}"
@@ -229,22 +229,22 @@ function UpdateUser() {
                     ></textarea>
                 </div>
                 <div className="relative flex">
-                        <FontAwesomeIcon icon={faKey} className="absolute top-[1rem] right-[1rem]" />
+                        <FontAwesomeIcon icon={faKey} className="absolute top-[0.5rem] right-[1rem]" />
                         <input type="password" onChange={(e) => {
                             if (e.target.validity.valid) setDisbledPassword(true);
                             else setDisbledPassword(false);
                             setPassword(e.target.value)
-                        }} required value={inputs.password} className="formInput w-full input pr-[2.3rem] input-bordered flex items-center gap-2" placeholder="كلمة المرور" pattern="^.{4,1024}$" />
+                        }} required value={inputs.password} className="formInput w-full input input-sm pr-[2.3rem] input-bordered flex items-center gap-2" placeholder="كلمة المرور" pattern="^.{4,1024}$" />
                         <button onClick={(event) => {
                             event.preventDefault();
                             handleUpdatePassword();
-                        }} disabled={!disbledPassword} className="btn btn-warning font-bold">تحديث</button>
+                        }} disabled={!disbledPassword} className="btn btn-sm btn-warning font-bold">تحديث</button>
                     </div>
                 <button disabled={!disbledSubmit.status || !disbledSubmit.name || !disbledSubmit.phoneNumber || !disbledSubmit.NationalIdentificationNumber}
                     onClick={(event) => {
                         event.preventDefault();
                         handleUpdate();
-                    }} className="btn text-white font-bold text-[20px] bg-primary">
+                    }} className="btn btn-sm text-white font-bold bg-primary">
                     {submit ? <span className="loading loading-ring loading-lg"></span> : "تحديث"}
                 </button>
             </form>

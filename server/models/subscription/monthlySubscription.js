@@ -10,7 +10,7 @@ const monthlySubscriptionSchema = new mongoose.Schema({
         type: Object,
         default: {
             "1": {
-                name: "محرم",
+                name: "يناير",
                 amount: 0,
                 comments: "",
                 pendingPayment: true,
@@ -21,7 +21,7 @@ const monthlySubscriptionSchema = new mongoose.Schema({
                 createdAt: null
             },
             "2": {
-                name: "صفر",
+                name: "فبراير",
                 amount: 0,
                 comments: "",
                 pendingPayment: true,
@@ -32,7 +32,7 @@ const monthlySubscriptionSchema = new mongoose.Schema({
                 createdAt: null
             },
             "3": {
-                name: "ربيع الاول",
+                name: "مارس",
                 amount: 0,
                 comments: "",
                 pendingPayment: true,
@@ -43,7 +43,7 @@ const monthlySubscriptionSchema = new mongoose.Schema({
                 createdAt: null
             },
             "4": {
-                name: "ربيع الثاني",
+                name: "أبريل",
                 amount: 0,
                 comments: "",
                 pendingPayment: true,
@@ -54,7 +54,7 @@ const monthlySubscriptionSchema = new mongoose.Schema({
                 createdAt: null
             },
             "5": {
-                name: "جماد الأول",
+                name: "مايو",
                 amount: 0,
                 comments: "",
                 pendingPayment: true,
@@ -65,7 +65,7 @@ const monthlySubscriptionSchema = new mongoose.Schema({
                 createdAt: null
             },
             "6": {
-                name: "جماد الثاني",
+                name: "يونيو",
                 amount: 0,
                 comments: "",
                 pendingPayment: true,
@@ -76,7 +76,7 @@ const monthlySubscriptionSchema = new mongoose.Schema({
                 createdAt: null
             },
             "7": {
-                name: "رجب",
+                name: "يوليو",
                 amount: 0,
                 comments: "",
                 pendingPayment: true,
@@ -87,7 +87,7 @@ const monthlySubscriptionSchema = new mongoose.Schema({
                 createdAt: null
             },
             "8": {
-                name: "شعبان",
+                name: "أغسطس",
                 amount: 0,
                 comments: "",
                 pendingPayment: true,
@@ -98,7 +98,7 @@ const monthlySubscriptionSchema = new mongoose.Schema({
                 createdAt: null
             },
             "9": {
-                name: "رمضان",
+                name: "سبتمبر",
                 amount: 0,
                 comments: "",
                 pendingPayment: true,
@@ -109,7 +109,7 @@ const monthlySubscriptionSchema = new mongoose.Schema({
                 createdAt: null
             },
             "10": {
-                name: "شوال",
+                name: "أكتوبر",
                 amount: 0,
                 comments: "",
                 pendingPayment: true,
@@ -120,7 +120,7 @@ const monthlySubscriptionSchema = new mongoose.Schema({
                 createdAt: null
             },
             "11": {
-                name: "ذو القعدة",
+                name: "نوفمبر",
                 amount: 0,
                 comments: "",
                 pendingPayment: true,
@@ -131,7 +131,7 @@ const monthlySubscriptionSchema = new mongoose.Schema({
                 createdAt: null
             },
             "12": {
-                name: "ذو الحجة",
+                name: "ديسمبر",
                 amount: 0,
                 comments: "",
                 pendingPayment: true,

@@ -182,7 +182,7 @@ const joiSchema = Joi.object({
     id: Joi.string(),
     customerData: Joi.object({
         name: Joi.string().min(3).max(30).required(),
-        job: Joi.string().min(3).max(30).pattern(/^[a-zA-Z\s]+$/).required(),
+        job: Joi.string().min(3).max(30).required(),
         nationalIdentificationNumber: Joi.string().pattern(/^[1-9]\d{9}$/).required(),
         phoneNumber: Joi.string().min(10).max(10).pattern(/^05\d{8}$/).required(),
         region: Joi.string().min(3).max(1024).required(),

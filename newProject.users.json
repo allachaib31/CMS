@@ -7,20 +7,20 @@
   "NationalIdentificationNumber": "1002042115",
   "phoneNumber": "0504136488",
   "createdAt": {
-    "$date": "2020-08-20T00:00:00.000Z"
+    "$date": "2020-02-25T00:00:00.000Z"
   },
   "hijriDate": {
     "day": 1,
     "month": {
-      "number": 1,
-      "ar": "محرم"
+      "number": 7,
+      "ar": "رَجَب"
     },
-    "year": 1442
+    "year": 1441
   },
   "comments": "يتم إيقاف الخصم من رصيده ابتداءً من تاريخ وفاته -رحمه الله-  وهو تاريخ انتهاء اشتراكه لتصفية رصيده لإعادته للورثة",
   "password": "$2b$10$NbzelIeGgdzzvTksTUahp.yUvK9lA/SRfjBz3jCcn85dQi3e4hA9q",
   "oneYear": true,
-  "status": "not active",
+  "status": "active",
   "enableAccount": true,
   "loans": {
     "number": 0,
@@ -77,21 +77,10 @@
   },
   "memberBalance": 0,
   "commentSubscribeHistory": "",
-  "cumulativeBalance": 9900,
-  "disable": true,
+  "cumulativeBalance": 0,
+  "disable": false,
   "profileImage": null,
-  "__v": 121,
-  "subscriptionExpiryDate": {
-    "$date": "2024-07-22T13:34:15.653Z"
-  },
-  "subscriptionExpiryDateHijri": {
-    "day": 16,
-    "month": {
-      "number": 1,
-      "ar": ""
-    },
-    "year": 1446
-  }
+  "__v": 121
 },
 {
   "_id": {
@@ -102,15 +91,15 @@
   "NationalIdentificationNumber": "1027229937",
   "phoneNumber": "0505741781",
   "createdAt": {
-    "$date": "2020-08-20T00:00:00.000Z"
+    "$date": "2020-02-25T00:00:00.000Z"
   },
   "hijriDate": {
     "day": 1,
     "month": {
-      "number": 1,
-      "ar": "محرم"
+      "number": 7,
+      "ar": "رَجَب"
     },
-    "year": 1442
+    "year": 1441
   },
   "password": "$2b$10$6nuqbwPBNtNlSXAkxBAXSes0xOCxd5o7r0WfWNQTlC2yXsZIpKC0y",
   "oneYear": true,
@@ -121,8 +110,8 @@
     "amount": 0
   },
   "subsidies": {
-    "number": 2,
-    "amount": 3000
+    "number": 0,
+    "amount": 0
   },
   "commodityProfitsContributions": 0,
   "admin": {
@@ -170,9 +159,9 @@
     }
   },
   "comments": "",
-  "memberBalance": 6745.746491228076,
+  "memberBalance": 0,
   "commentSubscribeHistory": "",
-  "cumulativeBalance": 10700,
+  "cumulativeBalance": 0,
   "disable": false,
   "profileImage": null,
   "__v": 124
@@ -186,15 +175,15 @@
   "NationalIdentificationNumber": "1036267555",
   "phoneNumber": "0500187090",
   "createdAt": {
-    "$date": "2020-08-20T00:00:00.000Z"
+    "$date": "2020-02-25T00:00:00.000Z"
   },
   "hijriDate": {
     "day": 1,
     "month": {
-      "number": 1,
-      "ar": "محرم"
+      "number": 7,
+      "ar": "رَجَب"
     },
-    "year": 1442
+    "year": 1441
   },
   "password": "$2b$10$6nuqbwPBNtNlSXAkxBAXSes0xOCxd5o7r0WfWNQTlC2yXsZIpKC0y",
   "oneYear": true,
@@ -205,8 +194,8 @@
     "amount": 0
   },
   "subsidies": {
-    "number": 1,
-    "amount": 10000
+    "number": 0,
+    "amount": 0
   },
   "commodityProfitsContributions": 0,
   "admin": {
@@ -217,9 +206,9 @@
     }
   },
   "comments": "",
-  "memberBalance": 6745.746491228076,
+  "memberBalance": 0,
   "commentSubscribeHistory": "",
-  "cumulativeBalance": 10700,
+  "cumulativeBalance": 0,
   "disable": false,
   "profileImage": null,
   "__v": 121
@@ -233,27 +222,27 @@
   "NationalIdentificationNumber": "1020104897",
   "phoneNumber": "0556161252",
   "createdAt": {
-    "$date": "2020-08-20T00:00:00.000Z"
+    "$date": "2020-02-25T00:00:00.000Z"
   },
   "hijriDate": {
     "day": 1,
     "month": {
-      "number": 1,
-      "ar": "محرم"
+      "number": 7,
+      "ar": "رَجَب"
     },
-    "year": 1442
+    "year": 1441
   },
   "password": "$2b$10$6nuqbwPBNtNlSXAkxBAXSes0xOCxd5o7r0WfWNQTlC2yXsZIpKC0y",
   "oneYear": true,
   "status": "active",
   "enableAccount": true,
   "loans": {
-    "number": 1,
-    "amount": 15000
+    "number": 0,
+    "amount": 0
   },
   "subsidies": {
-    "number": 2,
-    "amount": 3000
+    "number": 0,
+    "amount": 0
   },
   "commodityProfitsContributions": 0,
   "admin": {
@@ -264,9 +253,9 @@
     }
   },
   "comments": "",
-  "memberBalance": 6945.746491228076,
+  "memberBalance": 0,
   "commentSubscribeHistory": "",
-  "cumulativeBalance": 10900,
+  "cumulativeBalance": 0,
   "disable": false,
   "profileImage": null,
   "__v": 122
@@ -280,15 +269,15 @@
   "NationalIdentificationNumber": "1058892710",
   "phoneNumber": "0504824494",
   "createdAt": {
-    "$date": "2020-08-20T00:00:00.000Z"
+    "$date": "2020-02-25T00:00:00.000Z"
   },
   "hijriDate": {
     "day": 1,
     "month": {
-      "number": 1,
-      "ar": "محرم"
+      "number": 7,
+      "ar": "رَجَب"
     },
-    "year": 1442
+    "year": 1441
   },
   "password": "$2b$10$6nuqbwPBNtNlSXAkxBAXSes0xOCxd5o7r0WfWNQTlC2yXsZIpKC0y",
   "oneYear": true,
@@ -311,9 +300,9 @@
     }
   },
   "comments": "",
-  "memberBalance": 6745.746491228076,
+  "memberBalance": 0,
   "commentSubscribeHistory": "",
-  "cumulativeBalance": 10700,
+  "cumulativeBalance": 0,
   "disable": false,
   "profileImage": null,
   "__v": 121
@@ -327,23 +316,23 @@
   "NationalIdentificationNumber": "1010700100",
   "phoneNumber": "0557629683",
   "createdAt": {
-    "$date": "2020-08-20T00:00:00.000Z"
+    "$date": "2020-02-25T00:00:00.000Z"
   },
   "hijriDate": {
     "day": 1,
     "month": {
-      "number": 1,
-      "ar": "محرم"
+      "number": 7,
+      "ar": "رَجَب"
     },
-    "year": 1442
+    "year": 1441
   },
   "password": "$2b$10$kQ0An7.IjHIbC877zQhQaeDUyOTWOSdEYmAMDILeLiYHjVmUi3V.a",
   "oneYear": true,
   "status": "active",
   "enableAccount": true,
   "loans": {
-    "number": 1,
-    "amount": 10000
+    "number": 0,
+    "amount": 0
   },
   "subsidies": {
     "number": 0,
@@ -358,9 +347,9 @@
     }
   },
   "comments": "",
-  "memberBalance": 6745.746491228076,
+  "memberBalance": 0,
   "commentSubscribeHistory": "",
-  "cumulativeBalance": 10700,
+  "cumulativeBalance": 0,
   "disable": false,
   "profileImage": null,
   "__v": 122
@@ -374,15 +363,15 @@
   "NationalIdentificationNumber": "1045779269",
   "phoneNumber": "0555773544",
   "createdAt": {
-    "$date": "2020-08-20T00:00:00.000Z"
+    "$date": "2020-02-25T00:00:00.000Z"
   },
   "hijriDate": {
     "day": 1,
     "month": {
-      "number": 1,
-      "ar": "محرم"
+      "number": 7,
+      "ar": "رَجَب"
     },
-    "year": 1442
+    "year": 1441
   },
   "password": "$2b$10$6nuqbwPBNtNlSXAkxBAXSes0xOCxd5o7r0WfWNQTlC2yXsZIpKC0y",
   "oneYear": true,
@@ -393,8 +382,8 @@
     "amount": 0
   },
   "subsidies": {
-    "number": 1,
-    "amount": 5000
+    "number": 0,
+    "amount": 0
   },
   "commodityProfitsContributions": 0,
   "admin": {
@@ -405,9 +394,9 @@
     }
   },
   "comments": "",
-  "memberBalance": 6745.746491228076,
+  "memberBalance": 0,
   "commentSubscribeHistory": "",
-  "cumulativeBalance": 10700,
+  "cumulativeBalance": 0,
   "disable": false,
   "profileImage": null,
   "__v": 121
@@ -421,27 +410,27 @@
   "NationalIdentificationNumber": "1027229960",
   "phoneNumber": "0558773256",
   "createdAt": {
-    "$date": "2020-08-20T00:00:00.000Z"
+    "$date": "2020-02-25T00:00:00.000Z"
   },
   "hijriDate": {
     "day": 1,
     "month": {
-      "number": 1,
-      "ar": "محرم"
+      "number": 7,
+      "ar": "رَجَب"
     },
-    "year": 1442
+    "year": 1441
   },
   "password": "$2b$10$6nuqbwPBNtNlSXAkxBAXSes0xOCxd5o7r0WfWNQTlC2yXsZIpKC0y",
   "oneYear": true,
   "status": "active",
   "enableAccount": true,
   "loans": {
-    "number": 1,
-    "amount": 10000
+    "number": 0,
+    "amount": 0
   },
   "subsidies": {
-    "number": 1,
-    "amount": 7429
+    "number": 0,
+    "amount": 0
   },
   "commodityProfitsContributions": 0,
   "admin": {
@@ -452,9 +441,9 @@
     }
   },
   "comments": "",
-  "memberBalance": 6945.746491228076,
+  "memberBalance": 0,
   "commentSubscribeHistory": "",
-  "cumulativeBalance": 10900,
+  "cumulativeBalance": 0,
   "disable": false,
   "profileImage": null,
   "__v": 122
@@ -468,15 +457,15 @@
   "NationalIdentificationNumber": "1002042156",
   "phoneNumber": "0560355513",
   "createdAt": {
-    "$date": "2020-08-20T00:00:00.000Z"
+    "$date": "2020-02-25T00:00:00.000Z"
   },
   "hijriDate": {
     "day": 1,
     "month": {
-      "number": 1,
-      "ar": "محرم"
+      "number": 7,
+      "ar": "رَجَب"
     },
-    "year": 1442
+    "year": 1441
   },
   "password": "$2b$10$63lNIzgY9frP2Jiv1Ful4ey27mq/VZs9W6.8DWkHIDsKZP4bhD4AS",
   "oneYear": true,
@@ -499,9 +488,9 @@
     }
   },
   "comments": "",
-  "memberBalance": 6945.746491228076,
+  "memberBalance": 0,
   "commentSubscribeHistory": "",
-  "cumulativeBalance": 10900,
+  "cumulativeBalance": 0,
   "disable": false,
   "profileImage": null,
   "__v": 123
@@ -515,15 +504,15 @@
   "NationalIdentificationNumber": "1020104921",
   "phoneNumber": "0583443443",
   "createdAt": {
-    "$date": "2020-08-20T00:00:00.000Z"
+    "$date": "2020-02-25T00:00:00.000Z"
   },
   "hijriDate": {
     "day": 1,
     "month": {
-      "number": 1,
-      "ar": "محرم"
+      "number": 7,
+      "ar": "رَجَب"
     },
-    "year": 1442
+    "year": 1441
   },
   "password": "$2b$10$XqizkxeuN5PkAPULsqGq6edpGsV8HdLolQsOxnfx97HcecSMyTMxy",
   "oneYear": true,
@@ -546,9 +535,9 @@
     }
   },
   "comments": "",
-  "memberBalance": 6945.746491228076,
+  "memberBalance": 0,
   "commentSubscribeHistory": "",
-  "cumulativeBalance": 10900,
+  "cumulativeBalance": 0,
   "disable": false,
   "profileImage": null,
   "__v": 123
@@ -562,15 +551,15 @@
   "NationalIdentificationNumber": "1067138964",
   "phoneNumber": "0556662969",
   "createdAt": {
-    "$date": "2020-08-20T00:00:00.000Z"
+    "$date": "2020-02-25T00:00:00.000Z"
   },
   "hijriDate": {
     "day": 1,
     "month": {
-      "number": 1,
-      "ar": "محرم"
+      "number": 7,
+      "ar": "رَجَب"
     },
-    "year": 1442
+    "year": 1441
   },
   "password": "$2b$10$6nuqbwPBNtNlSXAkxBAXSes0xOCxd5o7r0WfWNQTlC2yXsZIpKC0y",
   "oneYear": true,
@@ -593,9 +582,9 @@
     }
   },
   "comments": "",
-  "memberBalance": 6745.746491228076,
+  "memberBalance": 0,
   "commentSubscribeHistory": "",
-  "cumulativeBalance": 10700,
+  "cumulativeBalance": 0,
   "disable": false,
   "profileImage": null,
   "__v": 121
@@ -609,15 +598,15 @@
   "NationalIdentificationNumber": "1067138972",
   "phoneNumber": "0507381072",
   "createdAt": {
-    "$date": "2020-08-20T00:00:00.000Z"
+    "$date": "2020-02-25T00:00:00.000Z"
   },
   "hijriDate": {
     "day": 1,
     "month": {
-      "number": 1,
-      "ar": "محرم"
+      "number": 7,
+      "ar": "رَجَب"
     },
-    "year": 1442
+    "year": 1441
   },
   "password": "$2b$10$6nuqbwPBNtNlSXAkxBAXSes0xOCxd5o7r0WfWNQTlC2yXsZIpKC0y",
   "oneYear": true,
@@ -640,9 +629,9 @@
     }
   },
   "comments": "",
-  "memberBalance": 6945.746491228076,
+  "memberBalance": 0,
   "commentSubscribeHistory": "",
-  "cumulativeBalance": 10900,
+  "cumulativeBalance": 0,
   "disable": false,
   "profileImage": null,
   "__v": 122
@@ -656,23 +645,23 @@
   "NationalIdentificationNumber": "1067850881",
   "phoneNumber": "0508266211",
   "createdAt": {
-    "$date": "2020-08-20T00:00:00.000Z"
+    "$date": "2020-02-25T00:00:00.000Z"
   },
   "hijriDate": {
     "day": 1,
     "month": {
-      "number": 1,
-      "ar": "محرم"
+      "number": 7,
+      "ar": "رَجَب"
     },
-    "year": 1442
+    "year": 1441
   },
   "password": "$2b$10$6nuqbwPBNtNlSXAkxBAXSes0xOCxd5o7r0WfWNQTlC2yXsZIpKC0y",
   "oneYear": true,
   "status": "active",
   "enableAccount": true,
   "loans": {
-    "number": 1,
-    "amount": 16000
+    "number": 0,
+    "amount": 0
   },
   "subsidies": {
     "number": 0,
@@ -687,9 +676,9 @@
     }
   },
   "comments": "",
-  "memberBalance": 6745.746491228076,
+  "memberBalance": 0,
   "commentSubscribeHistory": "",
-  "cumulativeBalance": 10700,
+  "cumulativeBalance": 0,
   "disable": false,
   "profileImage": null,
   "__v": 121
@@ -703,15 +692,15 @@
   "NationalIdentificationNumber": "1067727592",
   "phoneNumber": "0557985746",
   "createdAt": {
-    "$date": "2020-08-20T00:00:00.000Z"
+    "$date": "2020-02-25T00:00:00.000Z"
   },
   "hijriDate": {
     "day": 1,
     "month": {
-      "number": 1,
-      "ar": "محرم"
+      "number": 7,
+      "ar": "رَجَب"
     },
-    "year": 1442
+    "year": 1441
   },
   "password": "$2b$10$39fxbt5xcinSiykSdDKAq.ilRyC0nguQyORA2ePjz/YuCy66jpppi",
   "oneYear": true,
@@ -734,9 +723,9 @@
     }
   },
   "comments": "",
-  "memberBalance": 6945.746491228076,
+  "memberBalance": 0,
   "commentSubscribeHistory": "",
-  "cumulativeBalance": 10900,
+  "cumulativeBalance": 0,
   "disable": false,
   "profileImage": null,
   "__v": 123
@@ -750,15 +739,15 @@
   "NationalIdentificationNumber": "1068444866",
   "phoneNumber": "0569167409",
   "createdAt": {
-    "$date": "2020-08-20T00:00:00.000Z"
+    "$date": "2020-02-25T00:00:00.000Z"
   },
   "hijriDate": {
     "day": 1,
     "month": {
-      "number": 1,
-      "ar": "محرم"
+      "number": 7,
+      "ar": "رَجَب"
     },
-    "year": 1442
+    "year": 1441
   },
   "password": "$2b$10$v9bnUyozq0bJjTPBI3IThOcenF65qu.eOVHZHlpgSQIG1yHjA0TQO",
   "oneYear": true,
@@ -781,9 +770,9 @@
     }
   },
   "comments": "",
-  "memberBalance": 6945.746491228076,
+  "memberBalance": 0,
   "commentSubscribeHistory": "",
-  "cumulativeBalance": 10900,
+  "cumulativeBalance": 0,
   "disable": false,
   "profileImage": null,
   "__v": 123
@@ -797,15 +786,15 @@
   "NationalIdentificationNumber": "1080564139",
   "phoneNumber": "0549547467",
   "createdAt": {
-    "$date": "2020-08-20T00:00:00.000Z"
+    "$date": "2020-02-25T00:00:00.000Z"
   },
   "hijriDate": {
     "day": 1,
     "month": {
-      "number": 1,
-      "ar": "محرم"
+      "number": 7,
+      "ar": "رَجَب"
     },
-    "year": 1442
+    "year": 1441
   },
   "password": "$2b$10$VjcWARpU8i6IGdSrGhYaPOrXVSK1F.DQQZcN8GrI4Qw9jV2KuL6Zu",
   "oneYear": true,
@@ -828,9 +817,9 @@
     }
   },
   "comments": "",
-  "memberBalance": 6745.746491228076,
+  "memberBalance": 0,
   "commentSubscribeHistory": "",
-  "cumulativeBalance": 10700,
+  "cumulativeBalance": 0,
   "disable": false,
   "profileImage": null,
   "__v": 122
@@ -844,23 +833,23 @@
   "NationalIdentificationNumber": "1089164428",
   "phoneNumber": "0547847006",
   "createdAt": {
-    "$date": "2020-08-20T00:00:00.000Z"
+    "$date": "2020-02-25T00:00:00.000Z"
   },
   "hijriDate": {
     "day": 1,
     "month": {
-      "number": 1,
-      "ar": "محرم"
+      "number": 7,
+      "ar": "رَجَب"
     },
-    "year": 1442
+    "year": 1441
   },
   "password": "$2b$10$8tBg/O9sbv8Jy0TzqWUrkO8GXDEtvnCyatYJKxArNgsZYTzQZ6cn6",
   "oneYear": true,
   "status": "active",
   "enableAccount": true,
   "loans": {
-    "number": 1,
-    "amount": 10000
+    "number": 9,
+    "amount": 0
   },
   "subsidies": {
     "number": 0,
@@ -875,9 +864,9 @@
     }
   },
   "comments": "",
-  "memberBalance": 6745.746491228076,
+  "memberBalance": 0,
   "commentSubscribeHistory": "",
-  "cumulativeBalance": 10700,
+  "cumulativeBalance": 0,
   "disable": false,
   "profileImage": null,
   "__v": 122
@@ -891,15 +880,15 @@
   "NationalIdentificationNumber": "1092967627",
   "phoneNumber": "0530355720",
   "createdAt": {
-    "$date": "2020-08-20T00:00:00.000Z"
+    "$date": "2020-02-25T00:00:00.000Z"
   },
   "hijriDate": {
     "day": 1,
     "month": {
-      "number": 1,
-      "ar": "محرم"
+      "number": 7,
+      "ar": "رَجَب"
     },
-    "year": 1442
+    "year": 1441
   },
   "password": "$2b$10$IojudM4ONWxBG/oTxLQdFO/TajAoIhCX8ZPd055ah3G8F5S86.rDu",
   "oneYear": true,
@@ -910,8 +899,8 @@
     "amount": 0
   },
   "subsidies": {
-    "number": 1,
-    "amount": 10000
+    "number": 0,
+    "amount": 0
   },
   "commodityProfitsContributions": 0,
   "admin": {
@@ -922,9 +911,9 @@
     }
   },
   "comments": "",
-  "memberBalance": 6945.746491228076,
+  "memberBalance": 0,
   "commentSubscribeHistory": "",
-  "cumulativeBalance": 10900,
+  "cumulativeBalance": 0,
   "disable": false,
   "profileImage": null,
   "__v": 123
@@ -957,9 +946,9 @@
     }
   },
   "comments": "",
-  "memberBalance": 4666.126315789473,
+  "memberBalance": 0,
   "commentSubscribeHistory": "",
-  "cumulativeBalance": 5500,
+  "cumulativeBalance": 0,
   "disable": false,
   "hijriDate": {
     "day": 1,
@@ -970,7 +959,7 @@
     "year": 1444
   },
   "createdAt": {
-    "$date": "2022-07-30T20:18:07.897Z"
+    "$date": "2022-09-27T20:18:07.897Z"
   },
   "id": "U19",
   "__v": 50
@@ -1003,20 +992,20 @@
     }
   },
   "comments": "",
-  "memberBalance": 2483.0263157894738,
+  "memberBalance": 0,
   "commentSubscribeHistory": "",
-  "cumulativeBalance": 3000,
+  "cumulativeBalance": 0,
   "disable": false,
   "hijriDate": {
     "day": 1,
     "month": {
-      "number": 1,
-      "ar": "محرم"
+      "number": 11,
+      "ar": "ذو القعدة"
     },
-    "year": 1445
+    "year": 1444
   },
   "createdAt": {
-    "$date": "2023-07-19T16:30:46.370Z"
+    "$date": "2023-05-21T16:30:46.370Z"
   },
   "id": "U20",
   "__v": 22

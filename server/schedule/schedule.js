@@ -4,11 +4,11 @@ const monthlySubscriptionModel = require("../models/subscription/monthlySubscrip
 const getHijriDate = require("../utils/getHijriDate");
 const momentHijri = require("moment-hijri");
 function scheduleUpdate() {
-    cron.schedule('*/10 * * * *', async () => {
-     const hijriDate = getHijriDate();
+    cron.schedule('*/1 * * * *', async () => {
+        const hijriDate = getHijriDate();
         const foundationSubscription = await foundationSubscriptionModel.find().populate("idUser");
         for (let i = 0; i < foundationSubscription.length; i++) {
-            if(foundationSubscription[i].idUser.subscriptionExpiryDate) {
+            if (foundationSubscription[i].idUser.subscriptionExpiryDate) {
                 continue;
             }
             let existingSubscription = await monthlySubscriptionModel.findOne({ idUser: foundationSubscription[i].idUser, year: hijriDate[2] });
@@ -24,7 +24,7 @@ function scheduleUpdate() {
                 });
                 for (let j = 0; j < 12; j++) {
                     const monthIndex = (j + 1).toString();
-                    existingSubscription.months[monthIndex].dueDate = momentHijri(hijriDate[2] + "-" + monthIndex + "-" + foundationSubscription[i].hijriDate.day, 'iYYYY-iMM-iDD').locale('en').format('YYYY-MM-DD');
+                    existingSubscription.months[monthIndex].dueDate = momentHijri(hijriDate[2] + "-" + monthIndex + "-" + 25, 'iYYYY-iMM-iDD').locale('en').format('YYYY-MM-DD');
                     const toHijriDate = getHijriDate(existingSubscription.months[monthIndex].dueDate);
                     existingSubscription.months[monthIndex].dueDateHijri = {
                         day: toHijriDate[0],
@@ -50,15 +50,15 @@ function scheduleUpdate() {
             verifyDate(currentMonthIndex);
             verifyDate(prevMonth);
             function verifyDate(index) {
-                if(subscription.months[index].dueDate == null) return;
+                if (subscription.months[index].dueDate == null) return;
                 const targetDate = new Date(subscription.months[index].dueDate)
                 targetDate.setDate(targetDate.getDate() + 5);
                 const currentDate = new Date();
                 targetDate.setHours(0, 0, 0, 0);
                 currentDate.setHours(0, 0, 0, 0);
-    
+
                 if (currentDate.getTime() >= targetDate.getTime()) {
-                    if(!subscription.months[index].isInvoiceOverdue && subscription.months[index].amount == 0){
+                    if (!subscription.months[index].isInvoiceOverdue && subscription.months[index].amount == 0) {
                         subscription.months[index].isInvoiceOverdue = true;
                         subscription.numberofArrears += 1;
                         subscription.markModified('months');

@@ -50,7 +50,7 @@ function PayMonthlySubscriptions() {
             .then((res) => {
                 setLoading((e) => !e);
                 setSubscriptions(res.data.subscriptions);
-                setMonth(input.dateHijri.month.number);
+                setMonth(new Date(input.date).getMonth() + 1);
                 setTotal(res.data.total);
                 setAmount(res.data.typeSubscription[0].amount);
             })
@@ -87,6 +87,21 @@ function PayMonthlySubscriptions() {
             },
         });
     }, []);
+    useEffect(() => {
+        const today = new Date();
+        const currentDate25th = new Date(today.getFullYear(), today.getMonth(), 25 + 1);
+        const formatted = currentDate25th.toISOString().split("T")[0];
+
+        const hijriDate = hijriDateObject(formatted);
+        setInputs({
+            date: formatted,
+            dateHijri: {
+                day: hijriDate[0],
+                month: hijriDate[1],
+                year: hijriDate[2],
+            },
+        });
+    }, []);
     return (
         <div>
             <h1 className="text-center font-bold py-[0.5rem]">
@@ -96,20 +111,26 @@ function PayMonthlySubscriptions() {
                 <input
                     className="input input-sm input-bordered"
                     onChange={(event) => {
-                        const hijriDate = hijriDateObject(event.target.value);
-                        setInputs((prevInput) => {
-                            return {
-                                ...prevInput,
-                                date: event.target.value,
-                                dateHijri: {
-                                    day: hijriDate[0],
-                                    month: hijriDate[1],
-                                    year: hijriDate[2],
-                                },
-                            };
-                        });
+                        const selected = new Date(event.target.value);
+                        // Force day to 25
+                        const forcedDate = new Date(selected.getFullYear(), selected.getMonth(), 25 + 1);
+                        const formatted = forcedDate.toISOString().split("T")[0];
+
+                        // Update the input value to show 25th immediately
+                        event.target.value = formatted;
+
+                        const hijriDate = hijriDateObject(formatted);
+                        setInputs((prevInput) => ({
+                            ...prevInput,
+                            date: formatted,
+                            dateHijri: {
+                                day: hijriDate[0],
+                                month: hijriDate[1],
+                                year: hijriDate[2],
+                            },
+                        }));
                         getSubscriptionsForm({
-                            date: event.target.value,
+                            date: formatted,
                             dateHijri: {
                                 day: hijriDate[0],
                                 month: hijriDate[1],
@@ -117,6 +138,8 @@ function PayMonthlySubscriptions() {
                             },
                         });
                     }}
+                    value={inputs.date}
+
                     type="date"
                     id="dateInput"
                     name="dateInput"
@@ -160,16 +183,16 @@ function PayMonthlySubscriptions() {
                                     المبلغ
                                 </th>
                                 <th className="text-center border border-slate-600" >
-                                     الاستحقاق <br/> الميلادي
+                                    الاستحقاق <br /> الميلادي
                                 </th>
                                 <th className="text-center border border-slate-600" >
-                                     الاستحقاق <br/> الهجري
+                                    الاستحقاق <br /> الهجري
                                 </th>
                                 <th className="text-center border border-slate-600" >
-                                     الايداع <br/> الميلادي
+                                    الايداع <br /> الميلادي
                                 </th>
                                 <th className="text-center border border-slate-600" >
-                                     الايداع <br/> الهجري
+                                    الايداع <br /> الهجري
                                 </th>
                                 <th className="border border-slate-600">
                                     ملاحظات
@@ -182,7 +205,7 @@ function PayMonthlySubscriptions() {
                         <tbody className="text-center text-sm">
                             {subscriptions &&
                                 subscriptions.map((subscription) => {
-                                    const date = subscription.months[month].createdAt == null ? new Date() : new Date(subscription.months[month].createdAt);
+                                    const date = subscription.months[month].createdAt == null ? null : new Date(subscription.months[month].createdAt);
                                     const hijriDate = hijriDateObject(date);
                                     return (
                                         <tr>
@@ -198,11 +221,11 @@ function PayMonthlySubscriptions() {
                                                 {subscription.months[month].dueDateHijri.day}
                                             </td>
                                             <td className="border border-slate-600">
-                                                {date.getFullYear()}-{date.getMonth() + 1}-
-                                                {date.getDate()}
+                                                {date && date.getFullYear()}-{date && date.getMonth() + 1}-
+                                                {date && date.getDate()}
                                             </td>
                                             <td className="border border-slate-600">
-                                                {hijriDate[2]}-{hijriDate[1].number}-{hijriDate[0]}
+                                                {date && hijriDate[2]}-{date && hijriDate[1].number}-{date && hijriDate[0]}
                                             </td>
                                             <td id={subscription._id} onClick={() => {
                                                 setComment({

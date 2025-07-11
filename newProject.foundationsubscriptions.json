@@ -10,8 +10,8 @@
   "hijriDate": {
     "day": 1,
     "month": {
-      "number": 1,
-      "ar": "محرم"
+      "number": 7,
+      "ar": "رجب"
     },
     "year": 1441
   },
@@ -31,8 +31,8 @@
   "hijriDate": {
     "day": 1,
     "month": {
-      "number": 1,
-      "ar": "محرم"
+      "number": 7,
+      "ar": "رجب"
     },
     "year": 1441
   },
@@ -52,8 +52,8 @@
   "hijriDate": {
     "day": 1,
     "month": {
-      "number": 1,
-      "ar": "محرم"
+      "number": 7,
+      "ar": "رجب"
     },
     "year": 1441
   },
@@ -73,8 +73,8 @@
   "hijriDate": {
     "day": 1,
     "month": {
-      "number": 1,
-      "ar": "محرم"
+      "number": 7,
+      "ar": "رجب"
     },
     "year": 1441
   },
@@ -94,8 +94,8 @@
   "hijriDate": {
     "day": 1,
     "month": {
-      "number": 1,
-      "ar": "محرم"
+      "number": 7,
+      "ar": "رجب"
     },
     "year": 1441
   },
@@ -115,8 +115,8 @@
   "hijriDate": {
     "day": 1,
     "month": {
-      "number": 1,
-      "ar": "محرم"
+      "number": 7,
+      "ar": "رجب"
     },
     "year": 1441
   },
@@ -136,8 +136,8 @@
   "hijriDate": {
     "day": 1,
     "month": {
-      "number": 1,
-      "ar": "محرم"
+      "number": 7,
+      "ar": "رجب"
     },
     "year": 1441
   },
@@ -157,8 +157,8 @@
   "hijriDate": {
     "day": 1,
     "month": {
-      "number": 1,
-      "ar": "محرم"
+      "number": 7,
+      "ar": "رجب"
     },
     "year": 1441
   },
@@ -178,8 +178,8 @@
   "hijriDate": {
     "day": 1,
     "month": {
-      "number": 1,
-      "ar": "محرم"
+      "number": 7,
+      "ar": "رجب"
     },
     "year": 1441
   },
@@ -199,8 +199,8 @@
   "hijriDate": {
     "day": 1,
     "month": {
-      "number": 1,
-      "ar": "محرم"
+      "number": 7,
+      "ar": "رجب"
     },
     "year": 1441
   },
@@ -220,8 +220,8 @@
   "hijriDate": {
     "day": 1,
     "month": {
-      "number": 1,
-      "ar": "محرم"
+      "number": 7,
+      "ar": "رجب"
     },
     "year": 1441
   },
@@ -241,8 +241,8 @@
   "hijriDate": {
     "day": 1,
     "month": {
-      "number": 1,
-      "ar": "محرم"
+      "number": 7,
+      "ar": "رجب"
     },
     "year": 1441
   },
@@ -262,8 +262,8 @@
   "hijriDate": {
     "day": 1,
     "month": {
-      "number": 1,
-      "ar": "محرم"
+      "number": 7,
+      "ar": "رجب"
     },
     "year": 1441
   },
@@ -283,8 +283,8 @@
   "hijriDate": {
     "day": 1,
     "month": {
-      "number": 1,
-      "ar": "محرم"
+      "number": 7,
+      "ar": "رجب"
     },
     "year": 1441
   },
@@ -304,8 +304,8 @@
   "hijriDate": {
     "day": 1,
     "month": {
-      "number": 1,
-      "ar": "محرم"
+      "number": 7,
+      "ar": "رجب"
     },
     "year": 1441
   },
@@ -325,8 +325,8 @@
   "hijriDate": {
     "day": 1,
     "month": {
-      "number": 1,
-      "ar": "محرم"
+      "number": 7,
+      "ar": "رجب"
     },
     "year": 1441
   },
@@ -346,8 +346,8 @@
   "hijriDate": {
     "day": 1,
     "month": {
-      "number": 1,
-      "ar": "محرم"
+      "number": 7,
+      "ar": "رجب"
     },
     "year": 1441
   },
@@ -367,8 +367,8 @@
   "hijriDate": {
     "day": 1,
     "month": {
-      "number": 1,
-      "ar": "محرم"
+      "number": 7,
+      "ar": "رجب"
     },
     "year": 1441
   },
@@ -386,15 +386,15 @@
   "amount": 500,
   "comments": "",
   "hijriDate": {
-    "day": 1,
+    "day": 25,
     "month": {
-      "number": 9,
+      "number": 3,
       "ar": "ربيع الاول"
     },
     "year": 1444
   },
   "createdAt": {
-    "$date": "2022-04-02T20:18:07.897Z"
+    "$date": "2022-10-21T20:18:07.897Z"
   }
 },
 {
@@ -404,18 +404,19 @@
   "idUser": {
     "$oid": "66edbfb0cb63c34e1d6fe9f0"
   },
-  "amount": 700,
+  "amount": 500,
   "comments": "",
   "hijriDate": {
-    "day": 1,
+    "day": 25,
     "month": {
-      "number": 9,
-      "ar": "محرم"
+      "number": 11,
+      "ar": "ذو القعدة"
     },
-    "year": 1445
+    "year": 1444
   },
   "createdAt": {
-    "$date": "2023-07-30T16:30:46.676Z"
+    "$date": "2023-06-14T16:30:46.676Z"
   },
   "__v": 0
 }]
+
