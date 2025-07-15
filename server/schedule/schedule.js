@@ -4,18 +4,18 @@ const monthlySubscriptionModel = require("../models/subscription/monthlySubscrip
 const getHijriDate = require("../utils/getHijriDate");
 const momentHijri = require("moment-hijri");
 function scheduleUpdate() {
-    cron.schedule('*/1 * * * *', async () => {
+    cron.schedule('*/10 * * * *', async () => {
         const hijriDate = getHijriDate();
         const foundationSubscription = await foundationSubscriptionModel.find().populate("idUser");
         for (let i = 0; i < foundationSubscription.length; i++) {
             if (foundationSubscription[i].idUser.subscriptionExpiryDate) {
                 continue;
             }
-            let existingSubscription = await monthlySubscriptionModel.findOne({ idUser: foundationSubscription[i].idUser, year: hijriDate[2] });
+            let existingSubscription = await monthlySubscriptionModel.findOne({ idUser: foundationSubscription[i].idUser, year: new Date().getFullYear().toString() });
             if (!existingSubscription) {
                 existingSubscription = new monthlySubscriptionModel({
                     idUser: foundationSubscription[i].idUser,
-                    year: hijriDate[2],
+                    year: new Date().getFullYear().toString(),
                     hijriDate: {
                         day: hijriDate[0],
                         month: hijriDate[1],
@@ -24,7 +24,7 @@ function scheduleUpdate() {
                 });
                 for (let j = 0; j < 12; j++) {
                     const monthIndex = (j + 1).toString();
-                    existingSubscription.months[monthIndex].dueDate = momentHijri(hijriDate[2] + "-" + monthIndex + "-" + 25, 'iYYYY-iMM-iDD').locale('en').format('YYYY-MM-DD');
+                    existingSubscription.months[monthIndex].dueDate = `2025-${monthIndex}-25`//momentHijri(hijriDate[2] + "-" + monthIndex + "-" + 25, 'iYYYY-iMM-iDD').locale('en').format('YYYY-MM-DD');
                     const toHijriDate = getHijriDate(existingSubscription.months[monthIndex].dueDate);
                     existingSubscription.months[monthIndex].dueDateHijri = {
                         day: toHijriDate[0],
@@ -42,7 +42,7 @@ function scheduleUpdate() {
     });
     cron.schedule("*/10 * * * *", async () => {
         const hijriDate = getHijriDate();
-        const existingSubscriptions = await monthlySubscriptionModel.find({ year: hijriDate[2] });
+        const existingSubscriptions = await monthlySubscriptionModel.find({ year: new Date().getFullYear().toString() });
         existingSubscriptions.forEach(async (subscription) => {
             // Get the current month index
             const currentMonthIndex = hijriDate[1].number.toString();

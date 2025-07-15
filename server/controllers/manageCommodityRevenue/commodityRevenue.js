@@ -38,8 +38,8 @@ exports.addCommodityRevenue = async (req, res) => {
             });
         }
         let days = 30 * commodityData.numberOfInstallments;
-        const date = new Date();
-        date.setDate(new Date(commodityData.dateOfPayment).getDate() + days)
+        const date = new Date(commodityData.dateOfPayment);
+        date.setDate(date.getDate() + days)
         commodityData.paymentExpiryDate = date.toLocaleDateString();
         let paymentExpiryDateHijri = getHijriDate(date);
         commodityData.paymentExpiryDateHijri = {
@@ -65,6 +65,7 @@ exports.addCommodityRevenue = async (req, res) => {
         const commodityRevenu = new commodityRevenueModel({
             customerData, sponsorData, commodityData: {
                 ...commodityData,
+                currentBalanceFund: amountMoneyBox.amount,
                 saleAmount: commodityData.saleAmount //- commodityData.amountPaid
             }, comments, hijriDate: {
                 day: hijriDate[0],
@@ -419,6 +420,7 @@ exports.payInstallmentSchedule = async (req, res) => {
         for (const c of contributions) {
             const ratio = c.contributionAmount / totalContributed;
             const userPrincipalRefund = remaining * ratio;
+            const profitAmount = c.profitAmount / revenue.commodityData.numberOfInstallments;
 
             // 11a. Update contribution record
             await userContributionGoodModel.updateOne(
@@ -432,8 +434,8 @@ exports.payInstallmentSchedule = async (req, res) => {
                 {
                     $inc: {
                         memberBalance: userPrincipalRefund,
-                        cumulativeBalance: perProfitInstallment,
-                        commodityProfitsContributions: perProfitInstallment
+                        cumulativeBalance: profitAmount,
+                        commodityProfitsContributions: profitAmount
                     }
                 },
                 { new: true }

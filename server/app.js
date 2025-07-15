@@ -121,7 +121,7 @@ conn.once('open', () => {
     });
     const PORT = process.env.PORT || 5000;
     const server = app.listen(PORT, (req, res) => {
-        //scheduleUpdate();
+        scheduleUpdate();
         //if (cluster.worker.id === 1) scheduleUpdate();
         console.log(`server is start running in ${PORT}`);
     });

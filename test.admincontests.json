@@ -1,0 +1,14 @@
+[{
+  "_id": {
+    "$oid": "66fc8310ce0b4fa024b35a95"
+  },
+  "name": "زاهر محمد بن زاهر",
+  "password": "$2b$10$LkyFjIV8g3XClDBE/u5qNeKEUsuP8zFrd/wZ4VQbtQ25y.RsUtsjO",
+  "email": "ryman07@gmail.com",
+  "phoneNumber": "0500187090",
+  "createdAt": {
+    "$date": "2024-10-01T23:06:56.478Z"
+  },
+  "id": "AC1",
+  "__v": 0
+}]

@@ -1,11 +1,11 @@
 [{
   "_id": {
-    "$oid": "66ec5535f114ef61452922db"
+    "$oid": "66ec5535f114ef61452922cb"
   },
-  "id": "U17",
-  "name": "حمدان زاهر محمد بن زاهر",
-  "NationalIdentificationNumber": "1089164428",
-  "phoneNumber": "0547847006",
+  "id": "U1",
+  "name": "عبدالله محمد بن زاهر",
+  "NationalIdentificationNumber": "1002042115",
+  "phoneNumber": "0504136488",
   "createdAt": {
     "$date": "2020-02-25T00:00:00.000Z"
   },
@@ -17,80 +17,81 @@
     },
     "year": 1441
   },
-  "password": "$2b$10$8tBg/O9sbv8Jy0TzqWUrkO8GXDEtvnCyatYJKxArNgsZYTzQZ6cn6",
+  "comments": "يتم إيقاف الخصم من رصيده ابتداءً من تاريخ وفاته -رحمه الله-  وهو تاريخ انتهاء اشتراكه لتصفية رصيده لإعادته للورثة",
+  "password": "$2b$10$NbzelIeGgdzzvTksTUahp.yUvK9lA/SRfjBz3jCcn85dQi3e4hA9q",
   "oneYear": true,
-  "status": "active",
-  "enableAccount": true,
-  "loans": {
-    "number": 9,
-    "amount": 0
-  },
-  "subsidies": {
-    "number": 47,
-    "amount": 5342.77
-  },
-  "commodityProfitsContributions": 0,
-  "admin": {
-    "isAdmin": true,
-    "userPermissions": [],
-    "_id": {
-      "$oid": "66f68740504bebf82f0f36cd"
-    }
-  },
-  "comments": "",
-  "memberBalance": 6957.23,
-  "commentSubscribeHistory": "",
-  "cumulativeBalance": 12300,
-  "disable": false,
-  "profileImage": null,
-  "__v": 122
-},
-{
-  "_id": {
-    "$oid": "66ec5535f114ef61452922dc"
-  },
-  "id": "U18",
-  "name": "نواف حمدان محمد بن زاهر",
-  "NationalIdentificationNumber": "1092967627",
-  "phoneNumber": "0530355720",
-  "createdAt": {
-    "$date": "2020-02-25T00:00:00.000Z"
-  },
-  "hijriDate": {
-    "day": 1,
-    "month": {
-      "number": 7,
-      "ar": "رَجَب"
-    },
-    "year": 1441
-  },
-  "password": "$2b$10$IojudM4ONWxBG/oTxLQdFO/TajAoIhCX8ZPd055ah3G8F5S86.rDu",
-  "oneYear": true,
-  "status": "active",
+  "status": "not active",
   "enableAccount": true,
   "loans": {
     "number": 0,
     "amount": 0
   },
   "subsidies": {
-    "number": 47,
-    "amount": 5342.77
+    "number": 0,
+    "amount": 0
   },
   "commodityProfitsContributions": 0,
   "admin": {
     "isAdmin": true,
-    "userPermissions": [],
+    "userPermissions": [
+      "اضافة او حذف او تعديل عضو جديد",
+      "اضافة او حذف او تعديل مسؤل جديد",
+      "تفعيل اشتراك و ايقاف اشتراك عضو",
+      "تغيير رقم الجوال",
+      "إضافة أقساط قروض الأعضاء",
+      "إضافة المصروفات المسترجعة بأنواعها",
+      "إضافة المصروفات الغير مسترجعة بأنواعها",
+      "إضافة نوع إيراد جديد",
+      "إضافة نوع مصروف جديد",
+      "إضافة إيرادات (شراء السلع)",
+      "إدارة الإعلانات",
+      "تعبئة عقد شراء سلعة وأقساطها",
+      "إضافة إيرادات المساهمات في الأسهم",
+      "إدارة التصويت",
+      "طباعة القروض و أقساطها (كل الأعضاء أو عضو محدد)",
+      "طباعة طلب شراء سلعة (بعد التعبئة)",
+      "طباعة جدول أقساط سلعة (بعد التعبئة)",
+      "طباعة سجل المساهمة في شراء السلع",
+      "طباعة سجل الاشتراكات (سنوي ، شهري ، أو مدة محددة)",
+      "إضافة بيانات شراء السلع وأقساطها",
+      "إضافة بيانات المساهمات (أسهم، صندوق استثماري، شركة مالية، أخرى)",
+      "إضافة بيانات سجل المساهمة في صندوق استثماري",
+      "إضافة بيانات المساهمة في شركة مالية",
+      "إضافة إيرادات (اشتراكات الأعضاء)",
+      "طباعة الإيرادات (كلي أو جزئي حسب المدة)",
+      "طباعة إيرادات عضو (كلي أو جزئي حسب المدة) ",
+      "طباعة مصروفات عضو (كلي أو جزئي حسب المدة)",
+      "طباعة المصروفات الغير مسترجعة (كلي أو جزئي حسب المدة)",
+      "طباعة المصروفات المسترجعة (كلي أو جزئي حسب المدة)",
+      "طباعة سجل المساهمات بأنواعها",
+      "طباعة عقد شراء سلعة و أقساطها (بعد التعبئة)",
+      "طباعة سجل المساهمة في الصناديق الاستثمارية",
+      "طباعة سجل المساهمة في الأسهم",
+      "طباعة سجل المساهمة في شركة مالية",
+      "التعامل مع صفحة بنود واتفاقيات الصندوق",
+      "التعامل مع صفحة شجرة العائلة"
+    ],
     "_id": {
-      "$oid": "66ec6b7af06990a1bde83a12"
+      "$oid": "66ec6956edb9e7f12f19c4c1"
     }
   },
-  "comments": "",
-  "memberBalance": 6957.23,
+  "memberBalance": 6135.18,
   "commentSubscribeHistory": "",
-  "cumulativeBalance": 12300,
-  "disable": false,
+  "cumulativeBalance": 9900,
+  "disable": true,
   "profileImage": null,
-  "__v": 123
+  "__v": 122,
+  "subscriptionExpiryDate": {
+    "$date": "2024-07-22T09:28:35.466Z"
+  },
+  "subscriptionExpiryDateHijri": {
+    "day": 16,
+    "month": {
+      "number": 1,
+      "ar": "محرم"
+    },
+    "year": 1446
+  }
 },
 {
   "_id": {
@@ -120,8 +121,8 @@
     "amount": 0
   },
   "subsidies": {
-    "number": 47,
-    "amount": 5342.77
+    "number": 2,
+    "amount": 12000
   },
   "commodityProfitsContributions": 0,
   "admin": {
@@ -178,6 +179,53 @@
 },
 {
   "_id": {
+    "$oid": "66ec5535f114ef61452922cd"
+  },
+  "id": "U3",
+  "name": "زاهر محمد بن زاهر",
+  "NationalIdentificationNumber": "1036267555",
+  "phoneNumber": "0500187090",
+  "createdAt": {
+    "$date": "2020-02-25T00:00:00.000Z"
+  },
+  "hijriDate": {
+    "day": 1,
+    "month": {
+      "number": 7,
+      "ar": "رَجَب"
+    },
+    "year": 1441
+  },
+  "password": "$2b$10$B4zIVOxm/vornO6BmyJb9OJhIfjcjLtcdpnNVu8ZsOY2eU0za.SLy",
+  "oneYear": true,
+  "status": "active",
+  "enableAccount": true,
+  "loans": {
+    "number": 0,
+    "amount": 0
+  },
+  "subsidies": {
+    "number": 0,
+    "amount": 0
+  },
+  "commodityProfitsContributions": 0,
+  "admin": {
+    "isAdmin": true,
+    "userPermissions": [],
+    "_id": {
+      "$oid": "66fc7d1eecebcfe3a7a03eb3"
+    }
+  },
+  "comments": "",
+  "memberBalance": 6957.23,
+  "commentSubscribeHistory": "",
+  "cumulativeBalance": 12300,
+  "disable": false,
+  "profileImage": null,
+  "__v": 121
+},
+{
+  "_id": {
     "$oid": "66ec5535f114ef61452922ce"
   },
   "id": "U4",
@@ -204,8 +252,8 @@
     "amount": 0
   },
   "subsidies": {
-    "number": 47,
-    "amount": 5342.77
+    "number": 1,
+    "amount": 2000
   },
   "commodityProfitsContributions": 0,
   "admin": {
@@ -251,8 +299,8 @@
     "amount": 0
   },
   "subsidies": {
-    "number": 47,
-    "amount": 5342.77
+    "number": 0,
+    "amount": 0
   },
   "commodityProfitsContributions": 0,
   "admin": {
@@ -260,241 +308,6 @@
     "userPermissions": [],
     "_id": {
       "$oid": "66ec6b7af06990a1bde839f8"
-    }
-  },
-  "comments": "",
-  "memberBalance": 6957.23,
-  "commentSubscribeHistory": "",
-  "cumulativeBalance": 12300,
-  "disable": false,
-  "profileImage": null,
-  "__v": 121
-},
-{
-  "_id": {
-    "$oid": "66ec5535f114ef61452922d8"
-  },
-  "id": "U14",
-  "name": "راشد علي محمد بن زاهر",
-  "NationalIdentificationNumber": "1067727592",
-  "phoneNumber": "0557985746",
-  "createdAt": {
-    "$date": "2020-02-25T00:00:00.000Z"
-  },
-  "hijriDate": {
-    "day": 1,
-    "month": {
-      "number": 7,
-      "ar": "رَجَب"
-    },
-    "year": 1441
-  },
-  "password": "$2b$10$39fxbt5xcinSiykSdDKAq.ilRyC0nguQyORA2ePjz/YuCy66jpppi",
-  "oneYear": true,
-  "status": "active",
-  "enableAccount": true,
-  "loans": {
-    "number": 0,
-    "amount": 0
-  },
-  "subsidies": {
-    "number": 47,
-    "amount": 5342.77
-  },
-  "commodityProfitsContributions": 0,
-  "admin": {
-    "isAdmin": true,
-    "userPermissions": [],
-    "_id": {
-      "$oid": "66ec6b7af06990a1bde83a0a"
-    }
-  },
-  "comments": "",
-  "memberBalance": 6957.23,
-  "commentSubscribeHistory": "",
-  "cumulativeBalance": 12300,
-  "disable": false,
-  "profileImage": null,
-  "__v": 123
-},
-{
-  "_id": {
-    "$oid": "66ec5535f114ef61452922d9"
-  },
-  "id": "U15",
-  "name": "حمد حمدان محمد بن زاهر",
-  "NationalIdentificationNumber": "1068444866",
-  "phoneNumber": "0569167409",
-  "createdAt": {
-    "$date": "2020-02-25T00:00:00.000Z"
-  },
-  "hijriDate": {
-    "day": 1,
-    "month": {
-      "number": 7,
-      "ar": "رَجَب"
-    },
-    "year": 1441
-  },
-  "password": "$2b$10$v9bnUyozq0bJjTPBI3IThOcenF65qu.eOVHZHlpgSQIG1yHjA0TQO",
-  "oneYear": true,
-  "status": "active",
-  "enableAccount": true,
-  "loans": {
-    "number": 0,
-    "amount": 0
-  },
-  "subsidies": {
-    "number": 47,
-    "amount": 5342.77
-  },
-  "commodityProfitsContributions": 0,
-  "admin": {
-    "isAdmin": true,
-    "userPermissions": [],
-    "_id": {
-      "$oid": "66ec6b7af06990a1bde83a0c"
-    }
-  },
-  "comments": "",
-  "memberBalance": 6957.23,
-  "commentSubscribeHistory": "",
-  "cumulativeBalance": 12300,
-  "disable": false,
-  "profileImage": null,
-  "__v": 123
-},
-{
-  "_id": {
-    "$oid": "66ec5535f114ef61452922d3"
-  },
-  "id": "U9",
-  "name": "محمد عبدالله محمد بن زاهر",
-  "NationalIdentificationNumber": "1002042156",
-  "phoneNumber": "0560355513",
-  "createdAt": {
-    "$date": "2020-02-25T00:00:00.000Z"
-  },
-  "hijriDate": {
-    "day": 1,
-    "month": {
-      "number": 7,
-      "ar": "رَجَب"
-    },
-    "year": 1441
-  },
-  "password": "$2b$10$63lNIzgY9frP2Jiv1Ful4ey27mq/VZs9W6.8DWkHIDsKZP4bhD4AS",
-  "oneYear": true,
-  "status": "active",
-  "enableAccount": true,
-  "loans": {
-    "number": 0,
-    "amount": 0
-  },
-  "subsidies": {
-    "number": 47,
-    "amount": 5342.77
-  },
-  "commodityProfitsContributions": 0,
-  "admin": {
-    "isAdmin": true,
-    "userPermissions": [],
-    "_id": {
-      "$oid": "66ec6b7af06990a1bde83a00"
-    }
-  },
-  "comments": "",
-  "memberBalance": 6957.23,
-  "commentSubscribeHistory": "",
-  "cumulativeBalance": 12300,
-  "disable": false,
-  "profileImage": null,
-  "__v": 123
-},
-{
-  "_id": {
-    "$oid": "66ec5535f114ef61452922d6"
-  },
-  "id": "U12",
-  "name": "عبدالله مرعي محمد بن زاهر",
-  "NationalIdentificationNumber": "1067138972",
-  "phoneNumber": "0507381072",
-  "createdAt": {
-    "$date": "2020-02-25T00:00:00.000Z"
-  },
-  "hijriDate": {
-    "day": 1,
-    "month": {
-      "number": 7,
-      "ar": "رَجَب"
-    },
-    "year": 1441
-  },
-  "password": "$2b$10$6nuqbwPBNtNlSXAkxBAXSes0xOCxd5o7r0WfWNQTlC2yXsZIpKC0y",
-  "oneYear": true,
-  "status": "active",
-  "enableAccount": true,
-  "loans": {
-    "number": 0,
-    "amount": 0
-  },
-  "subsidies": {
-    "number": 47,
-    "amount": 5342.77
-  },
-  "commodityProfitsContributions": 0,
-  "admin": {
-    "isAdmin": true,
-    "userPermissions": [],
-    "_id": {
-      "$oid": "66ec6b7af06990a1bde83a06"
-    }
-  },
-  "comments": "",
-  "memberBalance": 6957.23,
-  "commentSubscribeHistory": "",
-  "cumulativeBalance": 12300,
-  "disable": false,
-  "profileImage": null,
-  "__v": 122
-},
-{
-  "_id": {
-    "$oid": "66ec5535f114ef61452922cd"
-  },
-  "id": "U3",
-  "name": "زاهر محمد بن زاهر",
-  "NationalIdentificationNumber": "1036267555",
-  "phoneNumber": "0500187090",
-  "createdAt": {
-    "$date": "2020-02-25T00:00:00.000Z"
-  },
-  "hijriDate": {
-    "day": 1,
-    "month": {
-      "number": 7,
-      "ar": "رَجَب"
-    },
-    "year": 1441
-  },
-  "password": "$2b$10$B4zIVOxm/vornO6BmyJb9OJhIfjcjLtcdpnNVu8ZsOY2eU0za.SLy",
-  "oneYear": true,
-  "status": "active",
-  "enableAccount": true,
-  "loans": {
-    "number": 0,
-    "amount": 0
-  },
-  "subsidies": {
-    "number": 47,
-    "amount": 5342.77
-  },
-  "commodityProfitsContributions": 0,
-  "admin": {
-    "isAdmin": true,
-    "userPermissions": [],
-    "_id": {
-      "$oid": "66fc7d1eecebcfe3a7a03eb3"
     }
   },
   "comments": "",
@@ -533,8 +346,8 @@
     "amount": 0
   },
   "subsidies": {
-    "number": 47,
-    "amount": 5342.77
+    "number": 0,
+    "amount": 0
   },
   "commodityProfitsContributions": 0,
   "admin": {
@@ -580,8 +393,8 @@
     "amount": 0
   },
   "subsidies": {
-    "number": 47,
-    "amount": 5342.77
+    "number": 1,
+    "amount": 5000
   },
   "commodityProfitsContributions": 0,
   "admin": {
@@ -627,8 +440,8 @@
     "amount": 0
   },
   "subsidies": {
-    "number": 47,
-    "amount": 5342.77
+    "number": 1,
+    "amount": 7429
   },
   "commodityProfitsContributions": 0,
   "admin": {
@@ -645,6 +458,53 @@
   "disable": false,
   "profileImage": null,
   "__v": 122
+},
+{
+  "_id": {
+    "$oid": "66ec5535f114ef61452922d3"
+  },
+  "id": "U9",
+  "name": "محمد عبدالله محمد بن زاهر",
+  "NationalIdentificationNumber": "1002042156",
+  "phoneNumber": "0560355513",
+  "createdAt": {
+    "$date": "2020-02-25T00:00:00.000Z"
+  },
+  "hijriDate": {
+    "day": 1,
+    "month": {
+      "number": 7,
+      "ar": "رَجَب"
+    },
+    "year": 1441
+  },
+  "password": "$2b$10$63lNIzgY9frP2Jiv1Ful4ey27mq/VZs9W6.8DWkHIDsKZP4bhD4AS",
+  "oneYear": true,
+  "status": "active",
+  "enableAccount": true,
+  "loans": {
+    "number": 0,
+    "amount": 0
+  },
+  "subsidies": {
+    "number": 0,
+    "amount": 0
+  },
+  "commodityProfitsContributions": 0,
+  "admin": {
+    "isAdmin": true,
+    "userPermissions": [],
+    "_id": {
+      "$oid": "66ec6b7af06990a1bde83a00"
+    }
+  },
+  "comments": "",
+  "memberBalance": 6957.23,
+  "commentSubscribeHistory": "",
+  "cumulativeBalance": 12300,
+  "disable": false,
+  "profileImage": null,
+  "__v": 123
 },
 {
   "_id": {
@@ -674,8 +534,8 @@
     "amount": 0
   },
   "subsidies": {
-    "number": 47,
-    "amount": 5342.77
+    "number": 0,
+    "amount": 0
   },
   "commodityProfitsContributions": 0,
   "admin": {
@@ -721,8 +581,8 @@
     "amount": 0
   },
   "subsidies": {
-    "number": 47,
-    "amount": 5342.77
+    "number": 0,
+    "amount": 0
   },
   "commodityProfitsContributions": 0,
   "admin": {
@@ -739,6 +599,53 @@
   "disable": false,
   "profileImage": null,
   "__v": 121
+},
+{
+  "_id": {
+    "$oid": "66ec5535f114ef61452922d6"
+  },
+  "id": "U12",
+  "name": "عبدالله مرعي محمد بن زاهر",
+  "NationalIdentificationNumber": "1067138972",
+  "phoneNumber": "0507381072",
+  "createdAt": {
+    "$date": "2020-02-25T00:00:00.000Z"
+  },
+  "hijriDate": {
+    "day": 1,
+    "month": {
+      "number": 7,
+      "ar": "رَجَب"
+    },
+    "year": 1441
+  },
+  "password": "$2b$10$6nuqbwPBNtNlSXAkxBAXSes0xOCxd5o7r0WfWNQTlC2yXsZIpKC0y",
+  "oneYear": true,
+  "status": "active",
+  "enableAccount": true,
+  "loans": {
+    "number": 0,
+    "amount": 0
+  },
+  "subsidies": {
+    "number": 0,
+    "amount": 0
+  },
+  "commodityProfitsContributions": 0,
+  "admin": {
+    "isAdmin": true,
+    "userPermissions": [],
+    "_id": {
+      "$oid": "66ec6b7af06990a1bde83a06"
+    }
+  },
+  "comments": "",
+  "memberBalance": 6957.23,
+  "commentSubscribeHistory": "",
+  "cumulativeBalance": 12300,
+  "disable": false,
+  "profileImage": null,
+  "__v": 122
 },
 {
   "_id": {
@@ -768,8 +675,8 @@
     "amount": 0
   },
   "subsidies": {
-    "number": 47,
-    "amount": 5342.77
+    "number": 0,
+    "amount": 0
   },
   "commodityProfitsContributions": 0,
   "admin": {
@@ -786,6 +693,100 @@
   "disable": false,
   "profileImage": null,
   "__v": 121
+},
+{
+  "_id": {
+    "$oid": "66ec5535f114ef61452922d8"
+  },
+  "id": "U14",
+  "name": "راشد علي محمد بن زاهر",
+  "NationalIdentificationNumber": "1067727592",
+  "phoneNumber": "0557985746",
+  "createdAt": {
+    "$date": "2020-02-25T00:00:00.000Z"
+  },
+  "hijriDate": {
+    "day": 1,
+    "month": {
+      "number": 7,
+      "ar": "رَجَب"
+    },
+    "year": 1441
+  },
+  "password": "$2b$10$39fxbt5xcinSiykSdDKAq.ilRyC0nguQyORA2ePjz/YuCy66jpppi",
+  "oneYear": true,
+  "status": "active",
+  "enableAccount": true,
+  "loans": {
+    "number": 0,
+    "amount": 0
+  },
+  "subsidies": {
+    "number": 0,
+    "amount": 0
+  },
+  "commodityProfitsContributions": 0,
+  "admin": {
+    "isAdmin": true,
+    "userPermissions": [],
+    "_id": {
+      "$oid": "66ec6b7af06990a1bde83a0a"
+    }
+  },
+  "comments": "",
+  "memberBalance": 6957.23,
+  "commentSubscribeHistory": "",
+  "cumulativeBalance": 12300,
+  "disable": false,
+  "profileImage": null,
+  "__v": 123
+},
+{
+  "_id": {
+    "$oid": "66ec5535f114ef61452922d9"
+  },
+  "id": "U15",
+  "name": "حمد حمدان محمد بن زاهر",
+  "NationalIdentificationNumber": "1068444866",
+  "phoneNumber": "0569167409",
+  "createdAt": {
+    "$date": "2020-02-25T00:00:00.000Z"
+  },
+  "hijriDate": {
+    "day": 1,
+    "month": {
+      "number": 7,
+      "ar": "رَجَب"
+    },
+    "year": 1441
+  },
+  "password": "$2b$10$v9bnUyozq0bJjTPBI3IThOcenF65qu.eOVHZHlpgSQIG1yHjA0TQO",
+  "oneYear": true,
+  "status": "active",
+  "enableAccount": true,
+  "loans": {
+    "number": 0,
+    "amount": 0
+  },
+  "subsidies": {
+    "number": 0,
+    "amount": 0
+  },
+  "commodityProfitsContributions": 0,
+  "admin": {
+    "isAdmin": true,
+    "userPermissions": [],
+    "_id": {
+      "$oid": "66ec6b7af06990a1bde83a0c"
+    }
+  },
+  "comments": "",
+  "memberBalance": 6957.23,
+  "commentSubscribeHistory": "",
+  "cumulativeBalance": 12300,
+  "disable": false,
+  "profileImage": null,
+  "__v": 123
 },
 {
   "_id": {
@@ -815,8 +816,8 @@
     "amount": 0
   },
   "subsidies": {
-    "number": 47,
-    "amount": 5342.77
+    "number": 0,
+    "amount": 0
   },
   "commodityProfitsContributions": 0,
   "admin": {
@@ -833,4 +834,190 @@
   "disable": false,
   "profileImage": null,
   "__v": 122
+},
+{
+  "_id": {
+    "$oid": "66ec5535f114ef61452922db"
+  },
+  "id": "U17",
+  "name": "حمدان زاهر محمد بن زاهر",
+  "NationalIdentificationNumber": "1089164428",
+  "phoneNumber": "0547847006",
+  "createdAt": {
+    "$date": "2020-02-25T00:00:00.000Z"
+  },
+  "hijriDate": {
+    "day": 1,
+    "month": {
+      "number": 7,
+      "ar": "رَجَب"
+    },
+    "year": 1441
+  },
+  "password": "$2b$10$8tBg/O9sbv8Jy0TzqWUrkO8GXDEtvnCyatYJKxArNgsZYTzQZ6cn6",
+  "oneYear": true,
+  "status": "active",
+  "enableAccount": true,
+  "loans": {
+    "number": 9,
+    "amount": 0
+  },
+  "subsidies": {
+    "number": 0,
+    "amount": 0
+  },
+  "commodityProfitsContributions": 0,
+  "admin": {
+    "isAdmin": true,
+    "userPermissions": [],
+    "_id": {
+      "$oid": "66f68740504bebf82f0f36cd"
+    }
+  },
+  "comments": "",
+  "memberBalance": 6957.23,
+  "commentSubscribeHistory": "",
+  "cumulativeBalance": 12300,
+  "disable": false,
+  "profileImage": null,
+  "__v": 122
+},
+{
+  "_id": {
+    "$oid": "66ec5535f114ef61452922dc"
+  },
+  "id": "U18",
+  "name": "نواف حمدان محمد بن زاهر",
+  "NationalIdentificationNumber": "1092967627",
+  "phoneNumber": "0530355720",
+  "createdAt": {
+    "$date": "2020-02-25T00:00:00.000Z"
+  },
+  "hijriDate": {
+    "day": 1,
+    "month": {
+      "number": 7,
+      "ar": "رَجَب"
+    },
+    "year": 1441
+  },
+  "password": "$2b$10$IojudM4ONWxBG/oTxLQdFO/TajAoIhCX8ZPd055ah3G8F5S86.rDu",
+  "oneYear": true,
+  "status": "active",
+  "enableAccount": true,
+  "loans": {
+    "number": 0,
+    "amount": 0
+  },
+  "subsidies": {
+    "number": 1,
+    "amount": 10000
+  },
+  "commodityProfitsContributions": 0,
+  "admin": {
+    "isAdmin": true,
+    "userPermissions": [],
+    "_id": {
+      "$oid": "66ec6b7af06990a1bde83a12"
+    }
+  },
+  "comments": "",
+  "memberBalance": 6957.23,
+  "commentSubscribeHistory": "",
+  "cumulativeBalance": 12300,
+  "disable": false,
+  "profileImage": null,
+  "__v": 123
+},
+{
+  "_id": {
+    "$oid": "66ec8fc91b75a2b0239b374a"
+  },
+  "name": "حمدان مرعي محمد بن زاهر",
+  "password": "$2b$10$02g3I05LjNhyZu9OvUpWHOUkv9Qq2GSRG6YAwd3ZnLMLT5A1RO9ZG",
+  "NationalIdentificationNumber": "1094807177",
+  "phoneNumber": "0550432722",
+  "oneYear": true,
+  "status": "active",
+  "enableAccount": true,
+  "loans": {
+    "number": 0,
+    "amount": 0
+  },
+  "subsidies": {
+    "number": 0,
+    "amount": 0
+  },
+  "commodityProfitsContributions": 0,
+  "admin": {
+    "isAdmin": true,
+    "userPermissions": [],
+    "_id": {
+      "$oid": "66ec8fc91b75a2b0239b3749"
+    }
+  },
+  "comments": "",
+  "memberBalance": 4877.65,
+  "commentSubscribeHistory": "",
+  "cumulativeBalance": 7100,
+  "disable": false,
+  "hijriDate": {
+    "day": 1,
+    "month": {
+      "number": 3,
+      "ar": "ربيع الاول"
+    },
+    "year": 1444
+  },
+  "createdAt": {
+    "$date": "2022-09-27T20:18:07.897Z"
+  },
+  "id": "U19",
+  "__v": 50
+},
+{
+  "_id": {
+    "$oid": "66edbfb0cb63c34e1d6fe9f0"
+  },
+  "name": "محمد حمدان محمد بن زاهر",
+  "password": "$2b$10$OPH5/Sve5UKxG9mU0WXpzu70P3eEcmTB1S7zgOodiafOhaFjTgVoy",
+  "NationalIdentificationNumber": "1117592897",
+  "phoneNumber": "0503038799",
+  "oneYear": true,
+  "status": "active",
+  "enableAccount": true,
+  "loans": {
+    "number": 0,
+    "amount": 0
+  },
+  "subsidies": {
+    "number": 0,
+    "amount": 0
+  },
+  "commodityProfitsContributions": 0,
+  "admin": {
+    "isAdmin": true,
+    "userPermissions": [],
+    "_id": {
+      "$oid": "66edbfb0cb63c34e1d6fe9ef"
+    }
+  },
+  "comments": "",
+  "memberBalance": 3594.55,
+  "commentSubscribeHistory": "",
+  "cumulativeBalance": 5500,
+  "disable": false,
+  "hijriDate": {
+    "day": 1,
+    "month": {
+      "number": 11,
+      "ar": "ذو القعدة"
+    },
+    "year": 1444
+  },
+  "createdAt": {
+    "$date": "2023-05-21T16:30:46.370Z"
+  },
+  "id": "U20",
+  "__v": 22
 }]

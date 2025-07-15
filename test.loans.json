@@ -1,0 +1,513 @@
+[{
+  "_id": {
+    "$oid": "66eda8c6fc530a00b117b7f5"
+  },
+  "name": "محمد علي محمد بن زاهر",
+  "amount": 16000,
+  "premiumAmount": 1454.5454545454545,
+  "balance": 15999.999999999996,
+  "numberOfInstallments": 11,
+  "dateOfReceipt": {
+    "$date": "2022-10-24T00:00:00.000Z"
+  },
+  "dateOfReceiptHijri": {
+    "day": "28",
+    "month": {
+      "number": "3",
+      "ar": "ربيع الاول"
+    },
+    "year": "1444"
+  },
+  "paymentStartDate": {
+    "$date": "2022-11-22T23:00:00.000Z"
+  },
+  "paymentStartDateHijri": {
+    "day": 28,
+    "month": {
+      "number": 4,
+      "ar": "ربيع الثاني"
+    },
+    "year": 1444
+  },
+  "paymentEndDate": {
+    "$date": "2023-09-13T23:00:00.000Z"
+  },
+  "paymentEndDateHijri": {
+    "day": 28,
+    "month": {
+      "number": 2,
+      "ar": "صفر"
+    },
+    "year": 1445
+  },
+  "comments": "",
+  "hijriDate": {
+    "day": 28,
+    "month": {
+      "number": 3,
+      "ar": "ربيع الاول"
+    },
+    "year": 1444
+  },
+  "createdAt": {
+    "$date": "2022-10-24T00:00:00.000Z"
+  },
+  "id": "L1",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66edb13a60f1a88de4e24ee0"
+  },
+  "name": "علي محمد بن زاهر",
+  "amount": 15000,
+  "premiumAmount": 1000,
+  "balance": 15000,
+  "numberOfInstallments": 15,
+  "dateOfReceipt": {
+    "$date": "2023-03-28T00:00:00.000Z"
+  },
+  "dateOfReceiptHijri": {
+    "day": "6",
+    "month": {
+      "number": "9",
+      "ar": "رمضان"
+    },
+    "year": "1444"
+  },
+  "paymentStartDate": {
+    "$date": "2023-04-26T23:00:00.000Z"
+  },
+  "paymentStartDateHijri": {
+    "day": 6,
+    "month": {
+      "number": 10,
+      "ar": "شوّال"
+    },
+    "year": 1444
+  },
+  "paymentEndDate": {
+    "$date": "2024-06-12T23:00:00.000Z"
+  },
+  "paymentEndDateHijri": {
+    "day": 26,
+    "month": {
+      "number": 12,
+      "ar": "ذو الحجة"
+    },
+    "year": 1445
+  },
+  "comments": "",
+  "hijriDate": {
+    "day": 6,
+    "month": {
+      "number": 9,
+      "ar": "رمضان"
+    },
+    "year": 1444
+  },
+  "createdAt": {
+    "$date": "2023-03-28T00:00:00.000Z"
+  },
+  "id": "L2",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66ee870d0e8254583397a2c3"
+  },
+  "name": "علي مرعي محمد بن زاهر",
+  "amount": 10000,
+  "premiumAmount": 1000,
+  "balance": 10000,
+  "numberOfInstallments": 10,
+  "dateOfReceipt": {
+    "$date": "2024-01-19T00:00:00.000Z"
+  },
+  "dateOfReceiptHijri": {
+    "day": "7",
+    "month": {
+      "number": "7",
+      "ar": "رجب"
+    },
+    "year": "1445"
+  },
+  "paymentStartDate": {
+    "$date": "2024-02-27T23:00:00.000Z"
+  },
+  "paymentStartDateHijri": {
+    "day": 17,
+    "month": {
+      "number": 8,
+      "ar": "شعبان"
+    },
+    "year": 1445
+  },
+  "paymentEndDate": {
+    "$date": "2024-11-19T23:00:00.000Z"
+  },
+  "paymentEndDateHijri": {
+    "day": 17,
+    "month": {
+      "number": 5,
+      "ar": "جمادى الأول"
+    },
+    "year": 1446
+  },
+  "comments": "",
+  "hijriDate": {
+    "day": 7,
+    "month": {
+      "number": 7,
+      "ar": "رجب"
+    },
+    "year": 1445
+  },
+  "createdAt": {
+    "$date": "2024-01-19T00:00:00.000Z"
+  },
+  "id": "L3",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66eec098e96ad408fc3d94e3"
+  },
+  "name": "حمدان زاهر محمد بن زاهر",
+  "amount": 10000,
+  "premiumAmount": 1000,
+  "balance": 2000,
+  "numberOfInstallments": 10,
+  "dateOfReceipt": {
+    "$date": "2024-06-01T00:00:00.000Z"
+  },
+  "dateOfReceiptHijri": {
+    "day": "24",
+    "month": {
+      "number": "11",
+      "ar": "ذو القعدة"
+    },
+    "year": "1445"
+  },
+  "paymentStartDate": {
+    "$date": "2024-06-30T23:00:00.000Z"
+  },
+  "paymentStartDateHijri": {
+    "day": 24,
+    "month": {
+      "number": 12,
+      "ar": " ذو الحجة"
+    },
+    "year": 1445
+  },
+  "paymentEndDate": {
+    "$date": "2025-03-24T23:00:00.000Z"
+  },
+  "paymentEndDateHijri": {
+    "day": 24,
+    "month": {
+      "number": 9,
+      "ar": "رمضان"
+    },
+    "year": 1446
+  },
+  "comments": "",
+  "hijriDate": {
+    "day": 24,
+    "month": {
+      "number": 11,
+      "ar": "ذو القعدة"
+    },
+    "year": 1445
+  },
+  "createdAt": {
+    "$date": "2024-06-01T00:00:00.000Z"
+  },
+  "id": "L4",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66eec4cae5d2041b674c9710"
+  },
+  "name": "غرمان محمد بن زاهر",
+  "amount": 10000,
+  "premiumAmount": 1000,
+  "balance": 0,
+  "numberOfInstallments": 10,
+  "dateOfReceipt": {
+    "$date": "2024-06-06T00:00:00.000Z"
+  },
+  "dateOfReceiptHijri": {
+    "day": 29,
+    "month": {
+      "number": "11",
+      "ar": "ذو القعدة"
+    },
+    "year": 1445
+  },
+  "paymentStartDate": {
+    "$date": "2024-07-05T23:00:00.000Z"
+  },
+  "paymentStartDateHijri": {
+    "day": 29,
+    "month": {
+      "number": 12,
+      "ar": "ذو الحجة"
+    },
+    "year": 1445
+  },
+  "paymentEndDate": {
+    "$date": "2025-03-29T23:00:00.000Z"
+  },
+  "paymentEndDateHijri": {
+    "day": 29,
+    "month": {
+      "number": 9,
+      "ar": "رمضان"
+    },
+    "year": 1446
+  },
+  "comments": "",
+  "hijriDate": {
+    "day": 29,
+    "month": {
+      "number": 11,
+      "ar": "ذو القعدة"
+    },
+    "year": 1445
+  },
+  "createdAt": {
+    "$date": "2024-06-06T00:00:00.000Z"
+  },
+  "id": "L5",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6771a4670dccd2ef6ebb042c"
+  },
+  "name": "حمد حمدان محمد بن زاهر",
+  "amount": 9000,
+  "premiumAmount": 2250,
+  "balance": 4500,
+  "numberOfInstallments": 4,
+  "dateOfReceipt": {
+    "$date": "2024-12-11T15:14:12.212Z"
+  },
+  "dateOfReceiptHijri": {
+    "day": "10",
+    "month": {
+      "number": "6",
+      "ar": "جماد الثاني"
+    },
+    "year": "1446"
+  },
+  "paymentStartDate": {
+    "$date": "2025-01-11T07:00:00.000Z"
+  },
+  "paymentStartDateHijri": {
+    "day": 11,
+    "month": {
+      "number": 7,
+      "ar": "رجب"
+    },
+    "year": 1446
+  },
+  "paymentEndDate": {
+    "$date": "2025-04-11T06:00:00.000Z"
+  },
+  "paymentEndDateHijri": {
+    "day": 13,
+    "month": {
+      "number": 10,
+      "ar": "شوال"
+    },
+    "year": 1446
+  },
+  "comments": "",
+  "hijriDate": {
+    "day": 10,
+    "month": {
+      "number": 6,
+      "ar": "جماد الثاني"
+    },
+    "year": 1446
+  },
+  "createdAt": {
+    "$date": "2024-12-11T15:14:12.212Z"
+  },
+  "id": "L6",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6784c5a50dccd2ef6e158ce2"
+  },
+  "name": "محمد مرعي محمد بن زاهر",
+  "amount": 15000,
+  "premiumAmount": 1250,
+  "balance": 0,
+  "numberOfInstallments": 12,
+  "dateOfReceipt": {
+    "$date": "2024-12-11T00:00:00.000Z"
+  },
+  "dateOfReceiptHijri": {
+    "day": "10",
+    "month": {
+      "number": "6",
+      "ar": "جمادى الثانية"
+    },
+    "year": "1446"
+  },
+  "paymentStartDate": {
+    "$date": "2025-01-11T07:00:00.000Z"
+  },
+  "paymentStartDateHijri": {
+    "day": 11,
+    "month": {
+      "number": 7,
+      "ar": "رجب"
+    },
+    "year": 1446
+  },
+  "paymentEndDate": {
+    "$date": "2025-12-11T07:00:00.000Z"
+  },
+  "paymentEndDateHijri": {
+    "day": 20,
+    "month": {
+      "number": 6,
+      "ar": "جمادى الثانية"
+    },
+    "year": 1447
+  },
+  "comments": "",
+  "hijriDate": {
+    "day": 10,
+    "month": {
+      "number": 6,
+      "ar": "جماد الثاني"
+    },
+    "year": 1446
+  },
+  "createdAt": {
+    "$date": "2024-12-11T15:14:12.212Z"
+  },
+  "id": "L7",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67a24e5060f91bb3dab11a83"
+  },
+  "name": "حمدان محمد بن زاهر",
+  "amount": 7800,
+  "premiumAmount": 650,
+  "balance": 1950,
+  "numberOfInstallments": 12,
+  "dateOfReceipt": {
+    "$date": "2025-02-04T00:00:00.000Z"
+  },
+  "dateOfReceiptHijri": {
+    "day": "5",
+    "month": {
+      "number": "8",
+      "ar": "شعبان"
+    },
+    "year": "1446"
+  },
+  "paymentStartDate": {
+    "$date": "2025-03-05T07:00:00.000Z"
+  },
+  "paymentStartDateHijri": {
+    "day": 5,
+    "month": {
+      "number": 9,
+      "ar": "رمضان"
+    },
+    "year": 1446
+  },
+  "paymentEndDate": {
+    "$date": "2026-01-29T07:00:00.000Z"
+  },
+  "paymentEndDateHijri": {
+    "day": 10,
+    "month": {
+      "number": 8,
+      "ar": "شعبان"
+    },
+    "year": 1447
+  },
+  "comments": "",
+  "hijriDate": {
+    "day": 17,
+    "month": {
+      "number": 7,
+      "ar": "رجب"
+    },
+    "year": 1446
+  },
+  "createdAt": {
+    "$date": "2025-01-17T09:49:31.422Z"
+  },
+  "id": "L8",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6847ee175b79de07e16e2d67"
+  },
+  "name": "نواف حمدان محمد بن زاهر",
+  "amount": 10000,
+  "premiumAmount": 1000,
+  "balance": 0,
+  "numberOfInstallments": 10,
+  "dateOfReceipt": {
+    "$date": "2025-05-07T00:00:00.000Z"
+  },
+  "dateOfReceiptHijri": {
+    "day": "9",
+    "month": {
+      "number": "11",
+      "ar": "ذو القعدة"
+    },
+    "year": "1446"
+  },
+  "paymentStartDate": {
+    "$date": "2025-07-06T06:00:00.000Z"
+  },
+  "paymentStartDateHijri": {
+    "day": 11,
+    "month": {
+      "number": 1,
+      "ar": "محرم"
+    },
+    "year": 1447
+  },
+  "paymentEndDate": {
+    "$date": "2026-04-02T06:00:00.000Z"
+  },
+  "paymentEndDateHijri": {
+    "day": 14,
+    "month": {
+      "number": 10,
+      "ar": "شوال"
+    },
+    "year": 1447
+  },
+  "comments": "",
+  "hijriDate": {
+    "day": 2,
+    "month": {
+      "number": 12,
+      "ar": "ذو الحجة"
+    },
+    "year": 1446
+  },
+  "createdAt": {
+    "$date": "2025-05-29T21:00:32.553Z"
+  },
+  "id": "L9",
+  "__v": 0
+}]

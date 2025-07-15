@@ -80,7 +80,7 @@ exports.addFoundationSubscriptions = async (req, res) => {
         }
         const Subscription = new monthlySubscriptionModel({
             idUser,
-            year: hijriDate[2],
+            year: new Date().getFullYear().toString(),
             hijriDate: {
                 day: hijriDate[0],
                 month: hijriDate[1],
@@ -98,19 +98,19 @@ exports.addFoundationSubscriptions = async (req, res) => {
         }
         for (let i = 0; i < 12; i++) {
             const monthIndex = (i + 1).toString();
-            if (Number(monthIndex) <= hijriDate[1].number) {//tfkar
-                if(Number(monthIndex) == hijriDate[1].number){
-                    const dueDate = addDaysToHijriDate([hijriDate[0], { number: Number(monthIndex), ar: Subscription.months[Number(monthIndex)].name }, hijriDate[2]]);
-                    Subscription.months[monthIndex].dueDate = momentHijri(dueDate[2] + "-" + dueDate[1].number + "-" + dueDate[0], 'iYYYY-iMM-iDD').locale("en").format('YYYY-MM-DD');
+            if (Number(monthIndex) <= new Date().getMonth() + 1/*hijriDate[1].number*/) {//tfkar
+                if(Number(monthIndex) == new Date().getMonth() + 1){
+                    const dueDate = `${new Date().getFullYear()}-${monthIndex}-25`//addDaysToHijriDate([hijriDate[0], { number: Number(monthIndex), ar: Subscription.months[Number(monthIndex)].name }, hijriDate[2]]);
+                    Subscription.months[monthIndex].dueDate = dueDate;//momentHijri(dueDate[2] + "-" + dueDate[1].number + "-" + dueDate[0], 'iYYYY-iMM-iDD').locale("en").format('YYYY-MM-DD');
                     const toHijriDate = getHijriDate(Subscription.months[monthIndex].dueDate);
                     Subscription.months[monthIndex] = {
                         dueDateHijri: {
                             day: toHijriDate[0],
                             month: {
-                                number: dueDate[1].number,
-                                ar: dueDate[1].ar
+                                number: toHijriDate[1].number,
+                                ar: toHijriDate[1].ar
                             },
-                            year: dueDate[2]
+                            year: toHijriDate[2]
                         },
                         amount: amount,
                         pendingPayment: true,
@@ -127,16 +127,16 @@ exports.addFoundationSubscriptions = async (req, res) => {
                 }
                 else Subscription.months[monthIndex].pendingPayment = false;
             } else {
-                const dueDate = addDaysToHijriDate([25, { number: Number(monthIndex), ar: Subscription.months[Number(monthIndex)].name }, hijriDate[2]]);
-                Subscription.months[monthIndex].dueDate = momentHijri(dueDate[2] + "-" + dueDate[1].number + "-" + dueDate[0], 'iYYYY-iMM-iDD').locale("en").format('YYYY-MM-DD');
+                const dueDate = `${new Date().getFullYear()}-${monthIndex}-25`//addDaysToHijriDate([25, { number: Number(monthIndex), ar: Subscription.months[Number(monthIndex)].name }, hijriDate[2]]);
+                Subscription.months[monthIndex].dueDate = dueDate;//momentHijri(dueDate[2] + "-" + dueDate[1].number + "-" + dueDate[0], 'iYYYY-iMM-iDD').locale("en").format('YYYY-MM-DD');
                 const toHijriDate = getHijriDate(Subscription.months[monthIndex].dueDate);
                 Subscription.months[monthIndex].dueDateHijri = {
                     day: toHijriDate[0],
                     month: {
-                        number: dueDate[1].number,
-                        ar: dueDate[1].ar
+                        number: toHijriDate[1].number,
+                        ar: toHijriDate[1].ar
                     },
-                    year: dueDate[2]
+                    year: toHijriDate[2]
                 };
             }
         }
@@ -169,6 +169,7 @@ exports.addFoundationSubscriptions = async (req, res) => {
 exports.addMonthlySubscriptions = async (req, res) => {
     const { idUser, month, dueDateHijri, dueDate, year } = req.body;
     try {
+        const date = new Date(dueDate);
         // Check for permissions
         if (req.user.admin.userPermission.indexOf("إضافة إيرادات (اشتراكات الأعضاء)") === -1) {
             return res.status(403).send({
@@ -189,7 +190,7 @@ exports.addMonthlySubscriptions = async (req, res) => {
             })
         }
 
-        let existingSubscription = await monthlySubscriptionModel.findOne({ idUser, year });
+        let existingSubscription = await monthlySubscriptionModel.findOne({ idUser, year: date.getFullYear().toString() });
 
         if (existingSubscription.months[month].amount != 0) {
             return res.status(400).send({

@@ -384,7 +384,7 @@ exports.sellStock = async (req, res) => {
                 ? (userProfit * 100) / rec.contributionAmount
                 : 0;
             rec.amount = userProfit;
-            rec.balanceAfterSale = rec.prevBalance + principalRefund + userProfit;
+            rec.balanceAfterSale = rec.prevBalance + userProfit;
             await rec.save();
 
             // Credit user's account: principal + profit

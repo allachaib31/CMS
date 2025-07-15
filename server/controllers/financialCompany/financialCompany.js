@@ -194,7 +194,7 @@ exports.paymentFinancialCompany = async (req, res) => {
                 ? (profitToCredit * 100) / rec.contributionAmount
                 : 0;
             rec.amount = userTotal;
-            rec.balanceAfterSale = rec.prevBalance + userTotal;
+            rec.balanceAfterSale = rec.prevBalance + profitToCredit;
             await rec.save();
 
             // b) credit the user’s account

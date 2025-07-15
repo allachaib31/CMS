@@ -1,0 +1,520 @@
+[{
+  "_id": {
+    "$oid": "672ce7e4d70addcca366ad27"
+  },
+  "idUser": {
+    "$oid": "66ec8fc91b75a2b0239b374a"
+  },
+  "unReimbursedExpensesId": {
+    "$oid": "672ce7e4d70addcca366ad14"
+  },
+  "amount": 526.3157894736842,
+  "itPaid": true,
+  "hijriDate": {
+    "day": 5,
+    "month": {
+      "number": 5,
+      "ar": "جماد الأول"
+    },
+    "year": 1446
+  },
+  "createdAt": {
+    "$date": "2024-11-07T16:01:12.822Z"
+  },
+  "id": "CP1",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "672ceb9c21ac2828dd9d4d2c"
+  },
+  "idUser": {
+    "$oid": "66ec8fc91b75a2b0239b374a"
+  },
+  "unReimbursedExpensesId": {
+    "$oid": "672ceb9c21ac2828dd9d4d19"
+  },
+  "amount": 52.63157894736842,
+  "itPaid": true,
+  "hijriDate": {
+    "day": 5,
+    "month": {
+      "number": 5,
+      "ar": "جماد الأول"
+    },
+    "year": 1446
+  },
+  "createdAt": {
+    "$date": "2024-11-07T16:01:12.736Z"
+  },
+  "id": "CP2",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "672cebaf8c26d81d08f1ecce"
+  },
+  "idUser": {
+    "$oid": "66ec8fc91b75a2b0239b374a"
+  },
+  "unReimbursedExpensesId": {
+    "$oid": "672cebae8c26d81d08f1ecbb"
+  },
+  "amount": 26.31578947368421,
+  "itPaid": true,
+  "hijriDate": {
+    "day": 5,
+    "month": {
+      "number": 5,
+      "ar": "جماد الأول"
+    },
+    "year": 1446
+  },
+  "createdAt": {
+    "$date": "2024-11-07T16:01:12.861Z"
+  },
+  "id": "CP3",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "672cec72a4d4e70263c85c33"
+  },
+  "idUser": {
+    "$oid": "66ec8fc91b75a2b0239b374a"
+  },
+  "unReimbursedExpensesId": {
+    "$oid": "672cec71a4d4e70263c85c20"
+  },
+  "amount": 50,
+  "itPaid": true,
+  "hijriDate": {
+    "day": 5,
+    "month": {
+      "number": 5,
+      "ar": "جماد الأول"
+    },
+    "year": 1446
+  },
+  "createdAt": {
+    "$date": "2024-11-07T16:01:12.679Z"
+  },
+  "id": "CP4",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "672cec72a4d4e70263c85c36"
+  },
+  "idUser": {
+    "$oid": "66edbfb0cb63c34e1d6fe9f0"
+  },
+  "unReimbursedExpensesId": {
+    "$oid": "672cec71a4d4e70263c85c20"
+  },
+  "amount": 50,
+  "itPaid": true,
+  "hijriDate": {
+    "day": 5,
+    "month": {
+      "number": 5,
+      "ar": "جماد الأول"
+    },
+    "year": 1446
+  },
+  "createdAt": {
+    "$date": "2024-11-07T16:01:12.679Z"
+  },
+  "id": "CP5",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "672cec7e21ac2828dd9d4d5e"
+  },
+  "idUser": {
+    "$oid": "66ec8fc91b75a2b0239b374a"
+  },
+  "unReimbursedExpensesId": {
+    "$oid": "672cec7e21ac2828dd9d4d4b"
+  },
+  "amount": 50,
+  "itPaid": true,
+  "hijriDate": {
+    "day": 5,
+    "month": {
+      "number": 5,
+      "ar": "جماد الأول"
+    },
+    "year": 1446
+  },
+  "createdAt": {
+    "$date": "2024-11-07T16:01:12.736Z"
+  },
+  "id": "CP6",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "672cec7e21ac2828dd9d4d61"
+  },
+  "idUser": {
+    "$oid": "66edbfb0cb63c34e1d6fe9f0"
+  },
+  "unReimbursedExpensesId": {
+    "$oid": "672cec7e21ac2828dd9d4d4b"
+  },
+  "amount": 50,
+  "itPaid": true,
+  "hijriDate": {
+    "day": 5,
+    "month": {
+      "number": 5,
+      "ar": "جماد الأول"
+    },
+    "year": 1446
+  },
+  "createdAt": {
+    "$date": "2024-11-07T16:01:12.736Z"
+  },
+  "id": "CP7",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "672cecc58c26d81d08f1ed00"
+  },
+  "idUser": {
+    "$oid": "66ec8fc91b75a2b0239b374a"
+  },
+  "unReimbursedExpensesId": {
+    "$oid": "672cecc58c26d81d08f1eced"
+  },
+  "amount": 25,
+  "itPaid": true,
+  "hijriDate": {
+    "day": 5,
+    "month": {
+      "number": 5,
+      "ar": "جماد الأول"
+    },
+    "year": 1446
+  },
+  "createdAt": {
+    "$date": "2024-11-07T16:01:12.861Z"
+  },
+  "id": "CP8",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "672cecc58c26d81d08f1ed03"
+  },
+  "idUser": {
+    "$oid": "66edbfb0cb63c34e1d6fe9f0"
+  },
+  "unReimbursedExpensesId": {
+    "$oid": "672cecc58c26d81d08f1eced"
+  },
+  "amount": 25,
+  "itPaid": true,
+  "hijriDate": {
+    "day": 5,
+    "month": {
+      "number": 5,
+      "ar": "جماد الأول"
+    },
+    "year": 1446
+  },
+  "createdAt": {
+    "$date": "2024-11-07T16:01:12.861Z"
+  },
+  "id": "CP9",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "672cece3dfd2ec21cc110bb7"
+  },
+  "idUser": {
+    "$oid": "66ec8fc91b75a2b0239b374a"
+  },
+  "unReimbursedExpensesId": {
+    "$oid": "672cece3dfd2ec21cc110ba4"
+  },
+  "amount": 50,
+  "itPaid": true,
+  "hijriDate": {
+    "day": 5,
+    "month": {
+      "number": 5,
+      "ar": "جماد الأول"
+    },
+    "year": 1446
+  },
+  "createdAt": {
+    "$date": "2024-11-07T16:01:12.528Z"
+  },
+  "id": "CP10",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "672cece3dfd2ec21cc110bba"
+  },
+  "idUser": {
+    "$oid": "66edbfb0cb63c34e1d6fe9f0"
+  },
+  "unReimbursedExpensesId": {
+    "$oid": "672cece3dfd2ec21cc110ba4"
+  },
+  "amount": 50,
+  "itPaid": true,
+  "hijriDate": {
+    "day": 5,
+    "month": {
+      "number": 5,
+      "ar": "جماد الأول"
+    },
+    "year": 1446
+  },
+  "createdAt": {
+    "$date": "2024-11-07T16:01:12.528Z"
+  },
+  "id": "CP11",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "672ced00a4d4e70263c85c68"
+  },
+  "idUser": {
+    "$oid": "66ec8fc91b75a2b0239b374a"
+  },
+  "unReimbursedExpensesId": {
+    "$oid": "672ced00a4d4e70263c85c55"
+  },
+  "amount": 27.45,
+  "itPaid": true,
+  "hijriDate": {
+    "day": 5,
+    "month": {
+      "number": 5,
+      "ar": "جماد الأول"
+    },
+    "year": 1446
+  },
+  "createdAt": {
+    "$date": "2024-11-07T16:01:12.679Z"
+  },
+  "id": "CP12",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "672ced00a4d4e70263c85c6b"
+  },
+  "idUser": {
+    "$oid": "66edbfb0cb63c34e1d6fe9f0"
+  },
+  "unReimbursedExpensesId": {
+    "$oid": "672ced00a4d4e70263c85c55"
+  },
+  "amount": 27.45,
+  "itPaid": true,
+  "hijriDate": {
+    "day": 5,
+    "month": {
+      "number": 5,
+      "ar": "جماد الأول"
+    },
+    "year": 1446
+  },
+  "createdAt": {
+    "$date": "2024-11-07T16:01:12.679Z"
+  },
+  "id": "CP13",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "672ced5b8c26d81d08f1ed35"
+  },
+  "idUser": {
+    "$oid": "66ec8fc91b75a2b0239b374a"
+  },
+  "unReimbursedExpensesId": {
+    "$oid": "672ced5b8c26d81d08f1ed22"
+  },
+  "amount": 148.5,
+  "itPaid": true,
+  "hijriDate": {
+    "day": 5,
+    "month": {
+      "number": 5,
+      "ar": "جماد الأول"
+    },
+    "year": 1446
+  },
+  "createdAt": {
+    "$date": "2024-11-07T16:01:12.861Z"
+  },
+  "id": "CP14",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "672ced5b8c26d81d08f1ed38"
+  },
+  "idUser": {
+    "$oid": "66edbfb0cb63c34e1d6fe9f0"
+  },
+  "unReimbursedExpensesId": {
+    "$oid": "672ced5b8c26d81d08f1ed22"
+  },
+  "amount": 148.5,
+  "itPaid": true,
+  "hijriDate": {
+    "day": 5,
+    "month": {
+      "number": 5,
+      "ar": "جماد الأول"
+    },
+    "year": 1446
+  },
+  "createdAt": {
+    "$date": "2024-11-07T16:01:12.861Z"
+  },
+  "id": "CP15",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "672ceddfa4d4e70263c85c9e"
+  },
+  "idUser": {
+    "$oid": "66edbfb0cb63c34e1d6fe9f0"
+  },
+  "unReimbursedExpensesId": {
+    "$oid": "672ceddfa4d4e70263c85c8a"
+  },
+  "amount": 163.8,
+  "itPaid": true,
+  "hijriDate": {
+    "day": 5,
+    "month": {
+      "number": 5,
+      "ar": "جماد الأول"
+    },
+    "year": 1446
+  },
+  "createdAt": {
+    "$date": "2024-11-07T16:01:12.679Z"
+  },
+  "id": "CP16",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "672cee188c26d81d08f1ed6b"
+  },
+  "idUser": {
+    "$oid": "66edbfb0cb63c34e1d6fe9f0"
+  },
+  "unReimbursedExpensesId": {
+    "$oid": "672cee188c26d81d08f1ed57"
+  },
+  "amount": 50,
+  "itPaid": true,
+  "hijriDate": {
+    "day": 5,
+    "month": {
+      "number": 5,
+      "ar": "جماد الأول"
+    },
+    "year": 1446
+  },
+  "createdAt": {
+    "$date": "2024-11-07T16:01:12.861Z"
+  },
+  "id": "CP17",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "672cee40dfd2ec21cc110bf3"
+  },
+  "idUser": {
+    "$oid": "66edbfb0cb63c34e1d6fe9f0"
+  },
+  "unReimbursedExpensesId": {
+    "$oid": "672cee3fdfd2ec21cc110bdf"
+  },
+  "amount": 50,
+  "itPaid": true,
+  "hijriDate": {
+    "day": 5,
+    "month": {
+      "number": 5,
+      "ar": "جماد الأول"
+    },
+    "year": 1446
+  },
+  "createdAt": {
+    "$date": "2024-11-07T16:01:12.528Z"
+  },
+  "id": "CP18",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "672cee5fa4d4e70263c85cd1"
+  },
+  "idUser": {
+    "$oid": "66edbfb0cb63c34e1d6fe9f0"
+  },
+  "unReimbursedExpensesId": {
+    "$oid": "672cee5ea4d4e70263c85cbd"
+  },
+  "amount": 25,
+  "itPaid": true,
+  "hijriDate": {
+    "day": 5,
+    "month": {
+      "number": 5,
+      "ar": "جماد الأول"
+    },
+    "year": 1446
+  },
+  "createdAt": {
+    "$date": "2024-11-07T16:01:12.679Z"
+  },
+  "id": "CP19",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "672cee9fd70addcca366ad85"
+  },
+  "idUser": {
+    "$oid": "66edbfb0cb63c34e1d6fe9f0"
+  },
+  "unReimbursedExpensesId": {
+    "$oid": "672cee9ed70addcca366ad71"
+  },
+  "amount": 28.1,
+  "itPaid": true,
+  "hijriDate": {
+    "day": 5,
+    "month": {
+      "number": 5,
+      "ar": "جماد الأول"
+    },
+    "year": 1446
+  },
+  "createdAt": {
+    "$date": "2024-11-07T16:01:12.822Z"
+  },
+  "id": "CP20",
+  "__v": 0
+}]

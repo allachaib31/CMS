@@ -23,13 +23,14 @@ exports.addLoans = async (req, res) => {
                 msg: "لايوجد رصيد كافي في الصندوق",
             });
         }
-        let date = new Date();
-        date.setDate(new Date(dateOfReceipt).getDate() + 30);
+        let date = new Date(dateOfReceipt);
+        date.setDate(date.getDate() + 30);
         const paymentStartDate = date.toLocaleDateString();
         const paymentStartDateHijri = getHijriDate(date);
-        date = new Date();
-        date.setDate(new Date(dateOfReceipt).getDate() + (numberOfInstallments * 30));
+        date = new Date(dateOfReceipt);
+        date.setDate(date.getDate() + (numberOfInstallments * 30));
         const paymentEndDate = date.toLocaleDateString();
+
         const paymentEndDateHijri = getHijriDate(date);
         const user = await userModel.findById(nationalIdentificationNumber);
         if (!user) {
