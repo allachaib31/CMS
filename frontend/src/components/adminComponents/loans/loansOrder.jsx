@@ -31,7 +31,7 @@ function LoansOrder() {
             setShowAlert({
                 display: true,
                 status: true,
-                text: res.data.msg
+                text: "تم إضافة القرض بنجاح"
             });
         }).catch((err) => {
             if (err.response && err.response.status === 401) {
@@ -148,7 +148,7 @@ function LoansOrder() {
                         handleSubmit();
                     }
                 }} disabled={submit} className='btn btn-sm text-white font-bold btn-primary'>
-                    {submit ? <span className="loading loading-ring loading-lg"></span> : "تاكيد"}
+                    {submit ? <span className="loading loading-ring loading-lg"></span> : "تأكيد"}
                 </button>
             </form>
         </div>

@@ -56,7 +56,7 @@ function LoansHistory() {
                             <th className='border border-slate-600' rowSpan={2}>تاريخ الطلب<br/> الميلادي </th>
                             <th className='border border-slate-600' rowSpan={2}>تاريخ الطلب<br/> الهجري </th>
                             <th className='border border-slate-600' rowSpan={2}>ملحوظات</th>
-                            <th className='border border-slate-600' rowSpan={2}>تفاصيل أكثر</th>
+                            <th className='border border-slate-600' rowSpan={2}></th>
                         </tr>
                     </thead>
                     <tbody className='text-center'>
@@ -69,7 +69,7 @@ function LoansHistory() {
                                     <td className='border border-slate-600'>{new Date(loanInfo.loan.createdAt).toLocaleDateString('en-CA')}</td>
                                     <td className='border border-slate-600'>{loanInfo.loan.hijriDate.year}-{loanInfo.loan.hijriDate.month.number}-{loanInfo.loan.hijriDate.day}</td>
                                     <td className='border border-slate-600'>{loanInfo.loan.comments}</td>
-                                    <td className='border border-slate-600'><Link to={`/loans/recordInstallments?id=${loanInfo.loan.id}`} className='btn btn-xs btn-info'>تفاصيل أكثر</Link></td>
+                                    <td className='border border-slate-600'><Link to={`/loans/recordInstallments?id=${loanInfo.loan.id}`} className='btn btn-xs btn-info'>التفاصيل</Link></td>
                                 </tr>
                             )
                         })}

@@ -70,7 +70,7 @@ function RecordInstallments() {
                     loanInfo && <table className="text-xs table table-xs border-separate border-spacing-0 border w-[500px] md:w-[900px] mx-auto">
                         <thead className="text-[0.6rem] md:text-xs text-center">
                             <tr>
-                                <td className='border border-slate-600' colSpan={9}>سجل الاقساط</td>
+                                <td className='border border-slate-600' colSpan={9}>سجل الأقساط</td>
                             </tr>
                             <tr>
                                 <th className="border border-slate-600" rowSpan={2}>
@@ -130,7 +130,7 @@ function RecordInstallments() {
                                 مبلغ القسط<br/> المتأخر
                             </th>
                             <th className="border border-slate-600" rowSpan={2}>
-                                دفع
+                                
                             </th>
                         </tr>
                         <tbody>
@@ -164,7 +164,7 @@ function RecordInstallments() {
                                                                 id: installment._id
                                                             })
                                                         }
-                                                    }} className='btn btn-xs btn-success'>دفع</button>
+                                                    }} className='btn btn-xs btn-success'>تسديد</button>
                                                 }</td>
                                         </tr>
                                     )

@@ -270,7 +270,9 @@ exports.payInstallments = async (req, res) => {
 
 exports.getLoansHistory = async (req, res) => {
     try {
-        const loans = await loansModel.find();
+        const loans = await loansModel.find().sort({
+            createdAt: 1
+        });
         var totalLoans = 0;
         var totalAmountsPaid = 0;
 
@@ -280,6 +282,8 @@ exports.getLoansHistory = async (req, res) => {
 
             const installments = await installmentsLoansModel.find({
                 idLoans: loan._id
+            }).sort({
+                requiredPaymentDate: 1
             });
 
             var installmentsPaid = 0;
@@ -327,7 +331,9 @@ exports.getLoansHistory = async (req, res) => {
 
 exports.getIdLoans = async (req, res) => {
     try {
-        const loansId = await loansModel.find().select("id");
+        const loansId = await loansModel.find().select("id").sort({
+            createdAt: 1
+        });
         return res.status(200).send({
             loansId
         })

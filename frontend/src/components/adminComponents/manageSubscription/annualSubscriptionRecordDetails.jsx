@@ -46,48 +46,51 @@ function AnnualSubscriptionRecordDetails() {
     }, [])
     return (
         <div className="px-[1rem]">
-            <div className='container mx-auto'>
-                <Link to="/subscription/annualSubscriptionRecord" className="btn btn-sm btn-primary px-[2rem]">
-                    <FontAwesomeIcon icon={faRightLong} />
-                </Link>
-            </div>
             <h1 className="text-center text-sm font-bold py-[0.5rem]">
                 سجل الاشتراكات السنوية  للعضو : {query.get("name")}
             </h1>
-            <div className='container mx-auto flex flex-wrap '>
-                <select onChange={(event) => {
-                    setInputs((prevInput) => {
-                        return { ...prevInput, typeSearch: event.target.value, endYear: (event.target.value == "years") ? hijriDateObject()[2] : "" }
-                    })
-                }} className="select select-sm select-bordered w-full max-w-[7rem]">
-                    <option value="oneYear">لسنة</option>
-                    <option value="years">لسنوات</option>
-                </select>
-                {
-                    inputs.typeSearch == "oneYear" ? <div className='flex'><input onChange={(event) => {
+            <div className='flex flex-wrap gap-[1rem] container mx-auto'>
+                <div>
+                    <Link to="/subscription/annualSubscriptionRecord" className="btn btn-sm btn-primary px-[2rem]">
+                        <FontAwesomeIcon icon={faRightLong} />
+                    </Link>
+                </div>
+                <div>
+                    <Link to={`/print/recordAnnualDetails?idUser=${inputs.idUser}&tyeSearch=${inputs.typeSearch}&startYear=${inputs.startYear}&endYear=${inputs.endYear}`} target='_blank' className='btn btn-sm w-24 btn-info font-bold'><FontAwesomeIcon icon={faPrint} /> <span>طباعة</span></Link>
+                </div>
+                <div className='container mx-auto flex flex-wrap '>
+                    <select onChange={(event) => {
                         setInputs((prevInput) => {
-                            return { ...prevInput, startYear: event.target.value.trim() }
+                            return { ...prevInput, typeSearch: event.target.value, endYear: (event.target.value == "years") ? hijriDateObject()[2] : "" }
                         })
-                    }} type="text" className="formInput input input-sm input-bordered w-full max-w-[6rem]" placeholder='السنة' required pattern='\b(1[0-9]{3}|2[0-9]{3}|3[0-9]{3}|4[0-9]{3}|5[0-9]{3}|6[0-9]{3}|7[0-9]{3}|8[0-9]{3}|9[0-9]{3})\b' />
-                        <button onClick={() => handleSearch("oneYear")} className='btn btn-sm xs:w-auto bg-primary text-white'>ابحث</button>
-                    </div> : <div className='flex'>
-                        <input onChange={(event) => {
+                    }} className="select select-sm select-bordered w-full max-w-[7rem]">
+                        <option value="oneYear">لسنة</option>
+                        <option value="years">لسنوات</option>
+                    </select>
+                    {
+                        inputs.typeSearch == "oneYear" ? <div className='flex'><input onChange={(event) => {
                             setInputs((prevInput) => {
                                 return { ...prevInput, startYear: event.target.value.trim() }
                             })
-                        }} type="text" className="formInput input input-sm input-bordered w-full max-w-[5rem]" placeholder='من ' required pattern='\b(1[0-9]{3}|2[0-9]{3}|3[0-9]{3}|4[0-9]{3}|5[0-9]{3}|6[0-9]{3}|7[0-9]{3}|8[0-9]{3}|9[0-9]{3})\b' />
-                        <input onChange={(event) => {
-                            setInputs((prevInput) => {
-                                return { ...prevInput, endYear: event.target.value.trim() }
-                            })
-                        }} type="text" className="formInput input input-sm input-bordered w-full max-w-[5rem]" placeholder='الى' required pattern='\b(1[0-9]{3}|2[0-9]{3}|3[0-9]{3}|4[0-9]{3}|5[0-9]{3}|6[0-9]{3}|7[0-9]{3}|8[0-9]{3}|9[0-9]{3})\b' />
-                        <button onClick={() => handleSearch("customYear")} className='btn btn-sm xs:w-auto bg-primary text-white'>ابحث</button>
-                    </div>
-                }
+                        }} type="text" className="formInput input input-sm input-bordered w-full max-w-[6rem]" placeholder='السنة' required pattern='\b(1[0-9]{3}|2[0-9]{3}|3[0-9]{3}|4[0-9]{3}|5[0-9]{3}|6[0-9]{3}|7[0-9]{3}|8[0-9]{3}|9[0-9]{3})\b' />
+                            <button onClick={() => handleSearch("oneYear")} className='btn btn-sm xs:w-auto bg-primary text-white'>ابحث</button>
+                        </div> : <div className='flex'>
+                            <input onChange={(event) => {
+                                setInputs((prevInput) => {
+                                    return { ...prevInput, startYear: event.target.value.trim() }
+                                })
+                            }} type="text" className="formInput input input-sm input-bordered w-full max-w-[5rem]" placeholder='من ' required pattern='\b(1[0-9]{3}|2[0-9]{3}|3[0-9]{3}|4[0-9]{3}|5[0-9]{3}|6[0-9]{3}|7[0-9]{3}|8[0-9]{3}|9[0-9]{3})\b' />
+                            <input onChange={(event) => {
+                                setInputs((prevInput) => {
+                                    return { ...prevInput, endYear: event.target.value.trim() }
+                                })
+                            }} type="text" className="formInput input input-sm input-bordered w-full max-w-[5rem]" placeholder='الى' required pattern='\b(1[0-9]{3}|2[0-9]{3}|3[0-9]{3}|4[0-9]{3}|5[0-9]{3}|6[0-9]{3}|7[0-9]{3}|8[0-9]{3}|9[0-9]{3})\b' />
+                            <button onClick={() => handleSearch("customYear")} className='btn btn-sm xs:w-auto bg-primary text-white'>ابحث</button>
+                        </div>
+                    }
+                </div>
             </div>
-            <div className='container mx-auto'>
-                <Link to={`/print/recordAnnualDetails?idUser=${inputs.idUser}&tyeSearch=${inputs.typeSearch}&startYear=${inputs.startYear}&endYear=${inputs.endYear}`} target='_blank' className='mt-[1rem] btn btn-sm btn-info font-bold'><FontAwesomeIcon icon={faPrint} /> طباعة</Link>
-            </div>
+
             <div className='flex justify-center'>
                 {
                     inputs.typeSearch == "oneYear" ? <div className="overflow-x-auto">
@@ -97,7 +100,7 @@ function AnnualSubscriptionRecordDetails() {
                                     <tr>
                                         <th className='border border-slate-600'>الاشهر</th>
                                         <th className='border border-slate-600'>المبلغ</th>
-                                        <th className='border border-slate-600'>تاريخ الدفع</th>
+                                        <th className='border border-slate-600'>تاريخ التسديد</th>
                                         <th className='border border-slate-600'>ملاحظات</th>
                                     </tr>
                                 </thead>
@@ -125,18 +128,18 @@ function AnnualSubscriptionRecordDetails() {
                                 <tr className='text-xs'>
                                     <th className='border border-slate-600'>الاسم</th>
                                     <th className='border border-slate-600'>السنة</th>
-                                    <th className='border border-slate-600'>محرم</th>
-                                    <th className='border border-slate-600'>صفر</th>
-                                    <th className='border border-slate-600'>ربيع <br /> الاول</th>
-                                    <th className='border border-slate-600'>ربيع <br />الثاني</th>
-                                    <th className='border border-slate-600'>جمادى <br />الاول</th>
-                                    <th className='border border-slate-600'>جمادى <br />الثاني</th>
-                                    <th className='border border-slate-600'>رجب</th>
-                                    <th className='border border-slate-600'>شعبان</th>
-                                    <th className='border border-slate-600'>رمضان</th>
-                                    <th className='border border-slate-600'>شوال</th>
-                                    <th className='border border-slate-600'>ذو <br/>القعدة</th>
-                                    <th className='border border-slate-600'>ذو <br/>الحجة</th>
+                                    <th className='border border-slate-600'>يناير</th>
+                                    <th className='border border-slate-600'>فبراير</th>
+                                    <th className='border border-slate-600'>مارس</th>
+                                    <th className='border border-slate-600'>أبريل</th>
+                                    <th className='border border-slate-600'>مايو</th>
+                                    <th className='border border-slate-600'>يونيو</th>
+                                    <th className='border border-slate-600'>يوليو</th>
+                                    <th className='border border-slate-600'>أغسطس</th>
+                                    <th className='border border-slate-600'>سبتمبر</th>
+                                    <th className='border border-slate-600'>أكتوبر</th>
+                                    <th className='border border-slate-600'>نوفمبر</th>
+                                    <th className='border border-slate-600'>ديسمبر</th>
                                     <th className='border border-slate-600'>ملاحظات</th>
                                 </tr>
                             </thead>

@@ -75,12 +75,12 @@ function Dashboard() {
                         <h1 className='text-center font-bold text-orange-400'>{(data.loans - data.loansPaid).toFixed(2)}</h1>
                     </div>
                     <div className='rounded-[14px] bg-primary text-secondary-content flex flex-col justify-center items-center w-full md:w-1/4 xl:w-1/6 py-[2rem]'>
-                        <h1 className='text-center font-bold'>رباحك في المساهمات والسلع</h1>
+                        <h1 className='text-center font-bold'>أرباحك في المساهمات والسلع</h1>
                         <h1 className='text-center font-bold text-orange-400'>{data.commodityProfitsContributions.toFixed(2)}</h1>
                     </div>
                     <div className='rounded-[14px] bg-primary text-secondary-content flex flex-col justify-center items-center w-full md:w-1/4 xl:w-1/6 py-[2rem]'>
                         <h1 className='text-center font-bold'>مبالغ الإعانات التي صرفت لك</h1>
-                        <h1 className='text-center font-bold text-orange-400'>0.00</h1>
+                        <h1 className='text-center font-bold text-orange-400'>{data?.subsidies?.toFixed(2)}</h1>
                     </div>
                     {/*<div className='flex gap-[1rem] flex-col items-center justify-center md:flex-row w-full bg-base-100'>
                         <div className='bg-primary text-secondary-content flex flex-col justify-center items-center w-full md:w-1/2 py-[2rem]'>

@@ -512,6 +512,8 @@ exports.getAnnualSubscriptions = async (req, res) => {
     try {
         const subscription = await monthlySubscriptionModel.find({
             year
+        }).sort({
+            createdAt: 1
         }).populate("idUser", "name id");
         return res.status(200).send({
             subscription,
@@ -531,6 +533,8 @@ exports.getAnnualSubscriptionsDetails = async (req, res) => {
             const subscription = await monthlySubscriptionModel.find({
                 idUser,
                 year: startYear
+            }).sort({
+                createdAt: 1
             }).populate("idUser", "name");
             return res.status(200).send({
                 subscription,
@@ -543,6 +547,8 @@ exports.getAnnualSubscriptionsDetails = async (req, res) => {
                 $gte: startYear,
                 $lte: endYear
             }
+        }).sort({
+            createdAt: 1
         }).populate("idUser", "name");
         return res.status(200).send({
             subscription,

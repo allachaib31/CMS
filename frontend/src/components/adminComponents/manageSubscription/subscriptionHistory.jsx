@@ -143,7 +143,7 @@ function SubscriptionHistory() {
               <th className='border border-slate-600'>الرصيد الحالي <br/>للعضو</th>
               <th className='border border-slate-600'>نسبة العضو <br/>من رصيد الصندوق</th>
               <th className='border border-slate-600'>ملاحظات</th>
-              <th className='border border-slate-600'>تفاصيل أكثر</th>
+              <th className='border border-slate-600'></th>
             </tr>
           </thead>
           <tbody className='text-center'>
