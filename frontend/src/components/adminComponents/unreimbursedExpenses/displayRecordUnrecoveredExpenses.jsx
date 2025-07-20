@@ -31,7 +31,7 @@ function DisplayRecordUnrecoveredExpenses() {
       <div className="mt-[0.5rem] flex flex-col md:flex-row gap-[0.5rem] justify-center">
         <div className="flex md:flex-col items-center gap-[0.5rem]">
           <h1 className="md:w-auto w-[70%] bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">إجمالي المصروفات  </h1>
-          <h1 className="md:w-auto w-[30%] bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem] text-center">{total.toFixed(2)}</h1>
+          <h1 className="md:w-auto w-[30%] bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem] text-center">{total.toFixed(2) - expensesPaidCash.toFixed(2)}</h1>
         </div>
         <div className="flex md:flex-col items-center gap-[0.5rem]">
           <h1 className="md:w-auto w-[70%] bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">المصروفات المسددة نقداً</h1>

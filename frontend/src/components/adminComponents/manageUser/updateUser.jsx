@@ -81,7 +81,7 @@ function UpdateUser() {
             setShowAlert({
                 display: true,
                 status: true,
-                text: res.data.msg
+                text: "تم تحديث البيانات بنجاح"
             });
         }).catch((err) => {
             setSubmit((e) => !e)
@@ -134,7 +134,7 @@ function UpdateUser() {
                 </Link>
             </div>
             <h1 className="text-center  font-bold py-[1rem]">
-                تحديث معلومات المستخدم
+                تحديث معلومات العضو
             </h1>
             {loading ? <div className="flex justify-center"><span className="loading loading-ring w-[4rem]"></span></div> : <form action="" className="py-[2rem] flex flex-col gap-[1rem]">
             {showAlert.display ? <Alert msg={showAlert} /> : ""}

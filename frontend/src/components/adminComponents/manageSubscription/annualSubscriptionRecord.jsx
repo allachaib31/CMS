@@ -138,7 +138,7 @@ function AnnualSubscriptionRecord() {
 
                                 <th className='border border-slate-600'>رصيد <br />العضو</th>
                                 <th className='border border-slate-600'>المتأخرات</th>
-                                <th className='border border-slate-600'>تفاصيل</th>
+                                <th className='border border-slate-600'></th>
                             </tr>
                         </thead>
                         <tbody>

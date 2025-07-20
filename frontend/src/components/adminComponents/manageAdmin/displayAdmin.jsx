@@ -55,10 +55,11 @@ function DisplayAdmin() {
   }, [currentPage]);
   return (
     <div className="px-[1rem] sm:px-0">
-      <div className="container mx-auto mb-[1rem] flex sm:flex-row sm:gap-0 gap-[1rem] flex-col justify-between">
-        <Link to="/admin/addAdmin" className="btn btn-sm text-sm btn-primary">
+      <h1 className="text-center font-bold">المسؤولون</h1>
+      <div className="container mx-auto mb-[1rem] flex sm:flex-row sm:gap-0 gap-[1rem] flex-col justify-end">
+        {/*<Link to="/admin/addAdmin" className="btn btn-sm text-sm btn-primary">
         إضافة مسؤول 
-        </Link>
+        </Link>*/}
         <div className="join flex-wrap ">
           <div>
             <div>
@@ -98,7 +99,7 @@ function DisplayAdmin() {
           {/* head */}
           <thead>
             <tr className="text-center text-xs">
-              <th className="border border-slate-600" rowSpan={2}>العدد</th>
+              {/*<th className="border border-slate-600" rowSpan={2}>العدد</th>*/}
               <th className="border border-slate-600" rowSpan={2}>اسم العضو</th>
               <th className="border border-slate-600" rowSpan={2}>رقم الهوية</th>
               <th className="border border-slate-600" rowSpan={2}>رقم الجوال</th>
@@ -107,8 +108,8 @@ function DisplayAdmin() {
 
               </th>
               <th className="border border-slate-600" rowSpan={2}>الحالة</th>
-              <th className="border border-slate-600" rowSpan={2}>تعديل</th>
-              <th className="border border-slate-600" rowSpan={2}>حدف</th>
+              <th className="border border-slate-600" rowSpan={2}></th>
+              <th className="border border-slate-600" rowSpan={2}></th>
             </tr>
             <tr>
               <th className="border border-slate-600">
@@ -124,7 +125,7 @@ function DisplayAdmin() {
               const date = new Date(admin.createdAt);
               return (
                 <tr className="text-center text-xs">
-                  <td className="border border-slate-600">{admin.id}</td>
+                  {/*<td className="border border-slate-600">{admin.id}</td>*/}
                   <td className="border border-slate-600">{admin.name}</td>
                   <td className="border border-slate-600">{admin.NationalIdentificationNumber}</td>
                   <td className="border border-slate-600">{admin.phoneNumber}</td>
@@ -135,6 +136,7 @@ function DisplayAdmin() {
                   <td className="border border-slate-600"><button onClick={() => {
                     setUserDelete({
                       id: admin.id,
+                      name: admin.name,
                       index
                     });
                     document.getElementById('deleteModel').showModal()

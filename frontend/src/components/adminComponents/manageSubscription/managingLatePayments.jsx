@@ -89,7 +89,7 @@ function ManagingLatePayments() {
                 <th className="text-center border border-slate-600" colSpan={2}>
                   تاريخ الاستحقاق
                 </th>
-                <th className="text-center border border-slate-600" rowSpan={2}>دفع</th>
+                <th className="text-center border border-slate-600" rowSpan={2}></th>
               </tr>
               <tr className="text-xs">
                 <th className="text-center border border-slate-600">الميلادي</th>
@@ -120,7 +120,7 @@ function ManagingLatePayments() {
                             dueDate: subscription.dueDate,
                             year: subscription.dueDateHijri.year,
                           })
-                        }} className="btn btn-sm text-xs btn-success">دفع</button>
+                        }} className="btn btn-sm text-xs btn-success">تسديد</button>
                       </td>
                     </tr>
                   );

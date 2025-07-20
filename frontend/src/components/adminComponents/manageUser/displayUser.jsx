@@ -58,7 +58,7 @@ function DisplayUser() {
     <div className="px-[1rem] sm:px-0">
       <div className="container mx-auto flex sm:flex-row sm:gap-0 gap-[1rem] flex-col justify-between mb-[1rem]">
         <Link to="/user/addUser" className="btn btn-sm btn-primary">
-          اضافة عضو
+        إضافة عضو
         </Link>
         <div className="join flex-wrap ">
           <div>

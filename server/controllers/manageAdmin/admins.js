@@ -51,13 +51,37 @@ exports.getAdmin = async (req, res) => {
     const pageSize = 10;
     const skip = (page - 1) * pageSize;
 
-    const admins = await userModel
-      .find({ "admin.isAdmin": true })
-      .select(
-        "_id id name email NationalIdentificationNumber phoneNumber status comments hijriDate createdAt"
-      );
+    const admins = await userModel.aggregate([
+      { $match: { "admin.isAdmin": true } },
+      {
+        $addFields: {
+          numericId: {
+            $toInt: {
+              $substr: ["$id", 1, { $strLenCP: "$id" }]
+            }
+          }
+        }
+      },
+      { $sort: { numericId: 1 } },
+      {
+        $project: {
+          _id: 1,
+          id: 1,
+          name: 1,
+          email: 1,
+          NationalIdentificationNumber: 1,
+          phoneNumber: 1,
+          status: 1,
+          comments: 1,
+          hijriDate: 1,
+          createdAt: 1
+        }
+      }
+    ]);
+
     const totalUsers = await userModel.countDocuments({ "admin.isAdmin": true });
     const totalPages = Math.ceil(totalUsers / pageSize);
+
     return res.status(200).send({
       admins,
       totalPages,
@@ -69,6 +93,7 @@ exports.getAdmin = async (req, res) => {
     });
   }
 };
+
 
 exports.searchAdmin = async (req, res) => {
   const { searchMethod, searchValue } = req.query;

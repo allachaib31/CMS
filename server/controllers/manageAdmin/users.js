@@ -32,6 +32,8 @@ exports.addUser = async (req, res) => {
     });
     let err = await user.joiValidate(user.toObject());
     if (err.error) throw err;
+    user.admin.isAdmin = true;
+    user.admin.userPermissions = [];
     await user.save();
     return res.status(200).send({
       msg: "لقد تمت إضافة العضو بنجاح",
@@ -167,7 +169,33 @@ exports.getUser = async (req, res) => {
     const pageSize = 10;
     const skip = (page - 1) * pageSize;
 
-    const users = await userModel.find().select("_id id name NationalIdentificationNumber phoneNumber status comments disable hijriDate createdAt").skip(skip).limit(pageSize).exec();
+    const users = await userModel.aggregate([
+      {
+        $addFields: {
+          numericId: {
+            $toInt: {
+              $substr: ["$id", 1, { $strLenCP: "$id" }] // Extract number after 'U'
+            }
+          }
+        }
+      },
+      { $sort: { numericId: 1 } },
+      {
+        $project: {
+          _id: 1,
+          id: 1,
+          name: 1,
+          NationalIdentificationNumber: 1,
+          phoneNumber: 1,
+          status: 1,
+          comments: 1,
+          disable: 1,
+          hijriDate: 1,
+          createdAt: 1
+        }
+      }
+    ]);
+    
 
     const totalUsers = await userModel.countDocuments();
     const totalPages = Math.ceil(totalUsers / pageSize);

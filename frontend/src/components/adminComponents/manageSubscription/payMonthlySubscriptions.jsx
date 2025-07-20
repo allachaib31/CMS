@@ -105,7 +105,7 @@ function PayMonthlySubscriptions() {
     return (
         <div>
             <h1 className="text-center font-bold py-[0.5rem]">
-                نموذج الاشتراكات
+            الاشتراكات الشهرية
             </h1>
             <div className="join items-center justify-center w-full gap-[1rem]">
                 <input
@@ -158,7 +158,7 @@ function PayMonthlySubscriptions() {
             </div>
             <div className="mt-[1rem] flex justify-center">
                 <div className="flex gap-[0.2rem]">
-                    <h1 className="text-sm bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">إجمالي الاشتراكات لهذا الشهر</h1>
+                    <h1 className="text-sm bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">إجمالي اشتراكات هذا الشهر </h1>
                     <h1 className="text-sm font-bold bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">{total}</h1>
                 </div>
             </div>
@@ -198,7 +198,7 @@ function PayMonthlySubscriptions() {
                                     ملاحظات
                                 </th>
                                 <th className="border border-slate-600">
-                                    دفع
+                                    
                                 </th>
                             </tr>
                         </thead>
@@ -238,8 +238,8 @@ function PayMonthlySubscriptions() {
                                                 {subscription.months[month].comments}
                                             </td>
                                             <td id={subscription.idUser._id} className="border border-slate-600">
-                                                {subscription.months[month].amount != 0 ? "تم الدفع بنجاح" : <button onClick={() => {
-                                                    if (window.confirm("هل انت متاكد من انك تريد القيام به العملية")) {
+                                                {subscription.months[month].amount != 0 ? "تم التسديد بنجاح" : <button onClick={() => {
+                                                    if (window.confirm("هل تريد القيام بهذه العملية")) {
                                                         handleSubmit({
                                                             idUser: subscription.idUser._id,
                                                             amount,
@@ -249,7 +249,7 @@ function PayMonthlySubscriptions() {
                                                             year: subscription.months[month].dueDateHijri.year,
                                                         })
                                                     }
-                                                }} className="btn btn-sm btn-success text-sm">دفع</button>}
+                                                }} className="btn btn-sm btn-success text-sm">تسديد</button>}
                                             </td>
                                         </tr>
                                     );

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import authPng from "../../../images/auth.png";
-import logoPng from "../../../images/logo.png";
+import logoPng from "../../../images/logo2.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faIdCard, faKey } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
@@ -51,7 +51,7 @@ function Login() {
       </div>
       <div className="p-[1rem] w-full md:w-1/2 min-h-screen">
         <div className="flex justify-end">
-          <img src={logoPng} alt="" srcset="" />
+          <img src={logoPng} alt="" srcset="" className="w-48 h-48"/>
         </div>
         <div className="flex flex-col gap-[2rem] justify-center items-center">
           <h1 className="text-xl">تسجيل الدخول</h1>

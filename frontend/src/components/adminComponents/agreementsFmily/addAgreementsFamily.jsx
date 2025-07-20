@@ -418,7 +418,7 @@ function AddAgreementsFamily() {
             setShowAlert({
                 display: true,
                 status: true,
-                text: res.data.msg
+                text: "تم إضافة الاتفاقية بنجاح"
             });
         }).catch((err) => {
             if (err.response && err.response.status === 401) {

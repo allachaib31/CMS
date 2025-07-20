@@ -6,5 +6,5 @@ exports.generateNextId = async (nameModel, key) => {
     }
 
 
-    return `${key}${Number(lastRecord[lastRecord.length - 1].id.split(key)[1]) + 1}`;
+    return `${key}${Number(lastRecord.length + 1)}`;
 }

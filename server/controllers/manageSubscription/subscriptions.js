@@ -99,7 +99,7 @@ exports.addFoundationSubscriptions = async (req, res) => {
         for (let i = 0; i < 12; i++) {
             const monthIndex = (i + 1).toString();
             if (Number(monthIndex) <= new Date().getMonth() + 1/*hijriDate[1].number*/) {//tfkar
-                if(Number(monthIndex) == new Date().getMonth() + 1){
+                if (Number(monthIndex) == new Date().getMonth() + 1) {
                     const dueDate = `${new Date().getFullYear()}-${monthIndex}-25`//addDaysToHijriDate([hijriDate[0], { number: Number(monthIndex), ar: Subscription.months[Number(monthIndex)].name }, hijriDate[2]]);
                     Subscription.months[monthIndex].dueDate = dueDate;//momentHijri(dueDate[2] + "-" + dueDate[1].number + "-" + dueDate[0], 'iYYYY-iMM-iDD').locale("en").format('YYYY-MM-DD');
                     const toHijriDate = getHijriDate(Subscription.months[monthIndex].dueDate);
@@ -123,7 +123,7 @@ exports.addFoundationSubscriptions = async (req, res) => {
                         },
                         createdAt: new Date()
                     };
-                    
+
                 }
                 else Subscription.months[monthIndex].pendingPayment = false;
             } else {
@@ -562,25 +562,50 @@ exports.getSubscriptionHistory = async (req, res) => {
         const page = parseInt(req.query.page) || 1;
         const pageSize = 10;
         const skip = (page - 1) * pageSize;
-        const users = await userModel.find().select("_id name memberBalance cumulativeBalance commentSubscribeHistory status createdAt").skip(skip).limit(pageSize).exec();
+
+        const users = await userModel.aggregate([
+            {
+                $addFields: {
+                    numericId: {
+                        $toInt: {
+                            $substr: ["$id", 1, { $strLenCP: "$id" }]
+                        }
+                    }
+                }
+            },
+            { $sort: { numericId: 1 } },
+            {
+                $project: {
+                    _id: 1,
+                    id: 1,
+                    name: 1,
+                    memberBalance: 1,
+                    cumulativeBalance: 1,
+                    commentSubscribeHistory: 1,
+                    status: 1,
+                    createdAt: 1
+                }
+            }
+        ]);
+
         const totalUsers = await userModel.countDocuments();
         const totalPages = Math.ceil(totalUsers / pageSize);
-        const moneyBox = await moneyBoxModel.findById(moneyBoxId)
-        var activeMembers = (await userModel.find({status: "active"})).length;
-        var newUser = 0;
+        const moneyBox = await moneyBoxModel.findById(moneyBoxId);
+
+        const activeMembers = await userModel.countDocuments({ status: "active" });
+
+        let newUser = 0;
+        const moment = require('moment');
+        const currentDate = moment();
+
         for (let i = 0; i < users.length; i++) {
-            //if (users[i].status == "active") activeMembers++;
-            var creationDate = moment(users[i].createdAt).locale("en");
-
-            // Get the current date
-            var currentDate = moment();
-
-            // Calculate the difference in days
-            var daysDifference = currentDate.diff(creationDate, 'years');
-            if (daysDifference < 1) {
+            const creationDate = moment(users[i].createdAt).locale("en");
+            const yearsDifference = currentDate.diff(creationDate, 'years');
+            if (yearsDifference < 1) {
                 newUser++;
             }
         }
+
         return res.status(200).json({
             moneyBox,
             users,
@@ -594,7 +619,8 @@ exports.getSubscriptionHistory = async (req, res) => {
             msg: "حدث خطأ أثناء معالجة طلبك"
         });
     }
-}
+};
+
 
 exports.searchSubscriptionHistory = async (req, res) => {
     try {

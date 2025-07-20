@@ -6,7 +6,9 @@ const userModel = require("../../../models/user");
 const {loansModel} = require("../../../models/loans/loans");
 const { voteModel } = require("../../../models/voting/vote");
 const monthlySubscriptionModel = require("../../../models/subscription/monthlySubscription");
+const { unReimbursedExpensesModel, validateUnReimbursedExpenses } = require("../../../models/unreimbursedExpenses/unreimbursedExpenses");
 const typeSubscriptionModel = require("../../../models/subscription/typeSubscription");
+
 const getHijriDate = require("../../../utils/getHijriDate");
 const { adsModel } = require("../../../models/advertising/ads");
 const moneyBoxId = process.env.moneyBoxId;
@@ -16,6 +18,7 @@ exports.getClientInformation = async (req, res) => {
     try {
         const user = await userModel.findById(id);
         const moneyBox = await moneyBoxModel.findById(moneyBoxId);
+        const unReimbursedExpenses = await unReimbursedExpensesModel.find();
         const loansUser = await loansModel.find({
             name: user.name
         });
@@ -23,7 +26,12 @@ exports.getClientInformation = async (req, res) => {
         loansUser.forEach((loan) => {
             balance += loan.balance;
         })
+        let balanceDistribution = 0;
+        unReimbursedExpenses.forEach((expenses) => {
+            balanceDistribution += expenses.balanceDistribution;
+        })
         return res.status(200).send({
+            balanceDistribution,
             memberBalance: user.memberBalance,
             cumulativeBalance: user.cumulativeBalance,
             commodityProfitsContributions: user.commodityProfitsContributions,

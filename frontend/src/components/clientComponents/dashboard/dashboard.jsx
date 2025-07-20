@@ -10,6 +10,7 @@ function Dashboard() {
         memberBalance: 0,
         loans: 0,
         loansPaid: 0,
+        balanceDistribution: 0,
         moneyBox: {
             amount: 0,
             cumulativeAmount: 0
@@ -24,6 +25,7 @@ function Dashboard() {
                 memberBalance: res.data.memberBalance,
                 loans: res.data.loans.amount,
                 loansPaid: res.data.loansPaid,
+                balanceDistribution: res.data.balanceDistribution,
                 moneyBox: {
                     amount: res.data.moneyBox.amount,
                     cumulativeAmount: res.data.moneyBox.cumulativeAmount
@@ -46,7 +48,7 @@ function Dashboard() {
                     </div>
                     <div className='rounded-[14px] bg-primary text-secondary-content flex flex-col justify-center items-center w-full md:w-1/4 xl:w-1/6 py-[2rem]'>
                         <h1 className='text-center font-bold'>المصروفات</h1>
-                        <h1 className='text-center font-bold text-orange-400 '>{(data.moneyBox.cumulativeAmount - data.moneyBox.amount).toFixed(2)}</h1>
+                        <h1 className='text-center font-bold text-orange-400 '>{(data.balanceDistribution).toFixed(2)}</h1>
                     </div>
                     <div className='rounded-[14px] bg-primary text-secondary-content flex flex-col justify-center items-center w-full md:w-1/4 xl:w-1/6 py-[2rem]'>
                         <h1 className='text-center font-bold'>الرصيد الحالي للصندوق</h1>

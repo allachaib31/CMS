@@ -26,11 +26,12 @@ function ConsolidatedRecordRevenues() {
 
             <h1 className="text-center text-sm font-bold py-[0.5rem]">السجل الموحد للإيرادات</h1>
             <div className="mt-[0.5rem] flex lg:flex-row flex-col gap-[0.5rem] justify-center">
-                <div className="flex lg:flex-col items-center gap-[0.5rem]">
+                <div className="flex items-center gap-[0.5rem]">
                     <h1 className="text-sm w-[70%] lg:w-auto md:text-center bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">إجمالي الايرادات</h1>
                     <h1 className="text-sm w-[30%] lg:w-auto text-center bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">{moneyBox &&(moneyBox.source.subscriptions + moneyBox.source.commodityRevenue + moneyBox.source.contributionRevenues + moneyBox.source.financialCompany + moneyBox.source.investmentBox).toFixed(2)}</h1>
                 </div>
-                <div className="flex lg:flex-col items-center gap-[0.5rem]">
+                {/**
+                 *                  <div className="flex lg:flex-col items-center gap-[0.5rem]">
                     <h1 className="text-sm w-[70%] lg:w-auto md:text-center bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">إجمالي الاشتراكات</h1>
                     <h1 className="text-sm w-[30%] lg:w-auto  text-center bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">{moneyBox && moneyBox.source.subscriptions.toFixed(2)}</h1>
                 </div>
@@ -54,6 +55,7 @@ function ConsolidatedRecordRevenues() {
                     <h1 className="text-sm w-[70%] lg:w-auto md:text-center bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">إجمالي إيرادات القروض</h1>
                     <h1 className="text-sm w-[30%] lg:w-auto  text-center bg-primary text-white rounded-[1rem] py-[0.7rem] px-[1.3rem]">{moneyBox && moneyBox.source.loanIncome.toFixed(2)}</h1>
                 </div>
+                 */}
             </div>
             <div className="overflow-x-auto mt-[1rem]">
                 <table className="table table-xs border-separate border-spacing-0 border w-[300px] sm:w-[700px] mx-auto">
@@ -69,7 +71,7 @@ function ConsolidatedRecordRevenues() {
                                 الملاحظات
                             </th>
                             <th className="text-center border border-slate-600">
-                                تفاصيل اكثر
+                               
                             </th>
                         </tr>
                     </thead>
@@ -83,11 +85,11 @@ function ConsolidatedRecordRevenues() {
                                         {moneyBox.source.comment}
                                     </td>
                                     <td className="border border-slate-600">
-                                        <Link to="/subscription" className='btn btn-sm text-xs btn-info'>التفاصيل</Link> 
+                                        <Link to="/subscription/payMonthlySubscriptions" className='btn btn-sm text-xs btn-info'>التفاصيل</Link> 
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th className="border border-slate-600">ايرادات السلع</th>
+                                    <th className="border border-slate-600">إيرادات السلع</th>
                                     <td className="border border-slate-600">{moneyBox.source.commodityRevenue.toFixed(2)}</td>
                                     <td className="border border-slate-600">
                                         {moneyBox.source.comments}
@@ -103,11 +105,11 @@ function ConsolidatedRecordRevenues() {
                                     {moneyBox.source.comments}
                                     </td>
                                     <td className="border border-slate-600">
-                                        <Link to="/contributionRevenue" className='btn btn-sm text-xs btn-info'>التفاصيل</Link> 
+                                        <Link to="/stocks/stockRevenue" className='btn btn-sm text-xs btn-info'>التفاصيل</Link> 
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th className="border border-slate-600">الشركات المالية</th>
+                                    <th className="border border-slate-600">إيرادات الشركات</th>
                                     <td className="border border-slate-600">{moneyBox.source.financialCompany.toFixed(2)}</td>
                                     <td className="border border-slate-600">
                                     {moneyBox.source.comments}
@@ -117,7 +119,7 @@ function ConsolidatedRecordRevenues() {
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th className="border border-slate-600">الصناديق الاستثمارية</th>
+                                    <th className="border border-slate-600">إيرادات الصناديق</th>
                                     <td className="border border-slate-600">{moneyBox.source.investmentBox.toFixed(2)}</td>
                                     <td className="border border-slate-600">
                                     {moneyBox.source.comments}
@@ -127,7 +129,7 @@ function ConsolidatedRecordRevenues() {
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th className="border border-slate-600">ايرادات القروض</th>
+                                    <th className="border border-slate-600">إيرادات القروض</th>
                                     <td className="border border-slate-600">{moneyBox.source.loanIncome.toFixed(2)}</td>
                                     <td className="border border-slate-600">
                                     {moneyBox.source.comments}

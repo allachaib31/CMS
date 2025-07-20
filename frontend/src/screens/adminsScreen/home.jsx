@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import profileImage from "../../images/profileImage.png";
-import logo from "../../images/logo.png";
+import logo from "../../images/logo2.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChartPie, faBuilding, faUser, faChartSimple, faFileInvoiceDollar, faSackDollar, faUserTie, faHandHoldingDollar, faGift, faRecycle, faArrowTrendUp, faShapes, faCheckToSlot, faGamepad, faMicrophone, faListCheck, faTree, faHandHoldingDroplet, faUpload, faGauge, faVault } from "@fortawesome/free-solid-svg-icons";
 import { getClientAdsFetch, uploadImageFetch, validationFetch } from "../../utils/apiFetch";
@@ -145,7 +145,7 @@ function Home() {
                 ></label>
                 <ul className="menu p-4 w-[17rem] sm:w-80 min-h-full bg-base-200 text-base-content">
                   <div className="flex justify-center mb-[2rem]">
-                    <img src={logo} alt="" />
+                    <img src={logo} alt="" className="w-48 h-48"/>
                   </div>
                   <li className="space-y-1">
                     <Link to="/admin/dashboard">
